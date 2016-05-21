@@ -258,6 +258,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 23.6249943
       objectReference: {fileID: 0}
+    - target: {fileID: 11474494, guid: c9c968606fd2845429059b19a8ab41b5, type: 2}
+      propertyPath: Info.Instance
+      value: 
+      objectReference: {fileID: 18879423}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9c968606fd2845429059b19a8ab41b5, type: 2}
   m_IsPrefabParent: 0
@@ -1573,7 +1577,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0.0015822117, w: 0.99999875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_Children:
   - {fileID: 267480492}
   m_Father: {fileID: 781514666}
@@ -1635,7 +1639,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 437174770}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 781514667}
+        m_MethodName: ConnectToGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437174770
@@ -3064,7 +3079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af75d7720d09a54c971bab6601b0e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorInstance: {fileID: 18879423}
+  actorInstance: {fileID: 18879423}
   txtName: {fileID: 1581315843}
 --- !u!1 &901203801
 GameObject:
@@ -3740,7 +3755,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: -0.0015822117, w: 0.99999875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.1813}
   m_Children:
   - {fileID: 187560430}
   - {fileID: 1385596878}
@@ -4764,7 +4779,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0.0015822117, w: 0.99999875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_Children:
   - {fileID: 1552733724}
   m_Father: {fileID: 781514666}
@@ -5532,7 +5547,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: -0.0015822117, w: 0.99999875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.1813}
   m_Children:
   - {fileID: 1595799337}
   - {fileID: 781514666}
@@ -6122,7 +6137,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0.0015822117, w: 0.99999875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_Children:
   - {fileID: 1535464903}
   m_Father: {fileID: 781514666}

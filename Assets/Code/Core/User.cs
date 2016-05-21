@@ -35,22 +35,11 @@ public class User {
 
     public void AddCharacter(JSONNode node)
     {
-        ActorInfo tempCharacter = new ActorInfo();
-
-        tempCharacter.ID = node["_id"].Value;
-        tempCharacter.Name = node["name"].Value;
-
-        if (node["looks"]["g"].AsBool)
-        {
-            tempCharacter.Gender = Gender.Male;
-        }
-        else
-        {
-            tempCharacter.Gender = Gender.Female;
-        }
-
+        ActorInfo tempCharacter = new ActorInfo(node);
         Characters.Add(tempCharacter);
     }
+
+    public ActorInfo SelectedCharacter;
 
     public List<ActorInfo> Characters = new List<ActorInfo>();
 

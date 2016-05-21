@@ -43,7 +43,10 @@ public class ActorInstance : MonoBehaviour
     #endregion
 
     #region Public Parameters
+
     public ActorInfo Info;
+    public ActorMovement MovementController { protected set; get; }
+
     #endregion
 
     #region Public Methods
@@ -107,6 +110,12 @@ public class ActorInstance : MonoBehaviour
             m_RightFoot.sprite = SM.Resources.GetSprite("Foot");
             m_LeftFoot.sprite = SM.Resources.GetSprite("Foot");
         }
+    }
+
+    public void RegisterMovementController(ActorMovement controller)
+    {
+        MovementController = controller;
+        SM.SocketClient.Subscribe(Info.ID ,controller);
     }
 
     #endregion

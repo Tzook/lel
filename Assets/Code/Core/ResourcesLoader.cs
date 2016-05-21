@@ -203,6 +203,11 @@ public class ResourcesLoader : MonoBehaviour {
 		}
 	}
 
+    public void ClearObjectPool()
+    {
+        m_listObjectPool.Clear();
+    }
+
     #endregion
 
     #region Internal Methods
@@ -413,6 +418,7 @@ public class ResourcesLoader : MonoBehaviour {
         return tempObj;
     }
 
+    
     #endregion
 
 }

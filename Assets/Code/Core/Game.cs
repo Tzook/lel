@@ -12,11 +12,28 @@ public class Game : MonoBehaviour {
 
     public void LoadScene(string scene)
     {
-        SM.Resources.ClearObjectPool();
-
-        SceneManager.LoadScene(scene);
+        StartCoroutine(LoadSceneRoutine(scene));
     }
 
+    public void SpawnPlayer(ActorInfo info)
+    {
+        GameObject tempObj = SM.Resources.GetRecycledObject("actor");
+        tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
+    }
+
+    protected IEnumerator LoadSceneRoutine(string scene)
+    {
+        string lastScene = SceneManager.GetActiveScene().name;
+        SM.Resources.ClearObjectPool();
+        SceneManager.LoadScene(scene);
+
+        while(lastScene == SceneManager.GetActiveScene().name)
+        {
+            yield return 0;
+        }
+
+        SM.SocketClient.EmitLoadedScene();
+    }
 
 
 }

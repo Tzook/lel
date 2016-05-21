@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using BestHTTP.SocketIO;
+using SimpleJSON;
 
-public class SocketClient : MonoBehaviour {
+
+public class SocketClient : MonoBehaviour
+{
 
     #region Config
     public bool DebugMode = false;
@@ -13,6 +16,8 @@ public class SocketClient : MonoBehaviour {
     #region Essential
 
     protected WebSocketConnector webSocketConnector;
+
+    protected Socket CurrentSocket;
 
     void Awake()
     {
@@ -37,17 +42,17 @@ public class SocketClient : MonoBehaviour {
     public void ConnectToGame()
     {
         BroadcastEvent("Connecting to server..");
-        Socket socket = webSocketConnector.connect(LocalUserInfo.Me.SelectedCharacter.ID);
-        socket.On("connect", OnConnect);
-        socket.On("disconnect", OnDisconnect);
-        socket.On("error", OnError);
-        socket.On("load_scene", OnLoadScene);
+        CurrentSocket = webSocketConnector.connect(LocalUserInfo.Me.SelectedCharacter.ID);
+        CurrentSocket.On("connect", OnConnect);
+        CurrentSocket.On("disconnect", OnDisconnect);
+        CurrentSocket.On("error", OnError);
+        CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         SM.LoadingWindow.Register(this);
     }
 
     public void Subscribe(string id, IUpdatePositionListener instance)
     {
-        if(!SubscribedMovables.ContainsKey(id))
+        if (!SubscribedMovables.ContainsKey(id))
         {
             SubscribedMovables.Add(id, instance);
         }
@@ -71,7 +76,7 @@ public class SocketClient : MonoBehaviour {
 
     #endregion
 
-    #region Internal Methods
+    #region Callbacks
 
     private void OnError(Socket socket, Packet packet, object[] args)
     {
@@ -87,21 +92,47 @@ public class SocketClient : MonoBehaviour {
     {
         BroadcastEvent("On connect");
         SM.Game.LoadScene(LocalUserInfo.Me.SelectedCharacter.CurrentRoom);
-        SM.LoadingWindow.Leave(this);
     }
 
-    protected void OnLoadScene(Socket socket, Packet packet, params object[] args)
+    protected void OnActorJoinRoom(Socket socket, Packet packet, params object[] args)
     {
-        BroadcastEvent("On Load Scene");
+        BroadcastEvent("Actor has joined the room");
+
+        Debug.Log(args[0].ToString());
+
+        //TODO Maybe move it to somewhere else.
+        JSONNode data = JSON.Parse(args[0].ToString());
+        for(int i=0;i<data.Count;i++)
+        {
+            SM.Game.SpawnPlayer(new ActorInfo(data[i]));
+        }
     }
+
+
+    #endregion
+
+    #region Emittions
+
+    public void EmitLoadedScene()
+    {
+        BroadcastEvent("Emitted : LoadedScene");
+        SM.LoadingWindow.Leave(this);
+        CurrentSocket.Emit("entered_room", "");
+    }
+
+    #endregion
+
+    #region Internal
+
 
     protected void BroadcastEvent(string info)
     {
-        if(DebugMode)
+        if (DebugMode)
         {
             Debug.Log(this + " | " + info);
         }
     }
+
 
     #endregion
 }

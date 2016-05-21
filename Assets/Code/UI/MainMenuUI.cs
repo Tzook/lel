@@ -30,6 +30,12 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField]
     protected CreateCharacterUI m_CreateCharacterUI;
 
+    [SerializeField]
+    protected CharacterInfoPageUI m_CharacterInfoUI;
+
+    [SerializeField]
+    protected ui_pageMenu m_CharacterSelectionPageMenu;
+
     protected LoginHandler m_LoginHandler;
     protected RegisterHandler m_RegisterHandler;
     protected LogoutHandler m_LogoutHandler;
@@ -186,7 +192,17 @@ public class MainMenuUI : MonoBehaviour
             GameObject tempObj = SM.Resources.GetRecycledObject("CharSpot");
             tempObj.transform.SetParent(CharactersContainer, false);
             tempObj.GetComponent<CharspotUI>().Load(user.Characters[i]);
+            AddListenerToCharspot(tempObj.GetComponent<Button>(), user.Characters[i]);
         }
+    }
+
+    protected void AddListenerToCharspot(Button charspotButton, ActorInfo info)
+    {
+        charspotButton.onClick.AddListener(delegate
+        {
+            m_CharacterSelectionPageMenu.SwitchTo(1);
+            m_CharacterInfoUI.SetInfo(info);
+        });
     }
 
     public void ClearPlayerCharacters()

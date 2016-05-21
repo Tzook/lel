@@ -42,6 +42,7 @@ public class SocketClient : MonoBehaviour {
         socket.On("disconnect", OnDisconnect);
         socket.On("error", OnError);
         socket.On("load_scene", OnLoadScene);
+        SM.LoadingWindow.Register(this);
     }
 
     public void Subscribe(string id, IUpdatePositionListener instance)
@@ -86,6 +87,7 @@ public class SocketClient : MonoBehaviour {
     {
         BroadcastEvent("On connect");
         SM.Game.LoadScene(LocalUserInfo.Me.SelectedCharacter.CurrentRoom);
+        SM.LoadingWindow.Leave(this);
     }
 
     protected void OnLoadScene(Socket socket, Packet packet, params object[] args)

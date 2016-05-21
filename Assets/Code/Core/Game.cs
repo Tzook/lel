@@ -8,7 +8,6 @@ public class Game : MonoBehaviour {
     {
         SM.Game = this;
         Application.runInBackground = true;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public void LoadScene(string scene)

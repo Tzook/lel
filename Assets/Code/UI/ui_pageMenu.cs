@@ -62,9 +62,6 @@ public class ui_pageMenu : MonoBehaviour {
 	//Will lerp the list item to be in a relative position to the focused index.
 	protected IEnumerator RelocatePage(int selfIndex)
 	{
-
-        float initSpeed = m_fSpeed;
-
         if (!m_bInstant)
         {
             yield return new WaitForSeconds(m_fDelay);
@@ -80,7 +77,7 @@ public class ui_pageMenu : MonoBehaviour {
 		float sizePenalty = 0;
 		float change = 0;
 		Vector2 targetPos = new Vector2(0,0);
-	
+
 		if(m_bVertical)
 		{
 			A = currentRect.TransformPoint(currentRect.rect.x+currentRect.rect.width,currentRect.rect.y+currentRect.rect.height,0).y;

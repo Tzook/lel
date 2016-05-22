@@ -22,6 +22,7 @@ public class WebSocketConnector
 		}
 		options.AdditionalQueryParams.Add("id", charId);
 		var manager = new SocketManager(new Uri(URL), options);
+		manager.Encoder = new SimpleJsonEncoder();
 		manager.Open();
 		return manager.Socket;
 	}

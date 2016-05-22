@@ -98,11 +98,8 @@ public class SocketClient : MonoBehaviour
     {
         BroadcastEvent("Actor has joined the room");
 
-        Debug.Log(args[0].ToString());
-
-        //TODO Maybe move it to somewhere else.
-        JSONNode data = JSON.Parse(args[0].ToString());
-        for(int i=0;i<data.Count;i++)
+        JSONNode data = (JSONNode)args[0];
+        for (int i = 0; i < data.Count; i++)
         {
             SM.Game.SpawnPlayer(new ActorInfo(data[i]));
         }
@@ -117,7 +114,8 @@ public class SocketClient : MonoBehaviour
     {
         BroadcastEvent("Emitted : LoadedScene");
         SM.LoadingWindow.Leave(this);
-        CurrentSocket.Emit("entered_room", "");
+        JSONNode node = new JSONClass();
+        CurrentSocket.Emit("entered_room", node);
     }
 
     #endregion

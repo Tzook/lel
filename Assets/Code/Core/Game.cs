@@ -19,6 +19,10 @@ public class Game : MonoBehaviour {
     {
         GameObject tempObj = SM.Resources.GetRecycledObject("actor");
         tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
+        tempObj.AddComponent<ActorMovement>();
+        // tempObj.GetComponent<ActorMovement>().enabled = true;
+        // tempObj.GetComponent<ActorController>().enabled = false;
+        // tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     protected IEnumerator LoadSceneRoutine(string scene)

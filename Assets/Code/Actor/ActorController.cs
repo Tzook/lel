@@ -59,23 +59,31 @@ public class ActorController : MonoBehaviour
 
     void FixedUpdate()
     {
+        var moved = false;
         if(Input.GetKey(KeyCode.A))
         {
             MoveLeft();
+            moved = true;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            MoveRight(); 
+            MoveRight();
+            moved = true;
         }
 
         if (Input.GetKey(KeyCode.Space))
         {
             Jump();
+            moved = true;
         }
 
         GroundRay = Physics2D.Raycast(transform.position, -transform.up, Collider.size.y/12f , GroundLayerMask);
         Grounded = GroundRay;
 
+        if (moved)
+        {
+            SM.SocketClient.EmitMovement(transform.position);
+        }
     }
 
     #endregion

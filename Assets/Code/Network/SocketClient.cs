@@ -47,6 +47,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("disconnect", OnDisconnect);
         CurrentSocket.On("error", OnError);
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
+        CurrentSocket.On("movement", OnMovement);
         SM.LoadingWindow.Register(this);
     }
 
@@ -105,6 +106,22 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    protected void OnMovement(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Movement occured");
+
+        JSONNode data = (JSONNode)args[0];
+        string id = data["id"];
+        if (SubscribedMovables.ContainsKey(id))
+        {
+            IUpdatePositionListener instance = SubscribedMovables[id];
+            instance.UpdatePosition(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat));
+        }
+        else
+        {
+            Debug.LogError(this + " | " + id + " received movement, but actor is not subscribed!");
+        }
+    }
 
     #endregion
 
@@ -116,6 +133,15 @@ public class SocketClient : MonoBehaviour
         SM.LoadingWindow.Leave(this);
         JSONNode node = new JSONClass();
         CurrentSocket.Emit("entered_room", node);
+    }
+
+    public void EmitMovement(Vector3 pos)
+    {
+        JSONNode node = new JSONClass();
+        node["x"] = pos.x.ToString();
+        node["y"] = pos.y.ToString();
+        node["z"] = pos.z.ToString();
+        CurrentSocket.Emit("movement", node);
     }
 
     #endregion

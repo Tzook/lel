@@ -4,22 +4,21 @@ using BestHTTP;
 using System.Text;
 using SimpleJSON;
 
-abstract public class HttpProvider 
+abstract public class HttpProvider
 {
 	public static bool debug = true;
-	private const string BASE_URL = "https://lul.herokuapp.com";
 	private Action<JSONNode> _callback;
-	
+
 	public HttpProvider(Action<JSONNode> callback)
 	{
 		_callback = callback;
 	}
-	
+
 	protected void performRequest(string partialUrl, JSONNode parametersObject, bool isPost)
 	{
-		string url = BASE_URL + partialUrl;
+		string url = Config.BASE_URL + partialUrl;
 		if (!isPost) {
-			// TODO add url parameters 
+			// TODO add url parameters
 		}
 		if (debug) {
 			Debug.Log("Performing request for the url: " + url);
@@ -35,7 +34,7 @@ abstract public class HttpProvider
 		}
 		request.Send();
 	}
-	
+
 	protected void OnRequestFinished(HTTPRequest request, HTTPResponse response)
 	{
 		JSONNode parsedResponse;
@@ -52,7 +51,7 @@ abstract public class HttpProvider
 				Debug.LogError(parsedResponse["error"]);
 			}
 		}
-		
+
 		_callback(parsedResponse);
 	}
 }

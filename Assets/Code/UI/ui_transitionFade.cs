@@ -44,11 +44,9 @@ public class ui_transitionFade : MonoBehaviour {
 	protected IEnumerator FadeIn(float speed)
 	{
 		m_CanvasGroup.alpha = 0;
-		float t = 0f;
-		while (t<1f)
+		while (m_CanvasGroup.alpha<1f)
 		{
-			t+=speed*Time.deltaTime;
-			m_CanvasGroup.alpha = t;
+			m_CanvasGroup.alpha+=speed*Time.deltaTime;
 			yield return 0;
 		}
 	}
@@ -56,6 +54,7 @@ public class ui_transitionFade : MonoBehaviour {
 	protected IEnumerator FadeOut(float speed)
 	{
 		m_CanvasGroup.alpha = 1;
+
 		float t = 1f;
 		while (t>0f)
 		{

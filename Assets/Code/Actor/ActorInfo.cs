@@ -10,6 +10,7 @@ public class ActorInfo
     public Gender Gender;
     public ActorInstance Instance;
     public string CurrentRoom;
+    public Vector3 LastPosition;
 
     public ActorInfo()
     {
@@ -20,7 +21,8 @@ public class ActorInfo
         this.ID = node["_id"].Value;
         this.Name = node["name"].Value;
         this.CurrentRoom = node["room"].Value;
-        
+        this.LastPosition = new Vector3(node["position"]["x"].AsFloat, node["position"]["y"].AsFloat, node["position"]["z"].AsFloat);
+
         if (node["looks"]["g"].AsBool)
         {
             this.Gender = Gender.Male;

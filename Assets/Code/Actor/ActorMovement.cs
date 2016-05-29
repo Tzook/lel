@@ -8,17 +8,31 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 
     public ActorInstance Instance;
 
-    protected Vector3 lastPosition;
+    [SerializeField]
+    protected float relocateSpeed = 3f;
 
-    void Awake()
+    protected Vector3 lastPosition;
+    protected Vector3 initScale;
+
+    void Start()
     {
         Instance = GetComponent<ActorInstance>();
         Instance.RegisterMovementController(this);
         lastPosition = transform.position;
+        initScale = transform.localScale;
     }
 
     public void UpdatePosition(Vector3 TargetPos)
     {
+        if(TargetPos.x > lastPosition.x)
+        {
+            transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+        }
+        else if (TargetPos.x < lastPosition.x)
+        {
+            transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+        }
+
         lastPosition = TargetPos;
     }
 
@@ -29,6 +43,7 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 
     protected void LerpToPosition()
     {
-        transform.position = Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * 4);
+        transform.position = Vector3.MoveTowards(transform.position, lastPosition, Time.deltaTime * relocateSpeed);
     }
+
 }

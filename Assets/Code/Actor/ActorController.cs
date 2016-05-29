@@ -9,8 +9,8 @@ public class ActorController : MonoBehaviour
 
     protected Rigidbody2D Rigidbody;
     protected BoxCollider2D Collider;
-
     protected RaycastHit2D GroundRay;
+    protected Animator Anim;
 
     #endregion
 
@@ -50,6 +50,8 @@ public class ActorController : MonoBehaviour
 
         Collider = GetComponent<BoxCollider2D>();
         Collider.enabled = true;
+
+        Anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Start()
@@ -59,6 +61,8 @@ public class ActorController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Anim.SetBool("InAir", false);
+        Anim.SetBool("Walking", false);
         var moved = false;
         if(Input.GetKey(KeyCode.A))
         {
@@ -82,6 +86,13 @@ public class ActorController : MonoBehaviour
 
         if (moved)
         {
+            Anim.SetBool("Walking", true);
+            SM.SocketClient.EmitMovement(transform.position);
+        }
+
+        if(!Grounded)
+        {
+            Anim.SetBool("InAir", true);
             SM.SocketClient.EmitMovement(transform.position);
         }
     }

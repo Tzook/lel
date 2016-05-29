@@ -102,7 +102,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         for (int i = 0; i < data.Count; i++)
         {
-            SM.Game.SpawnPlayer(new ActorInfo(data[i]));
+            SM.Game.LoadNpcCharacter(new ActorInfo(data[i]));
         }
     }
 
@@ -133,6 +133,7 @@ public class SocketClient : MonoBehaviour
         SM.LoadingWindow.Leave(this);
         JSONNode node = new JSONClass();
         CurrentSocket.Emit("entered_room", node);
+        SM.Game.LoadPlayerCharacter();
     }
 
     public void EmitMovement(Vector3 pos)

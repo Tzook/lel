@@ -13,6 +13,8 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 
     protected Vector3 lastPosition;
     protected Vector3 initScale;
+    protected Animator Anim;
+
 
     void Start()
     {
@@ -20,11 +22,13 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
         Instance.RegisterMovementController(this);
         lastPosition = transform.position;
         initScale = transform.localScale;
+
+        Anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     public void UpdatePosition(Vector3 TargetPos)
     {
-        if(TargetPos.x > lastPosition.x)
+        if (TargetPos.x > lastPosition.x)
         {
             transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
         }
@@ -43,6 +47,19 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 
     protected void LerpToPosition()
     {
+        Anim.SetBool("InAir", false);
+        Anim.SetBool("Walking", false);
+
+        if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.1f)
+        {
+            Anim.SetBool("InAir", true);
+        }
+
+        if (Mathf.Abs(transform.position.x - lastPosition.x) > 0.1f)
+        {
+            Anim.SetBool("Walking", true);
+        }
+
         transform.position = Vector3.MoveTowards(transform.position, lastPosition, Time.deltaTime * relocateSpeed);
     }
 

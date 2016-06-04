@@ -86,10 +86,10 @@ public class ActorController : MonoBehaviour
             Anim.SetBool("Walking", true);
         }
 
-        GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f , GroundLayerMask);
-        GroundRayLeft = Physics2D.Raycast(transform.position - transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f, GroundLayerMask);
+        GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.15f , GroundLayerMask);
+        GroundRayLeft = Physics2D.Raycast(transform.position - transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.15f, GroundLayerMask);
 
-        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f,  -Collider.size.y / 13f, 0), -transform.up * 0.1f, Color.red);
+        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f,  -Collider.size.y / 13f, 0), -transform.up * 0.15f, Color.red);
 
         Grounded = (GroundRayRight || GroundRayLeft);
 

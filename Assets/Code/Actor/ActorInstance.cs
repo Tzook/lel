@@ -51,9 +51,16 @@ public class ActorInstance : MonoBehaviour
 
     #region Public Methods
 
-    public void UpdateVisual(ActorInfo info)
+    public void RegisterInfo(ActorInfo info)
     {
         this.Info = info;
+        this.Info.Instance = this;
+    }
+
+    public void UpdateVisual(ActorInfo info)
+    {
+        RegisterInfo(info);
+
         UpdateVisual();
     }
     

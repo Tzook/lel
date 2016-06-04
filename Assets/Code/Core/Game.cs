@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour {
 
-	void Awake()
+    public SceneControl CurrentScene;
+    public bool InGame { protected set; get; }
+
+    void Awake()
     {
         SM.Game = this;
         Application.runInBackground = true;
@@ -15,8 +18,22 @@ public class Game : MonoBehaviour {
         StartCoroutine(LoadSceneRoutine(scene));
     }
 
+    public void LeaveToMainMenu()
+    {
+        if(InGame)
+        {
+            InGame = false;
+
+            SM.Resources.ClearObjectPool();
+            SM.SocketClient.
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
     public GameObject SpawnPlayer(ActorInfo info)
     {
+        CurrentScene.Join(info);
+
         GameObject tempObj = SM.Resources.GetRecycledObject("actor");
         tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
         tempObj.transform.position = info.LastPosition;
@@ -31,6 +48,15 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<ActorMovement>().enabled = true;
         tempObj.GetComponent<ActorController>().enabled = false;
         tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    public void RemoveNpcCharacter(ActorInfo info)
+    {
+        GameObject leavingPlayer = CurrentScene.GetPlayer(info.ID).Instance.gameObject;
+
+        leavingPlayer.SetActive(false);
+
+        CurrentScene.Leave(info);
     }
 
     public void LoadPlayerCharacter()
@@ -53,7 +79,18 @@ public class Game : MonoBehaviour {
             yield return 0;
         }
 
+        CurrentScene = new SceneControl();
+
         SM.SocketClient.EmitLoadedScene();
+
+        while(SM.GameCamera==null)
+        {
+            yield return 0;
+        }
+
+        SM.GameCamera.Register(CurrentScene.ClientCharacter.Instance.gameObject);
+
+        InGame = true;
     }
 
 

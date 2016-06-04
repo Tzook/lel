@@ -9,8 +9,12 @@ public class ActorController : MonoBehaviour
 
     protected Rigidbody2D Rigidbody;
     protected BoxCollider2D Collider;
-    protected RaycastHit2D GroundRay;
+    protected RaycastHit2D GroundRayRight;
+    protected RaycastHit2D GroundRayLeft;
     protected Animator Anim;
+
+    [SerializeField]
+    protected bool ClientOnly = false;
 
     #endregion
 
@@ -33,6 +37,8 @@ public class ActorController : MonoBehaviour
     protected LayerMask GroundLayerMask = 0 << 0 | 1;
 
     protected Vector3 initScale;
+
+    protected Vector3 lastSentPosition;
 
     #endregion
 
@@ -63,38 +69,45 @@ public class ActorController : MonoBehaviour
     {
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
-        var moved = false;
         if(Input.GetKey(KeyCode.A))
         {
             MoveLeft();
-            moved = true;
+            Anim.SetBool("Walking", true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             MoveRight();
-            moved = true;
+            Anim.SetBool("Walking", true);
         }
 
         if (Input.GetKey(KeyCode.Space))
         {
             Jump();
-            moved = true;
-        }
-
-        GroundRay = Physics2D.Raycast(transform.position, -transform.up, Collider.size.y/12f , GroundLayerMask);
-        Grounded = GroundRay;
-
-        if (moved)
-        {
             Anim.SetBool("Walking", true);
-            SM.SocketClient.EmitMovement(transform.position);
         }
 
-        if(!Grounded)
+        GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f , GroundLayerMask);
+        GroundRayLeft = Physics2D.Raycast(transform.position - transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f, GroundLayerMask);
+
+        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f,  -Collider.size.y / 13f, 0), -transform.up * 0.05f, Color.red);
+
+        Grounded = (GroundRayRight || GroundRayLeft);
+
+        if (!Grounded)
         {
             Anim.SetBool("InAir", true);
-            SM.SocketClient.EmitMovement(transform.position);
         }
+
+        if (!ClientOnly)
+        {
+            if (lastSentPosition != transform.position)
+            {
+                SM.SocketClient.EmitMovement(transform.position);
+                lastSentPosition = transform.position;
+            }
+        }
+
+       
     }
 
     #endregion
@@ -123,7 +136,10 @@ public class ActorController : MonoBehaviour
 
     protected IEnumerator JumpRoutine()
     {
-        Rigidbody.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
+        if (Rigidbody.velocity.y <= 0f)
+        {
+            Rigidbody.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
+        }
 
         yield return new WaitForSeconds(JumpDelay);
 

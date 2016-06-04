@@ -8,4 +8,6 @@ public static class SM
     public static ResourcesLoader Resources;
     public static Game Game;
     public static SocketClient SocketClient;
+    public static GameCamera GameCamera;
+    public static InGameMainMenuUI InGameMainMenu;
 }

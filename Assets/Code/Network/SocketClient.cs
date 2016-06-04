@@ -47,8 +47,16 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("disconnect", OnDisconnect);
         CurrentSocket.On("error", OnError);
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
-        CurrentSocket.On("movement", OnMovement);
+        CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
+
         SM.LoadingWindow.Register(this);
+    }
+
+    public void Diconnect()
+    {
+        DisposeSubscriptions();
+        CurrentSocket.Disconnect();
+        CurrentSocket.Off();
     }
 
     public void Subscribe(string id, IUpdatePositionListener instance)
@@ -73,6 +81,11 @@ public class SocketClient : MonoBehaviour
         {
             Debug.LogError(this + " | " + id + " attempted to unsubscribe but was not subscribed from the first place!");
         }
+    }
+
+    public void DisposeSubscriptions()
+    {
+        SubscribedMovables.Clear();
     }
 
     #endregion
@@ -100,10 +113,15 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has joined the room");
 
         JSONNode data = (JSONNode)args[0];
-        for (int i = 0; i < data.Count; i++)
-        {
-            SM.Game.LoadNpcCharacter(new ActorInfo(data[i]));
-        }
+        SM.Game.LoadNpcCharacter(new ActorInfo(data["character"]));
+    }
+
+    protected void OnActorLeaveRoom(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Actor has left the room");
+
+        JSONNode data = (JSONNode)args[0];
+        SM.Game.RemoveNpcCharacter(new ActorInfo(data["character"]));
     }
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
@@ -132,8 +150,12 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Emitted : LoadedScene");
         SM.LoadingWindow.Leave(this);
         JSONNode node = new JSONClass();
+
         CurrentSocket.Emit("entered_room", node);
+
         SM.Game.LoadPlayerCharacter();
+
+        CurrentSocket.On("movement", OnMovement);
     }
 
     public void EmitMovement(Vector3 pos)

@@ -25,7 +25,7 @@ public class Game : MonoBehaviour {
             InGame = false;
 
             SM.Resources.ClearObjectPool();
-            SM.SocketClient.
+            SM.SocketClient.Diconnect();
             SceneManager.LoadScene("MainMenu");
         }
     }

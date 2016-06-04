@@ -89,7 +89,7 @@ public class ActorController : MonoBehaviour
         GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f , GroundLayerMask);
         GroundRayLeft = Physics2D.Raycast(transform.position - transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, 0.05f, GroundLayerMask);
 
-        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f,  -Collider.size.y / 13f, 0), -transform.up * 0.05f, Color.red);
+        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f,  -Collider.size.y / 13f, 0), -transform.up * 0.1f, Color.red);
 
         Grounded = (GroundRayRight || GroundRayLeft);
 

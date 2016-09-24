@@ -12,13 +12,14 @@ public class WarningMessageUI : MonoBehaviour {
     [SerializeField]
     protected Text m_MessageText;
 
+    public static WarningMessageUI Instance;
     #endregion
 
     #region Mono
 
     void Awake()
     {
-        SM.WarningMessage = this;
+        Instance = this;
         Hidden = true;
         this.gameObject.SetActive(false);
     }

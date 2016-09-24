@@ -73,56 +73,56 @@ public class ActorInstance : MonoBehaviour
     {
         if(Info.Gender == Gender.Male)
         {
-            m_Head.sprite  = SM.Resources.GetSprite("MaleHead");
-            m_Chest.sprite = SM.Resources.GetSprite("MaleChest");
+            m_Head.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_head");
+            m_Chest.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_torso");
 
-            m_RightArm.sprite = SM.Resources.GetSprite("MaleArm");
-            m_LeftArm.sprite  = SM.Resources.GetSprite("MaleArm");
+            m_RightArm.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_arm");
+            m_LeftArm.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_arm");
 
-            m_RightElbow.sprite = SM.Resources.GetSprite("MaleElbow");
-            m_LeftElbow.sprite  = SM.Resources.GetSprite("MaleElbow");
+            m_RightElbow.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_elbow");
+            m_LeftElbow.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_elbow");
 
-            m_RightFist.sprite = SM.Resources.GetSprite("Fist");
-            m_LeftFist.sprite  = SM.Resources.GetSprite("Fist");
+            m_RightFist.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_hand");
+            m_LeftFist.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_hand");
 
-            m_RightLeg.sprite = SM.Resources.GetSprite("Leg");
-            m_LeftLeg.sprite  = SM.Resources.GetSprite("Leg");
+            m_RightLeg.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_hip");
+            m_LeftLeg.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_hip");
 
-            m_RightKnee.sprite = SM.Resources.GetSprite("Knee");
-            m_LeftKnee.sprite  = SM.Resources.GetSprite("Knee");
+            m_RightKnee.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_knee");
+            m_LeftKnee.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_knee");
 
-            m_RightFoot.sprite = SM.Resources.GetSprite("Foot");
-            m_LeftFoot.sprite  = SM.Resources.GetSprite("Foot");
+            m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_foot");
+            m_LeftFoot.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_foot");
         }   
         else
         {
-            m_Head.sprite = SM.Resources.GetSprite("FemaleHead");
-            m_Chest.sprite = SM.Resources.GetSprite("FemaleChest");
+            m_Head.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_head");
+            m_Chest.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_torso");
 
-            m_RightArm.sprite = SM.Resources.GetSprite("FemaleArm");
-            m_LeftArm.sprite = SM.Resources.GetSprite("FemaleArm");
+            m_RightArm.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_arm");
+            m_LeftArm.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_arm");
 
-            m_RightElbow.sprite = SM.Resources.GetSprite("FemaleElbow");
-            m_LeftElbow.sprite = SM.Resources.GetSprite("FemaleElbow");
+            m_RightElbow.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_elbow");
+            m_LeftElbow.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_elbow");
 
-            m_RightFist.sprite = SM.Resources.GetSprite("Fist");
-            m_LeftFist.sprite = SM.Resources.GetSprite("Fist");
+            m_RightFist.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_hand");
+            m_LeftFist.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_hand");
 
-            m_RightLeg.sprite = SM.Resources.GetSprite("Leg");
-            m_LeftLeg.sprite = SM.Resources.GetSprite("Leg");
+            m_RightLeg.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_hip");
+            m_LeftLeg.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_hip");
 
-            m_RightKnee.sprite = SM.Resources.GetSprite("Knee");
-            m_LeftKnee.sprite = SM.Resources.GetSprite("Knee");
+            m_RightKnee.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_knee");
+            m_LeftKnee.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_knee");
 
-            m_RightFoot.sprite = SM.Resources.GetSprite("Foot");
-            m_LeftFoot.sprite = SM.Resources.GetSprite("Foot");
+            m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
+            m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
         }
     }
 
     public void RegisterMovementController(ActorMovement controller)
     {
         MovementController = controller;
-        SM.SocketClient.Subscribe(Info.ID ,controller);
+        SocketClient.Instance.Subscribe(Info.ID ,controller);
     }
 
     #endregion

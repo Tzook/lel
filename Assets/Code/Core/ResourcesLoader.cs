@@ -12,9 +12,11 @@ public class ResourcesLoader : MonoBehaviour {
     protected Dictionary<string, GameObject> m_dicLoadedObjects = new Dictionary<string, GameObject>();
     protected Dictionary<string, AudioClip>  m_dicLoadedClips   = new Dictionary<string, AudioClip>();
 
+    public static ResourcesLoader Instance;
+
     void Awake()
     {
-        SM.Resources = this;
+        Instance = this;
     }
 
     void Start()
@@ -214,7 +216,7 @@ public class ResourcesLoader : MonoBehaviour {
 
     protected IEnumerator LoadResourcesRoutine()
     {
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
         
         float lastMiliSec = 0;
 
@@ -340,7 +342,7 @@ public class ResourcesLoader : MonoBehaviour {
             Debug.Log((Time.time) + "***WHOLE PROCCESS");
         }
 
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
 
 
     }

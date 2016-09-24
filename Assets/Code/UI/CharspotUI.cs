@@ -4,13 +4,36 @@ using System.Collections;
 
 public class CharspotUI : MonoBehaviour {
 
-    public ActorInstance Actor;
+    public Transform actorSpot;
 
     [SerializeField]
     protected Text txtName;
 
+    ActorInstance Actor;
+
     public void Load(ActorInfo info)
     {
+        if(Actor!=null)
+        {
+            Actor.gameObject.SetActive(false);
+        }
+
+        GameObject tempObj;
+        if (info.Gender == Gender.Male)
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+        }
+        else
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+        }
+
+        tempObj.transform.SetParent(transform);
+        tempObj.transform.position = actorSpot.position;
+        tempObj.transform.localScale = actorSpot.localScale;
+
+        Actor = tempObj.GetComponent<ActorInstance>();
+
         Actor.UpdateVisual(info);
         txtName.text = info.Name;
     }

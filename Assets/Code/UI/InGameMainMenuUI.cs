@@ -6,16 +6,18 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected GameObject menuPanel;
 
+    public static InGameMainMenuUI Instance;
+
 	void Awake()
     {
-        SM.InGameMainMenu = this;
+        Instance = this;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!menuPanel.activeInHierarchy && SM.Game.InGame)
+            if(!menuPanel.activeInHierarchy && Game.Instance.InGame)
             {
                 menuPanel.SetActive(true);
             }
@@ -34,7 +36,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void Logout()
     {
         menuPanel.SetActive(false);
-        SM.Game.LeaveToMainMenu();
+        Game.Instance.LeaveToMainMenu();
     }
 
     public void Quit()

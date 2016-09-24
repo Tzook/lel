@@ -9,9 +9,11 @@ public class LoadingWindowUI : MonoBehaviour {
 
     protected ui_transitionFade m_Fader;
 
+    public static LoadingWindowUI Instance;
+
     void Awake()
     {
-        SM.LoadingWindow = this;
+        Instance = this;
         this.gameObject.SetActive(false);
         m_Fader = GetComponent<ui_transitionFade>();
     }

@@ -34,11 +34,11 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
     {
         if (TargetPos.x > lastPosition.x)
         {
-            transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+            transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         }
         else if (TargetPos.x < lastPosition.x)
         {
-            transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+            transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
         }
 
         lastPosition = TargetPos;

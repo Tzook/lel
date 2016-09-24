@@ -6,11 +6,13 @@ public class Game : MonoBehaviour {
 
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
+    public static Game Instance;
 
     void Awake()
     {
-        SM.Game = this;
+        Instance = this;
         Application.runInBackground = true;
+        Application.targetFrameRate = 60;
     }
 
     public void LoadScene(string scene)
@@ -24,8 +26,8 @@ public class Game : MonoBehaviour {
         {
             InGame = false;
 
-            SM.Resources.ClearObjectPool();
-            SM.SocketClient.Diconnect();
+            ResourcesLoader.Instance.ClearObjectPool();
+            SocketClient.Instance.Diconnect();
             SceneManager.LoadScene("MainMenu");
         }
     }
@@ -34,7 +36,17 @@ public class Game : MonoBehaviour {
     {
         CurrentScene.Join(info);
 
-        GameObject tempObj = SM.Resources.GetRecycledObject("actor");
+        GameObject tempObj;
+        if (info.Gender == Gender.Male)
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+        }
+        else
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+        }
+
+
         tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
         tempObj.transform.position = info.LastPosition;
         return tempObj;
@@ -71,7 +83,7 @@ public class Game : MonoBehaviour {
     protected IEnumerator LoadSceneRoutine(string scene)
     {
         string lastScene = SceneManager.GetActiveScene().name;
-        SM.Resources.ClearObjectPool();
+        ResourcesLoader.Instance.ClearObjectPool();
         SceneManager.LoadScene(scene);
 
         while(lastScene == SceneManager.GetActiveScene().name)
@@ -81,14 +93,14 @@ public class Game : MonoBehaviour {
 
         CurrentScene = new SceneControl();
 
-        SM.SocketClient.EmitLoadedScene();
+        SocketClient.Instance.EmitLoadedScene();
 
-        while(SM.GameCamera==null)
+        while(GameCamera.Instance==null)
         {
             yield return 0;
         }
 
-        SM.GameCamera.Register(CurrentScene.ClientCharacter.Instance.gameObject);
+        GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
         InGame = true;
     }

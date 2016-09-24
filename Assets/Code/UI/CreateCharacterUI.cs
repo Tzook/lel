@@ -12,6 +12,8 @@ public class CreateCharacterUI : MonoBehaviour {
     protected InputField m_inputName;
 
     [SerializeField]
+    Transform actorSpot;
+
     protected ActorInstance m_ActorInstance;
 
     protected ActorInfo m_ActorInfo;
@@ -28,6 +30,20 @@ public class CreateCharacterUI : MonoBehaviour {
 
     public void Init()
     {
+        if (m_ActorInstance != null)
+        {
+            m_ActorInstance.gameObject.SetActive(false);
+        }
+
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+
+        tempObj.transform.SetParent(transform);
+        tempObj.transform.position = actorSpot.position;
+        tempObj.transform.localScale = actorSpot.localScale;
+
+        m_ActorInstance = tempObj.GetComponent<ActorInstance>();
+
+
         m_ActorInstance.Reset();
         m_ActorInfo = m_ActorInstance.Info;
         m_txtGender.text = m_ActorInfo.Gender.ToString();
@@ -36,16 +52,28 @@ public class CreateCharacterUI : MonoBehaviour {
 
     public void ToggleGender()
     {
-        if(m_ActorInfo.Gender == Gender.Male)
+
+        m_ActorInstance.gameObject.SetActive(false);
+
+        GameObject tempObj;
+        if (m_ActorInfo.Gender == Gender.Male)
         {
             m_ActorInfo.Gender = Gender.Female;
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
         }
         else
-        if (m_ActorInfo.Gender == Gender.Female)
         {
             m_ActorInfo.Gender = Gender.Male;
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
         }
 
+
+        tempObj.transform.SetParent(transform);
+        tempObj.transform.position = actorSpot.position;
+        tempObj.transform.localScale = actorSpot.localScale;
+
+        m_ActorInstance = tempObj.GetComponent<ActorInstance>();
+        m_ActorInstance.Info = m_ActorInfo;
         m_ActorInstance.UpdateVisual();
 
         m_txtGender.text = m_ActorInfo.Gender.ToString();
@@ -63,25 +91,25 @@ public class CreateCharacterUI : MonoBehaviour {
         
         if (string.IsNullOrEmpty(name))
         {
-            SM.WarningMessage.ShowMessage("You must type a name!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type a name!", 2f);
             return;
         }
-        
-        SM.LoadingWindow.Register(this);
+
+        LoadingWindowUI.Instance.Register(this);
         m_createCharacter.Create(name, gender);
     }
     
     public void CreateCharacterResponse(JSONNode response)
     {
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
 
         if (response["error"] != null)
         {
-            SM.WarningMessage.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
         }
         else
         {
-            SM.WarningMessage.ShowMessage(response["data"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_mainMenuUI.MoveToMenu(1);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);

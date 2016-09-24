@@ -59,7 +59,7 @@ public class MainMenuUI : MonoBehaviour
         m_SessionHandler = new SessionHandler(SessionResponse);
         m_LogoutHandler = new LogoutHandler(LogoutResponse);
 
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
         m_SessionHandler.Session();
     }
 
@@ -100,17 +100,17 @@ public class MainMenuUI : MonoBehaviour
 
         if (string.IsNullOrEmpty(username))
         {
-            SM.WarningMessage.ShowMessage("You must type your username to log in!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type your username to log in!", 2f);
             return;
         }
 
         if (string.IsNullOrEmpty(password))
         {
-            SM.WarningMessage.ShowMessage("You must type your password to log in!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type your password to log in!", 2f);
             return;
         }
 
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
         m_LoginHandler.Login(username, password);
     }
 
@@ -122,29 +122,29 @@ public class MainMenuUI : MonoBehaviour
 
         if (string.IsNullOrEmpty(username))
         {
-            SM.WarningMessage.ShowMessage("You must type your username to register!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type your username to register!", 2f);
             return;
         }
 
         if (string.IsNullOrEmpty(password))
         {
-            SM.WarningMessage.ShowMessage("You must type your password to register!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type your password to register!", 2f);
             return;
         }
 
         if (string.IsNullOrEmpty(passwordConfirm))
         {
-            SM.WarningMessage.ShowMessage("You must type your password again to register!", 2f);
+            WarningMessageUI.Instance.ShowMessage("You must type your password again to register!", 2f);
             return;
         }
 
         if (passwordConfirm != password)
         {
-            SM.WarningMessage.ShowMessage("The password and its confirmation do not match!", 2f);
+            WarningMessageUI.Instance.ShowMessage("The password and its confirmation do not match!", 2f);
             return;
         }
 
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
         m_RegisterationPanel.SetActive(false);
         m_LoginPanel.SetActive(true);
         m_RegisterHandler.Register(username, password);
@@ -158,7 +158,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void AttemptLogout()
     {
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
         m_LogoutHandler.Logout();
     }
 
@@ -189,7 +189,7 @@ public class MainMenuUI : MonoBehaviour
 
         for (int i = 0; i < user.Characters.Count; i++)
         {
-            GameObject tempObj = SM.Resources.GetRecycledObject("CharSpot");
+            GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("CharSpot");
             tempObj.transform.SetParent(CharactersContainer, false);
             tempObj.GetComponent<CharspotUI>().Load(user.Characters[i]);
             AddListenerToCharspot(tempObj.GetComponent<Button>(), user.Characters[i]);
@@ -233,16 +233,16 @@ public class MainMenuUI : MonoBehaviour
 
     public void LoginResponse(JSONNode response)
     {
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
 
         if (response["error"] != null)
         {
-            SM.WarningMessage.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
         }
         else
         {
             LocalUserInfo.Me.UpdateData(response["data"]);
-            SM.WarningMessage.ShowMessage(response["data"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
         }
@@ -250,16 +250,16 @@ public class MainMenuUI : MonoBehaviour
 
     public void RegisterationResponse(JSONNode response)
     {
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
 
         if (response["error"] != null)
         {
-            SM.WarningMessage.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
         }
         else
         {
             LocalUserInfo.Me.UpdateData(response["data"]);
-            SM.WarningMessage.ShowMessage("Welcome, new member!", 1f);
+            WarningMessageUI.Instance.ShowMessage("Welcome, new member!", 1f);
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
         }
@@ -267,7 +267,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void SessionResponse(JSONNode response)
     {
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
 
         if (response["error"] != null)
         {
@@ -285,7 +285,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void LogoutResponse(JSONNode response)
     {
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
         LocalUserInfo.DisposeCurrentUser();
 
         if (response["error"] != null)

@@ -19,9 +19,11 @@ public class SocketClient : MonoBehaviour
 
     protected Socket CurrentSocket;
 
+    public static SocketClient Instance;
+
     void Awake()
     {
-        SM.SocketClient = this;
+        Instance = this;
     }
 
     void Start()
@@ -49,7 +51,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
 
-        SM.LoadingWindow.Register(this);
+        LoadingWindowUI.Instance.Register(this);
     }
 
     public void Diconnect()
@@ -105,7 +107,7 @@ public class SocketClient : MonoBehaviour
     protected void OnConnect(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("On connect");
-        SM.Game.LoadScene(LocalUserInfo.Me.SelectedCharacter.CurrentRoom);
+        Game.Instance.LoadScene(LocalUserInfo.Me.SelectedCharacter.CurrentRoom);
     }
 
     protected void OnActorJoinRoom(Socket socket, Packet packet, params object[] args)
@@ -113,7 +115,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has joined the room");
 
         JSONNode data = (JSONNode)args[0];
-        SM.Game.LoadNpcCharacter(new ActorInfo(data["character"]));
+        Game.Instance.LoadNpcCharacter(new ActorInfo(data["character"]));
     }
 
     protected void OnActorLeaveRoom(Socket socket, Packet packet, params object[] args)
@@ -121,7 +123,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has left the room");
 
         JSONNode data = (JSONNode)args[0];
-        SM.Game.RemoveNpcCharacter(new ActorInfo(data["character"]));
+        Game.Instance.RemoveNpcCharacter(new ActorInfo(data["character"]));
     }
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
@@ -148,12 +150,12 @@ public class SocketClient : MonoBehaviour
     public void EmitLoadedScene()
     {
         BroadcastEvent("Emitted : LoadedScene");
-        SM.LoadingWindow.Leave(this);
+        LoadingWindowUI.Instance.Leave(this);
         JSONNode node = new JSONClass();
 
         CurrentSocket.Emit("entered_room", node);
 
-        SM.Game.LoadPlayerCharacter();
+        Game.Instance.LoadPlayerCharacter();
 
         CurrentSocket.On("movement", OnMovement);
     }

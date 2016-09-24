@@ -41,9 +41,12 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_LeftFoot;
 
+
     [SerializeField]
     protected GameObject NameLabel;
 
+    [SerializeField]
+    protected MessageBubbleUI MessageBubble;
 
     #endregion
 
@@ -141,6 +144,13 @@ public class ActorInstance : MonoBehaviour
         SocketClient.Instance.Subscribe(Info.ID ,controller);
     }
 
+    public void ChatBubble(string Message)
+    {
+        if (Message.Length < 65)
+        {
+            MessageBubble.GetComponent<MessageBubbleUI>().PopMessage(Message);
+        }
+    }
     #endregion
 
 

@@ -6,6 +6,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected GameObject menuPanel;
 
+    [SerializeField]
+    protected ChatboxUI chatPanel;
+
     public static InGameMainMenuUI Instance;
 
 	void Awake()
@@ -24,6 +27,14 @@ public class InGameMainMenuUI : MonoBehaviour {
             else
             {
                 menuPanel.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!chatPanel.gameObject.activeInHierarchy && Game.Instance.InGame)
+            {
+                chatPanel.Open();
             }
         }
     }

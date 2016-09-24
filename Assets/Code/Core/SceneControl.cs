@@ -32,7 +32,7 @@ public class SceneControl
         }
     }
 
-    public ActorInfo GetPlayerByName(string Name)
+    public ActorInfo GetActorByName(string Name)
     {
         for(int i=0;i<actors.Keys.Count;i++)
         {
@@ -45,7 +45,7 @@ public class SceneControl
         return null;
     }
 
-    public ActorInfo GetPlayer(string ID)
+    public ActorInfo GetActor(string ID)
     {
         if(actors.ContainsKey(ID))
         {

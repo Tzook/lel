@@ -50,6 +50,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("error", OnError);
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
+        CurrentSocket.On("message", OnChatMessage);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -143,6 +144,23 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    protected void OnChatMessage(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Chat Message!");
+
+        JSONNode data = (JSONNode)args[0];
+
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
+        if (actorInfo != null && actorInfo.Instance)
+        {
+            actorInfo.Instance.ChatBubble(data["message"]);
+        }
+        else
+        {
+            Debug.LogError(data["id"] + " is no longer in the room for this event to occur.");
+        }
+    }
+
     #endregion
 
     #region Emittions
@@ -167,6 +185,13 @@ public class SocketClient : MonoBehaviour
         node["y"] = pos.y.ToString();
         node["z"] = pos.z.ToString();
         CurrentSocket.Emit("movement", node);
+    }
+
+    public void SendChatMessage(string Message)
+    {
+        JSONNode node = new JSONClass();
+        node["message"] = Message;
+        CurrentSocket.Emit("message", node);
     }
 
     #endregion

@@ -8,6 +8,8 @@ public class Game : MonoBehaviour {
     public bool InGame { protected set; get; }
     public static Game Instance;
 
+    public GameObject ClientCharacter;
+
     void Awake()
     {
         Instance = this;
@@ -30,6 +32,12 @@ public class Game : MonoBehaviour {
             SocketClient.Instance.Diconnect();
             SceneManager.LoadScene("MainMenu");
         }
+    }
+
+    public void SendChatMessage(string givenText)
+    {
+        SocketClient.Instance.SendChatMessage(givenText);
+        ClientCharacter.GetComponent<ActorInstance>().ChatBubble(givenText);
     }
 
     public GameObject SpawnPlayer(ActorInfo info)
@@ -64,7 +72,7 @@ public class Game : MonoBehaviour {
 
     public void RemoveNpcCharacter(ActorInfo info)
     {
-        GameObject leavingPlayer = CurrentScene.GetPlayer(info.ID).Instance.gameObject;
+        GameObject leavingPlayer = CurrentScene.GetActor(info.ID).Instance.gameObject;
 
         leavingPlayer.SetActive(false);
 
@@ -73,11 +81,11 @@ public class Game : MonoBehaviour {
 
     public void LoadPlayerCharacter()
     {
-        GameObject tempObj = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
+        ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
 
-        tempObj.GetComponent<ActorMovement>().enabled = false;
-        tempObj.GetComponent<ActorController>().enabled = true;
-        tempObj.GetComponent<Rigidbody2D>().isKinematic = false;
+        ClientCharacter.GetComponent<ActorMovement>().enabled = false;
+        ClientCharacter.GetComponent<ActorController>().enabled = true;
+        ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     protected IEnumerator LoadSceneRoutine(string scene)
@@ -105,5 +113,6 @@ public class Game : MonoBehaviour {
         InGame = true;
     }
 
+    
 
 }

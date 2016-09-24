@@ -46,7 +46,7 @@ public class Game : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
         }
 
-
+        
         tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
         tempObj.transform.position = info.LastPosition;
         return tempObj;

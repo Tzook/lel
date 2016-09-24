@@ -63,12 +63,12 @@ public class ActorController : MonoBehaviour
         Collider = GetComponent<BoxCollider2D>();
         Collider.enabled = true;
 
-        Anim = transform.GetChild(0).GetComponent<Animator>();
+        Anim = transform.FindChild("Body").GetComponent<Animator>();
     }
 
     void Start()
     {
-        initScale = transform.localScale;
+        initScale = Anim.transform.localScale;
     }
 
 
@@ -134,7 +134,7 @@ public class ActorController : MonoBehaviour
 
 
         Rigidbody.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigidbody.velocity.y);
-        transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
+        Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
     }
 
     public void MoveRight()
@@ -143,7 +143,7 @@ public class ActorController : MonoBehaviour
         //Rigidbody.position += (Vector2.right * InternalSpeed * Time.deltaTime);
 
         Rigidbody.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigidbody.velocity.y);
-        transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+        Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
     }
 
     public void StandStill()
@@ -161,7 +161,6 @@ public class ActorController : MonoBehaviour
 
     protected IEnumerator JumpRoutine()
     {
-        Debug.Log(Rigidbody.velocity.y);
 
         if (Rigidbody.velocity.y <= 1.5f)
         {

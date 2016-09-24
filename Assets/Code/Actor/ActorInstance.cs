@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ActorInstance : MonoBehaviour
 {
@@ -40,12 +41,17 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_LeftFoot;
 
+    [SerializeField]
+    protected GameObject NameLabel;
+
+
     #endregion
 
     #region Public Parameters
 
     public ActorInfo Info;
     public ActorMovement MovementController { protected set; get; }
+    public bool HideName = false;
 
     #endregion
 
@@ -71,7 +77,17 @@ public class ActorInstance : MonoBehaviour
 
     public void UpdateVisual()
     {
-        if(Info.Gender == Gender.Male)
+        if (!HideName)
+        {
+            NameLabel.SetActive(true);
+            NameLabel.transform.GetChild(0).GetComponent<Text>().text = Info.Name;
+        }
+        else
+        {
+            NameLabel.SetActive(false);
+        }
+
+        if (Info.Gender == Gender.Male)
         {
             m_Head.sprite  = ResourcesLoader.Instance.GetSprite("char_base_male_head");
             m_Chest.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_torso");

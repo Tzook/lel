@@ -51,6 +51,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
 
         actorInstance = tempObj.GetComponent<ActorInstance>();
 
+        actorInstance.HideName = true;
         actorInstance.UpdateVisual(info);
         txtName.text = info.Name;
         LocalUserInfo.Me.SelectedCharacter = info;

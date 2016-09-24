@@ -20,25 +20,27 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
     protected bool MovingVertical;
 
 
+
     void Start()
     {
         Instance = GetComponent<ActorInstance>();
         Instance.RegisterMovementController(this);
         lastPosition = transform.position;
-        initScale = transform.localScale;
 
-        Anim = transform.GetChild(0).GetComponent<Animator>();
+        Anim = transform.FindChild("Body").GetComponent<Animator>();
+
+        initScale = Anim.transform.localScale;
     }
 
     public void UpdatePosition(Vector3 TargetPos)
     {
         if (TargetPos.x > lastPosition.x)
         {
-            transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+            Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         }
         else if (TargetPos.x < lastPosition.x)
         {
-            transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+            Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
         }
 
         lastPosition = TargetPos;
@@ -56,22 +58,19 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
         MovingHorizontal = false;
         MovingVertical = false;
 
-        if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.1f)
+        if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
         {
             Anim.SetBool("InAir", true);
             MovingVertical = true;
         }
 
-        if (Mathf.Abs(transform.position.x - lastPosition.x) > 0.1f)
+        if (Mathf.Abs(transform.position.x - lastPosition.x) > 0.05f)
         {
             Anim.SetBool("Walking", true);
             MovingHorizontal = true;
         }
 
         transform.position = Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed);
-
-
-        
     }
 
 }

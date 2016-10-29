@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 [RequireComponent(typeof(ActorInstance))]
 public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 {
 
     public ActorInstance Instance;
-
 
     [SerializeField]
     protected float relocateSpeed = 15f;
@@ -18,7 +16,7 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
 
     protected bool MovingHorizontal;
     protected bool MovingVertical;
-
+    protected bool aimRight;
 
 
     void Start()
@@ -32,7 +30,7 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
         initScale = Anim.transform.localScale;
     }
 
-    public void UpdatePosition(Vector3 TargetPos)
+    public void UpdateMovement(Vector3 TargetPos, float angle)
     {
         if (TargetPos.x > lastPosition.x)
         {
@@ -43,7 +41,69 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
             Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
         }
 
+        if (angle == 0f)
+        {
+            StopAim();
+        }
+        else
+        {
+            Aim(angle);
+        }
+
         lastPosition = TargetPos;
+    }
+
+    private void Aim(float angle)
+    {
+
+        Anim.SetBool("Aim", true);
+
+        if (angle < 0 && angle > -90f || angle > 0 && angle < 90f)
+        {
+            Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+            Instance.TorsoBone.transform.localScale = Vector3.one;
+
+            aimRight = true;
+
+            if (angle < 0f && angle < -40f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, -40f), Time.deltaTime * 20f);
+            }
+            else if (angle > 0 && angle > 40f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, 40f), Time.deltaTime * 20f);
+            }
+            else
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 20f);
+            }
+        }
+        else
+        {
+            Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+            Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
+
+            aimRight = false;
+            if (angle < 0f && angle > -130f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, -130f), Time.deltaTime * 20f);
+            }
+            else if (angle > 0f && angle < 140f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, 140f), Time.deltaTime * 20f);
+            }
+            else
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Lerp(Instance.TorsoBone.transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime *20f);
+            }
+        }
+    }
+
+    private void StopAim()
+    {
+        Anim.SetBool("Aim", false);
+        Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+        Instance.TorsoBone.transform.localScale = Vector3.one;
     }
 
     void Update()

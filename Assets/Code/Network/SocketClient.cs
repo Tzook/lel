@@ -132,11 +132,14 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Movement occured");
 
         JSONNode data = (JSONNode)args[0];
+
+        Debug.Log(data.ToString());
+
         string id = data["id"];
         if (SubscribedMovables.ContainsKey(id))
         {
             IUpdatePositionListener instance = SubscribedMovables[id];
-            instance.UpdatePosition(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat));
+            instance.UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat);
         }
         else
         {
@@ -178,12 +181,15 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("movement", OnMovement);
     }
 
-    public void EmitMovement(Vector3 pos)
+    public void EmitMovement(Vector3 pos, float rotDegrees)
     {
         JSONNode node = new JSONClass();
+
         node["x"] = pos.x.ToString();
         node["y"] = pos.y.ToString();
         node["z"] = pos.z.ToString();
+        node["angle"].AsFloat = rotDegrees;
+
         CurrentSocket.Emit("movement", node);
     }
 

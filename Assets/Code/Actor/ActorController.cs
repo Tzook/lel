@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -7,16 +8,18 @@ public class ActorController : MonoBehaviour
 {
     #region References
 
-    protected Rigidbody2D Rigidbody;
-    protected BoxCollider2D Collider;
+    public ActorInstance Instance;
 
-    protected RaycastHit2D GroundRayRight;
-    protected RaycastHit2D GroundRayLeft;
+    Rigidbody2D Rigidbody;
+    BoxCollider2D Collider;
 
-    protected Animator Anim;
+    RaycastHit2D GroundRayRight;
+    RaycastHit2D GroundRayLeft;
+
+    Animator Anim;
 
     [SerializeField]
-    protected bool ClientOnly = false;
+    bool ClientOnly = false;
 
     #endregion
 
@@ -25,26 +28,32 @@ public class ActorController : MonoBehaviour
     public bool Grounded = false;
 
     [SerializeField]
-    protected float GroundedThreshold;
+    float GroundedThreshold;
 
     [SerializeField]
-    protected float InternalSpeed = 1f;
+    float InternalSpeed = 1f;
 
     [SerializeField]
-    protected float InternalJumpForce = 1f;
+    float InternalJumpForce = 1f;
 
     [SerializeField]
-    protected float JumpDelay = 0.1f;
+    float JumpDelay = 0.1f;
 
-    protected Coroutine JumpRoutineInstance;
+    Coroutine JumpRoutineInstance;
 
-    protected LayerMask GroundLayerMask = 0 << 0 | 1;
+    LayerMask GroundLayerMask = 0 << 0 | 1;
 
-    protected Vector3 initScale;
+    Vector3 initScale;
 
-    protected Vector3 lastSentPosition;
+    Vector3 lastSentPosition;
+    float lastSentAngle;
 
-    protected float MovementDirection;
+    float MovementDirection;
+
+    //Rotation Parameters;
+    Vector3 tempRot;
+    float rotDegrees;
+    bool aimRight;
 
     #endregion
 
@@ -53,6 +62,7 @@ public class ActorController : MonoBehaviour
     void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        Instance  = GetComponent<ActorInstance>();
 
         if(Rigidbody == null)
         {
@@ -71,6 +81,18 @@ public class ActorController : MonoBehaviour
         initScale = Anim.transform.localScale;
     }
 
+    void Update()
+    {
+        if(Input.GetMouseButton(1))
+        {
+            Aim();
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            StopAim();
+        }
+
+    }
 
     void FixedUpdate()
     {
@@ -102,7 +124,7 @@ public class ActorController : MonoBehaviour
         GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
         GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
 
-        Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
+        //Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
 
         Grounded = (GroundRayRight || GroundRayLeft);
 
@@ -113,10 +135,11 @@ public class ActorController : MonoBehaviour
 
         if (!ClientOnly)
         {
-            if (lastSentPosition != transform.position)
+            if (lastSentPosition != transform.position || lastSentAngle != rotDegrees)
             {
-                SocketClient.Instance.EmitMovement(transform.position);
+                SocketClient.Instance.EmitMovement(transform.position, rotDegrees);
                 lastSentPosition = transform.position;
+                lastSentAngle = rotDegrees;
             }
         }
 
@@ -135,6 +158,8 @@ public class ActorController : MonoBehaviour
 
         Rigidbody.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigidbody.velocity.y);
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
+
+        Anim.SetBool("ReverseWalk", aimRight);
     }
 
     public void MoveRight()
@@ -144,6 +169,8 @@ public class ActorController : MonoBehaviour
 
         Rigidbody.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigidbody.velocity.y);
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+
+        Anim.SetBool("ReverseWalk", !aimRight);
     }
 
     public void StandStill()
@@ -170,6 +197,63 @@ public class ActorController : MonoBehaviour
         yield return new WaitForSeconds(JumpDelay);
 
         JumpRoutineInstance = null;
+    }
+
+    private void Aim()
+    {
+        tempRot = (GameCamera.MousePosition - Instance.TorsoBone.transform.position);
+        tempRot.Normalize();
+        rotDegrees = Mathf.Atan2(tempRot.y, tempRot.x) * Mathf.Rad2Deg;
+
+        Anim.SetBool("Aim", true);
+
+        if (rotDegrees < 0 && rotDegrees > -90f || rotDegrees > 0 && rotDegrees < 90f)
+        {
+            Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+            Instance.TorsoBone.transform.localScale = Vector3.one;
+
+            aimRight = true;
+
+            if (rotDegrees < 0f && rotDegrees < -40f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, -40f);
+            }
+            else if (rotDegrees > 0 && rotDegrees > 40f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, 40f);
+            }
+            else
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees);
+            }
+        }
+        else
+        {
+            Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+            Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
+
+            aimRight = false;
+            if (rotDegrees < 0f && rotDegrees > -130f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, -130f);
+            }
+            else if (rotDegrees > 0f && rotDegrees < 140f)
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, 140f);
+            }
+            else
+            {
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees);
+            }
+        }
+    }
+
+    private void StopAim()
+    {
+        Anim.SetBool("Aim", false);
+        Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+        Instance.TorsoBone.transform.localScale = Vector3.one;
+        rotDegrees = 0f;
     }
 
     #endregion

@@ -14,6 +14,8 @@ public class GameCamera : MonoBehaviour {
     [SerializeField]
     protected CameraType CamType = CameraType.Normal;
 
+    Camera cam;
+
     #endregion
 
     Vector3 dampRef;
@@ -22,10 +24,12 @@ public class GameCamera : MonoBehaviour {
     protected Vector3 targetPos;
 
     public static GameCamera Instance;
+    public static Vector3 MousePosition;
 
 	void Awake()
     {
         Instance = this;
+        cam = GetComponent<Camera>();
     }
 
     void Start()
@@ -36,6 +40,11 @@ public class GameCamera : MonoBehaviour {
     public void Register(GameObject objToFollow)
     {
         followingObject = objToFollow;
+    }
+
+    void Update()
+    {
+        MousePosition = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void FixedUpdate()

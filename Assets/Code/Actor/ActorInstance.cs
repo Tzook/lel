@@ -7,6 +7,8 @@ public class ActorInstance : MonoBehaviour
 
     #region References
 
+    public Transform TorsoBone;
+
     [SerializeField]
     protected SpriteRenderer m_Head;
 

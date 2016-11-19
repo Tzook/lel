@@ -43,6 +43,14 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_LeftFoot;
 
+    [SerializeField]
+    protected SpriteRenderer m_Eyes;
+    [SerializeField]
+    protected SpriteRenderer m_Nose;
+    [SerializeField]
+    protected SpriteRenderer m_Mouth;
+
+
 
     [SerializeField]
     protected GameObject NameLabel;
@@ -138,6 +146,10 @@ public class ActorInstance : MonoBehaviour
             m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
             m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
         }
+
+        m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+        m_Nose.sprite = ResourcesLoader.Instance.GetSprite(Info.Nose);
+        m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth);
     }
 
     public void RegisterMovementController(ActorMovement controller)
@@ -153,6 +165,7 @@ public class ActorInstance : MonoBehaviour
             MessageBubble.GetComponent<MessageBubbleUI>().PopMessage(Message);
         }
     }
+
     #endregion
 
 

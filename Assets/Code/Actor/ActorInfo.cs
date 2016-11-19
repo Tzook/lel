@@ -11,6 +11,9 @@ public class ActorInfo
     public ActorInstance Instance;
     public string CurrentRoom;
     public Vector3 LastPosition;
+    public string Eyes = "eyes_0a";
+    public string Nose = "nose_0";
+    public string Mouth= "mouth_0";
 
     public ActorInfo()
     {
@@ -32,6 +35,9 @@ public class ActorInfo
             this.Gender = Gender.Female;
         }
 
+        Eyes = node["looks"]["eyes"].Value;
+        Nose = node["looks"]["nose"].Value;
+        Mouth= node["looks"]["mouth"].Value;
     }
 }
 

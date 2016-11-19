@@ -7,12 +7,15 @@ public class CreateCharacter : HttpProvider
 
 	public CreateCharacter(Action<JSONNode> callback) : base(callback){}
 	
-	public void Create(string name, Gender gender)
+	public void Create(ActorInfo info)
 	{
 		JSONNode parameters = new JSONClass();
-		parameters["name"] = name;
-		parameters["g"] = ((gender == Gender.Male) ? "1" : "0");
-		
-		performRequest(CREATE_CHARACTER_URL, parameters, true);
+		parameters["name"] = info.Name;
+		parameters["g"] = ((info.Gender == Gender.Male) ? "1" : "0");
+        parameters["eyes"] = info.Eyes;
+        parameters["nose"] = info.Nose;
+        parameters["mouth"] = info.Mouth;
+
+        performRequest(CREATE_CHARACTER_URL, parameters, true);
 	}
 }

@@ -152,16 +152,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Chat Message!");
 
         JSONNode data = (JSONNode)args[0];
-
-        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
-        if (actorInfo != null && actorInfo.Instance)
-        {
-            actorInfo.Instance.ChatBubble(data["message"]);
-        }
-        else
-        {
-            Debug.LogError(data["id"] + " is no longer in the room for this event to occur.");
-        }
+        Game.Instance.ReceiveChatMessage(data["id"], data["message"], data["type"]);
     }
 
     #endregion

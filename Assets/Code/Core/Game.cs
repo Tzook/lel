@@ -10,11 +10,14 @@ public class Game : MonoBehaviour {
 
     public GameObject ClientCharacter;
 
+    protected ChatlogUI chatlog;
+
     void Awake()
     {
         Instance = this;
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
+        chatlog = new ChatlogUI();
     }
 
     public void LoadScene(string scene)
@@ -24,7 +27,7 @@ public class Game : MonoBehaviour {
 
     public void LeaveToMainMenu()
     {
-        if(InGame)
+        if (InGame)
         {
             InGame = false;
 
@@ -34,11 +37,30 @@ public class Game : MonoBehaviour {
         }
     }
 
+    #region Chat
+
+    public void ReceiveChatMessage(string id, string message, string type)
+    {
+        ActorInfo actorInfo = CurrentScene.GetActor(id);
+        if (actorInfo != null && actorInfo.Instance)
+        {
+            actorInfo.Instance.ChatBubble(message);
+            chatlog.addMessage(actorInfo.Instance, message, type);
+        }
+        else
+        {
+            Debug.LogError(id + " is no longer in the room for this event to occur.");
+        }
+    }
     public void SendChatMessage(string givenText)
     {
         SocketClient.Instance.SendChatMessage(givenText);
-        ClientCharacter.GetComponent<ActorInstance>().ChatBubble(givenText);
+        ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
+        actor.ChatBubble(givenText);
+        chatlog.addMessage(actor, givenText, "room");
     }
+
+    #endregion
 
     public GameObject SpawnPlayer(ActorInfo info)
     {
@@ -54,7 +76,7 @@ public class Game : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
         }
 
-        
+
         tempObj.GetComponent<ActorInstance>().UpdateVisual(info);
         tempObj.transform.position = info.LastPosition;
         return tempObj;
@@ -112,7 +134,4 @@ public class Game : MonoBehaviour {
 
         InGame = true;
     }
-
-    
-
 }

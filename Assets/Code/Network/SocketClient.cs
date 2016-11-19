@@ -197,6 +197,8 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
         node["message"] = Message;
+        node["type"] = "room"; // can also be "whisper" or "global"
+        //node["target_id"] = id; use this when whispering
         CurrentSocket.Emit("message", node);
     }
 

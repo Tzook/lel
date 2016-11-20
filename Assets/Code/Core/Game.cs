@@ -9,15 +9,12 @@ public class Game : MonoBehaviour {
     public static Game Instance;
 
     public GameObject ClientCharacter;
-
-    protected ChatlogUI chatlog;
-
+   
     void Awake()
     {
         Instance = this;
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
-        chatlog = new ChatlogUI();
     }
 
     public void LoadScene(string scene)
@@ -45,7 +42,7 @@ public class Game : MonoBehaviour {
         if (actorInfo != null && actorInfo.Instance)
         {
             actorInfo.Instance.ChatBubble(message);
-            chatlog.addMessage(actorInfo.Instance, message, type);
+            ChatLogUI.Instance.AddMessage(actorInfo, message);
         }
         else
         {
@@ -57,7 +54,7 @@ public class Game : MonoBehaviour {
         SocketClient.Instance.SendChatMessage(givenText);
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
         actor.ChatBubble(givenText);
-        chatlog.addMessage(actor, givenText, "room");
+        ChatLogUI.Instance.AddMessage(actor.Info, givenText);
     }
 
     #endregion

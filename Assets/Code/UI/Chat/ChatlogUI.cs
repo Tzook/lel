@@ -2,9 +2,9 @@
 using System.Collections;
 using System;
 
-public class ChatLogUI : MonoBehaviour {
+public class ChatlogUI : MonoBehaviour {
 
-    public static ChatLogUI Instance;
+    public static ChatlogUI Instance;
 
     [SerializeField]
     Transform Container;

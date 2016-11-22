@@ -11,9 +11,12 @@ public class ActorInfo
     public ActorInstance Instance;
     public string CurrentRoom;
     public Vector3 LastPosition;
+    public int SkinColor;
+    public string Hair = "hair_0";
     public string Eyes = "eyes_0a";
     public string Nose = "nose_0";
     public string Mouth= "mouth_0";
+    
 
     public ActorInfo()
     {
@@ -35,9 +38,11 @@ public class ActorInfo
             this.Gender = Gender.Female;
         }
 
+        Hair = node["looks"]["hair"].Value;
         Eyes = node["looks"]["eyes"].Value;
         Nose = node["looks"]["nose"].Value;
-        Mouth= node["looks"]["mouth"].Value;
+        Mouth = node["looks"]["mouth"].Value;
+        SkinColor = node["looks"]["skin"].AsInt;
     }
 }
 

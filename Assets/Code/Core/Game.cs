@@ -42,7 +42,7 @@ public class Game : MonoBehaviour {
         if (actorInfo != null && actorInfo.Instance)
         {
             actorInfo.Instance.ChatBubble(message);
-            ChatLogUI.Instance.AddMessage(actorInfo, message);
+            ChatlogUI.Instance.AddMessage(actorInfo, message);
         }
         else
         {
@@ -54,7 +54,7 @@ public class Game : MonoBehaviour {
         SocketClient.Instance.SendChatMessage(givenText);
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
         actor.ChatBubble(givenText);
-        ChatLogUI.Instance.AddMessage(actor.Info, givenText);
+        ChatlogUI.Instance.AddMessage(actor.Info, givenText);
     }
 
     #endregion

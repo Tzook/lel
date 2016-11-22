@@ -25,12 +25,15 @@ public class CreateCharacterUI : MonoBehaviour
     [SerializeField]
     protected MainMenuUI m_mainMenuUI;
 
+    public List<string> AllowedHair = new List<string>();
     public List<string> AllowedEyes = new List<string>();
     public List<string> AllowedNose = new List<string>();
     public List<string> AllowedMouth = new List<string>();
+    int hairIndex;
     int eyesIndex;
     int noseIndex;
     int mouthIndex;
+    int skinIndex;
 
     void Start()
     {
@@ -89,6 +92,32 @@ public class CreateCharacterUI : MonoBehaviour
         m_ActorInstance.UpdateVisual();
 
         m_txtGender.text = m_ActorInfo.Gender.ToString();
+    }
+
+    public void NextHair()
+    {
+        hairIndex++;
+
+        if (hairIndex >= AllowedHair.Count)
+        {
+            hairIndex = 0;
+        }
+
+        m_ActorInfo.Hair = AllowedHair[hairIndex];
+        m_ActorInstance.UpdateVisual();
+    }
+
+    public void PrevHair()
+    {
+        hairIndex--;
+
+        if (hairIndex < 0)
+        {
+            hairIndex = AllowedHair.Count - 1;
+        }
+
+        m_ActorInfo.Hair = AllowedHair[hairIndex];
+        m_ActorInstance.UpdateVisual();
     }
 
     public void NextEyes()
@@ -168,6 +197,33 @@ public class CreateCharacterUI : MonoBehaviour
         m_ActorInfo.Mouth = AllowedMouth[mouthIndex];
         m_ActorInstance.UpdateVisual();
     }
+
+    public void NextSkin()
+    {
+        skinIndex++;
+
+        if (skinIndex >= 3)
+        {
+            skinIndex = 0;
+        }
+
+        m_ActorInfo.SkinColor = skinIndex;
+        m_ActorInstance.UpdateVisual();
+    }
+
+    public void PreviousSkin()
+    {
+        skinIndex--;
+
+        if (skinIndex < 0)
+        {
+            skinIndex = 2;
+        }
+
+        m_ActorInfo.SkinColor = mouthIndex;
+        m_ActorInstance.UpdateVisual();
+    }
+
 
 
     public void MoveToCharactersList()

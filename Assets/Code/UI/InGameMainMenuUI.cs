@@ -9,6 +9,12 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected ChatboxUI chatPanel;
 
+    [SerializeField]
+    protected GameObject optionsPanel;
+
+    [SerializeField]
+    protected GameObject inventoryPanel;
+
     public static InGameMainMenuUI Instance;
 
 	void Awake()
@@ -20,7 +26,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!menuPanel.activeInHierarchy && Game.Instance.InGame)
+            if(!menuPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
                 menuPanel.SetActive(true);
             }
@@ -28,11 +34,33 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 menuPanel.SetActive(false);
             }
+
+            if (optionsPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            {
+                optionsPanel.SetActive(false);
+            }
+
+            if (inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            {
+                inventoryPanel.SetActive(false);
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(InputMap.Map["Inventory"]))
         {
-            if (!chatPanel.gameObject.activeInHierarchy && Game.Instance.InGame)
+            if (!inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            {
+                inventoryPanel.SetActive(true);
+            }
+            else
+            {
+                inventoryPanel.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(InputMap.Map["Chat"]))
+        {
+            if (!chatPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
                 chatPanel.Open();
             }

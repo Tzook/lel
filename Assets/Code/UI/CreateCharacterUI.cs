@@ -253,6 +253,7 @@ public class CreateCharacterUI : MonoBehaviour
         if (response["error"] != null)
         {
             WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            AudioControl.Instance.Play("sound_negative");
         }
         else
         {
@@ -260,6 +261,7 @@ public class CreateCharacterUI : MonoBehaviour
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_mainMenuUI.MoveToMenu(1);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);
+            AudioControl.Instance.Play("sound_positiveprogress");
         }
     }
 }

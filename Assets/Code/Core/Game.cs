@@ -6,6 +6,7 @@ public class Game : MonoBehaviour {
 
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
+    public bool InChat;
     public static Game Instance;
 
     public GameObject ClientCharacter;

@@ -16,11 +16,12 @@ public class ChatboxUI : MonoBehaviour {
         m_Animator.SetTrigger("Show");
         m_txtField.Select();
         m_txtField.ActivateInputField();
+        Game.Instance.InChat = true;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(InputMap.Map["Chat"]))
         {
             if (!string.IsNullOrEmpty(m_txtField.text))
             {
@@ -31,7 +32,7 @@ public class ChatboxUI : MonoBehaviour {
             Hide();
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(InputMap.Map["Chat"]))
         {
             m_txtField.text = "";
             Hide();
@@ -41,6 +42,7 @@ public class ChatboxUI : MonoBehaviour {
     public void Hide()
     {
         m_Animator.SetTrigger("Hide");
+        Game.Instance.InChat = false;
     }
     
     public void CanShut()

@@ -133,7 +133,6 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Debug.Log(data.ToString());
 
         string id = data["id"];
         if (SubscribedMovables.ContainsKey(id))

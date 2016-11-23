@@ -238,6 +238,7 @@ public class MainMenuUI : MonoBehaviour
         if (response["error"] != null)
         {
             WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            AudioControl.Instance.Play("sound_negative");
         }
         else
         {
@@ -245,6 +246,7 @@ public class MainMenuUI : MonoBehaviour
             WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
+            AudioControl.Instance.Play("sound_positive");
         }
     }
 
@@ -255,6 +257,7 @@ public class MainMenuUI : MonoBehaviour
         if (response["error"] != null)
         {
             WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            AudioControl.Instance.Play("sound_negative");
         }
         else
         {
@@ -262,6 +265,7 @@ public class MainMenuUI : MonoBehaviour
             WarningMessageUI.Instance.ShowMessage("Welcome, new member!", 1f);
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
+            AudioControl.Instance.Play("sound_positiveprogress");
         }
     }
 
@@ -273,6 +277,7 @@ public class MainMenuUI : MonoBehaviour
         {
             //SM.WarningMessage.ShowMessage(response["error"].ToString());
             Debug.Log("Session could not be done: " + response["error"].Value);
+            AudioControl.Instance.Play("sound_negative");
         }
         else
         {
@@ -280,6 +285,7 @@ public class MainMenuUI : MonoBehaviour
             LocalUserInfo.Me.UpdateData(response["data"]);
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
+            AudioControl.Instance.Play("sound_positive");
         }
     }
 

@@ -100,12 +100,12 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
         {
             MoveLeft();
             Anim.SetBool("Walking", true);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
         {
             MoveRight();
             Anim.SetBool("Walking", true);
@@ -115,7 +115,7 @@ public class ActorController : MonoBehaviour
             StandStill();
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
         {
             Jump();
             //Anim.SetBool("Walking", true);

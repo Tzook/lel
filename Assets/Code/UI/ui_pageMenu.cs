@@ -14,6 +14,8 @@ public class ui_pageMenu : MonoBehaviour {
 	public bool  m_bVertical      = false;
     public bool m_bInstant = false;
 
+    public string m_sPageSwitchSound;
+
 	void Start()
 	{
 		if(m_bUpdateOnStart)
@@ -48,6 +50,8 @@ public class ui_pageMenu : MonoBehaviour {
     //Will update the menu to the m_iIndex page.
     protected void UpdatePage()
 	{
+        AudioControl.Instance.Play(m_sPageSwitchSound);
+
 		StopAllCoroutines();
 
 		m_listPages[m_iIndex].transform.SetAsLastSibling();

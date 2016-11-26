@@ -250,7 +250,7 @@ public class ActorInstance : MonoBehaviour
         m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
         m_Nose.sprite = ResourcesLoader.Instance.GetSprite(Info.Nose);
         m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth);
-        //m_Hair.sprite = ResourcesLoader.Instance.GetSprite(Info.Hair); TODO Implement ME!
+        m_Hair.sprite = ResourcesLoader.Instance.GetSprite(Info.Hair);
     }
 
     public void RegisterMovementController(ActorMovement controller)

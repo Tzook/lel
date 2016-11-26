@@ -25,7 +25,8 @@ public class CreateCharacterUI : MonoBehaviour
     [SerializeField]
     protected MainMenuUI m_mainMenuUI;
 
-    public List<string> AllowedHair = new List<string>();
+    public List<string> AllowedHairMale = new List<string>();
+    public List<string> AllowedHairFemale = new List<string>();
     public List<string> AllowedEyes = new List<string>();
     public List<string> AllowedNose = new List<string>();
     public List<string> AllowedMouth = new List<string>();
@@ -98,12 +99,30 @@ public class CreateCharacterUI : MonoBehaviour
     {
         hairIndex++;
 
-        if (hairIndex >= AllowedHair.Count)
+        if (m_ActorInfo.Gender == Gender.Male)
         {
-            hairIndex = 0;
+            if (hairIndex >= AllowedHairMale.Count)
+            {
+                hairIndex = 0;
+            }
+        }
+        else
+        {
+            if (hairIndex >= AllowedHairFemale.Count)
+            {
+                hairIndex = 0;
+            }
         }
 
-        m_ActorInfo.Hair = AllowedHair[hairIndex];
+        if (m_ActorInfo.Gender == Gender.Male)
+        {
+            m_ActorInfo.Hair = AllowedHairMale[hairIndex];
+        }
+        else
+        {
+            m_ActorInfo.Hair = AllowedHairFemale[hairIndex];
+        }
+
         m_ActorInstance.UpdateVisual();
     }
 
@@ -113,10 +132,25 @@ public class CreateCharacterUI : MonoBehaviour
 
         if (hairIndex < 0)
         {
-            hairIndex = AllowedHair.Count - 1;
+            if (m_ActorInfo.Gender == Gender.Male)
+            {
+                hairIndex = AllowedHairMale.Count - 1;
+            }
+            else
+            {
+                hairIndex = AllowedHairFemale.Count - 1;
+            }
         }
 
-        m_ActorInfo.Hair = AllowedHair[hairIndex];
+        if (m_ActorInfo.Gender == Gender.Male)
+        {
+            m_ActorInfo.Hair = AllowedHairMale[hairIndex];
+        }
+        else
+        {
+            m_ActorInfo.Hair = AllowedHairFemale[hairIndex];
+        }
+
         m_ActorInstance.UpdateVisual();
     }
 

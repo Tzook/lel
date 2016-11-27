@@ -75,11 +75,13 @@ public class CreateCharacterUI : MonoBehaviour
         {
             m_ActorInfo.Gender = Gender.Female;
             tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+            m_ActorInfo.Hair = AllowedHairFemale[0];
         }
         else
         {
             m_ActorInfo.Gender = Gender.Male;
             tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+            m_ActorInfo.Hair = AllowedHairMale[0];
         }
 
 

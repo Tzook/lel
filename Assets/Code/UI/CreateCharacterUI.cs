@@ -55,7 +55,7 @@ public class CreateCharacterUI : MonoBehaviour
         tempObj.transform.localScale = actorSpot.localScale;
 
         m_ActorInstance = tempObj.GetComponent<ActorInstance>();
-        m_ActorInstance.HideName = true;
+        m_ActorInstance.nameHidden = true;
 
         m_ActorInstance.Reset();
         m_ActorInfo = m_ActorInstance.Info;
@@ -91,7 +91,7 @@ public class CreateCharacterUI : MonoBehaviour
 
         m_ActorInstance = tempObj.GetComponent<ActorInstance>();
         m_ActorInstance.Info = m_ActorInfo;
-        m_ActorInstance.HideName = true;
+        m_ActorInstance.nameHidden = true;
         m_ActorInstance.UpdateVisual();
 
         m_txtGender.text = m_ActorInfo.Gender.ToString();

@@ -14,6 +14,9 @@ public class ResourcesLoader : MonoBehaviour {
 
     public static ResourcesLoader Instance;
 
+    public Material LitSprite;
+    public Material UnlitSprite;
+
     void Awake()
     {
         Instance = this;

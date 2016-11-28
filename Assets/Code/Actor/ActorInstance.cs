@@ -46,6 +46,9 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_Hair;
     [SerializeField]
+    protected SpriteRenderer m_HairBack;
+
+    [SerializeField]
     protected SpriteRenderer m_Eyes;
     [SerializeField]
     protected SpriteRenderer m_Nose;
@@ -66,7 +69,7 @@ public class ActorInstance : MonoBehaviour
 
     public ActorInfo Info;
     public ActorMovement MovementController { protected set; get; }
-    public bool HideName = false;
+    public bool nameHidden = false;
 
     #endregion
 
@@ -92,7 +95,7 @@ public class ActorInstance : MonoBehaviour
 
     public void UpdateVisual()
     {
-        if (!HideName)
+        if (!nameHidden)
         {
             NameLabel.SetActive(true);
             NameLabel.transform.GetChild(0).GetComponent<Text>().text = Info.Name;
@@ -251,6 +254,16 @@ public class ActorInstance : MonoBehaviour
         m_Nose.sprite = ResourcesLoader.Instance.GetSprite(Info.Nose);
         m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth);
         m_Hair.sprite = ResourcesLoader.Instance.GetSprite(Info.Hair);
+
+        Sprite HairBackSprite = ResourcesLoader.Instance.GetSprite(Info.Hair + "_back");
+        if (HairBackSprite != null)
+        {
+            m_HairBack.sprite = HairBackSprite;
+        }
+        else
+        {
+            m_HairBack.sprite = null;
+        }
     }
 
     public void RegisterMovementController(ActorMovement controller)
@@ -267,8 +280,78 @@ public class ActorInstance : MonoBehaviour
         }
     }
 
+    public void SetElementsUILayer()
+    {
+        SetElementUILayer(m_Head);
+        SetElementUILayer(m_Chest);
+        SetElementUILayer(m_Eyes);
+        SetElementUILayer(m_Nose);
+        SetElementUILayer(m_Mouth);
+        SetElementUILayer(m_Hair);
+        SetElementUILayer(m_HairBack);
+        SetElementUILayer(m_RightArm);
+        SetElementUILayer(m_RightElbow);
+        SetElementUILayer(m_RightFist);
+        SetElementUILayer(m_LeftArm);
+        SetElementUILayer(m_LeftElbow);
+        SetElementUILayer(m_LeftFist);
+        SetElementUILayer(m_RightLeg);
+        SetElementUILayer(m_RightKnee);
+        SetElementUILayer(m_RightFoot);
+        SetElementUILayer(m_LeftLeg);
+        SetElementUILayer(m_LeftKnee);
+        SetElementUILayer(m_LeftFoot);
+    }
+
+    public void SetElementsGameLayer()
+    {
+        SetElementGame(m_Head);
+        SetElementGame(m_Chest);
+        SetElementGame(m_Eyes);
+        SetElementGame(m_Nose);
+        SetElementGame(m_Mouth);
+        SetElementGame(m_Hair);
+        SetElementGame(m_HairBack);
+        SetElementGame(m_RightArm);
+        SetElementGame(m_RightElbow);
+        SetElementGame(m_RightFist);
+        SetElementGame(m_LeftArm);
+        SetElementGame(m_LeftElbow);
+        SetElementGame(m_LeftFist);
+        SetElementGame(m_RightLeg);
+        SetElementGame(m_RightKnee);
+        SetElementGame(m_RightFoot);
+        SetElementGame(m_LeftLeg);
+        SetElementGame(m_LeftKnee);
+        SetElementGame(m_LeftFoot);
+    }
+
+    void SetElementUILayer(SpriteRenderer m_Renderer)
+    {
+        m_Renderer.sortingLayerName = "OverCanvas";
+        m_Renderer.sortingOrder++;
+        m_Renderer.material = ResourcesLoader.Instance.UnlitSprite;
+    }
+
+    void SetElementGame(SpriteRenderer m_Renderer)
+    {
+        m_Renderer.sortingLayerName = "Sprites";
+        m_Renderer.sortingOrder--;
+        m_Renderer.material = ResourcesLoader.Instance.LitSprite;
+    }
+
+    public void HideName()
+    {
+        nameHidden = true;
+        NameLabel.SetActive(false);
+    }
+
+    public void ShowName()
+    {
+        nameHidden = true;
+        NameLabel.SetActive(true);
+    }
+
     #endregion
-
-
 
 }

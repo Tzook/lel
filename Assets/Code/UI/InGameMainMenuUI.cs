@@ -15,7 +15,30 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected GameObject inventoryPanel;
 
+    [SerializeField]
+    protected CharInfoUI m_CharInfoUI;
+
     public static InGameMainMenuUI Instance;
+
+    public bool isWindowOpen
+    {
+        set
+        {
+
+        }
+        get
+        {
+            for(int i=0;i<transform.childCount;i++)
+            {
+                if(transform.GetChild(i).gameObject.activeInHierarchy)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 
 	void Awake()
     {
@@ -24,29 +47,25 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (isWindowOpen)
         {
-            if(!menuPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 menuPanel.SetActive(true);
             }
-            else
-            {
-                menuPanel.SetActive(false);
-            }
-
-            if (optionsPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
-            {
-                optionsPanel.SetActive(false);
-            }
-
-            if (inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
-            {
-                inventoryPanel.SetActive(false);
-            }
         }
 
-        if(Input.GetKeyDown(InputMap.Map["Inventory"]))
+        if (Input.GetKeyDown(InputMap.Map["Inventory"]))
         {
             if (!inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
@@ -81,5 +100,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ShowCharacterInfo(ActorInfo Info)
+    {
+        m_CharInfoUI.Open(Info);
     }
 }

@@ -34,7 +34,7 @@ public class CharspotUI : MonoBehaviour {
 
         Actor = tempObj.GetComponent<ActorInstance>();
 
-        Actor.HideName = true;
+        Actor.nameHidden = true;
         Actor.UpdateVisual(info);
         txtName.text = info.Name;
     }

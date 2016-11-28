@@ -30,6 +30,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
 
     public void SetInfo(ActorInfo info)
     {
+
         if (actorInstance != null)
         {
             actorInstance.gameObject.SetActive(false);
@@ -51,7 +52,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
 
         actorInstance = tempObj.GetComponent<ActorInstance>();
 
-        actorInstance.HideName = true;
+        actorInstance.nameHidden = true;
         actorInstance.UpdateVisual(info);
         txtName.text = info.Name;
         LocalUserInfo.Me.SelectedCharacter = info;

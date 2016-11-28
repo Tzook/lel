@@ -7,6 +7,7 @@ public class Game : MonoBehaviour {
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
     public bool InChat;
+    public bool MovingTroughPortal;
     public static Game Instance;
 
     public GameObject ClientCharacter;
@@ -131,5 +132,10 @@ public class Game : MonoBehaviour {
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
         InGame = true;
+    }
+
+    public void ChangeScene(string SceneKey)
+    {
+        //TODO Add move trough portal socket request HERE!<<<<<
     }
 }

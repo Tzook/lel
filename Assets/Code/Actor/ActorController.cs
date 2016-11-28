@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -20,6 +19,8 @@ public class ActorController : MonoBehaviour
 
     [SerializeField]
     bool ClientOnly = false;
+
+    public GatePortal CurrentPortal;
 
     #endregion
 
@@ -133,6 +134,11 @@ public class ActorController : MonoBehaviour
             Anim.SetBool("InAir", true);
         }
 
+        if(Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+        {
+            EnterPortal();
+        }
+
         if (!ClientOnly)
         {
             if (lastSentPosition != transform.position || lastSentAngle != rotDegrees)
@@ -144,6 +150,14 @@ public class ActorController : MonoBehaviour
         }
 
        
+    }
+
+    private void EnterPortal()
+    {
+        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
+        {
+            Game.Instance.ChangeScene(CurrentPortal.TargetLevel);
+        }
     }
 
     #endregion
@@ -258,5 +272,20 @@ public class ActorController : MonoBehaviour
 
     #endregion
 
+    void OnTriggerEnter2D(Collider2D obj)
+    {
+        if(obj.tag == "GatePortal")
+        {
+            CurrentPortal = obj.GetComponent<GatePortal>();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D obj)
+    {
+        if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
+        {
+            CurrentPortal = null;
+        }
+    }
 
 }

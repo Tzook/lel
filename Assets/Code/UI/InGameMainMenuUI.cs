@@ -18,6 +18,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected CharInfoUI m_CharInfoUI;
 
+    [SerializeField]
+    protected CanvasGroup m_DimmerCanvasGroup;
+
     public static InGameMainMenuUI Instance;
 
     public bool isWindowOpen
@@ -105,5 +108,25 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ShowCharacterInfo(ActorInfo Info)
     {
         m_CharInfoUI.Open(Info);
+    }
+
+    public IEnumerator FadeInRoutine()
+    {
+        m_DimmerCanvasGroup.alpha = 0;
+        while(m_DimmerCanvasGroup.alpha < 1f)
+        {
+            m_DimmerCanvasGroup.alpha += 2f * Time.deltaTime;
+            yield return 0;
+        }
+    }
+
+    public IEnumerator FadeOutRoutine()
+    {
+        m_DimmerCanvasGroup.alpha = 1;
+        while (m_DimmerCanvasGroup.alpha > 0f)
+        {
+            m_DimmerCanvasGroup.alpha -= 2f * Time.deltaTime;
+            yield return 0;
+        }
     }
 }

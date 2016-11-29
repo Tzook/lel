@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using BestHTTP.SocketIO;
 using SimpleJSON;
 
-
 public class SocketClient : MonoBehaviour
 {
 
@@ -50,7 +49,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("error", OnError);
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
+        CurrentSocket.On("actor_move_room", OnMoveRoom);
         CurrentSocket.On("message", OnChatMessage);
+        CurrentSocket.On("movement", OnMovement);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -154,11 +155,19 @@ public class SocketClient : MonoBehaviour
         Game.Instance.ReceiveChatMessage(data["id"], data["message"], data["type"]);
     }
 
+    protected void OnMoveRoom(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Moved Room");
+
+        JSONNode data = (JSONNode)args[0];
+        Game.Instance.LoadScene(data["room"], data["oldRoom"]);
+    }
+
     #endregion
 
     #region Emittions
 
-    public void EmitLoadedScene()
+    public void EmitLoadedScene(string fromScene = "")
     {
         BroadcastEvent("Emitted : LoadedScene");
         LoadingWindowUI.Instance.Leave(this);
@@ -166,9 +175,17 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("entered_room", node);
 
-        Game.Instance.LoadPlayerCharacter();
+        Game.Instance.LoadPlayerCharacter(fromScene);
+    }
 
-        CurrentSocket.On("movement", OnMovement);
+    public void EmitMoveRoom(string targetRoom)
+    {
+        BroadcastEvent("Emitted : MovedRoom");
+        JSONNode node = new JSONClass();
+
+        node["room"] = targetRoom;
+
+        CurrentSocket.Emit("move_room", node);
     }
 
     public void EmitMovement(Vector3 pos, float rotDegrees)

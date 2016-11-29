@@ -119,6 +119,22 @@ public class GameCamera : MonoBehaviour {
         }
     }
 
+    public void InstantFocusCamera()
+    {
+        if (this.CamType == CameraType.Horizontal)
+        {
+            transform.position = new Vector3(followingObject.transform.position.x, transform.position.y, initPos.z);
+        }
+        else if (this.CamType == CameraType.Vertical)
+        {
+            transform.position = new Vector3(transform.position.x, followingObject.transform.position.y, initPos.z);
+        }
+        else
+        {
+            transform.position = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y, initPos.z);
+        }
+    }
+
     public enum CameraType
     {
         Normal, Vertical, Horizontal

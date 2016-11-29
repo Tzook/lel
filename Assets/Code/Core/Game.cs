@@ -19,9 +19,9 @@ public class Game : MonoBehaviour {
         Application.targetFrameRate = 60;
     }
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene, string fromScene = "")
     {
-        StartCoroutine(LoadSceneRoutine(scene));
+        StartCoroutine(LoadSceneRoutine(scene, fromScene));
     }
 
     public void LeaveToMainMenu()
@@ -100,19 +100,30 @@ public class Game : MonoBehaviour {
         CurrentScene.Leave(info);
     }
 
-    public void LoadPlayerCharacter()
+    public void LoadPlayerCharacter(string fromScene = "")
     {
         ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
 
         ClientCharacter.GetComponent<ActorMovement>().enabled = false;
         ClientCharacter.GetComponent<ActorController>().enabled = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
+
+        if(!string.IsNullOrEmpty(fromScene))
+        {
+            Debug.Log(fromScene);
+            ClientCharacter.transform.position = CurrentScene.GetPortal(fromScene).transform.position;
+        }
     }
 
-    protected IEnumerator LoadSceneRoutine(string scene)
+    protected IEnumerator LoadSceneRoutine(string scene, string fromScene = "")
     {
+        yield return StartCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
+
         string lastScene = SceneManager.GetActiveScene().name;
         ResourcesLoader.Instance.ClearObjectPool();
+        SocketClient.Instance.DisposeSubscriptions();
+
+        CurrentScene = null;
         SceneManager.LoadScene(scene);
 
         while(lastScene == SceneManager.GetActiveScene().name)
@@ -122,7 +133,19 @@ public class Game : MonoBehaviour {
 
         CurrentScene = new SceneControl();
 
-        SocketClient.Instance.EmitLoadedScene();
+        //TODO This yield is here because the gate portals wait for hte SceneControl to initalize, 
+        // - then a frame later they set themselves at it and then a frame after that they are registered.
+        // -- Without any portal gates the spawning in a new scene will recieve an exception (No gate to be placed on)
+        // --- Seems unreasonable so find a better way to figure spawn location (XYZ).
+        if (!string.IsNullOrEmpty(fromScene))
+        {
+            while (CurrentScene.GetPortal(fromScene) == null)
+            {
+                yield return 0;
+            }
+        }
+
+        SocketClient.Instance.EmitLoadedScene(fromScene);
 
         while(GameCamera.Instance==null)
         {
@@ -131,11 +154,10 @@ public class Game : MonoBehaviour {
 
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
+        MovingTroughPortal = false;
         InGame = true;
-    }
 
-    public void ChangeScene(string SceneKey)
-    {
-        //TODO Add move trough portal socket request HERE!<<<<<
+        GameCamera.Instance.InstantFocusCamera();
+        yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
     }
 }

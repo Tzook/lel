@@ -7,6 +7,8 @@ public class SceneControl
 {
     protected Dictionary<string, ActorInfo> actors = new Dictionary<string, ActorInfo>();
 
+    protected List<GatePortal> Portals = new List<GatePortal>();
+
     public ActorInfo ClientCharacter { protected set; get; }
 
     public int ActorCount { get { return actors.Count; } }
@@ -32,6 +34,11 @@ public class SceneControl
         }
     }
 
+    public void AddScenePortal(GatePortal portal)
+    {
+        Portals.Add(portal);
+    }
+
     public ActorInfo GetActorByName(string Name)
     {
         for(int i=0;i<actors.Keys.Count;i++)
@@ -55,4 +62,16 @@ public class SceneControl
         return null;
     }
 
+    public GatePortal GetPortal(string targetScene)
+    {
+        for(int i=0;i<Portals.Count;i++)
+        {
+            if(Portals[i].TargetLevel == targetScene)
+            {
+                return Portals[i];
+            }
+        }
+
+        return null;
+    }
 }

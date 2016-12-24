@@ -32,15 +32,15 @@ public class DraggableUI : MonoBehaviour
 
     private IEnumerator DragRoutine()
     {
-        float deltaX = GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).x;
-        float deltaY = GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).y;
+        float deltaX = GameCamera.MousePosition.x;
+        float deltaY = GameCamera.MousePosition.y;
 
         while (true)
         {
-            transform.position += new Vector3(GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).x - deltaX, GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).y - deltaY, 0f);
+            transform.position += new Vector3(GameCamera.MousePosition.x - deltaX, GameCamera.MousePosition.y - deltaY, 0f);
             //transform.position += new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f);
-            deltaX = GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).x;
-            deltaY = GameCamera.Instance.Cam.ScreenToWorldPoint(Input.mousePosition).y;
+            deltaX = GameCamera.MousePosition.x;
+            deltaY = GameCamera.MousePosition.y;
 
             yield return 0;
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SimpleJSON;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class ActorInfo
@@ -16,7 +17,8 @@ public class ActorInfo
     public string Eyes = "eyes_0a";
     public string Nose = "nose_0";
     public string Mouth= "mouth_0";
-    
+
+    public Inventory Inventory;
 
     public ActorInfo()
     {
@@ -43,6 +45,8 @@ public class ActorInfo
         Nose = node["looks"]["nose"].Value;
         Mouth = node["looks"]["mouth"].Value;
         SkinColor = node["looks"]["skin"].AsInt;
+
+        Inventory = new Inventory(node["items"]);
     }
 }
 

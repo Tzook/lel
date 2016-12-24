@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BestHTTP.SocketIO;
 using SimpleJSON;
+using System;
 
 public class SocketClient : MonoBehaviour
 {
@@ -52,6 +53,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_move_room", OnMoveRoom);
         CurrentSocket.On("message", OnChatMessage);
         CurrentSocket.On("movement", OnMovement);
+        CurrentSocket.On("actor_pick_item", OnActorPickItem);
+        CurrentSocket.On("drop_item", OnActorDropItem);
+        CurrentSocket.On("item_disappear", OnItemDisappear);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -163,6 +167,31 @@ public class SocketClient : MonoBehaviour
         Game.Instance.LoadScene(data["room"], data["oldRoom"]);
     }
 
+    protected void OnItemDisappear(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item Disappeared");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.DestroySceneItem(data["item_id"].Value);
+    }
+
+    protected void OnActorDropItem(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Actor dropped an item");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.SpawnItem(new ItemInfo(data["item"]), data["item_id"].Value, data["x"].AsFloat, data["y"].AsFloat);
+
+    }
+
+    protected void OnActorPickItem(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent(data["id"].Value + " picked the item "+ data["item_id"].Value);
+
+
+    }
+
     #endregion
 
     #region Emittions
@@ -207,6 +236,36 @@ public class SocketClient : MonoBehaviour
         node["type"] = "room"; // can also be "whisper" or "global"
         //node["target_id"] = id; use this when whispering
         CurrentSocket.Emit("message", node);
+    }
+
+    public void SendPickedItem(string ItemID)
+    {
+        JSONNode node = new JSONClass();
+
+        node["item_id"] = ItemID;
+
+        CurrentSocket.Emit("picked_item", node);
+    }
+
+    public void SendDroppedItem(int slotIndex)
+    {
+        JSONNode node = new JSONClass();
+
+        node["slot"].AsInt = slotIndex;
+
+        CurrentSocket.Emit("dropped_item", node);
+    }
+
+    public void SendMovedItem(int fromIndex, int toIndex)
+    {
+        JSONNode node = new JSONClass();
+
+        node["from"].AsInt = fromIndex;
+        node["to"].AsInt = toIndex;
+
+        Debug.Log("MovedItem from " + node["from"].AsInt + " to " + node["to"].AsInt);
+
+        CurrentSocket.Emit("moved_item", node);
     }
 
     #endregion

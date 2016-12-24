@@ -72,11 +72,11 @@ public class InGameMainMenuUI : MonoBehaviour {
         {
             if (!inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
-                inventoryPanel.SetActive(true);
+                inventoryPanel.GetComponent<InventoryUI>().ShowInventory(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
             }
             else
             {
-                inventoryPanel.SetActive(false);
+                inventoryPanel.GetComponent<InventoryUI>().Hide();
             }
         }
 

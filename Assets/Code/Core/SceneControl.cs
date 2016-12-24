@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class SceneControl
 {
     protected Dictionary<string, ActorInfo> actors = new Dictionary<string, ActorInfo>();
 
     protected List<GatePortal> Portals = new List<GatePortal>();
+
+    protected Dictionary<string, ItemInstance> items = new Dictionary<string, ItemInstance>();
 
     public ActorInfo ClientCharacter { protected set; get; }
 
@@ -73,5 +76,24 @@ public class SceneControl
         }
 
         return null;
+    }
+
+    internal void AddSceneItem(ItemInstance itemInstance, string instanceID)
+    {
+        if (!items.ContainsKey(instanceID))
+        {
+            items.Add(instanceID, itemInstance);
+        }
+    }
+
+    public ItemInstance GetSceneItem(string instanceID)
+    {
+        return items[instanceID];
+    }
+
+    public void DestroySceneItem(string instanceID)
+    {
+        items[instanceID].gameObject.SetActive(false);
+        items.Remove(instanceID);
     }
 }

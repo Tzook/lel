@@ -82,6 +82,15 @@ public class Game : MonoBehaviour {
 
     }
 
+    public void SpawnItem(ItemInfo info, string instanceID, float x, float y)
+    {
+        ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
+        itemInstance.transform.position = new Vector3(x, y, 0f);
+        itemInstance.SetInfo(info);
+
+        CurrentScene.AddSceneItem(itemInstance, instanceID);
+    }
+
     public void LoadNpcCharacter(ActorInfo info)
     {
         GameObject tempObj = SpawnPlayer(info);
@@ -160,4 +169,5 @@ public class Game : MonoBehaviour {
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
     }
+
 }

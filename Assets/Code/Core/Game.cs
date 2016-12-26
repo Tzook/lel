@@ -88,7 +88,7 @@ public class Game : MonoBehaviour {
         itemInstance.transform.position = new Vector3(x, y, 0f);
         itemInstance.SetInfo(info);
 
-        CurrentScene.AddSceneItem(itemInstance, instanceID);
+        CurrentScene.Items.Add(instanceID, itemInstance);
     }
 
     public void LoadNpcCharacter(ActorInfo info)
@@ -170,4 +170,19 @@ public class Game : MonoBehaviour {
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
     }
 
+    public static Vector3 SplineLerp(Vector3 source, Vector3 target, float Height, float t)
+    {
+        Vector3 ST = new Vector3(source.x + Height, source.y, source.z);
+        Vector3 TT = new Vector3(target.x + Height, target.y, target.z);
+
+        Vector3 STTTM = Vector3.Lerp(ST, TT, t);
+
+        Vector3 STM = Vector3.Lerp(source, ST, t);
+        Vector3 TTM = Vector3.Lerp(TT, target, t);
+
+        Vector3 SplineST = Vector3.Lerp(STM, STTTM, t);
+        Vector3 SplineTM = Vector3.Lerp(STTTM, TTM, t);
+
+        return Vector3.Lerp(SplineST, SplineTM, t);
+    }
 }

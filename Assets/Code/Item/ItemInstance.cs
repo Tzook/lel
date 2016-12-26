@@ -20,6 +20,17 @@ public class ItemInstance : MonoBehaviour {
     public void UpdateVisual()
     {
         m_Renderer.sprite = ResourcesLoader.Instance.GetSprite(Info.IconKey);
+        m_Animator.SetTrigger("Spawn");
+    }
+
+    public void Collect()
+    {
+        m_Animator.SetTrigger("Collect");
+    }
+
+    public void CanShut()
+    {
+        this.gameObject.SetActive(false);
     }
 
 }

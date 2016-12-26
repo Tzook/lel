@@ -3,15 +3,10 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour {
+public class InventoryUI : ItemSlotsContainerUI {
 
     [SerializeField]
     Transform Container;
-
-    public ItemUI HoveredSlot;
-    public ItemUI DraggedSlot;
-
-    GameObject CurrentDragged;
 
     ActorInfo CurrentCharacter;
 
@@ -20,12 +15,17 @@ public class InventoryUI : MonoBehaviour {
         CurrentCharacter = Character;
         this.gameObject.SetActive(true);
 
+        RefreshInventory();
+    }
+
+    public void RefreshInventory()
+    {
         Clear();
 
         //TODO Might have problem when changing inventory size - (Maybe generate the slots if required).
-        for(int i=0;i<Character.Inventory.Content.Length;i++)
+        for (int i = 0; i < CurrentCharacter.Inventory.Content.Length; i++)
         {
-             Container.GetChild(i).GetComponent<ItemUI>().SetData(Character.Inventory.Content[i], this); 
+            Container.GetChild(i).GetComponent<ItemUI>().SetData(CurrentCharacter.Inventory.Content[i], this);
         }
     }
 
@@ -42,48 +42,7 @@ public class InventoryUI : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
-    internal void Hover(ItemUI itemUI)
-    {
-        HoveredSlot = itemUI;
-    }
-
-    internal void UnHover(ItemUI itemUI)
-    {
-        if(HoveredSlot == itemUI)
-        {
-            HoveredSlot = null;
-        }
-    }
-
-    internal void BeginDrag(ItemUI itemUI)
-    {
-        DraggedSlot = itemUI;
-
-        CurrentDragged = ResourcesLoader.Instance.GetRecycledObject("DraggedItem");
-        CurrentDragged.GetComponent<Image>().sprite = ResourcesLoader.Instance.GetSprite(itemUI.CurrentItem.IconKey);
-        CurrentDragged.transform.SetParent(transform, false);
-        CurrentDragged.transform.SetAsLastSibling();
-
-        if (DragRoutineInstance!=null)
-        {
-            StopCoroutine(DragRoutineInstance);
-        }
-        DragRoutineInstance = StartCoroutine(DragSlotRoutine());
-    }
-
-    Coroutine DragRoutineInstance;
-    private IEnumerator DragSlotRoutine()
-    {
-        while(Input.GetMouseButton(0))
-        {
-            CurrentDragged.transform.position = GameCamera.MousePosition;
-            yield return 0;
-        }
-
-        ReleaseDraggedItem();
-    }
-
-    private void ReleaseDraggedItem()
+    protected override void ReleaseDraggedItem()
     {
         int draggedIndex = DraggedSlot.transform.GetSiblingIndex();
 
@@ -107,11 +66,6 @@ public class InventoryUI : MonoBehaviour {
 
         ShowInventory(CurrentCharacter);
 
-
-        DraggedSlot.UnDrag();
-        CurrentDragged.gameObject.SetActive(false);
-        CurrentDragged = null;
-
-        DragRoutineInstance = null;
+        base.ReleaseDraggedItem();
     }
 }

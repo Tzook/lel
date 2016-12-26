@@ -93,6 +93,10 @@ public class ActorController : MonoBehaviour
             StopAim();
         }
 
+        if (Input.GetKeyDown(InputMap.Map["Pick Up"]))
+        {
+            Instance.AttemptPickUp();
+        }
     }
 
     void FixedUpdate()

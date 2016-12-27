@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
 
 public class Game : MonoBehaviour {
 
@@ -11,7 +13,9 @@ public class Game : MonoBehaviour {
     public static Game Instance;
 
     public GameObject ClientCharacter;
-   
+
+    public List<GameObject> DontDestroyMeOnLoadList = new List<GameObject>();
+
     void Awake()
     {
         Instance = this;
@@ -32,8 +36,22 @@ public class Game : MonoBehaviour {
 
             ResourcesLoader.Instance.ClearObjectPool();
             SocketClient.Instance.Diconnect();
+
+            ResetUndestroyables();
+
             SceneManager.LoadScene("MainMenu");
         }
+    }
+
+    private void ResetUndestroyables()
+    {
+        while(DontDestroyMeOnLoadList.Count > 0)
+        {
+            Destroy(DontDestroyMeOnLoadList[0]);
+            DontDestroyMeOnLoadList.RemoveAt(0);
+        }
+
+        Destroy(this.gameObject);
     }
 
     #region Chat

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class InGameMainMenuUI : MonoBehaviour {
 
@@ -13,13 +14,13 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected GameObject optionsPanel;
 
     [SerializeField]
-    protected GameObject inventoryPanel;
+    protected InventoryUI inventoryPanel;
 
     [SerializeField]
     protected CharInfoUI m_CharInfoUI;
 
     [SerializeField]
-    protected EquipmentWindowUI m_EquipmentWindow;
+    protected EquipmentWindowUI equipmentPanel;
 
     [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
@@ -46,7 +47,12 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
     }
 
-	void Awake()
+    public ItemUI DraggedSlot;
+    public ItemUI HoveredSlot;
+
+    public GameObject CurrentDragged;
+
+    void Awake()
     {
         Instance = this;
     }
@@ -73,7 +79,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         if (Input.GetKeyDown(InputMap.Map["Inventory"]))
         {
-            if (!inventoryPanel.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (!inventoryPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
                 inventoryPanel.GetComponent<InventoryUI>().ShowInventory(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
             }
@@ -85,13 +91,13 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         if (Input.GetKeyDown(InputMap.Map["Equipment"]))
         {
-            if (!m_EquipmentWindow.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (!equipmentPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
             {
-                m_EquipmentWindow.Open(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                equipmentPanel.Open(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
             }
             else
             {
-                m_EquipmentWindow.Hide();
+                equipmentPanel.Hide();
             }
         }
 
@@ -132,7 +138,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshEquipment()
     {
-        m_EquipmentWindow.RefreshEquipment();
+        equipmentPanel.RefreshEquipment();
     }
 
     public IEnumerator FadeInRoutine()
@@ -153,5 +159,97 @@ public class InGameMainMenuUI : MonoBehaviour {
             m_DimmerCanvasGroup.alpha -= 2f * Time.deltaTime;
             yield return 0;
         }
+    }
+
+    public void BeginDrag(ItemUI slot)
+    {
+        DraggedSlot = slot;
+
+
+
+        CurrentDragged = ResourcesLoader.Instance.GetRecycledObject("DraggedItem");
+        CurrentDragged.GetComponent<Image>().sprite = ResourcesLoader.Instance.GetSprite(slot.CurrentItem.IconKey);
+        CurrentDragged.transform.SetParent(transform, false);
+        CurrentDragged.transform.SetAsLastSibling();
+
+        if (DragRoutineInstance != null)
+        {
+            StopCoroutine(DragRoutineInstance);
+        }
+        DragRoutineInstance = StartCoroutine(DragSlotRoutine(slot));
+    }
+
+    protected Coroutine DragRoutineInstance;
+    protected virtual IEnumerator DragSlotRoutine(ItemUI slot)
+    {
+        while (Input.GetMouseButton(0))
+        {
+            CurrentDragged.transform.position = GameCamera.MousePosition;
+            yield return 0;
+        }
+
+        DragRoutineInstance = null;
+
+        ReleaseDraggedItem(slot);
+    }
+
+    protected void ReleaseDraggedItem(ItemUI slot)
+    {
+        DraggedSlot.UnDrag();
+        CurrentDragged.gameObject.SetActive(false);
+        CurrentDragged = null;
+
+        int draggedIndex = DraggedSlot.transform.GetSiblingIndex();
+
+        if (DraggedSlot.ParentContainer == inventoryPanel)// -FROM INVENTORY
+        {
+            if (HoveredSlot != null) 
+            {
+                if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
+                {
+                    if (HoveredSlot != DraggedSlot)
+                    {
+                        int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
+
+                        inventoryPanel.CurrentCharacter.Inventory.SwapSlots(draggedIndex, releasedIndex);
+                        SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
+                    }
+
+                    HoveredSlot.UnDrag();
+                }
+                else if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
+                {
+                    //TODO EQUIP
+                }
+            }
+            else // --TO SPACE
+            {
+                inventoryPanel.CurrentCharacter.Inventory.RemoveItem(draggedIndex);
+                SocketClient.Instance.SendDroppedItem(draggedIndex);
+            }
+
+            inventoryPanel.RefreshInventory();
+        }
+        if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT
+        {
+            if (HoveredSlot != null)
+            {
+                if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
+                {
+                    //TODO MOVE SLOT
+                }
+                else if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
+                {
+                    //TODO UNEQUIP
+
+                    inventoryPanel.RefreshInventory();
+                }
+            }
+            else // --TO SPACE
+            {
+                //TODO UNEQUIP + DROP
+            }
+        }
+
     }
 }

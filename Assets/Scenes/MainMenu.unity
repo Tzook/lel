@@ -5870,6 +5870,7 @@ MonoBehaviour:
   InChat: 0
   MovingTroughPortal: 0
   ClientCharacter: {fileID: 0}
+  DontDestroyMeOnLoadList: []
 --- !u!114 &335610001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8774,10 +8775,13 @@ MonoBehaviour:
   menuPanel: {fileID: 1228492458}
   chatPanel: {fileID: 47423282}
   optionsPanel: {fileID: 1831890725}
-  inventoryPanel: {fileID: 724224594}
+  inventoryPanel: {fileID: 724224600}
   m_CharInfoUI: {fileID: 1898858711}
-  m_EquipmentWindow: {fileID: 544227781}
+  equipmentPanel: {fileID: 544227781}
   m_DimmerCanvasGroup: {fileID: 317743994}
+  DraggedSlot: {fileID: 0}
+  HoveredSlot: {fileID: 0}
+  CurrentDragged: {fileID: 0}
 --- !u!1 &511484756
 GameObject:
   m_ObjectHideFlags: 0
@@ -9185,8 +9189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c718314495176fc488be08cef3adf9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DraggedSlot: {fileID: 0}
-  HoveredSlot: {fileID: 0}
   CharSpot: {fileID: 687043328}
   HeadSlot: {fileID: 739612727}
   ChestSlot: {fileID: 1671487388}
@@ -12906,9 +12908,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8079cb367ab59d447ae2523dbfc6c5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DraggedSlot: {fileID: 0}
-  HoveredSlot: {fileID: 0}
   Container: {fileID: 1966155373}
+  CurrentCharacter:
+    ID: 
+    Name: 
+    Gender: 0
+    Instance: {fileID: 0}
+    CurrentRoom: 
+    LastPosition: {x: 0, y: 0, z: 0}
+    SkinColor: 0
+    Hair: hair_0
+    Eyes: eyes_0a
+    Nose: nose_0
+    Mouth: mouth_0
+    Inventory:
+      Content: []
 --- !u!1 &728010150
 GameObject:
   m_ObjectHideFlags: 0

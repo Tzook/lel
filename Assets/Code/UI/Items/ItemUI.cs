@@ -60,18 +60,23 @@ public class ItemUI : MonoBehaviour {
 
         IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 0.5f);
 
-        ParentContainer.BeginDrag(this);
+        InGameMainMenuUI.Instance.BeginDrag(this);
     }
 
     public void Hover()
     {
-        ParentContainer.Hover(this);
+        InGameMainMenuUI.Instance.HoveredSlot = this;
+
         outline.enabled = true;
     }
 
     public void UnHover()
     {
-        ParentContainer.UnHover(this);
+        if (InGameMainMenuUI.Instance.HoveredSlot == this)
+        {
+            InGameMainMenuUI.Instance.HoveredSlot = null;
+        }
+
         outline.enabled = false;
     }
 

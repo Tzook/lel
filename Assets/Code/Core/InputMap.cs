@@ -16,8 +16,9 @@ public class InputMap : MonoBehaviour {
 
     void Awake()
     {
+        Map.Clear();
         Initialize();
-        LoadMap();
+        //LoadMap();
     }
 
     private void Initialize()

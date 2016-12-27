@@ -3,12 +3,13 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
-public class InventoryUI : ItemSlotsContainerUI {
+public class InventoryUI : ItemSlotsContainerUI
+{
 
     [SerializeField]
     Transform Container;
 
-    ActorInfo CurrentCharacter;
+    public ActorInfo CurrentCharacter;
 
     public void ShowInventory(ActorInfo Character)
     {
@@ -40,32 +41,5 @@ public class InventoryUI : ItemSlotsContainerUI {
     internal void Hide()
     {
         this.gameObject.SetActive(false);
-    }
-
-    protected override void ReleaseDraggedItem()
-    {
-        int draggedIndex = DraggedSlot.transform.GetSiblingIndex();
-
-        if (HoveredSlot != null)
-        {
-            if (HoveredSlot != DraggedSlot)
-            {
-                int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
-
-                CurrentCharacter.Inventory.SwapSlots(draggedIndex, releasedIndex);
-                SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
-            }
-
-            HoveredSlot.UnDrag();
-        }
-        else
-        {
-            CurrentCharacter.Inventory.RemoveItem(draggedIndex);
-            SocketClient.Instance.SendDroppedItem(draggedIndex);
-        }
-
-        ShowInventory(CurrentCharacter);
-
-        base.ReleaseDraggedItem();
     }
 }

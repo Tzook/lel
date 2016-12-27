@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public class Game : MonoBehaviour {
 
@@ -12,9 +11,7 @@ public class Game : MonoBehaviour {
     public static Game Instance;
 
     public GameObject ClientCharacter;
-
-    public List<DontDestroyMeOnLoad> UndestroyedObjects = new List<DontDestroyMeOnLoad>();
-
+   
     void Awake()
     {
         Instance = this;
@@ -32,7 +29,7 @@ public class Game : MonoBehaviour {
         if (InGame)
         {
             InGame = false;
-            
+
             ResourcesLoader.Instance.ClearObjectPool();
             SocketClient.Instance.Diconnect();
             SceneManager.LoadScene("MainMenu");

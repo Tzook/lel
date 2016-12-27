@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System.Linq;
-using System;
 
 public class ActorInstance : MonoBehaviour
 {
@@ -71,9 +69,6 @@ public class ActorInstance : MonoBehaviour
 
     public ActorInfo Info;
     public ActorMovement MovementController { protected set; get; }
-
-    public bool PickingUpItem { get; private set; }
-
     public bool nameHidden = false;
 
     #endregion
@@ -356,72 +351,6 @@ public class ActorInstance : MonoBehaviour
         nameHidden = true;
         NameLabel.SetActive(true);
     }
-
-    public void AttemptPickUp()
-    {
-        if (PickingUpItem)
-        {
-            return;
-        }
-
-        if(Info.Inventory.isFull)
-        {
-            return;
-        }
-
-        ItemInstance tempItem;
-        for (int i = 0; i < Game.Instance.CurrentScene.SceneItemsCount; i++)
-        {
-            tempItem = Game.Instance.CurrentScene.Items[Game.Instance.CurrentScene.Items.Keys.ElementAt(i)].GetComponent<ItemInstance>();
-
-            if (Vector2.Distance(tempItem.transform.position, transform.position) < 1.7f)
-            {
-                SocketClient.Instance.SendPickedItem(Game.Instance.CurrentScene.Items.Keys.ElementAt(i));
-                PickingUpItem = true;
-                break;
-            }
-        }
-
-    }
-
-    public void PickUpItem(string instanceID)
-    {
-        PickingUpItem = false;
-
-        if (Game.Instance.CurrentScene.ClientCharacter.Instance == this)
-        {
-            Info.Inventory.AddItem(Game.Instance.CurrentScene.Items[instanceID].Info);
-            InGameMainMenuUI.Instance.RefreshInventory();
-        }
-
-        StartCoroutine(PickingUpItemRoutine(instanceID));
-    }
-
-    private IEnumerator PickingUpItemRoutine(string instanceID)
-    {
-        GameObject itemObject = Game.Instance.CurrentScene.Items[instanceID].gameObject;
-
-        Vector3 itemInitPos = itemObject.transform.position;
-        float rndHeight = UnityEngine.Random.Range(-1f, 1f);
-
-        Game.Instance.CurrentScene.Items.Remove(instanceID);
-
-        itemObject.GetComponent<ItemInstance>().Collect();
-
-        float t = 0f;
-        while(t<1f)
-        {
-            t += 2f * Time.deltaTime;
-
-            itemObject.transform.position = Game.SplineLerp(itemInitPos, transform.position, rndHeight, t);
-            
-
-            yield return 0;
-        }
-
-        
-    }
-
 
     #endregion
 

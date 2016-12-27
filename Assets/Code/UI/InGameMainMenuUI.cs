@@ -19,9 +19,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CharInfoUI m_CharInfoUI;
 
     [SerializeField]
-    protected EquipmentWindowUI m_EquipmentWindow;
-
-    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     public static InGameMainMenuUI Instance;
@@ -83,18 +80,6 @@ public class InGameMainMenuUI : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(InputMap.Map["Equipment"]))
-        {
-            if (!m_EquipmentWindow.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
-            {
-                m_EquipmentWindow.Open(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
-            }
-            else
-            {
-                m_EquipmentWindow.Hide();
-            }
-        }
-
         if (Input.GetKeyDown(InputMap.Map["Chat"]))
         {
             if (!chatPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
@@ -123,16 +108,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ShowCharacterInfo(ActorInfo Info)
     {
         m_CharInfoUI.Open(Info);
-    }
-
-    public void RefreshInventory()
-    {
-        inventoryPanel.GetComponent<InventoryUI>().RefreshInventory();
-    }
-
-    public void RefreshEquipment()
-    {
-        m_EquipmentWindow.RefreshEquipment();
     }
 
     public IEnumerator FadeInRoutine()

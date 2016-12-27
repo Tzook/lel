@@ -7,11 +7,6 @@ using System;
 public class Inventory
 {
     public ItemInfo[] Content;
-    public bool isFull
-    {
-        get { return (GetFreeSlot() == -1); }
-        set { }
-    }
 
     public Inventory(JSONNode inventoryNode = null)
     {
@@ -43,23 +38,5 @@ public class Inventory
     public void RemoveItem(int index)
     {
         Content[index] = null;
-    }
-
-    internal void AddItem(ItemInfo info)
-    {
-        Content[GetFreeSlot()] = info;
-    }
-
-    private int GetFreeSlot()
-    {
-        for(int i=0;i<Content.Length;i++)
-        {
-            if (Content[i] == null || string.IsNullOrEmpty(Content[i].Name))
-            {
-                return i;
-            }
-        }
-
-        return -1;
     }
 }

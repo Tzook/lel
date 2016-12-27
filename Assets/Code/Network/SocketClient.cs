@@ -189,7 +189,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent(data["id"].Value + " picked the item "+ data["item_id"].Value);
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.PickUpItem(data["item_id"]);
+
     }
 
     #endregion
@@ -240,7 +240,6 @@ public class SocketClient : MonoBehaviour
 
     public void SendPickedItem(string ItemID)
     {
-        Debug.Log("picking up " + ItemID);
         JSONNode node = new JSONClass();
 
         node["item_id"] = ItemID;

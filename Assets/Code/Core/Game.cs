@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System;
 
 public class Game : MonoBehaviour {
 
@@ -21,8 +20,6 @@ public class Game : MonoBehaviour {
         Instance = this;
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
-
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public void LoadScene(string scene, string fromScene = "")
@@ -35,27 +32,11 @@ public class Game : MonoBehaviour {
         if (InGame)
         {
             InGame = false;
-
+            
             ResourcesLoader.Instance.ClearObjectPool();
             SocketClient.Instance.Diconnect();
-
-            ClearUndestroyables();
-
             SceneManager.LoadScene("MainMenu");
-
         }
-    }
-
-    private void ClearUndestroyables()
-    {
-        while(UndestroyedObjects.Count>0)
-        {
-            Destroy(UndestroyedObjects[0].gameObject);
-            UndestroyedObjects.RemoveAt(0);
-        }
-
-        Destroy(this.gameObject);
-
     }
 
     #region Chat

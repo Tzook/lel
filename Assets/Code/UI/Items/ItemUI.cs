@@ -14,16 +14,16 @@ public class ItemUI : MonoBehaviour {
     public ItemInfo CurrentItem;
 
     [System.NonSerialized]
-    public InventoryUI ParentInventory;
+    public ItemSlotsContainerUI ParentContainer;
 
-    public void SetData(ItemInfo info = null, InventoryUI inventory = null)
+    public void SetData(ItemInfo info = null, ItemSlotsContainerUI Container = null)
     {
         if (info != null)
         {
             CurrentItem = info;
         }
 
-        ParentInventory = inventory;
+        ParentContainer = Container;
         RefreshUI();
     }
 
@@ -60,24 +60,24 @@ public class ItemUI : MonoBehaviour {
 
         IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 0.5f);
 
-        ParentInventory.BeginDrag(this);
+        ParentContainer.BeginDrag(this);
     }
 
     public void Hover()
     {
-        ParentInventory.Hover(this);
+        ParentContainer.Hover(this);
         outline.enabled = true;
     }
 
     public void UnHover()
     {
-        ParentInventory.UnHover(this);
+        ParentContainer.UnHover(this);
         outline.enabled = false;
     }
 
     internal void UnDrag()
     {
-        IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 0.5f);
+        IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 1f);
     }
 
 }

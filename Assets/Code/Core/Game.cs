@@ -98,11 +98,21 @@ public class Game : MonoBehaviour {
     public void ActorEquippedItem(string actorID, int inventoryIndex, string equipSlot, ItemInfo item)
     {
         ActorInfo actor = CurrentScene.GetActor(actorID);
-        actor.Equipment.SetItem(equipSlot, actor.Inventory.Content[inventoryIndex]);
+        ItemInfo previouslyEquipped = actor.Equipment.GetItem(equipSlot);
+
+        actor.Equipment.SetItem(equipSlot, item);
 
         if (actor == CurrentScene.ClientCharacter)
         {
-            ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.RemoveItem(inventoryIndex);
+            if (previouslyEquipped != null)
+            {
+                ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.Content[inventoryIndex] = previouslyEquipped;
+            }
+            else
+            {
+                ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.RemoveItem(inventoryIndex);
+            }
+
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();

@@ -140,7 +140,7 @@ public class SocketClient : MonoBehaviour
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
     {
-        BroadcastEvent("Movement occured");
+        //BroadcastEvent("Movement occured");
 
         JSONNode data = (JSONNode)args[0];
 
@@ -252,7 +252,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Equip Deleted");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.DeleteEquip(data["id"].Value, data["from"].Value);
+        Game.Instance.DeleteEquip(data["id"].Value, data["slot"].Value);
     }
 
     protected void OnActorMovedEquip(Socket socket, Packet packet, object[] args)

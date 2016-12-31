@@ -11,6 +11,9 @@ public class ItemUI : MonoBehaviour {
     [SerializeField]
     Outline outline;
 
+    [SerializeField]
+    public string slotKey;
+
     public ItemInfo CurrentItem;
 
     [System.NonSerialized]
@@ -18,10 +21,7 @@ public class ItemUI : MonoBehaviour {
 
     public void SetData(ItemInfo info = null, ItemSlotsContainerUI Container = null)
     {
-        if (info != null)
-        {
-            CurrentItem = info;
-        }
+        CurrentItem = info;
 
         ParentContainer = Container;
         RefreshUI();
@@ -83,6 +83,16 @@ public class ItemUI : MonoBehaviour {
     internal void UnDrag()
     {
         IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 1f);
+    }
+
+    public void DisableInput()
+    {
+        GetComponent<Image>().raycastTarget = false;
+    }
+
+    public void EnableInput()
+    {
+        GetComponent<Image>().raycastTarget = true;
     }
 
 }

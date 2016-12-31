@@ -20,8 +20,11 @@ public class ActorInfo
 
     public Inventory Inventory;
 
+    public Equipment Equipment;
+
     public ActorInfo()
     {
+        Equipment = new Equipment(new JSONClass());
     }
 
     public ActorInfo(JSONNode node)
@@ -47,6 +50,9 @@ public class ActorInfo
         SkinColor = node["looks"]["skin"].AsInt;
 
         Inventory = new Inventory(node["items"]);
+
+        Equipment = new Equipment(node["equips"]);
+
     }
 }
 

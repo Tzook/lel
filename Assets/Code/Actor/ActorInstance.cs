@@ -57,6 +57,8 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_Mouth;
 
+    [SerializeField]
+    protected SpriteRenderer m_Hat;
 
 
     [SerializeField]
@@ -86,19 +88,30 @@ public class ActorInstance : MonoBehaviour
         this.Info.Instance = this;
     }
 
+    public void Reset()
+    {
+        UpdateVisual(new ActorInfo());
+    }
+
+    #region Update Looks
+
     public void UpdateVisual(ActorInfo info)
     {
         RegisterInfo(info);
 
         UpdateVisual();
     }
-    
-    public void Reset()
-    {
-        UpdateVisual(new ActorInfo());
-    }
 
     public void UpdateVisual()
+    {
+        UpadeNameLabel();
+        UpdateSkin();
+        UpdateFace();
+        UpdateHair();
+        UpdateEquipment();
+    }
+
+    protected void UpadeNameLabel()
     {
         if (!nameHidden)
         {
@@ -109,7 +122,10 @@ public class ActorInstance : MonoBehaviour
         {
             NameLabel.SetActive(false);
         }
+    }
 
+    protected void UpdateSkin()
+    {
         if (Info.Gender == Gender.Male)
         {
             if (Info.SkinColor == 0)
@@ -181,7 +197,7 @@ public class ActorInstance : MonoBehaviour
                 m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_foot_black");
                 m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_male_foot_black");
             }
-        }   
+        }
         else
         {
             if (Info.SkinColor == 0)
@@ -207,7 +223,7 @@ public class ActorInstance : MonoBehaviour
                 m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
                 m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot");
             }
-            else if(Info.SkinColor == 1)
+            else if (Info.SkinColor == 1)
             {
                 m_Head.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_head_brown");
                 m_Chest.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_torso_brown");
@@ -254,12 +270,18 @@ public class ActorInstance : MonoBehaviour
                 m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite("char_base_female_foot_black");
             }
         }
+    }
 
+    protected void UpdateFace()
+    {
         m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
         m_Nose.sprite = ResourcesLoader.Instance.GetSprite(Info.Nose);
         m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth);
         m_Hair.sprite = ResourcesLoader.Instance.GetSprite(Info.Hair);
+    }
 
+    protected void UpdateHair()
+    {
         Sprite HairBackSprite = ResourcesLoader.Instance.GetSprite(Info.Hair + "_back");
         if (HairBackSprite != null)
         {
@@ -270,6 +292,97 @@ public class ActorInstance : MonoBehaviour
             m_HairBack.sprite = null;
         }
     }
+
+    protected void UpdateEquipment()
+    {
+        m_Hat.sprite = null;
+
+        UpdateItem(Info.Equipment.Head);
+        UpdateItem(Info.Equipment.Chest);
+        UpdateItem(Info.Equipment.Gloves);
+        UpdateItem(Info.Equipment.Legs);
+        UpdateItem(Info.Equipment.Shoes);
+    }
+
+    private void UpdateItem(ItemInfo item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        string key;
+        for(int i=0;i<item.Sprites.Count;i++)
+        {
+            key = item.Sprites.Keys.ElementAt(i);
+            SetSprites(key, item.Sprites[key]);
+        }
+    }
+
+    private void SetSprites(string key, string spriteKey)
+    {
+        if (Info.Gender == Gender.Female)
+        {
+            spriteKey = spriteKey.Replace("male","female");
+        }
+
+        switch (key)
+        {
+            case "head":
+                {
+                    m_Head.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "chest":
+                {
+                    m_Chest.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "arm":
+                {
+                    m_LeftArm.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightArm.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "elbow":
+                {
+                    m_LeftElbow.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightElbow.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "hand":
+                {
+                    m_LeftFist.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightFist.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "hip":
+                {
+                    m_LeftLeg.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightLeg.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "knee":
+                {
+                    m_LeftKnee.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightKnee.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "foot":
+                {
+                    m_LeftFoot.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    m_RightFoot.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "hat":
+                {
+                    m_Hat.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+        }
+    }
+
+    #endregion
 
     public void RegisterMovementController(ActorMovement controller)
     {
@@ -292,6 +405,7 @@ public class ActorInstance : MonoBehaviour
         SetElementUILayer(m_Eyes);
         SetElementUILayer(m_Nose);
         SetElementUILayer(m_Mouth);
+        SetElementUILayer(m_Hat);
         SetElementUILayer(m_Hair);
         SetElementUILayer(m_HairBack);
         SetElementUILayer(m_RightArm);
@@ -315,6 +429,7 @@ public class ActorInstance : MonoBehaviour
         SetElementGame(m_Eyes);
         SetElementGame(m_Nose);
         SetElementGame(m_Mouth);
+        SetElementGame(m_Hat);
         SetElementGame(m_Hair);
         SetElementGame(m_HairBack);
         SetElementGame(m_RightArm);
@@ -402,7 +517,7 @@ public class ActorInstance : MonoBehaviour
         GameObject itemObject = Game.Instance.CurrentScene.Items[instanceID].gameObject;
 
         Vector3 itemInitPos = itemObject.transform.position;
-        float rndHeight = UnityEngine.Random.Range(-1f, 1f);
+        float rndHeight = UnityEngine.Random.Range(-2f, 2f);
 
         Game.Instance.CurrentScene.Items.Remove(instanceID);
 
@@ -422,6 +537,17 @@ public class ActorInstance : MonoBehaviour
         
     }
 
+    //private GetReferencedImage(string imagekey)
+    //{
+    //    switch(imagekey)
+    //    {
+    //        case "male_head":
+    //            {
+    //                return m_Head
+    //                break;
+    //            }
+    //    }
+    //}
 
     #endregion
 

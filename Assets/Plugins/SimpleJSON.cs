@@ -998,6 +998,11 @@ namespace SimpleJSON
             return ret;
         }
 
+        public string GetKey(int iIndex)
+        {
+            return m_Dict.Keys.ElementAt(iIndex);
+        }
+
         public override void Serialize(System.IO.BinaryWriter aWriter)
         {
             aWriter.Write((byte)JSONBinaryTag.Class);

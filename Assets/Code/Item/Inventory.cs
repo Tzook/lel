@@ -50,6 +50,11 @@ public class Inventory
         Content[GetFreeSlot()] = info;
     }
 
+    internal void AddItemAt(int index, ItemInfo info)
+    {
+        Content[index] = info;
+    }
+
     private int GetFreeSlot()
     {
         for(int i=0;i<Content.Length;i++)

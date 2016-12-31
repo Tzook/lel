@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class InGameMainMenuUI : MonoBehaviour {
 
@@ -67,6 +68,8 @@ public class InGameMainMenuUI : MonoBehaviour {
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
+
+                Game.Instance.InChat = false;
             }
         }
         else
@@ -108,6 +111,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                 chatPanel.Open();
             }
         }
+
     }
 
     public void Resume()
@@ -131,15 +135,38 @@ public class InGameMainMenuUI : MonoBehaviour {
         m_CharInfoUI.Open(Info);
     }
 
+
     public void RefreshInventory()
     {
         inventoryPanel.GetComponent<InventoryUI>().RefreshInventory();
     }
 
+    internal void DisableInventoryInput()
+    {
+        inventoryPanel.DisableInput();
+    }
+
+    public void EnableInventoryInput()
+    {
+        inventoryPanel.EnableInput();
+    }
+
+
     public void RefreshEquipment()
     {
         equipmentPanel.RefreshEquipment();
     }
+
+    internal void DisableEquipmentInput()
+    {
+        equipmentPanel.DisableInput();
+    }
+
+    public void EnableEquipmentInput()
+    {
+        equipmentPanel.EnableInput();
+    }
+
 
     public IEnumerator FadeInRoutine()
     {
@@ -210,25 +237,24 @@ public class InGameMainMenuUI : MonoBehaviour {
                     if (HoveredSlot != DraggedSlot)
                     {
                         int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
-
-                        inventoryPanel.CurrentCharacter.Inventory.SwapSlots(draggedIndex, releasedIndex);
                         SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
+
                     }
 
                     HoveredSlot.UnDrag();
                 }
                 else if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
                 {
-                    //TODO EQUIP
+                    if (equipmentPanel.CanEquip(DraggedSlot.CurrentItem, HoveredSlot))
+                    {
+                        SocketClient.Instance.SendEquippedItem(draggedIndex, HoveredSlot.slotKey);
+                    }
                 }
             }
             else // --TO SPACE
             {
-                inventoryPanel.CurrentCharacter.Inventory.RemoveItem(draggedIndex);
                 SocketClient.Instance.SendDroppedItem(draggedIndex);
             }
-
-            inventoryPanel.RefreshInventory();
         }
         if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT
         {
@@ -240,14 +266,14 @@ public class InGameMainMenuUI : MonoBehaviour {
                 }
                 else if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
                 {
-                    //TODO UNEQUIP
+                    int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
 
-                    inventoryPanel.RefreshInventory();
+                    SocketClient.Instance.SendUnequippedItem(DraggedSlot.slotKey, releasedIndex);
                 }
             }
             else // --TO SPACE
             {
-                //TODO UNEQUIP + DROP
+                SocketClient.Instance.SendDroppedEquip(DraggedSlot.slotKey);
             }
         }
 

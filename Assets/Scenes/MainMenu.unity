@@ -1928,7 +1928,7 @@ GameObject:
   - 222: {fileID: 73574481}
   - 114: {fileID: 73574480}
   - 114: {fileID: 73574482}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: txtDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3970,7 +3970,7 @@ GameObject:
   - 224: {fileID: 258214995}
   - 222: {fileID: 258214997}
   - 114: {fileID: 258214996}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LoadingWindowPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5230,7 +5230,7 @@ GameObject:
   - 222: {fileID: 311716598}
   - 114: {fileID: 311716597}
   - 114: {fileID: 311716596}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5428,6 +5428,10 @@ Prefab:
     - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
       propertyPath: m_Name
       value: OffHandSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
@@ -6082,7 +6086,7 @@ GameObject:
   - 222: {fileID: 345054953}
   - 114: {fileID: 345054952}
   - 114: {fileID: 345054951}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LoadingHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6299,7 +6303,7 @@ GameObject:
   - 222: {fileID: 351312298}
   - 114: {fileID: 351312297}
   - 114: {fileID: 351312299}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: txtCancelDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7936,6 +7940,15 @@ Prefab:
       propertyPath: m_Name
       value: BootsSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+        type: 2}
+      propertyPath: slotKey
+      value: shoes
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
   m_IsPrefabParent: 0
@@ -8228,7 +8241,7 @@ GameObject:
   - 224: {fileID: 443837949}
   - 222: {fileID: 443837951}
   - 114: {fileID: 443837950}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8743,6 +8756,7 @@ RectTransform:
   - {fileID: 544227776}
   - {fileID: 1898858706}
   - {fileID: 317743993}
+  - {fileID: 1113396787}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
@@ -8782,6 +8796,95 @@ MonoBehaviour:
   DraggedSlot: {fileID: 0}
   HoveredSlot: {fileID: 0}
   CurrentDragged: {fileID: 0}
+--- !u!1 &502911124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 502911125}
+  - 222: {fileID: 502911128}
+  - 114: {fileID: 502911127}
+  - 114: {fileID: 502911126}
+  m_Layer: 5
+  m_Name: txtMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &502911125
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502911124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1113396787}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.4, y: -1}
+  m_SizeDelta: {x: -21, y: -18.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &502911126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502911124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.41176468, g: 0.045415215, b: 0.045415215, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &502911127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502911124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.87116134, g: 0.9044118, b: 0.88986474, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &502911128
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502911124}
 --- !u!1 &511484756
 GameObject:
   m_ObjectHideFlags: 0
@@ -9118,7 +9221,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000038146973, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 221.3, y: 284.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &544227777
@@ -9192,6 +9295,9 @@ MonoBehaviour:
   CharSpot: {fileID: 687043328}
   HeadSlot: {fileID: 739612727}
   ChestSlot: {fileID: 1671487388}
+  GlovesSlot: {fileID: 2089633657}
+  LegsSlot: {fileID: 1439698304}
+  ShoesSlot: {fileID: 1447324306}
 --- !u!1 &549106545
 GameObject:
   m_ObjectHideFlags: 0
@@ -10722,7 +10828,7 @@ GameObject:
   - 224: {fileID: 619875223}
   - 222: {fileID: 619875225}
   - 114: {fileID: 619875224}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ConfirmDeletePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11740,6 +11846,11 @@ Prefab:
       propertyPath: m_Name
       value: ChestSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+        type: 2}
+      propertyPath: slotKey
+      value: chest
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
   m_IsPrefabParent: 0
@@ -12412,7 +12523,7 @@ GameObject:
   - 222: {fileID: 701895952}
   - 114: {fileID: 701895951}
   - 114: {fileID: 701895950}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ConsoleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12921,8 +13032,6 @@ MonoBehaviour:
     Eyes: eyes_0a
     Nose: nose_0
     Mouth: mouth_0
-    Inventory:
-      Content: []
 --- !u!1 &728010150
 GameObject:
   m_ObjectHideFlags: 0
@@ -15455,7 +15564,7 @@ GameObject:
   - 222: {fileID: 887034127}
   - 114: {fileID: 887034126}
   - 114: {fileID: 887034125}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: DeleteActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16554,7 +16663,7 @@ GameObject:
   - 224: {fileID: 937801572}
   - 222: {fileID: 937801574}
   - 114: {fileID: 937801573}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ConfirmDeleteMaskPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16697,7 +16806,7 @@ GameObject:
   - 224: {fileID: 949786427}
   - 222: {fileID: 949786429}
   - 114: {fileID: 949786428}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: txtAreYouSure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18365,6 +18474,15 @@ Prefab:
       propertyPath: m_Name
       value: HeadSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+        type: 2}
+      propertyPath: slotKey
+      value: head
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
   m_IsPrefabParent: 0
@@ -18628,6 +18746,15 @@ Prefab:
       propertyPath: m_Name
       value: GlovesSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+        type: 2}
+      propertyPath: slotKey
+      value: gloves
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
   m_IsPrefabParent: 0
@@ -18845,7 +18972,7 @@ GameObject:
   - 114: {fileID: 1079497357}
   - 225: {fileID: 1079497359}
   - 114: {fileID: 1079497358}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LoadingWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19222,6 +19349,101 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1113396786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1113396787}
+  - 222: {fileID: 1113396790}
+  - 114: {fileID: 1113396789}
+  - 225: {fileID: 1113396788}
+  - 114: {fileID: 1113396791}
+  m_Layer: 5
+  m_Name: ShockMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1113396787
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113396786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 502911125}
+  m_Father: {fileID: 501787974}
+  m_RootOrder: 8
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 123}
+  m_SizeDelta: {x: -541, y: -409}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1113396788
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113396786}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1113396789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113396786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300030, guid: 2e71ce7188ff11f438cd366d6573e423, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1113396790
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113396786}
+--- !u!114 &1113396791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113396786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f55f78abec4d4647b955e2d49e29544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_txtContent: {fileID: 502911127}
+  m_CanvasGroup: {fileID: 1113396788}
 --- !u!1 &1128366519
 GameObject:
   m_ObjectHideFlags: 0
@@ -20359,7 +20581,7 @@ GameObject:
   - 222: {fileID: 1184511241}
   - 114: {fileID: 1184511240}
   - 114: {fileID: 1184511239}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20645,7 +20867,7 @@ GameObject:
   - 222: {fileID: 1201544985}
   - 114: {fileID: 1201544984}
   - 114: {fileID: 1201544983}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LoadingHead (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21947,7 +22169,7 @@ GameObject:
   - 114: {fileID: 1289058126}
   - 114: {fileID: 1289058125}
   - 114: {fileID: 1289058129}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: TopCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23797,6 +24019,10 @@ Prefab:
       propertyPath: m_Name
       value: MainHandSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
   m_IsPrefabParent: 0
@@ -24086,6 +24312,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1434360754}
+--- !u!114 &1439698304 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+    type: 2}
+  m_PrefabInternal: {fileID: 1524204806}
+  m_Script: {fileID: 11500000, guid: 2f910bf5e9de5da438e92f6894ab204e, type: 3}
 --- !u!1 &1443947950
 GameObject:
   m_ObjectHideFlags: 0
@@ -24160,6 +24392,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443947950}
+--- !u!114 &1447324306 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+    type: 2}
+  m_PrefabInternal: {fileID: 423631783}
+  m_Script: {fileID: 11500000, guid: 2f910bf5e9de5da438e92f6894ab204e, type: 3}
 --- !u!1 &1448293883
 GameObject:
   m_ObjectHideFlags: 0
@@ -24681,7 +24919,7 @@ GameObject:
   - 222: {fileID: 1496096957}
   - 95: {fileID: 1496096956}
   - 114: {fileID: 1496096958}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Console
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25426,6 +25664,15 @@ Prefab:
     - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
       propertyPath: m_Name
       value: PantsSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014230844566, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+        type: 2}
+      propertyPath: slotKey
+      value: legs
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6e6903b240832499dc92f54519fc49, type: 2}
@@ -26648,7 +26895,7 @@ GameObject:
   - 222: {fileID: 1645793846}
   - 114: {fileID: 1645793845}
   - 114: {fileID: 1645793847}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Console
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27551,7 +27798,7 @@ GameObject:
   - 224: {fileID: 1699895070}
   - 222: {fileID: 1699895072}
   - 114: {fileID: 1699895071}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31332,7 +31579,7 @@ GameObject:
   - 222: {fileID: 2009130508}
   - 114: {fileID: 2009130507}
   - 114: {fileID: 2009130506}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LoadingHead (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32588,6 +32835,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2086723721}
+--- !u!114 &2089633657 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011563551750, guid: 1d6e6903b240832499dc92f54519fc49,
+    type: 2}
+  m_PrefabInternal: {fileID: 1067910133}
+  m_Script: {fileID: 11500000, guid: 2f910bf5e9de5da438e92f6894ab204e, type: 3}
 --- !u!1001 &2100845430
 Prefab:
   m_ObjectHideFlags: 0
@@ -33009,7 +33262,7 @@ GameObject:
   - 222: {fileID: 2144666277}
   - 114: {fileID: 2144666276}
   - 114: {fileID: 2144666275}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: DeleteCancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

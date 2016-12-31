@@ -11,6 +11,17 @@ public class InventoryUI : ItemSlotsContainerUI
 
     public ActorInfo CurrentCharacter;
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if(InGameMainMenuUI.Instance.HoveredSlot!=null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
+            {
+                SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+            }
+        }
+    }
+
     public void ShowInventory(ActorInfo Character)
     {
         CurrentCharacter = Character;
@@ -41,5 +52,21 @@ public class InventoryUI : ItemSlotsContainerUI
     internal void Hide()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public override void DisableInput()
+    {
+        for(int i=0;i<Container.childCount;i++)
+        {
+            Container.GetChild(i).GetComponent<ItemUI>().DisableInput();
+        }
+    }
+
+    public override void EnableInput()
+    {
+        for (int i = 0; i < Container.childCount; i++)
+        {
+            Container.GetChild(i).GetComponent<ItemUI>().EnableInput();
+        }
     }
 }

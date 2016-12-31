@@ -56,9 +56,10 @@ public class Game : MonoBehaviour {
 
     #region Chat
 
-    public void ReceiveChatMessage(string id, string message, string type)
+    public void ReceiveChatMessage(string actorID, string message, string type)
     {
-        ActorInfo actorInfo = CurrentScene.GetActor(id);
+        ActorInfo actorInfo = CurrentScene.GetActor(actorID);
+
         if (actorInfo != null && actorInfo.Instance)
         {
             actorInfo.Instance.ChatBubble(message);
@@ -66,15 +67,81 @@ public class Game : MonoBehaviour {
         }
         else
         {
-            Debug.LogError(id + " is no longer in the room for this event to occur.");
+            Debug.LogError(actorID + " is no longer in the room for this event to occur.");
         }
     }
+
     public void SendChatMessage(string givenText)
     {
         SocketClient.Instance.SendChatMessage(givenText);
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
         actor.ChatBubble(givenText);
         ChatlogUI.Instance.AddMessage(actor.Info, givenText);
+    }
+
+    #endregion
+
+    #region Items
+
+    public void MoveInventoryItem(int from, int to)
+    {
+        ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.SwapSlots(from, to);
+        InGameMainMenuUI.Instance.RefreshInventory();
+    }
+
+    public void DeleteInventoryItem(int slot)
+    {
+        ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.RemoveItem(slot);
+        InGameMainMenuUI.Instance.RefreshInventory();
+    }
+
+    public void ActorEquippedItem(string actorID, int inventoryIndex, string equipSlot, ItemInfo item)
+    {
+        ActorInfo actor = CurrentScene.GetActor(actorID);
+        actor.Equipment.SetItem(equipSlot, actor.Inventory.Content[inventoryIndex]);
+
+        if (actor == CurrentScene.ClientCharacter)
+        {
+            ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.RemoveItem(inventoryIndex);
+
+            InGameMainMenuUI.Instance.RefreshEquipment();
+            InGameMainMenuUI.Instance.RefreshInventory();
+        }
+
+        actor.Instance.UpdateVisual();
+    }
+
+    public void ActorUnequippedItem(string actorID, string equipSlot, int inventoryIndex, ItemInfo item)
+    {
+        ActorInfo actor = CurrentScene.GetActor(actorID);
+        ItemInfo itemToAdd = actor.Equipment.GetItem(equipSlot);
+
+        actor.Equipment.SetItem(equipSlot, item);
+
+        if (actor == CurrentScene.ClientCharacter)
+        {
+            ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.AddItemAt(inventoryIndex, itemToAdd);
+            
+
+            InGameMainMenuUI.Instance.RefreshEquipment();
+            InGameMainMenuUI.Instance.RefreshInventory();
+        }
+
+        actor.Instance.UpdateVisual();
+    }
+
+    public void DeleteEquip(string actorID, string equipSlot)
+    {
+        ActorInfo actor = CurrentScene.GetActor(actorID);
+
+        if (actor == CurrentScene.ClientCharacter)
+        {
+            ClientCharacter.GetComponent<ActorInstance>().Info.Equipment.SetItem(equipSlot, null);
+
+            InGameMainMenuUI.Instance.RefreshEquipment();
+        }
+
+        actor.Instance.UpdateVisual();
     }
 
     #endregion
@@ -190,8 +257,8 @@ public class Game : MonoBehaviour {
 
     public static Vector3 SplineLerp(Vector3 source, Vector3 target, float Height, float t)
     {
-        Vector3 ST = new Vector3(source.x + Height, source.y, source.z);
-        Vector3 TT = new Vector3(target.x + Height, target.y, target.z);
+        Vector3 ST = new Vector3(source.x , source.y + Height, source.z);
+        Vector3 TT = new Vector3(target.x , target.y + Height, target.z);
 
         Vector3 STTTM = Vector3.Lerp(ST, TT, t);
 

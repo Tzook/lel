@@ -56,6 +56,12 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
         CurrentSocket.On("drop_item", OnActorDropItem);
         CurrentSocket.On("item_disappear", OnItemDisappear);
+        CurrentSocket.On("actor_move_item", OnActorMoveItem);
+        CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
+        CurrentSocket.On("actor_equip_item", OnActorEquipItem);
+        CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
+        CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
+        CurrentSocket.On("actor_moved_equip", OnActorMovedEquip);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -192,6 +198,69 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.GetActor(data["id"]).Instance.PickUpItem(data["item_id"]);
     }
 
+    protected void OnActorMoveItem(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item Moved");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.MoveInventoryItem(data["from"].AsInt, data["to"].AsInt);
+    }
+
+    protected void OnActorDeleteItem(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item Deleted");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.DeleteInventoryItem(data["slot"].AsInt);
+    }
+
+    protected void OnActorEquipItem(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        ItemInfo swappedItem = null;
+
+        if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
+        {
+            swappedItem = new ItemInfo(data["equipped_item"]);
+        }
+
+        BroadcastEvent(data["id"].Value+" Equipped Item ");
+
+        Game.Instance.ActorEquippedItem(data["id"].Value, data["from"].AsInt, data["to"].Value, swappedItem);
+    }
+
+    protected void OnActorUnequipItem(Socket socket, Packet packet, object[] args)
+    {
+        
+        JSONNode data = (JSONNode)args[0];
+
+        ItemInfo swappedItem = null;
+
+        if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
+        {
+            swappedItem = new ItemInfo(data["equipped_item"]);
+        }
+
+        BroadcastEvent(data["id"].Value + " Unequipped Item ");
+
+        Game.Instance.ActorUnequippedItem(data["id"].Value, data["from"].Value, data["to"].AsInt, swappedItem);
+    }
+
+    protected void OnActorDeleteEquip(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Equip Deleted");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.DeleteEquip(data["id"].Value, data["from"].Value);
+    }
+
+    protected void OnActorMovedEquip(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Equip Moved");
+        JSONNode data = (JSONNode)args[0];
+
+    }
     #endregion
 
     #region Emittions
@@ -257,6 +326,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("dropped_item", node);
     }
 
+
     public void SendMovedItem(int fromIndex, int toIndex)
     {
         JSONNode node = new JSONClass();
@@ -264,9 +334,68 @@ public class SocketClient : MonoBehaviour
         node["from"].AsInt = fromIndex;
         node["to"].AsInt = toIndex;
 
-        Debug.Log("MovedItem from " + node["from"].AsInt + " to " + node["to"].AsInt);
-
         CurrentSocket.Emit("moved_item", node);
+    }
+
+    public void SendEquippedItem(int fromIndex, string Slot)
+    {
+        JSONNode node = new JSONClass();
+
+        node["from"].AsInt = fromIndex;
+        node["to"] = Slot;
+
+        Debug.Log(node);
+
+        CurrentSocket.Emit("equipped_item", node);
+    }
+
+    public void SendUnequippedItem(string fromSlot, int toIndex)
+    {
+        JSONNode node = new JSONClass();
+
+        node["from"] = fromSlot;
+        node["to"].AsInt = toIndex;
+
+        Debug.Log(node);
+
+        CurrentSocket.Emit("unequipped_item", node);
+    }
+
+    public void SendUsedEquip(string fromSlot)
+    {
+        JSONNode node = new JSONClass();
+
+        node["slot"] = fromSlot;
+
+        CurrentSocket.Emit("used_equip", node);
+    }
+
+    public void SendUsedItem(int inventoryIndex)
+    {
+        JSONNode node = new JSONClass();
+
+        node["slot"] = inventoryIndex.ToString();
+
+        CurrentSocket.Emit("used_item", node);
+    }
+
+    public void SendDroppedEquip(string fromSlot)
+    {
+        JSONNode node = new JSONClass();
+
+        node["slot"] = fromSlot;
+
+        CurrentSocket.Emit("dropped_equip", node);
+    }
+
+    public void SendMovedEquip(string fromSlot, string toSlot)
+    {
+        JSONNode node = new JSONClass();
+
+        node["from"] = fromSlot;
+        node["to"] = toSlot;
+
+        CurrentSocket.Emit("moved_equip", node);
     }
 
     #endregion

@@ -56,7 +56,7 @@ public class Game : MonoBehaviour {
 
     #region Chat
 
-    public void ReceiveChatMessage(string actorID, string message, string type)
+    public void ReceiveChatMessage(string actorID, string message)
     {
         ActorInfo actorInfo = CurrentScene.GetActor(actorID);
 
@@ -131,7 +131,7 @@ public class Game : MonoBehaviour {
         if (actor == CurrentScene.ClientCharacter)
         {
             ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.AddItemAt(inventoryIndex, itemToAdd);
-            
+
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();
@@ -237,7 +237,7 @@ public class Game : MonoBehaviour {
 
         CurrentScene = new SceneControl();
 
-        //TODO This yield is here because the gate portals wait for hte SceneControl to initalize, 
+        //TODO This yield is here because the gate portals wait for hte SceneControl to initalize,
         // - then a frame later they set themselves at it and then a frame after that they are registered.
         // -- Without any portal gates the spawning in a new scene will recieve an exception (No gate to be placed on)
         // --- Seems unreasonable so find a better way to figure spawn location (XYZ).

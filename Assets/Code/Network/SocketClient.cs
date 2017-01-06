@@ -51,7 +51,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
         CurrentSocket.On("actor_move_room", OnMoveRoom);
-        CurrentSocket.On("message", OnChatMessage);
+        CurrentSocket.On("chat", OnChatMessage);
         CurrentSocket.On("movement", OnMovement);
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
         CurrentSocket.On("drop_item", OnActorDropItem);
@@ -162,7 +162,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Chat Message!");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.ReceiveChatMessage(data["id"], data["message"], data["type"]);
+        Game.Instance.ReceiveChatMessage(data["id"], data["msg"]);
     }
 
     protected void OnMoveRoom(Socket socket, Packet packet, params object[] args)
@@ -232,7 +232,7 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorUnequipItem(Socket socket, Packet packet, object[] args)
     {
-        
+
         JSONNode data = (JSONNode)args[0];
 
         ItemInfo swappedItem = null;
@@ -301,10 +301,8 @@ public class SocketClient : MonoBehaviour
     public void SendChatMessage(string Message)
     {
         JSONNode node = new JSONClass();
-        node["message"] = Message;
-        node["type"] = "room"; // can also be "whisper" or "global"
-        //node["target_id"] = id; use this when whispering
-        CurrentSocket.Emit("message", node);
+        node["msg"] = Message;
+        CurrentSocket.Emit("chatted", node);
     }
 
     public void SendPickedItem(string ItemID)

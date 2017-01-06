@@ -65,7 +65,7 @@ public class ItemUI : MonoBehaviour {
 
     public void Hover()
     {
-        InGameMainMenuUI.Instance.HoveredSlot = this;
+        InGameMainMenuUI.Instance.SetHoverSlot(this);
 
         outline.enabled = true;
     }
@@ -74,7 +74,7 @@ public class ItemUI : MonoBehaviour {
     {
         if (InGameMainMenuUI.Instance.HoveredSlot == this)
         {
-            InGameMainMenuUI.Instance.HoveredSlot = null;
+            InGameMainMenuUI.Instance.UnsetHoverSlot();
         }
 
         outline.enabled = false;

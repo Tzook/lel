@@ -18,6 +18,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected InventoryUI inventoryPanel;
 
     [SerializeField]
+    protected ItemInfoUI itemInfoPanel;
+
+    [SerializeField]
     protected CharInfoUI m_CharInfoUI;
 
     [SerializeField]
@@ -49,7 +52,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     }
 
     public ItemUI DraggedSlot;
+
     public ItemUI HoveredSlot;
+
 
     public GameObject CurrentDragged;
 
@@ -167,6 +172,18 @@ public class InGameMainMenuUI : MonoBehaviour {
         equipmentPanel.EnableInput();
     }
 
+    
+    public void SetHoverSlot(ItemUI item)
+    {
+        HoveredSlot = item;
+        itemInfoPanel.Show(item.CurrentItem);
+    }
+
+    public void UnsetHoverSlot()
+    {
+        HoveredSlot = null;
+        itemInfoPanel.Hide();
+    }
 
     public IEnumerator FadeInRoutine()
     {

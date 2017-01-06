@@ -71,12 +71,28 @@ public class Game : MonoBehaviour {
         }
     }
 
+    public void ReceiveWhisper(string name, string message)
+    {
+        ChatlogUI.Instance.AddWhisperFrom(name, message);
+    }
+
+    public void ReceiveWhisperFail(string name)
+    {
+        ChatlogUI.Instance.AddWhisperFail(name);
+    }
+
     public void SendChatMessage(string givenText)
     {
         SocketClient.Instance.SendChatMessage(givenText);
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
         actor.ChatBubble(givenText);
         ChatlogUI.Instance.AddMessage(actor.Info, givenText);
+    }
+
+    public void SendWhisper(string givenText, string targetName)
+    {
+        SocketClient.Instance.SendWhisper(givenText, targetName);
+        ChatlogUI.Instance.AddWhisperTo(targetName, givenText);
     }
 
     #endregion

@@ -45,19 +45,27 @@ public class SocketClient : MonoBehaviour
     {
         BroadcastEvent("Connecting to server..");
         CurrentSocket = webSocketConnector.connect(LocalUserInfo.Me.SelectedCharacter.ID);
+
         CurrentSocket.On("connect", OnConnect);
         CurrentSocket.On("disconnect", OnDisconnect);
         CurrentSocket.On("error", OnError);
+
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
         CurrentSocket.On("actor_move_room", OnMoveRoom);
+
         CurrentSocket.On("chat", OnChatMessage);
+        CurrentSocket.On("whisper", OnWhisper);
+        CurrentSocket.On("whisper_fail", OnWhisperFail);
+
         CurrentSocket.On("movement", OnMovement);
+
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
         CurrentSocket.On("drop_item", OnActorDropItem);
         CurrentSocket.On("item_disappear", OnItemDisappear);
         CurrentSocket.On("actor_move_item", OnActorMoveItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
+
         CurrentSocket.On("actor_equip_item", OnActorEquipItem);
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
         CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
@@ -163,6 +171,22 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
         Game.Instance.ReceiveChatMessage(data["id"], data["msg"]);
+    }
+
+    protected void OnWhisper(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Whisper Message!");
+
+        JSONNode data = (JSONNode)args[0];
+        Game.Instance.ReceiveWhisper(data["name"], data["msg"]);
+    }
+
+    protected void OnWhisperFail(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Whisper Fail!");
+
+        JSONNode data = (JSONNode)args[0];
+        Game.Instance.ReceiveWhisperFail(data["name"]);
     }
 
     protected void OnMoveRoom(Socket socket, Packet packet, params object[] args)
@@ -298,11 +322,19 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("movement", node);
     }
 
-    public void SendChatMessage(string Message)
+    public void SendChatMessage(string message)
     {
         JSONNode node = new JSONClass();
-        node["msg"] = Message;
+        node["msg"] = message;
         CurrentSocket.Emit("chatted", node);
+    }
+
+    public void SendWhisper(string message, string targetName)
+    {
+        JSONNode node = new JSONClass();
+        node["msg"] = message;
+        node["to"] = targetName;
+        CurrentSocket.Emit("whispered", node);
     }
 
     public void SendPickedItem(string ItemID)

@@ -9,9 +9,9 @@ public class ChatPieceUI : MonoBehaviour {
 
     [SerializeField]
     Text m_txtContent;
-    
-    public void SetMessage(ActorInfo from, string Content)
+
+    public void SetMessage(string text)
     {
-        m_txtContent.text = from.Name + ": \"" + Content + " \"";
+        m_txtContent.text = text;
     }
 }

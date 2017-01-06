@@ -19,10 +19,32 @@ public class ChatlogUI : MonoBehaviour {
 
     internal void AddMessage(ActorInfo actorInfo, string message)
     {
+        AddRow(actorInfo.Name + ": \"" + message + " \"");
+    }
+
+    internal void AddWhisperTo(string name, string message)
+    {
+        // TODO think better how to display whispers
+        AddRow(name + ">>: \"" + message + " \"");
+    }
+
+    internal void AddWhisperFrom(string name, string message)
+    {
+        // TODO think better how to display whispers
+        AddRow(name + "<<: \"" + message + " \"");
+    }
+
+    internal void AddWhisperFail(string name)
+    {
+        AddRow("Failed sending message to " + name);
+    }
+
+    protected void AddRow(string message)
+    {
         GameObject tempObj = Instantiate(ResourcesLoader.Instance.GetObject("ChatLogPiece"));
         tempObj.transform.SetParent(Container, false);
         tempObj.transform.SetAsFirstSibling();
-        tempObj.GetComponent<ChatPieceUI>().SetMessage(actorInfo, message);
+        tempObj.GetComponent<ChatPieceUI>().SetMessage(message);
 
         if(Container.childCount > LogCap)
         {

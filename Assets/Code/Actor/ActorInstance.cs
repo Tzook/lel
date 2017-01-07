@@ -537,17 +537,49 @@ public class ActorInstance : MonoBehaviour
         
     }
 
-    //private GetReferencedImage(string imagekey)
-    //{
-    //    switch(imagekey)
-    //    {
-    //        case "male_head":
-    //            {
-    //                return m_Head
-    //                break;
-    //            }
-    //    }
-    //}
+    public void PlayMouthEmote(string emoteKey)
+    {
+        if (MouthEmoteInstance != null)
+        {
+            StopCoroutine(MouthEmoteInstance);
+        }
+
+        MouthEmoteInstance = StartCoroutine(MouthEmoteRoutine(emoteKey));
+    }
+
+    public Coroutine MouthEmoteInstance;
+    private IEnumerator MouthEmoteRoutine(string emoteKey)
+    {
+        m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth + "_" + emoteKey);
+
+        yield return new WaitForSeconds(3f);
+
+        m_Mouth.sprite = ResourcesLoader.Instance.GetSprite(Info.Mouth);
+
+        MouthEmoteInstance = null;
+    }
+
+    public void PlayEyesEmote(string emoteKey)
+    {
+        if (EyesEmoteInstance != null)
+        {
+            StopCoroutine(EyesEmoteInstance);
+        }
+
+        EyesEmoteInstance = StartCoroutine(EyesEmoteRoutine(emoteKey));
+    }
+
+    public Coroutine EyesEmoteInstance;
+    private IEnumerator EyesEmoteRoutine(string emoteKey)
+    {
+        m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes + "_" + emoteKey);
+
+        yield return new WaitForSeconds(3f);
+
+        m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+
+        EyesEmoteInstance = null;
+    }
 
     #endregion
 

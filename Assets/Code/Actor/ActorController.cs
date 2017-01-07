@@ -97,6 +97,64 @@ public class ActorController : MonoBehaviour
         {
             Instance.AttemptPickUp();
         }
+
+        if(Input.GetKeyDown(InputMap.Map["Wink Emote"]))
+        {
+            if(Instance.EyesEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("eyes", "wink");
+                Instance.PlayEyesEmote("wink");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Sad Eyes Emote"]))
+        {
+            if (Instance.EyesEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("eyes", "cry");
+                Instance.PlayEyesEmote("cry");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Mad Eyes Emote"]))
+        {
+            if (Instance.EyesEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("eyes", "angry");
+                Instance.PlayEyesEmote("angry");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Happy Mouth Emote"]))
+        {
+            if (Instance.MouthEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("mouth", "happy");
+                Instance.PlayMouthEmote("happy");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Sad Mouth Emote"]))
+        {
+            if (Instance.MouthEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("mouth", "sad");
+                Instance.PlayMouthEmote("sad");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Angry Mouth Emote"]))
+        {
+            if (Instance.MouthEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("mouth", "angry");
+                Instance.PlayMouthEmote("angry");
+            }
+        }
+        else if (Input.GetKeyDown(InputMap.Map["Surprised Mouth Emote"]))
+        {
+            if (Instance.MouthEmoteInstance == null)
+            {
+                SocketClient.Instance.SendEmote("mouth", "surprised");
+                Instance.PlayMouthEmote("surprised");
+            }
+        }
+
     }
 
     void FixedUpdate()

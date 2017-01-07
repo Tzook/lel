@@ -70,6 +70,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
         CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
         CurrentSocket.On("actor_moved_equip", OnActorMovedEquip);
+        CurrentSocket.On("actor_emote", OnActorEmoted);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -285,6 +286,14 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
 
     }
+
+    protected void OnActorEmoted(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Actor Emoted");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.ActorEmoted(data["id"].Value, data["type"].Value, data["emote"].Value);
+    }
     #endregion
 
     #region Emittions
@@ -426,6 +435,16 @@ public class SocketClient : MonoBehaviour
         node["to"] = toSlot;
 
         CurrentSocket.Emit("moved_equip", node);
+    }
+
+    public void SendEmote(string type, string emote)
+    {
+        JSONNode node = new JSONClass();
+
+        node["type"] = type;
+        node["emote"] = emote;
+
+        CurrentSocket.Emit("emoted", node);
     }
 
     #endregion

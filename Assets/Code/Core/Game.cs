@@ -170,6 +170,18 @@ public class Game : MonoBehaviour {
         actor.Instance.UpdateVisual();
     }
 
+    public void ActorEmoted(string id, string type, string emote)
+    {
+        if (type == "eyes")
+        {
+            CurrentScene.GetActor(id).Instance.PlayEyesEmote(emote);
+        }
+        else if (type == "mouth")
+        {
+            CurrentScene.GetActor(id).Instance.PlayMouthEmote(emote);
+        }
+
+    }
     #endregion
 
     public GameObject SpawnPlayer(ActorInfo info)

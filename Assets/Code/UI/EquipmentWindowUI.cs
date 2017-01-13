@@ -24,6 +24,9 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
     [SerializeField]
     ItemUI ShoesSlot;
 
+    [SerializeField]
+    ItemUI WeaponSlot;
+
     ActorInfo CurrentCharacter;
 
     void Update()
@@ -90,6 +93,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         GlovesSlot.SetData(CurrentCharacter.Equipment.Gloves, this);
         LegsSlot.SetData(CurrentCharacter.Equipment.Legs, this);
         ShoesSlot.SetData(CurrentCharacter.Equipment.Shoes, this);
+        WeaponSlot.SetData(CurrentCharacter.Equipment.Weapon, this);
 
         CharInstance.UpdateVisual();
     }
@@ -101,6 +105,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         GlovesSlot.GetComponent<ItemUI>().DisableInput();
         LegsSlot.GetComponent<ItemUI>().DisableInput();
         ShoesSlot.GetComponent<ItemUI>().DisableInput();
+        WeaponSlot.GetComponent<ItemUI>().DisableInput();
     }
 
     public override void EnableInput()
@@ -110,6 +115,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         GlovesSlot.GetComponent<ItemUI>().EnableInput();
         LegsSlot.GetComponent<ItemUI>().EnableInput();
         ShoesSlot.GetComponent<ItemUI>().EnableInput();
+        WeaponSlot.GetComponent<ItemUI>().EnableInput();
     }
 
     public bool CanEquip(ItemInfo item, ItemUI slot)

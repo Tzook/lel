@@ -10,6 +10,7 @@ public class Equipment {
     public ItemInfo Gloves;
     public ItemInfo Legs;
     public ItemInfo Shoes;
+    public ItemInfo Weapon;
 
     public Equipment(JSONNode node)
     {
@@ -54,6 +55,11 @@ public class Equipment {
                     Shoes = item;
                     break;
                 }
+            case "weapon":
+                {
+                    Weapon = item;
+                    break;
+                }
         }
 
     }
@@ -80,6 +86,10 @@ public class Equipment {
             case "shoes":
                 {
                     return Shoes;
+                }
+            case "weapon":
+                {
+                    return Weapon;
                 }
         }
 

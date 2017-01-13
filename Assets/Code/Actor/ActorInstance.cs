@@ -60,6 +60,9 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer m_Hat;
 
+    [SerializeField]
+    protected SpriteRenderer m_Weapon;
+
 
     [SerializeField]
     protected GameObject NameLabel;
@@ -302,6 +305,7 @@ public class ActorInstance : MonoBehaviour
         UpdateItem(Info.Equipment.Gloves);
         UpdateItem(Info.Equipment.Legs);
         UpdateItem(Info.Equipment.Shoes);
+        UpdateItem(Info.Equipment.Weapon);
     }
 
     private void UpdateItem(ItemInfo item)

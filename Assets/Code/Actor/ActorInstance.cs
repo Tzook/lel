@@ -299,6 +299,7 @@ public class ActorInstance : MonoBehaviour
     protected void UpdateEquipment()
     {
         m_Hat.sprite = null;
+        m_Weapon.sprite = null;
 
         UpdateItem(Info.Equipment.Head);
         UpdateItem(Info.Equipment.Chest);
@@ -381,6 +382,11 @@ public class ActorInstance : MonoBehaviour
             case "hat":
                 {
                     m_Hat.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "weapon":
+                {
+                    m_Weapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
                     break;
                 }
         }

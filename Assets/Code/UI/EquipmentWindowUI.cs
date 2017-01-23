@@ -88,14 +88,17 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
 
     public void RefreshEquipment()
     {
-        HeadSlot.SetData(CurrentCharacter.Equipment.Head, this);
-        ChestSlot.SetData(CurrentCharacter.Equipment.Chest, this);
-        GlovesSlot.SetData(CurrentCharacter.Equipment.Gloves, this);
-        LegsSlot.SetData(CurrentCharacter.Equipment.Legs, this);
-        ShoesSlot.SetData(CurrentCharacter.Equipment.Shoes, this);
-        WeaponSlot.SetData(CurrentCharacter.Equipment.Weapon, this);
+        if (CurrentCharacter != null)
+        {
+            HeadSlot.SetData(CurrentCharacter.Equipment.Head, this);
+            ChestSlot.SetData(CurrentCharacter.Equipment.Chest, this);
+            GlovesSlot.SetData(CurrentCharacter.Equipment.Gloves, this);
+            LegsSlot.SetData(CurrentCharacter.Equipment.Legs, this);
+            ShoesSlot.SetData(CurrentCharacter.Equipment.Shoes, this);
+            WeaponSlot.SetData(CurrentCharacter.Equipment.Weapon, this);
 
-        CharInstance.UpdateVisual();
+            CharInstance.UpdateVisual();
+        }
     }
 
     public override void DisableInput()

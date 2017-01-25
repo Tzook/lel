@@ -34,6 +34,8 @@ public class Game : MonoBehaviour {
         {
             InGame = false;
 
+            InGameMainMenuUI.Instance.HideGameUI();
+
             ResourcesLoader.Instance.ClearObjectPool();
             SocketClient.Instance.Diconnect();
 
@@ -288,6 +290,8 @@ public class Game : MonoBehaviour {
 
         MovingTroughPortal = false;
         InGame = true;
+
+        InGameMainMenuUI.Instance.ShowGameUI();
 
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());

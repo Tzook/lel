@@ -24,7 +24,25 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CharInfoUI m_CharInfoUI;
 
     [SerializeField]
+    RoundValueBarUI HPBar;
+
+    [SerializeField]
+    RoundValueBarUI MPBar;
+
+    [SerializeField]
+    RoundValueBarUI XPBar;
+
+    [SerializeField]
+    protected GameObject m_GameUI;
+
+    [SerializeField]
+    protected Transform WindowsContainer;
+
+    [SerializeField]
     protected EquipmentWindowUI equipmentPanel;
+
+    [SerializeField]
+    protected StatsWindowUI statsPanel;
 
     [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
@@ -39,9 +57,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
         get
         {
-            for(int i=0;i<transform.childCount;i++)
+            for(int i=0;i< WindowsContainer.childCount;i++)
             {
-                if(transform.GetChild(i).gameObject.activeInHierarchy)
+                if(WindowsContainer.GetChild(i).gameObject.activeInHierarchy)
                 {
                     return true;
                 }
@@ -69,9 +87,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                for (int i = 0; i < transform.childCount; i++)
+                for (int i = 0; i < WindowsContainer.childCount; i++)
                 {
-                    transform.GetChild(i).gameObject.SetActive(false);
+                    WindowsContainer.GetChild(i).gameObject.SetActive(false);
                 }
 
                 Game.Instance.InChat = false;
@@ -117,6 +135,18 @@ public class InGameMainMenuUI : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(InputMap.Map["Stats"]))
+        {
+            if (!statsPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            {
+                statsPanel.GetComponent<StatsWindowUI>().Show(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+            }
+            else
+            {
+                statsPanel.GetComponent<StatsWindowUI>().Hide();
+            }
+        }
+
     }
 
     public void Resume()
@@ -133,6 +163,16 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ShowGameUI()
+    {
+        m_GameUI.SetActive(true);
+    }
+
+    public void HideGameUI()
+    {
+        m_GameUI.SetActive(false);
     }
 
     public void ShowCharacterInfo(ActorInfo Info)

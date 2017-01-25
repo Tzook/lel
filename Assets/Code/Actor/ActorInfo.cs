@@ -17,6 +17,7 @@ public class ActorInfo
     public string Eyes = "eyes_0a";
     public string Nose = "nose_0";
     public string Mouth= "mouth_0";
+    
 
     public Inventory Inventory;
 

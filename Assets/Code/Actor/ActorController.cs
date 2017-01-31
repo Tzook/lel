@@ -201,6 +201,11 @@ public class ActorController : MonoBehaviour
             EnterPortal();
         }
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            Anim.SetInteger("AttackType",Random.Range(0,3));
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Anim.SetTrigger("ChargeAttack");
@@ -281,6 +286,7 @@ public class ActorController : MonoBehaviour
         if (Rigidbody.velocity.y <= 1.5f)
         {
             Rigidbody.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
+            AudioControl.Instance.Play("sound_bloop");
         }
 
         yield return new WaitForSeconds(JumpDelay);

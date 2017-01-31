@@ -181,7 +181,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         m_GameUI.SetActive(true);
         ActorInfo info = Game.Instance.CurrentScene.ClientCharacter;
 
-        XPBar.SetValue(info.EXP / info.NextLevelXP);
+        RefreshXP(info);
         HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
         MPBar.SetValue(info.CurrentMana / info.MaxMana);
         LevelText.text = info.LVL.ToString();
@@ -358,4 +358,12 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     }
 
+    internal void RefreshXP(ActorInfo info = null)
+    {
+        if (info == null)
+        {
+            info = Game.Instance.CurrentScene.ClientCharacter;
+        }
+        XPBar.SetValue(info.EXP / info.NextLevelXP);
+    }
 }

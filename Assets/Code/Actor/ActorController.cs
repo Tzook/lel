@@ -201,14 +201,11 @@ public class ActorController : MonoBehaviour
             EnterPortal();
         }
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            Anim.SetInteger("AttackType",Random.Range(0,3));
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
+            Anim.SetInteger("AttackType", Random.Range(0, 3));
             Anim.SetTrigger("ChargeAttack");
+            Instance.StartCombatMode();
         }
 
         //if (Input.GetMouseButtonUp(0))

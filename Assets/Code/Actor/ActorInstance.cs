@@ -70,6 +70,9 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     protected MessageBubbleUI MessageBubble;
 
+    [SerializeField]
+    Animator Anim;
+
     #endregion
 
     #region Public Parameters
@@ -591,6 +594,23 @@ public class ActorInstance : MonoBehaviour
         EyesEmoteInstance = null;
     }
 
+    public void StartCombatMode()
+    {
+        if (CombatModeInstance != null)
+        {
+            StopCoroutine(CombatModeInstance);
+        }
+
+        CombatModeInstance = StartCoroutine(CombatModeRoutine());
+    }
+
+    public Coroutine CombatModeInstance { get; private set; }
+    private IEnumerator CombatModeRoutine()
+    {
+        Anim.SetBool("Combat", true);
+        yield return new WaitForSeconds(3f);
+        Anim.SetBool("Combat", false);
+    }
     #endregion
 
 }

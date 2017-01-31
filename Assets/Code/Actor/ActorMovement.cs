@@ -18,7 +18,6 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
     protected bool MovingVertical;
     protected bool aimRight;
 
-
     void Start()
     {
         Instance = GetComponent<ActorInstance>();

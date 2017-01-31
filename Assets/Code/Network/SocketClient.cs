@@ -70,7 +70,11 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
         CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
         CurrentSocket.On("actor_moved_equip", OnActorMovedEquip);
+
         CurrentSocket.On("actor_emote", OnActorEmoted);
+
+        CurrentSocket.On("actor_gain_exp ", OnActorGainXP);
+        CurrentSocket.On("actor_lvl_up  ", OnActorLevelUp);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -294,6 +298,21 @@ public class SocketClient : MonoBehaviour
 
         Game.Instance.ActorEmoted(data["id"].Value, data["type"].Value, data["emote"].Value);
     }
+
+    protected void OnActorGainXP(Socket socket, Packet packet, object[] args)
+    {
+
+        BroadcastEvent("Actor Gained XP");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.ClientCharacter.EXP = data["exp"].AsInt;
+        InGameMainMenuUI.Instance.RefreshXP();
+    }
+
+    protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
+    {
+    }
+
     #endregion
 
     #region Emittions

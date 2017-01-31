@@ -66,6 +66,8 @@ public class Game : MonoBehaviour {
         {
             actorInfo.Instance.ChatBubble(message);
             ChatlogUI.Instance.AddMessage(actorInfo, message);
+            InGameMainMenuUI.Instance.SetLastChatMessage(message);
+            InGameMainMenuUI.Instance.SetLastChatMessage(actorInfo.Name + " : \"" + message + "\"");
         }
         else
         {
@@ -89,6 +91,7 @@ public class Game : MonoBehaviour {
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
         actor.ChatBubble(givenText);
         ChatlogUI.Instance.AddMessage(actor.Info, givenText);
+        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \""+givenText+"\"");
     }
 
     public void SendWhisper(string givenText, string targetName)

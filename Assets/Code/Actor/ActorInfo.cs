@@ -17,7 +17,34 @@ public class ActorInfo
     public string Eyes = "eyes_0a";
     public string Nose = "nose_0";
     public string Mouth= "mouth_0";
-    
+
+    public int LVL;
+
+    public int EXP;
+    public int NextLevelXP
+    {
+        get
+        {
+            return Mathf.FloorToInt(
+                (50f * Mathf.Pow(this.LVL, 3) 
+                - 150f * Mathf.Pow(this.LVL, 2) 
+                + 400f * this.LVL) 
+                / 3);
+        }
+        private set { }
+    }
+
+
+    public int STR;
+    public int MAG;
+    public int DEX;
+
+    public int MaxHealth;
+    public int CurrentHealth;
+
+    public int MaxMana;
+    public int CurrentMana;
+
 
     public Inventory Inventory;
 
@@ -53,6 +80,23 @@ public class ActorInfo
         Inventory = new Inventory(node["items"]);
 
         Equipment = new Equipment(node["equips"]);
+
+        if(node["stats"]!=null)
+        {
+            this.LVL = node["stats"]["lvl"].AsInt;
+
+            this.EXP = node["stats"]["exp"].AsInt;
+
+            this.STR = node["stats"]["str"].AsInt;
+            this.MAG = node["stats"]["mag"].AsInt;
+            this.DEX = node["stats"]["dex"].AsInt;
+
+            this.MaxHealth = node["stats"]["hp"]["total"].AsInt;
+            this.CurrentHealth = node["stats"]["hp"]["now"].AsInt;
+
+            this.MaxMana = node["stats"]["mp"]["total"].AsInt;
+            this.CurrentMana = node["stats"]["mp"]["now"].AsInt;
+        }
 
     }
 }

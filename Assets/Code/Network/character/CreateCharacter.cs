@@ -17,9 +17,9 @@ public class CreateCharacter : HttpProvider
         parameters["mouth"] = info.Mouth;
         parameters["skin"].AsInt = info.SkinColor;
         parameters["hair"] = info.Hair;
-        parameters["str"] = "4";
-        parameters["mag"] = "2";
-        parameters["dex"] = "1";
+        parameters["str"] = info.STR.ToString();
+        parameters["mag"] = info.MAG.ToString();
+        parameters["dex"] = info.DEX.ToString();
 
 
         performRequest(CREATE_CHARACTER_URL, parameters, true);

@@ -47,6 +47,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
+    [SerializeField]
+    Text LastChatMessageText;
+
     public static InGameMainMenuUI Instance;
 
     public bool isWindowOpen
@@ -168,6 +171,11 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ShowGameUI()
     {
         m_GameUI.SetActive(true);
+        ActorInfo info = Game.Instance.CurrentScene.ClientCharacter;
+
+        XPBar.SetValue(info.EXP / info.NextLevelXP);
+        HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
+        MPBar.SetValue(info.CurrentMana / info.MaxMana);
     }
 
     public void HideGameUI()
@@ -178,6 +186,11 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ShowCharacterInfo(ActorInfo Info)
     {
         m_CharInfoUI.Open(Info);
+    }
+
+    public void SetLastChatMessage(string text)
+    {
+        LastChatMessageText.text = text;
     }
 
 

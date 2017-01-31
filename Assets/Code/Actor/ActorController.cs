@@ -196,10 +196,22 @@ public class ActorController : MonoBehaviour
             Anim.SetBool("InAir", true);
         }
 
-        if(Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+        if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
         {
             EnterPortal();
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Anim.SetTrigger("ChargeAttack");
+        }
+
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    Anim.SetTrigger("ReleaseAttack");
+        //}
+
+        Anim.SetBool("Charging", Input.GetMouseButton(0));
 
         if (!ClientOnly)
         {

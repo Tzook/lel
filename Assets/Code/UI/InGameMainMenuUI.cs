@@ -33,6 +33,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     RoundValueBarUI XPBar;
 
     [SerializeField]
+    Text LevelText;
+
+    [SerializeField]
     protected GameObject m_GameUI;
 
     [SerializeField]
@@ -106,47 +109,52 @@ public class InGameMainMenuUI : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(InputMap.Map["Inventory"]))
+        if(Game.Instance.InGame && !Game.Instance.InChat)
         {
-            if (!inventoryPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            
+            if (Input.GetKeyDown(InputMap.Map["Inventory"]))
             {
-                inventoryPanel.GetComponent<InventoryUI>().ShowInventory(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                if (!inventoryPanel.gameObject.activeInHierarchy)
+                {
+                    inventoryPanel.GetComponent<InventoryUI>().ShowInventory(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                }
+                else
+                {
+                    inventoryPanel.GetComponent<InventoryUI>().Hide();
+                    itemInfoPanel.Hide();
+                }
             }
-            else
-            {
-                inventoryPanel.GetComponent<InventoryUI>().Hide();
-            }
-        }
 
-        if (Input.GetKeyDown(InputMap.Map["Equipment"]))
-        {
-            if (!equipmentPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (Input.GetKeyDown(InputMap.Map["Equipment"]))
             {
-                equipmentPanel.Open(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                if (!equipmentPanel.gameObject.activeInHierarchy)
+                {
+                    equipmentPanel.Open(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                }
+                else
+                {
+                    equipmentPanel.Hide();
+                }
             }
-            else
-            {
-                equipmentPanel.Hide();
-            }
-        }
 
-        if (Input.GetKeyDown(InputMap.Map["Chat"]))
-        {
-            if (!chatPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (Input.GetKeyDown(InputMap.Map["Chat"]))
             {
-                chatPanel.Open();
+                if (!chatPanel.gameObject.activeInHierarchy)
+                {
+                    chatPanel.Open();
+                }
             }
-        }
 
-        if (Input.GetKeyDown(InputMap.Map["Stats"]))
-        {
-            if (!statsPanel.gameObject.activeInHierarchy && Game.Instance.InGame && !Game.Instance.InChat)
+            if (Input.GetKeyDown(InputMap.Map["Stats"]))
             {
-                statsPanel.GetComponent<StatsWindowUI>().Show(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
-            }
-            else
-            {
-                statsPanel.GetComponent<StatsWindowUI>().Hide();
+                if (!statsPanel.gameObject.activeInHierarchy)
+                {
+                    statsPanel.GetComponent<StatsWindowUI>().Show(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                }
+                else
+                {
+                    statsPanel.GetComponent<StatsWindowUI>().Hide();
+                }
             }
         }
 
@@ -176,6 +184,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         XPBar.SetValue(info.EXP / info.NextLevelXP);
         HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
         MPBar.SetValue(info.CurrentMana / info.MaxMana);
+        LevelText.text = info.LVL.ToString();
     }
 
     public void HideGameUI()

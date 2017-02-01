@@ -56,6 +56,8 @@ public class ActorController : MonoBehaviour
     float rotDegrees;
     bool aimRight;
 
+    bool Invincible;
+
     #endregion
 
     #region Mono
@@ -266,7 +268,7 @@ public class ActorController : MonoBehaviour
 
     public void StandStill()
     {
-        Rigidbody.velocity = new Vector2(0, Rigidbody.velocity.y);
+        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x- (Rigidbody.velocity.x/4f), Rigidbody.velocity.y);
     }
 
     public void Jump()
@@ -358,6 +360,14 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    void OnTriggerStay2D(Collider2D obj)
+    {
+        if (obj.tag == "Enemy")
+        {
+            Hurt(obj.GetComponent<Enemy>());
+        }
+    }
+
     void OnTriggerExit2D(Collider2D obj)
     {
         if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
@@ -365,5 +375,52 @@ public class ActorController : MonoBehaviour
             CurrentPortal = null;
         }
     }
+
+    private void Hurt(Enemy enemy)
+    {
+        if (!Invincible)
+        {
+            SocketClient.Instance.SendHurt(enemy.Info);
+            Anim.SetInteger("HurtType", Random.Range(0, 3));
+            Anim.SetTrigger("Hurt");
+            StartCoroutine(InvincibilityRoutine());
+
+            if (enemy.transform.position.x < transform.position.x)
+            {
+                Rigidbody.AddForce((InternalJumpForce * 2f * transform.right), ForceMode2D.Impulse);
+            }
+            else
+            {
+                Rigidbody.AddForce((InternalJumpForce * 2f * -transform.right), ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    private IEnumerator InvincibilityRoutine()
+    {
+        Invincible = true;
+
+        Coroutine StrobeInstance = StartCoroutine(StrobeRoutine());
+
+        yield return new WaitForSeconds(2);
+
+        StopCoroutine(StrobeInstance);
+
+        Instance.SetOpacity(1f);
+
+        Invincible = false;
+    }
+
+    private IEnumerator StrobeRoutine()
+    {
+        while(true)
+        {
+            Instance.SetOpacity(0.5f);
+            yield return new WaitForSeconds(0.1f);
+            Instance.SetOpacity(1f);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
 
 }

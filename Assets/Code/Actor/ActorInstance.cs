@@ -99,6 +99,38 @@ public class ActorInstance : MonoBehaviour
         UpdateVisual(new ActorInfo());
     }
 
+    public void SetOpacity(float fValue)
+    {
+        Color targetCLR = new Color(Color.white.r, Color.white.g, Color.white.b, fValue);
+
+        m_Head.color = targetCLR;
+        m_Eyes.color = targetCLR;
+        m_Nose.color = targetCLR;
+        m_Mouth.color = targetCLR;
+        m_Hair.color = targetCLR;
+        m_HairBack.color = targetCLR;
+
+        m_Hat.color = targetCLR;
+        m_Chest.color = targetCLR;
+
+        m_RightArm.color = targetCLR;
+        m_RightElbow.color = targetCLR;
+        m_RightFist.color = targetCLR;
+        m_LeftArm.color = targetCLR;
+        m_LeftElbow.color = targetCLR;
+        m_LeftFist.color = targetCLR;
+
+        m_LeftLeg.color = targetCLR;
+        m_LeftKnee.color = targetCLR;
+        m_LeftFoot.color = targetCLR;
+        m_RightLeg.color = targetCLR;
+        m_RightKnee.color = targetCLR;
+        m_RightFoot.color = targetCLR;
+
+        m_Weapon.color = targetCLR;
+
+    }
+
     #region Update Looks
 
     public void UpdateVisual(ActorInfo info)

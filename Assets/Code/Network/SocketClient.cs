@@ -466,6 +466,11 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("emoted", node);
     }
 
+    public void SendHurt(EnemyInfo Info)
+    {
+        
+    }
+
     #endregion
 
     #region Internal

@@ -380,9 +380,8 @@ public class ActorController : MonoBehaviour
     {
         if (!Invincible)
         {
-            SocketClient.Instance.SendHurt(enemy.Info);
-            Anim.SetInteger("HurtType", Random.Range(0, 3));
-            Anim.SetTrigger("Hurt");
+            SocketClient.Instance.SendTookDMG(enemy.Info);
+            Instance.Hurt();
             StartCoroutine(InvincibilityRoutine());
 
             if (enemy.transform.position.x < transform.position.x)

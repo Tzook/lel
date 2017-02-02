@@ -358,12 +358,33 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     }
 
-    internal void RefreshXP(ActorInfo info = null)
+    public void RefreshXP(ActorInfo info = null)
     {
         if (info == null)
         {
             info = Game.Instance.CurrentScene.ClientCharacter;
         }
+
         XPBar.SetValue(info.EXP / info.NextLevelXP);
+    }
+
+    public void RefreshHP(ActorInfo info = null)
+    {
+        if (info == null)
+        {
+            info = Game.Instance.CurrentScene.ClientCharacter;
+        }
+
+        HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
+    }
+
+    public void RefreshMP(ActorInfo info = null)
+    {
+        if (info == null)
+        {
+            info = Game.Instance.CurrentScene.ClientCharacter;
+        }
+
+        MPBar.SetValue(info.CurrentMana / info.MaxMana);
     }
 }

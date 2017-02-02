@@ -73,8 +73,10 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_emote", OnActorEmoted);
 
-        CurrentSocket.On("actor_gain_exp ", OnActorGainXP);
-        CurrentSocket.On("actor_lvl_up  ", OnActorLevelUp);
+        CurrentSocket.On("actor_gain_exp", OnActorGainXP);
+        CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
+
+        CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -301,9 +303,10 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorGainXP(Socket socket, Packet packet, object[] args)
     {
-
-        BroadcastEvent("Actor Gained XP");
         JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Actor Gained " + data["exp"].AsInt + " XP");
+        
 
         Game.Instance.CurrentScene.ClientCharacter.EXP = data["exp"].AsInt;
         InGameMainMenuUI.Instance.RefreshXP();
@@ -311,6 +314,25 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
     {
+    }
+
+    protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor Got Wounded");
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        if(actor == Game.Instance.CurrentScene.ClientCharacter)
+        {
+            actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+            actor.CurrentHealth = data["hp"].AsInt;
+            InGameMainMenuUI.Instance.RefreshHP();
+        }
+        else
+        {
+            actor.Instance.Hurt();
+        }
     }
 
     #endregion
@@ -466,9 +488,13 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("emoted", node);
     }
 
-    public void SendHurt(EnemyInfo Info)
+    public void SendTookDMG(EnemyInfo Info)
     {
-        
+        JSONNode node = new JSONClass();
+
+        node["from"] = Info.Name;
+
+        CurrentSocket.Emit("took_dmg", node);
     }
 
     #endregion

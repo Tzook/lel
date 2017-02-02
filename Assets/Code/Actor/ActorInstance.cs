@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
-using System;
 
 public class ActorInstance : MonoBehaviour
 {
@@ -557,6 +556,19 @@ public class ActorInstance : MonoBehaviour
         StartCoroutine(PickingUpItemRoutine(instanceID));
     }
 
+    internal void Hurt()
+    {
+        Anim.SetInteger("HurtType", Random.Range(0, 3));
+        Anim.SetTrigger("Hurt");
+    }
+
+    public void PopHint(string text, Color clr)
+    {
+        GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
+        pop.transform.position = transform.position + new Vector3(0f,1f,0f);
+        pop.GetComponent<PopText>().Pop(text, clr);
+    }
+
     private IEnumerator PickingUpItemRoutine(string instanceID)
     {
         GameObject itemObject = Game.Instance.CurrentScene.Items[instanceID].gameObject;
@@ -643,6 +655,7 @@ public class ActorInstance : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Anim.SetBool("Combat", false);
     }
+
     #endregion
 
 }

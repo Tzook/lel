@@ -150,7 +150,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has left the room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.RemoveNpcCharacter(new ActorInfo(data["character"]));
+        Game.Instance.RemoveNpcCharacter(data["id"]);
     }
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
@@ -306,7 +306,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
 
         BroadcastEvent("Actor Gained " + data["exp"].AsInt + " XP");
-        
+
 
         Game.Instance.CurrentScene.ClientCharacter.EXP = data["exp"].AsInt;
         InGameMainMenuUI.Instance.RefreshXP();

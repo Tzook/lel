@@ -357,7 +357,7 @@ public class SocketClient : MonoBehaviour
 
         node["room"] = targetRoom;
 
-        CurrentSocket.Emit("move_room", node);
+        CurrentSocket.Emit("moved_room", node);
     }
 
     public void EmitMovement(Vector3 pos, float rotDegrees)

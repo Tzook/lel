@@ -201,7 +201,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Moved Room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.LoadScene(data["room"], data["oldRoom"]);
+        Game.Instance.LoadScene(data["to"], data["from"]);
     }
 
     protected void OnItemDisappear(Socket socket, Packet packet, object[] args)

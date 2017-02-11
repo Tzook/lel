@@ -8,8 +8,9 @@ public class Game : MonoBehaviour {
 
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
-    public bool InChat;
-    public bool MovingTroughPortal;
+    public bool InChat = false;
+    public bool MovingTroughPortal = false;
+    public bool isBitch = false;
     public static Game Instance;
 
     public GameObject ClientCharacter;
@@ -298,6 +299,27 @@ public class Game : MonoBehaviour {
 
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
+    }
+
+    public void SetBitch(bool isbitch)
+    {
+        if(this.isBitch && !isbitch) // WAS SET ON
+        {
+            foreach (Enemy enemy in CurrentScene.Enemies)
+            {
+                enemy.SetAIOFF();
+            }
+        }
+        else if(!this.isBitch && isbitch) // WAS SET OFF
+        {
+            foreach (Enemy enemy in CurrentScene.Enemies)
+            {
+                enemy.SetAION();
+            }
+        }
+
+        this.isBitch = isbitch;
+
     }
 
     public static Vector3 SplineLerp(Vector3 source, Vector3 target, float Height, float t)

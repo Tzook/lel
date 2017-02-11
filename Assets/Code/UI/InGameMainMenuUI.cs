@@ -33,7 +33,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     RoundValueBarUI XPBar;
 
     [SerializeField]
-    Text LevelText;
+    BlinkNumberUI LevelUI;
 
     [SerializeField]
     protected GameObject m_GameUI;
@@ -54,6 +54,8 @@ public class InGameMainMenuUI : MonoBehaviour {
     Text LastChatMessageText;
 
     public static InGameMainMenuUI Instance;
+
+    public StatsInfoUI StatsInfo;
 
     public bool isWindowOpen
     {
@@ -154,6 +156,8 @@ public class InGameMainMenuUI : MonoBehaviour {
                 else
                 {
                     statsPanel.GetComponent<StatsWindowUI>().Hide();
+                    InGameMainMenuUI.Instance.StatsInfo.Hide();
+
                 }
             }
         }
@@ -182,9 +186,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         ActorInfo info = Game.Instance.CurrentScene.ClientCharacter;
 
         RefreshXP(info);
-        HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
-        MPBar.SetValue(info.CurrentMana / info.MaxMana);
-        LevelText.text = info.LVL.ToString();
+        RefreshHP(info);
+        RefreshMP(info);
+        RefreshLevel(info);
     }
 
     public void HideGameUI()
@@ -365,7 +369,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = Game.Instance.CurrentScene.ClientCharacter;
         }
 
-        XPBar.SetValue(info.EXP / info.NextLevelXP);
+        XPBar.SetValue(info.EXP / (info.NextLevelXP * 1f));
     }
 
     public void RefreshHP(ActorInfo info = null)
@@ -375,7 +379,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = Game.Instance.CurrentScene.ClientCharacter;
         }
 
-        HPBar.SetValue(info.CurrentHealth / info.MaxHealth);
+        HPBar.SetValue(info.CurrentHealth / (info.MaxHealth * 1f));
     }
 
     public void RefreshMP(ActorInfo info = null)
@@ -385,6 +389,16 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = Game.Instance.CurrentScene.ClientCharacter;
         }
 
-        MPBar.SetValue(info.CurrentMana / info.MaxMana);
+        MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
+    }
+
+    public void RefreshLevel(ActorInfo info = null)
+    {
+        if (info == null)
+        {
+            info = Game.Instance.CurrentScene.ClientCharacter;
+        }
+
+        LevelUI.SetValue(info.LVL.ToString());
     }
 }

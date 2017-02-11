@@ -562,6 +562,16 @@ public class ActorInstance : MonoBehaviour
         Anim.SetTrigger("Hurt");
     }
 
+
+    public void LevelUp()
+    {
+        GameObject temObj = ResourcesLoader.Instance.GetRecycledObject("LevelUpEffect");
+
+        temObj.transform.position = transform.position;
+
+        temObj.GetComponent<LevelUpEffect>().Play();
+    }
+
     public void PopHint(string text, Color clr)
     {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");

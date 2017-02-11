@@ -53,10 +53,14 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
         CurrentSocket.On("actor_move_room", OnMoveRoom);
+        CurrentSocket.On("bitch_please", OnBitchPlease);
+        CurrentSocket.On("actor_bitch", OnActorBitch);
 
+        CurrentSocket.On("shout", OnShout);
         CurrentSocket.On("chat", OnChatMessage);
         CurrentSocket.On("whisper", OnWhisper);
         CurrentSocket.On("whisper_fail", OnWhisperFail);
+
 
         CurrentSocket.On("movement", OnMovement);
 
@@ -73,10 +77,15 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_emote", OnActorEmoted);
 
+        CurrentSocket.On("actor_gain_hp", OnActorGainHP);
+        CurrentSocket.On("actor_gain_mp", OnActorGainMP);
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+
+        CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -180,6 +189,14 @@ public class SocketClient : MonoBehaviour
         Game.Instance.ReceiveChatMessage(data["id"], data["msg"]);
     }
 
+    protected void OnShout(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Shout Message!");
+
+        JSONNode data = (JSONNode)args[0];
+        Game.Instance.ReceiveWhisper(data["name"], data["msg"]);
+    }
+
     protected void OnWhisper(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("Whisper Message!");
@@ -202,6 +219,23 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
         Game.Instance.LoadScene(data["room"], data["oldRoom"]);
+    }
+
+    protected void OnBitchPlease(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Bitch Please");
+
+        JSONNode data = (JSONNode)args[0];
+        SendBitchPlease(data["key"].Value);
+    }
+
+    protected void OnActorBitch(Socket socket, Packet packet, params object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Actor Bitch "+ data["is_bitch"].AsBool);
+
+        Game.Instance.SetBitch(data["is_bitch"].AsBool);
     }
 
     protected void OnItemDisappear(Socket socket, Packet packet, object[] args)
@@ -301,19 +335,57 @@ public class SocketClient : MonoBehaviour
         Game.Instance.ActorEmoted(data["id"].Value, data["type"].Value, data["emote"].Value);
     }
 
+    protected void OnActorGainHP(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Actor Gained " + data["hp"].AsInt + " HP");
+
+        Game.Instance.CurrentScene.ClientCharacter.CurrentHealth = data["now"].AsInt;
+
+        InGameMainMenuUI.Instance.RefreshHP();
+    }
+
+    protected void OnActorGainMP(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Actor Gained " + data["mp"].AsInt + " MP");
+
+        Game.Instance.CurrentScene.ClientCharacter.CurrentMana = data["now"].AsInt;
+
+        InGameMainMenuUI.Instance.RefreshMP();
+    }
+
     protected void OnActorGainXP(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
         BroadcastEvent("Actor Gained " + data["exp"].AsInt + " XP");
-        
 
-        Game.Instance.CurrentScene.ClientCharacter.EXP = data["exp"].AsInt;
+        Game.Instance.CurrentScene.ClientCharacter.EXP = data["now"].AsInt;
+
         InGameMainMenuUI.Instance.RefreshXP();
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
     {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor Got Wounded");
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+
+        if (actor == Game.Instance.CurrentScene.ClientCharacter)
+        {
+            actor.SetStats(data["stats"]);
+            InGameMainMenuUI.Instance.RefreshHP();
+            InGameMainMenuUI.Instance.RefreshMP();
+            InGameMainMenuUI.Instance.RefreshXP();
+            InGameMainMenuUI.Instance.RefreshLevel();
+        }
+
+        actor.Instance.LevelUp();
     }
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
@@ -323,10 +395,12 @@ public class SocketClient : MonoBehaviour
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
-        if(actor == Game.Instance.CurrentScene.ClientCharacter)
+
+        if (actor == Game.Instance.CurrentScene.ClientCharacter)
         {
             actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
             actor.CurrentHealth = data["hp"].AsInt;
+
             InGameMainMenuUI.Instance.RefreshHP();
         }
         else
@@ -370,6 +444,13 @@ public class SocketClient : MonoBehaviour
         node["angle"].AsFloat = rotDegrees;
 
         CurrentSocket.Emit("movement", node);
+    }
+
+    public void SendBitchPlease(string requestKey)
+    {
+        JSONNode node = new JSONClass();
+        node["key"] = requestKey;
+        CurrentSocket.Emit("bitch_please", node);
     }
 
     public void SendChatMessage(string message)
@@ -496,6 +577,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("took_dmg", node);
     }
+
 
     #endregion
 

@@ -7,9 +7,8 @@ using System;
 public class SceneControl
 {
     protected Dictionary<string, ActorInfo> actors = new Dictionary<string, ActorInfo>();
-
-    protected List<GatePortal> Portals = new List<GatePortal>();
-
+    protected List<GatePortal>              Portals = new List<GatePortal>();
+    public List<Enemy>                      Enemies = new List<Enemy>();
     public Dictionary<string, ItemInstance> Items = new Dictionary<string, ItemInstance>();
 
     public int SceneItemsCount
@@ -44,6 +43,14 @@ public class SceneControl
     public void AddScenePortal(GatePortal portal)
     {
         Portals.Add(portal);
+    }
+
+    public void AddSceneEnemy(Enemy enemy)
+    {
+        if (!Enemies.Contains(enemy))
+        {
+            Enemies.Add(enemy);
+        }
     }
 
     public ActorInfo GetActorByName(string Name)

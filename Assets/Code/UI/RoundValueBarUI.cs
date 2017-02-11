@@ -32,9 +32,10 @@ public class RoundValueBarUI : MonoBehaviour {
     public Coroutine ChangeValueInstance { get; private set; }
     public Coroutine LowValueInstance { get; private set; }
 
-    void Start()
+    void OnEnable()
     {
         icChangeBar = ChangeBarPanel.color;
+
         icBar = BarPanel.color;
         icText = ValueText.color;
     }

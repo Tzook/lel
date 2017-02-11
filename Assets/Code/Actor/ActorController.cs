@@ -58,6 +58,8 @@ public class ActorController : MonoBehaviour
 
     bool Invincible;
 
+    Enemy CollidingEnemy;
+
     #endregion
 
     #region Mono
@@ -154,6 +156,14 @@ public class ActorController : MonoBehaviour
             {
                 SocketClient.Instance.SendEmote("mouth", "surprised");
                 Instance.PlayMouthEmote("surprised");
+            }
+        }
+
+        if(!Invincible)
+        {
+            if(CollidingEnemy != null)
+            {
+                Hurt(CollidingEnemy);
             }
         }
 
@@ -364,7 +374,7 @@ public class ActorController : MonoBehaviour
     {
         if (obj.tag == "Enemy")
         {
-            Hurt(obj.GetComponent<Enemy>());
+            CollidingEnemy = obj.GetComponent<Enemy>();
         }
     }
 
@@ -373,6 +383,14 @@ public class ActorController : MonoBehaviour
         if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
         {
             CurrentPortal = null;
+        }
+
+        if(obj.tag == "Enemy")
+        {
+            if(obj.GetComponent<Enemy>() == CollidingEnemy)
+            {
+                CollidingEnemy = null;
+            }
         }
     }
 

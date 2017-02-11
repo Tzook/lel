@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using 
+    UnityEngine;
 using System.Collections;
 using SimpleJSON;
 using System.Collections.Generic;
 
-[System.Serializable]
 public class ActorInfo
 {
     public string ID;
@@ -25,14 +25,13 @@ public class ActorInfo
     {
         get
         {
-            return Mathf.FloorToInt(
-                (50f * Mathf.Pow(this.LVL, 3) 
-                - 150f * Mathf.Pow(this.LVL, 2) 
-                + 400f * this.LVL) 
-                / 3);
+            // see http://tibia.wikia.com/wiki/Experience_Formula
+            return Mathf.FloorToInt(((50f / 3f) * ((LVL+1) * (LVL + 1) * (LVL + 1) - 6f * (LVL + 1) * (LVL + 1) + 17f * (LVL + 1) - 12f)) 
+                                    - ((50f / 3f) * (LVL * LVL * LVL - 6f * LVL * LVL + 17f * LVL - 12f)));
         }
         private set { }
     }
+
 
 
     public int STR;
@@ -81,23 +80,27 @@ public class ActorInfo
 
         Equipment = new Equipment(node["equips"]);
 
-        if(node["stats"]!=null)
+        if (node["stats"] != null)
         {
-            this.LVL = node["stats"]["lvl"].AsInt;
-
-            this.EXP = node["stats"]["exp"].AsInt;
-
-            this.STR = node["stats"]["str"].AsInt;
-            this.MAG = node["stats"]["mag"].AsInt;
-            this.DEX = node["stats"]["dex"].AsInt;
-
-            this.MaxHealth = node["stats"]["hp"]["total"].AsInt;
-            this.CurrentHealth = node["stats"]["hp"]["now"].AsInt;
-
-            this.MaxMana = node["stats"]["mp"]["total"].AsInt;
-            this.CurrentMana = node["stats"]["mp"]["now"].AsInt;
+            SetStats(node["stats"]);
         }
+    }
 
+    public void SetStats(JSONNode node)
+    {
+        this.LVL = node["lvl"].AsInt;
+
+        this.EXP = node["exp"].AsInt;
+
+        this.STR = node["str"].AsInt;
+        this.MAG = node["mag"].AsInt;
+        this.DEX = node["dex"].AsInt;
+
+        this.MaxHealth = node["hp"]["total"].AsInt;
+        this.CurrentHealth = node["hp"]["now"].AsInt;
+
+        this.MaxMana = node["mp"]["total"].AsInt;
+        this.CurrentMana = node["mp"]["now"].AsInt;
     }
 }
 

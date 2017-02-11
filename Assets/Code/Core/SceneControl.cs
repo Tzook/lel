@@ -32,11 +32,11 @@ public class SceneControl
         }
     }
 
-    public void Leave(ActorInfo info)
+    public void Leave(string id)
     {
-        if(actors.ContainsKey(info.ID))
+        if(actors.ContainsKey(id))
         {
-            actors.Remove(info.ID);
+            actors.Remove(id);
         }
     }
 

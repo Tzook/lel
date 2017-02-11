@@ -229,13 +229,13 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
-    public void RemoveNpcCharacter(ActorInfo info)
+    public void RemoveNpcCharacter(string id)
     {
-        GameObject leavingPlayer = CurrentScene.GetActor(info.ID).Instance.gameObject;
+        GameObject leavingPlayer = CurrentScene.GetActor(id).Instance.gameObject;
 
         leavingPlayer.SetActive(false);
 
-        CurrentScene.Leave(info);
+        CurrentScene.Leave(id);
     }
 
     public void LoadPlayerCharacter(string fromScene = "")

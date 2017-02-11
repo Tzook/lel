@@ -83,6 +83,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+        CurrentSocket.On("bitch_please", OnBitchPlease);
+        CurrentSocket.On("actor_bitch", onActorBitch);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
 
@@ -159,7 +161,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has left the room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.RemoveNpcCharacter(new ActorInfo(data["character"]));
+        Game.Instance.RemoveNpcCharacter(data["id"]);
     }
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
@@ -218,7 +220,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Moved Room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.LoadScene(data["room"], data["oldRoom"]);
+        Game.Instance.LoadScene(data["to"], data["from"]);
     }
 
     protected void OnBitchPlease(Socket socket, Packet packet, params object[] args)
@@ -409,6 +411,22 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    protected void OnBitchPlease(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Got bitch please");
+        string key = data["key"];
+        SendBitchPlease(key);
+    }
+
+    protected void onActorBitch(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        bool isBitch = data["is_bitch"].AsBool;
+        BroadcastEvent("Got actor bitch : " + (isBitch ? "true" : "false"));
+    }
+
+
     #endregion
 
     #region Emittions
@@ -431,7 +449,7 @@ public class SocketClient : MonoBehaviour
 
         node["room"] = targetRoom;
 
-        CurrentSocket.Emit("move_room", node);
+        CurrentSocket.Emit("moved_room", node);
     }
 
     public void EmitMovement(Vector3 pos, float rotDegrees)
@@ -578,6 +596,14 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("took_dmg", node);
     }
 
+    protected void SendBitchPlease(string key)
+    {
+        JSONNode node = new JSONClass();
+
+        node["key"] = key;
+
+        CurrentSocket.Emit("bitch_please", node);
+    }
 
     #endregion
 

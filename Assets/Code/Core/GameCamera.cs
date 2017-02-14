@@ -37,7 +37,7 @@ public class GameCamera : MonoBehaviour {
     void Start()
     {
         initPos = transform.position;
-        InGameMainMenuUI.Instance.GetComponent<Canvas>().worldCamera = this.Cam;
+        InGameMainMenuUI.Instance.SetCurrentCamera(this.Cam);
     }
 
     public void Register(GameObject objToFollow)

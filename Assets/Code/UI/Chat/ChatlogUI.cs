@@ -19,27 +19,27 @@ public class ChatlogUI : MonoBehaviour {
 
     internal void AddMessage(ActorInfo actorInfo, string message)
     {
-        AddRow(actorInfo.Name + ": \"" + message + " \"");
+        AddRow(actorInfo.Name + ": \"" + message + " \"", Color.white);
     }
 
     internal void AddWhisperTo(string name, string message)
     {
         // TODO think better how to display whispers
-        AddRow(name + ">>: \"" + message + " \"");
+        AddRow(name + ">>: \"" + message + " \"", Color.blue);
     }
 
     internal void AddWhisperFrom(string name, string message)
     {
         // TODO think better how to display whispers
-        AddRow(name + "<<: \"" + message + " \"");
+        AddRow(name + "<<: \"" + message + " \"", Color.blue);
     }
 
     internal void AddWhisperFail(string name)
     {
-        AddRow("Failed sending message to " + name);
+        AddRow("Failed sending message to " + name, Color.red);
     }
 
-    protected void AddRow(string message)
+    protected void AddRow(string message, Color clr)
     {
         GameObject tempObj = Instantiate(ResourcesLoader.Instance.GetObject("ChatLogPiece"));
         tempObj.transform.SetParent(Container, false);

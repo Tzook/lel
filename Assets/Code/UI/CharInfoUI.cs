@@ -52,7 +52,7 @@ public class CharInfoUI : MonoBehaviour {
         CharInstance.Info = Info;
         CharInstance.nameHidden = true;
 
-        CharInstance.SetElementsUILayer();
+        CharInstance.SetElementsLayer("OverUI", 1);
         CharInstance.UpdateVisual();
     }
 

@@ -51,6 +51,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
+    protected Canvas SubCanvas;
+
+    [SerializeField]
     Text LastChatMessageText;
 
     public static InGameMainMenuUI Instance;
@@ -400,5 +403,11 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         LevelUI.SetValue(info.LVL.ToString());
+    }
+
+    public void SetCurrentCamera(Camera cam)
+    {
+        GetComponent<Canvas>().worldCamera = cam;
+        SubCanvas.worldCamera = cam;
     }
 }

@@ -10,6 +10,8 @@ public class ChatboxUI : MonoBehaviour {
     [SerializeField]
     InputField m_txtField;
 
+
+
 	public void Open()
     {
         this.gameObject.SetActive(true);
@@ -49,4 +51,6 @@ public class ChatboxUI : MonoBehaviour {
     {
         this.gameObject.SetActive(false);
     }
+
+
 }

@@ -55,6 +55,7 @@ public class CreateCharacterUI : MonoBehaviour
 
     public void Init()
     {
+        this.gameObject.SetActive(true);
         if (m_ActorInstance != null)
         {
             m_ActorInstance.gameObject.SetActive(false);
@@ -332,6 +333,7 @@ public class CreateCharacterUI : MonoBehaviour
         {
             RandomizeStatsSingle();
             rndRoll--;
+
             yield return new WaitForSeconds(0.025f);
         }
 

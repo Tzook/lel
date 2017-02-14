@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DontDestroyMeOnLoad : MonoBehaviour {
 
-	void Awake()
+	void Start()
     {
         DontDestroyOnLoad(this.gameObject);
         Game.Instance.DontDestroyMeOnLoadList.Add(this.gameObject);

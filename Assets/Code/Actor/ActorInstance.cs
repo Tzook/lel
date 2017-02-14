@@ -442,59 +442,45 @@ public class ActorInstance : MonoBehaviour
         }
     }
 
-    public void SetElementsUILayer()
+    public void SetElementsLayer(string layer = "Default", int minLevel = 0, Material matType = null)
     {
-        SetElementUILayer(m_Head);
-        SetElementUILayer(m_Chest);
-        SetElementUILayer(m_Eyes);
-        SetElementUILayer(m_Nose);
-        SetElementUILayer(m_Mouth);
-        SetElementUILayer(m_Hat);
-        SetElementUILayer(m_Hair);
-        SetElementUILayer(m_HairBack);
-        SetElementUILayer(m_RightArm);
-        SetElementUILayer(m_RightElbow);
-        SetElementUILayer(m_RightFist);
-        SetElementUILayer(m_LeftArm);
-        SetElementUILayer(m_LeftElbow);
-        SetElementUILayer(m_LeftFist);
-        SetElementUILayer(m_RightLeg);
-        SetElementUILayer(m_RightKnee);
-        SetElementUILayer(m_RightFoot);
-        SetElementUILayer(m_LeftLeg);
-        SetElementUILayer(m_LeftKnee);
-        SetElementUILayer(m_LeftFoot);
+        SetElementLayer(m_Head ,layer ,minLevel ,matType);
+        SetElementLayer(m_Chest, layer, minLevel, matType);
+        SetElementLayer(m_Eyes, layer, minLevel, matType);
+        SetElementLayer(m_Nose, layer, minLevel, matType);
+        SetElementLayer(m_Mouth, layer, minLevel, matType);
+        SetElementLayer(m_Hat, layer, minLevel, matType);
+        SetElementLayer(m_Hair, layer, minLevel, matType);
+        SetElementLayer(m_HairBack, layer, minLevel, matType);
+        SetElementLayer(m_RightArm, layer, minLevel, matType);
+        SetElementLayer(m_RightElbow, layer, minLevel, matType);
+        SetElementLayer(m_RightFist, layer, minLevel, matType);
+        SetElementLayer(m_LeftArm, layer, minLevel, matType);
+        SetElementLayer(m_LeftElbow, layer, minLevel, matType);
+        SetElementLayer(m_LeftFist, layer, minLevel, matType);
+        SetElementLayer(m_RightLeg, layer, minLevel, matType);
+        SetElementLayer(m_RightKnee, layer, minLevel, matType);
+        SetElementLayer(m_RightFoot, layer, minLevel, matType);
+        SetElementLayer(m_LeftLeg, layer, minLevel, matType);
+        SetElementLayer(m_LeftKnee, layer, minLevel, matType);
+        SetElementLayer(m_LeftFoot, layer, minLevel, matType);
+        SetElementLayer(m_Weapon, layer, minLevel, matType);
     }
 
-    public void SetElementsGameLayer()
-    {
-        SetElementGame(m_Head);
-        SetElementGame(m_Chest);
-        SetElementGame(m_Eyes);
-        SetElementGame(m_Nose);
-        SetElementGame(m_Mouth);
-        SetElementGame(m_Hat);
-        SetElementGame(m_Hair);
-        SetElementGame(m_HairBack);
-        SetElementGame(m_RightArm);
-        SetElementGame(m_RightElbow);
-        SetElementGame(m_RightFist);
-        SetElementGame(m_LeftArm);
-        SetElementGame(m_LeftElbow);
-        SetElementGame(m_LeftFist);
-        SetElementGame(m_RightLeg);
-        SetElementGame(m_RightKnee);
-        SetElementGame(m_RightFoot);
-        SetElementGame(m_LeftLeg);
-        SetElementGame(m_LeftKnee);
-        SetElementGame(m_LeftFoot);
-    }
 
-    void SetElementUILayer(SpriteRenderer m_Renderer)
+    void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
     {
-        m_Renderer.sortingLayerName = "OverCanvas";
-        m_Renderer.sortingOrder++;
-        m_Renderer.material = ResourcesLoader.Instance.UnlitSprite;
+        m_Renderer.sortingLayerName = layer;
+        m_Renderer.sortingOrder += layerPositionAddition;
+
+        if (matType == null)
+        {
+            m_Renderer.material = ResourcesLoader.Instance.UnlitSprite;
+        }
+        else
+        {
+            m_Renderer.material = matType;
+        }
     }
 
     void SetElementGame(SpriteRenderer m_Renderer)

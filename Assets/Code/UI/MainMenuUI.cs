@@ -164,8 +164,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void CreateCharacterMenu()
     {
-        m_CreateCharacterUI.Init();
         MoveToMenu(2);
+        m_CreateCharacterUI.Init();
     }
 
     public void MoveToMenu(int index)

@@ -374,7 +374,7 @@ public class ActorController : MonoBehaviour
     {
         if (obj.tag == "Enemy")
         {
-            CollidingEnemy = obj.GetComponent<Enemy>();
+            CollidingEnemy = obj.GetComponent<HitBox>().EnemyReference;
         }
     }
 
@@ -387,7 +387,7 @@ public class ActorController : MonoBehaviour
 
         if(obj.tag == "Enemy")
         {
-            if(obj.GetComponent<Enemy>() == CollidingEnemy)
+            if(obj.GetComponent<HitBox>().EnemyReference == CollidingEnemy)
             {
                 CollidingEnemy = null;
             }

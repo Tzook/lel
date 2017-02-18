@@ -44,6 +44,8 @@ public class ActorInfo
     public int MaxMana;
     public int CurrentMana;
 
+    public List<string> PrimaryAbilities = new List<string>();
+    public string CurrentPrimaryAbility;
 
     public Inventory Inventory;
 
@@ -101,6 +103,14 @@ public class ActorInfo
 
         this.MaxMana = node["mp"]["total"].AsInt;
         this.CurrentMana = node["mp"]["now"].AsInt;
+
+        this.PrimaryAbilities.Clear();
+        for(int i=0;i<node["abilities"].Count;i++)
+        {
+            this.PrimaryAbilities.Add(node["abilities"][i].Value);
+        }
+
+        this.CurrentPrimaryAbility = node["primaryAbility"].Value;
     }
 }
 

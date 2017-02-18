@@ -56,6 +56,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     Text LastChatMessageText;
 
+    [SerializeField]
+    Image PrimaryAbilityImage;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -192,6 +195,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshHP(info);
         RefreshMP(info);
         RefreshLevel(info);
+
+        PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility).Icon;
     }
 
     public void HideGameUI()

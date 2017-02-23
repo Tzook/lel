@@ -604,7 +604,8 @@ public class SocketClient : MonoBehaviour
 
     public void SendLoadedAttack()
     {
-        CurrentSocket.Emit("loaded_attack");
+        JSONNode node = new JSONClass();
+        CurrentSocket.Emit("loaded_attack", node);
     }
 
     public void SendPreformedAttack(float attackValue)

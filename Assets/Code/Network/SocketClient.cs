@@ -84,6 +84,8 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
 
+        CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
+        CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -407,6 +409,29 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    protected void OnActorLoadAttack(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        BroadcastEvent(actor.Name + " Loads Attack");
+
+        actor.Instance.LoadAttack(data["ability"].Value);
+    }
+
+    protected void OnActorPreformAttack(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        BroadcastEvent(actor.Name + " Preforms Attack");
+
+        actor.Instance.PreformAttack(data["ability"].Value, (1f*data["load"].AsInt)/100f);
+    }
     #endregion
 
     #region Emittions
@@ -574,6 +599,21 @@ public class SocketClient : MonoBehaviour
         node["from"] = Info.Name;
 
         CurrentSocket.Emit("took_dmg", node);
+    }
+
+
+    public void SendLoadedAttack()
+    {
+        CurrentSocket.Emit("loaded_attack");
+    }
+
+    public void SendPreformedAttack(float attackValue)
+    {
+        JSONNode node = new JSONClass();
+
+        node["load"] = Mathf.FloorToInt(attackValue * 100f).ToString();
+
+        CurrentSocket.Emit("performed_attack", node);
     }
 
     #endregion

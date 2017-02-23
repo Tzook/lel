@@ -652,6 +652,19 @@ public class ActorInstance : MonoBehaviour
         Anim.SetBool("Combat", false);
     }
 
+    public void LoadAttack(string ability)
+    {
+        Anim.SetInteger("AttackType", Random.Range(0, 3));
+        Anim.SetBool("Charging", true);
+        Debug.Log(Anim.GetBool("Charging"));
+    }
+
+    public void PreformAttack(string ability, float AttackValue)
+    {
+        Anim.SetBool("Charging", false);
+        Debug.Log(Anim.GetBool("Charging"));
+    }
+
     #endregion
 
 }

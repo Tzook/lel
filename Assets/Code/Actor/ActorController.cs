@@ -22,6 +22,7 @@ public class ActorController : MonoBehaviour
 
     public GatePortal CurrentPortal;
 
+
     #endregion
 
     #region Parameters
@@ -59,6 +60,9 @@ public class ActorController : MonoBehaviour
     bool Invincible;
 
     Enemy CollidingEnemy;
+
+    float LoadAttackValue = 0f;
+    Coroutine LoadAttackValueInstance;
 
     #endregion
 
@@ -216,14 +220,7 @@ public class ActorController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Anim.SetInteger("AttackType", Random.Range(0, 3));
-            Anim.SetTrigger("ChargeAttack");
-            Instance.StartCombatMode();
         }
-
-        //if (Input.GetMouseButtonUp(0))
-        //{
-        //    Anim.SetTrigger("ReleaseAttack");
-        //}
 
         Anim.SetBool("Charging", Input.GetMouseButton(0));
 
@@ -248,6 +245,7 @@ public class ActorController : MonoBehaviour
             SocketClient.Instance.EmitMoveRoom(CurrentPortal.TargetLevel);
         }
     }
+
 
     #endregion
 
@@ -358,6 +356,37 @@ public class ActorController : MonoBehaviour
         Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
         Instance.TorsoBone.transform.localScale = Vector3.one;
         rotDegrees = 0f;
+    }
+
+    public void BeginLoadAttack()
+    {
+        LoadAttackValueInstance = StartCoroutine(LoadAttackValueRoutine());
+        SocketClient.Instance.SendLoadedAttack();
+    }
+
+    private IEnumerator LoadAttackValueRoutine()
+    {
+        LoadAttackValue = 0f;
+        while(LoadAttackValue < 1f)
+        {
+            LoadAttackValue += 0.3f * Time.deltaTime;
+            yield return 0;
+        }
+
+        LoadAttackValueInstance = null;
+    }
+
+    public void ReleaseAttack()
+    {
+        Instance.StartCombatMode();
+
+        if(LoadAttackValueInstance!=null)
+        {
+             StopCoroutine(LoadAttackValueInstance);
+             LoadAttackValueInstance = null;
+        }
+
+        SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
     }
 
     #endregion

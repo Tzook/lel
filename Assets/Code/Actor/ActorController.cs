@@ -362,6 +362,7 @@ public class ActorController : MonoBehaviour
     {
         LoadAttackValueInstance = StartCoroutine(LoadAttackValueRoutine());
         SocketClient.Instance.SendLoadedAttack();
+        InGameMainMenuUI.Instance.StartChargingAttack();
     }
 
     private IEnumerator LoadAttackValueRoutine()
@@ -369,10 +370,12 @@ public class ActorController : MonoBehaviour
         LoadAttackValue = 0f;
         while(LoadAttackValue < 1f)
         {
-            LoadAttackValue += 0.3f * Time.deltaTime;
+            LoadAttackValue += 1f * Time.deltaTime;
+            InGameMainMenuUI.Instance.SetChargeAttackValue(LoadAttackValue);
             yield return 0;
         }
 
+        InGameMainMenuUI.Instance.SetChargeAttackValue(LoadAttackValue);
         LoadAttackValueInstance = null;
     }
 
@@ -386,6 +389,7 @@ public class ActorController : MonoBehaviour
              LoadAttackValueInstance = null;
         }
 
+        InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
     }
 

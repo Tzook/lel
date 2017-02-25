@@ -59,6 +59,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     Image PrimaryAbilityImage;
 
+    [SerializeField]
+    ChargeAttackBarUI ChargeAttackBar;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -408,6 +411,21 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         LevelUI.SetValue(info.LVL.ToString());
+    }
+
+    public void StartChargingAttack()
+    {
+        ChargeAttackBar.StartCharging(Game.Instance.ClientCharacter.transform); 
+    }
+
+    public void SetChargeAttackValue(float val)
+    {
+        ChargeAttackBar.SetValue(val);
+    }
+
+    public void StopChargingAttack()
+    {
+        ChargeAttackBar.StopCharging();
     }
 
     public void SetCurrentCamera(Camera cam)

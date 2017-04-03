@@ -6,6 +6,9 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     ActorController Controller;
 
+    [SerializeField]
+    ParticleSystem m_Particles;
+
     public void PlaySound(string soundKey)
     {
         AudioControl.Instance.Play(soundKey);
@@ -25,5 +28,15 @@ public class AnimationAssist : MonoBehaviour {
         {
             Controller.ReleaseAttack();
         }
+    }
+
+    public void BeginChargeParticles()
+    {
+        m_Particles.Play();
+    }
+
+    public void EndChargeParticles()
+    {
+        m_Particles.Stop();
     }
 }

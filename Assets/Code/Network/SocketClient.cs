@@ -612,6 +612,9 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
+        // value might be more than 1 sometimes since we are dealing with floats
+        attackValue = Mathf.Min(1f, attackValue); 
+
         node["load"] = Mathf.FloorToInt(attackValue * 100f).ToString();
 
         CurrentSocket.Emit("performed_attack", node);

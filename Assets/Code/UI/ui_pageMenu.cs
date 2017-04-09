@@ -14,7 +14,7 @@ public class ui_pageMenu : MonoBehaviour {
 	public bool  m_bVertical      = false;
     public bool m_bInstant = false;
 
-    public string m_sPageSwitchSound;
+    public string m_sPageSwitchSound = "sound_pagefold";
 
 	void Start()
 	{

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using SimpleJSON;
+using BestHTTP;
+using System.Text;
 
 [CustomEditor(typeof(SceneInfo))]
 public class SceneInfoEditor : Editor {
@@ -37,10 +39,22 @@ public class SceneInfoEditor : Editor {
                 node["scene"]["Spawners"][i]["PositionY"]   = currentInfo.Spawners[i].transform.position.y.ToString();
             }
 
-            Debug.Log("Sending scene info " + node.ToString());
+            SendSceneInfo(node);
         }
 
         GUILayout.EndHorizontal();
 
+    }
+
+    private void SendSceneInfo(JSONNode node)
+    {
+        Debug.Log("Sending scene info " + node.ToString());
+
+        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
+
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Content-Type", "application/json");
+
+        WWW req = new WWW("http://www.lul.herokuapp.com/room/generate" ,rawdata ,headers);
     }
 }

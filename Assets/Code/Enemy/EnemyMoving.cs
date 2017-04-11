@@ -14,12 +14,15 @@ public class EnemyMoving : Enemy
     public override void SetAION()
     {
         base.SetAION();
+        Rigid.bodyType = RigidbodyType2D.Dynamic;
+
         AIRoutineInstance = StartCoroutine(AIRoutine());
     }
 
     public override void SetAIOFF()
     {
         base.SetAIOFF();
+        Rigid.bodyType = RigidbodyType2D.Kinematic;
 
         if (AIRoutineInstance != null)
         {
@@ -28,6 +31,16 @@ public class EnemyMoving : Enemy
         }
 
         StopAllCoroutines();
+    }
+
+    Vector3 LastSentPosition;
+    void FixedUpdate()
+    {
+        if(Game.Instance.isBitch && LastSentPosition != transform.position)
+        {
+            LastSentPosition = transform.position;
+            SocketClient.Instance.SendMobMove(Info.ID, transform.position.x, transform.position.y);
+        }
     }
 
     #region AI
@@ -155,6 +168,33 @@ public class EnemyMoving : Enemy
         Body.localScale = new Vector3( initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
+    }
+
+    #endregion
+
+    #region UnderControl
+
+    public override void UpdateMovement(float x, float y)
+    {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 2f);
+
+        if(transform.position.x != x)
+        {
+            Anim.SetBool("Walk", true);
+
+            if (transform.position.x < x)
+            {
+                Body.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+            }
+            else
+            {
+                Body.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
+            }
+        }
+        else
+        {
+            Anim.SetBool("Walk", false);
+        }
     }
 
     #endregion

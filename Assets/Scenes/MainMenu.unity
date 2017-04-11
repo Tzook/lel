@@ -9474,6 +9474,7 @@ GameObject:
   - component: {fileID: 335610002}
   - component: {fileID: 335610003}
   - component: {fileID: 335610004}
+  - component: {fileID: 335610005}
   m_Layer: 0
   m_Name: CORE
   m_TagString: Untagged
@@ -9651,6 +9652,42 @@ MonoBehaviour:
   PrimaryAbilities:
   - Name: melee
     Icon: {fileID: 21300000, guid: 087a5b74d3a9c2b48abf376c54be1563, type: 3}
+--- !u!114 &335610005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335609996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604cbdbe14093ab49b5d424e9ff7822b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Monsters:
+  - MonsterKey: Turtle
+    MonsterName: Turtle
+    MonsterHP: 10
+    MonsterLevel: 1
+    MinDMG: 1
+    MaxDMG: 5
+  - MonsterKey: OldTurtle
+    MonsterName: Old Turtle
+    MonsterHP: 30
+    MonsterLevel: 2
+    MinDMG: 3
+    MaxDMG: 6
+  - MonsterKey: SpikedTurtle
+    MonsterName: Spiked Turtle
+    MonsterHP: 30
+    MonsterLevel: 3
+    MinDMG: 5
+    MaxDMG: 12
+  - MonsterKey: Spike
+    MonsterName: Spike
+    MonsterHP: 1
+    MonsterLevel: 1
+    MinDMG: 1
+    MaxDMG: 2
 --- !u!1 &337635988
 GameObject:
   m_ObjectHideFlags: 0

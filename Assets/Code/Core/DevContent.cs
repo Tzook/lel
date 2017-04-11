@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class DevContent : MonoBehaviour {
 
-    public List<DevMonster> Monsters = new List<DevMonster>();
+    public List<MonsterInfo> Monsters = new List<MonsterInfo>();
+
+    void Start()
+    {
+        Content.Instance.Monsters.InsertRange(0, Monsters);
+    }
 }
 
 [System.Serializable]
-public class DevMonster
+public class MonsterInfo
 {
     [SerializeField]
     public string MonsterKey;
@@ -27,4 +32,5 @@ public class DevMonster
 
     [SerializeField]
     public int MaxDMG;
+
 }

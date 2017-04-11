@@ -27,8 +27,11 @@ public class Enemy : MonoBehaviour {
 
     protected Vector3 initScale;
 
-    protected virtual void Start()
+    public virtual void Initialize(string instanceID, int currentHP = 0)
     {
+        Info.ID = instanceID;
+
+
         if (Body != null)
         {
             initScale = Body.localScale;
@@ -60,5 +63,10 @@ public class Enemy : MonoBehaviour {
     public virtual void SetAIOFF()
     {
 
+    }
+
+    public virtual void UpdateMovement(float x, float y)
+    {
+        transform.position = new Vector3(x, y, transform.position.z);
     }
 }

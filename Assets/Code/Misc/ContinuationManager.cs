@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public static class ContinuationManager
 {
+#if UNITY_EDITOR
     private class Job
     {
         public Job(Func<bool> completed, Action continueWith)
@@ -37,4 +41,5 @@ public static class ContinuationManager
         }
         if (!jobs.Any()) EditorApplication.update -= Update;
     }
+#endif
 }

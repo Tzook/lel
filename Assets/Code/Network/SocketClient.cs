@@ -87,8 +87,15 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
         CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
 
+        CurrentSocket.On("mob_spawn", OnMobSpawn);
+        CurrentSocket.On("mob_die", OnMobDeath);
+        CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
+        CurrentSocket.On("mob_move", OnMobMovement);
+
+
         LoadingWindowUI.Instance.Register(this);
     }
+
 
     public void Diconnect()
     {
@@ -432,6 +439,40 @@ public class SocketClient : MonoBehaviour
 
         actor.Instance.PreformAttack(data["ability"].Value, (1f*data["load"].AsInt)/100f);
     }
+
+
+    private void OnMobMovement(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        //BroadcastEvent("Mob Moved " + data["mob_id"].Value);
+        
+        Enemy monster = Game.Instance.CurrentScene.GetMob(data["mob_id"].Value);
+
+        monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat);
+
+    }
+
+    private void OnMobTakeDamage(Socket socket, Packet packet, object[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnMobDeath(Socket socket, Packet packet, object[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnMobSpawn(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        Debug.Log(data.ToString());
+        BroadcastEvent(data["key"].Value + " Spawned");
+
+        Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
+    }
+
     #endregion
 
     #region Emittions
@@ -618,6 +659,18 @@ public class SocketClient : MonoBehaviour
         node["load"] = Mathf.FloorToInt(attackValue * 100f).ToString();
 
         CurrentSocket.Emit("performed_attack", node);
+    }
+
+
+    public void SendMobMove(string instanceID, float x, float y)
+    {
+        JSONNode node = new JSONClass();
+
+        node["mob_id"] = instanceID;
+        node["x"] = x.ToString();
+        node["y"] = y.ToString();
+
+        CurrentSocket.Emit("mob_moved", node);
     }
 
     #endregion

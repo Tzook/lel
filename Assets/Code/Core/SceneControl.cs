@@ -89,6 +89,19 @@ public class SceneControl
         return null;
     }
 
+    public Enemy GetMob(string instanceID)
+    {
+        for(int i=0;i<Enemies.Count;i++)
+        {
+            if(Enemies[i].Info.ID == instanceID)
+            {
+                return Enemies[i];
+            }
+        }
+
+        return null;
+    }
+
     public void DestroySceneItem(string instanceID)
     {
         Items[instanceID].gameObject.SetActive(false);

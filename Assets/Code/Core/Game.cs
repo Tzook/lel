@@ -220,6 +220,25 @@ public class Game : MonoBehaviour {
         CurrentScene.Items.Add(instanceID, itemInstance);
     }
 
+    public void SpawnMonster(string instanceID, float xPos, float yPos, string mobKey, int currentHP)
+    {
+        GameObject tempMob = ResourcesLoader.Instance.GetRecycledObject(mobKey);
+        tempMob.transform.position = new Vector3(xPos, yPos, 0f);
+
+        tempMob.GetComponent<Enemy>().Initialize(instanceID, currentHP);
+
+        ResourcesLoader.Instance.GetRecycledObject("SpawnParticles").transform.position = tempMob.transform.position;
+
+        if(isBitch)
+        {
+            tempMob.GetComponent<Enemy>().SetAION();
+        }
+        else
+        {
+            tempMob.GetComponent<Enemy>().SetAIOFF();
+        }
+    }
+
     public void LoadNpcCharacter(ActorInfo info)
     {
         GameObject tempObj = SpawnPlayer(info);

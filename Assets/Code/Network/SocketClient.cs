@@ -50,6 +50,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("disconnect", OnDisconnect);
         CurrentSocket.On("error", OnError);
 
+        CurrentSocket.On("event_error", OnEventError);
+
         CurrentSocket.On("actor_join_room", OnActorJoinRoom);
         CurrentSocket.On("actor_leave_room", OnActorLeaveRoom);
         CurrentSocket.On("actor_move_room", OnMoveRoom);
@@ -60,7 +62,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("chat", OnChatMessage);
         CurrentSocket.On("whisper", OnWhisper);
         CurrentSocket.On("whisper_fail", OnWhisperFail);
-
 
         CurrentSocket.On("movement", OnMovement);
 
@@ -140,6 +141,14 @@ public class SocketClient : MonoBehaviour
     private void OnError(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("On error");
+        WarningMessageUI.Instance.ShowMessage("An error occurred");
+    }
+    
+    private void OnEventError(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("On event error");
+        JSONNode data = (JSONNode)args[0];
+        WarningMessageUI.Instance.ShowMessage(data.AsObject.ToString());
     }
 
     private void OnDisconnect(Socket socket, Packet packet, object[] args)
@@ -488,11 +497,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["key"].Value + " Spawned");
 
-<<<<<<< HEAD
-        Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
-=======
-        Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
->>>>>>> origin/master
+        Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
     }
 
     #endregion

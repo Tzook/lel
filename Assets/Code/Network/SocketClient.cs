@@ -470,7 +470,7 @@ public class SocketClient : MonoBehaviour
         Debug.Log(data.ToString());
         BroadcastEvent(data["key"].Value + " Spawned");
 
-        Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
+        Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
     }
 
     #endregion

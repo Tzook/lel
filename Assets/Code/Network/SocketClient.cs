@@ -488,7 +488,11 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["key"].Value + " Spawned");
 
+<<<<<<< HEAD
         Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
+=======
+        Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
+>>>>>>> origin/master
     }
 
     #endregion

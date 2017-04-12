@@ -69,4 +69,11 @@ public class Enemy : MonoBehaviour {
     {
         transform.position = new Vector3(x, y, transform.position.z);
     }
+
+    public void PopHint(string text, Color clr)
+    {
+        GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
+        pop.transform.position = transform.position + new Vector3(0f, 1f, 0f);
+        pop.GetComponent<PopText>().Pop(text, clr);
+    }
 }

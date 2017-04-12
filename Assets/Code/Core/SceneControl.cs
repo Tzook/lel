@@ -89,7 +89,7 @@ public class SceneControl
         return null;
     }
 
-    public Enemy GetMob(string instanceID)
+    public Enemy GetEnemy(string instanceID)
     {
         for(int i=0;i<Enemies.Count;i++)
         {

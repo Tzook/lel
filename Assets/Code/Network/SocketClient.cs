@@ -447,7 +447,7 @@ public class SocketClient : MonoBehaviour
 
         //BroadcastEvent("Mob Moved " + data["mob_id"].Value);
         
-        Enemy monster = Game.Instance.CurrentScene.GetMob(data["mob_id"].Value);
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
         monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat);
 
@@ -455,22 +455,40 @@ public class SocketClient : MonoBehaviour
 
     private void OnMobTakeDamage(Socket socket, Packet packet, object[] args)
     {
-        throw new NotImplementedException();
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["mob_id"].Value + " Took " + data["dmg"].AsInt + " DMG from " + data["id"].Value);
+
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+
+        monster.PopHint(data["dmg"].AsInt.ToString(), Color.blue);
+
+        if(Game.Instance.isBitch)
+        {
+            //ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+            //monster.Hurt();
+        }
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)
     {
-        throw new NotImplementedException();
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["mob_id"].Value + " Died...");
+
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+
+        monster.PopHint("DEATH", Color.black);
+        monster.gameObject.SetActive(false);
     }
 
     private void OnMobSpawn(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
-        Debug.Log(data.ToString());
         BroadcastEvent(data["key"].Value + " Spawned");
 
-        Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, "Turtle", data["hp"].AsInt);
+        Game.Instance.SpawnMonster(data["id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
     }
 
     #endregion
@@ -637,7 +655,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
-        node["from"] = Info.Name;
+        node["mob_id"] = Info.ID;
 
         CurrentSocket.Emit("took_dmg", node);
     }
@@ -671,6 +689,15 @@ public class SocketClient : MonoBehaviour
         node["y"] = y.ToString();
 
         CurrentSocket.Emit("mob_moved", node);
+    }
+
+    public void SendMobTookDamage(ActorInstance parentActor, Enemy enemyReference)
+    {
+        JSONNode node = new JSONClass();
+
+        node["mob_id"] = enemyReference.Info.ID;
+
+        CurrentSocket.Emit("mob_took_dmg", node);
     }
 
     #endregion

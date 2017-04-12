@@ -41,6 +41,11 @@ public class ActorController : MonoBehaviour
     [SerializeField]
     float JumpDelay = 0.1f;
 
+    [SerializeField]
+    ActorDamageInstance OneHandDamageInstance;
+
+
+
     Coroutine JumpRoutineInstance;
 
     LayerMask GroundLayerMask = 0 << 0 | 1;
@@ -391,6 +396,8 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
+
+        OneHandDamageInstance.gameObject.SetActive(true);
     }
 
     #endregion

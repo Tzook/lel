@@ -41,7 +41,16 @@ public class ActorDamageInstance : MonoBehaviour {
             if (TargetCollider.tag == "Enemy")
             {
                 SocketClient.Instance.SendMobTookDamage(ParentActor, TargetCollider.GetComponent<HitBox>().EnemyReference);
-                Debug.Log("SUP");
+
+                //TODO To be replaced with sound based on the actors weapon.
+                int rnd = Random.Range(0, 3);
+                AudioControl.Instance.Play("sound_hit_" + (rnd + 1));
+
+                GameObject tempHit;
+                tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+                tempHit.transform.position = ParentActor.Weapon.transform.position;
+                tempHit.GetComponent<HitEffect>().Play();
+
                 Hit = true;
                 this.gameObject.SetActive(false);
             }

@@ -60,7 +60,7 @@ public class ActorInstance : MonoBehaviour
     protected SpriteRenderer m_Hat;
 
     [SerializeField]
-    protected SpriteRenderer m_Weapon;
+    public SpriteRenderer Weapon;
 
 
     [SerializeField]
@@ -126,7 +126,7 @@ public class ActorInstance : MonoBehaviour
         m_RightKnee.color = targetCLR;
         m_RightFoot.color = targetCLR;
 
-        m_Weapon.color = targetCLR;
+        Weapon.color = targetCLR;
 
     }
 
@@ -333,7 +333,7 @@ public class ActorInstance : MonoBehaviour
     protected void UpdateEquipment()
     {
         m_Hat.sprite = null;
-        m_Weapon.sprite = null;
+        Weapon.sprite = null;
 
         UpdateItem(Info.Equipment.Head);
         UpdateItem(Info.Equipment.Chest);
@@ -420,7 +420,7 @@ public class ActorInstance : MonoBehaviour
                 }
             case "weapon":
                 {
-                    m_Weapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    Weapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
                     break;
                 }
         }
@@ -464,7 +464,7 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(m_LeftLeg, layer, minLevel, matType);
         SetElementLayer(m_LeftKnee, layer, minLevel, matType);
         SetElementLayer(m_LeftFoot, layer, minLevel, matType);
-        SetElementLayer(m_Weapon, layer, minLevel, matType);
+        SetElementLayer(Weapon, layer, minLevel, matType);
     }
 
 

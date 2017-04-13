@@ -53,6 +53,15 @@ public class SceneControl
         }
     }
 
+    public void RemoveSceneEnemy(Enemy enemy)
+    {
+        if (Enemies.Contains(enemy))
+        {
+            Enemies.Remove(enemy);
+        }
+    }
+
+
     public ActorInfo GetActorByName(string Name)
     {
         for(int i=0;i<actors.Keys.Count;i++)

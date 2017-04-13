@@ -443,11 +443,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Info:
     ID: 
-    Name: Spiked Turtle
+    Name: SpikedTurtle
     Type: 1
   Rigid: {fileID: 50000010356496678}
   Body: {fileID: 4000013075024830}
   Anim: {fileID: 95000011514922204}
+  m_HitBox: {fileID: 61087410083602296}
   HurtTypes: 2
   DeathTypes: 2
   Sprites:
@@ -460,8 +461,13 @@ MonoBehaviour:
   - {fileID: 212000013617666058}
   - {fileID: 212000012356532898}
   - {fileID: 212000011592121840}
+  WoundSounds:
+  - sound_punch
+  DeathSounds:
+  - monster_moan
+  Dead: 0
   CurrentAction: 0
-  MovementSpeed: 20
+  MovementSpeed: 0.5
 --- !u!114 &114302032850065344
 MonoBehaviour:
   m_ObjectHideFlags: 1

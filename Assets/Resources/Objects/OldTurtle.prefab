@@ -443,11 +443,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Info:
     ID: 
-    Name: Old Turtle
+    Name: OldTurtle
     Type: 1
   Rigid: {fileID: 50000011846382748}
   Body: {fileID: 4000010489232326}
   Anim: {fileID: 95000010536761378}
+  m_HitBox: {fileID: 61608513939217706}
   HurtTypes: 2
   DeathTypes: 2
   Sprites:
@@ -460,8 +461,13 @@ MonoBehaviour:
   - {fileID: 212000011737684190}
   - {fileID: 212000010958424896}
   - {fileID: 212000013785245892}
+  WoundSounds:
+  - sound_punch
+  DeathSounds:
+  - monster_moan
+  Dead: 0
   CurrentAction: 0
-  MovementSpeed: 20
+  MovementSpeed: 0.5
 --- !u!114 &114016859180908514
 MonoBehaviour:
   m_ObjectHideFlags: 1

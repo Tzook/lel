@@ -64,7 +64,7 @@ public class ActorController : MonoBehaviour
 
     bool Invincible;
 
-    Enemy CollidingEnemy;
+    public Enemy CollidingEnemy;
 
     float LoadAttackValue = 0f;
     Coroutine LoadAttackValueInstance;

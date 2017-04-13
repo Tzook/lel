@@ -448,6 +448,7 @@ MonoBehaviour:
   Rigid: {fileID: 50000013747786058}
   Body: {fileID: 4000010006997356}
   Anim: {fileID: 95000012348459206}
+  m_HitBox: {fileID: 61209167272088372}
   HurtTypes: 2
   DeathTypes: 2
   Sprites:
@@ -460,8 +461,13 @@ MonoBehaviour:
   - {fileID: 212000011457677346}
   - {fileID: 212000012225542490}
   - {fileID: 212000013806429594}
+  WoundSounds:
+  - sound_punch
+  DeathSounds:
+  - sound_brap
+  Dead: 0
   CurrentAction: 0
-  MovementSpeed: 20
+  MovementSpeed: 0.5
 --- !u!114 &114871081751205110
 MonoBehaviour:
   m_ObjectHideFlags: 1

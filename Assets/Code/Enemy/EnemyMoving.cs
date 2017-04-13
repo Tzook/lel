@@ -150,13 +150,12 @@ public class EnemyMoving : Enemy
 
     public void StandStill()
     {
-        Rigid.velocity = new Vector2(0f, Rigid.velocity.y);
         Anim.SetBool("Walk", false);    
     }
 
     public void WalkLeft()
     {
-        Rigid.velocity  = new Vector2( -MovementSpeed * Time.deltaTime, Rigid.velocity.y);
+        Rigid.position += -Vector2.right * MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( -initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
@@ -164,10 +163,37 @@ public class EnemyMoving : Enemy
 
     public void WalkRight()
     {
-        Rigid.velocity  = new Vector2( MovementSpeed * Time.deltaTime, Rigid.velocity.y);
+        Rigid.position += Vector2.right *  MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
+    }
+
+    public override void Hurt(ActorInstance actor, int damage = 0 )
+    {
+        base.Hurt(actor,damage);
+
+        if (Game.Instance.isBitch)
+        {
+
+            if (actor.transform.position.x < transform.position.x)
+            {
+                Rigid.AddForce(2f * transform.right, ForceMode2D.Impulse);
+            }
+            else
+            {
+                Rigid.AddForce(2f * -transform.right, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    public override void Death()
+    {
+        SetAIOFF();
+
+        Rigid.velocity = Vector2.zero;
+
+        base.Death();
     }
 
     #endregion

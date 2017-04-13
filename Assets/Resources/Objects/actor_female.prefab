@@ -612,6 +612,7 @@ GameObject:
   - component: {fileID: 4386491166636492}
   - component: {fileID: 61304535140757072}
   - component: {fileID: 114896086118762130}
+  - component: {fileID: 50249412507608442}
   m_Layer: 2
   m_Name: DI_OneHand
   m_TagString: Untagged
@@ -1119,6 +1120,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!50 &50249412507608442
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619472385376572}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61000011672600034
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1196,7 +1217,7 @@ MonoBehaviour:
   m_Nose: {fileID: 212000012525612324}
   m_Mouth: {fileID: 212000011237975628}
   m_Hat: {fileID: 212000010597469890}
-  m_Weapon: {fileID: 212000014243127740}
+  Weapon: {fileID: 212000014243127740}
   NameLabel: {fileID: 1000014035985048}
   MessageBubble: {fileID: 114000011053976482}
   Anim: {fileID: 95000013081912482}
@@ -1262,6 +1283,7 @@ MonoBehaviour:
   InternalJumpForce: 5
   JumpDelay: 0.05
   OneHandDamageInstance: {fileID: 114896086118762130}
+  CollidingEnemy: {fileID: 0}
 --- !u!114 &114000011053976482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1556,7 +1578,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1566239630
+  randomSeed: 679266055
   InitialModule:
     serializedVersion: 3
     enabled: 1

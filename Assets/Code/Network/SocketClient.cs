@@ -406,6 +406,7 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
     {
+
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Got Wounded");
 
@@ -469,14 +470,9 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["mob_id"].Value + " Took " + data["dmg"].AsInt + " DMG from " + data["id"].Value);
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-
-        monster.PopHint(data["dmg"].AsInt.ToString(), Color.blue);
-
-        if(Game.Instance.isBitch)
-        {
-            //ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-            //monster.Hurt();
-        }
+        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
+        
+        monster.Hurt(attackingPlayer, data["dmg"].AsInt);
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)
@@ -487,8 +483,7 @@ public class SocketClient : MonoBehaviour
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        monster.PopHint("DEATH", Color.black);
-        monster.gameObject.SetActive(false);
+        monster.gameObject.GetComponent<Enemy>().Death();
     }
 
     private void OnMobSpawn(Socket socket, Packet packet, object[] args)

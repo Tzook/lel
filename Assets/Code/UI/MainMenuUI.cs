@@ -25,16 +25,10 @@ public class MainMenuUI : MonoBehaviour
     protected GameObject m_LoginPanel;
 
     [SerializeField]
-    protected Transform CharactersContainer;
-
-    [SerializeField]
     protected CreateCharacterUI m_CreateCharacterUI;
 
     [SerializeField]
-    protected CharacterInfoPageUI m_CharacterInfoUI;
-
-    [SerializeField]
-    protected ui_pageMenu m_CharacterSelectionPageMenu;
+    protected CharacterSelectionPageUI m_CharacterSelectionUI;
 
     protected LoginHandler m_LoginHandler;
     protected RegisterHandler m_RegisterHandler;
@@ -179,39 +173,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void LoadPlayerCharacters(User user)
     {
-        StartCoroutine(LoadCharactersCoroutine(user));
-    }
-
-    protected IEnumerator LoadCharactersCoroutine(User user)
-    {
-        yield return 0;
-        ClearPlayerCharacters();
-
-        for (int i = 0; i < user.Characters.Count; i++)
-        {
-            GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("CharSpot");
-            tempObj.transform.SetParent(CharactersContainer, false);
-            tempObj.GetComponent<CharspotUI>().Load(user.Characters[i]);
-            AddListenerToCharspot(tempObj.GetComponent<Button>(), user.Characters[i]);
-        }
-    }
-
-    protected void AddListenerToCharspot(Button charspotButton, ActorInfo info)
-    {
-        charspotButton.onClick.AddListener(delegate
-        {
-            m_CharacterSelectionPageMenu.SwitchTo(1);
-            m_CharacterInfoUI.SetInfo(info);
-        });
-    }
-
-    public void ClearPlayerCharacters()
-    {
-        for (int i = 0; i < CharactersContainer.childCount; i++)
-        {
-            CharactersContainer.GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
-            CharactersContainer.GetChild(i).gameObject.SetActive(false);
-        }
+        StartCoroutine(m_CharacterSelectionUI.LoadCharactersCoroutine(user));
     }
 
     public void ResetLoginFields()

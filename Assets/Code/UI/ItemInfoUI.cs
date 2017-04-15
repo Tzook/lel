@@ -55,7 +55,7 @@ public class ItemInfoUI : MonoBehaviour {
     {
         while (true)
         {
-            transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z), Time.deltaTime * 5f);
             yield return 0;
         }
     }

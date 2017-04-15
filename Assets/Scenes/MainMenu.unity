@@ -7900,7 +7900,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.9395238}
   m_AnchoredPosition: {x: 0.00001001358, y: -0.099983215}
   m_SizeDelta: {x: 34.1, y: -0.2}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9474,7 +9474,6 @@ GameObject:
   - component: {fileID: 335610002}
   - component: {fileID: 335610003}
   - component: {fileID: 335610004}
-  - component: {fileID: 335610005}
   m_Layer: 0
   m_Name: CORE
   m_TagString: Untagged
@@ -9653,42 +9652,6 @@ MonoBehaviour:
   - Name: melee
     Icon: {fileID: 21300000, guid: 087a5b74d3a9c2b48abf376c54be1563, type: 3}
   Monsters: []
---- !u!114 &335610005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 335609996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604cbdbe14093ab49b5d424e9ff7822b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Monsters:
-  - MonsterKey: Turtle
-    MonsterName: Turtle
-    MonsterHP: 10
-    MonsterLevel: 1
-    MinDMG: 1
-    MaxDMG: 5
-  - MonsterKey: OldTurtle
-    MonsterName: Old Turtle
-    MonsterHP: 30
-    MonsterLevel: 2
-    MinDMG: 3
-    MaxDMG: 6
-  - MonsterKey: SpikedTurtle
-    MonsterName: Spiked Turtle
-    MonsterHP: 30
-    MonsterLevel: 3
-    MinDMG: 5
-    MaxDMG: 12
-  - MonsterKey: Spike
-    MonsterName: Spike
-    MonsterHP: 1
-    MonsterLevel: 1
-    MinDMG: 1
-    MaxDMG: 2
 --- !u!1 &337635988
 GameObject:
   m_ObjectHideFlags: 0
@@ -13223,7 +13186,9 @@ MonoBehaviour:
   XPBar: {fileID: 453411095}
   LevelUI: {fileID: 1127346525}
   m_GameUI: {fileID: 2092787462}
-  WindowsContainer: {fileID: 387207644}
+  WindowsContainers:
+  - {fileID: 387207644}
+  - {fileID: 1946539465}
   equipmentPanel: {fileID: 544227781}
   statsPanel: {fileID: 1205690744}
   m_DimmerCanvasGroup: {fileID: 317743994}
@@ -16656,7 +16621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 666321298}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -24445,8 +24410,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 266600131}
   m_HandleRect: {fileID: 266600130}
   m_Direction: 3
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9395238
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -35998,7 +35963,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1484493530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -51090,7 +51055,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2050740141}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -51732,6 +51697,7 @@ GameObject:
   - component: {fileID: 2084874197}
   - component: {fileID: 2084874199}
   - component: {fileID: 2084874198}
+  - component: {fileID: 2084874200}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -51761,7 +51727,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 215, y: 35}
+  m_SizeDelta: {x: 215, y: 210}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2084874198
 MonoBehaviour:
@@ -51792,6 +51758,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2084874196}
+--- !u!114 &2084874200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084874196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &2085407798
 GameObject:
   m_ObjectHideFlags: 0

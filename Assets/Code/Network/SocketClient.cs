@@ -146,9 +146,8 @@ public class SocketClient : MonoBehaviour
     
     private void OnEventError(Socket socket, Packet packet, object[] args)
     {
-        BroadcastEvent("On event error");
         JSONNode data = (JSONNode)args[0];
-        WarningMessageUI.Instance.ShowMessage(data.AsObject.ToString());
+        BroadcastEvent("On event error: " + data.AsObject.ToString());
     }
 
     private void OnDisconnect(Socket socket, Packet packet, object[] args)

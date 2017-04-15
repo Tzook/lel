@@ -134,6 +134,49 @@ BoxCollider2D:
   m_Offset: {x: 0.012807147, y: 0.20495564}
   serializedVersion: 2
   m_Size: {x: 3.3826227, y: 0.9487597}
+--- !u!1 &320398943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 320398945}
+  - component: {fileID: 320398944}
+  m_Layer: 0
+  m_Name: SPAWNER (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &320398944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 320398943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1089884df88e104478daebe0f14f730c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterKey: Turtle
+  SpawnCap: 5
+  RespawnTime: 10
+--- !u!4 &320398945
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 320398943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 46.82, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849270693}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &347456485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3619,7 @@ MonoBehaviour:
   - {fileID: 934862549}
   Spawners:
   - {fileID: 868781794}
+  - {fileID: 320398944}
 --- !u!4 &849270693
 Transform:
   m_ObjectHideFlags: 0
@@ -3588,6 +3632,7 @@ Transform:
   m_Children:
   - {fileID: 934862548}
   - {fileID: 868781795}
+  - {fileID: 320398945}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3755,7 +3800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1089884df88e104478daebe0f14f730c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterKey: Spiked Turtle
+  MonsterKey: SpikedTurtle
   SpawnCap: 5
   RespawnTime: 10
 --- !u!4 &868781795

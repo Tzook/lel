@@ -178,6 +178,11 @@ public class ActorController : MonoBehaviour
 
     }
 
+    void LateUpdate()
+    {
+        CollidingEnemy = null;
+    }
+
     void FixedUpdate()
     {
 

@@ -36,7 +36,7 @@ public class EnemyMoving : Enemy
     Vector3 LastSentPosition;
     void FixedUpdate()
     {
-        if(Game.Instance.isBitch && LastSentPosition != transform.position)
+        if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
             SocketClient.Instance.SendMobMove(Info.ID, transform.position.x, transform.position.y);

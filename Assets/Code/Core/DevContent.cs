@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class DevContent : MonoBehaviour {
 
-    public List<MonsterInfo> Monsters = new List<MonsterInfo>();
+    public List<DevMonsterInfo> Monsters = new List<DevMonsterInfo>();
 
-    void Start()
-    {
-        Content.Instance.Monsters.InsertRange(0, Monsters);
-    }
+    public List<DevItemInfo> Items = new List<DevItemInfo>();
+
+    //void Start()
+    //{
+    //    Content.Instance.Monsters.InsertRange(0, Monsters);
+    //}
 }
 
 [System.Serializable]
-public class MonsterInfo
+public class DevMonsterInfo
 {
     [SerializeField]
     public string MonsterKey;
@@ -33,4 +35,38 @@ public class MonsterInfo
     [SerializeField]
     public int MaxDMG;
 
+    [SerializeField]
+    public int RewardEXP;
+
+    [SerializeField]
+    public int MinGoldDrop;
+
+    [SerializeField]
+    public int MaxGoldDrop;
+
+    [SerializeField]
+    public List<string> PossibleLoot = new List<string>();
+
+
+
 }
+
+[System.Serializable]
+public class DevItemInfo
+{
+    public string Name;
+    public string Icon;
+    public string Type;
+    public int DropChance;
+    public int GoldValue;
+
+    public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
+}
+
+[SerializeField]
+public class DevItemSprite
+{
+    public string PartKey;
+    public string Sprite;
+}
+

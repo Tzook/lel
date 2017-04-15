@@ -14360,6 +14360,7 @@ MonoBehaviour:
   Spawners:
   - {fileID: 1083702612}
   - {fileID: 1832023376}
+  - {fileID: 2129480308}
 --- !u!4 &1094695129
 Transform:
   m_ObjectHideFlags: 0
@@ -14373,6 +14374,7 @@ Transform:
   - {fileID: 1979381172}
   - {fileID: 1083702611}
   - {fileID: 1832023375}
+  - {fileID: 2129480309}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20514,9 +20516,13 @@ MonoBehaviour:
   Rigid: {fileID: 0}
   Body: {fileID: 0}
   Anim: {fileID: 0}
+  m_HitBox: {fileID: 0}
   HurtTypes: 0
   DeathTypes: 0
   Sprites: []
+  WoundSounds: []
+  DeathSounds: []
+  Dead: 0
 --- !u!1 &2109989415
 GameObject:
   m_ObjectHideFlags: 0
@@ -20720,6 +20726,49 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &2129480307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2129480309}
+  - component: {fileID: 2129480308}
+  m_Layer: 0
+  m_Name: SPAWNER
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2129480308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129480307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1089884df88e104478daebe0f14f730c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterKey: SpikedTurtle
+  SpawnCap: 5
+  RespawnTime: 10
+--- !u!4 &2129480309
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129480307}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.1, y: 5.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1094695129}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2141514341
 GameObject:
   m_ObjectHideFlags: 0

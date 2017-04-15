@@ -17,7 +17,7 @@ public class Content : MonoBehaviour {
     [SerializeField]
     List<PrimaryAbility> PrimaryAbilities = new List<PrimaryAbility>();
 
-    public List<MonsterInfo> Monsters = new List<MonsterInfo>();
+    public List<DevMonsterInfo> Monsters = new List<DevMonsterInfo>();
 
     public ContentPiece GetInfo(string Key)
     {

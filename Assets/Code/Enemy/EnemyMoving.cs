@@ -202,7 +202,7 @@ public class EnemyMoving : Enemy
 
     public override void UpdateMovement(float x, float y)
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 2f);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 6f);
 
         if(transform.position.x != x)
         {

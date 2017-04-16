@@ -36,13 +36,12 @@ public class Enemy : MonoBehaviour {
     protected Vector3 initScale;
 
     public bool Dead = false;
-
+    
     public virtual void Initialize(string instanceID, int currentHP = 0)
     {
         Info.ID = instanceID;
 
-
-        if (Body != null)
+        if (Body != null && initScale == Vector3.zero)
         {
             initScale = Body.localScale;
         }

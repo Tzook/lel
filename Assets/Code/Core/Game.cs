@@ -38,7 +38,7 @@ public class Game : MonoBehaviour {
             InGameMainMenuUI.Instance.HideGameUI();
 
             ResourcesLoader.Instance.ClearObjectPool();
-            SocketClient.Instance.Diconnect();
+            SocketClient.Instance.Disconnect();
 
             ResetUndestroyables();
 

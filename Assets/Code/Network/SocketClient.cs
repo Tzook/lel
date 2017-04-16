@@ -97,12 +97,16 @@ public class SocketClient : MonoBehaviour
         LoadingWindowUI.Instance.Register(this);
     }
 
-
-    public void Diconnect()
+    public void Disconnect()
     {
         DisposeSubscriptions();
         CurrentSocket.Disconnect();
         CurrentSocket.Off();
+    }
+
+    void OnApplicationQuit()
+    {
+        Disconnect();
     }
 
     public void Subscribe(string id, IUpdatePositionListener instance)

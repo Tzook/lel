@@ -111,7 +111,7 @@ public class ActorController : MonoBehaviour
             Instance.AttemptPickUp();
         }
 
-        if(Input.GetKeyDown(InputMap.Map["Wink Emote"]))
+        if (Input.GetKeyDown(InputMap.Map["Wink Emote"]))
         {
             if(Instance.EyesEmoteInstance == null)
             {
@@ -247,6 +247,7 @@ public class ActorController : MonoBehaviour
        
     }
 
+
     private void EnterPortal()
     {
         if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
@@ -286,7 +287,7 @@ public class ActorController : MonoBehaviour
 
     public void StandStill()
     {
-        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x- (Rigidbody.velocity.x/4f), Rigidbody.velocity.y);
+        Rigidbody.velocity = new Vector2(0f, Rigidbody.velocity.y);
     }
 
     public void Jump()

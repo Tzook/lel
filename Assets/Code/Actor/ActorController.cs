@@ -181,6 +181,14 @@ public class ActorController : MonoBehaviour
     void LateUpdate()
     {
         CollidingEnemy = null;
+
+        if (Input.GetMouseButtonDown(0) && !Game.Instance.DraggingWindow)
+        {
+            Anim.SetInteger("AttackType", Random.Range(0, 3));
+        }
+
+        Anim.SetBool("Charging", (Input.GetMouseButton(0) && !Game.Instance.DraggingWindow));
+
     }
 
     void FixedUpdate()
@@ -226,13 +234,6 @@ public class ActorController : MonoBehaviour
         {
             EnterPortal();
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Anim.SetInteger("AttackType", Random.Range(0, 3));
-        }
-
-        Anim.SetBool("Charging", Input.GetMouseButton(0));
 
         if (!ClientOnly)
         {

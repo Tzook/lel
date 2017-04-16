@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 // Upgrade NOTE: commented out 'half4 unity_LightmapST', a built-in variable
@@ -69,9 +71,9 @@ VS_OUT vert(appdata_ferr input) {
 	float4 world      = mul(unity_ObjectToWorld, input.vertex);
 	float  waveOffset = (world.x + world.y + world.z) / _PositionScale;
 	float  wave       = (_Time.z + waveOffset) * _WaveSpeed;
-	result.position   = mul(UNITY_MATRIX_MVP, input.vertex + float4(cos(wave) * _WaveSizeX, sin(wave) * _WaveSizeY, 0, 0));
+	result.position   = UnityObjectToClipPos(input.vertex + float4(cos(wave) * _WaveSizeX, sin(wave) * _WaveSizeY, 0, 0));
 	#else
-	result.position   = mul(UNITY_MATRIX_MVP, input.vertex);
+	result.position   = UnityObjectToClipPos(input.vertex);
 	#endif
 	
 	#if defined(FERR2DT_VERTEXLIGHTBAKED)

@@ -30,6 +30,7 @@ public class ActorShadow : MonoBehaviour {
         if (GroundRay)
         {
             transform.position = GroundRay.point;
+            m_SpriteRenderer.color = new Color(m_SpriteRenderer.color.r, m_SpriteRenderer.color.g, m_SpriteRenderer.color.b,   1f - (Vector3.Distance(Collider.transform.position,GroundRay.point) / MaxDistance));
         }
     }
 

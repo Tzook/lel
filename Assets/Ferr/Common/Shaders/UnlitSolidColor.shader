@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Ferr/Common/Unlit Solid Color" {
 	Properties {
 		_Color("Color (RGB)", Color) = (1,1,1,1)
@@ -27,7 +29,7 @@ Shader "Ferr/Common/Unlit Solid Color" {
 
 			VS_OUT vert (appdata_ferr input) {
 				VS_OUT result;
-				result.position = mul (UNITY_MATRIX_MVP, input.vertex);
+				result.position = UnityObjectToClipPos (input.vertex);
 				return result;
 			}
 

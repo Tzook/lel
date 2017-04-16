@@ -24,10 +24,25 @@ public class DraggableUI : MonoBehaviour
             StopCoroutine(DragRoutineInstance);
         });
 
+        EventTrigger.Entry CurrentTrigger3 = new EventTrigger.Entry();
+        CurrentTrigger3.eventID = EventTriggerType.PointerDown;
+
+        CurrentTrigger3.callback.AddListener(delegate {
+            Game.Instance.DraggingWindow = true;
+        });
+
+        EventTrigger.Entry CurrentTrigger4 = new EventTrigger.Entry();
+        CurrentTrigger4.eventID = EventTriggerType.PointerUp;
+
+        CurrentTrigger4.callback.AddListener(delegate {
+            Game.Instance.DraggingWindow = false;
+        });
 
 
         GetComponent<EventTrigger>().triggers.Add(CurrentTrigger1);
         GetComponent<EventTrigger>().triggers.Add(CurrentTrigger2);
+        GetComponent<EventTrigger>().triggers.Add(CurrentTrigger3);
+        GetComponent<EventTrigger>().triggers.Add(CurrentTrigger4);
     }
 
     private IEnumerator DragRoutine()

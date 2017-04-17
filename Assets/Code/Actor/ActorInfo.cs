@@ -63,6 +63,8 @@ public class ActorInfo
         this.CurrentRoom = node["room"].Value;
         this.LastPosition = new Vector3(node["position"]["x"].AsFloat, node["position"]["y"].AsFloat, node["position"]["z"].AsFloat);
 
+        
+
         if (node["looks"]["g"].AsBool)
         {
             this.Gender = Gender.Male;

@@ -33,12 +33,6 @@ public class SocketClient : MonoBehaviour
 
     #endregion
 
-    #region Parameters
-
-    protected Dictionary<string, IUpdatePositionListener> SubscribedMovables = new Dictionary<string, IUpdatePositionListener>();
-
-    #endregion
-
     #region Public Methods
 
     public void ConnectToGame()
@@ -64,6 +58,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("whisper_fail", OnWhisperFail);
 
         CurrentSocket.On("movement", OnMovement);
+
+        CurrentSocket.On("actor_start_climbing", OnActorStartClimbing);
+        CurrentSocket.On("actor_stop_climbing", OnActorStopClimbing);
 
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
         CurrentSocket.On("drop_item", OnActorDropItem);
@@ -99,7 +96,6 @@ public class SocketClient : MonoBehaviour
 
     public void Disconnect()
     {
-        DisposeSubscriptions();
         CurrentSocket.Disconnect();
         CurrentSocket.Off();
     }
@@ -107,35 +103,6 @@ public class SocketClient : MonoBehaviour
     void OnApplicationQuit()
     {
         Disconnect();
-    }
-
-    public void Subscribe(string id, IUpdatePositionListener instance)
-    {
-        if (!SubscribedMovables.ContainsKey(id))
-        {
-            SubscribedMovables.Add(id, instance);
-        }
-        else
-        {
-            Debug.LogError(this + " | " + id + " attempted to subscribe more than once!");
-        }
-    }
-
-    public void Unsubscribe(string id)
-    {
-        if (SubscribedMovables.ContainsKey(id))
-        {
-            SubscribedMovables.Remove(id);
-        }
-        else
-        {
-            Debug.LogError(this + " | " + id + " attempted to unsubscribe but was not subscribed from the first place!");
-        }
-    }
-
-    public void DisposeSubscriptions()
-    {
-        SubscribedMovables.Clear();
     }
 
     #endregion
@@ -187,17 +154,27 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
+        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat);
+    }
 
-        string id = data["id"];
-        if (SubscribedMovables.ContainsKey(id))
-        {
-            IUpdatePositionListener instance = SubscribedMovables[id];
-            instance.UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat);
-        }
-        else
-        {
-            Debug.LogError(this + " | " + id + " received movement, but actor is not subscribed!");
-        }
+    protected void OnActorStartClimbing(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        //BroadcastEvent(data["id"].Value + " started climbing");
+
+        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().StartClimbing();
+
+    }
+
+    protected void OnActorStopClimbing(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        //BroadcastEvent(data["id"].Value + " started climbing");
+
+        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().StopClimbing();
+
     }
 
     protected void OnChatMessage(Socket socket, Packet packet, params object[] args)
@@ -533,6 +510,18 @@ public class SocketClient : MonoBehaviour
         node["angle"].AsFloat = rotDegrees;
 
         CurrentSocket.Emit("movement", node);
+    }
+
+    public void SendStartedClimbing()
+    {
+        JSONNode node = new JSONClass();
+        CurrentSocket.Emit("started_climbing", node);
+    }
+
+    public void SendStoppedClimbing()
+    {
+        JSONNode node = new JSONClass();
+        CurrentSocket.Emit("stopped_climbing", node);
     }
 
     public void SendBitchPlease(string requestKey)

@@ -279,7 +279,6 @@ public class Game : MonoBehaviour {
 
         string lastScene = SceneManager.GetActiveScene().name;
         ResourcesLoader.Instance.ClearObjectPool();
-        SocketClient.Instance.DisposeSubscriptions();
 
         CurrentScene = null;
         SceneManager.LoadScene(scene);

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(ActorInstance))]
-public class ActorMovement : MonoBehaviour, IUpdatePositionListener
+public class ActorMovement : MonoBehaviour
 {
 
     public ActorInstance Instance;
@@ -18,10 +18,11 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
     protected bool MovingVertical;
     protected bool aimRight;
 
+    protected bool OnRope;
+
     void Start()
     {
         Instance = GetComponent<ActorInstance>();
-        Instance.RegisterMovementController(this);
         lastPosition = transform.position;
 
         Anim = transform.FindChild("Body").GetComponent<Animator>();
@@ -117,20 +118,57 @@ public class ActorMovement : MonoBehaviour, IUpdatePositionListener
         MovingHorizontal = false;
         MovingVertical = false;
 
-        if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
+        if (OnRope)
         {
-            Anim.SetBool("InAir", true);
-            MovingVertical = true;
+            if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
+            {
+                Anim.SetBool("ClimbingUp", true);
+                Anim.SetBool("ClimbingDown", false);
+            }
+            else if (Mathf.Abs(transform.position.y - lastPosition.y) < -0.05f)
+            {
+                Anim.SetBool("ClimbingUp", false);
+                Anim.SetBool("ClimbingDown", true);
+            }
+            else
+            {
+                Anim.SetBool("ClimbingUp", false);
+                Anim.SetBool("ClimbingDown", false);
+            }
+        }
+        else
+        {
+            if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
+            {
+                Anim.SetBool("InAir", true);
+                MovingVertical = true;
+            }
+
+            if (Mathf.Abs(transform.position.x - lastPosition.x) > 0.05f)
+            {
+                Anim.SetBool("Walking", true);
+                MovingHorizontal = true;
+            }
         }
 
-        if (Mathf.Abs(transform.position.x - lastPosition.x) > 0.05f)
-        {
-            Anim.SetBool("Walking", true);
-            MovingHorizontal = true;
-        }
 
         transform.position = Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed);
     }
 
+    public void StartClimbing()
+    {
+        Anim.SetBool("OnRope", true);
+        Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+        OnRope = true;
+    }
+
+    public void StopClimbing()
+    {
+        Anim.SetBool("OnRope", false);
+        Anim.SetBool("ClimbingUp", false);
+        Anim.SetBool("ClimbingDown", false);
+
+        OnRope = false;
+    }
 
 }

@@ -428,11 +428,6 @@ public class ActorInstance : MonoBehaviour
 
     #endregion
 
-    public void RegisterMovementController(ActorMovement controller)
-    {
-        MovementController = controller;
-        SocketClient.Instance.Subscribe(Info.ID ,controller);
-    }
 
     public void ChatBubble(string Message)
     {

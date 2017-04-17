@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActorShadow : MonoBehaviour {
 
-    LayerMask GroundLayerMask = 0 << 0 | 1;
+    LayerMask GroundLayerMask = 0 << 0 | 1 ;
 
     RaycastHit2D GroundRay;
     

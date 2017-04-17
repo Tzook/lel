@@ -9,7 +9,7 @@ public class ActorController : MonoBehaviour
 
     public ActorInstance Instance;
 
-    Rigidbody2D Rigidbody;
+    Rigidbody2D Rigid;
     BoxCollider2D Collider;
 
     RaycastHit2D GroundRayRight;
@@ -21,6 +21,7 @@ public class ActorController : MonoBehaviour
     bool ClientOnly = false;
 
     public GatePortal CurrentPortal;
+    public GameObject CurrentRope;
 
 
     #endregion
@@ -28,12 +29,16 @@ public class ActorController : MonoBehaviour
     #region Parameters
 
     public bool Grounded = false;
+    public bool OnRope = false;
 
     [SerializeField]
     float GroundedThreshold;
 
     [SerializeField]
     float InternalSpeed = 1f;
+
+    [SerializeField]
+    float InternalClimbSpeed = 1f;
 
     [SerializeField]
     float InternalJumpForce = 1f;
@@ -75,13 +80,13 @@ public class ActorController : MonoBehaviour
 
     void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
+        Rigid = GetComponent<Rigidbody2D>();
         Instance  = GetComponent<ActorInstance>();
 
-        if(Rigidbody == null)
+        if(Rigid == null)
         {
-            Rigidbody = this.gameObject.AddComponent<Rigidbody2D>();
-            Rigidbody.freezeRotation = true;
+            Rigid = this.gameObject.AddComponent<Rigidbody2D>();
+            Rigid.freezeRotation = true;
         }
 
         Collider = GetComponent<BoxCollider2D>();
@@ -97,7 +102,7 @@ public class ActorController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1) && !OnRope)
         {
             Aim();
         }
@@ -197,42 +202,88 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
-        if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
+        if (!OnRope)
         {
-            MoveLeft();
-            Anim.SetBool("Walking", true);
-        }
-        else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
-        {
-            MoveRight();
-            Anim.SetBool("Walking", true);
+            if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
+            {
+                MoveLeft();
+                Anim.SetBool("Walking", true);
+            }
+            else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
+            {
+                MoveRight();
+                Anim.SetBool("Walking", true);
+            }
+            else
+            {
+                StandStill();
+            }
+
+            if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
+            {
+                Jump();
+                //Anim.SetBool("Walking", true);
+            }
+
+            GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+            GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+
+            //Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
+
+            Grounded = (GroundRayRight || GroundRayLeft);
+
+            if (!Grounded)
+            {
+                Anim.SetBool("InAir", true);
+            }
+
+            if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+            {
+                if (CurrentRope != null)
+                {
+                    ClimbRope();
+                }
+                else
+                {
+                    EnterPortal();
+                }
+            }
         }
         else
         {
-            StandStill();
-        }
+            if (CurrentRope == null)
+            {
+                UnclimbRope();
+            }
+            else
+            {
+                transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
 
-        if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
-        {
-            Jump();
-            //Anim.SetBool("Walking", true);
-        }
+                if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                {
+                    Anim.SetBool("ClimbingUp", true);
+                    Anim.SetBool("ClimbingDown", false);
 
-        GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
-        GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+                    transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                }
+                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
+                {
+                    Anim.SetBool("ClimbingDown", true);
+                    Anim.SetBool("ClimbingUp", false);
 
-        //Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
+                    transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    Anim.SetBool("ClimbingUp", false);
+                    Anim.SetBool("ClimbingDown", false);
+                }
 
-        Grounded = (GroundRayRight || GroundRayLeft);
-
-        if (!Grounded)
-        {
-            Anim.SetBool("InAir", true);
-        }
-
-        if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
-        {
-            EnterPortal();
+                if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
+                {
+                    UnclimbRope();
+                }
+            }
         }
 
         if (!ClientOnly)
@@ -248,7 +299,6 @@ public class ActorController : MonoBehaviour
        
     }
 
-
     private void EnterPortal()
     {
         if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
@@ -258,6 +308,28 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    private void ClimbRope()
+    {
+        OnRope = true;
+        Anim.SetBool("OnRope", true);
+        Rigid.velocity = Vector2.zero;
+        Rigid.bodyType = RigidbodyType2D.Kinematic;
+        Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+        StopAim();
+
+        SocketClient.Instance.SendStartedClimbing();
+    }
+
+    private void UnclimbRope()
+    {
+        OnRope = false;
+        Anim.SetBool("OnRope", false);
+        Anim.SetBool("ClimbingUp", false);
+        Anim.SetBool("ClimbingDown", false);
+        Rigid.bodyType = RigidbodyType2D.Dynamic;
+
+        SocketClient.Instance.SendStoppedClimbing();
+    }
 
     #endregion
 
@@ -269,7 +341,7 @@ public class ActorController : MonoBehaviour
         //Rigidbody.position += (Vector2.left * InternalSpeed * Time.deltaTime);
 
 
-        Rigidbody.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigidbody.velocity.y);
+        Rigid.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigid.velocity.y);
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
         Anim.SetBool("ReverseWalk", aimRight);
@@ -280,7 +352,7 @@ public class ActorController : MonoBehaviour
         //TODO Remove if no problems occur
         //Rigidbody.position += (Vector2.right * InternalSpeed * Time.deltaTime);
 
-        Rigidbody.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigidbody.velocity.y);
+        Rigid.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigid.velocity.y);
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("ReverseWalk", !aimRight);
@@ -288,7 +360,7 @@ public class ActorController : MonoBehaviour
 
     public void StandStill()
     {
-        Rigidbody.velocity = new Vector2(0f, Rigidbody.velocity.y);
+        Rigid.velocity = new Vector2(0f, Rigid.velocity.y);
     }
 
     public void Jump()
@@ -302,9 +374,9 @@ public class ActorController : MonoBehaviour
     protected IEnumerator JumpRoutine()
     {
 
-        if (Rigidbody.velocity.y <= 1.5f)
+        if (Rigid.velocity.y <= 1.5f)
         {
-            Rigidbody.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
+            Rigid.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
         }
 
@@ -415,6 +487,10 @@ public class ActorController : MonoBehaviour
         {
             CurrentPortal = obj.GetComponent<GatePortal>();
         }
+        else if (obj.tag == "Rope")
+        {
+            CurrentRope = obj.gameObject;
+        }
     }
 
     void OnTriggerStay2D(Collider2D obj)
@@ -431,8 +507,11 @@ public class ActorController : MonoBehaviour
         {
             CurrentPortal = null;
         }
-
-        if(obj.tag == "Enemy")
+        else if (obj.tag == "Rope" && CurrentRope == obj.gameObject)
+        {
+            CurrentRope = null;
+        }
+        else if (obj.tag == "Enemy")
         {
             if(obj.GetComponent<HitBox>().EnemyReference == CollidingEnemy)
             {
@@ -451,11 +530,11 @@ public class ActorController : MonoBehaviour
 
             if (enemy.transform.position.x < transform.position.x)
             {
-                Rigidbody.AddForce((InternalJumpForce * 2f * transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce((InternalJumpForce * 2f * transform.right), ForceMode2D.Impulse);
             }
             else
             {
-                Rigidbody.AddForce((InternalJumpForce * 2f * -transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce((InternalJumpForce * 2f * -transform.right), ForceMode2D.Impulse);
             }
         }
     }

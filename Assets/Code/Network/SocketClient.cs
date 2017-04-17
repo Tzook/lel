@@ -247,8 +247,9 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor dropped an item");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.SpawnItem(new ItemInfo(data["item"]), data["item_id"].Value, data["x"].AsFloat, data["y"].AsFloat);
-
+        foreach (JSONNode itemData in data.AsArray) {
+            Game.Instance.SpawnItem(new ItemInfo(itemData["item"]), itemData["item_id"].Value, itemData["x"].AsFloat, itemData["y"].AsFloat);
+        }
     }
 
     protected void OnActorPickItem(Socket socket, Packet packet, object[] args)

@@ -63,7 +63,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_stop_climbing", OnActorStopClimbing);
 
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
-        CurrentSocket.On("drop_item", OnActorDropItem);
+        CurrentSocket.On("drop_items", OnActorDropItem);
         CurrentSocket.On("item_disappear", OnItemDisappear);
         CurrentSocket.On("actor_move_item", OnActorMoveItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);

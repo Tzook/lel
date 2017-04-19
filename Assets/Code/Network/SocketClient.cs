@@ -247,9 +247,16 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor dropped an item");
         JSONNode data = (JSONNode)args[0];
 
-        foreach (JSONNode itemData in data.AsArray) {
-            Game.Instance.SpawnItem(new ItemInfo(itemData["item"]), itemData["item_id"].Value, itemData["x"].AsFloat, itemData["y"].AsFloat);
+        List<ItemInfo> infoList = new List<ItemInfo>();
+        List<string> idsList = new List<string>();
+        
+        for(int i=0;i<data.Count;i++)
+        {
+            infoList.Add(new ItemInfo(data[i]["item"]));
+            idsList.Add(data[i]["item_id"].Value);
         }
+
+        Game.Instance.SpawnItems(infoList, idsList, data[0]["x"].AsFloat, data[0]["y"].AsFloat);
     }
 
     protected void OnActorPickItem(Socket socket, Packet packet, object[] args)
@@ -380,6 +387,8 @@ public class SocketClient : MonoBehaviour
             InGameMainMenuUI.Instance.RefreshMP();
             InGameMainMenuUI.Instance.RefreshXP();
             InGameMainMenuUI.Instance.RefreshLevel();
+
+            AudioControl.Instance.Play("sound_positive2");
         }
 
         actor.Instance.LevelUp();

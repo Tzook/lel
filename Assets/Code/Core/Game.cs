@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System;
+//using SimpleJSON;
 
 public class Game : MonoBehaviour {
 
@@ -212,13 +212,22 @@ public class Game : MonoBehaviour {
 
     }
 
-    public void SpawnItem(ItemInfo info, string instanceID, float x, float y)
+    public ItemInstance SpawnItem(ItemInfo info, string instanceID, float x, float y)
     {
+        AudioControl.Instance.Play("impact");
+
         ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
         itemInstance.transform.position = new Vector3(x, y, 0f);
         itemInstance.SetInfo(info);
 
         CurrentScene.Items.Add(instanceID, itemInstance);
+
+        return itemInstance;
+    }
+
+    public void SpawnItems(List<ItemInfo> infos, List<string> ids, float x, float y)
+    {
+        StartCoroutine(SpawnItemsRoutine(infos, ids, x, y));
     }
 
     public void SpawnMonster(string instanceID, float xPos, float yPos, string mobKey, int currentHP)
@@ -341,6 +350,34 @@ public class Game : MonoBehaviour {
 
     }
 
+    private IEnumerator SpawnItemsRoutine(List<ItemInfo> infos, List<string> ids, float x, float y)
+    {
+        SpawnItem(infos[0], ids[0], x, y);
+
+        yield return 0;
+
+        Rigidbody2D tempRigid;
+        bool ThrowRight = true;
+
+        for(int i=1;i<infos.Count;i++)
+        {
+            ThrowRight = !ThrowRight;
+
+            tempRigid = SpawnItem(infos[i], ids[i], x, y).GetComponent<Rigidbody2D>();     
+            
+            if(ThrowRight)
+            {
+                tempRigid.AddForce(new Vector2(1f*i,4f), ForceMode2D.Impulse);
+            }
+            else
+            {
+                tempRigid.AddForce(new Vector2(-1f * i, 4f), ForceMode2D.Impulse);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public static Vector3 SplineLerp(Vector3 source, Vector3 target, float Height, float t)
     {
         Vector3 ST = new Vector3(source.x , source.y + Height, source.z);
@@ -356,4 +393,33 @@ public class Game : MonoBehaviour {
 
         return Vector3.Lerp(SplineST, SplineTM, t);
     }
+
+
+    #region Debug
+
+    //[SerializeField]
+    //bool Test;
+    //void Update()
+    //{
+    //    if(Test)
+    //    {
+    //        Test = false;
+
+    //        List<ItemInfo> infos = new List<ItemInfo>();
+    //        List<string> ids = new List<string>();
+
+    //        for(int i=0;i<6;i++)
+    //        {
+    //            infos.Add(new ItemInfo(JSON.Parse("{\"sprites\":{\"hip\":\"testingclothing_greenPants_male_hip\", \"knee\":\"testingclothing_greenPants_male_knee\"}, \"name\":\"Green Pants\", \"icon\":\"testingclothing_greenPants_male_hip\", \"type\":\"legs\"}")));
+    //            ids.Add(i.ToString());
+    //        }
+
+    //        SpawnItems(infos, ids, ClientCharacter.transform.position.x, ClientCharacter.transform.position.y);
+
+    //    }
+    //}
+
+    #endregion
+
 }
+

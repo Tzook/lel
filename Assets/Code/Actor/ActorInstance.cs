@@ -530,6 +530,7 @@ public class ActorInstance : MonoBehaviour
 
         if (Game.Instance.CurrentScene.ClientCharacter.Instance == this)
         {
+            AudioControl.Instance.Play("sound_item");
             Info.Inventory.AddItem(Game.Instance.CurrentScene.Items[instanceID].Info);
             InGameMainMenuUI.Instance.RefreshInventory();
         }
@@ -657,7 +658,8 @@ public class ActorInstance : MonoBehaviour
     public void PreformAttack(string ability, float AttackValue)
     {
         Anim.SetBool("Charging", false);
-        Debug.Log(Anim.GetBool("Charging"));
+
+        StartCombatMode();
     }
 
     #endregion

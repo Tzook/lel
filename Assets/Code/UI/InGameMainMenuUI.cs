@@ -339,7 +339,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                     {
                         int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
                         SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
-
+                        AudioControl.Instance.Play("sound_clickFast");
                     }
 
                     HoveredSlot.UnDrag();
@@ -349,6 +349,8 @@ public class InGameMainMenuUI : MonoBehaviour {
                     if (equipmentPanel.CanEquip(DraggedSlot.CurrentItem, HoveredSlot))
                     {
                         SocketClient.Instance.SendEquippedItem(draggedIndex, HoveredSlot.slotKey);
+                        AudioControl.Instance.Play("sound_equip");
+                        AudioControl.Instance.Play("sound_equip");
                     }
                 }
             }
@@ -363,18 +365,20 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
                 {
+                    AudioControl.Instance.Play("sound_equip");
                     //TODO MOVE SLOT
                 }
                 else if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
                 {
                     int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
-
+                    AudioControl.Instance.Play("sound_equip");
                     SocketClient.Instance.SendUnequippedItem(DraggedSlot.slotKey, releasedIndex);
                 }
             }
             else // --TO SPACE
             {
                 SocketClient.Instance.SendDroppedEquip(DraggedSlot.slotKey);
+                AudioControl.Instance.Play("sound_throw");
             }
         }
 

@@ -62,6 +62,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
     {
         LoadingWindowUI.Instance.Register(this);
         deleteCharacter.Delete(actorInstance.Info.ID);
+        AudioControl.Instance.Play("sound_magic");
     }
 
     public void DeleteCharacterResponse(JSONNode response)

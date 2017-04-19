@@ -282,6 +282,7 @@ public class CreateCharacterUI : MonoBehaviour
         }
 
         RandomizeStatsInstance = StartCoroutine(RandomizeStatsRoutine());
+        AudioControl.Instance.Play("sound_equip");
     }
 
     public void MoveToCharactersList()

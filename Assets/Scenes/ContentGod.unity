@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -41,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 9
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -66,13 +67,27 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_RuntimeCPUUsage: 25
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -89,6 +104,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &1577266817
@@ -163,7 +180,85 @@ MonoBehaviour:
     MinGoldDrop: 0
     MaxGoldDrop: 0
     PossibleLoot: []
-  Items: []
+  Items:
+  - Key: leatherVest
+    Name: Leather Vest
+    Icon: testingclothing_leatherVest_male_torso
+    Type: chest
+    DropChance: 5
+    GoldValue: 3
+    ItemSprites:
+    - PartKey: chest
+      Sprite: testingclothing_leatherVest_male_torso
+  - Key: adventurerShirt
+    Name: Adventurer Shirt
+    Icon: testingclothing_adventurerShirt_male_torso
+    Type: chest
+    DropChance: 10
+    GoldValue: 2
+    ItemSprites:
+    - PartKey: chest
+      Sprite: testingclothing_adventurerShirt_male_torso
+    - PartKey: arm
+      Sprite: testingclothing_adventurerShirt_male_arm
+    - PartKey: elbow
+      Sprite: testingclothing_adventurerShirt_male_elbow
+  - Key: blackGloves
+    Name: Black Gloves
+    Icon: testingclothing_blackGloves_male_hand
+    Type: gloves
+    DropChance: 5
+    GoldValue: 2
+    ItemSprites:
+    - PartKey: hand
+      Sprite: testingclothing_blackGloves_male_hand
+  - Key: clothPants
+    Name: Cloth Pants
+    Icon: testingclothing_clothPants_male_hip
+    Type: legs
+    DropChance: 15
+    GoldValue: 1
+    ItemSprites:
+    - PartKey: hip
+      Sprite: testingclothing_clothPants_male_hip
+    - PartKey: knee
+      Sprite: testingclothing_clothPants_male_knee
+  - Key: greenPants
+    Name: Green Pants
+    Icon: testingclothing_greenPants_male_hip
+    Type: legs
+    DropChance: 5
+    GoldValue: 5
+    ItemSprites:
+    - PartKey: hip
+      Sprite: testingclothing_greenPants_male_hip
+    - PartKey: knee
+      Sprite: testingclothing_greenPants_male_knee
+  - Key: leatherShoes
+    Name: Leather Shoes
+    Icon: testingclothing_leatherShoes_male_foot
+    Type: shoes
+    DropChance: 3
+    GoldValue: 12
+    ItemSprites:
+    - PartKey: foot
+      Sprite: testingclothing_leatherShoes_male_foot
+  - Key: strapShoes
+    Name: Strap Shoes
+    Icon: testingclothing_strapShoes_male_foot
+    Type: shoes
+    DropChance: 10
+    GoldValue: 1
+    ItemSprites: []
+  - Key: swordOfElad
+    Name: Sword of Elad
+    Icon: sword_of_elad
+    Type: weapon
+    DropChance: 5
+    GoldValue: 2
+    ItemSprites:
+    - PartKey: weapon
+      Sprite: sword_of_elad
 --- !u!81 &1577266819
 AudioListener:
   m_ObjectHideFlags: 0
@@ -215,6 +310,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022

@@ -706,6 +706,22 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("mob_took_dmg", node);
     }
 
+    public void SendItemPositions(List<ItemInstance> ItemInstances)
+    {
+        JSONNode node = new JSONClass();
+
+        for (int i = 0; i < ItemInstances.Count; i++)
+        {
+            node[i]["x"] = ItemInstances[i].transform.position.x.ToString();
+            node[i]["y"] = ItemInstances[i].transform.position.y.ToString();
+
+            node[i]["item_id"] = ItemInstances[i].ID;
+        }
+
+        CurrentSocket.Emit("items_locations", node);
+
+    }
+
     #endregion
 
     #region Internal

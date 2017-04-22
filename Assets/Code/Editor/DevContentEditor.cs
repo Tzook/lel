@@ -15,7 +15,7 @@ public class DevContentEditor : Editor
 
         DevContent currentInfo = (DevContent)target;
 
-        GUILayout.BeginHorizontal();
+        GUILayout.BeginVertical();
 
         if (GUILayout.Button("Update Monsters"))
         {
@@ -25,24 +25,26 @@ public class DevContentEditor : Editor
 
             for (int i = 0; i < currentInfo.Monsters.Count; i++)
             {
-                node["mobs"][i]["key"]      = currentInfo.Monsters[i].MonsterKey;
-                node["mobs"][i]["name"]     = currentInfo.Monsters[i].MonsterName;
-                node["mobs"][i]["hp"]       = currentInfo.Monsters[i].MonsterHP.ToString();
-                node["mobs"][i]["level"]    = currentInfo.Monsters[i].MonsterLevel.ToString();
-                node["mobs"][i]["minDMG"]   = currentInfo.Monsters[i].MinDMG.ToString();
-                node["mobs"][i]["maxDMG"]   = currentInfo.Monsters[i].MaxDMG.ToString();
+                node["mobs"][i]["key"] = currentInfo.Monsters[i].MonsterKey;
+                node["mobs"][i]["name"] = currentInfo.Monsters[i].MonsterName;
+                node["mobs"][i]["hp"] = currentInfo.Monsters[i].MonsterHP.ToString();
+                node["mobs"][i]["level"] = currentInfo.Monsters[i].MonsterLevel.ToString();
+                node["mobs"][i]["minDMG"] = currentInfo.Monsters[i].MinDMG.ToString();
+                node["mobs"][i]["maxDMG"] = currentInfo.Monsters[i].MaxDMG.ToString();
+                node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
                 node["mobs"][i]["MinGoldDrop"] = currentInfo.Monsters[i].MinGoldDrop.ToString();
                 node["mobs"][i]["MaxGoldDrop"] = currentInfo.Monsters[i].MaxGoldDrop.ToString();
 
-                for(int a=0;a<currentInfo.Monsters[i].PossibleLoot.Count;a++)
+                for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
                 {
-                    node["mobs"][i]["PossibleLoot"][a] = currentInfo.Monsters[i].PossibleLoot[a];
+                    node["mobs"][i]["drops"][a] = currentInfo.Monsters[i].PossibleLoot[a];
                 }
             }
 
             SendMonstersInfo(node);
         }
-        else if (GUILayout.Button("Update Items"))
+
+        if (GUILayout.Button("Update Items"))
         {
             JSONNode node = new JSONClass();
 
@@ -50,8 +52,18 @@ public class DevContentEditor : Editor
 
             for (int i = 0; i < currentInfo.Items.Count; i++)
             {
+                node["items"][i]["key"] = currentInfo.Items[i].Key;
                 node["items"][i]["name"] = currentInfo.Items[i].Name;
-                node["items"][i]["icon"] = currentInfo.Items[i].Icon;
+
+                if (currentInfo.Items[i].IconPlaceable != null)
+                {
+                    node["items"][i]["icon"] = currentInfo.Items[i].IconPlaceable.name.ToString();
+                }
+                else
+                {
+                    node["items"][i]["icon"] = currentInfo.Items[i].Icon;
+                }
+
                 node["items"][i]["type"] = currentInfo.Items[i].Type;
                 node["items"][i]["dropChance"] = currentInfo.Items[i].DropChance.ToString();
                 node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
@@ -59,14 +71,28 @@ public class DevContentEditor : Editor
                 for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 {
                     node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;
-                    node["items"][i]["ItemSprites"][a]["sprite"]  = currentInfo.Items[i].ItemSprites[a].Sprite;
+
+                    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
+                    {
+                        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
+                    }
+                    else
+                    {
+                        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].Sprite;
+                    }
                 }
+
             }
 
             SendItemsInfo(node);
         }
 
-        GUILayout.EndHorizontal();
+        if (GUILayout.Button("Restart Server"))
+        {
+            RestartServer();
+        }
+
+        GUILayout.EndVertical();
 
     }
 
@@ -99,7 +125,6 @@ public class DevContentEditor : Editor
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
 
-        //TODO Replace with valid URL
         WWW req = new WWW("http://lul.herokuapp.com/items/generate", rawdata, headers);
 
 
@@ -110,4 +135,26 @@ public class DevContentEditor : Editor
         });
     }
 
+    private void RestartServer()
+    {
+        JSONNode node = new JSONClass();
+
+        node["pass"] = "b0ss123";
+
+        Debug.Log("Restarting Server...");
+
+        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
+
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Content-Type", "application/json");
+
+
+        WWW req = new WWW("http://lul.herokuapp.com/restart", rawdata, headers);
+
+        ContinuationManager.Add(() => req.isDone, () =>
+        {
+            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
+            Debug.Log("WWW result : " + req.text);
+        });
+    }
 }

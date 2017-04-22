@@ -218,7 +218,7 @@ public class Game : MonoBehaviour {
 
         ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
         itemInstance.transform.position = new Vector3(x, y, 0f);
-        itemInstance.SetInfo(info);
+        itemInstance.SetInfo(info, instanceID);
 
         CurrentScene.Items.Add(instanceID, itemInstance);
 
@@ -359,12 +359,15 @@ public class Game : MonoBehaviour {
         Rigidbody2D tempRigid;
         bool ThrowRight = true;
 
+        List<ItemInstance> ItemInstances = new List<ItemInstance>();
+
         for(int i=1;i<infos.Count;i++)
         {
             ThrowRight = !ThrowRight;
 
-            tempRigid = SpawnItem(infos[i], ids[i], x, y).GetComponent<Rigidbody2D>();     
-            
+            tempRigid = SpawnItem(infos[i], ids[i], x, y).GetComponent<Rigidbody2D>();
+            ItemInstances.Add(tempRigid.GetComponent<ItemInstance>());
+
             if(ThrowRight)
             {
                 tempRigid.AddForce(new Vector2(1f*i,4f), ForceMode2D.Impulse);
@@ -375,6 +378,13 @@ public class Game : MonoBehaviour {
             }
 
             yield return new WaitForSeconds(0.1f);
+        }
+
+        if (isBitch)
+        {
+            yield return new WaitForSeconds(2f);
+
+            SocketClient.Instance.SendItemPositions(ItemInstances);
         }
     }
 

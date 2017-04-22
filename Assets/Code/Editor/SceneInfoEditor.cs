@@ -26,6 +26,8 @@ public class SceneInfoEditor : Editor {
   
             for (int i=0;i<currentInfo.ScenePortals.Count;i++)
             {
+                node["scene"]["Portals"][i]["key"] = currentInfo.ScenePortals[i].Key;
+                node["scene"]["Portals"][i]["targetPortal"] = currentInfo.ScenePortals[i].TargetPortal;
                 node["scene"]["Portals"][i]["TargetLevel"] = currentInfo.ScenePortals[i].TargetLevel;
                 node["scene"]["Portals"][i]["PositionX"]   = currentInfo.ScenePortals[i].transform.position.x.ToString();
                 node["scene"]["Portals"][i]["PositionY"]   = currentInfo.ScenePortals[i].transform.position.y.ToString();

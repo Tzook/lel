@@ -5,15 +5,19 @@ public class ItemInstance : MonoBehaviour {
 
     public ItemInfo Info;
 
+    public string ID;
+
     [SerializeField]
     SpriteRenderer m_Renderer;
 
     [SerializeField]
     Animator m_Animator;
 
-    public void SetInfo(ItemInfo info)
+    public void SetInfo(ItemInfo info,string id)
     {
         this.Info = info;
+        this.ID = id;
+
         UpdateVisual();
     }
 

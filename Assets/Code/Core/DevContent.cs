@@ -54,8 +54,13 @@ public class DevMonsterInfo
 [System.Serializable]
 public class DevItemInfo
 {
+    public string Key;
     public string Name;
+
+    //Will send "Icon" only if "IconPlaceable" is null.
+    public Sprite IconPlaceable;
     public string Icon;
+
     public string Type;
     public int DropChance;
     public int GoldValue;
@@ -63,10 +68,14 @@ public class DevItemInfo
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
 }
 
-[SerializeField]
+[System.Serializable]
 public class DevItemSprite
 {
     public string PartKey;
+
+    //Will send "Sprite" only if "SpritePlaceable" is null.
+    public Sprite SpritePlaceable = null;
+
     public string Sprite;
 }
 

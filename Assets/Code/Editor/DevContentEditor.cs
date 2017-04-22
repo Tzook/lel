@@ -6,14 +6,14 @@ using SimpleJSON;
 using BestHTTP;
 using System.Text;
 
-[CustomEditor(typeof(DevContent))]
+[CustomEditor(typeof(Content))]
 public class DevContentEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        DevContent currentInfo = (DevContent)target;
+        Content currentInfo = (Content)target;
 
         GUILayout.BeginVertical();
 

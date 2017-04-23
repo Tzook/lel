@@ -35,9 +35,9 @@ public class InventoryUI : ItemSlotsContainerUI
         Clear();
 
         //TODO Might have problem when changing inventory size - (Maybe generate the slots if required).
-        for (int i = 0; i < CurrentCharacter.Inventory.Content.Length; i++)
+        for (int i = 0; i < CurrentCharacter.Inventory.ContentArray.Length; i++)
         {
-            Container.GetChild(i).GetComponent<ItemUI>().SetData(CurrentCharacter.Inventory.Content[i], this);
+            Container.GetChild(i).GetComponent<ItemUI>().SetData(CurrentCharacter.Inventory.ContentArray[i], this);
         }
     }
 

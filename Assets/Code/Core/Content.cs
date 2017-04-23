@@ -44,6 +44,20 @@ public class Content : MonoBehaviour {
 
         return null;
     }
+
+    public DevItemInfo GetItem(string itemKey)
+    {
+        for(int i=0;i<Items.Count;i++)
+        {
+            if(Items[i].Key == itemKey)
+            {
+                return Items[i];
+            }
+        }
+
+        return null;
+    }
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -97,8 +111,10 @@ public class DevItemInfo
     public Sprite IconPlaceable;
     public string Icon;
 
+    public string UseSound;
+
     public string Type;
-    public int DropChance;
+    public float DropChance;
     public int GoldValue;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();

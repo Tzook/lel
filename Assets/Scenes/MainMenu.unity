@@ -9954,8 +9954,14 @@ MonoBehaviour:
     MinGoldDrop: 0
     MaxGoldDrop: 0
     PossibleLoot:
-    - swordOfEladImproved
     - leatherVest
+    - adventurerShirt
+    - blackGloves
+    - clothPants
+    - greenPants
+    - leatherShoes
+    - strapShoes
+    - swordOfElad
   - MonsterKey: OldTurtle
     MonsterName: Old Turtle
     MonsterHP: 30
@@ -9965,7 +9971,15 @@ MonoBehaviour:
     RewardEXP: 0
     MinGoldDrop: 0
     MaxGoldDrop: 0
-    PossibleLoot: []
+    PossibleLoot:
+    - leatherVest
+    - adventurerShirt
+    - blackGloves
+    - clothPants
+    - greenPants
+    - leatherShoes
+    - strapShoes
+    - swordOfElad
   - MonsterKey: SpikedTurtle
     MonsterName: Spiked Turtle
     MonsterHP: 30
@@ -9975,7 +9989,15 @@ MonoBehaviour:
     RewardEXP: 0
     MinGoldDrop: 0
     MaxGoldDrop: 0
-    PossibleLoot: []
+    PossibleLoot:
+    - leatherVest
+    - adventurerShirt
+    - blackGloves
+    - clothPants
+    - greenPants
+    - leatherShoes
+    - strapShoes
+    - swordOfElad
   - MonsterKey: Spike
     MonsterName: Spike
     MonsterHP: 1
@@ -9991,8 +10013,9 @@ MonoBehaviour:
     Name: Leather Vest
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_leatherVest_male_torso
+    UseSound: sound_equip
     Type: chest
-    DropChance: 5
+    DropChance: 3
     GoldValue: 3
     ItemSprites:
     - PartKey: chest
@@ -10002,8 +10025,9 @@ MonoBehaviour:
     Name: Adventurer Shirt
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_adventurerShirt_male_torso
+    UseSound: sound_equip
     Type: chest
-    DropChance: 10
+    DropChance: 3
     GoldValue: 2
     ItemSprites:
     - PartKey: chest
@@ -10019,8 +10043,9 @@ MonoBehaviour:
     Name: Black Gloves
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_blackGloves_male_hand
+    UseSound: sound_equip
     Type: gloves
-    DropChance: 5
+    DropChance: 3
     GoldValue: 2
     ItemSprites:
     - PartKey: hand
@@ -10030,8 +10055,9 @@ MonoBehaviour:
     Name: Cloth Pants
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_clothPants_male_hip
+    UseSound: sound_equip
     Type: legs
-    DropChance: 15
+    DropChance: 3
     GoldValue: 1
     ItemSprites:
     - PartKey: hip
@@ -10044,8 +10070,9 @@ MonoBehaviour:
     Name: Green Pants
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_greenPants_male_hip
+    UseSound: sound_equip
     Type: legs
-    DropChance: 5
+    DropChance: 3
     GoldValue: 5
     ItemSprites:
     - PartKey: hip
@@ -10058,6 +10085,7 @@ MonoBehaviour:
     Name: Leather Shoes
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_leatherShoes_male_foot
+    UseSound: sound_equip
     Type: shoes
     DropChance: 3
     GoldValue: 12
@@ -10069,33 +10097,23 @@ MonoBehaviour:
     Name: Strap Shoes
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_strapShoes_male_foot
+    UseSound: sound_equip
     Type: shoes
-    DropChance: 10
+    DropChance: 3
     GoldValue: 1
     ItemSprites: []
   - Key: swordOfElad
     Name: Sword of Elad
     IconPlaceable: {fileID: 0}
     Icon: sword_of_elad
+    UseSound: sound_equip
     Type: weapon
-    DropChance: 5
+    DropChance: 3
     GoldValue: 2
     ItemSprites:
     - PartKey: weapon
       SpritePlaceable: {fileID: 0}
       Sprite: sword_of_elad
-  - Key: swordOfEladImproved
-    Name: Better Sword Of Elad
-    IconPlaceable: {fileID: 21300010, guid: 3b8e302cce3fd19469f50e3d223fe844, type: 3}
-    Icon: 
-    Type: weapon
-    DropChance: 100
-    GoldValue: 15
-    ItemSprites:
-    - PartKey: weapon
-      SpritePlaceable: {fileID: 21300010, guid: 3b8e302cce3fd19469f50e3d223fe844,
-        type: 3}
-      Sprite: 
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with

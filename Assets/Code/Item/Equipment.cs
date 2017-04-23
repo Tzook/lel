@@ -14,14 +14,14 @@ public class Equipment {
 
     public Equipment(JSONNode node)
     {
-        string key = "";
+        string partKey = "";
 
         for (int i = 0; i < node.Count; i++)
         {
-            if (!string.IsNullOrEmpty(node[i]["name"].Value))
+            if (!string.IsNullOrEmpty(node[i]["key"].Value))
             {
-                key = ((JSONClass)node).GetKey(i);
-                SetItem(key, new ItemInfo(node[key]));
+                partKey = ((JSONClass)node).GetKey(i);
+                SetItem(partKey, new ItemInfo(Content.Instance.GetItem(node[partKey]["key"].Value)));
             }
         }
     }

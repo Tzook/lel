@@ -350,13 +350,13 @@ public class InGameMainMenuUI : MonoBehaviour {
                     {
                         SocketClient.Instance.SendEquippedItem(draggedIndex, HoveredSlot.slotKey);
                         AudioControl.Instance.Play("sound_equip");
-                        AudioControl.Instance.Play("sound_equip");
                     }
                 }
             }
             else // --TO SPACE
             {
                 SocketClient.Instance.SendDroppedItem(draggedIndex);
+                AudioControl.Instance.Play("sound_throw");
             }
         }
         if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT

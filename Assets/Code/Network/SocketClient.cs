@@ -63,7 +63,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_stop_climbing", OnActorStopClimbing);
 
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
-        CurrentSocket.On("drop_items", OnActorDropItem);
+        CurrentSocket.On("drop_items", OnDropItems);
         CurrentSocket.On("item_disappear", OnItemDisappear);
         CurrentSocket.On("actor_move_item", OnActorMoveItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
@@ -96,8 +96,11 @@ public class SocketClient : MonoBehaviour
 
     public void Disconnect()
     {
-        CurrentSocket.Disconnect();
-        CurrentSocket.Off();
+        if (CurrentSocket != null)
+        {
+            CurrentSocket.Disconnect();
+            CurrentSocket.Off();
+        }
     }
 
     void OnApplicationQuit()
@@ -137,7 +140,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has joined the room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.LoadNpcCharacter(new ActorInfo(data["character"]));
+        Game.Instance.LoadOtherPlayerCharacter(new ActorInfo(data["character"]));
     }
 
     protected void OnActorLeaveRoom(Socket socket, Packet packet, params object[] args)
@@ -145,7 +148,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has left the room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.RemoveNpcCharacter(data["id"]);
+        Game.Instance.RemoveOtherPlayerCharacter(data["id"]);
     }
 
     protected void OnMovement(Socket socket, Packet packet, params object[] args)
@@ -242,17 +245,19 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.DestroySceneItem(data["item_id"].Value);
     }
 
-    protected void OnActorDropItem(Socket socket, Packet packet, object[] args)
+    protected void OnDropItems(Socket socket, Packet packet, object[] args)
     {
-        BroadcastEvent("Actor dropped an item");
+        BroadcastEvent("An item was dropped");
         JSONNode data = (JSONNode)args[0];
 
         List<ItemInfo> infoList = new List<ItemInfo>();
         List<string> idsList = new List<string>();
-        
+
+        Debug.Log(data.ToString());
+
         for(int i=0;i<data.Count;i++)
         {
-            infoList.Add(new ItemInfo(data[i]["item"]));
+            infoList.Add(new ItemInfo(Content.Instance.GetItem(data[i]["item"]["key"].Value)));
             idsList.Add(data[i]["item_id"].Value);
         }
 
@@ -289,9 +294,11 @@ public class SocketClient : MonoBehaviour
 
         ItemInfo swappedItem = null;
 
-        if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
+        Debug.Log(data.ToString());
+
+        if (!string.IsNullOrEmpty(data["equipped_item"]["key"]))
         {
-            swappedItem = new ItemInfo(data["equipped_item"]);
+            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"]));
         }
 
         BroadcastEvent(data["id"].Value+" Equipped Item ");
@@ -308,7 +315,7 @@ public class SocketClient : MonoBehaviour
 
         if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
         {
-            swappedItem = new ItemInfo(data["equipped_item"]);
+            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"].Value));
         }
 
         BroadcastEvent(data["id"].Value + " Unequipped Item ");
@@ -593,8 +600,6 @@ public class SocketClient : MonoBehaviour
         node["from"].AsInt = fromIndex;
         node["to"] = Slot;
 
-        Debug.Log(node);
-
         CurrentSocket.Emit("equipped_item", node);
     }
 
@@ -616,6 +621,12 @@ public class SocketClient : MonoBehaviour
 
         node["slot"] = fromSlot;
 
+        string useSound = Game.Instance.CurrentScene.ClientCharacter.Equipment.GetItem(fromSlot).UseSound;
+        if (!string.IsNullOrEmpty(useSound))
+        {
+            AudioControl.Instance.Play(useSound);
+        }
+
         CurrentSocket.Emit("used_equip", node);
     }
 
@@ -624,6 +635,12 @@ public class SocketClient : MonoBehaviour
         JSONNode node = new JSONClass();
 
         node["slot"] = inventoryIndex.ToString();
+
+        string useSound = Game.Instance.CurrentScene.ClientCharacter.Inventory.ContentArray[inventoryIndex].UseSound;
+        if (!string.IsNullOrEmpty(useSound))
+        {
+            AudioControl.Instance.Play(useSound);
+        }
 
         CurrentSocket.Emit("used_item", node);
     }

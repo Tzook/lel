@@ -53,34 +53,34 @@ public class DevContentEditor : Editor
             for (int i = 0; i < currentInfo.Items.Count; i++)
             {
                 node["items"][i]["key"] = currentInfo.Items[i].Key;
-                node["items"][i]["name"] = currentInfo.Items[i].Name;
+                //node["items"][i]["name"] = currentInfo.Items[i].Name;
 
-                if (currentInfo.Items[i].IconPlaceable != null)
-                {
-                    node["items"][i]["icon"] = currentInfo.Items[i].IconPlaceable.name.ToString();
-                }
-                else
-                {
-                    node["items"][i]["icon"] = currentInfo.Items[i].Icon;
-                }
+                //if (currentInfo.Items[i].IconPlaceable != null)
+                //{
+                //    node["items"][i]["icon"] = currentInfo.Items[i].IconPlaceable.name.ToString();
+                //}
+                //else
+                //{
+                //    node["items"][i]["icon"] = currentInfo.Items[i].Icon;
+                //}
 
                 node["items"][i]["type"] = currentInfo.Items[i].Type;
                 node["items"][i]["dropChance"] = currentInfo.Items[i].DropChance.ToString();
                 node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
 
-                for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
-                {
-                    node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;
+                //for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
+                //{
+                //    node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;
 
-                    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
-                    {
-                        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
-                    }
-                    else
-                    {
-                        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].Sprite;
-                    }
-                }
+                //    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
+                //    {
+                //        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
+                //    }
+                //    else
+                //    {
+                //        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].Sprite;
+                //    }
+                //}
 
             }
 

@@ -129,7 +129,7 @@ public class Game : MonoBehaviour {
         {
             if (previouslyEquipped != null)
             {
-                ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.Content[inventoryIndex] = previouslyEquipped;
+                ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.ContentArray[inventoryIndex] = previouslyEquipped;
             }
             else
             {
@@ -249,7 +249,7 @@ public class Game : MonoBehaviour {
         }
     }
 
-    public void LoadNpcCharacter(ActorInfo info)
+    public void LoadOtherPlayerCharacter(ActorInfo info)
     {
         GameObject tempObj = SpawnPlayer(info);
 
@@ -258,7 +258,7 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
-    public void RemoveNpcCharacter(string id)
+    public void RemoveOtherPlayerCharacter(string id)
     {
         GameObject leavingPlayer = CurrentScene.GetActor(id).Instance.gameObject;
 

@@ -6,7 +6,7 @@ using System;
 [System.Serializable]
 public class Inventory
 {
-    public ItemInfo[] Content;
+    public ItemInfo[] ContentArray;
     public bool isFull
     {
         get { return (GetFreeSlot() == -1); }
@@ -23,43 +23,43 @@ public class Inventory
 
     public void SetInventory(JSONNode inventoryNode)
     {
-        Content = new ItemInfo[20];
+        ContentArray = new ItemInfo[20];
         for (int i = 0; i < inventoryNode.Count; i++)
         {
-            if (!string.IsNullOrEmpty(inventoryNode[i]["name"].Value))
+            if (!string.IsNullOrEmpty(inventoryNode[i]["key"].Value))
             {
-                Content[i] = new ItemInfo(inventoryNode[i]);
+                ContentArray[i] = new ItemInfo(Content.Instance.GetItem(inventoryNode[i]["key"].Value));
             }
         }
     }
 
     public void SwapSlots(int fromIndex, int toIndex)
     {
-        ItemInfo draggedInfo = Content[fromIndex];
-        Content[fromIndex] = Content[toIndex];
-        Content[toIndex] = draggedInfo;
+        ItemInfo draggedInfo = ContentArray[fromIndex];
+        ContentArray[fromIndex] = ContentArray[toIndex];
+        ContentArray[toIndex] = draggedInfo;
     }
 
     public void RemoveItem(int index)
     {
-        Content[index] = null;
+        ContentArray[index] = null;
     }
 
     internal void AddItem(ItemInfo info)
     {
-        Content[GetFreeSlot()] = info;
+        ContentArray[GetFreeSlot()] = info;
     }
 
     internal void AddItemAt(int index, ItemInfo info)
     {
-        Content[index] = info;
+        ContentArray[index] = info;
     }
 
     private int GetFreeSlot()
     {
-        for(int i=0;i<Content.Length;i++)
+        for(int i=0;i<ContentArray.Length;i++)
         {
-            if (Content[i] == null || string.IsNullOrEmpty(Content[i].Name))
+            if (ContentArray[i] == null || string.IsNullOrEmpty(ContentArray[i].Name))
             {
                 return i;
             }

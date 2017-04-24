@@ -476,7 +476,21 @@ public class ActorController : MonoBehaviour
         InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
 
+        //TODO Replace with item based DMG instance
         OneHandDamageInstance.gameObject.SetActive(true);
+    }
+
+    public void InturruptAttack()
+    {
+        Instance.StartCombatMode();
+
+        if (LoadAttackValueInstance != null)
+        {
+            StopCoroutine(LoadAttackValueInstance);
+            LoadAttackValueInstance = null;
+        }
+
+        InGameMainMenuUI.Instance.StopChargingAttack();
     }
 
     #endregion
@@ -536,6 +550,8 @@ public class ActorController : MonoBehaviour
             {
                 Rigid.AddForce((InternalJumpForce * 2f * -transform.right), ForceMode2D.Impulse);
             }
+
+            InturruptAttack();
         }
     }
 

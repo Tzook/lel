@@ -22,6 +22,7 @@ public class InventoryUI : ItemSlotsContainerUI
         }
     }
 
+
     public void ShowInventory(ActorInfo Character)
     {
         CurrentCharacter = Character;

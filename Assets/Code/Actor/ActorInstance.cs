@@ -532,6 +532,7 @@ public class ActorInstance : MonoBehaviour
         {
             AudioControl.Instance.Play("sound_item");
             Info.Inventory.AddItem(Game.Instance.CurrentScene.Items[instanceID].Info);
+
             InGameMainMenuUI.Instance.RefreshInventory();
         }
 

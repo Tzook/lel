@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour {
     BoxCollider2D m_HitBox;
 
     [SerializeField]
+    SpriteAlphaGroup m_AlphaGroup;
+
+    [SerializeField]
     protected int HurtTypes;
 
     [SerializeField]
@@ -47,6 +50,11 @@ public class Enemy : MonoBehaviour {
         }
 
         RegisterEnemy();
+
+        if(m_AlphaGroup!=null)
+        {
+            m_AlphaGroup.SetAlpha(1f);
+        }
     }
 
     private void RegisterEnemy()

@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4000010489232326}
   - component: {fileID: 212000013486271980}
   - component: {fileID: 95000010536761378}
+  - component: {fileID: 114162395767470044}
   m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
@@ -325,7 +326,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010036509418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 47.70993, y: 15.911822, z: 0}
+  m_LocalPosition: {x: 52.208836, y: -15.168239, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4000010489232326}
@@ -472,6 +473,7 @@ MonoBehaviour:
   Body: {fileID: 4000010489232326}
   Anim: {fileID: 95000010536761378}
   m_HitBox: {fileID: 61608513939217706}
+  m_AlphaGroup: {fileID: 114162395767470044}
   HurtTypes: 2
   DeathTypes: 2
   Sprites:
@@ -504,6 +506,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyReference: {fileID: 114000013421662664}
   Collisions: []
+--- !u!114 &114162395767470044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012042829428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3075cb0a318b73044aaf6cf3da941e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alpha: 0
 --- !u!210 &210324352886479942
 SortingGroup:
   m_ObjectHideFlags: 1

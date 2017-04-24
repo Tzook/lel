@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4000013075024830}
   - component: {fileID: 212000010458386326}
   - component: {fileID: 95000011514922204}
+  - component: {fileID: 114219952977951076}
   m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
@@ -200,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013660567376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.51734, y: 16.050854, z: 0}
+  m_LocalPosition: {x: 52.472553, y: -15.094069, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013075024830}
@@ -472,6 +473,7 @@ MonoBehaviour:
   Body: {fileID: 4000013075024830}
   Anim: {fileID: 95000011514922204}
   m_HitBox: {fileID: 61087410083602296}
+  m_AlphaGroup: {fileID: 114219952977951076}
   HurtTypes: 2
   DeathTypes: 2
   Sprites:
@@ -491,6 +493,18 @@ MonoBehaviour:
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 0.5
+--- !u!114 &114219952977951076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013356088534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3075cb0a318b73044aaf6cf3da941e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alpha: 0
 --- !u!114 &114302032850065344
 MonoBehaviour:
   m_ObjectHideFlags: 1

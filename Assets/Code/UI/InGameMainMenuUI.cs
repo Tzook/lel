@@ -152,6 +152,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                 else
                 {
                     equipmentPanel.Hide();
+                    itemInfoPanel.Hide();
                 }
             }
 
@@ -227,7 +228,10 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshInventory()
     {
-        inventoryPanel.GetComponent<InventoryUI>().RefreshInventory();
+        if (inventoryPanel.gameObject.activeInHierarchy)
+        {
+            inventoryPanel.GetComponent<InventoryUI>().RefreshInventory();
+        }
     }
 
     internal void DisableInventoryInput()

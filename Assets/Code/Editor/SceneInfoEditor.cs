@@ -23,7 +23,8 @@ public class SceneInfoEditor : Editor {
 
             node["pass"] = "b0ss123";
             node["scene"]["name"] = currentInfo.Name;
-  
+            node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
+
             for (int i=0;i<currentInfo.ScenePortals.Count;i++)
             {
                 node["scene"]["Portals"][i]["key"] = currentInfo.ScenePortals[i].Key;

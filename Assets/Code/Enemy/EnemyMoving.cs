@@ -43,6 +43,14 @@ public class EnemyMoving : Enemy
         }
     }
 
+    void LateUpdate()
+    {
+        if(m_HealthBar != null)
+        {
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 2f);
+        }
+    }
+
     #region AI
 
     public virtual IEnumerator AIRoutine()
@@ -169,9 +177,9 @@ public class EnemyMoving : Enemy
         Anim.SetBool("Walk", true);
     }
 
-    public override void Hurt(ActorInstance actor, int damage = 0 )
+    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0)
     {
-        base.Hurt(actor,damage);
+        base.Hurt(actor,damage, currentHP);
 
         if (Game.Instance.isBitch)
         {

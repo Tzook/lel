@@ -8,15 +8,21 @@ public class EnemyInfo {
     public string Name;
     public EnemyType Type;
 
-    public EnemyInfo(string id = "noID", string name = "Unknown", EnemyType type = EnemyType.Static)
+    public float CurrentHealth;
+    public float MaxHealth;
+
+    public EnemyInfo(DevMonsterInfo info, string id = "noID")
     {
         this.ID = id;
-        this.Name = name;
-        this.Type = type;
-    }
+        this.Name = info.MonsterName;
+        this.Type = info.Type;
 
-    public enum EnemyType
-    {
-        Static, Moving
+        this.CurrentHealth = info.MonsterHP;
+        this.MaxHealth = info.MonsterHP;
     }
+}
+
+public enum EnemyType
+{
+    Static, Moving
 }

@@ -58,6 +58,19 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public DevMonsterInfo GetMonster(string monsterKey)
+    {
+        for (int i = 0; i < Monsters.Count; i++)
+        {
+            if (Monsters[i].MonsterKey == monsterKey)
+            {
+                return Monsters[i];
+            }
+        }
+
+        return null;
+    }
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -95,6 +108,9 @@ public class DevMonsterInfo
     public int MaxGoldDrop;
 
     [SerializeField]
+    public EnemyType Type;
+
+    [SerializeField]
     public List<string> PossibleLoot = new List<string>();
 
 
@@ -116,6 +132,8 @@ public class DevItemInfo
     public string Type;
     public float DropChance;
     public int GoldValue;
+
+    public int StackCap = 1;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
 }

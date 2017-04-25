@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
     protected Animator Anim;
 
     [SerializeField]
-    BoxCollider2D m_HitBox;
+    public BoxCollider2D m_HitBox;
 
     [SerializeField]
     SpriteAlphaGroup m_AlphaGroup;
@@ -36,13 +36,17 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     protected List<string> DeathSounds = new List<string>();
 
+    [SerializeField]
+    public HealthBar m_HealthBar;
+
     protected Vector3 initScale;
 
     public bool Dead = false;
     
-    public virtual void Initialize(string instanceID, int currentHP = 0)
+    public virtual void Initialize(string instanceID ,DevMonsterInfo givenInfo ,int currentHP = 0)
     {
-        Info.ID = instanceID;
+        Info = new EnemyInfo(givenInfo, instanceID);
+        Info.CurrentHealth = currentHP;
 
         if (Body != null && initScale == Vector3.zero)
         {
@@ -99,7 +103,7 @@ public class Enemy : MonoBehaviour {
         pop.GetComponent<PopText>().Pop(text, clr);
     }
 
-    public virtual void Hurt(ActorInstance attackSource, int damage = 0)
+    public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0)
     {
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
@@ -115,6 +119,17 @@ public class Enemy : MonoBehaviour {
             PopHint(damage.ToString(), Color.blue);
         }
 
+
+
+        if(m_HealthBar == null)
+        {
+            m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
+            m_HealthBar.transform.position = transform.position;
+        }
+
+        Debug.Log(Info.CurrentHealth + " | " + currentHP + " | " +Info.MaxHealth);
+        m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
+        Info.CurrentHealth = currentHP;
     }
 
     public virtual void Death()
@@ -124,6 +139,9 @@ public class Enemy : MonoBehaviour {
             Dead = true;
 
             m_HitBox.enabled = false;
+
+            m_HealthBar.gameObject.SetActive(false);
+            m_HealthBar = null;
 
             AudioControl.Instance.Play(DeathSounds[Random.Range(0, WoundSounds.Count)]);
 

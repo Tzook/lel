@@ -9,6 +9,9 @@ public class InventoryUI : ItemSlotsContainerUI
     [SerializeField]
     Transform Container;
 
+    [SerializeField]
+    Text GoldText;
+
     public ActorInfo CurrentCharacter;
 
     void Update()
@@ -34,6 +37,8 @@ public class InventoryUI : ItemSlotsContainerUI
     public void RefreshInventory()
     {
         Clear();
+
+        GoldText.text = "0";
 
         //TODO Might have problem when changing inventory size - (Maybe generate the slots if required).
         for (int i = 0; i < CurrentCharacter.Inventory.ContentArray.Length; i++)

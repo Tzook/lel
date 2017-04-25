@@ -67,6 +67,7 @@ public class DevContentEditor : Editor
                 node["items"][i]["type"] = currentInfo.Items[i].Type;
                 node["items"][i]["dropChance"] = currentInfo.Items[i].DropChance.ToString();
                 node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
+                node["items"][i]["stackCap"] = currentInfo.Items[i].StackCap.ToString();
 
                 //for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 //{

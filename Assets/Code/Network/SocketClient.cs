@@ -257,7 +257,7 @@ public class SocketClient : MonoBehaviour
 
         for(int i=0;i<data.Count;i++)
         {
-            infoList.Add(new ItemInfo(Content.Instance.GetItem(data[i]["item"]["key"].Value)));
+            infoList.Add(new ItemInfo(Content.Instance.GetItem(data[i]["item"]["key"].Value), data[i]["item"]["stack"].AsInt));
             idsList.Add(data[i]["item_id"].Value);
         }
 
@@ -376,6 +376,8 @@ public class SocketClient : MonoBehaviour
 
         Game.Instance.CurrentScene.ClientCharacter.EXP = data["now"].AsInt;
 
+        InGameMainMenuUI.Instance.MinilogMessage("+"+data["exp"].AsInt+" EXP");
+
         InGameMainMenuUI.Instance.RefreshXP();
     }
 
@@ -396,6 +398,8 @@ public class SocketClient : MonoBehaviour
             InGameMainMenuUI.Instance.RefreshLevel();
 
             AudioControl.Instance.Play("sound_positive2");
+
+            InGameMainMenuUI.Instance.MinilogMessage("Leveled Up!");
         }
 
         actor.Instance.LevelUp();
@@ -469,7 +473,7 @@ public class SocketClient : MonoBehaviour
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
         ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
         
-        monster.Hurt(attackingPlayer, data["dmg"].AsInt);
+        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt);
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)

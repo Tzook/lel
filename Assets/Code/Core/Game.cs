@@ -235,7 +235,7 @@ public class Game : MonoBehaviour {
         GameObject tempMob = ResourcesLoader.Instance.GetRecycledObject(mobKey);
         tempMob.transform.position = new Vector3(xPos, yPos, 0f);
 
-        tempMob.GetComponent<Enemy>().Initialize(instanceID, currentHP);
+        tempMob.GetComponent<Enemy>().Initialize(instanceID, Content.Instance.GetMonster(mobKey) , currentHP);
 
         ResourcesLoader.Instance.GetRecycledObject("SpawnParticles").transform.position = tempMob.transform.position;
 

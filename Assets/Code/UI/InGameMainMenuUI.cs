@@ -63,6 +63,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     ChargeAttackBarUI ChargeAttackBar;
 
+    [SerializeField]
+    MinilogUI m_Minilog;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -447,5 +450,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         GetComponent<Canvas>().worldCamera = cam;
         SubCanvas.worldCamera = cam;
+    }
+
+    public void MinilogMessage(string message)
+    {
+        m_Minilog.AddMessage(message);
     }
 }

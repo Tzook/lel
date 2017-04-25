@@ -11,11 +11,19 @@ public class ItemInfo {
     public string UseSound;
     public string Description;
     public string Type;
+    public int Stack = 1;
 
     public Dictionary<string, string> Sprites = new Dictionary<string, string>();
 
-    public ItemInfo(JSONNode itemNode)
+    public ItemInfo(JSONNode itemNode, int stack = 1)
     {
+        if(stack == 0)
+        {
+            stack = 1;
+        }
+
+        this.Stack = stack;
+
         this.Name = itemNode["name"].Value;
         this.IconKey = itemNode["icon"].Value;
         this.Type = itemNode["type"].Value;
@@ -27,8 +35,15 @@ public class ItemInfo {
         }
     }
 
-    public ItemInfo(DevItemInfo storedItem)
+    public ItemInfo(DevItemInfo storedItem, int stack = 1)
     {
+        if (stack == 0)
+        {
+            stack = 1;
+        }
+
+        this.Stack = stack;
+
         this.Name = storedItem.Name;
         this.IconKey = storedItem.Icon;
         this.UseSound = storedItem.UseSound;

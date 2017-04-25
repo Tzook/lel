@@ -531,7 +531,12 @@ public class ActorInstance : MonoBehaviour
         if (Game.Instance.CurrentScene.ClientCharacter.Instance == this)
         {
             AudioControl.Instance.Play("sound_item");
-            Info.Inventory.AddItem(Game.Instance.CurrentScene.Items[instanceID].Info);
+
+            ItemInfo info = Game.Instance.CurrentScene.Items[instanceID].Info;
+
+            Info.Inventory.AddItem(info);
+
+            InGameMainMenuUI.Instance.MinilogMessage("Picked '" + info.Name + "'");
 
             InGameMainMenuUI.Instance.RefreshInventory();
         }

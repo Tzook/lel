@@ -336,56 +336,59 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         int draggedIndex = DraggedSlot.transform.GetSiblingIndex();
 
-        if (DraggedSlot.ParentContainer == inventoryPanel)// -FROM INVENTORY
+        if (Game.Instance.CanUseUI)
         {
-            if (HoveredSlot != null) 
+            if (DraggedSlot.ParentContainer == inventoryPanel)// -FROM INVENTORY
             {
-                if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
+                if (HoveredSlot != null)
                 {
-                    if (HoveredSlot != DraggedSlot)
+                    if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
+                    {
+                        if (HoveredSlot != DraggedSlot)
+                        {
+                            int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
+                            SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
+                            AudioControl.Instance.Play("sound_clickFast");
+                        }
+
+                        HoveredSlot.UnDrag();
+                    }
+                    else if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
+                    {
+                        if (equipmentPanel.CanEquip(DraggedSlot.CurrentItem, HoveredSlot))
+                        {
+                            SocketClient.Instance.SendEquippedItem(draggedIndex, HoveredSlot.slotKey);
+                            AudioControl.Instance.Play("sound_equip");
+                        }
+                    }
+                }
+                else // --TO SPACE
+                {
+                    SocketClient.Instance.SendDroppedItem(draggedIndex);
+                    AudioControl.Instance.Play("sound_throw");
+                }
+            }
+            if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT
+            {
+                if (HoveredSlot != null)
+                {
+                    if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
+                    {
+                        AudioControl.Instance.Play("sound_equip");
+                        //TODO MOVE SLOT
+                    }
+                    else if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
                     {
                         int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
-                        SocketClient.Instance.SendMovedItem(draggedIndex, releasedIndex);
-                        AudioControl.Instance.Play("sound_clickFast");
-                    }
-
-                    HoveredSlot.UnDrag();
-                }
-                else if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
-                {
-                    if (equipmentPanel.CanEquip(DraggedSlot.CurrentItem, HoveredSlot))
-                    {
-                        SocketClient.Instance.SendEquippedItem(draggedIndex, HoveredSlot.slotKey);
                         AudioControl.Instance.Play("sound_equip");
+                        SocketClient.Instance.SendUnequippedItem(DraggedSlot.slotKey, releasedIndex);
                     }
                 }
-            }
-            else // --TO SPACE
-            {
-                SocketClient.Instance.SendDroppedItem(draggedIndex);
-                AudioControl.Instance.Play("sound_throw");
-            }
-        }
-        if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT
-        {
-            if (HoveredSlot != null)
-            {
-                if (HoveredSlot.ParentContainer == equipmentPanel) // --TO EQUIPMENT
+                else // --TO SPACE
                 {
-                    AudioControl.Instance.Play("sound_equip");
-                    //TODO MOVE SLOT
+                    SocketClient.Instance.SendDroppedEquip(DraggedSlot.slotKey);
+                    AudioControl.Instance.Play("sound_throw");
                 }
-                else if (HoveredSlot.ParentContainer == inventoryPanel) // --TO INVENTORY
-                {
-                    int releasedIndex = HoveredSlot.transform.GetSiblingIndex();
-                    AudioControl.Instance.Play("sound_equip");
-                    SocketClient.Instance.SendUnequippedItem(DraggedSlot.slotKey, releasedIndex);
-                }
-            }
-            else // --TO SPACE
-            {
-                SocketClient.Instance.SendDroppedEquip(DraggedSlot.slotKey);
-                AudioControl.Instance.Play("sound_throw");
             }
         }
 

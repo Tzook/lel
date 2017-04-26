@@ -30,6 +30,7 @@ public class ActorController : MonoBehaviour
 
     public bool Grounded = false;
     public bool OnRope = false;
+    public bool CanInput = true;
 
     [SerializeField]
     float GroundedThreshold;
@@ -100,20 +101,38 @@ public class ActorController : MonoBehaviour
         initScale = Anim.transform.localScale;
     }
 
+    public bool Test;
     void Update()
     {
-        if(Input.GetMouseButton(1) && !OnRope)
+        if (Test)
         {
-            Aim();
-        }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            StopAim();
+            Death();
+            Test = false;
         }
 
-        if (Input.GetKeyDown(InputMap.Map["Pick Up"]))
+        if (CanInput)
         {
-            Instance.AttemptPickUp();
+            if (Input.GetMouseButton(1) && !OnRope)
+            {
+                Aim();
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                StopAim();
+            }
+
+            if (Input.GetKeyDown(InputMap.Map["Pick Up"]))
+            {
+                Instance.AttemptPickUp();
+            }
+
+            if (!Invincible)
+            {
+                if (CollidingEnemy != null)
+                {
+                    Hurt(CollidingEnemy);
+                }
+            }
         }
 
         if (Input.GetKeyDown(InputMap.Map["Wink Emote"]))
@@ -173,26 +192,21 @@ public class ActorController : MonoBehaviour
             }
         }
 
-        if(!Invincible)
-        {
-            if(CollidingEnemy != null)
-            {
-                Hurt(CollidingEnemy);
-            }
-        }
-
     }
 
     void LateUpdate()
     {
         CollidingEnemy = null;
 
-        if (Input.GetMouseButtonDown(0) && !Game.Instance.DraggingWindow)
+        if (CanInput)
         {
-            Anim.SetInteger("AttackType", Random.Range(0, 3));
-        }
+            if (Input.GetMouseButtonDown(0) && !Game.Instance.DraggingWindow)
+            {
+                Anim.SetInteger("AttackType", Random.Range(0, 3));
+            }
 
-        Anim.SetBool("Charging", (Input.GetMouseButton(0) && !Game.Instance.DraggingWindow));
+            Anim.SetBool("Charging", (Input.GetMouseButton(0) && !Game.Instance.DraggingWindow));
+        }
 
     }
 
@@ -202,88 +216,96 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
-        if (!OnRope)
+        if (CanInput)
         {
-            if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
+            if (!OnRope)
             {
-                MoveLeft();
-                Anim.SetBool("Walking", true);
-            }
-            else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
-            {
-                MoveRight();
-                Anim.SetBool("Walking", true);
-            }
-            else
-            {
-                StandStill();
-            }
-
-            if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
-            {
-                Jump();
-                //Anim.SetBool("Walking", true);
-            }
-
-            GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
-            GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
-
-            //Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
-
-            Grounded = (GroundRayRight || GroundRayLeft);
-
-            if (!Grounded)
-            {
-                Anim.SetBool("InAir", true);
-            }
-
-            if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
-            {
-                if (CurrentRope != null)
+                if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
                 {
-                    ClimbRope();
+                    MoveLeft();
+                    Anim.SetBool("Walking", true);
+                }
+                else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
+                {
+                    MoveRight();
+                    Anim.SetBool("Walking", true);
                 }
                 else
                 {
-                    EnterPortal();
-                }
-            }
-        }
-        else
-        {
-            if (CurrentRope == null)
-            {
-                UnclimbRope();
-            }
-            else
-            {
-                transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
-
-                if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
-                {
-                    Anim.SetBool("ClimbingUp", true);
-                    Anim.SetBool("ClimbingDown", false);
-
-                    transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
-                }
-                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
-                {
-                    Anim.SetBool("ClimbingDown", true);
-                    Anim.SetBool("ClimbingUp", false);
-
-                    transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
-                }
-                else
-                {
-                    Anim.SetBool("ClimbingUp", false);
-                    Anim.SetBool("ClimbingDown", false);
+                    StandStill();
                 }
 
                 if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
                 {
-                    UnclimbRope();
+                    Jump();
+                    //Anim.SetBool("Walking", true);
+                }
+
+                GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+                GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+
+                //Debug.DrawRay(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up * GroundedThreshold, Color.red);
+
+                Grounded = (GroundRayRight || GroundRayLeft);
+
+                if (!Grounded)
+                {
+                    Anim.SetBool("InAir", true);
+                }
+
+                if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                {
+                    if (CurrentRope != null)
+                    {
+                        ClimbRope();
+                    }
+                    else
+                    {
+                        EnterPortal();
+                    }
                 }
             }
+            else
+            {
+                if (CurrentRope == null)
+                {
+                    UnclimbRope();
+                }
+                else
+                {
+                    transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
+
+                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                    {
+                        Anim.SetBool("ClimbingUp", true);
+                        Anim.SetBool("ClimbingDown", false);
+
+                        transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                    }
+                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
+                    {
+                        Anim.SetBool("ClimbingDown", true);
+                        Anim.SetBool("ClimbingUp", false);
+
+                        transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        Anim.SetBool("ClimbingUp", false);
+                        Anim.SetBool("ClimbingDown", false);
+                    }
+
+                    if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
+                    {
+                        UnclimbRope();
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            StandStill();
         }
 
         if (!ClientOnly)
@@ -295,8 +317,6 @@ public class ActorController : MonoBehaviour
                 lastSentAngle = rotDegrees;
             }
         }
-
-       
     }
 
     private void EnterPortal()
@@ -493,6 +513,18 @@ public class ActorController : MonoBehaviour
         InGameMainMenuUI.Instance.StopChargingAttack();
     }
 
+    public void Death()
+    {
+        Anim.SetTrigger("Kill");
+        Anim.SetBool("isDead", true);
+
+        Instance.PlayEyesEmote("cry");
+        Instance.PlayMouthEmote("angry");
+
+        CanInput = false;
+        Game.Instance.CanUseUI = false;
+    }
+
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -540,6 +572,10 @@ public class ActorController : MonoBehaviour
         {
             SocketClient.Instance.SendTookDMG(enemy.Info);
             Instance.Hurt();
+
+            Instance.PlayEyesEmote("angry");
+            Instance.PlayMouthEmote("sad");
+
             StartCoroutine(InvincibilityRoutine());
 
             if (enemy.transform.position.x < transform.position.x)

@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
     public bool InChat = false;
+    public bool CanUseUI = true;
     public bool DraggingWindow = false;
     public bool MovingTroughPortal = false;
     public bool isBitch = false;

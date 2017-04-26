@@ -20,7 +20,10 @@ public class InventoryUI : ItemSlotsContainerUI
         {
             if(InGameMainMenuUI.Instance.HoveredSlot!=null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
             {
-                SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+                if (Game.Instance.CanUseUI)
+                {
+                    SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+                }
             }
         }
     }

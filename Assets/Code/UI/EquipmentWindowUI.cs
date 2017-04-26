@@ -35,7 +35,10 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         {
             if (InGameMainMenuUI.Instance.HoveredSlot != null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
             {
-                SocketClient.Instance.SendUsedEquip(InGameMainMenuUI.Instance.HoveredSlot.slotKey);
+                if (Game.Instance.CanUseUI)
+                {
+                    SocketClient.Instance.SendUsedEquip(InGameMainMenuUI.Instance.HoveredSlot.slotKey);
+                }
             }
         }
     }

@@ -9,6 +9,9 @@ public class ItemUI : MonoBehaviour {
     Image IconImage;
 
     [SerializeField]
+    Text CountText;
+
+    [SerializeField]
     Outline outline;
 
     [SerializeField]
@@ -29,10 +32,18 @@ public class ItemUI : MonoBehaviour {
 
     private void RefreshUI()
     {
-        if(CurrentItem == null)
+        if (CurrentItem == null)
         {
             IconImage.sprite = ResourcesLoader.Instance.GetSprite("transparentPixel");
+            CountText.text = "";
             return;
+        }
+        else
+        {
+            if (CurrentItem.Stack > 1)
+            {
+                CountText.text = "x" + CurrentItem.Stack;
+            }
         }
 
         if (!string.IsNullOrEmpty(CurrentItem.IconKey))

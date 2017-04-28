@@ -14,7 +14,7 @@ public class WebSocketConnector
 		List<Cookie> cookies = BestHTTP.Cookies.CookieJar.GetAll();
 		foreach (Cookie cookie in cookies)
 		{
-			if (cookie.Name == "unicorn")
+			if (cookie.Name == "unicorn" && cookie.Domain == Config.DOMAIN)
 			{
 				options.AdditionalQueryParams.Add("unicorn", cookie.Value);
 				break;

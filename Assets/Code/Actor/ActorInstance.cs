@@ -531,17 +531,27 @@ public class ActorInstance : MonoBehaviour
         if (Game.Instance.CurrentScene.ClientCharacter.Instance == this)
         {
             AudioControl.Instance.Play("sound_item");
-
-            ItemInfo info = Game.Instance.CurrentScene.Items[instanceID].Info;
-
-            Info.Inventory.AddItem(info);
-
-            InGameMainMenuUI.Instance.MinilogMessage("Picked '" + info.Name + "'");
-
-            InGameMainMenuUI.Instance.RefreshInventory();
         }
 
         StartCoroutine(PickingUpItemRoutine(instanceID));
+    }
+
+    public void AddItem(int slot, ItemInfo item)
+    {
+        Info.Inventory.AddItemAt(slot, item);
+
+        InGameMainMenuUI.Instance.MinilogMessage("Picked '" + item.Name + "'");
+
+        InGameMainMenuUI.Instance.RefreshInventory();
+    }
+
+    public void ChangeItemStack(int slot, int stack)
+    {
+        Info.Inventory.ChangeItemStack(slot, stack);
+        
+        InGameMainMenuUI.Instance.MinilogMessage("Changed stack to '" + stack + "'");
+
+        InGameMainMenuUI.Instance.RefreshInventory();
     }
 
     internal void Hurt()

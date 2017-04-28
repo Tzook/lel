@@ -66,7 +66,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("drop_items", OnDropItems);
         CurrentSocket.On("item_disappear", OnItemDisappear);
         CurrentSocket.On("actor_move_item", OnActorMoveItem);
+        CurrentSocket.On("actor_add_item", OnActorAddItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
+        CurrentSocket.On("change_item_stack", OnChangeItemStack);
 
         CurrentSocket.On("actor_equip_item", OnActorEquipItem);
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
@@ -278,6 +280,22 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
 
         Game.Instance.MoveInventoryItem(data["from"].AsInt, data["to"].AsInt);
+    }
+
+    protected void OnActorAddItem(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item Added");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.ClientCharacter.Instance.AddItem(data["slot"].AsInt, new ItemInfo(Content.Instance.GetItem(data["item"]["key"].Value), data["item"]["stack"].AsInt));
+    }
+
+    protected void OnChangeItemStack(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item Stack Changed");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.ClientCharacter.Instance.ChangeItemStack(data["slot"].AsInt, data["stack"].AsInt);
     }
 
     protected void OnActorDeleteItem(Socket socket, Packet packet, object[] args)

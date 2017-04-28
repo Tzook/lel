@@ -55,6 +55,11 @@ public class Inventory
         ContentArray[index] = info;
     }
 
+    internal void ChangeItemStack(int index, int stack)
+    {
+        ContentArray[index].Stack = stack;
+    }
+
     private int GetFreeSlot()
     {
         for(int i=0;i<ContentArray.Length;i++)

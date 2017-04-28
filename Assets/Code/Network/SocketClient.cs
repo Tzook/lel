@@ -69,6 +69,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_add_item", OnActorAddItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
         CurrentSocket.On("change_item_stack", OnChangeItemStack);
+        CurrentSocket.On("actor_gain_gold", OnActorGainGold);
 
         CurrentSocket.On("actor_equip_item", OnActorEquipItem);
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
@@ -295,7 +296,15 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Item Stack Changed");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.ClientCharacter.Instance.ChangeItemStack(data["slot"].AsInt, data["stack"].AsInt);
+        Game.Instance.CurrentScene.ClientCharacter.Instance.ChangeItemStack(data["slot"].AsInt, data["amount"].AsInt);
+    }
+
+    protected void OnActorGainGold(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Gained Gold");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.ClientCharacter.Instance.GainGold(data["amount"].AsInt);
     }
 
     protected void OnActorDeleteItem(Socket socket, Packet packet, object[] args)

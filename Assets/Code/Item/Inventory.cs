@@ -55,6 +55,11 @@ public class Inventory
         ContentArray[index] = info;
     }
 
+    internal ItemInfo GetItemAt(int index)
+    {
+        return ContentArray[index];
+    }
+
     internal void ChangeItemStack(int index, int stack)
     {
         ContentArray[index].Stack = stack;

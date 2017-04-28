@@ -92,6 +92,11 @@ public class ActorInfo
         }
     }
 
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+    }
+
     public void SetStats(JSONNode node)
     {
         this.LVL = node["lvl"].AsInt;

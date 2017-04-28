@@ -547,11 +547,20 @@ public class ActorInstance : MonoBehaviour
 
     public void ChangeItemStack(int slot, int stack)
     {
-        Info.Inventory.ChangeItemStack(slot, stack);
+        ItemInfo item = Info.Inventory.GetItemAt(slot);
+        int stackPicked = stack - item.Stack;
+        InGameMainMenuUI.Instance.MinilogMessage("Picked up " + stackPicked + " '" + item.Name + "'s (" + stack + ")");
         
-        InGameMainMenuUI.Instance.MinilogMessage("Changed stack to '" + stack + "'");
+        Info.Inventory.ChangeItemStack(slot, stack);
 
         InGameMainMenuUI.Instance.RefreshInventory();
+    }
+    
+    public void GainGold(int amount)
+    {
+        Info.AddGold(amount);
+
+        InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount + " gold");
     }
 
     internal void Hurt()

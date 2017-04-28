@@ -556,11 +556,15 @@ public class ActorInstance : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshInventory();
     }
     
-    public void GainGold(int amount)
+    public void ChangeGold(int amount)
     {
         Info.AddGold(amount);
 
-        InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount + " gold");
+        if (amount > 0) {
+            InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount + " gold");
+        } else {
+            InGameMainMenuUI.Instance.MinilogMessage("Lost " + (-amount) + " gold");
+        }
     }
 
     internal void Hurt()

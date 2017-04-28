@@ -42,7 +42,12 @@ public class ItemUI : MonoBehaviour {
         {
             if (CurrentItem.Stack > 1)
             {
+                Debug.Log(CurrentItem.Stack);
                 CountText.text = "x" + CurrentItem.Stack;
+            }
+            else
+            {
+                CountText.text = "";
             }
         }
 

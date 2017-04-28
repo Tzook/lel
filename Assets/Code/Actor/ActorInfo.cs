@@ -51,6 +51,8 @@ public class ActorInfo
 
     public Equipment Equipment;
 
+    public int Gold;
+
     public ActorInfo()
     {
         Equipment = new Equipment(new JSONClass());
@@ -62,7 +64,7 @@ public class ActorInfo
         this.Name = node["name"].Value;
         this.CurrentRoom = node["room"].Value;
         this.LastPosition = new Vector3(node["position"]["x"].AsFloat, node["position"]["y"].AsFloat, node["position"]["z"].AsFloat);
-
+        this.Gold = node["gold"].AsInt;
         
 
         if (node["looks"]["g"].AsBool)

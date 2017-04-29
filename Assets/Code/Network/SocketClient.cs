@@ -406,7 +406,7 @@ public class SocketClient : MonoBehaviour
 
         Game.Instance.CurrentScene.ClientCharacter.EXP = data["now"].AsInt;
 
-        InGameMainMenuUI.Instance.MinilogMessage("+"+data["exp"].AsInt+" EXP");
+        InGameMainMenuUI.Instance.MinilogMessage("+" + data["exp"].AsInt.ToString("N0") + " EXP");
 
         InGameMainMenuUI.Instance.RefreshXP();
     }

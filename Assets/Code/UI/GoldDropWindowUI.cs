@@ -15,7 +15,7 @@ public class GoldDropWindowUI : MonoBehaviour {
         {
             if (GoldValue <= Game.Instance.CurrentScene.ClientCharacter.Gold)
             {
-                InGameMainMenuUI.Instance.MinilogMessage("Dropped " + GoldValue + " Gold");
+                InGameMainMenuUI.Instance.MinilogMessage("Dropped " + GoldValue.ToString("N0") + " Gold");
 
                 SocketClient.Instance.SendDroppedGold(GoldValue);
                 this.gameObject.SetActive(false);

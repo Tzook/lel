@@ -41,7 +41,7 @@ public class InventoryUI : ItemSlotsContainerUI
     {
         Clear();
 
-        GoldText.text = CurrentCharacter.Gold.ToString();
+        GoldText.text = CurrentCharacter.Gold.ToString("N0");
 
         //TODO Might have problem when changing inventory size - (Maybe generate the slots if required).
         for (int i = 0; i < CurrentCharacter.Inventory.ContentArray.Length; i++)

@@ -112,11 +112,11 @@ public class Enemy : MonoBehaviour {
 
         if (attackSource.Info.ID == Game.Instance.CurrentScene.ClientCharacter.ID)
         {
-            PopHint(damage.ToString(), Color.green);
+            PopHint(damage.ToString("N0"), Color.green);
         }
         else
         {
-            PopHint(damage.ToString(), Color.blue);
+            PopHint(damage.ToString("N0"), Color.blue);
         }
 
 

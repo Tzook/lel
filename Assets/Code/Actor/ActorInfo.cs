@@ -99,11 +99,11 @@ public class ActorInfo
 
         if (amount > 0)
         {
-            InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount + " gold");
+            InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount.ToString("N0") + " gold");
         }
         else
         {
-            InGameMainMenuUI.Instance.MinilogMessage("Lost " + (-amount) + " gold");
+            InGameMainMenuUI.Instance.MinilogMessage("Lost " + (-amount).ToString("N0") + " gold");
         }
     }
 

@@ -549,7 +549,7 @@ public class ActorInstance : MonoBehaviour
     {
         ItemInfo item = Info.Inventory.GetItemAt(slot);
         int stackPicked = stack - item.Stack;
-        InGameMainMenuUI.Instance.MinilogMessage("Picked up " + stackPicked + " '" + item.Name + "'s (" + stack + ")");
+        InGameMainMenuUI.Instance.MinilogMessage("Picked up " + stackPicked.ToString("N0") + " '" + item.Name + "'s (" + stack.ToString("N0") + ")");
         
         Info.Inventory.ChangeItemStack(slot, stack);
 

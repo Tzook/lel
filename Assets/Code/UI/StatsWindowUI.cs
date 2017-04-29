@@ -29,12 +29,12 @@ public class StatsWindowUI : MonoBehaviour
     {
         this.gameObject.SetActive(true);
 
-        this.EXPText.text = info.EXP.ToString();
-        this.MaxHealthText.text = info.MaxHealth.ToString();
-        this.MaxManaText.text = info.MaxMana.ToString();
-        this.STRText.text = info.STR.ToString();
-        this.MAGText.text = info.MAG.ToString();
-        this.DEXText.text = info.DEX.ToString();
+        this.EXPText.text = info.EXP.ToString("N0");
+        this.MaxHealthText.text = info.MaxHealth.ToString("N0");
+        this.MaxManaText.text = info.MaxMana.ToString("N0");
+        this.STRText.text = info.STR.ToString("N0");
+        this.MAGText.text = info.MAG.ToString("N0");
+        this.DEXText.text = info.DEX.ToString("N0");
     }
 
     internal void Hide()

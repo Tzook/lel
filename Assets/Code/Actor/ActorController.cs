@@ -101,15 +101,8 @@ public class ActorController : MonoBehaviour
         initScale = Anim.transform.localScale;
     }
 
-    public bool Test;
     void Update()
     {
-        if (Test)
-        {
-            Death();
-            Test = false;
-        }
-
         if (CanInput)
         {
             if (Input.GetMouseButton(1) && !OnRope)

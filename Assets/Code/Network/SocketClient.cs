@@ -84,6 +84,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+        CurrentSocket.On("actor_ded", OnActorDed);
 
         CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
         CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
@@ -457,6 +458,26 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    protected void OnActorDed(Socket socket, Packet packet, object[] args)
+    {
+
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor Has Died");
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+
+        if (actor == Game.Instance.CurrentScene.ClientCharacter)
+        {
+            actor.Instance.GetComponent<ActorController>().Death();
+            InGameMainMenuUI.Instance.ShowDeathWindow();
+        }
+        else
+        {
+            actor.Instance.Death();
+        }
+    }
+
     protected void OnActorLoadAttack(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
@@ -781,6 +802,13 @@ public class SocketClient : MonoBehaviour
         }
 
         CurrentSocket.Emit("items_locations", node);
+
+    }
+
+    public void SendReleaseDeath()
+    {
+        JSONNode node = new JSONClass();
+        CurrentSocket.Emit("release_death", node);
 
     }
 

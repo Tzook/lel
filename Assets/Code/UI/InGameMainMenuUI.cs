@@ -66,6 +66,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     MinilogUI m_Minilog;
 
+    [SerializeField]
+    DeathWindowUI DeathWindow;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -458,5 +461,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void MinilogMessage(string message)
     {
         m_Minilog.AddMessage(message);
+    }
+
+    public void ShowDeathWindow()
+    {
+        DeathWindow.gameObject.SetActive(true);
     }
 }

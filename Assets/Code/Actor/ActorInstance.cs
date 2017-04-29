@@ -562,13 +562,20 @@ public class ActorInstance : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshInventory();
     }
   
-
     internal void Hurt()
     {
         Anim.SetInteger("HurtType", Random.Range(0, 3));
         Anim.SetTrigger("Hurt");
     }
 
+    public void Death()
+    {
+        Anim.SetTrigger("Kill");
+        Anim.SetBool("isDead", true);
+
+        PlayEyesEmote("cry");
+        PlayMouthEmote("angry");
+    }
 
     public void LevelUp()
     {

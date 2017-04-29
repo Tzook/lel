@@ -10268,15 +10268,36 @@ MonoBehaviour:
     MaxGoldDrop: 0
     Type: 0
     PossibleLoot:
-    - leatherVest
-    - adventurerShirt
-    - blackGloves
-    - clothPants
-    - greenPants
-    - leatherShoes
-    - strapShoes
-    - swordOfElad
-    - turtleShell
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strapShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: swordOfElad
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: turtleShell
+      MinStack: 1
+      MaxStack: 2
+    - ItemKey: gold
+      MinStack: 1
+      MaxStack: 5
   - MonsterKey: OldTurtle
     MonsterName: Old Turtle
     MonsterHP: 30
@@ -10288,15 +10309,36 @@ MonoBehaviour:
     MaxGoldDrop: 0
     Type: 0
     PossibleLoot:
-    - leatherVest
-    - adventurerShirt
-    - blackGloves
-    - clothPants
-    - greenPants
-    - leatherShoes
-    - strapShoes
-    - swordOfElad
-    - turtleShellOld
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strapShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: swordOfElad
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: turtleShellOld
+      MinStack: 1
+      MaxStack: 2
+    - ItemKey: gold
+      MinStack: 2
+      MaxStack: 10
   - MonsterKey: SpikedTurtle
     MonsterName: Spiked Turtle
     MonsterHP: 30
@@ -10308,15 +10350,36 @@ MonoBehaviour:
     MaxGoldDrop: 0
     Type: 0
     PossibleLoot:
-    - leatherVest
-    - adventurerShirt
-    - blackGloves
-    - clothPants
-    - greenPants
-    - leatherShoes
-    - strapShoes
-    - swordOfElad
-    - turtleShellSpiked
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strapShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: swordOfElad
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: turtleShellSpiked
+      MinStack: 1
+      MaxStack: 2
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 12
   - MonsterKey: Spike
     MonsterName: Spike
     MonsterHP: 1
@@ -10335,7 +10398,7 @@ MonoBehaviour:
     Icon: testingclothing_leatherVest_male_torso
     UseSound: sound_equip
     Type: chest
-    DropChance: 3
+    DropChance: 1
     GoldValue: 3
     StackCap: 1
     ItemSprites:
@@ -10348,7 +10411,7 @@ MonoBehaviour:
     Icon: testingclothing_adventurerShirt_male_torso
     UseSound: sound_equip
     Type: chest
-    DropChance: 3
+    DropChance: 1
     GoldValue: 2
     StackCap: 1
     ItemSprites:
@@ -10367,7 +10430,7 @@ MonoBehaviour:
     Icon: testingclothing_blackGloves_male_hand
     UseSound: sound_equip
     Type: gloves
-    DropChance: 3
+    DropChance: 1
     GoldValue: 2
     StackCap: 1
     ItemSprites:
@@ -10380,7 +10443,7 @@ MonoBehaviour:
     Icon: testingclothing_clothPants_male_hip
     UseSound: sound_equip
     Type: legs
-    DropChance: 3
+    DropChance: 1
     GoldValue: 1
     StackCap: 1
     ItemSprites:
@@ -10396,7 +10459,7 @@ MonoBehaviour:
     Icon: testingclothing_greenPants_male_hip
     UseSound: sound_equip
     Type: legs
-    DropChance: 3
+    DropChance: 1
     GoldValue: 5
     StackCap: 1
     ItemSprites:
@@ -10412,7 +10475,7 @@ MonoBehaviour:
     Icon: testingclothing_leatherShoes_male_foot
     UseSound: sound_equip
     Type: shoes
-    DropChance: 3
+    DropChance: 1
     GoldValue: 12
     StackCap: 1
     ItemSprites:
@@ -10425,7 +10488,7 @@ MonoBehaviour:
     Icon: testingclothing_strapShoes_male_foot
     UseSound: sound_equip
     Type: shoes
-    DropChance: 3
+    DropChance: 1
     GoldValue: 1
     StackCap: 1
     ItemSprites: []
@@ -10435,7 +10498,7 @@ MonoBehaviour:
     Icon: sword_of_elad
     UseSound: sound_equip
     Type: weapon
-    DropChance: 3
+    DropChance: 1
     GoldValue: 2
     StackCap: 1
     ItemSprites:
@@ -31177,6 +31240,7 @@ GameObject:
   - component: {fileID: 1130824464}
   - component: {fileID: 1130824466}
   - component: {fileID: 1130824465}
+  - component: {fileID: 1130824467}
   m_Layer: 5
   m_Name: GoldDropWindow
   m_TagString: Untagged
@@ -31236,6 +31300,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1130824463}
+--- !u!114 &1130824467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130824463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8598de8ac22bb114d824a54b37fc5c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InputField: {fileID: 49980897}
 --- !u!1 &1138552521
 GameObject:
   m_ObjectHideFlags: 0
@@ -36382,7 +36458,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1386186837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1130824467}
+        m_MethodName: DropGold
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1386186837

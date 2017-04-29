@@ -32,12 +32,12 @@ public class DevContentEditor : Editor
                 node["mobs"][i]["minDMG"] = currentInfo.Monsters[i].MinDMG.ToString();
                 node["mobs"][i]["maxDMG"] = currentInfo.Monsters[i].MaxDMG.ToString();
                 node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
-                node["mobs"][i]["MinGoldDrop"] = currentInfo.Monsters[i].MinGoldDrop.ToString();
-                node["mobs"][i]["MaxGoldDrop"] = currentInfo.Monsters[i].MaxGoldDrop.ToString();
 
                 for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
                 {
-                    node["mobs"][i]["drops"][a] = currentInfo.Monsters[i].PossibleLoot[a];
+                    node["mobs"][i]["drops"][a]["key"] = currentInfo.Monsters[i].PossibleLoot[a].ItemKey;
+                    node["mobs"][i]["drops"][a]["minStack"] = currentInfo.Monsters[i].PossibleLoot[a].MinStack.ToString();
+                    node["mobs"][i]["drops"][a]["maxStack"] = currentInfo.Monsters[i].PossibleLoot[a].MaxStack.ToString();
                 }
             }
 

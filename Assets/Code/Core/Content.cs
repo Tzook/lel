@@ -111,10 +111,18 @@ public class DevMonsterInfo
     public EnemyType Type;
 
     [SerializeField]
-    public List<string> PossibleLoot = new List<string>();
+    public List<LootInstance> PossibleLoot = new List<LootInstance>();
 
 
 
+}
+
+[System.Serializable]
+public class LootInstance
+{
+    public string ItemKey;
+    public int MinStack = 1;
+    public int MaxStack = 1;
 }
 
 [System.Serializable]

@@ -262,6 +262,7 @@ public class SocketClient : MonoBehaviour
 
         for(int i=0;i<data.Count;i++)
         {
+            Debug.Log("ITEM - " + data[i]["item"]["key"].Value);
             infoList.Add(new ItemInfo(Content.Instance.GetItem(data[i]["item"]["key"].Value), data[i]["item"]["stack"].AsInt));
             idsList.Add(data[i]["item_id"].Value);
         }
@@ -306,7 +307,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Changed Gold");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.ClientCharacter.Instance.ChangeGold(data["amount"].AsInt);
+        Game.Instance.CurrentScene.ClientCharacter.ChangeGold(data["amount"].AsInt);
     }
 
     protected void OnActorDeleteItem(Socket socket, Packet packet, object[] args)
@@ -613,6 +614,15 @@ public class SocketClient : MonoBehaviour
         node["slot"].AsInt = slotIndex;
 
         CurrentSocket.Emit("dropped_item", node);
+    }
+
+    public void SendDroppedGold(int GoldAmount)
+    {
+        JSONNode node = new JSONClass();
+
+        node["amount"].AsInt = GoldAmount;
+
+        CurrentSocket.Emit("dropped_gold", node);
     }
 
 

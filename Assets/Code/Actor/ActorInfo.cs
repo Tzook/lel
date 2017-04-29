@@ -92,9 +92,19 @@ public class ActorInfo
         }
     }
 
-    public void AddGold(int amount)
+    public void ChangeGold(int amount)
     {
         Gold += amount;
+        InGameMainMenuUI.Instance.RefreshInventory();
+
+        if (amount > 0)
+        {
+            InGameMainMenuUI.Instance.MinilogMessage("Gained " + amount + " gold");
+        }
+        else
+        {
+            InGameMainMenuUI.Instance.MinilogMessage("Lost " + (-amount) + " gold");
+        }
     }
 
     public void SetStats(JSONNode node)

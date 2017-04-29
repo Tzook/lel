@@ -253,7 +253,7 @@ public class ActorController : MonoBehaviour
                     Anim.SetBool("InAir", true);
                 }
 
-                if (Input.GetKeyDown(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
                 {
                     if (CurrentRope != null)
                     {
@@ -263,6 +263,10 @@ public class ActorController : MonoBehaviour
                     {
                         EnterPortal();
                     }
+                } 
+                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && CurrentRope != null) 
+                {
+                    ClimbRope();
                 }
             }
             else

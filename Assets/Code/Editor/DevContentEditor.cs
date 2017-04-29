@@ -102,7 +102,7 @@ public class DevContentEditor : Editor
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
 
-        WWW req = new WWW("http://lul.herokuapp.com/mob/generate", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/mob/generate", rawdata, headers);
 
 
         ContinuationManager.Add(() => req.isDone, () =>
@@ -122,7 +122,7 @@ public class DevContentEditor : Editor
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
 
-        WWW req = new WWW("http://lul.herokuapp.com/items/generate", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/items/generate", rawdata, headers);
 
 
         ContinuationManager.Add(() => req.isDone, () =>
@@ -146,7 +146,7 @@ public class DevContentEditor : Editor
         headers.Add("Content-Type", "application/json");
 
 
-        WWW req = new WWW("http://lul.herokuapp.com/restart", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/restart", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

@@ -59,7 +59,7 @@ public class SceneInfoEditor : Editor {
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
 
-        WWW req = new WWW("http://lul.herokuapp.com/room/generate" ,rawdata ,headers);
+        WWW req = new WWW(Config.BASE_URL + "/room/generate" ,rawdata ,headers);
 
 
         ContinuationManager.Add(() => req.isDone, () =>

@@ -328,7 +328,7 @@ public class ActorController : MonoBehaviour
         if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
         {
             Game.Instance.MovingTroughPortal = true;
-            SocketClient.Instance.EmitMoveRoom(CurrentPortal.TargetLevel);
+            SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
         }
     }
 

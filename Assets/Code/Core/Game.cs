@@ -26,9 +26,9 @@ public class Game : MonoBehaviour {
         Application.targetFrameRate = 60;
     }
 
-    public void LoadScene(string scene, string fromScene = "")
+    public void LoadScene(string scene, Vector3? position = null)
     {
-        StartCoroutine(LoadSceneRoutine(scene, fromScene));
+        StartCoroutine(LoadSceneRoutine(scene, position));
     }
 
     public void LeaveToMainMenu()
@@ -268,7 +268,7 @@ public class Game : MonoBehaviour {
         CurrentScene.Leave(id);
     }
 
-    public void LoadPlayerCharacter(string fromScene = "")
+    public void LoadPlayerCharacter(Vector3? position = null)
     {
         ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
 
@@ -276,14 +276,13 @@ public class Game : MonoBehaviour {
         ClientCharacter.GetComponent<ActorController>().enabled = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
 
-        if(!string.IsNullOrEmpty(fromScene))
+        if (position != null)
         {
-            Debug.Log(fromScene);
-            ClientCharacter.transform.position = CurrentScene.GetPortal(fromScene).transform.position;
+            ClientCharacter.transform.position = (Vector3)position;
         }
     }
 
-    protected IEnumerator LoadSceneRoutine(string scene, string fromScene = "")
+    protected IEnumerator LoadSceneRoutine(string scene, Vector3? position = null)
     {
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 
@@ -300,19 +299,7 @@ public class Game : MonoBehaviour {
 
         CurrentScene = new SceneControl();
 
-        //TODO This yield is here because the gate portals wait for hte SceneControl to initalize,
-        // - then a frame later they set themselves at it and then a frame after that they are registered.
-        // -- Without any portal gates the spawning in a new scene will recieve an exception (No gate to be placed on)
-        // --- Seems unreasonable so find a better way to figure spawn location (XYZ).
-        if (!string.IsNullOrEmpty(fromScene))
-        {
-            while (CurrentScene.GetPortal(fromScene) == null)
-            {
-                yield return 0;
-            }
-        }
-
-        SocketClient.Instance.EmitLoadedScene(fromScene);
+        SocketClient.Instance.EmitLoadedScene(position);
 
         while(GameCamera.Instance==null)
         {

@@ -220,7 +220,9 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Moved Room");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.LoadScene(data["to"], data["from"]);
+
+        Vector3 position = new Vector3(data["x"].AsFloat, data["y"].AsFloat);
+        Game.Instance.LoadScene(data["room"], position);
     }
 
     protected void OnBitchPlease(Socket socket, Packet packet, params object[] args)
@@ -527,7 +529,7 @@ public class SocketClient : MonoBehaviour
 
     #region Emittions
 
-    public void EmitLoadedScene(string fromScene = "")
+    public void EmitLoadedScene(Vector3? position = null)
     {
         BroadcastEvent("Emitted : LoadedScene");
         LoadingWindowUI.Instance.Leave(this);
@@ -535,17 +537,17 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("entered_room", node);
 
-        Game.Instance.LoadPlayerCharacter(fromScene);
+        Game.Instance.LoadPlayerCharacter(position);
     }
 
-    public void EmitMoveRoom(string targetRoom)
+    public void EmitEnteredPortal(string portal)
     {
-        BroadcastEvent("Emitted : MovedRoom");
+        BroadcastEvent("Emitted : Entering Portal");
         JSONNode node = new JSONClass();
 
-        node["room"] = targetRoom;
+        node["portal"] = portal;
 
-        CurrentSocket.Emit("moved_room", node);
+        CurrentSocket.Emit("entered_portal", node);
     }
 
     public void EmitMovement(Vector3 pos, float rotDegrees)

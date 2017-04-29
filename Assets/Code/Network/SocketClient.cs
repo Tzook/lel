@@ -770,6 +770,8 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
+        
+
         for (int i = 0; i < ItemInstances.Count; i++)
         {
             node[i]["x"] = ItemInstances[i].transform.position.x.ToString();

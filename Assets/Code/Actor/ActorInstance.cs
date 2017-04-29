@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class ActorInstance : MonoBehaviour
 {
@@ -71,6 +72,9 @@ public class ActorInstance : MonoBehaviour
 
     [SerializeField]
     Animator Anim;
+
+    [SerializeField]
+    SortingGroup m_SortingGroup;
 
     #endregion
 
@@ -439,7 +443,9 @@ public class ActorInstance : MonoBehaviour
 
     public void SetElementsLayer(string layer = "Default", int minLevel = 0, Material matType = null)
     {
-        SetElementLayer(m_Head ,layer ,minLevel ,matType);
+        m_SortingGroup.sortingLayerName = layer;
+
+        SetElementLayer(m_Head, layer, minLevel, matType);
         SetElementLayer(m_Chest, layer, minLevel, matType);
         SetElementLayer(m_Eyes, layer, minLevel, matType);
         SetElementLayer(m_Nose, layer, minLevel, matType);

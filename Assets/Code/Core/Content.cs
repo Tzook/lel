@@ -102,12 +102,6 @@ public class DevMonsterInfo
     public int RewardEXP;
 
     [SerializeField]
-    public int MinGoldDrop;
-
-    [SerializeField]
-    public int MaxGoldDrop;
-
-    [SerializeField]
     public EnemyType Type;
 
     [SerializeField]

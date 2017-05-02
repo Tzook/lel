@@ -270,7 +270,7 @@ public class CreateCharacterUI : MonoBehaviour
             skinIndex = 2;
         }
 
-        m_ActorInfo.SkinColor = mouthIndex;
+        m_ActorInfo.SkinColor = skinIndex;
         m_ActorInstance.UpdateVisual();
     }
 

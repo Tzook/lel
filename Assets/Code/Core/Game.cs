@@ -26,9 +26,9 @@ public class Game : MonoBehaviour {
         Application.targetFrameRate = 60;
     }
 
-    public void LoadScene(string scene, Vector3? position = null)
+    public void LoadScene(string scene, ActorInfo actorInfo)
     {
-        StartCoroutine(LoadSceneRoutine(scene, position));
+        StartCoroutine(LoadSceneRoutine(scene, actorInfo));
     }
 
     public void LeaveToMainMenu()
@@ -268,21 +268,17 @@ public class Game : MonoBehaviour {
         CurrentScene.Leave(id);
     }
 
-    public void LoadPlayerCharacter(Vector3? position = null)
+    public void LoadPlayerCharacter(ActorInfo actorInfo)
     {
+        LocalUserInfo.Me.SelectedCharacter = actorInfo;
         ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
 
         ClientCharacter.GetComponent<ActorMovement>().enabled = false;
         ClientCharacter.GetComponent<ActorController>().enabled = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
-
-        if (position != null)
-        {
-            ClientCharacter.transform.position = (Vector3)position;
-        }
     }
 
-    protected IEnumerator LoadSceneRoutine(string scene, Vector3? position = null)
+    protected IEnumerator LoadSceneRoutine(string scene, ActorInfo actorInfo)
     {
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 
@@ -299,7 +295,7 @@ public class Game : MonoBehaviour {
 
         CurrentScene = new SceneControl();
 
-        SocketClient.Instance.EmitLoadedScene(position);
+        SocketClient.Instance.EmitLoadedScene(actorInfo);
 
         while(GameCamera.Instance==null)
         {

@@ -136,7 +136,6 @@ public class SocketClient : MonoBehaviour
     protected void OnConnect(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("On connect");
-        Game.Instance.LoadScene(LocalUserInfo.Me.SelectedCharacter.CurrentRoom);
     }
 
     protected void OnActorJoinRoom(Socket socket, Packet packet, params object[] args)
@@ -222,8 +221,7 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Vector3 position = new Vector3(data["x"].AsFloat, data["y"].AsFloat);
-        Game.Instance.LoadScene(data["room"], position);
+        Game.Instance.LoadScene(data["room"], new ActorInfo(data["character"]));
     }
 
     protected void OnBitchPlease(Socket socket, Packet packet, params object[] args)
@@ -551,7 +549,7 @@ public class SocketClient : MonoBehaviour
 
     #region Emittions
 
-    public void EmitLoadedScene(Vector3? position = null)
+    public void EmitLoadedScene(ActorInfo actorInfo)
     {
         BroadcastEvent("Emitted : LoadedScene");
         LoadingWindowUI.Instance.Leave(this);
@@ -559,7 +557,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("entered_room", node);
 
-        Game.Instance.LoadPlayerCharacter(position);
+        Game.Instance.LoadPlayerCharacter(actorInfo);
     }
 
     public void EmitEnteredPortal(string portal)

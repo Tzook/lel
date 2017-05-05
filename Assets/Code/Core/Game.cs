@@ -352,19 +352,20 @@ public class Game : MonoBehaviour {
             tempRigid = SpawnItem(infos[i], ids[i], x, y).GetComponent<Rigidbody2D>();
             ItemInstances.Add(tempRigid.GetComponent<ItemInstance>());
 
+            float sideOffset = (i + 1) / 2; // round down so both side have equal distances
             if(ThrowRight)
             {
-                tempRigid.AddForce(new Vector2(1f*i,4f), ForceMode2D.Impulse);
+                tempRigid.AddForce(new Vector2(1f * sideOffset, 4f), ForceMode2D.Impulse);
             }
             else
             {
-                tempRigid.AddForce(new Vector2(-1f * i, 4f), ForceMode2D.Impulse);
+                tempRigid.AddForce(new Vector2(-1f * sideOffset, 4f), ForceMode2D.Impulse);
             }
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        if (isBitch)
+        if (isBitch && ItemInstances.Count > 0)
         {
             yield return new WaitForSeconds(2f);
 

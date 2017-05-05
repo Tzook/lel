@@ -118,8 +118,9 @@ public class SocketClient : MonoBehaviour
 
     private void OnError(Socket socket, Packet packet, object[] args)
     {
+        Error error = args[0] as Error;
         BroadcastEvent("On error");
-        WarningMessageUI.Instance.ShowMessage("An error occurred");
+        WarningMessageUI.Instance.ShowMessage("An error occurred: " + error);
     }
     
     private void OnEventError(Socket socket, Packet packet, object[] args)
@@ -788,15 +789,14 @@ public class SocketClient : MonoBehaviour
     public void SendItemPositions(List<ItemInstance> ItemInstances)
     {
         JSONNode node = new JSONClass();
-
-        
+        node["items"] = new JSONArray();
 
         for (int i = 0; i < ItemInstances.Count; i++)
         {
-            node[i]["x"] = ItemInstances[i].transform.position.x.ToString();
-            node[i]["y"] = ItemInstances[i].transform.position.y.ToString();
+            node["items"][i]["x"] = ItemInstances[i].transform.position.x.ToString();
+            node["items"][i]["y"] = ItemInstances[i].transform.position.y.ToString();
 
-            node[i]["item_id"] = ItemInstances[i].ID;
+            node["items"][i]["item_id"] = ItemInstances[i].ID;
         }
 
         CurrentSocket.Emit("items_locations", node);

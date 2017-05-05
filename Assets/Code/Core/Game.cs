@@ -10,9 +10,18 @@ public class Game : MonoBehaviour {
     public bool InGame { protected set; get; }
     public bool InChat = false;
     public bool CanUseUI = true;
-    public bool DraggingWindow = false;
+    public bool isDraggingWindow = false;
+    public bool isInteractingWithUI
+    {
+        get
+        {
+            return isDraggingWindow 
+                    || InGameMainMenuUI.Instance.isDraggingItem;
+        }
+    }
     public bool MovingTroughPortal = false;
     public bool isBitch = false;
+
     public static Game Instance;
 
     public GameObject ClientCharacter;

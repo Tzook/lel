@@ -191,14 +191,14 @@ public class ActorController : MonoBehaviour
     {
         CollidingEnemy = null;
 
-        if (CanInput)
+        if (CanInput && !Game.Instance.isInteractingWithUI)
         {
-            if (Input.GetMouseButtonDown(0) && !Game.Instance.DraggingWindow)
+            if (Input.GetMouseButtonDown(0))
             {
                 Anim.SetInteger("AttackType", Random.Range(0, 3));
             }
 
-            Anim.SetBool("Charging", (Input.GetMouseButton(0) && !Game.Instance.DraggingWindow));
+            Anim.SetBool("Charging", Input.GetMouseButton(0));
         }
 
     }

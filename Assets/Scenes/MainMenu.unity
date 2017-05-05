@@ -10242,7 +10242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InChat: 0
   CanUseUI: 1
-  DraggingWindow: 0
+  isDraggingWindow: 0
   MovingTroughPortal: 0
   isBitch: 0
   ClientCharacter: {fileID: 0}
@@ -10555,7 +10555,11 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 1
     StackCap: 1
-    ItemSprites: []
+    ItemSprites:
+    - PartKey: foot
+      SpritePlaceable: {fileID: 21300036, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_strapShoes_female_foot
   - Key: swordOfElad
     Name: Sword of Elad
     IconPlaceable: {fileID: 0}
@@ -14718,6 +14722,7 @@ MonoBehaviour:
   m_Minilog: {fileID: 462311633}
   DeathWindow: {fileID: 1089158045}
   StatsInfo: {fileID: 205626040}
+  isDraggingItem: 0
   DraggedSlot: {fileID: 0}
   HoveredSlot: {fileID: 0}
   CurrentDragged: {fileID: 0}

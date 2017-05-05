@@ -96,6 +96,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
     }
 
+    public bool isDraggingItem;
+
     public ItemUI DraggedSlot;
 
     public ItemUI HoveredSlot;
@@ -303,7 +305,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         DraggedSlot = slot;
 
-
+        isDraggingItem = true;
 
         CurrentDragged = ResourcesLoader.Instance.GetRecycledObject("DraggedItem");
         CurrentDragged.GetComponent<Image>().sprite = ResourcesLoader.Instance.GetSprite(slot.CurrentItem.IconKey);
@@ -336,6 +338,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         DraggedSlot.UnDrag();
         CurrentDragged.gameObject.SetActive(false);
         CurrentDragged = null;
+
+        isDraggingItem = false;
 
         int draggedIndex = DraggedSlot.transform.GetSiblingIndex();
 

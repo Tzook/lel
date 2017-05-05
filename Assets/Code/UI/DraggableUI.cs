@@ -28,14 +28,14 @@ public class DraggableUI : MonoBehaviour
         CurrentTrigger3.eventID = EventTriggerType.PointerDown;
 
         CurrentTrigger3.callback.AddListener(delegate {
-            Game.Instance.DraggingWindow = true;
+            Game.Instance.isDraggingWindow = true;
         });
 
         EventTrigger.Entry CurrentTrigger4 = new EventTrigger.Entry();
         CurrentTrigger4.eventID = EventTriggerType.PointerUp;
 
         CurrentTrigger4.callback.AddListener(delegate {
-            Game.Instance.DraggingWindow = false;
+            Game.Instance.isDraggingWindow = false;
         });
 
 

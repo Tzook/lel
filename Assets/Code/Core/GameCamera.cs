@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class GameCamera : MonoBehaviour {
 
@@ -13,6 +14,12 @@ public class GameCamera : MonoBehaviour {
 
     [SerializeField]
     protected CameraType CamType = CameraType.Normal;
+
+    [SerializeField]
+    GameObject BlurCamera;
+
+    [SerializeField]
+    Blur m_BlurEffect;
 
     public Camera Cam;
 
@@ -52,16 +59,30 @@ public class GameCamera : MonoBehaviour {
     {
         MousePosition = (Vector2)Cam.ScreenToWorldPoint(Input.mousePosition);
 
-        if(Input.GetMouseButtonDown(0))
+        CurrentMouseHit = Physics2D.Raycast(Cam.ScreenToWorldPoint(Input.mousePosition), transform.forward, Mathf.Infinity);
+
+        if(CurrentMouseHit.collider != null)
+        {
+            if(CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor")
+            {
+                Cursor.SetCursor(Content.Instance.ClickableCursor, Vector2.zero, CursorMode.Auto);
+            }
+            else
+            {
+                Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
+            }
+        }
+        else
+        {
+            Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
+        }
+
+        if (Input.GetMouseButtonDown(0))
         {
             if (DoubleClickInstance == null)
             {
                 DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
             }
-
-            CurrentMouseHit = Physics2D.Raycast(Cam.ScreenToWorldPoint(Input.mousePosition), transform.forward, Mathf.Infinity);
-
-           
         }
     }
 
@@ -89,12 +110,17 @@ public class GameCamera : MonoBehaviour {
 
     private void DoubleClick()
     {
-        if(CurrentMouseHit.collider != null)
+        if(Game.Instance.CanUseUI && CurrentMouseHit.collider != null)
         {
             if(CurrentMouseHit.collider.GetComponent<ActorInstance>() != null)
             {
                 InGameMainMenuUI.Instance.ShowCharacterInfo(CurrentMouseHit.collider.GetComponent<ActorInstance>().Info);
             }
+            else if (CurrentMouseHit.collider.GetComponent<NPC>() != null)
+            {
+                CurrentMouseHit.collider.GetComponent<NPC>().Interact();
+            }
+
         }
     }
 
@@ -117,6 +143,12 @@ public class GameCamera : MonoBehaviour {
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPos ,ref dampRef, FollowSpeed);
         }
+    }
+
+    public void SetBlurMode(bool state)
+    {
+        m_BlurEffect.enabled = state;
+        BlurCamera.gameObject.SetActive(state);
     }
 
     public void InstantFocusCamera()

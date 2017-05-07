@@ -7,6 +7,7 @@ public class DeathWindowUI : MonoBehaviour {
 	public void Respawn()
     {
         SocketClient.Instance.SendReleaseDeath();
+        
         this.gameObject.SetActive(false);
     }
 }

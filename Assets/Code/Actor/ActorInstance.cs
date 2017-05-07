@@ -491,6 +491,24 @@ public class ActorInstance : MonoBehaviour
         m_Renderer.material = ResourcesLoader.Instance.LitSprite;
     }
 
+    public void SetRenderingLayer(int iLayer, Transform body = null)
+    {
+        if(body == null)
+        {
+            body = this.transform;
+        }
+
+        if (body.gameObject.layer != 2) // Wont break "Ignore raycast" layer (Maybe a good reason to make this function work differently)
+        {
+            body.gameObject.layer = iLayer;
+        }
+
+        for (int i = 0; i < body.childCount; i++)
+        {
+            SetRenderingLayer(iLayer, body.GetChild(i));
+        }
+    }
+
     public void HideName()
     {
         nameHidden = true;

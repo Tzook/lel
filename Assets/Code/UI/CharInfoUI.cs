@@ -19,7 +19,6 @@ public class CharInfoUI : MonoBehaviour {
     {
         this.gameObject.SetActive(true);
 
-
         StartCoroutine(OpenRoutine(Info));
 
     }

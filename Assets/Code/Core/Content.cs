@@ -71,6 +71,8 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public Texture2D DefaultCursor;
+    public Texture2D ClickableCursor;
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);

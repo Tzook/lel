@@ -11,6 +11,9 @@ public class NPC : MonoBehaviour {
     [SerializeField]
     Transform Body;
 
+    [SerializeField]
+    Animator Anim;
+
     public Transform ChatBubbleSpot;
 
 	public void Interact()
@@ -44,5 +47,27 @@ public class NPC : MonoBehaviour {
         {
             SetLayerInChildren(iLayer, body.GetChild(i));
         }
+    }
+
+    public void ExecuteEvent(string eventKey, string eventValue)
+    {
+        switch(eventKey)
+        {
+            case "EndDialog":
+                {
+                    DialogManager.Instance.StopDialogMode();
+                    break;
+                }
+            case "StartDialog":
+                {
+                    DialogManager.Instance.StartDialog(eventValue);
+                    break;
+                }
+        }
+    }
+
+    public void TriggerAnimation(string triggerKey)
+    {
+        Anim.SetTrigger(triggerKey);
     }
 }

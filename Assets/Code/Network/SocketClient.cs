@@ -85,6 +85,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
         CurrentSocket.On("actor_ded", OnActorDed);
+        CurrentSocket.On("actor_resurrect", OnActorResurrect);
 
         CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
         CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
@@ -475,6 +476,15 @@ public class SocketClient : MonoBehaviour
         {
             actor.Instance.Death();
         }
+    }
+
+    protected void OnActorResurrect(Socket socket, Packet packet, object[] args)
+    {
+
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor Has Been Resurrected");
+        
+        Game.Instance.CurrentScene.ClientCharacter.Instance.GetComponent<ActorController>().Resurrect();
     }
 
     protected void OnActorLoadAttack(Socket socket, Packet packet, object[] args)

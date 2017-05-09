@@ -524,6 +524,12 @@ public class ActorController : MonoBehaviour
         Game.Instance.CanUseUI = false;
     }
 
+    public void Resurrect()
+    {
+        CanInput = true;
+        Game.Instance.CanUseUI = true;
+    }
+
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)

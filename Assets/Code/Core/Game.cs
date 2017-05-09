@@ -262,6 +262,9 @@ public class Game : MonoBehaviour {
     public void LoadOtherPlayerCharacter(ActorInfo info)
     {
         GameObject tempObj = SpawnPlayer(info);
+        if (info.CurrentHealth == 0) {
+            tempObj.GetComponent<ActorInstance>().Death();
+        }
 
         tempObj.GetComponent<ActorMovement>().enabled = true;
         tempObj.GetComponent<ActorController>().enabled = false;
@@ -281,9 +284,15 @@ public class Game : MonoBehaviour {
     {
         LocalUserInfo.Me.SelectedCharacter = actorInfo;
         ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
+        
+        ActorController actorController = ClientCharacter.GetComponent<ActorController>();
+        if (actorInfo.CurrentHealth == 0) {
+            actorController.Death();
+            InGameMainMenuUI.Instance.ShowDeathWindow();
+        }
 
         ClientCharacter.GetComponent<ActorMovement>().enabled = false;
-        ClientCharacter.GetComponent<ActorController>().enabled = true;
+        actorController.enabled = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 

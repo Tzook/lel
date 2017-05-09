@@ -21,6 +21,17 @@ public class DialogManager : MonoBehaviour {
         Instance = this;
     }
 
+    void Update()
+    {
+        if(inDialog)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                StopDialogMode();
+            }
+        }
+    }
+
 	public void StartDialogMode(NPC npc)
     {
         currentNPC = npc;
@@ -37,7 +48,7 @@ public class DialogManager : MonoBehaviour {
         CurrentNPCBubble.gameObject.SetActive(false);
 
         CurrentOptionsFrame = ResourcesLoader.Instance.GetRecycledObject("DialogOptionsFrame");
-        CurrentOptionsFrame.transform.position = Game.Instance.ClientCharacter.transform.GetChild(0).position;
+        CurrentOptionsFrame.transform.position = Game.Instance.ClientCharacter.GetComponent<ActorInstance>().NameLabel.transform.position;
         CurrentOptionsFrame.gameObject.SetActive(false);
 
         StartDialog(npc.DefaultDialog);
@@ -53,6 +64,14 @@ public class DialogManager : MonoBehaviour {
     public void StopDialogMode()
     {
         StopAllCoroutines();
+
+        StartCoroutine(StopDialogRoutine());
+
+    }
+
+    private IEnumerator StopDialogRoutine()
+    {
+        yield return 0;
 
         inDialog = false;
 
@@ -76,6 +95,8 @@ public class DialogManager : MonoBehaviour {
         CurrentNPCBubble.gameObject.SetActive(true);
 
         CurrentOptionsFrame.SetActive(true);
+
+        CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StopWavingInstruction();
 
         ClearCurrentOptionsFrame();
 
@@ -121,7 +142,9 @@ public class DialogManager : MonoBehaviour {
 
             yield return 0;
 
-            while(true)
+            CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StartWavingInstruction("Press 'Space' to continue...");
+
+            while (true)
             {
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
@@ -130,6 +153,8 @@ public class DialogManager : MonoBehaviour {
 
                 yield return 0;
             }
+
+            CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StopWavingInstruction();
 
             //Fade out bubble
             CurrentNPCBubble.GetComponent<CanvasGroup>().alpha = 1f;
@@ -161,6 +186,10 @@ public class DialogManager : MonoBehaviour {
                 yield return 0;
             }
         }
+
+        CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StartWavingInstruction("Choose your response...");
+
+
     }
 
     public void AddDialogOptionEvent(Button btn, string eventKey, string eventValue)

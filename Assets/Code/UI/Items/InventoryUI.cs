@@ -18,7 +18,9 @@ public class InventoryUI : ItemSlotsContainerUI
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if(InGameMainMenuUI.Instance.HoveredSlot!=null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
+            InGameMainMenuUI.Instance.isDraggingItem = false;
+
+            if (InGameMainMenuUI.Instance.HoveredSlot!=null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
             {
                 if (Game.Instance.CanUseUI)
                 {

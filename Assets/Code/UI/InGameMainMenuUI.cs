@@ -129,7 +129,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !DialogManager.Instance.inDialog)
             {
                 menuPanel.SetActive(true);
             }

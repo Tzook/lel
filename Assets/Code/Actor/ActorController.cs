@@ -331,6 +331,7 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("OnRope", true);
         Rigid.velocity = Vector2.zero;
         Rigid.bodyType = RigidbodyType2D.Kinematic;
+        Instance.SortingGroup.enabled = false;
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         StopAim();
 
@@ -344,6 +345,7 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("ClimbingUp", false);
         Anim.SetBool("ClimbingDown", false);
         Rigid.bodyType = RigidbodyType2D.Dynamic;
+        Instance.SortingGroup.enabled = true;
 
         SocketClient.Instance.SendStoppedClimbing();
     }

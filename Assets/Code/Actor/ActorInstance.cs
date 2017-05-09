@@ -65,7 +65,7 @@ public class ActorInstance : MonoBehaviour
 
 
     [SerializeField]
-    protected GameObject NameLabel;
+    public GameObject NameLabel;
 
     [SerializeField]
     protected MessageBubbleUI MessageBubble;
@@ -74,7 +74,7 @@ public class ActorInstance : MonoBehaviour
     Animator Anim;
 
     [SerializeField]
-    SortingGroup m_SortingGroup;
+    public SortingGroup SortingGroup;
 
     #endregion
 
@@ -443,7 +443,7 @@ public class ActorInstance : MonoBehaviour
 
     public void SetElementsLayer(string layer = "Default", int minLevel = 0, Material matType = null)
     {
-        m_SortingGroup.sortingLayerName = layer;
+        SortingGroup.sortingLayerName = layer;
 
         SetElementLayer(m_Head, layer, minLevel, matType);
         SetElementLayer(m_Chest, layer, minLevel, matType);

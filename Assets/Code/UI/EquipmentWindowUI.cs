@@ -33,6 +33,8 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
     {
         if (Input.GetMouseButtonDown(1))
         {
+            InGameMainMenuUI.Instance.isDraggingItem = false;
+
             if (InGameMainMenuUI.Instance.HoveredSlot != null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
             {
                 if (Game.Instance.CanUseUI)

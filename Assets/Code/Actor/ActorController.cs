@@ -14,6 +14,8 @@ public class ActorController : MonoBehaviour
 
     RaycastHit2D GroundRayRight;
     RaycastHit2D GroundRayLeft;
+    RaycastHit2D SideRayRight;
+    RaycastHit2D SideRayLeft;
 
     Animator Anim;
 
@@ -30,6 +32,8 @@ public class ActorController : MonoBehaviour
 
     public bool Grounded = false;
     public bool OnRope = false;
+    public bool LeftSlope = false;
+    public bool RightSlope = false;
     public bool CanInput = true;
 
     [SerializeField]
@@ -213,12 +217,20 @@ public class ActorController : MonoBehaviour
         {
             if (!OnRope)
             {
-                if (Input.GetKey(InputMap.Map["Move Left"]) && !Game.Instance.InChat)
+
+                SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), transform.right, GroundedThreshold, GroundLayerMask);
+                SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
+
+                LeftSlope = (SideRayLeft.normal.x < -0.5 || SideRayLeft.normal.x > 0.5);
+                RightSlope = (SideRayRight.normal.x < -0.5 || SideRayRight.normal.x > 0.5);
+
+
+                if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope && !Game.Instance.InChat)
                 {
                     MoveLeft();
                     Anim.SetBool("Walking", true);
                 }
-                else if (Input.GetKey(InputMap.Map["Move Right"]) && !Game.Instance.InChat)
+                else if (Input.GetKey(InputMap.Map["Move Right"]) && !RightSlope && !Game.Instance.InChat)
                 {
                     MoveRight();
                     Anim.SetBool("Walking", true);

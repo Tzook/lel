@@ -21,11 +21,11 @@ public class CharspotUI : MonoBehaviour {
         GameObject tempObj;
         if (info.Gender == Gender.Male)
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_male"));
         }
         else
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_female"));
         }
 
         tempObj.transform.SetParent(transform);

@@ -10,6 +10,9 @@ public class GameCamera : MonoBehaviour {
     protected float FollowSpeed;
 
     [SerializeField]
+    float AddedY = 1f;
+
+    [SerializeField]
     protected GameObject followingObject;
 
     [SerializeField]
@@ -130,15 +133,15 @@ public class GameCamera : MonoBehaviour {
         {
             if (this.CamType == CameraType.Horizontal)
             {
-                targetPos = new Vector3(followingObject.transform.position.x, transform.position.y, initPos.z);
+                targetPos = new Vector3(followingObject.transform.position.x, transform.position.y + AddedY, initPos.z);
             }
             else if (this.CamType == CameraType.Vertical)
             {
-                targetPos = new Vector3(transform.position.x, followingObject.transform.position.y, initPos.z);
+                targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
             }
             else
             {
-                targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y, initPos.z);
+                targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
             }
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPos ,ref dampRef, FollowSpeed);

@@ -61,7 +61,7 @@ public class CreateCharacterUI : MonoBehaviour
             m_ActorInstance.gameObject.SetActive(false);
         }
 
-        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+        GameObject tempObj = Instantiate(ResourcesLoader.Instance.GetObject(("actor_male")));
 
         tempObj.transform.SetParent(transform);
         tempObj.transform.position = actorSpot.position;
@@ -88,13 +88,13 @@ public class CreateCharacterUI : MonoBehaviour
         if (m_ActorInfo.Gender == Gender.Male)
         {
             m_ActorInfo.Gender = Gender.Female;
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_female"));
             m_ActorInfo.Hair = AllowedHairFemale[0];
         }
         else
         {
             m_ActorInfo.Gender = Gender.Male;
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_male"));
             m_ActorInfo.Hair = AllowedHairMale[0];
         }
 

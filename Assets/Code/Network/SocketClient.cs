@@ -480,11 +480,10 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorResurrect(Socket socket, Packet packet, object[] args)
     {
-
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Has Been Resurrected");
-        
-        Game.Instance.CurrentScene.ClientCharacter.Instance.GetComponent<ActorController>().Resurrect();
+
+        Game.Instance.CanUseUI = true;
     }
 
     protected void OnActorLoadAttack(Socket socket, Packet packet, object[] args)
@@ -816,6 +815,9 @@ public class SocketClient : MonoBehaviour
     public void SendReleaseDeath()
     {
         JSONNode node = new JSONClass();
+
+        Game.Instance.RemovePlayerCharacter();
+
         CurrentSocket.Emit("release_death", node);
 
     }

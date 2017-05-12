@@ -208,11 +208,11 @@ public class Game : MonoBehaviour {
         GameObject tempObj;
         if (info.Gender == Gender.Male)
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_male");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_male"));
         }
         else
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("actor_female");
+            tempObj = Instantiate(ResourcesLoader.Instance.GetObject("actor_female"));
         }
 
 
@@ -271,11 +271,21 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
+    public void RemovePlayerCharacter()
+    {
+        Destroy(ClientCharacter);
+
+        CurrentScene.Leave(ClientCharacter.GetComponent<ActorInstance>().Info.ID);
+
+        ClientCharacter = null;
+
+    }
+
     public void RemoveOtherPlayerCharacter(string id)
     {
         GameObject leavingPlayer = CurrentScene.GetActor(id).Instance.gameObject;
 
-        leavingPlayer.SetActive(false);
+        Destroy(leavingPlayer);
 
         CurrentScene.Leave(id);
     }
@@ -301,17 +311,23 @@ public class Game : MonoBehaviour {
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 
         string lastScene = SceneManager.GetActiveScene().name;
-        ResourcesLoader.Instance.ClearObjectPool();
 
-        CurrentScene = null;
-        SceneManager.LoadScene(scene);
-
-        while(lastScene == SceneManager.GetActiveScene().name)
+        if (lastScene != scene)
         {
-            yield return 0;
-        }
+            ResourcesLoader.Instance.ClearObjectPool();
 
-        CurrentScene = new SceneControl();
+            CurrentScene = null;
+
+            SceneManager.LoadScene(scene);
+
+            while (lastScene == SceneManager.GetActiveScene().name)
+            {
+                yield return 0;
+            }
+
+            CurrentScene = new SceneControl();
+
+        }
 
         SocketClient.Instance.EmitLoadedScene(actorInfo);
 

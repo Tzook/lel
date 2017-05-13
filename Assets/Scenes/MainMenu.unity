@@ -6988,6 +6988,8 @@ GameObject:
   - component: {fileID: 1318}
   - component: {fileID: 2736}
   - component: {fileID: 2737}
+  - component: {fileID: 468}
+  - component: {fileID: 467}
   m_Layer: 5
   m_Name: ItemInfoUI
   m_TagString: Untagged
@@ -6995,6 +6997,41 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 2
+    m_Right: 2
+    m_Top: 2
+    m_Bottom: 2
+  m_ChildAlignment: 8
+  m_Spacing: 2
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+--- !u!114 &468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &469
 GameObject:
   m_ObjectHideFlags: 0
@@ -34574,13 +34611,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1910}
-  m_RootOrder: 2
+  m_Father: {fileID: 1762}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.36076143, y: 0.31831932}
-  m_AnchorMax: {x: 0.9572539, y: 0.78680116}
-  m_AnchoredPosition: {x: -0.30000305, y: -0.5999985}
-  m_SizeDelta: {x: -0.5999999, y: -0.099998474}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.80000305, y: -24.850018}
+  m_SizeDelta: {x: 89.4, y: 48.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1627
 RectTransform:
@@ -36050,17 +36087,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1910}
+  m_Children:
+  - {fileID: 1999}
+  m_Father: {fileID: 41951183}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.04638833, y: 0.47131932}
-  m_AnchorMax: {x: 0.36076143, y: 0.933}
-  m_AnchoredPosition: {x: 0.6000004, y: 1.199997}
-  m_SizeDelta: {x: 0.40000153, y: 0.40000153}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -43.9, y: -27.449999}
+  m_SizeDelta: {x: 47.4, y: 48.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1706
 RectTransform:
@@ -37092,17 +37130,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1910}
+  m_Children:
+  - {fileID: 1626}
+  m_Father: {fileID: 41951183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.36076143, y: 0.78680116}
-  m_AnchorMax: {x: 0.9572539, y: 0.933}
-  m_AnchoredPosition: {x: 0.5, y: 0.7000046}
-  m_SizeDelta: {x: -0.5999985, y: 2.1000004}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 24.5, y: -11.44997}
+  m_SizeDelta: {x: 89.4, y: 17.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1763
 RectTransform:
@@ -39885,17 +39924,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1705}
-  - {fileID: 1762}
-  - {fileID: 1626}
-  - {fileID: 1999}
+  - {fileID: 41951183}
   m_Father: {fileID: 1654}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150.9, y: 104.600006}
+  m_SizeDelta: {x: 146.6, y: 74.7}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &1911
 RectTransform:
@@ -41537,13 +41573,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1910}
-  m_RootOrder: 3
+  m_Father: {fileID: 1705}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.04638833, y: 0.3565966}
-  m_AnchorMax: {x: 0.36076143, y: 0.47131932}
-  m_AnchoredPosition: {x: 0.375, y: -0.20000076}
-  m_SizeDelta: {x: 0.8280029, y: 1.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.22500992, y: -7.599983}
+  m_SizeDelta: {x: 47.828003, y: 13.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2000
 RectTransform:
@@ -47565,6 +47601,7 @@ MonoBehaviour:
   Items:
   - Key: leatherVest
     Name: Leather Vest
+    Description: A cheap leather vest.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_leatherVest_male_torso
     UseSound: sound_equip
@@ -47572,12 +47609,23 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 3
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: chest
       SpritePlaceable: {fileID: 0}
       Sprite: testingclothing_leatherVest_male_torso
   - Key: adventurerShirt
     Name: Adventurer Shirt
+    Description: An old, worn out adventurers shirt. It has seen many adventures.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_adventurerShirt_male_torso
     UseSound: sound_equip
@@ -47585,6 +47633,16 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 2
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: chest
       SpritePlaceable: {fileID: 0}
@@ -47597,6 +47655,7 @@ MonoBehaviour:
       Sprite: testingclothing_adventurerShirt_male_elbow
   - Key: blackGloves
     Name: Black Gloves
+    Description: Cheap black wool gloves.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_blackGloves_male_hand
     UseSound: sound_equip
@@ -47604,12 +47663,23 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 2
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: hand
       SpritePlaceable: {fileID: 0}
       Sprite: testingclothing_blackGloves_male_hand
   - Key: clothPants
     Name: Cloth Pants
+    Description: Cheap worn out rags.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_clothPants_male_hip
     UseSound: sound_equip
@@ -47617,6 +47687,16 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 1
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: hip
       SpritePlaceable: {fileID: 0}
@@ -47626,6 +47706,7 @@ MonoBehaviour:
       Sprite: testingclothing_clothPants_male_knee
   - Key: greenPants
     Name: Green Pants
+    Description: Green pants, the fanciest you could get for a cheap price.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_greenPants_male_hip
     UseSound: sound_equip
@@ -47633,6 +47714,16 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 5
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: hip
       SpritePlaceable: {fileID: 0}
@@ -47642,6 +47733,7 @@ MonoBehaviour:
       Sprite: testingclothing_greenPants_male_knee
   - Key: leatherShoes
     Name: Leather Shoes
+    Description: Cheap shoes, made of cheap leather.
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_leatherShoes_male_foot
     UseSound: sound_equip
@@ -47649,12 +47741,23 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 12
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: foot
       SpritePlaceable: {fileID: 0}
       Sprite: testingclothing_leatherShoes_male_foot
   - Key: strapShoes
     Name: Strap Shoes
+    Description: 
     IconPlaceable: {fileID: 0}
     Icon: testingclothing_strapShoes_male_foot
     UseSound: sound_equip
@@ -47662,6 +47765,16 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 1
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: foot
       SpritePlaceable: {fileID: 21300036, guid: ebcb940941159e54fb42d2b174b0cd9a,
@@ -47669,6 +47782,7 @@ MonoBehaviour:
       Sprite: testingclothing_strapShoes_male_foot
   - Key: swordOfElad
     Name: Sword of Elad
+    Description: A sword made for testing!
     IconPlaceable: {fileID: 0}
     Icon: sword_of_elad
     UseSound: sound_equip
@@ -47676,12 +47790,23 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 2
     StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 2
+      BonusSTR: 3
+      BonusMAG: 1
+      BonusDEX: 1
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites:
     - PartKey: weapon
       SpritePlaceable: {fileID: 0}
       Sprite: sword_of_elad
   - Key: turtleShell
     Name: Turtle Shell
+    Description: Some turtle used to call it home...
     IconPlaceable: {fileID: 21300000, guid: 99e4bd2a9cc5c704b8913b3f48fb2b87, type: 3}
     Icon: monster_turtle_shell_01
     UseSound: 
@@ -47689,9 +47814,20 @@ MonoBehaviour:
     DropChance: 80
     GoldValue: 1
     StackCap: 20
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites: []
   - Key: turtleShellOld
     Name: Old Shell
+    Description: Some turtle used to call it home...
     IconPlaceable: {fileID: 21300000, guid: bf22c59f1acecda4a83f7c6d93de5bae, type: 3}
     Icon: monster_turtle_shell_03
     UseSound: 
@@ -47699,9 +47835,20 @@ MonoBehaviour:
     DropChance: 80
     GoldValue: 2
     StackCap: 20
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites: []
   - Key: turtleShellSpiked
     Name: Spiked Shell
+    Description: Some turtle used to call it home...
     IconPlaceable: {fileID: 21300000, guid: e5b6e14bd4d011c479815290951dd9d5, type: 3}
     Icon: monster_turtle_shell_02
     UseSound: 
@@ -47709,9 +47856,21 @@ MonoBehaviour:
     DropChance: 80
     GoldValue: 3
     StackCap: 20
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites: []
   - Key: gold
     Name: Gold
+    Description: You are unable to read this anyways, so why bother typing something
+      interesting?
     IconPlaceable: {fileID: 21300000, guid: 00003834e03e11049aaaac83a1ce5b06, type: 3}
     Icon: goldCoins_0
     UseSound: 
@@ -47719,6 +47878,16 @@ MonoBehaviour:
     DropChance: 80
     GoldValue: 1
     StackCap: 999999999
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
     ItemSprites: []
   InfoBank:
   - Title: Experience
@@ -60497,6 +60666,8 @@ MonoBehaviour:
   txtDecription: {fileID: 2286}
   txtType: {fileID: 2909}
   imgIcon: {fileID: 2425}
+  bonusColor: {r: 0.5803922, g: 1, b: 0.7058824, a: 0.39215687}
+  requiredColor: {r: 1, g: 0.5803922, b: 0.5803922, a: 0.39215687}
 --- !u!114 &2738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69190,6 +69361,76 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!1 &41951182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 41951183}
+  - component: {fileID: 41951185}
+  - component: {fileID: 41951184}
+  m_Layer: 5
+  m_Name: DefaultInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &41951183
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41951182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1705}
+  - {fileID: 1762}
+  m_Father: {fileID: 1910}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 73.3, y: -37.35}
+  m_SizeDelta: {x: 142.6, y: 70.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &41951184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41951182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &41951185
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41951182}
 --- !u!1 &120410734
 GameObject:
   m_ObjectHideFlags: 0

@@ -107,6 +107,8 @@ public class DialogManager : MonoBehaviour {
 
             BubbleText.text = "";
 
+            yield return 0;
+
             //Fade in bubble
             CurrentNPCBubble.GetComponent<CanvasGroup>().alpha = 0f;
             while(CurrentNPCBubble.GetComponent<CanvasGroup>().alpha < 1f)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SimpleJSON;
 
 public class Content : MonoBehaviour {
 
@@ -127,6 +128,9 @@ public class DevItemInfo
     public string Key;
     public string Name;
 
+    [TextArea(16, 9)]
+    public string Description;
+
     //Will send "Icon" only if "IconPlaceable" is null.
     public Sprite IconPlaceable;
     public string Icon;
@@ -138,6 +142,8 @@ public class DevItemInfo
     public int GoldValue;
 
     public int StackCap = 1;
+
+    public ItemStats Stats;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
 }

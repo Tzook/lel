@@ -65,6 +65,18 @@ public class DevContentEditor : Editor
                 node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
                 node["items"][i]["stackCap"] = currentInfo.Items[i].StackCap.ToString();
 
+                node["items"][i]["stats"]["reqSTR"] = currentInfo.Items[i].Stats.RequiresSTR.ToString();
+                node["items"][i]["stats"]["reqMAG"] = currentInfo.Items[i].Stats.RequiresMAG.ToString();
+                node["items"][i]["stats"]["reqDEX"] = currentInfo.Items[i].Stats.RequiresDEX.ToString();
+                node["items"][i]["stats"]["reqLVL"] = currentInfo.Items[i].Stats.RequiresLVL.ToString();
+
+                node["items"][i]["stats"]["bonusSTR"] = currentInfo.Items[i].Stats.BonusSTR.ToString();
+                node["items"][i]["stats"]["bonusMAG"] = currentInfo.Items[i].Stats.BonusMAG.ToString();
+                node["items"][i]["stats"]["bonusDEX"] = currentInfo.Items[i].Stats.BonusDEX.ToString();
+                node["items"][i]["stats"]["bonusHP"] = currentInfo.Items[i].Stats.BonusHP.ToString();
+                node["items"][i]["stats"]["bonusMP"] = currentInfo.Items[i].Stats.BonusMP.ToString();
+
+
                 //for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 //{
                 //    node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;

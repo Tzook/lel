@@ -13,6 +13,8 @@ public class ItemInfo {
     public string Type;
     public int Stack = 1;
 
+    public ItemStats Stats;
+
     public Dictionary<string, string> Sprites = new Dictionary<string, string>();
 
     public ItemInfo(JSONNode itemNode, int stack = 1)
@@ -29,6 +31,9 @@ public class ItemInfo {
         this.Type = itemNode["type"].Value;
 
         Sprites.Clear();
+
+        this.Stats.SetInfo(itemNode["stats"]);
+
         for (int i=0;i<itemNode["sprites"].Count;i++)
         {
             Sprites.Add(((JSONClass)itemNode["sprites"]).GetKey(i), itemNode["sprites"][i].Value);
@@ -45,9 +50,12 @@ public class ItemInfo {
         this.Stack = stack;
 
         this.Name = storedItem.Name;
+        this.Description = storedItem.Description;
         this.IconKey = storedItem.Icon;
         this.UseSound = storedItem.UseSound;
         this.Type = storedItem.Type;
+
+        this.Stats = storedItem.Stats.Clone();
 
         Sprites.Clear();
         for (int i = 0; i < storedItem.ItemSprites.Count; i++)

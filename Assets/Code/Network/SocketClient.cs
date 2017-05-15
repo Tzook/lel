@@ -292,7 +292,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Item Added");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.ClientCharacter.Instance.AddItem(data["slot"].AsInt, new ItemInfo(Content.Instance.GetItem(data["item"]["key"].Value), data["item"]["stack"].AsInt));
+        LocalUserInfo.Me.SelectedCharacter.Instance.AddItem(data["slot"].AsInt, new ItemInfo(Content.Instance.GetItem(data["item"]["key"].Value), data["item"]["stack"].AsInt));
     }
 
     protected void OnChangeItemStack(Socket socket, Packet packet, object[] args)
@@ -300,7 +300,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Item Stack Changed");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.ClientCharacter.Instance.ChangeItemStack(data["slot"].AsInt, data["amount"].AsInt);
+        LocalUserInfo.Me.SelectedCharacter.Instance.ChangeItemStack(data["slot"].AsInt, data["amount"].AsInt);
     }
 
     protected void OnChangeGoldAmount(Socket socket, Packet packet, object[] args)
@@ -308,7 +308,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Changed Gold");
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.ClientCharacter.ChangeGold(data["amount"].AsInt);
+        LocalUserInfo.Me.SelectedCharacter.ChangeGold(data["amount"].AsInt);
     }
 
     protected void OnActorDeleteItem(Socket socket, Packet packet, object[] args)
@@ -383,7 +383,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent("Actor Gained " + data["hp"].AsInt + " HP");
 
-        Game.Instance.CurrentScene.ClientCharacter.CurrentHealth = data["now"].AsInt;
+        LocalUserInfo.Me.SelectedCharacter.CurrentHealth = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshHP();
     }
@@ -394,7 +394,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent("Actor Gained " + data["mp"].AsInt + " MP");
 
-        Game.Instance.CurrentScene.ClientCharacter.CurrentMana = data["now"].AsInt;
+        LocalUserInfo.Me.SelectedCharacter.CurrentMana = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshMP();
     }
@@ -405,7 +405,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent("Actor Gained " + data["exp"].AsInt + " XP");
 
-        Game.Instance.CurrentScene.ClientCharacter.EXP = data["now"].AsInt;
+        LocalUserInfo.Me.SelectedCharacter.EXP = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.MinilogMessage("+" + data["exp"].AsInt.ToString("N0") + " EXP");
 
@@ -420,7 +420,7 @@ public class SocketClient : MonoBehaviour
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
 
-        if (actor == Game.Instance.CurrentScene.ClientCharacter)
+        if (actor == LocalUserInfo.Me.SelectedCharacter)
         {
             actor.SetStats(data["stats"]);
             InGameMainMenuUI.Instance.RefreshHP();
@@ -445,7 +445,7 @@ public class SocketClient : MonoBehaviour
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
 
-        if (actor == Game.Instance.CurrentScene.ClientCharacter)
+        if (actor == LocalUserInfo.Me.SelectedCharacter)
         {
             actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
             actor.CurrentHealth = data["hp"].AsInt;
@@ -467,7 +467,7 @@ public class SocketClient : MonoBehaviour
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
 
-        if (actor == Game.Instance.CurrentScene.ClientCharacter)
+        if (actor == LocalUserInfo.Me.SelectedCharacter)
         {
             actor.Instance.GetComponent<ActorController>().Death();
             InGameMainMenuUI.Instance.ShowDeathWindow();
@@ -693,7 +693,7 @@ public class SocketClient : MonoBehaviour
 
         node["slot"] = fromSlot;
 
-        string useSound = Game.Instance.CurrentScene.ClientCharacter.Equipment.GetItem(fromSlot).UseSound;
+        string useSound = LocalUserInfo.Me.SelectedCharacter.Equipment.GetItem(fromSlot).UseSound;
         if (!string.IsNullOrEmpty(useSound))
         {
             AudioControl.Instance.Play(useSound);
@@ -708,7 +708,7 @@ public class SocketClient : MonoBehaviour
 
         node["slot"] = inventoryIndex.ToString();
 
-        string useSound = Game.Instance.CurrentScene.ClientCharacter.Inventory.ContentArray[inventoryIndex].UseSound;
+        string useSound = LocalUserInfo.Me.SelectedCharacter.Inventory.ContentArray[inventoryIndex].UseSound;
         if (!string.IsNullOrEmpty(useSound))
         {
             AudioControl.Instance.Play(useSound);

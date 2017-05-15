@@ -25,6 +25,7 @@ public class InventoryUI : ItemSlotsContainerUI
                 if (Game.Instance.CanUseUI)
                 {
                     SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+                    InGameMainMenuUI.Instance.ForceHideItemInfo();
                 }
             }
         }

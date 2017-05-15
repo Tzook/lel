@@ -12,8 +12,12 @@ public class Equipment {
     public ItemInfo Shoes;
     public ItemInfo Weapon;
 
-    public Equipment(JSONNode node)
+    ActorInfo Parent;
+
+    public Equipment(JSONNode node, ActorInfo parent)
     {
+        this.Parent = parent;
+
         string partKey = "";
 
         for (int i = 0; i < node.Count; i++)
@@ -62,6 +66,7 @@ public class Equipment {
                 }
         }
 
+        Parent.RefreshBonuses(this);
     }
     public ItemInfo GetItem(string slot)
     {

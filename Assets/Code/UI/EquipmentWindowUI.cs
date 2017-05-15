@@ -40,6 +40,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
                 if (Game.Instance.CanUseUI)
                 {
                     SocketClient.Instance.SendUsedEquip(InGameMainMenuUI.Instance.HoveredSlot.slotKey);
+                    InGameMainMenuUI.Instance.ForceHideItemInfo();
                 }
             }
         }

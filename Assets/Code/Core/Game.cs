@@ -149,6 +149,7 @@ public class Game : MonoBehaviour {
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();
+            InGameMainMenuUI.Instance.RefreshStats();
         }
 
         actor.Instance.UpdateVisual();
@@ -168,6 +169,7 @@ public class Game : MonoBehaviour {
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();
+            InGameMainMenuUI.Instance.RefreshStats();
         }
 
         actor.Instance.UpdateVisual();
@@ -182,6 +184,7 @@ public class Game : MonoBehaviour {
             ClientCharacter.GetComponent<ActorInstance>().Info.Equipment.SetItem(equipSlot, null);
 
             InGameMainMenuUI.Instance.RefreshEquipment();
+            InGameMainMenuUI.Instance.RefreshStats();
         }
 
         actor.Instance.UpdateVisual();

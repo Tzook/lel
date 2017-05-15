@@ -32,17 +32,47 @@ public class ActorInfo
         private set { }
     }
 
-
-
     public int STR;
     public int MAG;
     public int DEX;
 
-    public int MaxHealth;
+    public int BonusSTR;
+    public int BonusMAG;
+    public int BonusDEX;
+    public int BonusHP;
+    public int BonusMP;
+
+    public int MaxHealth
+    {
+        get
+        {
+            return (STR * 5) + (BonusSTR * 5);
+        }
+    }
     public int CurrentHealth;
 
-    public int MaxMana;
+    public int MaxMana
+    {
+        get
+        {
+            return (MAG * 5) + (BonusMAG * 5);
+        }
+    }
     public int CurrentMana;
+
+    public int TotalSTR
+    {
+        get { return BonusSTR + STR; }
+    }
+    public int TotalMAG
+    {
+        get { return BonusMAG + MAG; }
+    }
+    public int TotalDEX
+    {
+        get { return BonusDEX + DEX; }
+    }
+
 
     public List<string> PrimaryAbilities = new List<string>();
     public string CurrentPrimaryAbility;
@@ -55,7 +85,7 @@ public class ActorInfo
 
     public ActorInfo()
     {
-        Equipment = new Equipment(new JSONClass());
+        Equipment = new Equipment(new JSONClass(), this);
     }
 
     public ActorInfo(JSONNode node)
@@ -84,12 +114,15 @@ public class ActorInfo
 
         Inventory = new Inventory(node["items"]);
 
-        Equipment = new Equipment(node["equips"]);
+        Equipment = new Equipment(node["equips"], this);
 
         if (node["stats"] != null)
         {
             SetStats(node["stats"]);
         }
+
+
+        RefreshBonuses();
     }
 
     public void ChangeGold(int amount)
@@ -117,10 +150,8 @@ public class ActorInfo
         this.MAG = node["mag"].AsInt;
         this.DEX = node["dex"].AsInt;
 
-        this.MaxHealth = node["hp"]["total"].AsInt;
         this.CurrentHealth = node["hp"]["now"].AsInt;
 
-        this.MaxMana = node["mp"]["total"].AsInt;
         this.CurrentMana = node["mp"]["now"].AsInt;
 
         this.PrimaryAbilities.Clear();
@@ -130,6 +161,53 @@ public class ActorInfo
         }
 
         this.CurrentPrimaryAbility = node["primaryAbility"].Value;
+
+    }
+
+    public void RefreshBonuses()
+    {
+        BonusSTR = 0;
+        BonusMAG = 0;
+        BonusDEX = 0;
+        BonusHP = 0;
+        BonusMP = 0;
+
+        AddItemBonus(Equipment.Chest);
+        AddItemBonus(Equipment.Gloves);
+        AddItemBonus(Equipment.Head);
+        AddItemBonus(Equipment.Legs);
+        AddItemBonus(Equipment.Shoes);
+        AddItemBonus(Equipment.Weapon);
+    }
+
+    public void RefreshBonuses(Equipment equips)
+    {
+        BonusSTR = 0;
+        BonusMAG = 0;
+        BonusDEX = 0;
+        BonusHP = 0;
+        BonusMP = 0;
+
+        AddItemBonus(equips.Chest);
+        AddItemBonus(equips.Gloves);
+        AddItemBonus(equips.Head);
+        AddItemBonus(equips.Legs);
+        AddItemBonus(equips.Shoes);
+        AddItemBonus(equips.Weapon);
+    }
+
+    private void AddItemBonus(ItemInfo item)
+    {
+        if(item == null)
+        {
+            return;
+        }
+
+        BonusSTR += item.Stats.BonusSTR;
+        BonusMAG += item.Stats.BonusMAG;
+        BonusDEX += item.Stats.BonusDEX;
+        BonusHP += item.Stats.BonusHP;
+        BonusMP += item.Stats.BonusMP;
     }
 }
 

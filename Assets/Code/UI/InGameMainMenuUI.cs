@@ -176,11 +176,11 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (!statsPanel.gameObject.activeInHierarchy)
                 {
-                    statsPanel.GetComponent<StatsWindowUI>().Show(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
+                    statsPanel.Show(Game.Instance.ClientCharacter.GetComponent<ActorInstance>().Info);
                 }
                 else
                 {
-                    statsPanel.GetComponent<StatsWindowUI>().Hide();
+                    statsPanel.Hide();
                     InGameMainMenuUI.Instance.StatsInfo.Hide();
 
                 }
@@ -268,6 +268,14 @@ public class InGameMainMenuUI : MonoBehaviour {
         equipmentPanel.EnableInput();
     }
 
+
+    public void RefreshStats()
+    {
+        statsPanel.Refresh(LocalUserInfo.Me.SelectedCharacter);
+        RefreshHP();
+        RefreshMP();
+    }
+
     
     public void SetHoverSlot(ItemUI item)
     {
@@ -278,6 +286,11 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void UnsetHoverSlot()
     {
         HoveredSlot = null;
+        itemInfoPanel.Hide();
+    }
+
+    public void ForceHideItemInfo()
+    {
         itemInfoPanel.Hide();
     }
 

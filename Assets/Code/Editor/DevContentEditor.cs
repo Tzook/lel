@@ -77,6 +77,15 @@ public class DevContentEditor : Editor
                 node["items"][i]["stats"]["mp"] = currentInfo.Items[i].Stats.BonusMP.ToString();
 
 
+                for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
+                {
+                    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
+                    {
+                        currentInfo.Items[i].ItemSprites[a].Sprite = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
+                    }
+
+                }
+
                 //for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 //{
                 //    node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;

@@ -47511,6 +47511,12 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 1
       MaxStack: 5
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
   - MonsterKey: OldTurtle
     MonsterName: Old Turtle
     MonsterHP: 30
@@ -47550,6 +47556,33 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 2
       MaxStack: 10
+    - ItemKey: captainsRobe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: apprenticeRobeWhite
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: apprenticeRobeBlack
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
   - MonsterKey: SpikedTurtle
     MonsterName: Spiked Turtle
     MonsterHP: 30
@@ -47589,6 +47622,33 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 5
       MaxStack: 12
+    - ItemKey: captainsRobe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: apprenticeRobeWhite
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: apprenticeRobeBlack
+      MinStack: 1
+      MaxStack: 1
   - MonsterKey: Spike
     MonsterName: Spike
     MonsterHP: 1
@@ -47776,7 +47836,7 @@ MonoBehaviour:
       BonusHP: 0
       BonusMP: 0
     ItemSprites:
-    - PartKey: foot
+    - PartKey: testingclothing_strapShoes_male_foot
       SpritePlaceable: {fileID: 21300036, guid: ebcb940941159e54fb42d2b174b0cd9a,
         type: 3}
       Sprite: testingclothing_strapShoes_male_foot
@@ -47889,6 +47949,262 @@ MonoBehaviour:
       BonusHP: 0
       BonusMP: 0
     ItemSprites: []
+  - Key: captainsRobe
+    Name: Sailors Robe
+    Description: An expensive black robe, usually fashioned by sailors.
+    IconPlaceable: {fileID: 21300070, guid: ebcb940941159e54fb42d2b174b0cd9a, type: 3}
+    Icon: testingclothing_captainRobe_male_torso
+    UseSound: 
+    Type: chest
+    DropChance: 1
+    GoldValue: 15
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 3
+      BonusSTR: 3
+      BonusMAG: 2
+      BonusDEX: 3
+      BonusHP: 25
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: chest
+      SpritePlaceable: {fileID: 21300070, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_captainRobe_male_torso
+    - PartKey: arm
+      SpritePlaceable: {fileID: 21300046, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_captainRobe_male_arm
+    - PartKey: elbow
+      SpritePlaceable: {fileID: 21300054, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_captainRobe_male_elbow
+  - Key: blackPants
+    Name: Black Trousers
+    Description: Cheap, comfortable black trousers, nothing unique in them.
+    IconPlaceable: {fileID: 21300048, guid: ebcb940941159e54fb42d2b174b0cd9a, type: 3}
+    Icon: testingclothing_blackPants_male_hip
+    UseSound: 
+    Type: legs
+    DropChance: 1
+    GoldValue: 5
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 2
+      BonusSTR: 1
+      BonusMAG: 1
+      BonusDEX: 2
+      BonusHP: 0
+      BonusMP: 10
+    ItemSprites:
+    - PartKey: hip
+      SpritePlaceable: {fileID: 21300048, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_blackPants_male_hip
+    - PartKey: knee
+      SpritePlaceable: {fileID: 21300056, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_blackPants_male_knee
+  - Key: leatherGloves
+    Name: Leather Gloves
+    Description: Thin cheap and uncomfortable leather gloves.
+    IconPlaceable: {fileID: 21300062, guid: ebcb940941159e54fb42d2b174b0cd9a, type: 3}
+    Icon: testingclothing_leatherGloves_male_hand
+    UseSound: 
+    Type: gloves
+    DropChance: 1
+    GoldValue: 7
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 5
+      BonusSTR: 3
+      BonusMAG: 0
+      BonusDEX: 3
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: hand
+      SpritePlaceable: {fileID: 21300062, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_leatherGloves_male_hand
+  - Key: apprenticeRobeWhite
+    Name: White Apprentice Robe
+    Description: A minimalistic white robe, usually worn by apprentices of magic.
+    IconPlaceable: {fileID: 21300074, guid: ebcb940941159e54fb42d2b174b0cd9a, type: 3}
+    Icon: testingclothing_apperentice_male_torso
+    UseSound: 
+    Type: chest
+    DropChance: 1
+    GoldValue: 12
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 10
+      BonusSTR: 0
+      BonusMAG: 5
+      BonusDEX: 2
+      BonusHP: 0
+      BonusMP: 15
+    ItemSprites:
+    - PartKey: chest
+      SpritePlaceable: {fileID: 21300074, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperentice_male_torso
+    - PartKey: arm
+      SpritePlaceable: {fileID: 21300076, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperentice_male_arm
+    - PartKey: elbow
+      SpritePlaceable: {fileID: 21300082, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperentice_male_elbow
+  - Key: apprenticeRobeBlack
+    Name: Black Apprentice Robe
+    Description: A minimalistic black robe, usually worn by apprentices of magic.
+    IconPlaceable: {fileID: 21300086, guid: ebcb940941159e54fb42d2b174b0cd9a, type: 3}
+    Icon: testingclothing_apperenticeBlack_male_torso
+    UseSound: 
+    Type: chest
+    DropChance: 1
+    GoldValue: 12
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 10
+      BonusSTR: 0
+      BonusMAG: 5
+      BonusDEX: 2
+      BonusHP: 0
+      BonusMP: 15
+    ItemSprites:
+    - PartKey: chest
+      SpritePlaceable: {fileID: 21300086, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperenticeBlack_male_torso
+    - PartKey: arm
+      SpritePlaceable: {fileID: 21300088, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperenticeBlack_male_arm
+    - PartKey: elbow
+      SpritePlaceable: {fileID: 21300092, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: testingclothing_apperenticeBlack_male_elbow
+  - Key: shortSword
+    Name: Short Sword
+    Description: A short, cheap, iron sword. Excellent for stabbing, could also cut
+      quite well.
+    IconPlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: weapon_short_sword
+    UseSound: 
+    Type: weapon
+    DropChance: 1
+    GoldValue: 20
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 5
+      BonusSTR: 5
+      BonusMAG: 0
+      BonusDEX: 2
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: weapon_short_sword
+  - Key: shortClub
+    Name: Short Club
+    Description: A short, crude, blunt club. Not good as a sword, but could deal some
+      damage aswell.
+    IconPlaceable: {fileID: 21300002, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: weapon_short_club
+    UseSound: 
+    Type: weapon
+    DropChance: 2
+    GoldValue: 2
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 3
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300002, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: weapon_short_club
+  - Key: shortAxe
+    Name: Short Axe
+    Description: A short, cheap, crude. axe, made for chopping wood and enemies.
+    IconPlaceable: {fileID: 21300004, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: weapon_short_axe
+    UseSound: 
+    Type: weapon
+    DropChance: 1
+    GoldValue: 10
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 4
+      BonusSTR: 5
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300004, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: weapon_short_axe
+  - Key: shortScimitar
+    Name: Short Scimitar
+    Description: A short blade with a bent edge, made for cutting and slicing. Quite
+      useful in combat.
+    IconPlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: weapon_scimitar
+    UseSound: 
+    Type: weapon
+    DropChance: 1
+    GoldValue: 25
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 5
+      BonusSTR: 6
+      BonusMAG: 0
+      BonusDEX: 5
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: weapon_scimitar
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with
@@ -69537,6 +69853,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212000014284416608, guid: a517cca850296594f906c19dbc6215da,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300038, guid: 3b4165e6cf55e1c4fa658df9caff6d6f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a517cca850296594f906c19dbc6215da, type: 2}
   m_IsPrefabParent: 0

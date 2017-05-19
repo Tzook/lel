@@ -97,7 +97,7 @@ public class ActorController : MonoBehaviour
         Collider = GetComponent<BoxCollider2D>();
         Collider.enabled = true;
 
-        Anim = transform.FindChild("Body").GetComponent<Animator>();
+        Anim = transform.Find("Body").GetComponent<Animator>();
     }
 
     void Start()

@@ -25,7 +25,7 @@ public class ActorMovement : MonoBehaviour
         Instance = GetComponent<ActorInstance>();
         lastPosition = transform.position;
 
-        Anim = transform.FindChild("Body").GetComponent<Animator>();
+        Anim = transform.Find("Body").GetComponent<Animator>();
 
         initScale = Anim.transform.localScale;
     }

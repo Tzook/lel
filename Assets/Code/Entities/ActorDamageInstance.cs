@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActorDamageInstance : MonoBehaviour {
 
     public ActorInstance ParentActor;
-    float TimeAlive = 0.3f;
+    float TimeAlive = 0.1f;
     bool Hit = false;
 
 
@@ -17,7 +17,7 @@ public class ActorDamageInstance : MonoBehaviour {
 
     void OnEnable()
     {
-        TimeAlive = 0.3f;
+        TimeAlive = 0.1f;
         Hit = false;
     }
 
@@ -25,7 +25,7 @@ public class ActorDamageInstance : MonoBehaviour {
     {
         if(TimeAlive > 0f)
         {
-            TimeAlive -= 0.3f * Time.deltaTime;
+            TimeAlive -= 1f * Time.deltaTime;
         }
         else
         {

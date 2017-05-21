@@ -74,6 +74,9 @@ public class Content : MonoBehaviour {
 
     public Texture2D DefaultCursor;
     public Texture2D ClickableCursor;
+
+    public List<string> StartingGear = new List<string>();
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);

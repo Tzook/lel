@@ -125,6 +125,8 @@ public class InGameMainMenuUI : MonoBehaviour {
                 }
 
                 Game.Instance.InChat = false;
+                StatsInfo.Hide();
+                itemInfoPanel.Hide();
             }
         }
         else
@@ -181,7 +183,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                 else
                 {
                     statsPanel.Hide();
-                    InGameMainMenuUI.Instance.StatsInfo.Hide();
+                    StatsInfo.Hide();
 
                 }
             }

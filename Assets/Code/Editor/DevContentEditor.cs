@@ -105,6 +105,11 @@ public class DevContentEditor : Editor
             SendItemsInfo(node);
         }
 
+        if (GUILayout.Button("Send Starting Gear"))
+        {
+            SendStartingGear(currentInfo.StartingGear);
+        }
+
         if (GUILayout.Button("Restart Server"))
         {
             RestartServer();
@@ -168,6 +173,34 @@ public class DevContentEditor : Editor
 
 
         WWW req = new WWW(Config.BASE_URL + "/restart", rawdata, headers);
+
+        ContinuationManager.Add(() => req.isDone, () =>
+        {
+            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
+            Debug.Log("WWW result : " + req.text);
+        });
+    }
+
+    private void SendStartingGear(List<string> GearList)
+    {
+        JSONNode node = new JSONClass();
+
+        node["pass"] = "b0ss123";
+
+        for (int i = 0; i < GearList.Count; i++)
+        {
+            node["items"][i]["key"] = GearList[i];
+        }
+
+        Debug.Log("Sending Starting Gear...");
+
+        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
+
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Content-Type", "application/json");
+
+
+        WWW req = new WWW(Config.BASE_URL + "/gearInfo", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

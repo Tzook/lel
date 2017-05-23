@@ -211,7 +211,8 @@ public class Quest
     //TODO Reward primary ability
 
     public string RewardClass;
-
+    
+    public int RewardExp;
 
 }
 

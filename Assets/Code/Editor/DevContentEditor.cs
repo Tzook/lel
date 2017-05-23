@@ -222,33 +222,34 @@ public class DevContentEditor : Editor
 
         for (int i = 0; i < Quests.Count; i++)
         {
-            node["items"][i]["key"] = Quests[i].Key;
-            node["items"][i]["name"] = Quests[i].Name;
+            node["quests"][i]["key"] = Quests[i].Key;
 
             for( int c=0 ; c < Quests[i].Conditions.Count ; c++ )
             {
-                node["items"][i]["conditions"][c]["condition"] = Quests[i].Conditions[c].Condition;
-                node["items"][i]["conditions"][c]["conditionType"] = Quests[i].Conditions[c].Type;
-                node["items"][i]["conditions"][c]["targetProgress"] = Quests[i].Conditions[c].TargetProgress.ToString();
+                node["quests"][i]["conditions"][c]["condition"] = Quests[i].Conditions[c].Condition;
+                node["quests"][i]["conditions"][c]["conditionType"] = Quests[i].Conditions[c].Type;
+                node["quests"][i]["conditions"][c]["targetProgress"] = Quests[i].Conditions[c].TargetProgress.ToString();
             }
 
             for (int rc = 0; rc < Quests[i].RequiredCompletedQuests.Count; rc++)
             {
-                node["items"][i]["RequiredQuests"][rc]["key"] = Quests[i].RequiredCompletedQuests[rc];
+                node["quests"][i]["RequiredQuests"][rc]["key"] = Quests[i].RequiredCompletedQuests[rc];
             }
 
-            node["items"][i]["requiredClass"] = Quests[i].RequiredClass;
+            node["quests"][i]["requiredClass"] = Quests[i].RequiredClass;
 
-            node["items"][i]["minLevel"] = Quests[i].MinimumLevel.ToString();
+            node["quests"][i]["minLevel"] = Quests[i].MinimumLevel.ToString();
 
 
             for (int ri = 0; ri < Quests[i].RewardItems.Count; ri++)
             {
-                node["items"][i]["rewardItems"][ri]["key"] = Quests[i].RewardItems[ri].ItemKey;
-                node["items"][i]["rewardItems"][ri]["stack"] = Quests[i].RewardItems[ri].MinStack.ToString();
+                node["quests"][i]["rewardItems"][ri]["key"] = Quests[i].RewardItems[ri].ItemKey;
+                node["quests"][i]["rewardItems"][ri]["stack"] = Quests[i].RewardItems[ri].MinStack.ToString();
             }
 
-            node["items"][i]["rewardClass"] = Quests[i].RewardClass.ToString();
+            node["quests"][i]["rewardClass"] = Quests[i].RewardClass.ToString();
+            
+            node["quests"][i]["rewardExp"] = Quests[i].RewardExp.ToString();
 
         }
 
@@ -260,7 +261,7 @@ public class DevContentEditor : Editor
         headers.Add("Content-Type", "application/json");
 
 
-        WWW req = new WWW(Config.BASE_URL + "/quests", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/quests/generate", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

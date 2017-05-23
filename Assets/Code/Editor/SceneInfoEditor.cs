@@ -43,6 +43,12 @@ public class SceneInfoEditor : Editor {
                 node["scene"]["Spawners"][i]["PositionY"]   = currentInfo.Spawners[i].transform.position.y.ToString();
             }
 
+            for (int i = 0; i < currentInfo.Npcs.Count; i++)
+            {
+                node["scene"]["NPC"][i]["npcKey"] = currentInfo.Npcs[i].Key;
+            }
+
+
             SendSceneInfo(node);
         }
 

@@ -10379,6 +10379,7 @@ Transform:
   m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
   m_Children:
   - {fileID: 373436913}
+  - {fileID: 1844225493}
   - {fileID: 1445287353}
   m_Father: {fileID: 0}
   m_RootOrder: 18
@@ -10443,292 +10444,9 @@ MonoBehaviour:
     - Title: How to play
       Event: StartDialog
       Value: HowToPlay
-    - Title: Nothing...
-      Event: EndDialog
-      Value: 
-  - DialogKey: HowToPlay
-    Pieces:
-    - Content: What do you wanna know about?
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Movement
-      Event: StartDialog
-      Value: Movement
-    - Title: Combat
-      Event: StartDialog
-      Value: Combat
-    - Title: Items
-      Event: StartDialog
-      Value: Items
-    - Title: Nothing...
-      Event: EndDialog
-      Value: 
-  - DialogKey: Movement
-    Pieces:
-    - Content: '...'
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Moving
-      Event: StartDialog
-      Value: HowMove
-    - Title: Jumping
-      Event: StartDialog
-      Value: HowJump
-    - Title: Climbing
-      Event: StartDialog
-      Value: HowClimb
-    - Title: Nevermind
-      Event: StartDialog
-      Value: HowToPlay
-  - DialogKey: Combat
-    Pieces:
-    - Content: '...'
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Aiming
-      Event: StartDialog
-      Value: HowAim
-    - Title: Attacking
-      Event: StartDialog
-      Value: HowAttack
-    - Title: Nevermind
-      Event: StartDialog
-      Value: HowToPlay
-  - DialogKey: Items
-    Pieces:
-    - Content: '...'
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Picking up items
-      Event: StartDialog
-      Value: HowPickUp
-    - Title: Dropping items
-      Event: StartDialog
-      Value: HowDrop
-    - Title: Equipping items
-      Event: StartDialog
-      Value: HowEquip
-    - Title: Nevermind
-      Event: StartDialog
-      Value: HowToPlay
-  - DialogKey: HowMove
-    Pieces:
-    - Content: Oh, well, moving is pretty easy...
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: Greet
-    - Content: Use the 'A' key on your keyboard to move left.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: And the 'D' key to move right.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: You can switch those to almost any other key by pressing 'Escape' .
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Then by selecting 'Options' and 'Controls'.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Movement
-  - DialogKey: HowJump
-    Pieces:
-    - Content: You can jump by pressing the 'Space' bar on your keyboard.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: Greet
-    - Content: You can move while in mid air by the way.
-      LetterDelay: 0.03
-      Pitch: 0.9
-      AnimationTrigger: 
-    - Content: Just so you'll be able to reach higher platforms.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Movement
-  - DialogKey: HowClimb
-    Pieces:
-    - Content: You can climb ladders and ropes if you want.
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: 
-    - Content: All you have to do is stand by a rope...
-      LetterDelay: 0.03
-      Pitch: 0.9
-      AnimationTrigger: 
-    - Content: And use either the 'W' key on your keyboard to climb up.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Or the 'S' key to climb down...
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Ropes will help you navigate trough platform more easily...
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Sometimes they are the only choice...
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: Greet
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Movement
-  - DialogKey: HowAim
-    Pieces:
-    - Content: Aiming will give you the ability to hit enemies which are above you
-        or below you...
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: Greet
-    - Content: 'Press and hold the ''Right Mouse Button'' '
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: 
-    - Content: And then move your mouse over the targeted area...
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Combat
-  - DialogKey: HowAttack
-    Pieces:
-    - Content: Attacking could be done by pressing the 'Left Mouse Button'
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: Greet
-    - Content: Pressing once will do the job.
-      LetterDelay: 0.02
-      Pitch: 1.2
-      AnimationTrigger: 
-    - Content: However, charging the attack before releasing will cause more damage!
-      LetterDelay: 0.04
-      Pitch: 0.8
-      AnimationTrigger: 
-    - Content: Press and hold the 'Left Mouse Button' to charge the attack.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Then release the 'Left Mouse Button' to release the charged attack.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Combat
-  - DialogKey: HowPickUp
-    Pieces:
-    - Content: You could pick up items from the ground if you want.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: Greet
-    - Content: Picking up items is done by pressing the 'Shift' button.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Sometimes you might encounter items which are unpickable!
-      LetterDelay: 0.04
-      Pitch: 0.8
-      AnimationTrigger: 
-    - Content: That's because they belong to someone else!
-      LetterDelay: 0.02
-      Pitch: 1.1
-      AnimationTrigger: 
-    - Content: Items which are not picked up for 15 seconds will be declared 'Abandoned'
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: And could be picked up by other players.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Also, always make sure your inventory has space for the item you wish
-        to pick up.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: With that said, just so you know, some items are 'Stackable'.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: That means they don't always require a free slot to be picked up.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: They will be added to items with the same type instead.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: Unless they reach the stack cap and then would require a free inventory
-        slot.
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: '''Turtle Shells'' are stackable for example.'
-      LetterDelay: 0.02
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Items
-  - DialogKey: HowDrop
-    Pieces:
-    - Content: Dropping an item from your inventory is done by pressing and holding
-        the item.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: Greet
-    - Content: And then dragging it away from the inventory window...
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    - Content: It could be done also from the equipment window.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Items
-  - DialogKey: HowEquip
-    Pieces:
-    - Content: Equipping an item could be done by dragging it from your inventory
-        to the correct equipment slot.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: Greet
-    - Content: It could also by done by simply clicking on the 'Right Mouse Button'.
-      LetterDelay: 0.03
-      Pitch: 1
-      AnimationTrigger: 
-    Options:
-    - Title: Got it
-      Event: StartDialog
-      Value: Items
   DefaultDialog: Greetings
+  Name: Ship Captain
+  Key: shipCaptain
   Body: {fileID: 1445287353}
   Anim: {fileID: 1445287354}
   ChatBubbleSpot: {fileID: 373436913}
@@ -11261,6 +10979,8 @@ MonoBehaviour:
       Event: EndDialog
       Value: 
   DefaultDialog: Greetings
+  Name: Sailor
+  Key: sailor
   Body: {fileID: 1773058803}
   Anim: {fileID: 1773058802}
   ChatBubbleSpot: {fileID: 817205786}
@@ -28843,7 +28563,7 @@ Transform:
   - {fileID: 543499293}
   - {fileID: 450792760}
   m_Father: {fileID: 503877746}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1445287354
 Animator:
@@ -29142,6 +28862,9 @@ MonoBehaviour:
   - {fileID: 1256474249}
   Spawners:
   - {fileID: 2036393052}
+  Npcs:
+  - {fileID: 503877748}
+  - {fileID: 550529019}
 --- !u!4 &1487088046
 Transform:
   m_ObjectHideFlags: 0
@@ -41994,6 +41717,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1844225492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1844225493}
+  m_Layer: 14
+  m_Name: questSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: f5a61a6fe577dfd4fb9bf3073864a14e, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844225493
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844225492}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.05999505, y: 4.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 503877746}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852774160
 GameObject:

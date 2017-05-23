@@ -11,4 +11,6 @@ public class SceneInfo : MonoBehaviour {
     public List<GatePortal> ScenePortals = new List<GatePortal>();
 
     public List<MonsterSpawner> Spawners = new List<MonsterSpawner>();
+
+    public List<NPC> Npcs = new List<NPC>();
 }

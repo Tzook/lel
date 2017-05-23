@@ -8,6 +8,9 @@ public class NPC : MonoBehaviour {
 
     public string DefaultDialog;
 
+    public string Name;
+    public string Key;
+
     [SerializeField]
     Transform Body;
 
@@ -16,7 +19,11 @@ public class NPC : MonoBehaviour {
 
     public Transform ChatBubbleSpot;
 
-	public void Interact()
+    public Transform QuestSpot;
+
+    public GameObject CurrentQuestBubble;
+
+    public void Interact()
     {
         DialogManager.Instance.StartDialogMode(this);
     }

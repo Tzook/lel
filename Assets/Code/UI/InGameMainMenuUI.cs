@@ -49,6 +49,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected StatsWindowUI statsPanel;
 
     [SerializeField]
+    protected ProgressQuestsWindowUI questsPanel;
+
+    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
@@ -185,6 +188,18 @@ public class InGameMainMenuUI : MonoBehaviour {
                     statsPanel.Hide();
                     StatsInfo.Hide();
 
+                }
+            }
+
+            if (Input.GetKeyDown(InputMap.Map["Quests"]))
+            {
+                if (!questsPanel.gameObject.activeInHierarchy)
+                {
+                    questsPanel.Show();
+                }
+                else
+                {
+                    questsPanel.Hide();
                 }
             }
         }

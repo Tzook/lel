@@ -77,6 +77,8 @@ public class Content : MonoBehaviour {
 
     public List<string> StartingGear = new List<string>();
 
+    public List<Quest> Quests = new List<Quest>();
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -179,5 +181,46 @@ public class PrimaryAbility
     public string Name;
 
     public Sprite Icon;
+}
+
+[System.Serializable]
+public class Quest
+{
+    public string Name;
+
+    public string Key;
+
+    [TextArea(16, 9)]
+    public string InProgressDescription;
+
+    [TextArea(16, 9)]
+    public string QuestCompleteDescription;
+
+    public List<QuestCondition> Conditions = new List<QuestCondition>();
+
+    public List<string> RequiredCompletedQuests = new List<string>();
+
+    public string RequiredClass;
+
+    public int MinimumLevel;
+
+    public List<LootInstance> RewardItems = new List<LootInstance>();
+
+    //TODO Reward stats 
+
+    //TODO Reward primary ability
+
+    public string RewardClass;
+
+
+}
+
+[System.Serializable]
+public class QuestCondition
+{
+    public string Condition;
+    public string Type;
+    public int CurrentProgress;
+    public int TargetProgress;
 }
 

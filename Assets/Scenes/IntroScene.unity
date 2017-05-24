@@ -10441,15 +10441,74 @@ MonoBehaviour:
       Pitch: 1
       AnimationTrigger: 
     Options:
-    - Title: How to play
+    - Title: What am I supposed to do?
       Event: StartDialog
-      Value: HowToPlay
+      Value: WhatDo
+    - Title: Nevermind...
+      Event: EndDialog
+      Value: 
+  - DialogKey: WhatDo
+    Pieces:
+    - Content: Supposed to do...
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: Hm...
+      LetterDelay: 0.05
+      Pitch: 0.5
+      AnimationTrigger: 
+    - Content: Well, I brought you here, what you are supposed to do is beyond me.
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: 'If you are completely clueless, then I would suggest... '
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: Get richer?
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Maybe stronger?
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Become a better person?
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Find a solution to something maybe?...
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Find faith?...
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Follow fate?...
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: Greet
+    - Content: Or just continue that path in to the island...
+      LetterDelay: 0.02
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: Because it's the only path really.
+      LetterDelay: 0.025
+      Pitch: 1.1
+      AnimationTrigger: 
+    Options:
+    - Title: Okay...
+      Event: EndDialog
+      Value: 
   DefaultDialog: Greetings
   Name: Ship Captain
   Key: shipCaptain
   Body: {fileID: 1445287353}
   Anim: {fileID: 1445287354}
   ChatBubbleSpot: {fileID: 373436913}
+  QuestSpot: {fileID: 0}
+  CurrentQuestBubble: {fileID: 0}
 --- !u!1 &504505196
 GameObject:
   m_ObjectHideFlags: 0
@@ -10984,6 +11043,8 @@ MonoBehaviour:
   Body: {fileID: 1773058803}
   Anim: {fileID: 1773058802}
   ChatBubbleSpot: {fileID: 817205786}
+  QuestSpot: {fileID: 0}
+  CurrentQuestBubble: {fileID: 0}
 --- !u!61 &550529020
 BoxCollider2D:
   m_ObjectHideFlags: 0

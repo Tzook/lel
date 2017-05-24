@@ -206,9 +206,13 @@ public class Quest
 
     public List<LootInstance> RewardItems = new List<LootInstance>();
 
-    //TODO Reward stats 
+    public int RewardSTR;
+    public int RewardMAG;
+    public int RewardDEX;
+    public int RewardHP;
+    public int RewardMP;
 
-    //TODO Reward primary ability
+    public PrimaryAbility RewardPrimaryAbility;
 
     public string RewardClass;
     

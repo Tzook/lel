@@ -29,4 +29,6 @@ public class DialogOption
     public string Title;
     public string Event;
     public string Value;
+    public string Condition;
+    public string ConditionValue;
 }

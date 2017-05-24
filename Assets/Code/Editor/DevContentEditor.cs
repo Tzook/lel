@@ -248,7 +248,14 @@ public class DevContentEditor : Editor
             }
 
             node["quests"][i]["rewardClass"] = Quests[i].RewardClass.ToString();
-            
+
+            node["quests"][i]["rewardSTR"] = Quests[i].RewardSTR.ToString();
+            node["quests"][i]["rewardMAG"] = Quests[i].RewardMAG.ToString();
+            node["quests"][i]["rewardDEX"] = Quests[i].RewardDEX.ToString();
+            node["quests"][i]["rewardHP"] = Quests[i].RewardHP.ToString();
+            node["quests"][i]["rewardMP"] = Quests[i].RewardMP.ToString();
+            node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility.ToString();
+
             node["quests"][i]["rewardExp"] = Quests[i].RewardExp.ToString();
 
         }

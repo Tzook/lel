@@ -10,6 +10,7 @@ public class SceneControl
     protected List<GatePortal>              Portals = new List<GatePortal>();
     public List<Enemy>                      Enemies = new List<Enemy>();
     public Dictionary<string, ItemInstance> Items = new Dictionary<string, ItemInstance>();
+    public List<NPC>                        Npcs = new List<NPC>();
 
     public int SceneItemsCount
     {
@@ -58,6 +59,14 @@ public class SceneControl
         if (Enemies.Contains(enemy))
         {
             Enemies.Remove(enemy);
+        }
+    }
+
+    public void AddNPC(NPC npc)
+    {
+        if (!Npcs.Contains(npc))
+        {
+            Npcs.Add(npc);
         }
     }
 
@@ -115,5 +124,27 @@ public class SceneControl
     {
         Items[instanceID].gameObject.SetActive(false);
         Items.Remove(instanceID);
+    }
+
+    public void UpdateQuestProgress(string questKey)
+    {
+        NPC tempNPC = GetQuestNPC(questKey);
+        if (tempNPC != null)
+        {
+            tempNPC.RefreshQuestState();
+        }
+    }
+
+    public NPC GetQuestNPC(string questKey)
+    {
+        for(int i=0 ; i < Npcs.Count ; i++)
+        {
+            if(Npcs[i].GivingQuests.Contains(questKey))
+            {
+                return Npcs[i];
+            }
+        }
+
+        return null;
     }
 }

@@ -221,8 +221,8 @@ public class ActorController : MonoBehaviour
                 SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), transform.right, GroundedThreshold, GroundLayerMask);
                 SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
 
-                LeftSlope = (SideRayLeft.normal.x < -0.5 || SideRayLeft.normal.x > 0.5);
-                RightSlope = (SideRayRight.normal.x < -0.5 || SideRayRight.normal.x > 0.5);
+                LeftSlope = (SideRayLeft.normal.x < -0.7 || SideRayLeft.normal.x > 0.7);
+                RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
 
 
                 if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope && !Game.Instance.InChat)

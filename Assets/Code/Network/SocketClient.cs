@@ -95,6 +95,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_move", OnMobMovement);
 
+        CurrentSocket.On("quest_progress", OnQuestProgress);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -555,6 +556,19 @@ public class SocketClient : MonoBehaviour
         Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
     }
 
+
+    private void OnQuestProgress(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["quest_id"].Value + " Had Progress");
+
+        //TODO Implement
+        LocalUserInfo.Me.SelectedCharacter.UpdateQuestProgress("CONTENT");
+        InGameMainMenuUI.Instance.UpdateQuestProgress("CONTENT");
+        Game.Instance.CurrentScene.UpdateQuestProgress(data["quest_id"].Value);
+    }
+
     #endregion
 
     #region Emittions
@@ -821,6 +835,25 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("release_death", node);
 
     }
+
+    public void SendQuestStarted(string questID)
+    {
+        JSONNode node = new JSONClass();
+
+        node["quest_id"] = questID;
+
+        CurrentSocket.Emit("quest_started", node);
+    }
+
+    public void SendQuestAborted(string questID)
+    {
+        JSONNode node = new JSONClass();
+
+        node["quest_id"] = questID;
+
+        CurrentSocket.Emit("quest_aborted", node);
+    }
+
 
     #endregion
 

@@ -1,8 +1,8 @@
-﻿using 
-    UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using SimpleJSON;
 using System.Collections.Generic;
+using System;
 
 public class ActorInfo
 {
@@ -31,6 +31,8 @@ public class ActorInfo
         }
         private set { }
     }
+
+    public string Class;
 
     public int STR;
     public int MAG;
@@ -81,6 +83,9 @@ public class ActorInfo
 
     public Equipment Equipment;
 
+    public List<Quest> QuestsInProgress = new List<Quest>();
+    public List<string> CompletedQuests = new List<string>();
+
     public int Gold;
 
     public ActorInfo()
@@ -121,8 +126,27 @@ public class ActorInfo
             SetStats(node["stats"]);
         }
 
+        for(int i=0;i<node["quests"]["done"].Count;i++)
+        {
+            CompletedQuests.Add(node["quests"]["done"][i].Value);
+        }
+
+        //TODO Quests in progress!
 
         RefreshBonuses();
+    }
+
+    public Quest GetQuestProgress(string questKey)
+    {
+        for(int i=0;i<QuestsInProgress.Count;i++)
+        {
+            if (QuestsInProgress[i].Key == questKey)
+            {
+                return QuestsInProgress[i];
+            }
+        }
+
+        return null;
     }
 
     public void ChangeGold(int amount)
@@ -208,6 +232,10 @@ public class ActorInfo
         BonusDEX += item.Stats.BonusDEX;
         BonusHP += item.Stats.BonusHP;
         BonusMP += item.Stats.BonusMP;
+    }
+
+    public void UpdateQuestProgress(string questKey)
+    {
     }
 }
 

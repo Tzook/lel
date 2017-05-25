@@ -501,4 +501,8 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         DeathWindow.gameObject.SetActive(true);
     }
+
+    internal void UpdateQuestProgress(string questKey)
+    {
+    }
 }

@@ -79,6 +79,19 @@ public class Content : MonoBehaviour {
 
     public List<Quest> Quests = new List<Quest>();
 
+    public Quest GetQuest(string questKey)
+    {
+        for(int i=0;i<Quests.Count;i++)
+        {
+            if(Quests[i].Key == questKey)
+            {
+                return Quests[i];
+            }
+        }
+
+        return null;
+    }
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -196,6 +209,8 @@ public class Quest
     [TextArea(16, 9)]
     public string QuestCompleteDescription;
 
+    public string FacePrefab;
+
     public List<QuestCondition> Conditions = new List<QuestCondition>();
 
     public List<string> RequiredCompletedQuests = new List<string>();
@@ -218,6 +233,39 @@ public class Quest
     
     public int RewardExp;
 
+    public bool IsAvailable(ActorInfo character)
+    {
+        if (!string.IsNullOrEmpty(RequiredClass) && RequiredClass != character.Class)
+        {
+            return false;
+        }
+
+
+        if(character.LVL < MinimumLevel)
+        {
+            return false;
+        }
+
+
+        for (int i=0;i< RequiredCompletedQuests.Count;i++)
+        {
+            if(!character.CompletedQuests.Contains(RequiredCompletedQuests[i]))
+            {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+    public bool Complete
+    {
+        get
+        {
+            return true;
+        }
+    }
 }
 
 [System.Serializable]

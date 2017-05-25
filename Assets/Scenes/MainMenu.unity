@@ -455,7 +455,6 @@ GameObject:
   - component: {fileID: 1531}
   - component: {fileID: 955}
   - component: {fileID: 2122}
-  - component: {fileID: 822}
   - component: {fileID: 2123}
   m_Layer: 5
   m_Name: ChatBox
@@ -10480,23 +10479,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 274}
   m_Enabled: 1
---- !u!95 &822
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 27}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97eb73f8f37d1a144a713d3ecc29e70f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &826
 Animator:
   serializedVersion: 3
@@ -33657,7 +33639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -14}
+  m_AnchoredPosition: {x: 0, y: 122.400024}
   m_SizeDelta: {x: 0, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1532
@@ -41427,7 +41409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41, y: -39.00003}
+  m_AnchoredPosition: {x: 41, y: -39}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -41602,7 +41584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13125001, y: 0.54622227}
   m_AnchorMax: {x: 0.27875, y: 0.6506668}
-  m_AnchoredPosition: {x: 0.7998047, y: 54.400017}
+  m_AnchoredPosition: {x: 0.7998047, y: 54.400024}
   m_SizeDelta: {x: -5, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1962
@@ -44808,7 +44790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04638f9108dd1c746b6be38a615360e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animator: {fileID: 822}
   m_txtField: {fileID: 2265}
 --- !u!114 &2124
 MonoBehaviour:
@@ -51056,11 +51037,12 @@ MonoBehaviour:
   ChargeAttackBar: {fileID: 2481}
   m_Minilog: {fileID: 2322}
   DeathWindow: {fileID: 2594}
+  GoldDropWindow: {fileID: 2623}
   StatsInfo: {fileID: 2176}
   isDraggingItem: 0
   DraggedSlot: {fileID: 0}
   HoveredSlot: {fileID: 0}
-  CurrentDragged: {fileID: 0}
+  CurrentDragged: {fileID: 377}
 --- !u!114 &2337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52515,7 +52497,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2577}
   m_HandleRect: {fileID: 1808}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

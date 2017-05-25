@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +33,18 @@ public class NPC : MonoBehaviour {
 
     private void Initialize()
     {
+        StartCoroutine(InitRoutine());
+    }
+
+    private IEnumerator InitRoutine()
+    {
+        while(Game.Instance.CurrentScene == null)
+        {
+            yield return 0;
+        }
+
         Game.Instance.CurrentScene.AddNPC(this);
+
         RefreshQuestState();
     }
 

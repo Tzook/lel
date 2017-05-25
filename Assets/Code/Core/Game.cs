@@ -15,8 +15,9 @@ public class Game : MonoBehaviour {
     {
         get
         {
-            return isDraggingWindow 
-                    || InGameMainMenuUI.Instance.isDraggingItem;
+            return isDraggingWindow
+                    || InGameMainMenuUI.Instance.isDraggingItem
+                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen;
         }
     }
     public bool MovingTroughPortal = false;

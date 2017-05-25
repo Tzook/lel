@@ -469,6 +469,8 @@ MonoBehaviour:
     ID: 
     Name: SpikedTurtle
     Type: 1
+    CurrentHealth: 0
+    MaxHealth: 0
   Rigid: {fileID: 50000010356496678}
   Body: {fileID: 4000013075024830}
   Anim: {fileID: 95000011514922204}
@@ -490,9 +492,11 @@ MonoBehaviour:
   - sound_punch
   DeathSounds:
   - monster_moan
+  m_HealthBar: {fileID: 0}
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 0.5
+  Collider: {fileID: 61000013149939936}
 --- !u!114 &114219952977951076
 MonoBehaviour:
   m_ObjectHideFlags: 1

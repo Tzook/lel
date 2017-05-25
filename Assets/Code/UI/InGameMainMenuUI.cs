@@ -72,16 +72,15 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     DeathWindowUI DeathWindow;
 
+    [SerializeField]
+    GoldDropWindowUI GoldDropWindow;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
 
     public bool isWindowOpen
     {
-        set
-        {
-
-        }
         get
         {
             for (int wc = 0; wc < WindowsContainers.Count; wc++)
@@ -100,6 +99,14 @@ public class InGameMainMenuUI : MonoBehaviour {
     }
 
     public bool isDraggingItem;
+
+    public bool isFullScreenWindowOpen
+    {
+        get
+        {
+            return (GoldDropWindow.gameObject.activeInHierarchy || questsPanel.gameObject.activeInHierarchy);
+        }
+    }
 
     public ItemUI DraggedSlot;
 

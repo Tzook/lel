@@ -5,9 +5,6 @@ using UnityEngine.UI;
 public class ChatboxUI : MonoBehaviour {
 
     [SerializeField]
-    Animator m_Animator;
-
-    [SerializeField]
     InputField m_txtField;
 
 
@@ -15,7 +12,6 @@ public class ChatboxUI : MonoBehaviour {
 	public void Open()
     {
         this.gameObject.SetActive(true);
-        m_Animator.SetTrigger("Show");
         m_txtField.Select();
         m_txtField.ActivateInputField();
         Game.Instance.InChat = true;
@@ -43,14 +39,10 @@ public class ChatboxUI : MonoBehaviour {
 
     public void Hide()
     {
-        m_Animator.SetTrigger("Hide");
         Game.Instance.InChat = false;
-    }
-    
-    public void CanShut()
-    {
         this.gameObject.SetActive(false);
     }
+   
 
 
 }

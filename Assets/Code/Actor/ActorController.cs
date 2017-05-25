@@ -23,7 +23,7 @@ public class ActorController : MonoBehaviour
     bool ClientOnly = false;
 
     public GatePortal CurrentPortal;
-    public GameObject CurrentRope;
+    public BoxCollider2D CurrentRope;
 
 
     #endregion
@@ -284,14 +284,14 @@ public class ActorController : MonoBehaviour
                 {
                     transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
 
-                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat && transform.position.y < CurrentRope.bounds.max.y)
                     {
                         Anim.SetBool("ClimbingUp", true);
                         Anim.SetBool("ClimbingDown", false);
 
                         transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
                     }
-                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
+                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && transform.position.y > CurrentRope.bounds.min.y)
                     {
                         Anim.SetBool("ClimbingDown", true);
                         Anim.SetBool("ClimbingUp", false);
@@ -304,7 +304,7 @@ public class ActorController : MonoBehaviour
                         Anim.SetBool("ClimbingDown", false);
                     }
 
-                    if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
+                    if ((Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat))
                     {
                         UnclimbRope();
                     }
@@ -352,6 +352,7 @@ public class ActorController : MonoBehaviour
 
     private void UnclimbRope()
     {
+        CurrentRope = null;
         OnRope = false;
         Anim.SetBool("OnRope", false);
         Anim.SetBool("ClimbingUp", false);
@@ -546,7 +547,7 @@ public class ActorController : MonoBehaviour
         }
         else if (obj.tag == "Rope")
         {
-            CurrentRope = obj.gameObject;
+            CurrentRope = obj as BoxCollider2D;
         }
     }
 

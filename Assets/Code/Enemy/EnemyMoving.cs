@@ -11,6 +11,14 @@ public class EnemyMoving : Enemy
     [SerializeField]
     protected float MovementSpeed = 1f;
 
+    [SerializeField]
+    BoxCollider2D Collider;
+
+    RaycastHit2D SideRayRight;
+    RaycastHit2D SideRayLeft;
+
+    LayerMask GroundLayerMask = 0 << 0 | 1;
+
     public override void SetAION()
     {
         base.SetAION();
@@ -130,6 +138,14 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
+            SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 0.15f , GroundLayerMask);
+
+ 
+            if (SideRayLeft.normal.x < -0.3 || SideRayLeft.normal.x > 0.3)
+            {
+                yield break;
+            }
+
             yield return 0;
         }
 
@@ -145,6 +161,13 @@ public class EnemyMoving : Enemy
             t -= 1f * Time.deltaTime;
 
             WalkRight();
+
+            SideRayRight = Physics2D.Raycast(transform.position, transform.right, 0.15f , GroundLayerMask);
+
+            if (SideRayRight.normal.x < -0.3 || SideRayRight.normal.x > 0.3)
+            {
+                yield break;
+            }
 
             yield return 0;
         }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 216a614752628ef4882e2ee77ade8019
-timeCreated: 1495141783
+timeCreated: 1495740408
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,14 @@ TextureImporter:
     21300002: weapon_short_club
     21300004: weapon_short_axe
     21300006: weapon_scimitar
+    21300016: bow_normal_charged
+    21300018: bow_normal
+    21300020: bow_improved_charged
+    21300022: bow_improved
+    21300024: bow_oak_charged
+    21300026: bow_oak
+    21300028: bow_metal_charged
+    21300030: bow_metal
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -44,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 40
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -70,6 +78,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -77,12 +93,12 @@ TextureImporter:
       name: weapon_short_sword
       rect:
         serializedVersion: 2
-        x: 23
-        y: 1775
-        width: 266
-        height: 258
+        x: 12
+        y: 889
+        width: 130
+        height: 127
       alignment: 9
-      pivot: {x: 0.4155387, y: 0.4253597}
+      pivot: {x: 0.42593402, y: 0.43682045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -90,12 +106,12 @@ TextureImporter:
       name: weapon_short_club
       rect:
         serializedVersion: 2
-        x: 287
-        y: 1785
-        width: 270
-        height: 248
+        x: 144
+        y: 893
+        width: 134
+        height: 123
       alignment: 9
-      pivot: {x: 0.36924145, y: 0.42235}
+      pivot: {x: 0.39221737, y: 0.38257828}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -103,12 +119,12 @@ TextureImporter:
       name: weapon_short_axe
       rect:
         serializedVersion: 2
-        x: 563
-        y: 1793
-        width: 284
-        height: 240
+        x: 283
+        y: 897
+        width: 139
+        height: 119
       alignment: 9
-      pivot: {x: 0.31918162, y: 0.37964275}
+      pivot: {x: 0.32682416, y: 0.35166046}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -116,12 +132,116 @@ TextureImporter:
       name: weapon_scimitar
       rect:
         serializedVersion: 2
-        x: 877
-        y: 1693
-        width: 355
-        height: 340
+        x: 441
+        y: 848
+        width: 174
+        height: 168
       alignment: 9
-      pivot: {x: 0.39150906, y: 0.3772827}
+      pivot: {x: 0.416995, y: 0.3662698}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_normal_charged
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 579
+        width: 135
+        height: 245
+      alignment: 9
+      pivot: {x: 0.70208144, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_normal
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 579
+        width: 57
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_improved_charged
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 579
+        width: 141
+        height: 245
+      alignment: 9
+      pivot: {x: 0.67071944, y: 0.48689985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_improved
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 579
+        width: 63
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_oak_charged
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 579
+        width: 145
+        height: 245
+      alignment: 9
+      pivot: {x: 0.654943, y: 0.48034993}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_oak
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 579
+        width: 90
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_metal_charged
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 317
+        width: 119
+        height: 240
+      alignment: 9
+      pivot: {x: 0.78319377, y: 0.48662695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_metal
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 318
+        width: 48
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

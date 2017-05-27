@@ -95,6 +95,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_move", OnMobMovement);
 
+        CurrentSocket.On("quest_start", OnQuestStart);
+        CurrentSocket.On("quest_complete", OnQuestComplete);
+        CurrentSocket.On("quest_abort", OnQuestAbort);
         CurrentSocket.On("quest_progress", OnQuestProgress);
 
         LoadingWindowUI.Instance.Register(this);
@@ -556,6 +559,31 @@ public class SocketClient : MonoBehaviour
         Game.Instance.SpawnMonster(data["mob_id"].Value, data["x"].AsFloat, data["y"].AsFloat, data["key"].Value, data["hp"].AsInt);
     }
 
+
+
+    private void OnQuestAbort(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["quest_id"].Value + " Aborted");
+
+    }
+
+    private void OnQuestStart(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["quest_id"].Value + " Has Started");
+
+    }
+
+    private void OnQuestComplete(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["quest_id"].Value + " Was Completed");
+
+    }
 
     private void OnQuestProgress(Socket socket, Packet packet, object[] args)
     {

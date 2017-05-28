@@ -2,6 +2,7 @@
 using System.Collections;
 using SimpleJSON;
 using System;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Inventory
@@ -33,6 +34,23 @@ public class Inventory
         }
     }
 
+    public Dictionary<string, int> GetInventoryCounts()
+    {
+        Dictionary<string, int> dick = new Dictionary<string, int>();
+        for (int i = 0; i < ContentArray.Length; i++)
+        {
+            ItemInfo item = ContentArray[i];
+            if (item != null) {
+                if (!dick.ContainsKey(item.Key)) 
+                {
+                    dick[item.Key] = 0;
+                }
+                dick[item.Key] += item.Stack;
+            }
+        }
+        return dick;   
+    }
+
     public void SwapSlots(int fromIndex, int toIndex)
     {
         ItemInfo draggedInfo = ContentArray[fromIndex];
@@ -42,17 +60,14 @@ public class Inventory
 
     public void RemoveItem(int index)
     {
+        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(ContentArray[index].Key, -ContentArray[index].Stack);
         ContentArray[index] = null;
-    }
-
-    internal void AddItem(ItemInfo info)
-    {
-        ContentArray[GetFreeSlot()] = info;
     }
 
     internal void AddItemAt(int index, ItemInfo info)
     {
         ContentArray[index] = info;
+        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(info.Key, info.Stack);
     }
 
     internal ItemInfo GetItemAt(int index)
@@ -62,7 +77,9 @@ public class Inventory
 
     internal void ChangeItemStack(int index, int stack)
     {
+        int oldStack = ContentArray[index].Stack;
         ContentArray[index].Stack = stack;
+        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(ContentArray[index].Key, stack - oldStack);
     }
 
     private int GetFreeSlot()

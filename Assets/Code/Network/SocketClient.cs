@@ -98,7 +98,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("quest_start", OnQuestStart);
         CurrentSocket.On("quest_complete", OnQuestComplete);
         CurrentSocket.On("quest_abort", OnQuestAbort);
-        CurrentSocket.On("quest_progress", OnQuestProgress);
+        CurrentSocket.On("quest_hunt_progress", OnQuestHuntProgress);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -589,15 +589,15 @@ public class SocketClient : MonoBehaviour
 
     }
 
-    private void OnQuestProgress(Socket socket, Packet packet, object[] args)
+    private void OnQuestHuntProgress(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent(data["quest_id"].Value + " Had Progress");
+        BroadcastEvent(data["id"].Value + " Had Progress");
 
-        LocalUserInfo.Me.SelectedCharacter.UpdateQuestProgress(data["quest_id"].Value, data["mob_id"].Value, data["value"].AsInt);
+        LocalUserInfo.Me.SelectedCharacter.UpdateQuestProgress(data["id"].Value, data["mob_id"].Value, data["value"].AsInt);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
-        Game.Instance.CurrentScene.UpdateQuestProgress(data["quest_id"].Value);
+        Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
     }
 
     #endregion

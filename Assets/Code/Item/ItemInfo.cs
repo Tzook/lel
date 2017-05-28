@@ -6,6 +6,7 @@ using System;
 
 public class ItemInfo {
 
+    public string Key;
     public string Name;
     public string IconKey;
     public string UseSound;
@@ -17,29 +18,6 @@ public class ItemInfo {
 
     public Dictionary<string, string> Sprites = new Dictionary<string, string>();
 
-    public ItemInfo(JSONNode itemNode, int stack = 1)
-    {
-        if(stack == 0)
-        {
-            stack = 1;
-        }
-
-        this.Stack = stack;
-
-        this.Name = itemNode["name"].Value;
-        this.IconKey = itemNode["icon"].Value;
-        this.Type = itemNode["type"].Value;
-
-        Sprites.Clear();
-
-        this.Stats.SetInfo(itemNode["stats"]);
-
-        for (int i=0;i<itemNode["sprites"].Count;i++)
-        {
-            Sprites.Add(((JSONClass)itemNode["sprites"]).GetKey(i), itemNode["sprites"][i].Value);
-        }
-    }
-
     public ItemInfo(DevItemInfo storedItem, int stack = 1)
     {
         if (stack == 0)
@@ -49,6 +27,7 @@ public class ItemInfo {
 
         this.Stack = stack;
 
+        this.Key = storedItem.Key;
         this.Name = storedItem.Name;
         this.Description = storedItem.Description;
         this.IconKey = storedItem.Icon;

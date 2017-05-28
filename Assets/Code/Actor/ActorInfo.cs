@@ -125,13 +125,23 @@ public class ActorInfo
         {
             SetStats(node["stats"]);
         }
-
-        for(int i=0;i<node["quests"]["done"].Count;i++)
+        
+        // Get the JSON keys
+        IEnumerator enumerator = node["quests"]["done"].AsObject.GetEnumerator();
+        while (enumerator.MoveNext()) 
         {
-            CompletedQuests.Add(node["quests"]["done"][i].Value);
+            KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
+            CompletedQuests.Add(current.Key);
         }
 
-        //TODO Quests in progress!
+        // Get the JSON keys
+        enumerator = node["quests"]["progress"].AsObject.GetEnumerator();
+        while (enumerator.MoveNext()) 
+        {
+            KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
+            string questKey = current.Key;
+            AddQuest(questKey);
+        }
 
         RefreshBonuses();
     }
@@ -149,10 +159,8 @@ public class ActorInfo
         return null;
     }
 
-    public QuestCondition GetQuestCondition(string questKey, string typeKey)
+    public QuestCondition GetQuestCondition(Quest tempQuest, string typeKey)
     {
-        Quest tempQuest = GetQuestProgress(questKey);
-
         for(int i=0 ; i < tempQuest.Conditions.Count ; i++)
         {
             if(tempQuest.Conditions[i].Type == typeKey)
@@ -251,15 +259,45 @@ public class ActorInfo
 
     public void AddQuest(string questKey)
     {
-        QuestsInProgress.Add(Content.Instance.GetQuest(questKey).Clone());
+        Quest tempQuest = Content.Instance.GetQuest(questKey).Clone();
+        Dictionary<string, int> inventoryCounts = Inventory.GetInventoryCounts();
+
+        // loop through all conditions and add the item count from inventory to the quest progress
+        for (int i = 0; i < tempQuest.Conditions.Count; i++)
+        {
+            QuestCondition cond = tempQuest.Conditions[i];
+            if (inventoryCounts.ContainsKey(cond.Type)) 
+            {
+                cond.CurrentProgress = inventoryCounts[cond.Type];
+            }
+        }
+        QuestsInProgress.Add(tempQuest);
+    }
+
+    public void UpdateProgress(string type, int value) 
+    {
+        bool updatedAnything = false;
+        for (int i = 0; i < QuestsInProgress.Count; i++)
+        {
+            QuestCondition cond = GetQuestCondition(QuestsInProgress[i], type);
+            if (cond != null) 
+            {
+                cond.CurrentProgress += value;
+                updatedAnything = true;
+                Game.Instance.CurrentScene.UpdateQuestProgress(QuestsInProgress[i].Key);
+            }
+        }
+        if (updatedAnything) 
+        {
+            // refresh only if anything has been updated
+            InGameMainMenuUI.Instance.RefreshQuestProgress();
+        }
     }
     
     public void UpdateQuestProgress(string questKey, string mobKey, int Value)
     {
-        GetQuestCondition(questKey, mobKey).CurrentProgress = Value;
+        GetQuestCondition(GetQuestProgress(questKey), mobKey).CurrentProgress = Value;
     }
-
-    
 }
 
 public enum Gender

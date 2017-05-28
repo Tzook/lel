@@ -165,6 +165,11 @@ public class DialogManager : MonoBehaviour {
                 CurrentNPCBubble.GetComponent<CanvasGroup>().alpha -= 8f * Time.deltaTime;
                 yield return 0;
             }
+
+            if(CurrentDialog == null)
+            {
+                yield break;
+            }
         }
 
         //Spawn dialog options on frame.

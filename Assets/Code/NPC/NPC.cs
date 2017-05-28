@@ -97,8 +97,8 @@ public class NPC : MonoBehaviour {
                 }
             case "StartQuest":
                 {
-                    SocketClient.Instance.SendQuestStarted(eventValue);
                     DialogManager.Instance.StopDialogMode();
+                    SocketClient.Instance.SendQuestStarted(eventValue);
                     break;
                 }
         }
@@ -141,7 +141,8 @@ public class NPC : MonoBehaviour {
     {
         for(int i=0;i<GivingQuests.Count;i++)
         {
-            if(Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+            if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(GivingQuests[i]) == null 
+                && Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
             {
                 return true;
             }

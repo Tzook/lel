@@ -565,7 +565,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent(data["quest_id"].Value + " Aborted");
+        BroadcastEvent(data["id"].Value + " Aborted");
 
     }
 
@@ -573,7 +573,11 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent(data["quest_id"].Value + " Has Started");
+        BroadcastEvent(data["id"].Value + " Has Started");
+
+        LocalUserInfo.Me.SelectedCharacter.AddQuest(data["id"].Value);
+        InGameMainMenuUI.Instance.RefreshQuestProgress();
+        Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
 
     }
 
@@ -581,7 +585,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent(data["quest_id"].Value + " Was Completed");
+        BroadcastEvent(data["id"].Value + " Was Completed");
 
     }
 
@@ -591,9 +595,8 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["quest_id"].Value + " Had Progress");
 
-        //TODO Implement
-        LocalUserInfo.Me.SelectedCharacter.UpdateQuestProgress("CONTENT");
-        InGameMainMenuUI.Instance.UpdateQuestProgress("CONTENT");
+        LocalUserInfo.Me.SelectedCharacter.UpdateQuestProgress(data["quest_id"].Value, data["mob_id"].Value, data["value"].AsInt);
+        InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(data["quest_id"].Value);
     }
 
@@ -868,16 +871,25 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
-        node["quest_id"] = questID;
+        node["id"] = questID;
 
         CurrentSocket.Emit("quest_started", node);
+    }
+
+    public void SendQuestCompleted(string questID)
+    {
+        JSONNode node = new JSONClass();
+
+        node["id"] = questID;
+
+        CurrentSocket.Emit("quest_completed", node);
     }
 
     public void SendQuestAborted(string questID)
     {
         JSONNode node = new JSONClass();
 
-        node["quest_id"] = questID;
+        node["id"] = questID;
 
         CurrentSocket.Emit("quest_aborted", node);
     }

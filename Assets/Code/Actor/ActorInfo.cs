@@ -149,6 +149,21 @@ public class ActorInfo
         return null;
     }
 
+    public QuestCondition GetQuestCondition(string questKey, string typeKey)
+    {
+        Quest tempQuest = GetQuestProgress(questKey);
+
+        for(int i=0 ; i < tempQuest.Conditions.Count ; i++)
+        {
+            if(tempQuest.Conditions[i].Type == typeKey)
+            {
+                return tempQuest.Conditions[i];
+            }
+        }
+
+        return null;
+    }
+
     public void ChangeGold(int amount)
     {
         Gold += amount;
@@ -234,9 +249,17 @@ public class ActorInfo
         BonusMP += item.Stats.BonusMP;
     }
 
-    public void UpdateQuestProgress(string questKey)
+    public void AddQuest(string questKey)
     {
+        QuestsInProgress.Add(Content.Instance.GetQuest(questKey).Clone());
     }
+    
+    public void UpdateQuestProgress(string questKey, string mobKey, int Value)
+    {
+        GetQuestCondition(questKey, mobKey).CurrentProgress = Value;
+    }
+
+    
 }
 
 public enum Gender

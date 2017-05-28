@@ -135,6 +135,17 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
+    public LootInstance Clone()
+    {
+        LootInstance tempLoot = new LootInstance();
+
+        tempLoot.ItemKey = this.ItemKey;
+        tempLoot.MinStack = this.MinStack;
+        tempLoot.MaxStack = this.MaxStack;
+
+        return tempLoot;
+    }
+
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -266,11 +277,62 @@ public class Quest
             return true;
         }
     }
+
+    public Quest Clone()
+    {
+        Quest tempQuest = new Quest();
+
+        tempQuest.Key = this.Key;
+        tempQuest.Name = this.Name;
+        tempQuest.InProgressDescription = this.InProgressDescription;
+        tempQuest.QuestCompleteDescription = this.QuestCompleteDescription;
+        tempQuest.FacePrefab = this.FacePrefab;
+
+        for(int i=0;i<this.Conditions.Count;i++)
+        {
+            tempQuest.Conditions.Add(this.Conditions[i].Clone());
+        }
+
+        tempQuest.RequiredCompletedQuests.AddRange(this.RequiredCompletedQuests);
+        tempQuest.RequiredClass = this.RequiredClass;
+        tempQuest.MinimumLevel  = this.MinimumLevel;
+
+        for (int i = 0; i < this.RewardItems.Count; i++)
+        {
+            tempQuest.RewardItems.Add(this.RewardItems[i].Clone());
+        }
+
+        tempQuest.RewardSTR = this.RewardSTR;
+        tempQuest.RewardMAG = this.RewardMAG;
+        tempQuest.RewardDEX = this.RewardDEX;
+        tempQuest.RewardHP = this.RewardHP;
+        tempQuest.RewardMP = this.RewardMP;
+
+        tempQuest.RewardClass = this.RewardClass;
+        tempQuest.RewardPrimaryAbility = this.RewardPrimaryAbility;
+
+        tempQuest.RewardExp = this.RewardExp;
+
+        return tempQuest;
+    }
 }
 
 [System.Serializable]
 public class QuestCondition
 {
+
+    public QuestCondition Clone()
+    {
+        QuestCondition tempCondition = new QuestCondition();
+
+        tempCondition.Condition = this.Condition;
+        tempCondition.Type = this.Type;
+        tempCondition.CurrentProgress = this.CurrentProgress;
+        tempCondition.TargetProgress = this.TargetProgress;
+
+        return tempCondition;
+    }
+
     public string Condition;
     public string Type;
     public int CurrentProgress;

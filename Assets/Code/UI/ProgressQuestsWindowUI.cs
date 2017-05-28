@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,15 @@ public class ProgressQuestsWindowUI : MonoBehaviour {
     {
         this.gameObject.SetActive(true);
 
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         ClearContainer();
 
         GameObject tempObject;
-        for(int i=0 ; i < LocalUserInfo.Me.SelectedCharacter.QuestsInProgress.Count ; i++)
+        for (int i = 0; i < LocalUserInfo.Me.SelectedCharacter.QuestsInProgress.Count; i++)
         {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("QuestPanel");
             tempObject.transform.SetParent(Container, false);

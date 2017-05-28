@@ -541,7 +541,9 @@ public class ActorController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D obj)
     {
-        if(obj.tag == "GatePortal")
+        //Debug.Log("IN -" + obj.gameObject.name);
+
+        if (obj.tag == "GatePortal")
         {
             CurrentPortal = obj.GetComponent<GatePortal>();
         }
@@ -561,11 +563,13 @@ public class ActorController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D obj)
     {
+        //Debug.Log("OUT -"+obj.gameObject.name);
+
         if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
         {
             CurrentPortal = null;
         }
-        else if (obj.tag == "Rope" && CurrentRope == obj.gameObject)
+        else if (obj.tag == "Rope" && CurrentRope == obj.GetComponent<BoxCollider2D>())
         {
             CurrentRope = null;
         }

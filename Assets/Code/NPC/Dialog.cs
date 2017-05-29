@@ -31,4 +31,5 @@ public class DialogOption
     public string Value;
     public string Condition;
     public string ConditionValue;
+    public Color CLR = Color.white;
 }

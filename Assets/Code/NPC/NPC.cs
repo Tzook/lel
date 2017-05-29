@@ -101,6 +101,12 @@ public class NPC : MonoBehaviour {
                     SocketClient.Instance.SendQuestStarted(eventValue);
                     break;
                 }
+            case "CompleteQuest":
+                {
+                    DialogManager.Instance.StopDialogMode();
+                    SocketClient.Instance.SendQuestCompleted(eventValue);
+                    break;
+                }
         }
     }
 

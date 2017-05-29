@@ -22,6 +22,8 @@ public class QuestPanelUI : MonoBehaviour {
         txtTitle.text = quest.Name;
         txtDescription.text = quest.InProgressDescription;
 
+        ClearPanel();
+
         GameObject tempObject;
 
         if (!string.IsNullOrEmpty(quest.FacePrefab))
@@ -33,7 +35,8 @@ public class QuestPanelUI : MonoBehaviour {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("StandardQuest");
         }
 
-        tempObject.transform.SetParent(ConditionContainer, false);
+        tempObject.transform.SetParent(AvatarSpot, false);
+        tempObject.transform.position = AvatarSpot.position;
 
         string conContent = "";
         for (int i = 0; i < quest.Conditions.Count; i++)
@@ -43,7 +46,7 @@ public class QuestPanelUI : MonoBehaviour {
 
             switch(quest.Conditions[i].Condition)
             {
-                case "kill":
+                case "hunt":
                     {
                         conContent = Content.Instance.GetMonster(quest.Conditions[i].Type).MonsterName + " Slain ";
                        
@@ -61,5 +64,20 @@ public class QuestPanelUI : MonoBehaviour {
             tempObject.transform.GetChild(1).GetComponent<Text>().text = quest.Conditions[i].CurrentProgress + " / " + quest.Conditions[i].TargetProgress;
         }
 
+    }
+
+    public void ClearPanel()
+    {
+        while (AvatarSpot.transform.childCount > 0)
+        {
+            AvatarSpot.transform.GetChild(0).gameObject.SetActive(false);
+            AvatarSpot.transform.GetChild(0).SetParent(transform);
+        }
+
+        while(ConditionContainer.childCount > 0)
+        {
+            ConditionContainer.transform.GetChild(0).gameObject.SetActive(false);
+            ConditionContainer.transform.GetChild(0).SetParent(transform);
+        }
     }
 }

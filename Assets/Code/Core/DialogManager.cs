@@ -177,26 +177,73 @@ public class DialogManager : MonoBehaviour {
         CanvasGroup tempCG;
         for (int i = CurrentDialog.Options.Count - 1; i >= 0 ;i--)
         {
-            tempOption = ResourcesLoader.Instance.GetRecycledObject("DialogOption");
-            tempOption.transform.SetParent(CurrentOptionsFrame.transform.GetChild(0), false);
-
-            tempOption.transform.GetChild(0).GetComponent<Text>().text = CurrentDialog.Options[i].Title;
-
-            AddDialogOptionEvent(tempOption.GetComponent<Button>(), CurrentDialog.Options[i].Event, CurrentDialog.Options[i].Value);
-
-            tempCG = tempOption.GetComponent<CanvasGroup>();
-            tempCG.alpha = 0f;
-
-            while (tempCG.alpha < 1f)
+            if (CanShowOption(CurrentDialog.Options[i]))
             {
-                tempCG.alpha += 8f * Time.deltaTime;
-                yield return 0;
+                tempOption = ResourcesLoader.Instance.GetRecycledObject("DialogOption");
+                tempOption.transform.SetParent(CurrentOptionsFrame.transform.GetChild(0), false);
+
+                tempOption.GetComponent<Image>().color = CurrentDialog.Options[i].CLR;
+
+                tempOption.transform.GetChild(0).GetComponent<Text>().text = CurrentDialog.Options[i].Title;
+
+                AddDialogOptionEvent(tempOption.GetComponent<Button>(), CurrentDialog.Options[i].Event, CurrentDialog.Options[i].Value);
+
+                tempCG = tempOption.GetComponent<CanvasGroup>();
+                tempCG.alpha = 0f;
+
+                while (tempCG.alpha < 1f)
+                {
+                    tempCG.alpha += 8f * Time.deltaTime;
+                    yield return 0;
+                }
             }
         }
 
         CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StartWavingInstruction("Choose your response...");
 
 
+    }
+
+    public bool CanShowOption(DialogOption option)
+    {
+        if(string.IsNullOrEmpty(option.Condition))
+        {
+            return true;
+        }
+
+        switch(option.Condition)
+        {
+            case "QuestAvailable":
+                {
+                    if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) == null
+                          && Content.Instance.GetQuest(option.ConditionValue).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+                    {
+                            return true;
+                    }
+
+                    break;
+                }
+            case "QuestInProgress":
+                {
+                    if (LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) != null)
+                    {
+                        return true;
+                    }
+
+                    break;
+                }
+            case "QuestComplete":
+                {
+                    if (LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) != null)
+                    {
+                        return true;
+                    }
+
+                    break;
+                }
+        }
+
+        return false;
     }
 
     public void AddDialogOptionEvent(Button btn, string eventKey, string eventValue)

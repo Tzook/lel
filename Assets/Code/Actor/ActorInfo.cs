@@ -274,6 +274,12 @@ public class ActorInfo
         QuestsInProgress.Add(tempQuest);
     }
 
+    public void CompleteQuest(string questKey)
+    {
+        CompletedQuests.Add(questKey);
+        QuestsInProgress.Remove(GetQuestProgress(questKey));
+    }
+
     public void UpdateProgress(string type, int value) 
     {
         bool updatedAnything = false;
@@ -296,7 +302,11 @@ public class ActorInfo
     
     public void UpdateQuestProgress(string questKey, string mobKey, int Value)
     {
-        GetQuestCondition(GetQuestProgress(questKey), mobKey).CurrentProgress = Value;
+        QuestCondition condition = GetQuestCondition(GetQuestProgress(questKey), mobKey);
+
+        condition.CurrentProgress = Value;
+
+        ShockMessageUI.Instance.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.yellow);
     }
 }
 

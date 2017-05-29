@@ -25,7 +25,25 @@ public class ShockMessageUI : MonoBehaviour {
 
         m_txtContent.text = content;
 
+        m_txtContent.GetComponent<Outline>().effectColor = new Color(105f / 255f, 12f / 255f, 12f / 255f, 1f);
+
         if(ShockInstance!=null)
+        {
+            StopCoroutine(ShockInstance);
+        }
+
+        ShockInstance = StartCoroutine(ShockRoutine());
+    }
+
+    public void CallMessage(string content, Color clr)
+    {
+        this.gameObject.SetActive(true);
+
+        m_txtContent.text = content;
+
+        m_txtContent.GetComponent<Outline>().effectColor = clr;
+
+        if (ShockInstance != null)
         {
             StopCoroutine(ShockInstance);
         }

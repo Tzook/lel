@@ -140,7 +140,8 @@ public class ActorInfo
         {
             KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
             string questKey = current.Key;
-            AddQuest(questKey);
+            Quest quest = AddQuest(questKey);
+            fillInitialProgress(quest, node["quests"]["hunt"]);
         }
 
         RefreshBonuses();
@@ -257,7 +258,7 @@ public class ActorInfo
         BonusMP += item.Stats.BonusMP;
     }
 
-    public void AddQuest(string questKey)
+    public Quest AddQuest(string questKey)
     {
         Quest tempQuest = Content.Instance.GetQuest(questKey).Clone();
         Dictionary<string, int> inventoryCounts = Inventory.GetInventoryCounts();
@@ -272,6 +273,19 @@ public class ActorInfo
             }
         }
         QuestsInProgress.Add(tempQuest);
+        return tempQuest;
+    }
+
+    protected void fillInitialProgress(Quest quest, JSONNode initialHunt)
+    {
+        for (int i = 0; i < quest.Conditions.Count; i++)
+        {
+            QuestCondition cond = quest.Conditions[i];
+            if (initialHunt[cond.Type] != null) 
+            {
+                cond.CurrentProgress = initialHunt[cond.Type][quest.Key].AsInt;
+            }
+        }
     }
 
     public void CompleteQuest(string questKey)

@@ -48,7 +48,7 @@ public class ActorInfo
     {
         get
         {
-            return (STR * 5) + (BonusSTR * 5);
+            return (STR * 5) + (BonusSTR * 5) + BonusHP;
         }
     }
     public int CurrentHealth;
@@ -57,7 +57,7 @@ public class ActorInfo
     {
         get
         {
-            return (MAG * 5) + (BonusMAG * 5);
+            return (MAG * 5) + (BonusMAG * 5) + BonusMP;
         }
     }
     public int CurrentMana;

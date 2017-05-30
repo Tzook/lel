@@ -36,6 +36,8 @@ public class DialogManager : MonoBehaviour {
     {
         currentNPC = npc;
 
+        currentNPC.ShowName();
+
         inDialog = true;
 
         SetBlur(true);
@@ -63,6 +65,8 @@ public class DialogManager : MonoBehaviour {
 
     public void StopDialogMode()
     {
+        currentNPC.HideName();
+
         StopAllCoroutines();
 
         StartCoroutine(StopDialogRoutine());

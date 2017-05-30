@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour {
 
@@ -19,6 +20,9 @@ public class NPC : MonoBehaviour {
 
     [SerializeField]
     Animator Anim;
+
+    [SerializeField]
+    Text NameTag;
 
     public Transform ChatBubbleSpot;
 
@@ -44,6 +48,9 @@ public class NPC : MonoBehaviour {
         }
 
         Game.Instance.CurrentScene.AddNPC(this);
+
+        NameTag.text = Name;
+        NameTag.gameObject.SetActive(false);
 
         RefreshQuestState();
     }
@@ -140,6 +147,16 @@ public class NPC : MonoBehaviour {
         {
             CurrentQuestBubble.transform.position = QuestSpot.position;
         }
+    }
+
+    public void ShowName()
+    {
+        NameTag.gameObject.SetActive(true);
+    }
+
+    public void HideName()
+    {
+        NameTag.gameObject.SetActive(false);
     }
 
 

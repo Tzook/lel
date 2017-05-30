@@ -33,7 +33,7 @@ public class QuestRewardsWindowUI : MonoBehaviour {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("RewardPanel");
             tempObject.transform.SetParent(RewardsContainer, false);
 
-            tempObject.GetComponent<RewardPanelUI>().SetInfo("+EXP ", null, quest.RewardExp);
+            tempObject.GetComponent<RewardPanelUI>().SetInfo("+EXP ", ResourcesLoader.Instance.GetSprite("fx_hit_small"), quest.RewardExp);
         }
     }
 

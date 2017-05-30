@@ -228,6 +228,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
 
         Game.Instance.LoadScene(data["room"], new ActorInfo(data["character"]));
+
     }
 
     protected void OnBitchPlease(Socket socket, Packet packet, params object[] args)

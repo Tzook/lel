@@ -13,6 +13,8 @@ public class WarningMessageUI : MonoBehaviour {
     protected Text m_MessageText;
 
     public static WarningMessageUI Instance;
+
+    public bool HideOnStart = false;
     #endregion
 
     #region Mono
@@ -22,6 +24,11 @@ public class WarningMessageUI : MonoBehaviour {
         Instance = this;
         Hidden = true;
         this.gameObject.SetActive(false);
+    }
+
+    void Start()
+    {
+        this.gameObject.SetActive(!HideOnStart);
     }
 
     #endregion

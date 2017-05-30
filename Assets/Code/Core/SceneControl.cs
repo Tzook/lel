@@ -135,6 +135,18 @@ public class SceneControl
         }
     }
 
+    public void UpdateAllQuestProgress()
+    {
+        for(int i=0;i<Npcs.Count;i++)
+        {
+            for(int q=0;q<Npcs[i].GivingQuests.Count;q++)
+            {
+                UpdateQuestProgress(Npcs[i].GivingQuests[q]);
+            }
+        }
+    }
+
+
     public NPC GetQuestNPC(string questKey)
     {
         for(int i=0 ; i < Npcs.Count ; i++)

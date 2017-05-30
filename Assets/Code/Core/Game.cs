@@ -347,8 +347,11 @@ public class Game : MonoBehaviour {
 
         InGameMainMenuUI.Instance.ShowGameUI();
 
+        CurrentScene.UpdateAllQuestProgress();
+
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
+
     }
 
     public void SetBitch(bool isbitch)

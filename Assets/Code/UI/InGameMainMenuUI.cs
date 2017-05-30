@@ -75,6 +75,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     GoldDropWindowUI GoldDropWindow;
 
+    [SerializeField]
+    QuestRewardsWindowUI QuestRewardWindow;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -111,7 +114,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     public ItemUI DraggedSlot;
 
     public ItemUI HoveredSlot;
-
 
     public GameObject CurrentDragged;
 
@@ -512,5 +514,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void RefreshQuestProgress()
     {
         questsPanel.Refresh();
+    }
+
+    public void RecieveQuestReward(Quest quest)
+    {
+        QuestRewardWindow.Show(quest);
     }
 }

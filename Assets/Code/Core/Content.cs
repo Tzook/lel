@@ -246,18 +246,31 @@ public class Quest
 
     public bool IsAvailable(ActorInfo character)
     {
+        //Is already complete?
+        if(LocalUserInfo.Me.SelectedCharacter.CompletedQuests.Contains(this.Key))
+        {
+            return false;
+        }
+
+        //Is already in progress?
+        if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(this.Key) != null)
+        {
+            return false;
+        }
+
+        //Is not for my class?
         if (!string.IsNullOrEmpty(RequiredClass) && RequiredClass != character.Class)
         {
             return false;
         }
 
-
+        //Is for a higher level?
         if(character.LVL < MinimumLevel)
         {
             return false;
         }
 
-
+        //Is it a chain quest?
         for (int i=0;i< RequiredCompletedQuests.Count;i++)
         {
             if(!character.CompletedQuests.Contains(RequiredCompletedQuests[i]))
@@ -270,7 +283,7 @@ public class Quest
         return true;
     }
 
-    public bool Complete
+    public bool CanBeCompleted
     {
         get
         {

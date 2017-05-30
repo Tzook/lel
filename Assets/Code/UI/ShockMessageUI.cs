@@ -22,6 +22,7 @@ public class ShockMessageUI : MonoBehaviour {
 	public void CallMessage(string content)
     {
         this.gameObject.SetActive(true);
+        GetComponent<Image>().enabled = true;
 
         m_txtContent.text = content;
 
@@ -38,6 +39,24 @@ public class ShockMessageUI : MonoBehaviour {
     public void CallMessage(string content, Color clr)
     {
         this.gameObject.SetActive(true);
+        GetComponent<Image>().enabled = true;
+
+        m_txtContent.text = content;
+
+        m_txtContent.GetComponent<Outline>().effectColor = clr;
+
+        if (ShockInstance != null)
+        {
+            StopCoroutine(ShockInstance);
+        }
+
+        ShockInstance = StartCoroutine(ShockRoutine());
+    }
+
+    public void CallMessage(string content, Color clr, bool BackgroundState)
+    {
+        this.gameObject.SetActive(true);
+        GetComponent<Image>().enabled = BackgroundState;
 
         m_txtContent.text = content;
 

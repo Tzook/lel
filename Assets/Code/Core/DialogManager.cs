@@ -105,6 +105,10 @@ public class DialogManager : MonoBehaviour {
         for(int i=0;i<CurrentDialog.Pieces.Count;i++)
         {
 
+            BubbleText.text = "...";
+
+            yield return 0;
+
             BubbleText.text = "";
 
             yield return 0;
@@ -182,7 +186,14 @@ public class DialogManager : MonoBehaviour {
                 tempOption = ResourcesLoader.Instance.GetRecycledObject("DialogOption");
                 tempOption.transform.SetParent(CurrentOptionsFrame.transform.GetChild(0), false);
 
-                tempOption.GetComponent<Image>().color = CurrentDialog.Options[i].CLR;
+                if (CurrentDialog.Options[i].CLR == Color.white)
+                {
+                    tempOption.GetComponent<Outline>().effectColor = Color.clear;
+                }
+                else
+                {
+                    tempOption.GetComponent<Outline>().effectColor = CurrentDialog.Options[i].CLR;
+                }
 
                 tempOption.transform.GetChild(0).GetComponent<Text>().text = CurrentDialog.Options[i].Title;
 
@@ -215,8 +226,7 @@ public class DialogManager : MonoBehaviour {
         {
             case "QuestAvailable":
                 {
-                    if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) == null
-                          && Content.Instance.GetQuest(option.ConditionValue).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+                    if(Content.Instance.GetQuest(option.ConditionValue).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
                     {
                             return true;
                     }
@@ -234,7 +244,9 @@ public class DialogManager : MonoBehaviour {
                 }
             case "QuestComplete":
                 {
-                    if (LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) != null)
+                    Quest tempQuest = LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue);
+
+                    if (tempQuest != null && tempQuest.CanBeCompleted)
                     {
                         return true;
                     }

@@ -306,7 +306,7 @@ public class ActorInfo
 
         condition.CurrentProgress = Value;
 
-        ShockMessageUI.Instance.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.yellow);
+        ShockMessageUI.Instance.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
     }
 }
 

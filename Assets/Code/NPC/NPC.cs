@@ -104,7 +104,7 @@ public class NPC : MonoBehaviour {
             case "CompleteQuest":
                 {
                     DialogManager.Instance.StopDialogMode();
-                    SocketClient.Instance.SendQuestCompleted(eventValue);
+                    InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue));
                     break;
                 }
         }
@@ -147,8 +147,7 @@ public class NPC : MonoBehaviour {
     {
         for(int i=0;i<GivingQuests.Count;i++)
         {
-            if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(GivingQuests[i]) == null 
-                && Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+            if(Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
             {
                 return true;
             }
@@ -176,7 +175,7 @@ public class NPC : MonoBehaviour {
         for (int i = 0; i < GivingQuests.Count; i++)
         {
             tempQuest = LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(GivingQuests[i]);
-            if (tempQuest != null && tempQuest.Complete)
+            if (tempQuest != null && tempQuest.CanBeCompleted)
             {
                 return true;
             }   

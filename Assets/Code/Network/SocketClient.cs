@@ -81,6 +81,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_hp", OnActorGainHP);
         CurrentSocket.On("actor_gain_mp", OnActorGainMP);
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
+        CurrentSocket.On("actor_gain_stats", OnActorGainStats);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
@@ -417,6 +418,18 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshXP();
     }
 
+    protected void OnActorGainStats(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Actor Gained Stats");
+
+        LocalUserInfo.Me.SelectedCharacter.SetStats(data["stats"]);
+        InGameMainMenuUI.Instance.RefreshStats();
+        InGameMainMenuUI.Instance.RefreshXP();
+        InGameMainMenuUI.Instance.RefreshLevel();
+    }
+
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
@@ -427,12 +440,6 @@ public class SocketClient : MonoBehaviour
 
         if (actor == LocalUserInfo.Me.SelectedCharacter)
         {
-            actor.SetStats(data["stats"]);
-            InGameMainMenuUI.Instance.RefreshHP();
-            InGameMainMenuUI.Instance.RefreshMP();
-            InGameMainMenuUI.Instance.RefreshXP();
-            InGameMainMenuUI.Instance.RefreshLevel();
-
             AudioControl.Instance.Play("sound_positive2");
 
             InGameMainMenuUI.Instance.MinilogMessage("Leveled Up!");

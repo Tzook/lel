@@ -74,6 +74,12 @@ public class CreateCharacterUI : MonoBehaviour
         m_ActorInfo = m_ActorInstance.Info;
         m_txtGender.text = m_ActorInfo.Gender.ToString();
         m_inputName.text = "";
+        
+        for(int i=0;i<Content.Instance.StartingGear.Count;i++)
+        {
+            DevItemInfo item = Content.Instance.GetItem(Content.Instance.StartingGear[i]);
+            m_ActorInfo.Equipment.SetItem(item.Type, new ItemInfo(item, 1));
+        }
 
         ToggleGender();
         RandomizeStats();

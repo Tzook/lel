@@ -599,8 +599,8 @@ public class SocketClient : MonoBehaviour
 
         LocalUserInfo.Me.ClientCharacter.CompleteQuest(data["id"].Value);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
-        Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
 
+        Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 
     private void OnQuestHuntProgress(Socket socket, Packet packet, object[] args)

@@ -230,7 +230,7 @@ public class DialogManager : MonoBehaviour {
         {
             case "QuestAvailable":
                 {
-                    if(Content.Instance.GetQuest(option.ConditionValue).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+                    if(Content.Instance.GetQuest(option.ConditionValue).IsAvailable(LocalUserInfo.Me.ClientCharacter))
                     {
                             return true;
                     }
@@ -239,7 +239,7 @@ public class DialogManager : MonoBehaviour {
                 }
             case "QuestInProgress":
                 {
-                    if (LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue) != null)
+                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(option.ConditionValue) != null)
                     {
                         return true;
                     }
@@ -248,7 +248,7 @@ public class DialogManager : MonoBehaviour {
                 }
             case "QuestComplete":
                 {
-                    Quest tempQuest = LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(option.ConditionValue);
+                    Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(option.ConditionValue);
 
                     if (tempQuest != null && tempQuest.CanBeCompleted)
                     {

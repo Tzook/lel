@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour {
 
         AudioControl.Instance.Play(WoundSounds[Random.Range(0, WoundSounds.Count)]);
 
-        if (attackSource.Info.ID == Game.Instance.CurrentScene.ClientCharacter.ID)
+        if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
             PopHint(damage.ToString("N0"), Color.green);
         }

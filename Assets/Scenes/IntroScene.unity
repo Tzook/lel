@@ -31830,9 +31830,9 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: None of your buisness...
-      Event: EndDialog
-      Value: 
+    - Title: Turtle Soup
+      Event: StartDialog
+      Value: Turtle Soup
       Condition: QuestAvailable
       ConditionValue: turtleSoup
       CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
@@ -31903,13 +31903,100 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Turtle Soup
+    Pieces:
+    - Content: Hey, friend?
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Me and my friends here are eager to eat something new...
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: All we ate in the last few weeks is
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: "Fish...\t"
+      LetterDelay: 0.02
+      Pitch: 1.5
+      AnimationTrigger: 
+    - Content: And more fish...
+      LetterDelay: 0.02
+      Pitch: 1.5
+      AnimationTrigger: 
+    - Content: Now my friend Ike, -
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: He has the opportunity to prepare a...
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Something unique!
+      LetterDelay: 0.02
+      Pitch: 1.5
+      AnimationTrigger: 
+    - Content: But he is too shy to ask...
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: So, could you do us a favor?
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: It would be lovely if we had something exotic like...
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Maybe...
+      LetterDelay: 0.06
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: A turtle soup!
+      LetterDelay: 0.02
+      Pitch: 1.5
+      AnimationTrigger: 
+    - Content: I suppose 5 big turtle shells would do the job.
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: What do you say?
+      LetterDelay: 0.03
+      Pitch: 1.4
+      AnimationTrigger: 
+    Options:
+    - Title: I'll help you out.
+      Event: StartQuest
+      Value: turtleSoup
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+    - Title: Go get them yourself!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: No time for that...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Unfortunately, I will have to refuse...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests:
   - turtleSoup
   DefaultDialog: Greetings
   Name: Sailor Helena
   Key: sailor4
   Body: {fileID: 1744878305}
-  Anim: {fileID: 0}
+  Anim: {fileID: 1744878306}
   NameTag: {fileID: 930395590}
   ChatBubbleSpot: {fileID: 1575141770}
   QuestSpot: {fileID: 1953061689}
@@ -43424,6 +43511,8 @@ MonoBehaviour:
   - {fileID: 503877748}
   - {fileID: 550529019}
   - {fileID: 494015058}
+  - {fileID: 1623650892}
+  - {fileID: 1073923509}
 --- !u!4 &1487088046
 Transform:
   m_ObjectHideFlags: 0

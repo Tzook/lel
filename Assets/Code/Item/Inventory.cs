@@ -60,14 +60,14 @@ public class Inventory
 
     public void RemoveItem(int index)
     {
-        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(ContentArray[index].Key, -ContentArray[index].Stack);
+        LocalUserInfo.Me.ClientCharacter.UpdateProgress(ContentArray[index].Key, -ContentArray[index].Stack);
         ContentArray[index] = null;
     }
 
     internal void AddItemAt(int index, ItemInfo info)
     {
         ContentArray[index] = info;
-        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(info.Key, info.Stack);
+        LocalUserInfo.Me.ClientCharacter.UpdateProgress(info.Key, info.Stack);
     }
 
     internal ItemInfo GetItemAt(int index)
@@ -79,7 +79,7 @@ public class Inventory
     {
         int oldStack = ContentArray[index].Stack;
         ContentArray[index].Stack = stack;
-        LocalUserInfo.Me.SelectedCharacter.UpdateProgress(ContentArray[index].Key, stack - oldStack);
+        LocalUserInfo.Me.ClientCharacter.UpdateProgress(ContentArray[index].Key, stack - oldStack);
     }
 
     private int GetFreeSlot()

@@ -39,7 +39,7 @@ public class User {
         Characters.Add(tempCharacter);
     }
 
-    public ActorInfo SelectedCharacter;
+    public ActorInfo ClientCharacter;
 
     public List<ActorInfo> Characters = new List<ActorInfo>();
 

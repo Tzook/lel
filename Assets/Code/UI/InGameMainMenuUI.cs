@@ -234,7 +234,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ShowGameUI()
     {
         m_GameUI.SetActive(true);
-        ActorInfo info = Game.Instance.CurrentScene.ClientCharacter;
+        ActorInfo info = LocalUserInfo.Me.ClientCharacter;
 
         RefreshXP(info);
         RefreshHP(info);
@@ -297,7 +297,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshStats()
     {
-        statsPanel.Refresh(LocalUserInfo.Me.SelectedCharacter);
+        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);
         RefreshHP();
         RefreshMP();
     }
@@ -444,7 +444,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         if (info == null)
         {
-            info = Game.Instance.CurrentScene.ClientCharacter;
+            info = LocalUserInfo.Me.ClientCharacter;
         }
 
         XPBar.SetValue(info.EXP / (info.NextLevelXP * 1f));
@@ -454,7 +454,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         if (info == null)
         {
-            info = Game.Instance.CurrentScene.ClientCharacter;
+            info = LocalUserInfo.Me.ClientCharacter;
         }
 
         HPBar.SetValue(info.CurrentHealth / (info.MaxHealth * 1f));
@@ -464,7 +464,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         if (info == null)
         {
-            info = Game.Instance.CurrentScene.ClientCharacter;
+            info = LocalUserInfo.Me.ClientCharacter;
         }
 
         MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
@@ -474,7 +474,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         if (info == null)
         {
-            info = Game.Instance.CurrentScene.ClientCharacter;
+            info = LocalUserInfo.Me.ClientCharacter;
         }
 
         LevelUI.SetValue(info.LVL.ToString());

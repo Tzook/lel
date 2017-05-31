@@ -555,7 +555,7 @@ public class ActorInstance : MonoBehaviour
     {
         PickingUpItem = false;
 
-        if (Game.Instance.CurrentScene.ClientCharacter.Instance == this)
+        if (LocalUserInfo.Me.ClientCharacter.Instance == this)
         {
             AudioControl.Instance.Play("sound_item");
         }
@@ -568,6 +568,8 @@ public class ActorInstance : MonoBehaviour
         Info.Inventory.AddItemAt(slot, item);
 
         InGameMainMenuUI.Instance.MinilogMessage("Picked '" + item.Name + "'");
+
+        LocalUserInfo.Me.ClientCharacter.UpdateProgress(item.Key, Info.Inventory.GetInventoryCounts()[item.Key]);
 
         InGameMainMenuUI.Instance.RefreshInventory();
     }

@@ -147,7 +147,7 @@ public class ActorInfo
         RefreshBonuses();
     }
 
-    public Quest GetQuestProgress(string questKey)
+    public Quest GetQuest(string questKey)
     {
         for(int i=0;i<QuestsInProgress.Count;i++)
         {
@@ -172,6 +172,21 @@ public class ActorInfo
 
         return null;
     }
+
+    //public QuestCondition GetConditionByType(string conditionType)
+    //{
+    //    QuestCondition tempCondition;
+    //    for(int i=0;i<QuestsInProgress.Count;i++)
+    //    {
+    //        tempCondition = GetQuestCondition(QuestsInProgress[i], conditionType);
+    //        if(tempCondition != null)
+    //        {
+    //            return tempCondition;
+    //        }
+    //    }
+
+    //    return null;
+    //}
 
     public void ChangeGold(int amount)
     {
@@ -291,7 +306,7 @@ public class ActorInfo
     public void CompleteQuest(string questKey)
     {
         CompletedQuests.Add(questKey);
-        QuestsInProgress.Remove(GetQuestProgress(questKey));
+        QuestsInProgress.Remove(GetQuest(questKey));
     }
 
     public void UpdateProgress(string type, int value) 
@@ -305,6 +320,21 @@ public class ActorInfo
                 cond.CurrentProgress += value;
                 updatedAnything = true;
                 Game.Instance.CurrentScene.UpdateQuestProgress(QuestsInProgress[i].Key);
+
+                switch(cond.Condition)
+                {
+                    case "collect":
+                        {
+                            ShockMessageUI.Instance.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
+                            break;
+                        }
+                    case "hunt":
+                        {
+                            UpdateQuestProgress(QuestsInProgress[i].Key, cond.Type, cond.CurrentProgress);
+                            break;
+                        }
+                }
+                
             }
         }
         if (updatedAnything) 
@@ -316,7 +346,7 @@ public class ActorInfo
     
     public void UpdateQuestProgress(string questKey, string mobKey, int Value)
     {
-        QuestCondition condition = GetQuestCondition(GetQuestProgress(questKey), mobKey);
+        QuestCondition condition = GetQuestCondition(GetQuest(questKey), mobKey);
 
         condition.CurrentProgress = Value;
 

@@ -27,7 +27,7 @@ public class SceneControl
             actors.Add(info.ID ,info);
         }
 
-        if (info.ID == LocalUserInfo.Me.SelectedCharacter.ID)
+        if (info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
             ClientCharacter = info;
         }

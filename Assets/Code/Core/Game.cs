@@ -296,8 +296,8 @@ public class Game : MonoBehaviour {
 
     public void LoadPlayerCharacter(ActorInfo actorInfo)
     {
-        LocalUserInfo.Me.SelectedCharacter = actorInfo;
-        ClientCharacter = SpawnPlayer(LocalUserInfo.Me.SelectedCharacter);
+        LocalUserInfo.Me.ClientCharacter = actorInfo;
+        ClientCharacter = SpawnPlayer(LocalUserInfo.Me.ClientCharacter);
         
         ActorController actorController = ClientCharacter.GetComponent<ActorController>();
         if (actorInfo.CurrentHealth == 0) {

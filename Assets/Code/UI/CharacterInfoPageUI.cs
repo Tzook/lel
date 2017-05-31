@@ -55,7 +55,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
         actorInstance.nameHidden = true;
         actorInstance.UpdateVisual(info);
         txtName.text = info.Name;
-        LocalUserInfo.Me.SelectedCharacter = info;
+        LocalUserInfo.Me.ClientCharacter = info;
     }
 
     public void AttemptDeleteCharacter()

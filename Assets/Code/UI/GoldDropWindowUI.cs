@@ -13,7 +13,7 @@ public class GoldDropWindowUI : MonoBehaviour {
         int GoldValue = 0;
         if(int.TryParse(m_InputField.text, out GoldValue))
         {
-            if (GoldValue <= Game.Instance.CurrentScene.ClientCharacter.Gold)
+            if (GoldValue <= LocalUserInfo.Me.ClientCharacter.Gold)
             {
                 InGameMainMenuUI.Instance.MinilogMessage("Dropped " + GoldValue.ToString("N0") + " Gold");
 

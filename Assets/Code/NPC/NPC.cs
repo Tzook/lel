@@ -164,7 +164,7 @@ public class NPC : MonoBehaviour {
     {
         for(int i=0;i<GivingQuests.Count;i++)
         {
-            if(Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.SelectedCharacter))
+            if(Content.Instance.GetQuest(GivingQuests[i]).IsAvailable(LocalUserInfo.Me.ClientCharacter))
             {
                 return true;
             }
@@ -177,7 +177,7 @@ public class NPC : MonoBehaviour {
     {
         for (int i = 0; i < GivingQuests.Count; i++)
         {
-            if (LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(GivingQuests[i]) != null)
+            if (LocalUserInfo.Me.ClientCharacter.GetQuest(GivingQuests[i]) != null)
             {
                 return true;
             }
@@ -191,7 +191,7 @@ public class NPC : MonoBehaviour {
         Quest tempQuest;
         for (int i = 0; i < GivingQuests.Count; i++)
         {
-            tempQuest = LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(GivingQuests[i]);
+            tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(GivingQuests[i]);
             if (tempQuest != null && tempQuest.CanBeCompleted)
             {
                 return true;

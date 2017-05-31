@@ -247,13 +247,13 @@ public class Quest
     public bool IsAvailable(ActorInfo character)
     {
         //Is already complete?
-        if(LocalUserInfo.Me.SelectedCharacter.CompletedQuests.Contains(this.Key))
+        if(LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(this.Key))
         {
             return false;
         }
 
         //Is already in progress?
-        if(LocalUserInfo.Me.SelectedCharacter.GetQuestProgress(this.Key) != null)
+        if(LocalUserInfo.Me.ClientCharacter.GetQuest(this.Key) != null)
         {
             return false;
         }

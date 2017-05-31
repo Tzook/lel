@@ -20,11 +20,11 @@ public class ProgressQuestsWindowUI : MonoBehaviour {
         ClearContainer();
 
         GameObject tempObject;
-        for (int i = 0; i < LocalUserInfo.Me.SelectedCharacter.QuestsInProgress.Count; i++)
+        for (int i = 0; i < LocalUserInfo.Me.ClientCharacter.QuestsInProgress.Count; i++)
         {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("QuestPanel");
             tempObject.transform.SetParent(Container, false);
-            tempObject.GetComponent<QuestPanelUI>().SetInfo(LocalUserInfo.Me.SelectedCharacter.QuestsInProgress[i]);
+            tempObject.GetComponent<QuestPanelUI>().SetInfo(LocalUserInfo.Me.ClientCharacter.QuestsInProgress[i]);
         }
     }
 

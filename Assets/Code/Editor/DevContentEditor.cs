@@ -194,7 +194,7 @@ public class DevContentEditor : Editor
 
         for (int i = 0; i < GearList.Count; i++)
         {
-            node["items"][i]["key"] = GearList[i];
+            node["equips"][i]["key"] = GearList[i];
         }
 
         Debug.Log("Sending Starting Gear...");
@@ -205,7 +205,7 @@ public class DevContentEditor : Editor
         headers.Add("Content-Type", "application/json");
 
 
-        WWW req = new WWW(Config.BASE_URL + "/gearInfo", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/equips/begin", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

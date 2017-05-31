@@ -528,19 +528,22 @@ public class ActorInstance : MonoBehaviour
             return;
         }
 
-        if(Info.Inventory.isFull)
-        {
-            return;
-        }
 
         ItemInstance tempItem;
         for (int i = 0; i < Game.Instance.CurrentScene.SceneItemsCount; i++)
         {
-            tempItem = Game.Instance.CurrentScene.Items[Game.Instance.CurrentScene.Items.Keys.ElementAt(i)].GetComponent<ItemInstance>();
+            string itemKey = Game.Instance.CurrentScene.Items.Keys.ElementAt(i);
+            ItemInstance item = Game.Instance.CurrentScene.Items[itemKey];
+            tempItem = item.GetComponent<ItemInstance>();
 
             if (Vector2.Distance(tempItem.transform.position, transform.position) < 1.7f)
             {
-                SocketClient.Instance.SendPickedItem(Game.Instance.CurrentScene.Items.Keys.ElementAt(i));
+                if(Info.Inventory.isFull && item.Info.Key != "gold")
+                {
+                    continue;
+                }
+
+                SocketClient.Instance.SendPickedItem(itemKey);
                 PickingUpItem = true;
                 break;
             }

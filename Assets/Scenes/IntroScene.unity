@@ -31830,6 +31830,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: None of your buisness...
+      Event: EndDialog
+      Value: 
+      Condition: QuestAvailable
+      ConditionValue: turtleSoup
+      CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
   - DialogKey: EvenIDontKnow
     Pieces:
     - Content: "I see...\t\t"
@@ -31897,7 +31903,8 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
+  GivingQuests:
+  - turtleSoup
   DefaultDialog: Greetings
   Name: Sailor Helena
   Key: sailor4

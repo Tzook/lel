@@ -35688,7 +35688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 342.75, y: 187.43001}
+  m_AnchoredPosition: {x: 342.75, y: 187.43}
   m_SizeDelta: {x: -685.5, y: -374.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1647
@@ -41410,7 +41410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41, y: -39}
+  m_AnchoredPosition: {x: 41, y: -39.00006}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -41585,7 +41585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13125001, y: 0.54622227}
   m_AnchorMax: {x: 0.27875, y: 0.6506668}
-  m_AnchoredPosition: {x: 0.7998047, y: 54.399956}
+  m_AnchoredPosition: {x: 0.7998047, y: 54.399963}
   m_SizeDelta: {x: -5, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1962
@@ -43075,7 +43075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 34.5, y: -31.000061}
+  m_AnchoredPosition: {x: 34.5, y: -31}
   m_SizeDelta: {x: 148, y: 152}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &2041
@@ -48997,6 +48997,36 @@ MonoBehaviour:
       Icon: {fileID: 0}
     RewardClass: 
     RewardExp: 60
+  - Name: Turtle Soup
+    Key: turtleSoup
+    InProgressDescription: Helena the sailor asked me to help her out with obtaining
+      five 'Old Turtle' shells for Ike's turtle soup.
+    QuestCompleteDescription: Some girl named Helena once asked me to help her friend
+      'Ike' preparing his turtle soup.
+    FacePrefab: 
+    Conditions:
+    - Condition: collect
+      Type: turtleShellOld
+      CurrentProgress: 0
+      TargetProgress: 5
+    RequiredCompletedQuests:
+    - turtleProblem
+    RequiredClass: 
+    MinimumLevel: 0
+    RewardItems:
+    - ItemKey: gold
+      MinStack: 30
+      MaxStack: 0
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+    RewardClass: 
+    RewardExp: 80
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

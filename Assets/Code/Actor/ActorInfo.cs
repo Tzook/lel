@@ -227,6 +227,17 @@ public class ActorInfo
 
     }
 
+    public void SwitchPrimaryAbility(string key)
+    {
+        if(PrimaryAbilities.Contains(key))
+        {
+            //TODO Check if has bow equipped on RANGE ability.
+
+            CurrentPrimaryAbility = key;
+            InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
+        }
+    }
+
     public void RefreshBonuses()
     {
         BonusSTR = 0;
@@ -325,6 +336,13 @@ public class ActorInfo
                 {
                     case "collect":
                         {
+
+                            if (QuestsInProgress[i].CanBeCompleted)
+                            {
+                                ShockMessageUI.Instance.CallMessage(QuestsInProgress[i].Name + " Completed!", Color.black, false);
+                                break;
+                            }
+
                             ShockMessageUI.Instance.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
                             break;
                         }
@@ -346,9 +364,17 @@ public class ActorInfo
     
     public void UpdateQuestProgress(string questKey, string mobKey, int Value)
     {
-        QuestCondition condition = GetQuestCondition(GetQuest(questKey), mobKey);
+        Quest tempQuest = GetQuest(questKey);
+        QuestCondition condition = GetQuestCondition(tempQuest, mobKey);
 
         condition.CurrentProgress = Value;
+
+
+        if (tempQuest.CanBeCompleted)
+        {
+            ShockMessageUI.Instance.CallMessage(tempQuest.Name + " Completed!", Color.black, false);
+            return;
+        }
 
         ShockMessageUI.Instance.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
     }

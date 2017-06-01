@@ -717,6 +717,16 @@ public class ActorInstance : MonoBehaviour
         StartCombatMode();
     }
 
+    public void BendBow()
+    {
+        Weapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value + "_charged");
+    }
+
+    public void UnbendBow()
+    {
+        Weapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value);
+    }
+
     #endregion
 
 }

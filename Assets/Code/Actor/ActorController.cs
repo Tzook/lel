@@ -123,6 +123,15 @@ public class ActorController : MonoBehaviour
                 Instance.AttemptPickUp();
             }
 
+            for (int i = 0; i < Instance.Info.PrimaryAbilities.Count; i++)
+            {
+                if (Input.GetKeyDown(InputMap.Map["PrimaryAbility"+(i+1)]))
+                {
+                    Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i]);
+                }
+            }
+
+
             if (!Invincible)
             {
                 if (CollidingEnemy != null)
@@ -197,14 +206,31 @@ public class ActorController : MonoBehaviour
 
         if (CanInput && !Game.Instance.isInteractingWithUI)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Anim.SetInteger("AttackType", Random.Range(0, 3));
-            }
-
-            Anim.SetBool("Charging", Input.GetMouseButton(0));
+            AttackCharge();
         }
 
+    }
+
+    private void AttackCharge()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (Instance.Info.CurrentPrimaryAbility)
+            {
+                case "melee":
+                    {
+                        Anim.SetInteger("AttackType", Random.Range(0, 3));
+                        break;
+                    }
+                case "range":
+                    {
+                        Anim.SetInteger("AttackType", 3);
+                        break;
+                    }
+            }
+        }
+
+        Anim.SetBool("Charging", Input.GetMouseButton(0));
     }
 
     void FixedUpdate()

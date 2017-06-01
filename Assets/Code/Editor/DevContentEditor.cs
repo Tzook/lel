@@ -115,6 +115,11 @@ public class DevContentEditor : Editor
             SendStartingGear(currentInfo.StartingGear);
         }
 
+        if (GUILayout.Button("Update Primary Abilities"))
+        {
+            SendPrimaryAbilities(currentInfo.PrimaryAbilities);
+        }
+
         if (GUILayout.Button("Restart Server"))
         {
             RestartServer();
@@ -206,6 +211,34 @@ public class DevContentEditor : Editor
 
 
         WWW req = new WWW(Config.BASE_URL + "/equips/begin", rawdata, headers);
+
+        ContinuationManager.Add(() => req.isDone, () =>
+        {
+            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
+            Debug.Log("WWW result : " + req.text);
+        });
+    }
+
+    private void SendPrimaryAbilities(List<PrimaryAbility> primaryAbilities)
+    {
+        JSONNode node = new JSONClass();
+
+        node["pass"] = "b0ss123";
+
+        for (int i = 0; i < primaryAbilities.Count; i++)
+        {
+            node["primaryAbilities"][i]["key"] = primaryAbilities[i].Name;
+        }
+
+        Debug.Log("Sending Primary Abilities...");
+
+        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
+
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Content-Type", "application/json");
+
+
+        WWW req = new WWW(Config.BASE_URL + "/primaryAbilities", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

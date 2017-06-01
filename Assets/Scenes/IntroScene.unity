@@ -31836,6 +31836,12 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: turtleSoup
       CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
+    - Title: Complete Quest
+      Event: StartDialog
+      Value: Turtle Soup Complete
+      Condition: QuestComplete
+      ConditionValue: turtleSoup
+      CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
   - DialogKey: EvenIDontKnow
     Pieces:
     - Content: "I see...\t\t"
@@ -31990,6 +31996,39 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Turtle Soup Complete
+    Pieces:
+    - Content: Yummie!
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Ike, you see that?
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Ike!?
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: We have got us some tasty turtle shells!
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Thank you, darling...
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    - Content: Here, take that, for your effort.
+      LetterDelay: 0.04
+      Pitch: 1.4
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: turtleSoup
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
   GivingQuests:
   - turtleSoup
   DefaultDialog: Greetings

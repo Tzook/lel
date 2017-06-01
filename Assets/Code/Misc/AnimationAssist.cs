@@ -9,6 +9,9 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     ParticleSystem m_Particles;
 
+    [SerializeField]
+    GameObject ArrowObject;
+
     public void PlaySound(string soundKey)
     {
         AudioControl.Instance.Play(soundKey);
@@ -39,4 +42,15 @@ public class AnimationAssist : MonoBehaviour {
     {
         m_Particles.Stop();
     }
+
+    public void UnbendBow()
+    {
+        Controller.GetComponent<ActorInstance>().UnbendBow();
+    }
+
+    public void BendBow()
+    {
+        Controller.GetComponent<ActorInstance>().BendBow();
+    }
+
 }

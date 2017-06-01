@@ -78,6 +78,12 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     QuestRewardsWindowUI QuestRewardWindow;
 
+    [SerializeField]
+    PrimaryAbilitiesGridUI PrimaryAbilitiesGrid;
+
+    [SerializeField]
+    Image PrimaryAbilityIcon;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -519,5 +525,33 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void RecieveQuestReward(Quest quest)
     {
         QuestRewardWindow.Show(quest);
+    }
+
+    public void ShowPrimaryAbilities()
+    {
+        PrimaryAbilitiesGrid.Show();
+    }
+    
+    public void HidePrimaryAbilities()
+    {
+        PrimaryAbilitiesGrid.Hide();
+    }
+
+    public void TogglePrimaryAbilities()
+    {
+        if(PrimaryAbilitiesGrid.gameObject.activeInHierarchy)
+        {
+            HidePrimaryAbilities();
+        }
+        else
+        {
+            ShowPrimaryAbilities();
+        }
+        
+    }
+
+    public void RefreshCurrentPrimaryAbility()
+    {
+        PrimaryAbilityIcon.sprite = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility).Icon;
     }
 }

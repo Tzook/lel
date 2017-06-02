@@ -55,7 +55,7 @@ public class MinilogUI : MonoBehaviour {
         {
             yield return new WaitForSeconds(HideDelay);
 
-            Text tempText = transform.GetChild(transform.childCount - 1).GetComponent<Text>();
+            Text tempText = transform.GetChild(0).GetComponent<Text>();
 
             float t = 1f;
             while(t>0f)

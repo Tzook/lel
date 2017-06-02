@@ -83,8 +83,6 @@ public class ActorInstance : MonoBehaviour
     public ActorInfo Info;
     public ActorMovement MovementController { protected set; get; }
 
-    public bool PickingUpItem { get; private set; }
-
     public bool nameHidden = false;
 
     #endregion
@@ -523,12 +521,6 @@ public class ActorInstance : MonoBehaviour
 
     public void AttemptPickUp()
     {
-        if (PickingUpItem)
-        {
-            return;
-        }
-
-
         ItemInstance tempItem;
         for (int i = 0; i < Game.Instance.CurrentScene.SceneItemsCount; i++)
         {
@@ -536,16 +528,9 @@ public class ActorInstance : MonoBehaviour
             ItemInstance item = Game.Instance.CurrentScene.Items[itemKey];
             tempItem = item.GetComponent<ItemInstance>();
 
-            if (Vector2.Distance(tempItem.transform.position, transform.position) < 1.7f)
+            if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.4f)
             {
-                if(Info.Inventory.isFull && item.Info.Key != "gold")
-                {
-                    continue;
-                }
-
                 SocketClient.Instance.SendPickedItem(itemKey);
-                PickingUpItem = true;
-                break;
             }
         }
 
@@ -553,8 +538,6 @@ public class ActorInstance : MonoBehaviour
 
     public void PickUpItem(string instanceID)
     {
-        PickingUpItem = false;
-
         if (LocalUserInfo.Me.ClientCharacter.Instance == this)
         {
             AudioControl.Instance.Play("sound_item");

@@ -322,7 +322,6 @@ public class CreateCharacterUI : MonoBehaviour
         }
         else
         {
-            WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_mainMenuUI.MoveToMenu(1);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);

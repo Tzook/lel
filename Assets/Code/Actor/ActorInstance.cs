@@ -528,7 +528,7 @@ public class ActorInstance : MonoBehaviour
             ItemInstance item = Game.Instance.CurrentScene.Items[itemKey];
             tempItem = item.GetComponent<ItemInstance>();
 
-            if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.4f)
+            if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.5f)
             {
                 SocketClient.Instance.SendPickedItem(itemKey);
             }

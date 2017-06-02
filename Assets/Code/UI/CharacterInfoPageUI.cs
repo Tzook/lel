@@ -75,7 +75,6 @@ public class CharacterInfoPageUI : MonoBehaviour {
         }
         else
         {
-            WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_CharacterSelectionPageMenu.SwitchTo(0);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);

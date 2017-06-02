@@ -133,6 +133,9 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("On event error: " + data.AsObject.ToString());
+        if (data["display"].AsBool) {
+            InGameMainMenuUI.Instance.MinilogMessage(data["error"].ToString());
+        }
     }
 
     private void OnDisconnect(Socket socket, Packet packet, object[] args)

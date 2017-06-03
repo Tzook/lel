@@ -234,6 +234,7 @@ public class ActorInfo
             //TODO Check if has bow equipped on RANGE ability.
 
             CurrentPrimaryAbility = key;
+
             InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
         }
     }

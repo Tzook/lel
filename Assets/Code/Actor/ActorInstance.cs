@@ -63,6 +63,9 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     public SpriteRenderer Weapon;
 
+    [SerializeField]
+    public SpriteRenderer SubWeapon;
+
 
     [SerializeField]
     public GameObject NameLabel;
@@ -130,6 +133,7 @@ public class ActorInstance : MonoBehaviour
 
         Weapon.color = targetCLR;
 
+        SubWeapon.color = targetCLR;
     }
 
     #region Update Looks
@@ -336,6 +340,7 @@ public class ActorInstance : MonoBehaviour
     {
         m_Hat.sprite = null;
         Weapon.sprite = null;
+        SubWeapon.sprite = null;
 
         UpdateItem(Info.Equipment.Head);
         UpdateItem(Info.Equipment.Chest);
@@ -425,6 +430,11 @@ public class ActorInstance : MonoBehaviour
                     Weapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
                     break;
                 }
+            case "subWeapon":
+                {
+                    SubWeapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
         }
     }
 
@@ -464,8 +474,17 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(m_LeftKnee, layer, minLevel, matType);
         SetElementLayer(m_LeftFoot, layer, minLevel, matType);
         SetElementLayer(Weapon, layer, minLevel, matType);
+        SetElementLayer(SubWeapon, layer, minLevel, matType);
     }
 
+    public void ShootArrow()
+    {
+        GameObject arrow = ResourcesLoader.Instance.GetRecycledObject("Projectile_Arrow");
+
+        arrow.transform.position = Weapon.transform.position;
+        arrow.transform.rotation = m_Chest.transform.rotation;
+        arrow.GetComponent<ProjectileArrow>().Launch(this, true);
+    }
 
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
     {
@@ -690,7 +709,6 @@ public class ActorInstance : MonoBehaviour
     {
         Anim.SetInteger("AttackType", Random.Range(0, 3));
         Anim.SetBool("Charging", true);
-        Debug.Log(Anim.GetBool("Charging"));
     }
 
     public void PreformAttack(string ability, float AttackValue)
@@ -702,12 +720,12 @@ public class ActorInstance : MonoBehaviour
 
     public void BendBow()
     {
-        Weapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value + "_charged");
+        SubWeapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value + "_charged");
     }
 
     public void UnbendBow()
     {
-        Weapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value);
+        SubWeapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value);
     }
 
     #endregion

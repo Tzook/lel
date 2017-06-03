@@ -372,6 +372,7 @@ public class ActorController : MonoBehaviour
         Instance.SortingGroup.enabled = false;
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         StopAim();
+        InturruptAttack();
 
         SocketClient.Instance.SendStartedClimbing();
     }
@@ -534,8 +535,7 @@ public class ActorController : MonoBehaviour
         InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
 
-        //TODO Replace with item based DMG instance
-        OneHandDamageInstance.gameObject.SetActive(true);
+        ActivatePrimaryAbility();
     }
 
     public void InturruptAttack()
@@ -548,7 +548,27 @@ public class ActorController : MonoBehaviour
             LoadAttackValueInstance = null;
         }
 
+        Anim.SetBool("Charging", false);
         InGameMainMenuUI.Instance.StopChargingAttack();
+    }
+
+    public void ActivatePrimaryAbility()
+    {
+        InturruptAttack();
+
+        switch(Instance.Info.CurrentPrimaryAbility)
+        {
+            case "melee":
+                {
+                    OneHandDamageInstance.gameObject.SetActive(true);
+                    break;
+                }
+            case "range":
+                {
+                    Instance.ShootArrow();
+                    break;
+                }
+        }
     }
 
     public void Death()

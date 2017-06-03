@@ -167,6 +167,8 @@ public class DevItemInfo
     public string UseSound;
 
     public string Type;
+    public string SubType;
+
     public float DropChance;
     public int GoldValue;
 

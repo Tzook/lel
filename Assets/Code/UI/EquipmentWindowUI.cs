@@ -86,7 +86,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         CharInstance.Info = CurrentCharacter;
         CharInstance.nameHidden = true;
 
-        CharInstance.SetElementsLayer("OverCanvas", 1);
+        CharInstance.SetElementsLayer("OverUI", 2);
 
         RefreshEquipment();
 

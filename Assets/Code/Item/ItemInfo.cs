@@ -12,6 +12,7 @@ public class ItemInfo {
     public string UseSound;
     public string Description;
     public string Type;
+    public int StackCap;
     public int Stack = 1;
 
     public ItemStats Stats;
@@ -33,6 +34,7 @@ public class ItemInfo {
         this.IconKey = storedItem.Icon;
         this.UseSound = storedItem.UseSound;
         this.Type = storedItem.Type;
+        this.StackCap = storedItem.StackCap;
 
         this.Stats = storedItem.Stats.Clone();
 

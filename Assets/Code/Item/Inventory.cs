@@ -50,6 +50,41 @@ public class Inventory
         }
         return dick;   
     }
+    
+    public bool canPickItem(ItemInstance item)
+    {
+        bool canPick = false;
+        if (item.Info.Key == "gold") 
+        {
+            // gold can always be picked up
+            canPick = true;
+        } 
+        else
+        {
+            int stackNeeded = item.Info.Stack;
+            for (int i = 0; i < ContentArray.Length; i++)
+            {
+                if (ContentArray[i] == null)
+                {
+                    // empty slot - pick it up
+                    canPick = true;
+                    break;
+                }
+                else if (item.Info.Key == ContentArray[i].Key // same key
+                    && item.Info.StackCap > 1 // stackable
+                    && ContentArray[i].Stack < ContentArray[i].StackCap) // with empty stack slots
+                {
+                    // sum the stack added so far. if it reached the item's stack amount, it's pickable
+                    stackNeeded -= (ContentArray[i].StackCap - ContentArray[i].Stack);
+                    if (stackNeeded < 0) {
+                        canPick = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return canPick;
+    }
 
     public void SwapSlots(int fromIndex, int toIndex)
     {

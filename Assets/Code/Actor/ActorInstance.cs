@@ -85,7 +85,6 @@ public class ActorInstance : MonoBehaviour
 
     public ActorInfo Info;
     public ActorMovement MovementController { protected set; get; }
-
     public bool nameHidden = false;
 
     #endregion
@@ -549,7 +548,12 @@ public class ActorInstance : MonoBehaviour
 
             if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.5f)
             {
+                if (!Info.Inventory.canPickItem(item)) 
+                {
+                    continue;
+                }
                 SocketClient.Instance.SendPickedItem(itemKey);
+                break;
             }
         }
 

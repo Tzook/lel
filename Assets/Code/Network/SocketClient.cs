@@ -133,8 +133,10 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("On event error: " + data.AsObject.ToString());
-        if (data["display"].AsBool) {
-            InGameMainMenuUI.Instance.MinilogMessage(data["error"].ToString());
+
+        if (data["display"].AsBool)
+        {
+            ShockMessageUI.Instance.CallMessage(data["error"].Value);
         }
     }
 

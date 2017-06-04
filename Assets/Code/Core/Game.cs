@@ -136,7 +136,7 @@ public class Game : MonoBehaviour {
 
         actor.Equipment.SetItem(equipSlot, item);
 
-        if (actor == CurrentScene.ClientCharacter)
+        if (actor == LocalUserInfo.Me.ClientCharacter)
         {
             if (previouslyEquipped != null)
             {
@@ -147,6 +147,7 @@ public class Game : MonoBehaviour {
                 ClientCharacter.GetComponent<ActorInstance>().Info.Inventory.RemoveItem(inventoryIndex);
             }
 
+            actor.ValidatePrimaryAbility();
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();

@@ -173,20 +173,23 @@ public class ActorInfo
         return null;
     }
 
-    //public QuestCondition GetConditionByType(string conditionType)
-    //{
-    //    QuestCondition tempCondition;
-    //    for(int i=0;i<QuestsInProgress.Count;i++)
-    //    {
-    //        tempCondition = GetQuestCondition(QuestsInProgress[i], conditionType);
-    //        if(tempCondition != null)
-    //        {
-    //            return tempCondition;
-    //        }
-    //    }
-
-    //    return null;
-    //}
+    //Would switch to a primary ability 
+    //if current equipment won't allow the current ability.
+    public void ValidatePrimaryAbility()
+    {
+        switch(CurrentPrimaryAbility)
+        {
+            case "range":
+                {
+                    if(Equipment.Weapon.SubType != "range")
+                    {
+                        SwitchPrimaryAbility("melee");
+                        return;
+                    }
+                    break;
+                }
+        }
+    }
 
     public void ChangeGold(int amount)
     {
@@ -223,20 +226,40 @@ public class ActorInfo
             this.PrimaryAbilities.Add(node["abilities"][i].Value);
         }
 
-        this.CurrentPrimaryAbility = node["primaryAbility"].Value;
+        SwitchPrimaryAbility(node["primaryAbility"].Value);
 
     }
 
     public void SwitchPrimaryAbility(string key)
     {
-        if(PrimaryAbilities.Contains(key))
+        if(PrimaryAbilities.Contains(key) && CanUsePrimaryAbility(key))
         {
-            //TODO Check if has bow equipped on RANGE ability.
-
             CurrentPrimaryAbility = key;
 
-            InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
+            if (this == LocalUserInfo.Me.ClientCharacter)
+            {
+                InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
+            }
         }
+    }
+
+    public bool CanUsePrimaryAbility(string key)
+    {
+        switch(key)
+        {
+            case "range":
+                {
+                    if(Equipment.Weapon.SubType != "range")
+                    {
+                        ShockMessageUI.Instance.CallMessage("'Range' ability requires a BOW equipped!");
+                        return false;
+                    }
+
+                    break;
+                }
+        }
+
+        return true;
     }
 
     public void RefreshBonuses()

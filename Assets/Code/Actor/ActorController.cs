@@ -52,7 +52,7 @@ public class ActorController : MonoBehaviour
     float JumpDelay = 0.1f;
 
     [SerializeField]
-    ActorDamageInstance OneHandDamageInstance;
+    public ActorDamageInstance OneHandDamageInstance;
 
 
 
@@ -538,6 +538,25 @@ public class ActorController : MonoBehaviour
         ActivatePrimaryAbility();
     }
 
+    public void ActivatePrimaryAbility()
+    {
+        InturruptAttack();
+
+        switch (Instance.Info.CurrentPrimaryAbility)
+        {
+            case "melee":
+                {
+                    OneHandDamageInstance.gameObject.SetActive(true);
+                    break;
+                }
+            case "range":
+                {
+                    Instance.ShootArrow(true);
+                    break;
+                }
+        }
+    }
+
     public void InturruptAttack()
     {
         Instance.StartCombatMode();
@@ -550,25 +569,6 @@ public class ActorController : MonoBehaviour
 
         Anim.SetBool("Charging", false);
         InGameMainMenuUI.Instance.StopChargingAttack();
-    }
-
-    public void ActivatePrimaryAbility()
-    {
-        InturruptAttack();
-
-        switch(Instance.Info.CurrentPrimaryAbility)
-        {
-            case "melee":
-                {
-                    OneHandDamageInstance.gameObject.SetActive(true);
-                    break;
-                }
-            case "range":
-                {
-                    Instance.ShootArrow();
-                    break;
-                }
-        }
     }
 
     public void Death()

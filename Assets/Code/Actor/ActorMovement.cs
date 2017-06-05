@@ -171,4 +171,16 @@ public class ActorMovement : MonoBehaviour
         OnRope = false;
     }
 
+    public void ActivatePrimaryAbility(string ability)
+    {
+        switch (Instance.Info.CurrentPrimaryAbility)
+        {
+            case "range":
+                {
+                    Instance.ShootArrow(false);
+                    break;
+                }
+        }
+    }
+
 }

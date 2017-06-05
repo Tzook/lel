@@ -527,8 +527,9 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(actor.Name + " Preforms Attack");
 
         actor.Instance.PreformAttack(data["ability"].Value, (1f*data["load"].AsInt)/100f);
+        Debug.Log("#########" + data["ability"].Value);
+        actor.Instance.MovementController.ActivatePrimaryAbility(data["ability"].Value);
     }
-
 
     private void OnMobMovement(Socket socket, Packet packet, object[] args)
     {

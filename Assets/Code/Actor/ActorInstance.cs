@@ -84,7 +84,7 @@ public class ActorInstance : MonoBehaviour
     #region Public Parameters
 
     public ActorInfo Info;
-    public ActorMovement MovementController { protected set; get; }
+    public ActorMovement MovementController;
     public bool nameHidden = false;
 
     #endregion
@@ -476,13 +476,13 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(SubWeapon, layer, minLevel, matType);
     }
 
-    public void ShootArrow()
+    public void ShootArrow(bool isPlayer)
     {
         GameObject arrow = ResourcesLoader.Instance.GetRecycledObject("Projectile_Arrow");
 
         arrow.transform.position = Weapon.transform.position;
         arrow.transform.rotation = m_Chest.transform.rotation;
-        arrow.GetComponent<ProjectileArrow>().Launch(this, true);
+        arrow.GetComponent<ProjectileArrow>().Launch(this, isPlayer);
     }
 
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
@@ -711,7 +711,20 @@ public class ActorInstance : MonoBehaviour
 
     public void LoadAttack(string ability)
     {
-        Anim.SetInteger("AttackType", Random.Range(0, 3));
+        switch (ability)
+        {
+            case "melee":
+                {
+                    Anim.SetInteger("AttackType", Random.Range(0, 3));
+                    break;
+                }
+            case "range":
+                {
+                    Anim.SetInteger("AttackType", 3);
+                    break;
+                }
+        }
+
         Anim.SetBool("Charging", true);
     }
 
@@ -721,6 +734,7 @@ public class ActorInstance : MonoBehaviour
 
         StartCombatMode();
     }
+
 
     public void BendBow()
     {

@@ -514,7 +514,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(actor.Name + " Loads Attack");
 
-        actor.Instance.LoadAttack(data["ability"].Value);
+        actor.Instance.LoadAttack();
     }
 
     protected void OnActorPreformAttack(Socket socket, Packet packet, object[] args)
@@ -526,9 +526,9 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(actor.Name + " Preforms Attack");
 
-        actor.Instance.PreformAttack(data["ability"].Value, (1f*data["load"].AsInt)/100f);
-        Debug.Log("#########" + data["ability"].Value);
-        actor.Instance.MovementController.ActivatePrimaryAbility(data["ability"].Value);
+        actor.Instance.PreformAttack((1f*data["load"].AsInt)/100f);
+        actor.Instance.MovementController.ActivatePrimaryAbility();
+
     }
 
     private void OnMobMovement(Socket socket, Packet packet, object[] args)

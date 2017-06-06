@@ -171,7 +171,7 @@ public class ActorMovement : MonoBehaviour
         OnRope = false;
     }
 
-    public void ActivatePrimaryAbility(string ability)
+    public void ActivatePrimaryAbility()
     {
         switch (Instance.Info.CurrentPrimaryAbility)
         {

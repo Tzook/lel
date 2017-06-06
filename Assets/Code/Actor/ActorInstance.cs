@@ -709,9 +709,9 @@ public class ActorInstance : MonoBehaviour
         Anim.SetBool("Combat", false);
     }
 
-    public void LoadAttack(string ability)
+    public void LoadAttack()
     {
-        switch (ability)
+        switch (Info.CurrentPrimaryAbility)
         {
             case "melee":
                 {
@@ -728,7 +728,7 @@ public class ActorInstance : MonoBehaviour
         Anim.SetBool("Charging", true);
     }
 
-    public void PreformAttack(string ability, float AttackValue)
+    public void PreformAttack(float AttackValue)
     {
         Anim.SetBool("Charging", false);
 

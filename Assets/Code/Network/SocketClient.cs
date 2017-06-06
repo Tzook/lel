@@ -90,6 +90,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
         CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
+        CurrentSocket.On("actor_change_ability", OnActorChangeAbility);
 
         CurrentSocket.On("mob_spawn", OnMobSpawn);
         CurrentSocket.On("mob_die", OnMobDeath);
@@ -531,6 +532,19 @@ public class SocketClient : MonoBehaviour
 
     }
 
+    protected void OnActorChangeAbility(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        BroadcastEvent(actor.Name + " Changed ability Attack");
+
+        actor.SetPrimaryAbility(data["ability"].Value);
+
+    }
+
     private void OnMobMovement(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
@@ -838,6 +852,16 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("performed_attack", node);
     }
+
+    public void SendChangedAbility(string ability)
+    {
+        JSONNode node = new JSONClass();
+
+        node["ability"] = ability;
+
+        CurrentSocket.Emit("changed_ability", node);
+    }
+
 
 
     public void SendMobMove(string instanceID, float x, float y)

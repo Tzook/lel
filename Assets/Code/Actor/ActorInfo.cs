@@ -226,7 +226,7 @@ public class ActorInfo
             this.PrimaryAbilities.Add(node["abilities"][i].Value);
         }
 
-        SwitchPrimaryAbility(node["primaryAbility"].Value);
+        SetPrimaryAbility(node["primaryAbility"].Value);
 
     }
 
@@ -234,12 +234,20 @@ public class ActorInfo
     {
         if(PrimaryAbilities.Contains(key) && CanUsePrimaryAbility(key))
         {
-            CurrentPrimaryAbility = key;
+            SocketClient.Instance.SendChangedAbility(key);
 
-            if (this == LocalUserInfo.Me.ClientCharacter)
-            {
-                InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
-            }
+            SetPrimaryAbility(key);
+
+        }
+    }
+
+    public void SetPrimaryAbility(string key)
+    {
+        CurrentPrimaryAbility = key;
+
+        if (this == LocalUserInfo.Me.ClientCharacter)
+        {
+            InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
         }
     }
 

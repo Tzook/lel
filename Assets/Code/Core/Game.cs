@@ -343,8 +343,6 @@ public class Game : MonoBehaviour {
 
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
-        MovingTroughPortal = false;
-        InGame = true;
 
         InGameMainMenuUI.Instance.ShowGameUI();
 
@@ -353,6 +351,8 @@ public class Game : MonoBehaviour {
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
 
+        MovingTroughPortal = false;
+        InGame = true;
     }
 
     public void SetBitch(bool isbitch)

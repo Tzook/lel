@@ -12,6 +12,9 @@ public class NPC : MonoBehaviour {
 
     public string DefaultDialog;
 
+    public string IntroAnimation;
+    public string EndAnimation;
+
     public string Name;
     public string Key;
 

@@ -139,6 +139,10 @@ public class GameCamera : MonoBehaviour {
             {
                 targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
             }
+            else if (this.CamType == CameraType.Static)
+            {
+                
+            }
             else
             {
                 targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
@@ -164,6 +168,9 @@ public class GameCamera : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, followingObject.transform.position.y, initPos.z);
         }
+        else if (this.CamType == CameraType.Static)
+        {
+        }
         else
         {
             transform.position = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y, initPos.z);
@@ -172,6 +179,6 @@ public class GameCamera : MonoBehaviour {
 
     public enum CameraType
     {
-        Normal, Vertical, Horizontal
+        Normal, Vertical, Horizontal, Static
     }
 }

@@ -53,6 +53,11 @@ public class DialogManager : MonoBehaviour {
         CurrentOptionsFrame.transform.position = Game.Instance.ClientCharacter.GetComponent<ActorInstance>().NameLabel.transform.position;
         CurrentOptionsFrame.gameObject.SetActive(false);
 
+        if(!string.IsNullOrEmpty(currentNPC.IntroAnimation))
+        {
+            currentNPC.TriggerAnimation(currentNPC.IntroAnimation);
+        }
+
         StartDialog(npc.DefaultDialog);
     }
 
@@ -65,6 +70,11 @@ public class DialogManager : MonoBehaviour {
 
     public void StopDialogMode()
     {
+        if (!string.IsNullOrEmpty(currentNPC.EndAnimation))
+        {
+            currentNPC.TriggerAnimation(currentNPC.EndAnimation);
+        }
+
         currentNPC.HideName();
 
         StopAllCoroutines();

@@ -52,6 +52,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected ProgressQuestsWindowUI questsPanel;
 
     [SerializeField]
+    protected CompletedQuestsWindowUI completedQuestsPanel;
+
+    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
@@ -113,7 +116,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         get
         {
-            return (GoldDropWindow.gameObject.activeInHierarchy || questsPanel.gameObject.activeInHierarchy);
+            return (GoldDropWindow.gameObject.activeInHierarchy || questsPanel.gameObject.activeInHierarchy || completedQuestsPanel.gameObject.activeInHierarchy);
         }
     }
 
@@ -215,6 +218,18 @@ public class InGameMainMenuUI : MonoBehaviour {
                 else
                 {
                     questsPanel.Hide();
+                }
+            }
+
+            if (Input.GetKeyDown(InputMap.Map["CompletedQuests"]))
+            {
+                if (!completedQuestsPanel.gameObject.activeInHierarchy)
+                {
+                    completedQuestsPanel.Show();
+                }
+                else
+                {
+                    completedQuestsPanel.Hide();
                 }
             }
         }
@@ -520,6 +535,11 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void RefreshQuestProgress()
     {
         questsPanel.Refresh();
+    }
+
+    public void RefreshCompletedQuestProgress()
+    {
+        completedQuestsPanel.Refresh();
     }
 
     public void RecieveQuestReward(Quest quest)

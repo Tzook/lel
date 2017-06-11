@@ -391,6 +391,7 @@ public class ActorInfo
         {
             // refresh only if anything has been updated
             InGameMainMenuUI.Instance.RefreshQuestProgress();
+            InGameMainMenuUI.Instance.RefreshCompletedQuestProgress();
         }
     }
     

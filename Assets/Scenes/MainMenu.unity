@@ -35740,7 +35740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 342.75, y: 187.43}
+  m_AnchoredPosition: {x: 342.75, y: 187.42998}
   m_SizeDelta: {x: -685.5, y: -374.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1647
@@ -49088,7 +49088,7 @@ MonoBehaviour:
       because he is too scared to do so himself.\t\t"
     QuestCompleteDescription: 'Some cowardly sailor once asked me to slay some turtles
       for him... '
-    FacePrefab: 
+    FacePrefab: MikeQuest
     Conditions:
     - Condition: hunt
       Type: Turtle
@@ -49124,7 +49124,7 @@ MonoBehaviour:
       five 'Old Turtle' shells for Ike's turtle soup.
     QuestCompleteDescription: Some girl named Helena once asked me to help her friend
       'Ike' preparing his turtle soup.
-    FacePrefab: 
+    FacePrefab: HelenaQuest
     Conditions:
     - Condition: collect
       Type: turtleShellOld
@@ -49132,6 +49132,30 @@ MonoBehaviour:
       TargetProgress: 5
     RequiredCompletedQuests:
     - turtleProblem
+    RequiredClass: 
+    MinimumLevel: 0
+    RewardItems:
+    - ItemKey: gold
+      MinStack: 30
+      MaxStack: 0
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+    RewardClass: 
+    RewardExp: 80
+  - Name: Turtle Lore
+    Key: TurtleQuizz
+    InProgressDescription: I passed the shaman's test successfully...
+    QuestCompleteDescription: A shaman once told me about the lore of the ancient
+      turtles...
+    FacePrefab: ShamanQuest
+    Conditions: []
+    RequiredCompletedQuests: []
     RequiredClass: 
     MinimumLevel: 0
     RewardItems:
@@ -70919,7 +70943,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.99999994}
   m_AnchoredPosition: {x: 0.000009536743, y: -0.099975586}
   m_SizeDelta: {x: 34.1, y: -0.2}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -71249,10 +71273,10 @@ RectTransform:
   m_Father: {fileID: 731934678}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.22087751, y: 0}
-  m_AnchorMax: {x: 0.7571225, y: 0.124000005}
-  m_AnchoredPosition: {x: 0.024700165, y: 0}
-  m_SizeDelta: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.23175101, y: 0}
+  m_AnchorMax: {x: 0.7788695, y: 0.124000005}
+  m_AnchoredPosition: {x: -1.0983, y: 0}
+  m_SizeDelta: {x: -2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &864387686
 MonoBehaviour:
@@ -71349,6 +71373,7 @@ GameObject:
   - component: {fileID: 1097256412}
   - component: {fileID: 1097256414}
   - component: {fileID: 1097256416}
+  - component: {fileID: 1097256413}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -71371,9 +71396,36 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13412651, y: 0.15943067}
   m_AnchorMax: {x: 0.84413457, y: 0.67658395}
-  m_AnchoredPosition: {x: -1.2999992, y: -0.5999985}
+  m_AnchoredPosition: {x: 2.1, y: -0.5999985}
   m_SizeDelta: {x: -1.4000015, y: 0.9000015}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1097256413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097256411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.44852942, g: 0.38695404, b: 0.27373487, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &1097256414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -71392,8 +71444,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 5
+    m_Right: 5
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
@@ -71484,6 +71536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardsContainer: {fileID: 1097256412}
+  QuestTitle: {fileID: 1936252685}
 --- !u!1 &1298705607
 GameObject:
   m_ObjectHideFlags: 0
@@ -71772,7 +71825,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 650680265}
   m_Direction: 3
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -72145,7 +72198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14475101, y: 0.67658395}
   m_AnchorMax: {x: 0.8332611, y: 0.7475694}
-  m_AnchoredPosition: {x: 0.02299881, y: -0.07501221}
+  m_AnchoredPosition: {x: 3.4, y: -0.07501221}
   m_SizeDelta: {x: 1.8470001, y: 0.099998474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862356035
@@ -72251,7 +72304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -47.099976}
+  m_AnchoredPosition: {x: 0, y: -39.875008}
   m_SizeDelta: {x: 160, y: 19.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936252684

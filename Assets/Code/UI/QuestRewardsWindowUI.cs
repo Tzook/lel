@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestRewardsWindowUI : MonoBehaviour {
 
     [SerializeField]
     Transform RewardsContainer;
+
+    [SerializeField]
+    Text QuestTitle;
 
     string TargetQuest;
 
@@ -14,6 +18,8 @@ public class QuestRewardsWindowUI : MonoBehaviour {
         this.gameObject.SetActive(true);
 
         TargetQuest = quest.Key;
+
+        QuestTitle.text = quest.Name;
 
         ClearContainer();
 

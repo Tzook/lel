@@ -55,7 +55,7 @@ public class EnemyMoving : Enemy
     {
         if(m_HealthBar != null)
         {
-            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 2f);
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 3f);
         }
     }
 
@@ -138,10 +138,16 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 0.15f , GroundLayerMask);
+            SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f , GroundLayerMask);
 
- 
-            if (SideRayLeft.normal.x < -0.3 || SideRayLeft.normal.x > 0.3)
+            //Debug.DrawRay(transform.position, -transform.right, Color.blue);
+
+            if (SideRayLeft.collider != null)
+            {
+                Debug.Log(SideRayLeft.collider.gameObject.name + " | " + SideRayLeft.normal);
+            }
+
+            if (SideRayLeft.normal.x < -0.3 || SideRayLeft.normal.x > 0.3 || SideRayLeft.normal.y < -0.3 || SideRayLeft.normal.y > 0.3)
             {
                 yield break;
             }
@@ -162,9 +168,15 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            SideRayRight = Physics2D.Raycast(transform.position, transform.right, 0.15f , GroundLayerMask);
+            SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f , GroundLayerMask);//original 0.15f
 
-            if (SideRayRight.normal.x < -0.3 || SideRayRight.normal.x > 0.3)
+            //Debug.DrawRay(transform.position, transform.right, Color.blue);
+            if (SideRayRight.collider != null)
+            {
+                Debug.Log(SideRayRight.collider.gameObject.name + " | " + SideRayRight.normal);
+            }
+
+            if (SideRayRight.normal.x < -0.3 || SideRayRight.normal.x > 0.3 || SideRayRight.normal.y < -0.3 || SideRayRight.normal.y > 0.3)
             {
                 yield break;
             }

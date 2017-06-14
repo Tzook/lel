@@ -227,22 +227,22 @@ public class Game : MonoBehaviour {
 
     }
 
-    public ItemInstance SpawnItem(ItemInfo info, string instanceID, float x, float y)
+    public ItemInstance SpawnItem(ItemInfo info, string instanceID, string owner, float x, float y)
     {
         AudioControl.Instance.Play("impact");
 
         ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
         itemInstance.transform.position = new Vector3(x, y, 0f);
-        itemInstance.SetInfo(info, instanceID);
+        itemInstance.SetInfo(info, instanceID, owner);
 
         CurrentScene.Items.Add(instanceID, itemInstance);
 
         return itemInstance;
     }
 
-    public void SpawnItems(List<ItemInfo> infos, List<string> ids, float x, float y)
+    public void SpawnItems(List<ItemInfo> infos, List<string> ids, List<string> owners, float x, float y)
     {
-        StartCoroutine(SpawnItemsRoutine(infos, ids, x, y));
+        StartCoroutine(SpawnItemsRoutine(infos, ids, owners, x, y));
     }
 
     public void SpawnMonster(string instanceID, float xPos, float yPos, string mobKey, int currentHP)
@@ -376,9 +376,9 @@ public class Game : MonoBehaviour {
 
     }
 
-    private IEnumerator SpawnItemsRoutine(List<ItemInfo> infos, List<string> ids, float x, float y)
+    private IEnumerator SpawnItemsRoutine(List<ItemInfo> infos, List<string> ids, List<string> owners, float x, float y)
     {
-        SpawnItem(infos[0], ids[0], x, y);
+        SpawnItem(infos[0], ids[0], owners[0], x, y);
 
         yield return 0;
 
@@ -391,7 +391,7 @@ public class Game : MonoBehaviour {
         {
             ThrowRight = !ThrowRight;
 
-            tempRigid = SpawnItem(infos[i], ids[i], x, y).GetComponent<Rigidbody2D>();
+            tempRigid = SpawnItem(infos[i], ids[i], owners[i], x, y).GetComponent<Rigidbody2D>();
             ItemInstances.Add(tempRigid.GetComponent<ItemInstance>());
 
             float sideOffset = (i + 1) / 2; // round down so both side have equal distances

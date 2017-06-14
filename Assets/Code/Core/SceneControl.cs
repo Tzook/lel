@@ -126,6 +126,11 @@ public class SceneControl
         Items.Remove(instanceID);
     }
 
+    public void RemoveItemOwner(string instanceID)
+    {
+        Items[instanceID].Owner = "";
+    }
+
     public void UpdateQuestProgress(string questKey)
     {
         NPC tempNPC = GetQuestNPC(questKey);

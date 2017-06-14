@@ -6,6 +6,9 @@ public class ItemInstance : MonoBehaviour {
     public ItemInfo Info;
 
     public string ID;
+    
+    // this item's owner name (the one who can pick it up)
+    public string Owner; 
 
     [SerializeField]
     SpriteRenderer m_Renderer;
@@ -13,10 +16,11 @@ public class ItemInstance : MonoBehaviour {
     [SerializeField]
     Animator m_Animator;
 
-    public void SetInfo(ItemInfo info,string id)
+    public void SetInfo(ItemInfo info, string id, string owner)
     {
         this.Info = info;
         this.ID = id;
+        this.Owner = owner;
 
         UpdateVisual();
     }

@@ -65,6 +65,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_pick_item", OnActorPickItem);
         CurrentSocket.On("drop_items", OnDropItems);
         CurrentSocket.On("item_disappear", OnItemDisappear);
+        CurrentSocket.On("item_owner_gone", OnItemOwnerGone);
         CurrentSocket.On("actor_move_item", OnActorMoveItem);
         CurrentSocket.On("actor_add_item", OnActorAddItem);
         CurrentSocket.On("actor_delete_item", OnActorDeleteItem);
@@ -263,6 +264,14 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.DestroySceneItem(data["item_id"].Value);
     }
 
+    protected void OnItemOwnerGone(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Item's owner is gone");
+        JSONNode data = (JSONNode)args[0];
+
+        Game.Instance.CurrentScene.RemoveItemOwner(data["item_id"].Value);
+    }
+
     protected void OnDropItems(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("An item was dropped");
@@ -270,17 +279,20 @@ public class SocketClient : MonoBehaviour
 
         List<ItemInfo> infoList = new List<ItemInfo>();
         List<string> idsList = new List<string>();
+        List<string> ownersList = new List<string>();
 
         Debug.Log(data.ToString());
 
         for(int i=0;i<data.Count;i++)
         {
-            Debug.Log("ITEM - " + data[i]["item"]["key"].Value);
-            infoList.Add(new ItemInfo(Content.Instance.GetItem(data[i]["item"]["key"].Value), data[i]["item"]["stack"].AsInt));
+            JSONNode item = data[i]["item"];
+            Debug.Log("ITEM - " + item["key"].Value);
+            infoList.Add(new ItemInfo(Content.Instance.GetItem(item["key"].Value), item["stack"].AsInt));
             idsList.Add(data[i]["item_id"].Value);
+            ownersList.Add(data[i]["owner"].Value);
         }
 
-        Game.Instance.SpawnItems(infoList, idsList, data[0]["x"].AsFloat, data[0]["y"].AsFloat);
+        Game.Instance.SpawnItems(infoList, idsList, ownersList, data[0]["x"].AsFloat, data[0]["y"].AsFloat);
     }
 
     protected void OnActorPickItem(Socket socket, Packet packet, object[] args)

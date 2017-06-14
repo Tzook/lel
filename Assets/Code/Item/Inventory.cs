@@ -54,7 +54,12 @@ public class Inventory
     public bool canPickItem(ItemInstance item)
     {
         bool canPick = false;
-        if (item.Info.Key == "gold") 
+        if (!String.IsNullOrEmpty(item.Owner) && item.Owner != LocalUserInfo.Me.ClientCharacter.Name) 
+        {
+            // item has an owner and it is not you
+            canPick = false;
+        }
+        else if (item.Info.Key == "gold") 
         {
             // gold can always be picked up
             canPick = true;

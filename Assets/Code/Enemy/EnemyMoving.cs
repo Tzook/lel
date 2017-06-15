@@ -141,15 +141,14 @@ public class EnemyMoving : Enemy
             SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f , GroundLayerMask);
 
             //Debug.DrawRay(transform.position, -transform.right, Color.blue);
+            //if (SideRayLeft.collider != null)
+            //{
+            //    Debug.Log(SideRayLeft.collider.gameObject.name + " | " + SideRayLeft.normal);
+            //}
 
-            if (SideRayLeft.collider != null)
+            if (SideRayLeft.normal.x < -0.3f || SideRayLeft.normal.x > 0.3f)
             {
-                Debug.Log(SideRayLeft.collider.gameObject.name + " | " + SideRayLeft.normal);
-            }
-
-            if (SideRayLeft.normal.x < -0.3 || SideRayLeft.normal.x > 0.3 || SideRayLeft.normal.y < -0.3 || SideRayLeft.normal.y > 0.3)
-            {
-                yield break;
+                break;
             }
 
             yield return 0;
@@ -171,14 +170,14 @@ public class EnemyMoving : Enemy
             SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f , GroundLayerMask);//original 0.15f
 
             //Debug.DrawRay(transform.position, transform.right, Color.blue);
-            if (SideRayRight.collider != null)
-            {
-                Debug.Log(SideRayRight.collider.gameObject.name + " | " + SideRayRight.normal);
-            }
+            //if (SideRayRight.collider != null)
+            //{
+            //    Debug.Log(SideRayRight.collider.gameObject.name + " | " + SideRayRight.normal);
+            //}
 
-            if (SideRayRight.normal.x < -0.3 || SideRayRight.normal.x > 0.3 || SideRayRight.normal.y < -0.3 || SideRayRight.normal.y > 0.3)
+            if (SideRayRight.normal.x < -0.3f || SideRayRight.normal.x > 0.3f)
             {
-                yield break;
+                break;
             }
 
             yield return 0;

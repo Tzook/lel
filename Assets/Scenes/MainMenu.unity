@@ -48305,6 +48305,12 @@ MonoBehaviour:
     - ItemKey: shortAxe
       MinStack: 1
       MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
   - MonsterKey: OldTurtle
     MonsterName: Old Turtle
     MonsterHP: 30
@@ -48369,6 +48375,12 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
       MinStack: 1
       MaxStack: 1
   - MonsterKey: SpikedTurtle
@@ -48437,6 +48449,12 @@ MonoBehaviour:
     - ItemKey: apprenticeRobeBlack
       MinStack: 1
       MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
   - MonsterKey: Spike
     MonsterName: Spike
     MonsterHP: 1
@@ -48485,6 +48503,12 @@ MonoBehaviour:
     - ItemKey: shortAxe
       MinStack: 1
       MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -48494,7 +48518,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: chest
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 3
     StackCap: 1
     Stats:
@@ -48519,7 +48543,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: chest
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 2
     StackCap: 1
     Stats:
@@ -48530,7 +48554,7 @@ MonoBehaviour:
       BonusSTR: 0
       BonusMAG: 0
       BonusDEX: 0
-      BonusHP: 0
+      BonusHP: 5
       BonusMP: 0
     ItemSprites:
     - PartKey: chest
@@ -48550,7 +48574,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: gloves
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 2
     StackCap: 1
     Stats:
@@ -48561,7 +48585,7 @@ MonoBehaviour:
       BonusSTR: 0
       BonusMAG: 0
       BonusDEX: 0
-      BonusHP: 0
+      BonusHP: 10
       BonusMP: 0
     ItemSprites:
     - PartKey: hand
@@ -48575,7 +48599,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: legs
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 1
     StackCap: 1
     Stats:
@@ -48586,7 +48610,7 @@ MonoBehaviour:
       BonusSTR: 0
       BonusMAG: 0
       BonusDEX: 0
-      BonusHP: 0
+      BonusHP: 5
       BonusMP: 0
     ItemSprites:
     - PartKey: hip
@@ -48603,7 +48627,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: legs
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 5
     StackCap: 1
     Stats:
@@ -48613,8 +48637,8 @@ MonoBehaviour:
       RequiresLVL: 0
       BonusSTR: 0
       BonusMAG: 0
-      BonusDEX: 0
-      BonusHP: 0
+      BonusDEX: 1
+      BonusHP: 10
       BonusMP: 0
     ItemSprites:
     - PartKey: hip
@@ -48631,7 +48655,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: shoes
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 12
     StackCap: 1
     Stats:
@@ -48656,7 +48680,7 @@ MonoBehaviour:
     UseSound: sound_equip
     Type: shoes
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 1
     StackCap: 1
     Stats:
@@ -48666,8 +48690,8 @@ MonoBehaviour:
       RequiresLVL: 0
       BonusSTR: 0
       BonusMAG: 0
-      BonusDEX: 0
-      BonusHP: 0
+      BonusDEX: 1
+      BonusHP: 5
       BonusMP: 0
     ItemSprites:
     - PartKey: foot
@@ -48796,7 +48820,7 @@ MonoBehaviour:
     UseSound: 
     Type: chest
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 15
     StackCap: 1
     Stats:
@@ -48830,7 +48854,7 @@ MonoBehaviour:
     UseSound: 
     Type: legs
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 5
     StackCap: 1
     Stats:
@@ -48840,7 +48864,7 @@ MonoBehaviour:
       RequiresLVL: 2
       BonusSTR: 1
       BonusMAG: 1
-      BonusDEX: 2
+      BonusDEX: 1
       BonusHP: 0
       BonusMP: 10
     ItemSprites:
@@ -48860,18 +48884,18 @@ MonoBehaviour:
     UseSound: 
     Type: gloves
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 7
     StackCap: 1
     Stats:
       RequiresSTR: 0
       RequiresMAG: 0
       RequiresDEX: 0
-      RequiresLVL: 5
-      BonusSTR: 3
+      RequiresLVL: 4
+      BonusSTR: 1
       BonusMAG: 0
-      BonusDEX: 3
-      BonusHP: 0
+      BonusDEX: 1
+      BonusHP: 5
       BonusMP: 0
     ItemSprites:
     - PartKey: hand
@@ -48886,14 +48910,14 @@ MonoBehaviour:
     UseSound: 
     Type: chest
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 12
     StackCap: 1
     Stats:
       RequiresSTR: 0
       RequiresMAG: 0
       RequiresDEX: 0
-      RequiresLVL: 10
+      RequiresLVL: 7
       BonusSTR: 0
       BonusMAG: 5
       BonusDEX: 2
@@ -48920,19 +48944,19 @@ MonoBehaviour:
     UseSound: 
     Type: chest
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 12
     StackCap: 1
     Stats:
       RequiresSTR: 0
       RequiresMAG: 0
       RequiresDEX: 0
-      RequiresLVL: 10
-      BonusSTR: 0
-      BonusMAG: 5
+      RequiresLVL: 7
+      BonusSTR: 3
+      BonusMAG: 0
       BonusDEX: 2
       BonusHP: 0
-      BonusMP: 15
+      BonusMP: 20
     ItemSprites:
     - PartKey: chest
       SpritePlaceable: {fileID: 21300086, guid: ebcb940941159e54fb42d2b174b0cd9a,
@@ -48955,7 +48979,7 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 20
     StackCap: 1
     Stats:
@@ -48963,9 +48987,9 @@ MonoBehaviour:
       RequiresMAG: 0
       RequiresDEX: 0
       RequiresLVL: 5
-      BonusSTR: 5
+      BonusSTR: 4
       BonusMAG: 0
-      BonusDEX: 2
+      BonusDEX: 1
       BonusHP: 0
       BonusMP: 0
     ItemSprites:
@@ -48982,7 +49006,7 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: 
-    DropChance: 2
+    DropChance: 0.5
     GoldValue: 2
     StackCap: 1
     Stats:
@@ -49008,15 +49032,15 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 10
     StackCap: 1
     Stats:
       RequiresSTR: 0
       RequiresMAG: 0
       RequiresDEX: 0
-      RequiresLVL: 4
-      BonusSTR: 5
+      RequiresLVL: 3
+      BonusSTR: 3
       BonusMAG: 0
       BonusDEX: 0
       BonusHP: 0
@@ -49035,7 +49059,7 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: 
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 25
     StackCap: 1
     Stats:
@@ -49043,11 +49067,11 @@ MonoBehaviour:
       RequiresMAG: 0
       RequiresDEX: 0
       RequiresLVL: 5
-      BonusSTR: 6
+      BonusSTR: 5
       BonusMAG: 0
       BonusDEX: 5
       BonusHP: 0
-      BonusMP: 0
+      BonusMP: 5
     ItemSprites:
     - PartKey: weapon
       SpritePlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019,
@@ -49063,7 +49087,7 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: range
-    DropChance: 1
+    DropChance: 0.5
     GoldValue: 20
     StackCap: 1
     Stats:
@@ -49103,6 +49127,32 @@ MonoBehaviour:
       BonusHP: 0
       BonusMP: 0
     ItemSprites: []
+  - Key: shortDagger
+    Name: Short Dagger
+    Description: A short, handy and sharp dagger. "You can never have too many knives!"
+    IconPlaceable: {fileID: 21300010, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: weapon_short_dagger
+    UseSound: 
+    Type: weapon
+    SubType: 
+    DropChance: 0.5
+    GoldValue: 10
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 2
+      BonusSTR: 2
+      BonusMAG: 0
+      BonusDEX: 1
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300010, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: weapon_short_dagger
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with
@@ -49166,7 +49216,7 @@ MonoBehaviour:
     RequiredClass: 
     MinimumLevel: 0
     RewardItems:
-    - ItemKey: shortSword
+    - ItemKey: shortDagger
       MinStack: 1
       MaxStack: 0
     - ItemKey: gold
@@ -49201,6 +49251,9 @@ MonoBehaviour:
     RewardItems:
     - ItemKey: gold
       MinStack: 30
+      MaxStack: 0
+    - ItemKey: blackPants
+      MinStack: 1
       MaxStack: 0
     RewardSTR: 0
     RewardMAG: 0
@@ -53842,7 +53895,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 087a5b74d3a9c2b48abf376c54be1563, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

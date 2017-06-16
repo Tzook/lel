@@ -97,6 +97,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("mob_die", OnMobDeath);
         CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_move", OnMobMovement);
+        CurrentSocket.On("aggro", OnAggro);
 
         CurrentSocket.On("quest_start", OnQuestStart);
         CurrentSocket.On("quest_complete", OnQuestComplete);
@@ -567,6 +568,23 @@ public class SocketClient : MonoBehaviour
 
         monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat);
 
+    }
+
+    private void OnAggro(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Aggro on mob " + data["mob_id"].Value);
+        
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+
+        if (String.IsNullOrEmpty(data["id"].Value)) {
+            // no new character - remove the aggro from the mob
+            // TODO implement
+        } else {
+            ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+            // Set mob aggro to be after the actor
+        }
     }
 
     private void OnMobTakeDamage(Socket socket, Packet packet, object[] args)

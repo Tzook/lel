@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour {
 
     protected Vector3 initScale;
 
+    public ActorInstance CurrentTarget;
+
     public bool Dead = false;
     
     public virtual void Initialize(string instanceID ,DevMonsterInfo givenInfo ,int currentHP = 0)
@@ -101,6 +103,11 @@ public class Enemy : MonoBehaviour {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
         pop.transform.position = transform.position + new Vector3(0f, 1f, 0f);
         pop.GetComponent<PopText>().Pop(text, clr);
+    }
+
+    public virtual void SetTarget(ActorInstance target)
+    {
+        CurrentTarget = target;
     }
 
     public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0)

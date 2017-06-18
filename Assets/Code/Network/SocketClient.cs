@@ -578,12 +578,14 @@ public class SocketClient : MonoBehaviour
         
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        if (String.IsNullOrEmpty(data["id"].Value)) {
-            // no new character - remove the aggro from the mob
-            // TODO implement
-        } else {
-            ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-            // Set mob aggro to be after the actor
+        if (String.IsNullOrEmpty(data["id"].Value))
+        {
+            monster.SetTarget(null);
+        }
+        else
+        {
+            ActorInstance actor = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
+            monster.SetTarget(actor);
         }
     }
 

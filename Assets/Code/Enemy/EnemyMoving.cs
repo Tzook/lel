@@ -12,12 +12,17 @@ public class EnemyMoving : Enemy
     protected float MovementSpeed = 1f;
 
     [SerializeField]
+    protected float MaxChaseDistance = 20f;
+
+    [SerializeField]
     BoxCollider2D Collider;
 
     RaycastHit2D SideRayRight;
     RaycastHit2D SideRayLeft;
 
     LayerMask GroundLayerMask = 0 << 0 | 1;
+
+    Coroutine CurrentActionRoutine;
 
     public override void SetAION()
     {
@@ -30,7 +35,10 @@ public class EnemyMoving : Enemy
     public override void SetAIOFF()
     {
         base.SetAIOFF();
+
         Rigid.bodyType = RigidbodyType2D.Kinematic;
+
+        StopCurrentActionRoutine();
 
         if (AIRoutineInstance != null)
         {
@@ -39,6 +47,30 @@ public class EnemyMoving : Enemy
         }
 
         StopAllCoroutines();
+    }
+
+    public override void SetTarget(ActorInstance target)
+    {
+        base.SetTarget(target);
+
+        if(target == null)
+        {
+            StopCurrentActionRoutine();
+        }
+    }
+
+    public bool isRightBlocked()
+    {
+        SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f, GroundLayerMask);
+
+        return (SideRayRight.normal.x < -0.3f || SideRayRight.normal.x > 0.3f);
+    }
+
+    public bool isLeftBlocked()
+    {
+        SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f, GroundLayerMask);
+
+        return (SideRayLeft.normal.x < -0.3f || SideRayLeft.normal.x > 0.3f);
     }
 
     Vector3 LastSentPosition;
@@ -61,6 +93,16 @@ public class EnemyMoving : Enemy
 
     #region AI
 
+    public void StopCurrentActionRoutine()
+    {
+        if (CurrentActionRoutine != null)
+        {
+            StopCoroutine(CurrentActionRoutine);
+            CurrentActionRoutine = null;
+            CurrentAction = AIAction.Thinking;
+        }
+    }
+
     public virtual IEnumerator AIRoutine()
     {
         int rndDecision;
@@ -69,19 +111,26 @@ public class EnemyMoving : Enemy
             //MAKE DECISION
             if (CurrentAction == AIAction.Thinking)
             {
-                rndDecision = Random.Range(0, 5);
-
-                if(rndDecision == 0 || rndDecision == 1)
+                if (CurrentTarget != null)
                 {
-                    CurrentAction = AIAction.WanderingLeft;
-                }
-                else if (rndDecision == 2 || rndDecision == 3)
-                {
-                    CurrentAction = AIAction.WanderingRight;
+                    CurrentAction = AIAction.Chasing;
                 }
                 else
                 {
-                    CurrentAction = AIAction.Idle;
+                    rndDecision = Random.Range(0, 5);
+
+                    if (rndDecision == 0 || rndDecision == 1)
+                    {
+                        CurrentAction = AIAction.WanderingLeft;
+                    }
+                    else if (rndDecision == 2 || rndDecision == 3)
+                    {
+                        CurrentAction = AIAction.WanderingRight;
+                    }
+                    else
+                    {
+                        CurrentAction = AIAction.Idle;
+                    }
                 }
             }
 
@@ -90,24 +139,37 @@ public class EnemyMoving : Enemy
             {
                 case AIAction.Thinking:
                     {
+                        CurrentActionRoutine = null;
+
                         yield return 0;
                         break;
                     }
                 case AIAction.Idle:
                     {
-                        yield return StartCoroutine(IdleRoutine());
+                        CurrentActionRoutine = StartCoroutine(IdleRoutine());
                         break;
                     }
                 case AIAction.WanderingLeft:
                     {
-                        yield return StartCoroutine(WanderLeftRotuine());
+                        CurrentActionRoutine = StartCoroutine(WanderLeftRotuine());
                         break;
                     }
                 case AIAction.WanderingRight:
                     {
-                        yield return StartCoroutine(WanderRightRotuine());
+                        CurrentActionRoutine = StartCoroutine(WanderRightRotuine());
                         break;
                     }
+                case AIAction.Chasing:
+                    {
+                        CurrentActionRoutine = StartCoroutine(ChaseTargetRoutine());
+
+                        break;
+                    }
+            }
+
+            if (CurrentActionRoutine != null)
+            {
+                yield return CurrentActionRoutine;
             }
         }
     }
@@ -138,15 +200,7 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f , GroundLayerMask);
-
-            //Debug.DrawRay(transform.position, -transform.right, Color.blue);
-            //if (SideRayLeft.collider != null)
-            //{
-            //    Debug.Log(SideRayLeft.collider.gameObject.name + " | " + SideRayLeft.normal);
-            //}
-
-            if (SideRayLeft.normal.x < -0.3f || SideRayLeft.normal.x > 0.3f)
+            if (isLeftBlocked())
             {
                 break;
             }
@@ -167,15 +221,7 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f , GroundLayerMask);//original 0.15f
-
-            //Debug.DrawRay(transform.position, transform.right, Color.blue);
-            //if (SideRayRight.collider != null)
-            //{
-            //    Debug.Log(SideRayRight.collider.gameObject.name + " | " + SideRayRight.normal);
-            //}
-
-            if (SideRayRight.normal.x < -0.3f || SideRayRight.normal.x > 0.3f)
+            if (isRightBlocked())
             {
                 break;
             }
@@ -183,6 +229,51 @@ public class EnemyMoving : Enemy
             yield return 0;
         }
 
+        CurrentAction = AIAction.Thinking;
+    }
+
+    protected IEnumerator ChaseTargetRoutine()
+    {
+        float currentDistance = Mathf.NegativeInfinity;
+
+        while(currentDistance < MaxChaseDistance)
+        {
+            currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
+
+            if (currentDistance < 0.4f)
+            {
+                StandStill();
+            }
+            else
+            {
+                if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
+                {
+                    if (isRightBlocked())
+                    {
+                        StandStill();
+                    }
+                    else
+                    {
+                        WalkRight();
+                    }
+                }
+                else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
+                {
+                    if (isLeftBlocked())
+                    {
+                        StandStill();
+                    }
+                    else
+                    {
+                        WalkLeft();
+                    }
+                }
+            }
+
+            yield return 0;
+        }
+
+        SetTarget(null);
         CurrentAction = AIAction.Thinking;
     }
 

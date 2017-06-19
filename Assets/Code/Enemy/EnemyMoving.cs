@@ -15,14 +15,14 @@ public class EnemyMoving : Enemy
     protected float MaxChaseDistance = 20f;
 
     [SerializeField]
-    BoxCollider2D Collider;
+    protected BoxCollider2D Collider;
 
-    RaycastHit2D SideRayRight;
-    RaycastHit2D SideRayLeft;
+    protected RaycastHit2D SideRayRight;
+    protected RaycastHit2D SideRayLeft;
 
-    LayerMask GroundLayerMask = 0 << 0 | 1;
+    protected LayerMask GroundLayerMask = 0 << 0 | 1;
 
-    Coroutine CurrentActionRoutine;
+    protected Coroutine CurrentActionRoutine;
 
     public override void SetAION()
     {
@@ -37,6 +37,7 @@ public class EnemyMoving : Enemy
         base.SetAIOFF();
 
         Rigid.bodyType = RigidbodyType2D.Kinematic;
+        Rigid.velocity = Vector2.zero;
 
         StopCurrentActionRoutine();
 
@@ -73,7 +74,7 @@ public class EnemyMoving : Enemy
         return (SideRayLeft.normal.x < -0.3f || SideRayLeft.normal.x > 0.3f);
     }
 
-    Vector3 LastSentPosition;
+    protected Vector3 LastSentPosition;
     void FixedUpdate()
     {
         if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
@@ -174,7 +175,7 @@ public class EnemyMoving : Enemy
         }
     }
 
-    protected IEnumerator IdleRoutine()
+    protected virtual IEnumerator IdleRoutine()
     {
         float t = Random.Range(0.5f, 5f);
 
@@ -190,7 +191,7 @@ public class EnemyMoving : Enemy
         CurrentAction = AIAction.Thinking;
     }
 
-    protected IEnumerator WanderLeftRotuine()
+    protected virtual IEnumerator WanderLeftRotuine()
     {
         float t = Random.Range(0.5f, 5f);
 
@@ -211,7 +212,7 @@ public class EnemyMoving : Enemy
         CurrentAction = AIAction.Thinking;
     }
 
-    protected IEnumerator WanderRightRotuine()
+    protected virtual IEnumerator WanderRightRotuine()
     {
         float t = Random.Range(0.5f, 5f);
 
@@ -232,7 +233,7 @@ public class EnemyMoving : Enemy
         CurrentAction = AIAction.Thinking;
     }
 
-    protected IEnumerator ChaseTargetRoutine()
+    protected virtual IEnumerator ChaseTargetRoutine()
     {
         float currentDistance = Mathf.NegativeInfinity;
 
@@ -281,12 +282,12 @@ public class EnemyMoving : Enemy
 
     #region Basic Actions
 
-    public void StandStill()
+    public virtual void StandStill()
     {
         Anim.SetBool("Walk", false);    
     }
 
-    public void WalkLeft()
+    public virtual void WalkLeft()
     {
         Rigid.position += -Vector2.right * MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( -initScale.x, initScale.y, initScale.z);
@@ -294,7 +295,7 @@ public class EnemyMoving : Enemy
         Anim.SetBool("Walk", true);
     }
 
-    public void WalkRight()
+    public virtual void WalkRight()
     {
         Rigid.position += Vector2.right *  MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( initScale.x, initScale.y, initScale.z);

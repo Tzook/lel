@@ -55,8 +55,8 @@ GameObject:
   - component: {fileID: 4481017125369934}
   - component: {fileID: 61810517774232944}
   - component: {fileID: 50703313168340370}
-  - component: {fileID: 114512895665678626}
   - component: {fileID: 210654925549061332}
+  - component: {fileID: 114841577627873246}
   m_Layer: 8
   m_Name: Rabbit
   m_TagString: Untagged
@@ -304,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1261437044694780}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.869713, y: -90.32036, z: 0}
+  m_LocalPosition: {x: 37.698814, y: -45.028538, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4287563029629802}
@@ -495,9 +495,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc81eb7829f04394fb3eb4b59955f65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyReference: {fileID: 114512895665678626}
+  EnemyReference: {fileID: 114841577627873246}
   Collisions: []
---- !u!114 &114512895665678626
+--- !u!114 &114800630036675402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1002417551707832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3075cb0a318b73044aaf6cf3da941e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alpha: 0
+--- !u!114 &114841577627873246
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -505,13 +517,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1261437044694780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe152a475af5f1489c8bd95617ddbd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d2b698bf83f3f74185cbf567cf46983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Info:
     ID: 
-    Name: Rabbit
-    Type: 1
+    Name: 
+    Type: 0
     CurrentHealth: 0
     MaxHealth: 0
   Rigid: {fileID: 50703313168340370}
@@ -537,22 +549,14 @@ MonoBehaviour:
   DeathSounds:
   - brap
   m_HealthBar: {fileID: 0}
+  CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 4
+  MaxChaseDistance: 20
   Collider: {fileID: 61810517774232944}
---- !u!114 &114800630036675402
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1002417551707832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3075cb0a318b73044aaf6cf3da941e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Alpha: 0
+  JumpForce: 500
+  GroundedThreshold: 0.3
 --- !u!210 &210654925549061332
 SortingGroup:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ public class ActorInfo
     public ActorInstance Instance;
     public string CurrentRoom;
     public Vector3 LastPosition;
+    public bool Climbing;
     public int SkinColor;
     public string Hair = "hair_0";
     public string Eyes = "eyes_0a";
@@ -99,6 +100,7 @@ public class ActorInfo
         this.Name = node["name"].Value;
         this.CurrentRoom = node["room"].Value;
         this.LastPosition = new Vector3(node["position"]["x"].AsFloat, node["position"]["y"].AsFloat, node["position"]["z"].AsFloat);
+        this.Climbing = node["position"]["climbing"].AsBool;
         this.Gold = node["gold"].AsInt;
         
 

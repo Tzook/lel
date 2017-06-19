@@ -18,8 +18,6 @@ public class ActorMovement : MonoBehaviour
     protected bool MovingVertical;
     protected bool aimRight;
 
-    protected bool OnRope;
-
     void Start()
     {
         Instance = GetComponent<ActorInstance>();
@@ -28,6 +26,10 @@ public class ActorMovement : MonoBehaviour
         Anim = transform.Find("Body").GetComponent<Animator>();
 
         initScale = Anim.transform.localScale;
+
+        if (Instance.Info.Climbing) {
+            StartClimbing();
+        }
     }
 
     public void UpdateMovement(Vector3 TargetPos, float angle)
@@ -118,7 +120,7 @@ public class ActorMovement : MonoBehaviour
         MovingHorizontal = false;
         MovingVertical = false;
 
-        if (OnRope)
+        if (Instance.Info.Climbing)
         {
             if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
             {
@@ -159,7 +161,7 @@ public class ActorMovement : MonoBehaviour
     {
         Anim.SetBool("OnRope", true);
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
-        OnRope = true;
+        Instance.Info.Climbing = true;
     }
 
     public void StopClimbing()
@@ -168,7 +170,7 @@ public class ActorMovement : MonoBehaviour
         Anim.SetBool("ClimbingUp", false);
         Anim.SetBool("ClimbingDown", false);
 
-        OnRope = false;
+        Instance.Info.Climbing = false;
     }
 
     public void ActivatePrimaryAbility()

@@ -128,6 +128,7 @@ public class ActorController : MonoBehaviour
                 if (Input.GetKeyDown(InputMap.Map["PrimaryAbility"+(i+1)]))
                 {
                     Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i]);
+                    InturruptAttack();
                 }
             }
 

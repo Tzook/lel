@@ -241,7 +241,7 @@ public class EnemyMoving : Enemy
         {
             currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
 
-            if (currentDistance < 0.4f)
+            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f)
             {
                 StandStill();
             }

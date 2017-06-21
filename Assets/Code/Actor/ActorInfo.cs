@@ -259,6 +259,11 @@ public class ActorInfo
         {
             case "range":
                 {
+                    if(Equipment.Weapon == null)
+                    {
+                        return false;
+                    }
+
                     if(Equipment.Weapon.SubType != "range")
                     {
                         ShockMessageUI.Instance.CallMessage("'Range' ability requires a BOW equipped!");

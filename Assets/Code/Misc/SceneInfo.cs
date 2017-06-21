@@ -13,4 +13,11 @@ public class SceneInfo : MonoBehaviour {
     public List<MonsterSpawner> Spawners = new List<MonsterSpawner>();
 
     public List<NPC> Npcs = new List<NPC>();
+
+    public static SceneInfo Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 }

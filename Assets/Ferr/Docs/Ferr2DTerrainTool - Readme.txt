@@ -20,16 +20,15 @@ GameObject->Create Ferr2D Terrain->Create Physical 2D Terrain (Ctrl+T)
 GameObject->Create Ferr2D Terrain->Create Decorative 2D Terrain (Ctrl+Shift+T)
 	Same as previous, but with colliders off.
 	
-GameObject->Create Ferr2D Terrain->Create Terrain Material OR
-Project Window->Create->Create Terrain Material
+GameObject->Create Ferr2D Terrain->Create Terrain Material
 	This creates a basic empty terrain material prefab. Hook up some materials to it, define some sides, and go!
-	
-Assets->Prebuild Ferr2D Terrain
-	This tells Ferr2D to go through all prefabs, and ensure they're up-to-date. This is automatically called on Play, so this is mostly a debug feature.
 
-Assets->Rebuild Ferr2D Component Cache
-	This will search the project for all Ferr2D objects, and cache them. This is done automatically on initial load, so this is also primarily for debugging.
-	
+Tools->Ferr->2D Terrain->Rebuild Ferr2D terrain in scene
+	Forces all terrain in the scene to rebuild their meshes. Great if you've modified terrain materials with one scene open, but want to update the meshes in another scene.
+
+Tools->Ferr->2D Terrain->Update scene Ferr2D objs with new material assets
+	Looks for old format terrain materials (created in 1.0.9 or earlier) in the current scene, creates new formats when needed, and relinks objects with the new material assets!
+
 Edit->Preferences->Ferr
 	Various configuration options for visual and default values.
 
@@ -38,16 +37,34 @@ SHIFT+CTRL:  drag select path points
 SHIFT+Click: add path point
 ALT  +Click: removes path points
 CTRL +Click: snap move points
-CTRL +Q:     override tab mode
-CTRL +W:     scale tab mode
-CTRL +E:     hide tabs
 Ctrl +R:     toggle smart snap
+Ctrl +L:     toggle segment lock mode
 
 KNOWN ISSUES
 -If you drag your mouse outside the material editor window and let go while dragging a region, no undo data will be saved.
 -Forcing an edge type on the closing segment will have no effect, however, forcing the edge type before the closing segment will affect both.
 
 VERSION LOG
+
+v1.11 2017-6
++Terrain
+ -Added a Segment Lock Mode [Ctrl+L and scene menu] where you can override the random body texture segments
+ -Edge texture slicing is now independant of path points, resulting in way less stretching
+ -Path points now automatically compensate scale to keep the top and bottom of the edge parallel
+ -New terrain material picker shows recently used, and utilizes Unity's object picker
+ -Inverted fill now has controls for how far the outer area extends
+ -Added a button for generating colliders in editor instead of at start
++Shaders
+ -Improved falloff algorithm for lights
+ -Added fog compatibility
++General
+ -Fixed 5.6 warnings and updated minimum version to 5.3, initial 2017.1 compatibility check
+ -Switched terrain materials to ScriptableObjects, old materials still work, but are phasing out
+ -ComponentTracker is now gone, ScriptableObjects are king
+ -Fixed various issues with undo and marking modified objects dirty
+ -Changed namespace on Poly2Tri to avoid collisions with other tools, please modify if you already have a version in your project!
+
+NOTE: Materials that were created in v1.0.9 or earlier will need to be upgraded to appear in the material selector. Visit each scene with terrain objects, and choose the menu item "Tools->Ferr->2D Terrain->Update scene Ferr2D objs with new material assets". This will automatically create new material assets and connect terrain objects to them! You can also create new materials through the "Create Updated Material Object" button on the old assets, and relink them manually.
 
 v1.10 2016-9
 +Terrain

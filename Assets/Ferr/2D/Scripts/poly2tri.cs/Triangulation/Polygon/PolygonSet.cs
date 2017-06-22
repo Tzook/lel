@@ -37,7 +37,7 @@
 
 using System.Collections.Generic;
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class PolygonSet
     {

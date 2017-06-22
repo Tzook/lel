@@ -73,6 +73,10 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
     /// In order to combat Z-Fighting, this allows you to set a Z-Offset on the fill.
     /// </summary>
 	public float    fillZ           = 0.05f;
+	/// <summary>
+    /// When fill is inverted, how large is the outside border? Zero will auto-size the border.
+    /// </summary>
+	public Vector2  invertFillBorder = Vector2.zero;
     /// <summary>
     /// This will separate edges at corners, for applying different material parts to different slopes,
     /// as well as creating sharp corners on smoothed paths.
@@ -252,10 +256,17 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         }
     }
 
+	[Serializable]
+	public class CutOverrides {
+		public List<int> data;
+	}
+
+	[SerializeField()]
+	public List<Ferr2DT_TerrainDirection> directionOverrides = new List<Ferr2DT_TerrainDirection>();
+	[SerializeField()]
+	public List<CutOverrides>             cutOverrides       = new List<CutOverrides>();
     [SerializeField()]
-    public List<Ferr2DT_TerrainDirection> directionOverrides;
-    [SerializeField()]
-    public List<float>                    vertScales;
+    public List<float>                    vertScales         = new List<float>();
 	#endregion
 	
 	#region Private fields
@@ -270,8 +281,8 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
 	#endregion
 
     #region MonoBehaviour Methods
-    void Start() {
-        if (createCollider) {
+	void Awake() {
+        if (createCollider && GetComponent<Collider>() == null && GetComponent<Collider2D>() == null) {
             RecreateCollider();
         }
         for (int i = 0; i < Camera.allCameras.Length; i++) {
@@ -281,10 +292,6 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
     #endregion
 
     #region Creation methods
-    [Obsolete("Please use Build() instead! This method will be removed in 1.1")]
-    public void RecreatePath(bool aFullBuild = true) {
-        Build(aFullBuild);
-    }
     /// <summary>
     /// This method gets called automatically whenever the Ferr2DT path gets updated in the 
     /// editor. This will completely recreate the the visual mesh (only) for the terrain. If you want
@@ -530,8 +537,8 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
             collider = gameObject.AddComponent<MeshCollider>();
         }
         if (physicsMaterial != null) collider.sharedMaterial = physicsMaterial;
-		#if !UNITY_5
-        collider.smoothSphereCollisions = smoothSphereCollisions;
+		#if !UNITY_5_3_OR_NEWER
+        collider.smoothSphereCollisions = smoothSphereCollisions; 
 		#endif
         collider.isTrigger              = isTrigger;
 
@@ -772,10 +779,10 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
 		    p2 = Path.pathVerts[next] - Path.pathVerts[curr];
 		    bool rightInner = Mathf.Atan2(p1.x*p2.y - p1.y*p2.x, Vector2.Dot(p1, p2)) < 0;
 		    
-		    AddSegment(Ferr2D_Path.IndicesToPath(Path.pathVerts, segments[order[i]]), leftInner, rightInner, GetScalesFromIndices(segments[order[i]]), order.Count <= 1 && Path.closed, smoothPath, dirs[order[i]]);
+		    AddSegment(Ferr2D_Path.IndicesToList<Vector2>(Path.pathVerts, segments[order[i]]), leftInner, rightInner, Ferr2D_Path.IndicesToList<float>(vertScales, segments[order[i]]), Ferr2D_Path.IndicesToList<CutOverrides>(cutOverrides, segments[order[i]]), order.Count <= 1 && Path.closed, smoothPath, dirs[order[i]]);
         }
     }
-	private void AddSegment(List<Vector2> aSegment, bool aLeftInner, bool aRightInner, List<float> aScale, bool aClosed, bool aSmooth, Ferr2DT_TerrainDirection aDir = Ferr2DT_TerrainDirection.None) {
+	private void AddSegment(List<Vector2> aSegment, bool aLeftInner, bool aRightInner, List<float> aScale, List<CutOverrides> aCutOverrides, bool aClosed, bool aSmooth, Ferr2DT_TerrainDirection aDir = Ferr2DT_TerrainDirection.None) {
 		Ferr2DT_SegmentDescription desc;
 		if (aDir != Ferr2DT_TerrainDirection.None) { desc = TerrainMaterial.GetDescriptor(aDir); }
 		else                                       { desc = GetDescription(aSegment);            }
@@ -787,9 +794,6 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         #endif
 		Rect    body      = TerrainMaterial.ToUV( desc.body[0] );
 		float   bodyWidth = body.width * unitsPerUV.x;
-		Vector3 point1,  point2;
-		float   distance;
-		int     cuts;
 		
 		#if UNITY_5_4_OR_NEWER
 		UnityEngine.Random.InitState((int)(aSegment[0].x * 100000 + aSegment[0].y * 10000));
@@ -803,21 +807,8 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         capRightSlideDir.Normalize();
         aSegment[0                 ] -= capLeftSlideDir  * desc.capOffset;
         aSegment[aSegment.Count - 1] -= capRightSlideDir * desc.capOffset;
-
-		point2   = aSegment[0];
-
-		for (int i = 0; i < aSegment.Count-1; i++) {
-			point1   = point2;
-			point2   = aSegment[i+1];
-			distance = Vector3.Distance(point1, point2);
-			cuts     = Mathf.Max(1,Mathf.FloorToInt(distance / bodyWidth + 0.5f));
-
-			for (int t = 0; t < cuts; t++) {
-                float p1 = (float)(t) / cuts;
-                float p2 = (float)(t + 1) / cuts;
-                SlicedQuad(aSegment, i, p1, p2, Mathf.Max(2, splitCount + 2), aSmooth, aClosed, desc, Mathf.Lerp(aScale[i], aScale[i + 1], p1), Mathf.Lerp(aScale[i], aScale[i + 1], p2));
-			}
-		}
+		
+		CreateBody(desc, aSegment, aScale, aCutOverrides, bodyWidth, Mathf.Max(2, splitCount+2), aClosed);
         
 		if (!aClosed) {
 			AddCap(aSegment, desc, aLeftInner, -1, aScale[0], aSmooth);
@@ -829,80 +820,124 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
 		UnityEngine.Random.seed = tSeed;
 		#endif
 	}
-	private void SlicedQuad(List<Vector2> aSegment, int aVert, float aStart, float aEnd, int aCuts, bool aSmoothed, bool aClosed, Ferr2DT_SegmentDescription aDesc, float aStartScale, float aEndScale) {
+	private void CreateBody(Ferr2DT_SegmentDescription aDesc, List<Vector2> aSegment, List<float> aSegmentScale, List<CutOverrides> aCutOverrides, float aBodyWidth, int aTextureSlices, bool aClosed) {
+		float distance    = Ferr2D_Path.GetSegmentLength(aSegment);
+		int   textureCuts = Mathf.Max(1, Mathf.FloorToInt(distance / aBodyWidth + 0.5f));
+
 		Ferr2D_DynamicMesh mesh = DMesh;
-        Vector2[] pos    = new Vector2[aCuts];
-		Vector2[] norm   = new Vector2[aCuts];
-        float  [] scales = new float  [aCuts];
-		Vector3   tn1  = Ferr2D_Path.GetNormal(aSegment, aVert,   aClosed);
-		Vector3   tn2  = Ferr2D_Path.GetNormal(aSegment, aVert+1, aClosed);
 
-        // get the data needed to make the quad
-        for (int i = 0; i < aCuts; i++) {
-            float percent = aStart + (i / (float)(aCuts - 1)) * (aEnd - aStart);
-            if (aSmoothed) {
-                pos [i] = Ferr2D_Path.HermiteGetPt    (aSegment, aVert, percent, aClosed);
-                norm[i] = Ferr2D_Path.HermiteGetNormal(aSegment, aVert, percent, aClosed);
-            } else {
-                pos [i] = Vector2.Lerp(aSegment[aVert], aSegment[aVert + 1], percent);
-                norm[i] = Vector2.Lerp(tn1,             tn2,                 percent);
-            }
-            scales[i] = Mathf.Lerp(aStartScale, aEndScale, (i / (float)(aCuts - 1)));
-        }
-
-        #if UNITY_5_4_OR_NEWER
-		UnityEngine.Random.State tSeed = default(UnityEngine.Random.State);
-        #else
-        int tSeed = 0;
-        #endif
-		if (randomByWorldCoordinates) {
+		Rect  body = PickBody(aDesc, aCutOverrides, aSegment[0], 0, 0);
+		float d    = (body.height / 2) * unitsPerUV.y;
+		float yOff = fill == Ferr2DT_FillMode.InvertedClosed ? -aDesc.yOffset : aDesc.yOffset;
+		
+		int p1 = 0, p2 = 0, p3 = 0;
+		int pIndex = 0;
+		int cutIndex = 0;
+		// loop for each instance of the texture
+		for (int t = 0; t < textureCuts; t++) {
+			float texPercent     = (t/(float)(textureCuts));
+			float texPercentStep = (1f/(float)(textureCuts));
 			
-			
-			#if UNITY_5_4_OR_NEWER
-            tSeed = UnityEngine.Random.state;
-			UnityEngine.Random.InitState((int)(pos[0].x * 700000 + pos[0].y * 30000));
-			#else
-            tSeed = UnityEngine.Random.seed;
-            UnityEngine.Random.seed = (int)(pos[0].x * 700000 + pos[0].y * 30000);
-			#endif
-        }
+			// slice each texture chunk a number of times
+			for (int i = 0; i < aTextureSlices; i++) {
+				float slicePercent = (i/(float)(aTextureSlices-1));
+				float totalPercent = texPercent + slicePercent*texPercentStep;
 
-		Rect  body  = TerrainMaterial.ToUV(aDesc.body[UnityEngine.Random.Range(0, aDesc.body.Length)]);
-		float d     = (body.height / 2) * unitsPerUV.y;
-		float yOff  = fill == Ferr2DT_FillMode.InvertedClosed ? -aDesc.yOffset : aDesc.yOffset;
-		if (randomByWorldCoordinates) {
-			#if UNITY_5_4_OR_NEWER
-			UnityEngine.Random.state = tSeed;
-			#else
-			UnityEngine.Random.seed = tSeed;
-			#endif
-        }
+				int   ptLocal  = 0;
+				float pctLocal = 0;
+				Ferr2D_Path.PathGlobalPercentToLocal(aSegment, totalPercent, out ptLocal, out pctLocal, distance, aClosed);
 
-        // put the data together into a mesh
-		int p1=0, p2=0, p3=0;
-		for (int i = 0; i < aCuts; i++) {
-			float percent = (i/(float)(aCuts-1));
-
-			Vector3 pos1 = pos [i  ];
-			Vector3 n1   = norm[i  ];
-			int   v1 = mesh.AddVertex(pos1.x + n1.x * (d*scales[i] + yOff), pos1.y + n1.y * (d*scales[i] + yOff), -slantAmount + aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, percent), fill == Ferr2DT_FillMode.InvertedClosed ? body.yMax : body.y   );
-			int   v2 = mesh.AddVertex(pos1.x - n1.x * (d*scales[i] - yOff), pos1.y - n1.y * (d*scales[i] - yOff),  slantAmount + aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, percent), fill == Ferr2DT_FillMode.InvertedClosed ? body.y    : body.yMax);
-			int   v3 = splitMiddle ? mesh.AddVertex(pos1.x + n1.x * yOff, pos1.y + n1.y * yOff, aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, percent), Mathf.Lerp(body.y,body.yMax,0.5f)) : -1;
-
-			if (i != 0) {
-				if (!splitMiddle) {
-					mesh.AddFace(v2, p2, p1, v1);
-				} else {
-					mesh.AddFace(v2, p2, p3, v3);
-					mesh.AddFace(v3, p3, p1, v1);
+				// if we skip over path points, we need to add slices at each path point to prevent the mesh from bypassing it.
+				for (int extra = 0; extra < ptLocal-pIndex; extra++) {
+					float traveledDist = Ferr2D_Path.GetSegmentLengthToIndex(aSegment, pIndex + extra + 1);
+					float v = (traveledDist / distance) * textureCuts;
+					v = v-(int)v;
+					AddVertexColumn(aDesc, aSegment, aSegmentScale, aClosed, mesh, body, d, yOff, i!=0, v, pIndex + extra + 1, 0, ref p1, ref p2, ref p3);
+					cutIndex = -1;
 				}
+				pIndex = ptLocal;
+				
+				AddVertexColumn(aDesc, aSegment, aSegmentScale, aClosed, mesh, body, d, yOff, i!=0, slicePercent, ptLocal, pctLocal, ref p1, ref p2, ref p3);
 			}
 
-			p1 = v1;
-			p2 = v2;
-			p3 = v3;
+			cutIndex += 1;
+			body = PickBody(aDesc, aCutOverrides, mesh.GetVert(p2), pIndex, cutIndex);
 		}
 	}
+	private Rect PickBody(Ferr2DT_SegmentDescription aDesc, List<CutOverrides> aCutOverrides, Vector2 aStartPos, int aCurrIndex, int aCurrCut) {
+		int  cutOverride = -1;
+		Rect result = default(Rect);
+		
+		if (aCutOverrides[aCurrIndex].data != null && aCurrCut < aCutOverrides[aCurrIndex].data.Count)
+			cutOverride = aCutOverrides[aCurrIndex].data[aCurrCut]-1;
+
+		if (cutOverride == -1 || cutOverride >= aDesc.body.Length) {
+			result = GetRandomBodyRect(aStartPos, aDesc);
+		} else {
+			// trigger this so a random number is consumed
+			GetRandomBodyRect(aStartPos, aDesc);
+			result = TerrainMaterial.ToUV(aDesc.body[cutOverride]);
+		}
+		return result;
+	}
+	private Rect GetRandomBodyRect(Vector2 aInitialPos, Ferr2DT_SegmentDescription aDesc) {
+#if UNITY_5_4_OR_NEWER
+		UnityEngine.Random.State tSeed = default(UnityEngine.Random.State);
+#else
+        int tSeed = 0;
+#endif
+		if (randomByWorldCoordinates) {
+#if UNITY_5_4_OR_NEWER
+			tSeed = UnityEngine.Random.state;
+			UnityEngine.Random.InitState((int)(aInitialPos.x + aInitialPos.y));
+#else
+            tSeed = UnityEngine.Random.seed;
+            UnityEngine.Random.seed = (int)(aInitialPos.x + aInitialPos.y);
+#endif
+		}
+
+		Rect body = TerrainMaterial.ToUV(aDesc.body[UnityEngine.Random.Range(0, aDesc.body.Length)]);
+		if (randomByWorldCoordinates) {
+#if UNITY_5_4_OR_NEWER
+			UnityEngine.Random.state = tSeed;
+#else
+			UnityEngine.Random.seed = tSeed;
+#endif
+		}
+		return body;
+	}
+
+	private void AddVertexColumn(Ferr2DT_SegmentDescription aDesc, List<Vector2> aSegment, List<float> aSegmentScale, bool aClosed, Ferr2D_DynamicMesh mesh, Rect body, float d, float yOff, bool aConnectFace, float slicePercent, int ptLocal, float pctLocal, ref int p1, ref int p2, ref int p3) {
+		
+		Vector2 pos1 = smoothPath ? Ferr2D_Path.HermiteGetPt    (aSegment, ptLocal, pctLocal, aClosed) : Ferr2D_Path.LinearGetPt    (aSegment, ptLocal, pctLocal, aClosed);
+		Vector2 n1   = smoothPath ? Ferr2D_Path.HermiteGetNormal(aSegment, ptLocal, pctLocal, aClosed) : Ferr2D_Path.LinearGetNormal(aSegment, ptLocal, pctLocal, aClosed);
+		float   s    = aClosed    ? Mathf.Lerp(aSegmentScale[ptLocal], aSegmentScale[(ptLocal+1)%aSegmentScale.Count], pctLocal) : Mathf.Lerp(aSegmentScale[ptLocal], aSegmentScale[Mathf.Min(ptLocal+1, aSegmentScale.Count-1)], pctLocal);
+		
+		// this compensates for scale distortion when corners are very sharp, but the normals are not long enough to keep the edge the appropriate width
+		// not actually a problem for smooth paths
+		if (!smoothPath) {
+			n1.Normalize();
+			float rootScale = 1f/Mathf.Abs(Mathf.Cos(Vector2.Angle(Ferr2D_Path.GetSegmentNormal(ptLocal, aSegment, aClosed), n1)*Mathf.Deg2Rad));
+			s = s * rootScale;
+		}
+
+		int v1 = mesh.AddVertex(pos1.x + n1.x * (d*s + yOff), pos1.y + n1.y * (d*s + yOff), -slantAmount + aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, slicePercent), fill == Ferr2DT_FillMode.InvertedClosed ? body.yMax : body.y);
+		int v2 = mesh.AddVertex(pos1.x - n1.x * (d*s - yOff), pos1.y - n1.y * (d*s - yOff),  slantAmount + aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, slicePercent), fill == Ferr2DT_FillMode.InvertedClosed ? body.y : body.yMax);
+		int v3 = splitMiddle ? mesh.AddVertex(pos1.x + n1.x * yOff, pos1.y + n1.y * yOff, aDesc.zOffset, Mathf.Lerp(body.x, body.xMax, slicePercent), Mathf.Lerp(body.y, body.yMax, 0.5f)) : -1;
+		if (aConnectFace) {
+			if (!splitMiddle) {
+				mesh.AddFace(v2, p2, p1, v1);
+			} else {
+				mesh.AddFace(v2, p2, p3, v3);
+				mesh.AddFace(v3, p3, p1, v1);
+			}
+		}
+
+		p1 = v1;
+		p2 = v2;
+		p3 = v3;
+	}
+	
 	private void AddCap    (List<Vector2> aSegment, Ferr2DT_SegmentDescription aDesc, bool aInner, float aDir, float aScale, bool aSmooth) {
 		IFerr2DTMaterial   mat   = TerrainMaterial;
 		Ferr2D_DynamicMesh mesh  = DMesh;
@@ -988,7 +1023,7 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         }
 
         int       offset  = DMesh.VertCount;
-		List<int> indices = Ferr2D_Triangulator.GetIndices(ref fillVerts, true, fill == Ferr2DT_FillMode.InvertedClosed, fillSplit && aFullBuild ? fillSplitDistance : 0);
+		List<int> indices = Ferr2D_Triangulator.GetIndices(ref fillVerts, true, fill == Ferr2DT_FillMode.InvertedClosed, invertFillBorder, fillSplit && aFullBuild ? fillSplitDistance : 0);
         for (int i = 0; i < fillVerts.Count; i++) {
             DMesh.AddVertex(fillVerts[i].x, fillVerts[i].y, fillZ, (fillVerts[i].x + uvOffset.x + transform.position.x) / scale.x, (fillVerts[i].y + uvOffset.y + transform.position.y ) / scale.y);
         }
@@ -1066,12 +1101,14 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         if (aAtIndex == -1) {
             Path              .Add(aPt                          );
             directionOverrides.Add(Ferr2DT_TerrainDirection.None);
+			cutOverrides      .Add(new CutOverrides()         );
             vertScales        .Add(1                            );
             return Path.pathVerts.Count;
         } else {
             Path.pathVerts    .Insert(aAtIndex, aPt                          );
             directionOverrides.Insert(aAtIndex, Ferr2DT_TerrainDirection.None);
-            vertScales        .Insert(aAtIndex, 1                            );
+			cutOverrides      .Insert(aAtIndex, new CutOverrides()         );
+			vertScales        .Insert(aAtIndex, 1                            );
             return aAtIndex;
         }
     }
@@ -1092,7 +1129,8 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         if (aPtIndex < 0 || aPtIndex >= Path.pathVerts.Count) throw new ArgumentOutOfRangeException();
         Path.pathVerts    .RemoveAt(aPtIndex);
         directionOverrides.RemoveAt(aPtIndex);
-        vertScales        .RemoveAt(aPtIndex);
+		cutOverrides      .RemoveAt(aPtIndex);
+		vertScales        .RemoveAt(aPtIndex);
     }
     /// <summary>
     /// Removes all points from the terrain properly. Does not rebuild meshes.
@@ -1100,18 +1138,19 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
     public void                         ClearPoints     () {
         Path.pathVerts    .Clear();
         directionOverrides.Clear();
+		cutOverrides      .Clear();
         vertScales        .Clear();
     }
 
-    private Ferr2DT_SegmentDescription	GetDescription	    (List<Vector2> aSegment  ) {
+    public  Ferr2DT_SegmentDescription	GetDescription	    (List<Vector2> aSegment  ) {
         Ferr2DT_TerrainDirection dir = Ferr2D_Path.GetDirection(aSegment, 0, fill == Ferr2DT_FillMode.InvertedClosed);
 	    return TerrainMaterial.GetDescriptor(dir);
 	}
-    private Ferr2DT_SegmentDescription  GetDescription      (List<int>     aSegment  ) {
+    public  Ferr2DT_SegmentDescription  GetDescription      (List<int>     aSegment  ) {
         Ferr2DT_TerrainDirection dir = Ferr2D_Path.GetDirection(Path.pathVerts, aSegment, 0, fill == Ferr2DT_FillMode.InvertedClosed);
 	    return TerrainMaterial.GetDescriptor(dir);
     }
-    private List<List<int>>             GetSegments         (List<Vector2> aPath, out List<Ferr2DT_TerrainDirection> aSegDirections)
+    public  List<List<int>>             GetSegments         (List<Vector2> aPath, out List<Ferr2DT_TerrainDirection> aSegDirections)
     {
         List<List<int>> segments = new List<List<int>>();
         if (splitCorners) {
@@ -1129,6 +1168,9 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
         }
         if (Path.closed ) {
             Ferr2D_Path.CloseEnds(aPath, ref segments, ref aSegDirections, splitCorners, fill == Ferr2DT_FillMode.InvertedClosed);
+			Ferr2DT_TerrainDirection dir = directionOverrides[segments[segments.Count-1][0]];
+			if (dir != Ferr2DT_TerrainDirection.None)
+				aSegDirections[aSegDirections.Count-1] = dir;
         }
         return segments;
     }
@@ -1140,20 +1182,13 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
 
 		for (int i = 0; i < list.Count; i++) {
 			if (smoothPath && list[i].Count > 2) {
-				result.AddRange(Ferr2D_Path.SmoothSegment( Ferr2D_Path.IndicesToPath(path.pathVerts, list[i]), aSplitDist, false));
+				result.AddRange(Ferr2D_Path.SmoothSegment( Ferr2D_Path.IndicesToList<Vector2>(path.pathVerts, list[i]), aSplitDist, false));
 			} else {
-                result.AddRange(Ferr2D_Path.IndicesToPath(path.pathVerts, list[i]));
+                result.AddRange(Ferr2D_Path.IndicesToList<Vector2>(path.pathVerts, list[i]));
 			}
 		}
 		return result;
 	}
-    private List<float>                 GetScalesFromIndices(List<int>     aIndices  ) {
-        List<float> result = new List<float>(aIndices.Count);
-        for (int i = 0; i < aIndices.Count; i++) {
-            result.Add(vertScales[aIndices[i]]);
-        }
-        return result;
-    }
 
     /// <summary>
     /// This method ensures that path overrides are properly present. Adds them if there aren't enough, and removes them if there are too many.
@@ -1161,19 +1196,24 @@ public class Ferr2DT_PathTerrain : MonoBehaviour, Ferr2D_IPath {
     public  void                        MatchOverrides  () {
         if (directionOverrides == null) directionOverrides = new List<Ferr2DT_TerrainDirection>();
 	    if (vertScales         == null) vertScales         = new List<float>();
-	    Ferr2D_Path path = Path;
+		if (cutOverrides       == null) cutOverrides       = new List<CutOverrides>();
+		Ferr2D_Path path = Path;
 
         for (int i = directionOverrides.Count; i < path.pathVerts.Count; i++) {
             directionOverrides.Add(Ferr2DT_TerrainDirection.None);
         }
-        for (int i = vertScales.Count; i < path.pathVerts.Count; i++) {
+		for (int i = cutOverrides.Count; i < path.pathVerts.Count; i++) {
+			cutOverrides      .Add(new CutOverrides());
+		}
+		for (int i = vertScales.Count; i < path.pathVerts.Count; i++) {
             vertScales        .Add(1);
         }
         if (directionOverrides.Count > path.pathVerts.Count && path.pathVerts.Count > 0) {
             int diff = directionOverrides.Count - path.pathVerts.Count;
             directionOverrides.RemoveRange(directionOverrides.Count - diff - 1, diff);
-            vertScales        .RemoveRange(vertScales.Count - diff - 1, diff);
-        }
+            vertScales        .RemoveRange(vertScales        .Count - diff - 1, diff);
+			cutOverrides      .RemoveRange(cutOverrides    .Count - diff - 1, diff);
+		}
     }
 	#endregion
 }

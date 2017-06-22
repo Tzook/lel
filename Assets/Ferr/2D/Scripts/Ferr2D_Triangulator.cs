@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using Poly2Tri;
+using FerrPoly2Tri;
 
 /// <summary>
 /// This thing can be better, but it'll do for now. It takes a list of points, and creates a 2D mesh describing it.
@@ -16,8 +16,9 @@ public static class Ferr2D_Triangulator
     /// <param name="aPoints">A list of points to triangulate.</param>
     /// <param name="aTreatAsPath">Should we discard any triangles at all? Use this if you want to get rid of triangles that are outside the path.</param>
     /// <param name="aInvert">if we're treating it as a path, should we instead sicard triangles inside the path?</param>
+    /// <param name="aInvertBorderSize">When inverted, how large should the border be in each direction?</param>
     /// <returns>A magical list of indices describing the triangulation!</returns>
-	public  static List<int> GetIndices           (ref List<Vector2> aPoints, bool aTreatAsPath, bool aInvert, float aVertGridSpacing = 0) {
+	public  static List<int> GetIndices           (ref List<Vector2> aPoints, bool aTreatAsPath, bool aInvert, Vector2 aInvertBorderSize, float aVertGridSpacing = 0) {
 		
 		Vector4 bounds = GetBounds(aPoints);
 		
@@ -32,10 +33,13 @@ public static class Ferr2D_Triangulator
 
 		Polygon poly;
 		if (aInvert) {
-			aPoints.Add(new Vector2(bounds.x - (bounds.z - bounds.x) * 1, bounds.w - (bounds.y - bounds.w) * 1)); // 4
-			aPoints.Add(new Vector2(bounds.z + (bounds.z - bounds.x) * 1, bounds.w - (bounds.y - bounds.w) * 1)); // 3
-			aPoints.Add(new Vector2(bounds.z + (bounds.z - bounds.x) * 1, bounds.y + (bounds.y - bounds.w) * 1)); // 2
-			aPoints.Add(new Vector2(bounds.x - (bounds.z - bounds.x) * 1, bounds.y + (bounds.y - bounds.w) * 1)); // 1
+			float width  = aInvertBorderSize.x == 0 ? (bounds.z - bounds.x) : aInvertBorderSize.x;
+			float height = aInvertBorderSize.y == 0 ? (bounds.y - bounds.w) : aInvertBorderSize.y;
+			aPoints.Add(new Vector2(bounds.x - width, bounds.w - height));
+			aPoints.Add(new Vector2(bounds.z + width, bounds.w - height));
+			aPoints.Add(new Vector2(bounds.z + width, bounds.y + height));
+			aPoints.Add(new Vector2(bounds.x - width, bounds.y + height));
+			
 			List<PolygonPoint> outer = new List<PolygonPoint>(4);
 			for (int i = 0; i < 4; i++) {
 				outer.Add( new PolygonPoint( aPoints[(aPoints.Count - 4) + i].x, aPoints[(aPoints.Count - 4) + i].y) );

@@ -1,5 +1,3 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Hidden/Ferr Gizmo Shader 3D" {
 	Properties {
 		_MainTex("Texture (RGBA)", 2D) = "white" {}

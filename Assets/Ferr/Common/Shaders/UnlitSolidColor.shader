@@ -1,5 +1,3 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Ferr/Common/Unlit Solid Color" {
 	Properties {
 		_Color("Color (RGB)", Color) = (1,1,1,1)

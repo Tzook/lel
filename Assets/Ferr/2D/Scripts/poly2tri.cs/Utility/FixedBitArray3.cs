@@ -33,7 +33,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public struct FixedBitArray3 : IEnumerable<bool>
     {

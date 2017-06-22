@@ -42,14 +42,14 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class DelaunayTriangle
     {
 
         public FixedArray3<TriangulationPoint> Points;
         public FixedArray3<DelaunayTriangle> Neighbors;
-        private FixedBitArray3 mEdgeIsConstrained;
+	    private FixedBitArray3 mEdgeIsConstrained = default(FixedBitArray3);
         public FixedBitArray3 EdgeIsConstrained { get { return mEdgeIsConstrained; } }
         public FixedBitArray3 EdgeIsDelaunay;
         public bool IsInterior { get; set; }

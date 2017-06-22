@@ -12,8 +12,9 @@ public class Ferr2DT_SceneOverlay {
     public static bool showIndices  = false;
     public static bool showCollider = true;
 	public static bool smartSnap    = false;
-	
-    const float dist = 100;
+	public static bool segmentLockMode = false;
+
+	const float dist = 100;
     public static void OnGUI() {
         Handles.BeginGUI();
 
@@ -39,9 +40,18 @@ public class Ferr2DT_SceneOverlay {
 	    currX += size * 6;
 	    smartSnap = GUI.Toggle(new Rect(currX, top, size * 5, size), smartSnap, new GUIContent("Smart Snap", "[Ctrl+R]"), EditorStyles.toolbarButton);
 	    currX += size * 5 + 6;
-	    
+
+		segmentLockMode = GUI.Toggle(new Rect(currX, top, size * 8, size), segmentLockMode, new GUIContent("Segment Lock Mode", "[Ctrl+L]"), EditorStyles.toolbarButton);
+		currX += size * 8 + 6;
+
+		#if UNITY_5_5_OR_NEWER
+		Ferr2DT_Menu.HideMeshes = !GUI.Toggle(new Rect(currX, top, size * 6, size), !Ferr2DT_Menu.HideMeshes, "Show Highlight",    EditorStyles.toolbarButton);
+	    currX += size * 6;
+	    #else
 	    Ferr2DT_Menu.HideMeshes = !GUI.Toggle(new Rect(currX, top, size * 5, size), !Ferr2DT_Menu.HideMeshes, "Show Meshes",       EditorStyles.toolbarButton);
 	    currX += size * 5;
+	    #endif
+	    
 	    showCollider            =  GUI.Toggle(new Rect(currX, top, size * 6, size), showCollider,             "Show Colliders",    EditorStyles.toolbarButton);
 	    currX += size * 6;
 	    showIndices             =  GUI.Toggle(new Rect(currX, top, size * 2, size), showIndices,              "123",               EditorStyles.toolbarButton);
@@ -50,6 +60,9 @@ public class Ferr2DT_SceneOverlay {
 		if (Event.current.control && Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.R) {
 	        smartSnap = !smartSnap;
         }
-        Handles.EndGUI();
+		if (Event.current.control && Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.L) {
+			segmentLockMode = !segmentLockMode;
+		}
+		Handles.EndGUI();
     }
 }

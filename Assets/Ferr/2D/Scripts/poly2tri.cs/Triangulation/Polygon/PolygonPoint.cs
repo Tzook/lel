@@ -34,7 +34,7 @@
 /// Future possibilities
 ///   Documentation!
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class PolygonPoint : TriangulationPoint
     {

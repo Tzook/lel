@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: PipeMaterial
   m_TagString: Untagged
@@ -27,6 +27,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,18 +40,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a21887e1cf80db49978ff567bcdd66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillMaterial: {fileID: 0}
-  edgeMaterial: {fileID: 2100000, guid: 28520f0cd7081434186f4f8dc2363fb4, type: 2}
+  _fillMaterial: {fileID: 0}
+  _edgeMaterial: {fileID: 2100000, guid: 28520f0cd7081434186f4f8dc2363fb4, type: 2}
   descriptors:
   - applyTo: 0
     zOffset: 0
     yOffset: 0
     leftCap:
       serializedVersion: 2
-      x: 14
+      x: 0.02734375
       y: 0
-      width: 50
-      height: 128
+      width: 0.09765625
+      height: 1
     innerLeftCap:
       serializedVersion: 2
       x: 0
@@ -58,10 +60,10 @@ MonoBehaviour:
       height: 0
     rightCap:
       serializedVersion: 2
-      x: 448
+      x: 0.875
       y: 0
-      width: 38
-      height: 128
+      width: 0.07421875
+      height: 1
     innerRightCap:
       serializedVersion: 2
       x: 0
@@ -70,20 +72,20 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: 64
-      y: 10
-      width: 128
-      height: 108
+      x: 0.125
+      y: 0.078125
+      width: 0.25
+      height: 0.84375
     - serializedVersion: 2
-      x: 192
-      y: 10
-      width: 128
-      height: 108
+      x: 0.375
+      y: 0.078125
+      width: 0.25
+      height: 0.84375
     - serializedVersion: 2
-      x: 320
-      y: 10
-      width: 128
-      height: 108
+      x: 0.625
+      y: 0.078125
+      width: 0.25
+      height: 0.84375
     capOffset: 0
   - applyTo: 0
     zOffset: 0
@@ -116,8 +118,8 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
+      width: 0.001953125
+      height: 0.0078125
     capOffset: 0
   - applyTo: 0
     zOffset: 0
@@ -150,8 +152,8 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
+      width: 0.001953125
+      height: 0.0078125
     capOffset: 0
   - applyTo: 0
     zOffset: 0
@@ -184,10 +186,10 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
+      width: 0.001953125
+      height: 0.0078125
     capOffset: 0
-  isPixel: 1
+  isPixel: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -199,4 +201,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

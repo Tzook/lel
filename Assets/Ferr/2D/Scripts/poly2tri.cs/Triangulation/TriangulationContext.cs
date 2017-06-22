@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public abstract class TriangulationContext
     {

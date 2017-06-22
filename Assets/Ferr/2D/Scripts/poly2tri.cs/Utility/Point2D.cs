@@ -34,7 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class Point2D : IComparable<Point2D>
     {

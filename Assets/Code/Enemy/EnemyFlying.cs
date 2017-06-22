@@ -168,7 +168,7 @@ public class EnemyFlying : Enemy {
 
     protected virtual IEnumerator FlyAroundRoutine()
     {
-        Vector2 PatrolPoint = SceneInfo.Instance.Spawners[Random.Range(0, SceneInfo.Instance.Spawners.Count)].transform.position;
+        Vector2 PatrolPoint = GetClosestSpawner().transform.position;
         Vector2 targetPos = new Vector2(PatrolPoint.x + Random.Range(-SpawnerPatrolRadius, SpawnerPatrolRadius), PatrolPoint.y + Random.Range(-SpawnerPatrolRadius, SpawnerPatrolRadius));
 
         while (Vector2.Distance(transform.position, targetPos) > 0.2f)
@@ -226,7 +226,29 @@ public class EnemyFlying : Enemy {
             {
                 Rigid.position += (Vector2) (CurrentTarget.transform.position - transform.position) * MovementSpeed * Time.deltaTime;
 
-                if (Physics2D.Linecast(transform.position, CurrentTarget.transform.position))
+                if (CurrentTarget.transform.position.y < transform.position.y)
+                {
+                    if (Mathf.Abs(transform.position.y - CurrentTarget.transform.position.y) > 1f)
+                    {
+                        Anim.SetInteger("FlyDir", 2);
+                    }
+                }
+                else
+                {
+                    Anim.SetInteger("FlyDir", 1);
+                }
+
+                if (transform.position.x < CurrentTarget.transform.position.x)
+                {
+                    Body.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+                }
+                else
+                {
+                    Body.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
+                }
+
+
+                if (isDirectionBlocked(CurrentTarget.transform.position - transform.position))
                 {
                     break;
                 }

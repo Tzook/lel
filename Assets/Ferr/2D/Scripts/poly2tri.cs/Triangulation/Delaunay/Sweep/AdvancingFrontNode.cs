@@ -35,7 +35,7 @@
 /// Future possibilities
 ///   Comments!
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class AdvancingFrontNode
     {

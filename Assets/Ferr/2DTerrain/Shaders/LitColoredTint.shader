@@ -1,4 +1,4 @@
-Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color Tinted (4 lights|lightmap +1 light)" {
+Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color Tinted (4 lights|lightmap +2 lights)" {
 	Properties {
 		_MainTex ("Texture (RGB)", 2D) = "white" {}
 		_Color   ("Color tint (RGB)", Color) = (1,1,1,1)
@@ -18,6 +18,7 @@ Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color Tinted (4 lights|lightma
 			#pragma  vertex   vert  
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			
 			#define  MAX_LIGHTS 4
 			#define  FERR2DT_TINT
@@ -33,8 +34,9 @@ Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color Tinted (4 lights|lightma
 			#pragma  vertex   vert
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			
-			#define  MAX_LIGHTS 1
+			#define  MAX_LIGHTS 2
 			#define  FERR2DT_LIGHTMAP
 			#define  FERR2DT_TINT
 			

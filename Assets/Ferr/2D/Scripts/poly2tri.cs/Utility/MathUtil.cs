@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class MathUtil
     {

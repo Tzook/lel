@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     /*
      * Extends the PointSet by adding some Constraints on how it will be triangulated<br>

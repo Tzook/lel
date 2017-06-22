@@ -1,5 +1,3 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Ferr/Common/Unlit Textured Vertex Color" {
 	Properties {
 		_MainTex("Texture (RGBA)", 2D) = "white" {}

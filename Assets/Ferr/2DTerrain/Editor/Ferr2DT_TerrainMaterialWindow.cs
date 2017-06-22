@@ -3,6 +3,7 @@ using UnityEditor;
 
 using System;
 using System.Collections;
+using UnityEditor.SceneManagement;
 
 public static class Ferr2DT_TerrainMaterialUtility {
     public static Rect AtlasField          (IFerr2DTMaterial aMat, Rect aRect, Texture aTexture) {
@@ -342,8 +343,9 @@ public class Ferr2DT_TerrainMaterialWindow : EditorWindow {
             switch (Event.current.commandName)
             {
                 case "UndoRedoPerformed":
+					GUI.changed = true;
                     Repaint ();
-                    return;
+					break;
             }
         }
 
@@ -418,12 +420,18 @@ public class Ferr2DT_TerrainMaterialWindow : EditorWindow {
         if (GUI.changed) {
 	        EditorUtility.SetDirty((UnityEngine.Object)material);
 
+			bool updatedTerrain = false;
             Ferr2DT_PathTerrain[] terrain = GameObject.FindObjectsOfType(typeof(Ferr2DT_PathTerrain)) as Ferr2DT_PathTerrain[];
-            for (int i = 0; i < terrain.Length; i++)
-            {
-                if(terrain[i].TerrainMaterial == material)
-                    terrain[i].Build(true);
+            for (int i = 0; i < terrain.Length; i++) {
+				if (terrain[i].TerrainMaterial == material) {
+					terrain[i].Build(true);
+					updatedTerrain = true;
+				}
             }
+
+			if (updatedTerrain) {
+				EditorSceneManager.MarkAllScenesDirty();
+			}
 		}
 
         prevDir = currDir;

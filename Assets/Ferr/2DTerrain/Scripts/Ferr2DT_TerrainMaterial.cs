@@ -131,5 +131,31 @@ public class Ferr2DT_TerrainMaterial : MonoBehaviour, IFerr2DTMaterial
             aNativeRect.width  * edgeMaterial.mainTexture.width,
             aNativeRect.height * edgeMaterial.mainTexture.height);
     }
+
+    public Ferr2DT_Material CreateNewFormatMaterial() {
+        Ferr2DT_Material result = ScriptableObject.CreateInstance<Ferr2DT_Material>();
+
+        result.edgeMaterial = _edgeMaterial;
+        result.fillMaterial = _fillMaterial;
+
+        for (int i = 0; i<4; i+=1) {
+            Ferr2DT_TerrainDirection   dir  = (Ferr2DT_TerrainDirection)i;
+            if (!Has(dir)) continue;
+            result.Set(dir, true);
+            Ferr2DT_SegmentDescription dest = result.GetDescriptor(dir);
+            Ferr2DT_SegmentDescription src  = GetDescriptor(dir);
+            dest.applyTo       = src.applyTo;
+            dest.body          = src.body;
+            dest.capOffset     = src.capOffset;
+            dest.innerLeftCap  = src.innerLeftCap;
+            dest.innerRightCap = src.innerRightCap;
+            dest.leftCap       = src.leftCap;
+            dest.rightCap      = src.rightCap;
+            dest.yOffset       = src.yOffset;
+            dest.zOffset       = src.zOffset;
+        }
+
+        return result;
+    }
     #endregion
 }

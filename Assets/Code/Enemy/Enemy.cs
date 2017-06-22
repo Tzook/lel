@@ -150,6 +150,8 @@ public class Enemy : MonoBehaviour {
             m_HealthBar.gameObject.SetActive(false);
             m_HealthBar = null;
 
+            CurrentTarget = null;
+
             AudioControl.Instance.Play(DeathSounds[Random.Range(0, WoundSounds.Count)]);
 
             UnregisterEnemy();
@@ -170,5 +172,30 @@ public class Enemy : MonoBehaviour {
         Dead = false;
 
         this.gameObject.SetActive(false);
+    }
+
+    public MonsterSpawner GetClosestSpawner()
+    {
+        float ClosestDistance = Mathf.Infinity;
+        float tempDistance;
+        MonsterSpawner tempSpawner = null;
+        MonsterSpawner ClosestSpawner = null;
+
+        for (int i = 0; i < SceneInfo.Instance.Spawners.Count; i++)
+        {
+            tempSpawner = SceneInfo.Instance.Spawners[i];
+
+            if (tempSpawner.MonsterKey == Info.Name)
+            {
+                tempDistance = Vector2.Distance(transform.position, tempSpawner.transform.position);
+                if (tempDistance < ClosestDistance)
+                {
+                    ClosestDistance = tempDistance;
+                    ClosestSpawner = tempSpawner;
+                }
+            }
+        }
+
+        return ClosestSpawner;
     }
 }

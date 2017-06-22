@@ -73,7 +73,7 @@ public class Ferr2D_DynamicMesh
         aMesh.normals   = mNorms  .ToArray();
         aMesh.tangents  = mTans   .ToArray();
         if (mUV2s != null) {
-			#if UNITY_5
+			#if UNITY_5_3_OR_NEWER
 			aMesh.uv2 = mUV2s.ToArray();
 			#else
             aMesh.uv1 = mUV2s.ToArray();
@@ -158,6 +158,16 @@ public class Ferr2D_DynamicMesh
 		}
 		return result;
 	}
+
+	/// <summary>
+	/// Returns the vert at the indicated index. Index isn't checked for validity.
+	/// </summary>
+	/// <param name="aIndex">Value between 0 and number of verts in the mesh.</param>
+	/// <returns>Vertex from the indicated index</returns>
+	public Vector3 GetVert(int aIndex) {
+		return mVerts[aIndex];
+	}
+
     private void RecalculateTangents(Mesh aMesh) {
         Vector3[] tan2     = new Vector3[aMesh.vertices.Length];
         Vector3[] tan1     = new Vector3[aMesh.vertices.Length];

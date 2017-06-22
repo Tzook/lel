@@ -17,6 +17,7 @@ Shader "Ferr/2D Terrain/Unlit/Tinted Textured Vertex Color" {
 			#pragma vertex         vert
 			#pragma fragment       frag
 			#pragma fragmentoption ARB_precision_hint_fastest
+			#pragma multi_compile_fog
 
 			#define FERR2DT_TINT
 

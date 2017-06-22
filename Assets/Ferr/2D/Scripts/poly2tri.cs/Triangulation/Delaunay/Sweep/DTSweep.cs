@@ -50,7 +50,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public static class DTSweep
     {
@@ -680,7 +680,7 @@ namespace Poly2Tri
                 }
                 if (tcx.IsDebugEnabled)
                 {
-                    Console.WriteLine("EdgeEvent - Point on constrained edge");
+                    //Console.WriteLine("EdgeEvent - Point on constrained edge");
                 }
 
                 return;
@@ -705,7 +705,7 @@ namespace Poly2Tri
                 }
                 if (tcx.IsDebugEnabled)
                 {
-                    Console.WriteLine("EdgeEvent - Point on constrained edge");
+                    //Console.WriteLine("EdgeEvent - Point on constrained edge");
                 }
 
                 return;
@@ -765,7 +765,7 @@ namespace Poly2Tri
                     {
                         if (tcx.IsDebugEnabled)
                         {
-                            Console.WriteLine("[FLIP] - constrained edge done"); // TODO: remove
+                            //Console.WriteLine("[FLIP] - constrained edge done"); // TODO: remove
                         }
                         t.MarkConstrainedEdge(ep, eq);
                         ot.MarkConstrainedEdge(ep, eq);
@@ -776,7 +776,7 @@ namespace Poly2Tri
                     {
                         if (tcx.IsDebugEnabled)
                         {
-                            Console.WriteLine("[FLIP] - subedge done"); // TODO: remove
+                            //Console.WriteLine("[FLIP] - subedge done"); // TODO: remove
                         }
                         // XXX: I think one of the triangles should be legalized here?
                     }
@@ -785,7 +785,7 @@ namespace Poly2Tri
                 {
                     if (tcx.IsDebugEnabled)
                     {
-                        Console.WriteLine("[FLIP] - flipping and continuing with triangle still crossing edge"); // TODO: remove
+                        //Console.WriteLine("[FLIP] - flipping and continuing with triangle still crossing edge"); // TODO: remove
                     }
                     Orientation o = TriangulationUtil.Orient2d(eq, op, ep);
                     t = NextFlipTriangle(tcx, o, t, ot, p, op);
@@ -893,7 +893,7 @@ namespace Poly2Tri
 
             if (tcx.IsDebugEnabled)
             {
-                Console.WriteLine("[FLIP:SCAN] - scan next point"); // TODO: remove
+                //Console.WriteLine("[FLIP:SCAN] - scan next point"); // TODO: remove
                 tcx.DTDebugContext.PrimaryTriangle = t;
                 tcx.DTDebugContext.SecondaryTriangle = ot;
             }

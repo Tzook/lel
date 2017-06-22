@@ -17,6 +17,7 @@ Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color (4 lights|lightmap +1 li
 			#pragma  vertex   vert  
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			
 			#define  MAX_LIGHTS 4
 			
@@ -31,8 +32,9 @@ Shader "Ferr/2D Terrain/Pixel Lit/Textured Vertex Color (4 lights|lightmap +1 li
 			#pragma  vertex   vert
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			
-			#define  MAX_LIGHTS 1
+			#define  MAX_LIGHTS 2
 			#define  FERR2DT_LIGHTMAP
 			
 			#include "UnityCG.cginc"

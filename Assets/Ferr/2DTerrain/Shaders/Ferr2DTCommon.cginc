@@ -1,19 +1,4 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-// Upgrade NOTE: commented out 'half4 unity_LightmapST', a built-in variable
-
 #define LIGHT_SCALE 4
-
-#if UNITY_VERSION < 500
-#define UNITY_SAMPLE_TEX2D tex2D
-#endif
-
-#if defined(FERR2DT_LIGHTMAP) && UNITY_VERSION < 500
-sampler2D_half unity_Lightmap;
-// half4          unity_LightmapST;
-#endif
 
 #if defined(FERR2DT_TINT)
 float4 _Color;
@@ -49,19 +34,19 @@ struct VS_OUT {
 	#ifdef FERR2DT_VERTEXLIT
 	float3 light   : TEXCOORD3;
 	#endif
+	UNITY_FOG_COORDS(4)
 	fixed4 color   : COLOR;
 };
 
 float3 GetLight(int i, float3 aViewPos) {
 	half3  toLight = unity_LightPosition[i].xyz - aViewPos * unity_LightPosition[i].w;
 	half   distSq  = dot(toLight, toLight);
-	#if UNITY_VERSION < 500
-	half   atten   = 2.0 / ((distSq * unity_LightAtten[i].z) + 1.0);
-	#else
 	half   atten   = 1.0 / ((distSq * unity_LightAtten[i].z) + 1.0);
-	#endif
 
-	return unity_LightColor[i].rgb * atten;
+	// this prevents areas outside the radius from getting lit, with a bit of a gradient to prevent it from being harsh
+	float cutoff = saturate((unity_LightAtten[i].w - distSq) / unity_LightAtten[i].w);
+
+	return unity_LightColor[i].rgb * atten * cutoff;
 }
 
 VS_OUT vert(appdata_ferr input) {
@@ -83,7 +68,7 @@ VS_OUT vert(appdata_ferr input) {
 	#endif
 	
 	#if defined(FERR2DT_VERTEXLIT)
-	float3 viewPos = mul(UNITY_MATRIX_MV, input.vertex).xyz;
+	float3 viewPos = UnityObjectToViewPos(input.vertex).xyz;
 	float3 light   = UNITY_LIGHTMODEL_AMBIENT;
 	
 	#if defined(FERR2DT_VERTEXLIGHTBAKED)
@@ -101,12 +86,14 @@ VS_OUT vert(appdata_ferr input) {
 	#endif
 	
 	#if MAX_LIGHTS > 0
-	result.viewpos = mul(UNITY_MATRIX_MV, input.vertex).xyz;
+	result.viewpos = UnityObjectToViewPos(input.vertex).xyz;
 	#endif
 	#ifdef FERR2DT_LIGHTMAP
 	result.lightuv = input.lightcoord * unity_LightmapST.xy + unity_LightmapST.zw;
 	#endif
 	result.uv      = TRANSFORM_TEX(input.texcoord0, _MainTex);
+
+	UNITY_TRANSFER_FOG(result, result.position);
 
 	return result;
 }
@@ -133,6 +120,8 @@ fixed4 frag(VS_OUT inp) : COLOR {
 	#if defined(FERR2DT_VERTEXLIT)
 	color.rgb *= inp.light;
 	#endif
+
+	UNITY_APPLY_FOG(inp.fogCoord, color);
 
 	return color;
 }

@@ -18,6 +18,7 @@ Shader "Ferr/2D Terrain/Pixel Lit/Lightmap Textured Vertex Color Transparent (8 
 			#pragma  vertex   vert  
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			#pragma  target 3.0
 			
 			#define  MAX_LIGHTS 8
@@ -33,6 +34,7 @@ Shader "Ferr/2D Terrain/Pixel Lit/Lightmap Textured Vertex Color Transparent (8 
 			#pragma  vertex   vert
 			#pragma  fragment frag
 			#pragma  fragmentoption ARB_precision_hint_fastest
+			#pragma  multi_compile_fog
 			
 			#define  MAX_LIGHTS 0
 			#define  FERR2DT_LIGHTMAP

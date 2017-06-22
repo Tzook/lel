@@ -43,7 +43,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class Polygon : Point2DList, ITriangulatable, IEnumerable<TriangulationPoint>, IList<TriangulationPoint>
     {

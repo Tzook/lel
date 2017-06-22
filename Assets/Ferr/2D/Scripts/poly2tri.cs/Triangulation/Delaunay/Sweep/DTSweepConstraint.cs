@@ -35,7 +35,7 @@ using System.Diagnostics;
 //using System.Linq;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class DTSweepConstraint : TriangulationConstraint
     {

@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEditor;
 using System;
 
+using Object = UnityEngine.Object;
+
 [CustomEditor(typeof(Ferr2DT_TerrainMaterial))]
 public class Ferr2DT_TerrainMaterialEditor : Editor {
 
@@ -28,7 +30,10 @@ public class Ferr2DT_TerrainMaterialEditor : Editor {
         else {
             if (GUILayout.Button("Open Material Editor")) Ferr2DT_TerrainMaterialWindow.Show(mat);
         }
-		if (GUI.changed) {
+
+        DrawUpdateUI();
+
+        if (GUI.changed) {
 			EditorUtility.SetDirty(target);
 
             Ferr2DT_PathTerrain[] terrain = GameObject.FindObjectsOfType(typeof(Ferr2DT_PathTerrain)) as Ferr2DT_PathTerrain[];
@@ -39,4 +44,23 @@ public class Ferr2DT_TerrainMaterialEditor : Editor {
             }
 		}
 	}
+
+    void DrawUpdateUI() {
+        if (target is Ferr2DT_TerrainMaterial && GUILayout.Button("Create Updated Material Object")) {
+            string path = AssetDatabase.GetAssetPath(target);
+            path = System.IO.Path.ChangeExtension(path, ".asset");
+
+            ScriptableObject material = ((Ferr2DT_TerrainMaterial)target).CreateNewFormatMaterial();
+
+            if (AssetDatabase.LoadAssetAtPath(path, typeof(Object)) != null) {
+                Debug.LogWarning("Already exists!");
+            } else {
+                
+                AssetDatabase.CreateAsset(material, path);
+                AssetDatabase.SaveAssets();
+
+                EditorGUIUtility.PingObject(material);
+            }
+        }
+    }
 }

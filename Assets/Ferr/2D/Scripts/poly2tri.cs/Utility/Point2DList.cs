@@ -59,7 +59,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class Point2DList : IEnumerable<Point2D>, IList<Point2D> // : List<Point2D>
     {

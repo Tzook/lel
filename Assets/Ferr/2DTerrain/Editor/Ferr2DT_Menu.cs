@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEditor;
 using System;
 using System.IO;
+using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 
 public class Ferr2DT_Menu {
 	public enum SnapType {
@@ -45,7 +47,7 @@ public class Ferr2DT_Menu {
 		get { LoadPrefs(); return smoothTerrain; }
 	}
 	
-    [MenuItem("GameObject/Create Ferr2D Terrain/Create Physical 2D Terrain %t", false, 0)]
+    [MenuItem("GameObject/Create Ferr2D Terrain/Physical 2D Terrain %t", false, 0)]
     static void MenuAddPhysicalTerrain() {
         Ferr2DT_MaterialSelector.Show(AddPhysicalTerrain);
     }
@@ -56,7 +58,7 @@ public class Ferr2DT_Menu {
     }
 
 
-    [MenuItem("GameObject/Create Ferr2D Terrain/Create Decorative 2D Terrain %#t", false, 0)]
+    [MenuItem("GameObject/Create Ferr2D Terrain/Decorative 2D Terrain %#t", false, 0)]
     static void MenuAddDecoTerrain() {
         Ferr2DT_MaterialSelector.Show(AddDecoTerrain);
     }
@@ -108,19 +110,82 @@ public class Ferr2DT_Menu {
         return obj;
     }
 
-    [MenuItem("Assets/Prebuild Ferr2D Terrain", false, 101)]
-    static void MenuPrebuildTerrain() {
-        Debug.Log("Prebuilding...");
-        Ferr2DT_Builder.SaveTerrains();
-        Debug.Log("Prebuilding complete.");
-    }
+	[MenuItem("Tools/Ferr/2D Terrain/Rebuild Ferr2D terrain in scene", false, 100)]
+	static void RebuildTerrain() {
+		Ferr2DT_PathTerrain[] terrain = GameObject.FindObjectsOfType<Ferr2DT_PathTerrain>();
+		for (int i = 0; i < terrain.Length; i++) {
+			Undo.RecordObject(terrain[i], "Updating terrain material");
+			terrain[i].Build(true);
+		}
+		Debug.LogFormat("Ferr2D rebuild done - {0} objects.", terrain.Length);
 
-    [MenuItem("Assets/Rebuild Ferr2D Component Cache", false, 101)]
-    static void MenuRebuildComponentCache() {
-        Ferr.ComponentTracker.RecreateCache();
-    }
-	
-	
+		if (terrain.Length > 0)
+			EditorSceneManager.MarkAllScenesDirty();
+	}
+	[MenuItem("Tools/Ferr/2D Terrain/Update scene Ferr2D objs with new material assets", false, 200)]
+	static void UpdateTerrainAssets() {
+		UpdateTerrainAssets(true);
+	}
+	static void UpdateTerrainAssets(bool aCreateNewAssets) {
+		Ferr2DT_PathTerrain[] terrain          = GameObject.FindObjectsOfType<Ferr2DT_PathTerrain>();
+		List<string>          missing          = new List<string>();
+		List<string>          updatedMaterials = new List<string>();
+		int updated = 0;
+		int created = 0;
+		int skipped = 0;
+		int good    = 0;
+		
+		for (int i = 0; i < terrain.Length; i++) {
+			IFerr2DTMaterial mat = terrain[i].TerrainMaterial;
+			if (mat is Ferr2DT_TerrainMaterial) {
+				string path           = AssetDatabase.GetAssetPath(mat as UnityEngine.Object);
+				bool   newAssetExists = true;
+
+				path = Path.ChangeExtension(path, "asset");
+				if (!File.Exists(path)) {
+					string name = Path.GetFileNameWithoutExtension(path);
+
+					if (aCreateNewAssets) {
+						updatedMaterials.Add(name+".prefab");
+						ScriptableObject newAsset = ((Ferr2DT_TerrainMaterial)mat).CreateNewFormatMaterial();
+						AssetDatabase.CreateAsset(newAsset, path);
+						AssetDatabase.SaveAssets();
+						created += 1;
+					} else {
+						if (!missing.Contains(name))
+							missing.Add(name);
+						skipped += 1;
+						newAssetExists = false;
+					}
+				}
+
+				if (newAssetExists) {
+					Ferr2DT_Material newMat = AssetDatabase.LoadAssetAtPath<Ferr2DT_Material>(path);
+					if (newMat == null) {
+						Debug.Log("Error attempting to load asset: " + path);
+					} else {
+						Undo.RecordObject(terrain[i], "Updating terrain material");
+						updated += 1;
+						terrain[i].TerrainMaterial = newMat;
+						terrain[i].Build(true);
+					}
+				}
+			} else {
+				good += 1;
+			}
+		}
+		Debug.LogFormat("Ferr2D scene update done - {0} materials created, {1} objs updated, {2} already good, {3} objs skipped.", created, updated, good, skipped);
+		if (missing.Count > 0) {
+			Debug.LogFormat("Missing updated assets for these materials: {0}", string.Join(", ", missing.ToArray()));
+		}
+		if (updatedMaterials.Count > 0) {
+			Debug.LogFormat("Consider deleting these old materials once all scenes have been upgraded: {0}", string.Join(", ", updatedMaterials.ToArray()));
+		}
+
+		if (updated > 0 || created > 0)
+			EditorSceneManager.MarkAllScenesDirty();
+	}
+
 	[PreferenceItem("Ferr")]
 	static void Ferr2DT_PreferencesGUI() 
 	{

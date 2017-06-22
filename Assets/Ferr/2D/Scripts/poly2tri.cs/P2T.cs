@@ -32,7 +32,7 @@
 using System.Diagnostics;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public static class P2T
     {
@@ -81,7 +81,7 @@ namespace Poly2Tri
         {
             TriangulationContext tcx;
 
-            System.Console.WriteLine("Triangulating " + t.FileName);
+            //System.Console.WriteLine("Triangulating " + t.FileName);
             //        long time = System.nanoTime();
             tcx = CreateContext(algorithm);
             tcx.PrepareTriangulation(t);

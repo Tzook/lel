@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: SandTerrainMaterial
   m_TagString: Untagged
@@ -23,10 +23,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 112.734741, y: -12.2743788, z: -41.3285675}
+  m_LocalPosition: {x: 112.73474, y: -12.274379, z: -41.328568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,18 +40,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a21887e1cf80db49978ff567bcdd66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillMaterial: {fileID: 2100000, guid: 20d61511302407844bfb568c6740a9bd, type: 2}
-  edgeMaterial: {fileID: 2100000, guid: aaf4802d4ba9d5642a8bf690532efeab, type: 2}
+  _fillMaterial: {fileID: 2100000, guid: 20d61511302407844bfb568c6740a9bd, type: 2}
+  _edgeMaterial: {fileID: 2100000, guid: aaf4802d4ba9d5642a8bf690532efeab, type: 2}
   descriptors:
   - applyTo: 0
     zOffset: 0
-    yOffset: -.280000001
+    yOffset: -0.28
     leftCap:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 32
-      height: 32
+      width: 0.25
+      height: 1
     innerLeftCap:
       serializedVersion: 2
       x: 0
@@ -58,10 +60,10 @@ MonoBehaviour:
       height: 0
     rightCap:
       serializedVersion: 2
-      x: 96
+      x: 0.75
       y: 0
-      width: 32
-      height: 32
+      width: 0.25
+      height: 1
     innerRightCap:
       serializedVersion: 2
       x: 0
@@ -70,43 +72,9 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: 32
+      x: 0.25
       y: 0
-      width: 64
-      height: 32
-    capOffset: 0
-  - applyTo: 0
-    zOffset: 0
-    yOffset: 0
-    leftCap:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    innerLeftCap:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    rightCap:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    innerRightCap:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    body:
-    - serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
+      width: 0.5
       height: 1
     capOffset: 0
   - applyTo: 0
@@ -140,8 +108,8 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
+      width: 0.0078125
+      height: 0.03125
     capOffset: 0
   - applyTo: 0
     zOffset: 0
@@ -174,10 +142,44 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
+      width: 0.0078125
+      height: 0.03125
     capOffset: 0
-  isPixel: 1
+  - applyTo: 0
+    zOffset: 0
+    yOffset: 0
+    leftCap:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    innerLeftCap:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    rightCap:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    innerRightCap:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    body:
+    - serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0.0078125
+      height: 0.03125
+    capOffset: 0
+  isPixel: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -189,4 +191,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

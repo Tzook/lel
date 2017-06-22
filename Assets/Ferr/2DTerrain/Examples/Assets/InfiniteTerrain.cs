@@ -64,7 +64,7 @@ public class InfiniteTerrain : MonoBehaviour {
             Vector2 pos = new Vector2(startX + i * vertSpacing, terrainHeights[i]);
             terrain.AddPoint(pos);
             if (terrainSecondaryHeights[i] != terrainHeights[i]) {
-                pos = new Vector2(startX + i * vertSpacing, terrainSecondaryHeights[i]);
+                pos = new Vector2(startX + i * vertSpacing+0.1f, terrainSecondaryHeights[i]);
                 terrain.AddPoint(pos);
             }
         }

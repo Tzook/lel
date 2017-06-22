@@ -32,7 +32,7 @@
 using System;
 
 
-namespace Poly2Tri
+namespace FerrPoly2Tri
 {
     public class Rect2D
     {

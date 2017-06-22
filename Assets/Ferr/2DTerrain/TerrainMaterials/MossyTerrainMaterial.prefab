@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: MossyTerrainMaterial
   m_TagString: Untagged
@@ -27,6 +27,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,8 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a21887e1cf80db49978ff567bcdd66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillMaterial: {fileID: 2100000, guid: a2079d6498b7ec14282eeae830ad71b1, type: 2}
-  edgeMaterial: {fileID: 2100000, guid: 6a137a711dab1dd4c9609c5b44c38f5a, type: 2}
+  _fillMaterial: {fileID: 2100000, guid: a2079d6498b7ec14282eeae830ad71b1, type: 2}
+  _edgeMaterial: {fileID: 2100000, guid: 6a137a711dab1dd4c9609c5b44c38f5a, type: 2}
   descriptors:
   - applyTo: 0
     zOffset: 0
@@ -47,9 +49,9 @@ MonoBehaviour:
     leftCap:
       serializedVersion: 2
       x: 0
-      y: .064453125
-      width: .125
-      height: .33203125
+      y: 0.064453125
+      width: 0.125
+      height: 0.33203125
     innerLeftCap:
       serializedVersion: 2
       x: 0
@@ -58,10 +60,10 @@ MonoBehaviour:
       height: 0
     rightCap:
       serializedVersion: 2
-      x: .875
-      y: .064453125
-      width: .125
-      height: .33203125
+      x: 0.875
+      y: 0.064453125
+      width: 0.125
+      height: 0.33203125
     innerRightCap:
       serializedVersion: 2
       x: 0
@@ -70,18 +72,18 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: .125
-      y: .064453125
-      width: .375
-      height: .33203125
+      x: 0.125
+      y: 0.064453125
+      width: 0.375
+      height: 0.33203125
     - serializedVersion: 2
-      x: .5
-      y: .064453125
-      width: .375
-      height: .33203125
+      x: 0.5
+      y: 0.064453125
+      width: 0.375
+      height: 0.33203125
     capOffset: 0
   - applyTo: 1
-    zOffset: .0199999996
+    zOffset: 0.02
     yOffset: 0
     leftCap:
       serializedVersion: 2
@@ -109,13 +111,13 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: .0107421875
-      y: .451171875
-      width: .453125
-      height: .125
+      x: 0.0107421875
+      y: 0.45117188
+      width: 0.453125
+      height: 0.125
     capOffset: 0
   - applyTo: 2
-    zOffset: .0199999996
+    zOffset: 0.02
     yOffset: 0
     leftCap:
       serializedVersion: 2
@@ -143,13 +145,13 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: .025390625
-      y: .451171875
-      width: .42578125
-      height: .125
+      x: 0.025390625
+      y: 0.45117188
+      width: 0.42578125
+      height: 0.125
     capOffset: 0
   - applyTo: 3
-    zOffset: .00999999978
+    zOffset: 0.01
     yOffset: 0
     leftCap:
       serializedVersion: 2
@@ -177,11 +179,11 @@ MonoBehaviour:
       height: 0
     body:
     - serializedVersion: 2
-      x: .509765625
-      y: .388867199
-      width: .451171875
-      height: .190429688
-    capOffset: .349999994
+      x: 0.5097656
+      y: 0.3888672
+      width: 0.45117188
+      height: 0.19042969
+    capOffset: 0.35
   isPixel: 0
 --- !u!1001 &100100000
 Prefab:
@@ -194,4 +196,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

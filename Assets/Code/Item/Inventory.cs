@@ -81,7 +81,7 @@ public class Inventory
                 {
                     // sum the stack added so far. if it reached the item's stack amount, it's pickable
                     stackNeeded -= (ContentArray[i].StackCap - ContentArray[i].Stack);
-                    if (stackNeeded < 0) {
+                    if (stackNeeded <= 0) {
                         canPick = true;
                         break;
                     }

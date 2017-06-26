@@ -20,8 +20,7 @@ public class ShortcutsController : MonoBehaviour
         }
         else 
         {
-            // TODO use mapping for shortcuts key
-            if (Input.GetKeyDown(KeyCode.Tab)) 
+            if (Input.GetKeyDown(InputMap.Map["Shortcuts"])) 
             {
                 MapActionsToKeys();
             }

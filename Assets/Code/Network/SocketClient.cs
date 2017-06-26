@@ -104,6 +104,14 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("quest_abort", OnQuestAbort);
         CurrentSocket.On("quest_hunt_progress", OnQuestHuntProgress);
 
+        CurrentSocket.On("create_party", OnCreateParty);
+        CurrentSocket.On("party_invitation", OnPartyInvitation);
+        CurrentSocket.On("actor_join_party", OnActorJoinParty);
+        CurrentSocket.On("actor_leave_party", OnActorLeaveParty);
+        CurrentSocket.On("actor_kicked_from_party", OnActorKickedFromParty);
+        CurrentSocket.On("actor_lead_party", OnActorLeadParty);
+        CurrentSocket.On("party_members", OnPartyMembersUpdate);
+
         LoadingWindowUI.Instance.Register(this);
     }
 
@@ -666,6 +674,96 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
     }
 
+    private void OnPartyMembersUpdate(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Register party members");
+
+        JSONNode data = (JSONNode)args[0];
+
+        List<string> members = new List<string>();
+
+        for (int i=0;i<data["chars_names"].Count;i++)
+        {
+            members.Add(data["chars_names"][i].Value);
+        }
+
+        Party party = new Party(data["leader_name"].Value, members);
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty = party;
+
+        InGameMainMenuUI.Instance.ShowParty();
+    }
+
+    private void OnCreateParty(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Create Party");
+
+
+        JSONNode data = (JSONNode)args[0];
+
+        List<string> members = new List<string>();
+
+        members.Add(LocalUserInfo.Me.ClientCharacter.Name);
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty = new Party(LocalUserInfo.Me.ClientCharacter.Name, members);
+
+        InGameMainMenuUI.Instance.ShowParty();
+    }
+
+    private void OnActorLeadParty(Socket socket, Packet packet, object[] args)
+    {
+        BroadcastEvent("Create Party");
+
+
+        JSONNode data = (JSONNode)args[0];
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty.Leader = data["char_name"].Value;
+
+        InGameMainMenuUI.Instance.RefreshParty();
+    }
+
+    private void OnActorKickedFromParty(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["char_name"].Value +  " was kicked from party");
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Remove(data["char_name"].Value);
+
+        InGameMainMenuUI.Instance.RefreshParty();
+    }
+
+    private void OnActorLeaveParty(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["char_name"].Value + " has left the party");
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Remove(data["char_name"].Value);
+
+        InGameMainMenuUI.Instance.RefreshParty();
+    }
+    
+    private void OnActorJoinParty(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["char_name"].Value + " has joined the party");
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Add(data["char_name"].Value);
+
+        InGameMainMenuUI.Instance.RefreshParty();
+    }
+
+    private void OnPartyInvitation(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["leader_name"].Value + " has sent an invitation to party");
+
+        InGameMainMenuUI.Instance.AddAcceptDeclineMessage(data["leader_name"].Value + " has invited you to party!", data["leader_name"].Value, SendJoinParty);
+    }
+
     #endregion
 
     #region Emittions
@@ -968,6 +1066,57 @@ public class SocketClient : MonoBehaviour
         node["id"] = questID;
 
         CurrentSocket.Emit("quest_aborted", node);
+    }
+
+
+    public void SendJoinParty(string leaderKey)
+    {
+        JSONNode node = new JSONClass();
+
+        node["leader_name"] = leaderKey;
+
+        CurrentSocket.Emit("join_party", node);
+    }
+
+    public void SendCreateParty()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("create_party", node);
+    }
+
+    public void SendLeaveParty()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("leave_party", node);
+    }
+
+    public void SendInviteToParty(string characterName)
+    {
+        JSONNode node = new JSONClass();
+
+        node["char_name"] = characterName;
+
+        CurrentSocket.Emit("invite_to_party", node);
+    }
+
+    public void SendKickFromParty(string characterName)
+    {
+        JSONNode node = new JSONClass();
+
+        node["char_name"] = characterName;
+
+        CurrentSocket.Emit("kick_from_party", node);
+    }
+
+    public void SendChangePartyLeader(string characterName)
+    {
+        JSONNode node = new JSONClass();
+
+        node["char_name"] = characterName;
+
+        CurrentSocket.Emit("change_party_leader", node);
     }
 
 

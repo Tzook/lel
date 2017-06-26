@@ -89,6 +89,8 @@ public class ActorInfo
 
     public int Gold;
 
+    public Party CurrentParty;
+
     public ActorInfo()
     {
         Equipment = new Equipment(new JSONClass(), this);
@@ -376,7 +378,7 @@ public class ActorInfo
                     case "collect":
                         {
 
-                            if (QuestsInProgress[i].CanBeCompleted)
+                            if (QuestsInProgress[i].WasNowCompleted)
                             {
                                 ShockMessageUI.Instance.CallMessage(QuestsInProgress[i].Name + " Completed!", Color.black, false);
                                 break;
@@ -410,7 +412,7 @@ public class ActorInfo
         condition.CurrentProgress = Value;
 
 
-        if (tempQuest.CanBeCompleted)
+        if (tempQuest.WasNowCompleted)
         {
             ShockMessageUI.Instance.CallMessage(tempQuest.Name + " Completed!", Color.black, false);
             return;

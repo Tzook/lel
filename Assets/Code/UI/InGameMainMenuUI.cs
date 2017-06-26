@@ -87,6 +87,12 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     Image PrimaryAbilityIcon;
 
+    [SerializeField]
+    AcceptDeclineWindowUI AcceptDeclineWindow;
+
+    [SerializeField]
+    PartyWindowUI PartyWindow;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -573,5 +579,28 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void RefreshCurrentPrimaryAbility()
     {
         PrimaryAbilityIcon.sprite = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility).Icon;
+    }
+
+    public void AddAcceptDeclineMessage(string content,string key, Action<string> acceptCallback)
+    {
+        AcceptDeclineWindow.AddMessage(content,key, acceptCallback);
+    }
+
+    public void ShowParty()
+    {
+        PartyWindow.gameObject.SetActive(true);
+    }
+
+    public void HideParty()
+    {
+        PartyWindow.gameObject.SetActive(false);
+    }
+
+    public void RefreshParty()
+    {
+        if (PartyWindow.gameObject.activeInHierarchy)
+        {
+            PartyWindow.Refresh();
+        }
     }
 }

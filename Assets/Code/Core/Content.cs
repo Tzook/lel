@@ -289,24 +289,6 @@ public class Quest
     {
         get
         {
-            //if(RewardClass != LocalUserInfo.Me.SelectedCharacter.Class)
-            //{
-            //    return false;
-            //}
-
-            //if(MinimumLevel > LocalUserInfo.Me.SelectedCharacter.LVL)
-            //{
-            //    return false;
-            //}
-
-            //for (int i = 0; i < RequiredCompletedQuests.Count; i++)
-            //{
-            //    if(!LocalUserInfo.Me.SelectedCharacter.CompletedQuests.Contains(RequiredCompletedQuests[i]))
-            //    {
-            //        return false;
-            //    }
-            //}
-
             for (int i=0;i<Conditions.Count;i++)
             {
                 if(Conditions[i].CurrentProgress < Conditions[i].TargetProgress)
@@ -317,6 +299,29 @@ public class Quest
 
 
             return true;
+        }
+    }
+
+    //Will check if quest was completed now
+    public bool WasNowCompleted
+    {
+        get
+        {
+            bool HasEqual = false;
+            for (int i = 0; i < Conditions.Count; i++)
+            {
+                if (Conditions[i].CurrentProgress < Conditions[i].TargetProgress)
+                {
+                    return false;
+                }
+
+                if (Conditions[i].CurrentProgress == Conditions[i].TargetProgress)
+                {
+                    HasEqual = true;
+                }
+            }
+
+            return HasEqual;
         }
     }
 

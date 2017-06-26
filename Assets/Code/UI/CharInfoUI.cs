@@ -11,12 +11,29 @@ public class CharInfoUI : MonoBehaviour {
     Text m_txtGender;
 
     [SerializeField]
+    Text m_txtClass;
+
+    [SerializeField]
+    Text m_txtLevel;
+
+    [SerializeField]
+    Button m_btnAddFriend;
+
+    [SerializeField]
+    Button m_btnAddParty;
+
+
+    [SerializeField]
     Transform CharSpot;
 
     ActorInstance CharInstance;
 
+    ActorInfo CurrentInfo;
+
     public void Open(ActorInfo Info)
     {
+        CurrentInfo = Info;
+
         this.gameObject.SetActive(true);
 
         StartCoroutine(OpenRoutine(Info));
@@ -27,6 +44,11 @@ public class CharInfoUI : MonoBehaviour {
     {
         m_txtName.text = Info.Name;
         m_txtGender.text = "Gender: " + Info.Gender.ToString();
+        m_txtClass.text = "Class: " + Info.Class;
+        m_txtLevel.text = "Level: " + Info.LVL;
+
+        m_btnAddFriend.interactable = false;
+        m_btnAddParty.interactable = CanSendPartyInvite(Info.Name);
 
         if (CharSpot.childCount > 0)
         {
@@ -55,4 +77,27 @@ public class CharInfoUI : MonoBehaviour {
         CharInstance.UpdateVisual();
     }
 
+    public void InviteToParty()
+    {
+        if (LocalUserInfo.Me.ClientCharacter.CurrentParty == null)
+        {
+            SocketClient.Instance.SendCreateParty();
+        }
+
+        SocketClient.Instance.SendInviteToParty(CurrentInfo.Name);
+    }
+
+    public bool CanSendPartyInvite(string charName)
+    {
+        if(LocalUserInfo.Me.ClientCharacter.CurrentParty == null)
+        {
+            return true;
+        }
+
+        Party party = LocalUserInfo.Me.ClientCharacter.CurrentParty;
+
+        return (!party.Members.Contains(charName)
+                && party.Leader == LocalUserInfo.Me.ClientCharacter.Name
+                && party.Members.Count < 5);
+    }
 }

@@ -100,7 +100,7 @@ public class ShortcutsController : MonoBehaviour
                 {
                     string key = actionsFirstKey + index + keyAction.key;
                     keyToAction[key] = keyAction.action;
-                    Debug.Log("Type key " + key + " to invoke action.");
+                    Debug.Log("Type key " + key + " to invoke action " + keyAction.text);
                 }
                 index++;
             }

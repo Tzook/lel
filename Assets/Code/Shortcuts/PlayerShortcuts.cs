@@ -15,15 +15,17 @@ public class PlayerShortcuts: AbstractShortcuts
     public override List<KeyAction> GetActions()
     {
         List<KeyAction> list = new List<KeyAction>();
+
+        ActorInstance actorInstance = GetComponent<ActorInstance>();
         
         if (isMe) 
         {
-            list.Add(new KeyAction(OpenInfoUI, "i"));
+            list.Add(new KeyAction(OpenInfoUI, "i", "Info of " + actorInstance.Info.Name));
         }
         else 
         {
-            list.Add(new KeyAction(OpenInfoUI, "i"));
-            list.Add(new KeyAction(SendWhisper, "w"));
+            list.Add(new KeyAction(OpenInfoUI, "i", "Info of " + actorInstance.Info.Name));
+            list.Add(new KeyAction(SendWhisper, "w", "Whisper " + actorInstance.Info.Name));
         }
         
         return list;

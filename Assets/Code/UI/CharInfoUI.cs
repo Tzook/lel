@@ -70,6 +70,7 @@ public class CharInfoUI : MonoBehaviour {
         CharSpot.GetChild(0).transform.localScale = Vector3.one;
         CharInstance = CharSpot.GetChild(0).GetComponent<ActorInstance>();
 
+        CharInstance.GetComponent<PlayerShortcuts>().enabled = false;
         CharInstance.Info = Info;
         CharInstance.nameHidden = true;
 

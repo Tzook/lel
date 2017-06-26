@@ -17,10 +17,10 @@ public class PlayerShortcuts: AbstractShortcuts
         List<KeyAction> list = new List<KeyAction>();
 
         ActorInstance actorInstance = GetComponent<ActorInstance>();
-        
         if (isMe) 
         {
             list.Add(new KeyAction(OpenInfoUI, "i", "Info of " + actorInstance.Info.Name));
+            list.Add(new KeyAction(SomeOtherAction, "x", "Some other action"));
         }
         else 
         {
@@ -34,6 +34,12 @@ public class PlayerShortcuts: AbstractShortcuts
     private void OpenInfoUI()
     {
         Debug.Log("Opening info ui!");
+        InGameMainMenuUI.Instance.ShowCharacterInfo(GetComponent<ActorInstance>().Info);
+    }
+
+    private void SomeOtherAction()
+    {
+        Debug.Log("Some other action!");
     }
 
     private void SendWhisper()

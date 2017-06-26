@@ -82,6 +82,7 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         CharSpot.GetChild(0).position = CharSpot.position;
         CharSpot.GetChild(0).transform.localScale = Vector3.one;
         CharInstance = CharSpot.GetChild(0).GetComponent<ActorInstance>();
+        CharInstance.GetComponent<PlayerShortcuts>().enabled = false;
 
         CharInstance.Info = CurrentCharacter;
         CharInstance.nameHidden = true;

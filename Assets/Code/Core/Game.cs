@@ -273,6 +273,7 @@ public class Game : MonoBehaviour {
 
         tempObj.GetComponent<ActorMovement>().enabled = true;
         tempObj.GetComponent<ActorController>().enabled = false;
+        tempObj.GetComponent<PlayerShortcuts>().isMe = false;
         tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
@@ -308,6 +309,7 @@ public class Game : MonoBehaviour {
 
         ClientCharacter.GetComponent<ActorMovement>().enabled = false;
         actorController.enabled = true;
+        ClientCharacter.GetComponent<PlayerShortcuts>().isMe = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 

@@ -17,6 +17,7 @@ public class ShortcutsController : MonoBehaviour
             // TODO disable all other actions when in mood
             // TODO add UI for being in the mood
             WaitForActionKey();
+            WaitForExitingKey();
         }
         else 
         {
@@ -56,11 +57,13 @@ public class ShortcutsController : MonoBehaviour
 
     private void ExitMood()
     {
+        Debug.Log("Exiting shortcuts mood");
         inMood = false;
     }
 
     private void EnterMood()
     {
+        Debug.Log("Entering shortcuts mood");
         inMood = true;
         keyIndex = 0;
         keyToAction.Clear();
@@ -77,6 +80,19 @@ public class ShortcutsController : MonoBehaviour
             }
         }
         keyIndex++;
+    }
+
+    private void WaitForExitingKey()
+    {
+        UnityEngine.KeyCode[] keys = {KeyCode.Escape, KeyCode.Tab, KeyCode.Return, KeyCode.Space};
+        foreach (UnityEngine.KeyCode key in keys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                ExitMood();
+                return;
+            }
+        }
     }
 
     // go through all the AbstractShortcuts instances in the scene and assign keys for each action in them

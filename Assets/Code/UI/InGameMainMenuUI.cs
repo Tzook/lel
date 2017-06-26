@@ -278,7 +278,10 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void ShowCharacterInfo(ActorInfo Info)
     {
-        m_CharInfoUI.Open(Info);
+        if (Info != LocalUserInfo.Me.ClientCharacter)
+        {
+            m_CharInfoUI.Open(Info);
+        }
     }
 
     public void SetLastChatMessage(string text)

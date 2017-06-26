@@ -485,18 +485,21 @@ public class SocketClient : MonoBehaviour
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
+        actor.CurrentHealth = data["hp"].AsInt;
+
 
         if (actor == LocalUserInfo.Me.ClientCharacter)
         {
             actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
-            actor.CurrentHealth = data["hp"].AsInt;
-
             InGameMainMenuUI.Instance.RefreshHP();
         }
         else
         {
             actor.Instance.Hurt();
+            actor.Instance.MovementController.RefreshHealth();
         }
+
+        InGameMainMenuUI.Instance.RefreshParty();
     }
 
     protected void OnActorDed(Socket socket, Packet packet, object[] args)
@@ -741,6 +744,13 @@ public class SocketClient : MonoBehaviour
 
         LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Remove(data["char_name"].Value);
 
+        ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
+
+        if (actor != null && LocalUserInfo.Me.ClientCharacter != actor)
+        {
+            actor.Instance.MovementController.HideHealth();
+        }
+
         InGameMainMenuUI.Instance.RefreshParty();
     }
     
@@ -751,6 +761,13 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["char_name"].Value + " has joined the party");
 
         LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Add(data["char_name"].Value);
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
+
+        if(actor != null && LocalUserInfo.Me.ClientCharacter != actor)
+        {
+            actor.Instance.MovementController.ShowHealth();
+        }
 
         InGameMainMenuUI.Instance.RefreshParty();
     }
@@ -1099,6 +1116,9 @@ public class SocketClient : MonoBehaviour
         node["char_name"] = characterName;
 
         CurrentSocket.Emit("invite_to_party", node);
+
+        LocalUserInfo.Me.ClientCharacter.CurrentParty = null;
+        InGameMainMenuUI.Instance.HideParty();
     }
 
     public void SendKickFromParty(string characterName)

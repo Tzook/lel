@@ -18,6 +18,11 @@ public class ActorMovement : MonoBehaviour
     protected bool MovingVertical;
     protected bool aimRight;
 
+    [SerializeField]
+    GameObject m_HealthBar;
+
+    BoxCollider2D HitBox;
+
     void Start()
     {
         Instance = GetComponent<ActorInstance>();
@@ -29,6 +34,13 @@ public class ActorMovement : MonoBehaviour
 
         if (Instance.Info.Climbing) {
             StartClimbing();
+        }
+
+        HitBox = GetComponent<BoxCollider2D>();
+
+        if(LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Contains(Instance.Info.Name))
+        {
+            ShowHealth();
         }
     }
 
@@ -113,6 +125,14 @@ public class ActorMovement : MonoBehaviour
         LerpToPosition();
     }
 
+    void LateUpdate()
+    {
+        if(m_HealthBar != null)
+        {
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, -HitBox.bounds.max.y), Time.deltaTime * 3f);
+        }
+    }
+
     protected void LerpToPosition()
     {
         Anim.SetBool("InAir", false);
@@ -182,6 +202,33 @@ public class ActorMovement : MonoBehaviour
                     Instance.ShootArrow(false);
                     break;
                 }
+        }
+    }
+
+    public void RefreshHealth()
+    {
+        if (m_HealthBar != null)
+        {
+            m_HealthBar.GetComponent<HealthBar>().SetHealthbar(Instance.Info.CurrentHealth, Instance.Info.MaxHealth);
+        }
+    }
+
+    public void ShowHealth()
+    {
+        if(m_HealthBar == null)
+        {
+            m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBarActor");
+            m_HealthBar.transform.position = transform.position;
+            RefreshHealth();
+        }
+    }
+
+    public void HideHealth()
+    {
+        if(m_HealthBar != null)
+        {
+            m_HealthBar.gameObject.SetActive(false);
+            m_HealthBar = null;
         }
     }
 

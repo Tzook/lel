@@ -81,4 +81,10 @@ public class PartyWindowUI : MonoBehaviour {
             }
         }
     }
+
+    public void LeaveParty()
+    {
+        SocketClient.Instance.SendLeaveParty();
+
+    }
 }

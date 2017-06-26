@@ -59,6 +59,7 @@ public class ShortcutsController : MonoBehaviour
     {
         Debug.Log("Exiting shortcuts mood");
         inMood = false;
+        SetBlur(false);
     }
 
     private void EnterMood()
@@ -67,6 +68,12 @@ public class ShortcutsController : MonoBehaviour
         inMood = true;
         keyIndex = 0;
         keyToAction.Clear();
+        SetBlur(true);
+    }
+
+    public void SetBlur(bool state)
+    {
+        GameCamera.Instance.SetBlurMode(state);
     }
 
     private void TrimActions(char foundKey)

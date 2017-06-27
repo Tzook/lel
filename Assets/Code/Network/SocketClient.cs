@@ -683,6 +683,8 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
+        Debug.Log("$$$$$$$$ " + data.ToString());
+
         List<string> members = new List<string>();
 
         for (int i=0;i<data["chars_names"].Count;i++)
@@ -760,12 +762,12 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value + " has joined the party");
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Add(data["char_name"].Value);
-
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
         if(actor != null && LocalUserInfo.Me.ClientCharacter != actor)
         {
+
+            LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Add(data["char_name"].Value);
             actor.Instance.MovementController.ShowHealth();
         }
 

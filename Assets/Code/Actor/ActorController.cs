@@ -511,7 +511,6 @@ public class ActorController : MonoBehaviour
 
     private IEnumerator LoadAttackValueRoutine()
     {
-        LoadAttackValue = 0f;
         while(LoadAttackValue < 1f)
         {
             LoadAttackValue += 1f * Time.deltaTime;
@@ -535,6 +534,7 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
+        LoadAttackValue = 0f;
 
         ActivatePrimaryAbility();
     }
@@ -567,6 +567,7 @@ public class ActorController : MonoBehaviour
             StopCoroutine(LoadAttackValueInstance);
             LoadAttackValueInstance = null;
         }
+        LoadAttackValue = 0f;
 
         Anim.SetBool("Charging", false);
         InGameMainMenuUI.Instance.StopChargingAttack();

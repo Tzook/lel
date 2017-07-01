@@ -36,11 +36,15 @@ public class CharInfoUI : MonoBehaviour {
 
         this.gameObject.SetActive(true);
 
-        StartCoroutine(OpenRoutine(Info));
-
+        Refresh();
     }
 
-    private IEnumerator OpenRoutine(ActorInfo Info)
+    public void Refresh()
+    {
+        StartCoroutine(RefreshRoutine(CurrentInfo));
+    } 
+
+    private IEnumerator RefreshRoutine(ActorInfo Info)
     {
         m_txtName.text = Info.Name;
         m_txtGender.text = "Gender: " + Info.Gender.ToString();
@@ -86,6 +90,8 @@ public class CharInfoUI : MonoBehaviour {
         }
 
         SocketClient.Instance.SendInviteToParty(CurrentInfo.Name);
+
+        Refresh();
     }
 
     public bool CanSendPartyInvite(string charName)

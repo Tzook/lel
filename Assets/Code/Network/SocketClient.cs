@@ -683,8 +683,6 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Debug.Log("$$$$$$$$ " + data.ToString());
-
         List<string> members = new List<string>();
 
         for (int i=0;i<data["chars_names"].Count;i++)

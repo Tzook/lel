@@ -5,6 +5,7 @@ using UnityEngine;
 public class Party {
 
     public string Leader;
+
     public List<string> Members = new List<string>();
 
     public Party(string leader, List<string> members)

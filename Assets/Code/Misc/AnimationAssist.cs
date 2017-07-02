@@ -12,6 +12,9 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     GameObject ArrowObject;
 
+    [SerializeField]
+    Enemy Enemy;
+
     public void PlaySound(string soundKey)
     {
         AudioControl.Instance.Play(soundKey);
@@ -51,6 +54,11 @@ public class AnimationAssist : MonoBehaviour {
     public void BendBow()
     {
         Controller.GetComponent<ActorInstance>().BendBow();
+    }
+
+    public void TryVarriation()
+    {
+        Enemy.TryIdleVarriation();
     }
 
 }

@@ -705,6 +705,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 106
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.577}
+--- !u!1 &20825874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 20825876}
+  - component: {fileID: 20825875}
+  m_Layer: 0
+  m_Name: SPAWNER (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &20825875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 20825874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1089884df88e104478daebe0f14f730c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterKey: FatRabbit
+  SpawnCap: 2
+  RespawnTime: 10
+--- !u!4 &20825876
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 20825874}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6, y: -25.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 163
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &23537331
 GameObject:
   m_ObjectHideFlags: 0
@@ -28089,6 +28132,7 @@ MonoBehaviour:
   Controller: {fileID: 0}
   m_Particles: {fileID: 0}
   ArrowObject: {fileID: 0}
+  Enemy: {fileID: 0}
 --- !u!1 &1743780895
 GameObject:
   m_ObjectHideFlags: 0
@@ -32501,6 +32545,7 @@ MonoBehaviour:
   Controller: {fileID: 0}
   m_Particles: {fileID: 0}
   ArrowObject: {fileID: 0}
+  Enemy: {fileID: 0}
 --- !u!1 &1967621929
 GameObject:
   m_ObjectHideFlags: 0
@@ -33250,6 +33295,7 @@ MonoBehaviour:
   - {fileID: 411958152}
   Spawners:
   - {fileID: 118129115}
+  - {fileID: 20825875}
   Npcs: []
 --- !u!4 &2005480949
 Transform:

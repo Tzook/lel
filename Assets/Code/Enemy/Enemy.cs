@@ -37,6 +37,12 @@ public class Enemy : MonoBehaviour {
     protected List<string> DeathSounds = new List<string>();
 
     [SerializeField]
+    protected int IdleVarriations = 0;
+
+    [SerializeField]
+    protected int VarriationChance = 3;
+
+    [SerializeField]
     public HealthBar m_HealthBar;
 
     protected Vector3 initScale;
@@ -197,5 +203,19 @@ public class Enemy : MonoBehaviour {
         }
 
         return ClosestSpawner;
+    }
+
+    public void TryIdleVarriation()
+    {
+        if(IdleVarriations <= 0)
+        {
+            return;
+        }
+
+        if(Random.Range(0,VarriationChance) == 0)
+        {
+            Anim.SetInteger("IdleVarriationIndex", Random.Range(0, IdleVarriations));
+            Anim.SetTrigger("IdleVarriation");
+        }
     }
 }

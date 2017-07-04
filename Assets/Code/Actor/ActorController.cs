@@ -328,12 +328,15 @@ public class ActorController : MonoBehaviour
                     }
                     else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
                     {
-                        if (IsCharAboveRope()) {
+                        if (IsCharAboveRope()) 
+                        {
                             Anim.SetBool("ClimbingDown", true);
                             Anim.SetBool("ClimbingUp", false);
 
                             transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
-                        } else {
+                        } 
+                        else 
+                        {
                             UnclimbRope();
                         }
                     }
@@ -402,7 +405,6 @@ public class ActorController : MonoBehaviour
 
     private void UnclimbRope()
     {
-        CurrentRope = null;
         OnRope = false;
         Anim.SetBool("OnRope", false);
         Anim.SetBool("ClimbingUp", false);

@@ -32,6 +32,7 @@ public class ItemInfoUI : MonoBehaviour {
         ClearStats();
 
         this.gameObject.SetActive(true);
+        transform.position = GameCamera.MousePosition;
         txtTitle.text = info.Name;
         txtDecription.text = info.Description;
         txtType.text = info.Type;

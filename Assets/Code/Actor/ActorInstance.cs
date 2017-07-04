@@ -575,8 +575,6 @@ public class ActorInstance : MonoBehaviour
 
         InGameMainMenuUI.Instance.MinilogMessage("Picked '" + item.Name + "'");
 
-        LocalUserInfo.Me.ClientCharacter.UpdateProgress(item.Key, Info.Inventory.GetInventoryCounts()[item.Key]);
-
         InGameMainMenuUI.Instance.RefreshInventory();
     }
 

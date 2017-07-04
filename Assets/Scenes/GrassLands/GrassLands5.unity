@@ -33874,6 +33874,18 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Rabbit Raids
+      Event: StartDialog
+      Value: RabbitRaids
+      Condition: QuestAvailable
+      ConditionValue: rabbitRaids
+      CLR: {r: 1, g: 0.9496957, b: 0.5441177, a: 1}
+    - Title: CompleteQuest
+      Event: StartDialog
+      Value: RabbitRaidsComplete
+      Condition: QuestComplete
+      ConditionValue: rabbitRaids
+      CLR: {r: 1, g: 0.9496957, b: 0.5441177, a: 1}
   - DialogKey: AskSomeoneElse
     Pieces:
     - Content: What am I?
@@ -33895,7 +33907,96 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
+  - DialogKey: RabbitRaids
+    Pieces:
+    - Content: Hey handsome!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: It has been a long time since a thug like you passed by!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Those rabbits just won't stop stealing from us!
+      LetterDelay: 0.03
+      Pitch: 0.6
+      AnimationTrigger: 
+    - Content: Could you take some of them out?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Teach them a lesson?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Make them stop raiding our farm?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: I'll pay you for that! Just get it done!
+      LetterDelay: 0.03
+      Pitch: 1
+      AnimationTrigger: 
+    Options:
+    - Title: Accept
+      Event: StartQuest
+      Value: rabbitRaids
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9670385, b: 0.52205884, a: 1}
+    - Title: Can't help you
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: RabbitRaidsComplete
+    Pieces:
+    - Content: 'Oh boy! '
+      LetterDelay: 0.02
+      Pitch: 1.2
+      AnimationTrigger: 
+    - Content: you took out a handful of rabbits out there!
+      LetterDelay: 0.03
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: I saw it in my own eyes!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: It made the majority of them think twice!...-
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Before touching our carrots!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: But it didn't stop them...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Anyhow, I owe you what I owe you.
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Here's your gold...
+      LetterDelay: 0.03
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: Maybe you could help with something else, tho'.
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: rabbitRaids
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9670385, b: 0.52205884, a: 1}
+  GivingQuests:
+  - rabbitRaids
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 

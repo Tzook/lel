@@ -150,7 +150,7 @@ public class DialogManager : MonoBehaviour {
                     AudioControl.Instance.PlayWithPitch("talksound", CurrentDialog.Pieces[i].Pitch);
                 }
 
-                if(Input.GetKey(KeyCode.Space))
+                if(ContinueChat())
                 {
                     break;
                 }
@@ -166,7 +166,7 @@ public class DialogManager : MonoBehaviour {
 
             while (true)
             {
-                if(Input.GetKeyDown(KeyCode.Space))
+                if (ContinueChat())
                 {
                     break;
                 }
@@ -227,6 +227,11 @@ public class DialogManager : MonoBehaviour {
         CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StartWavingInstruction("Choose your response...");
 
 
+    }
+
+    private static bool ContinueChat()
+    {
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
     }
 
     public bool CanShowOption(DialogOption option)

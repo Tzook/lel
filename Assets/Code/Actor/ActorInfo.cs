@@ -381,10 +381,13 @@ public class ActorInfo
                             if (QuestsInProgress[i].WasNowCompleted)
                             {
                                 ShockMessageUI.Instance.CallMessage(QuestsInProgress[i].Name + " Completed!", Color.black, false);
-                                break;
+                            }
+                            // if the quest condition wasn't completed already or if it was and now it isn't
+                            else if (cond.CurrentProgress - value < cond.TargetProgress || cond.CurrentProgress < cond.TargetProgress)
+                            {
+                                ShockMessageUI.Instance.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
                             }
 
-                            ShockMessageUI.Instance.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
                             break;
                         }
                     case "hunt":

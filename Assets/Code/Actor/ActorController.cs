@@ -287,7 +287,7 @@ public class ActorController : MonoBehaviour
 
                 if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
                 {
-                    if (CurrentRope != null)
+                    if (CurrentRope != null && IsCharBelowRope())
                     {
                         ClimbRope();
                     }
@@ -295,8 +295,8 @@ public class ActorController : MonoBehaviour
                     {
                         EnterPortal();
                     }
-                } 
-                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && CurrentRope != null) 
+                }
+                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && CurrentRope != null && IsCharAboveRope())
                 {
                     ClimbRope();
                 }
@@ -311,19 +311,34 @@ public class ActorController : MonoBehaviour
                 {
                     transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
 
-                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat && transform.position.y < CurrentRope.bounds.max.y)
+                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
                     {
-                        Anim.SetBool("ClimbingUp", true);
-                        Anim.SetBool("ClimbingDown", false);
+                        // if rope is above our upper body
+                        if (IsCharBelowRope())
+                        {
+                            Anim.SetBool("ClimbingUp", true);
+                            Anim.SetBool("ClimbingDown", false);
 
-                        transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                        }
+                        else
+                        {
+                            UnclimbRope();
+                        }
                     }
-                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && transform.position.y > CurrentRope.bounds.min.y)
+                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
                     {
-                        Anim.SetBool("ClimbingDown", true);
-                        Anim.SetBool("ClimbingUp", false);
+                        if (IsCharAboveRope()) 
+                        {
+                            Anim.SetBool("ClimbingDown", true);
+                            Anim.SetBool("ClimbingUp", false);
 
-                        transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                        } 
+                        else 
+                        {
+                            UnclimbRope();
+                        }
                     }
                     else
                     {
@@ -355,6 +370,16 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    private bool IsCharAboveRope()
+    {
+        return transform.position.y > CurrentRope.bounds.min.y;
+    }
+
+    private bool IsCharBelowRope()
+    {
+        return transform.position.y < CurrentRope.bounds.max.y;
+    }
+
     private void EnterPortal()
     {
         if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
@@ -380,7 +405,6 @@ public class ActorController : MonoBehaviour
 
     private void UnclimbRope()
     {
-        CurrentRope = null;
         OnRope = false;
         Anim.SetBool("OnRope", false);
         Anim.SetBool("ClimbingUp", false);

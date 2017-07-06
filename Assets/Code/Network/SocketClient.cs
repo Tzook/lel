@@ -112,6 +112,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lead_party", OnActorLeadParty);
         CurrentSocket.On("party_members", OnPartyMembersUpdate);
 
+        CurrentSocket.On("known_info", OnKnownInfo);
+
         LoadingWindowUI.Instance.Register(this);
     }
 
@@ -780,6 +782,16 @@ public class SocketClient : MonoBehaviour
 
         InGameMainMenuUI.Instance.AddAcceptDeclineMessage(data["leader_name"].Value + " has invited you to party!", data["leader_name"].Value, SendJoinParty);
     }
+
+
+
+    private void OnKnownInfo(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Recieved info on "+data["char"].ToString());
+    }
+
 
     #endregion
 

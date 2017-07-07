@@ -80,7 +80,7 @@ public class EnemyMoving : Enemy
         if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
-            SocketClient.Instance.SendMobMove(Info.ID, transform.position.x, transform.position.y);
+            EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
         }
     }
 

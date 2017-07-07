@@ -31,7 +31,7 @@ public class EnemyJumping : EnemyMoving
             if (!Dead && LastSentPosition != transform.position)
             {
                 LastSentPosition = transform.position;
-                SocketClient.Instance.SendMobMove(Info.ID, transform.position.x, transform.position.y);
+                EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
             }
 
             Anim.SetBool("inAir", !isGrounded);

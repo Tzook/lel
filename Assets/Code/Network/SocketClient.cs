@@ -1034,15 +1034,21 @@ public class SocketClient : MonoBehaviour
 
 
 
-    public void SendMobMove(string instanceID, float x, float y)
+    public void SendMobsMove(Dictionary<string, Vector3> mobsToUpdate)
     {
         JSONNode node = new JSONClass();
+        node["mobs"] = new JSONArray();
 
-        node["mob_id"] = instanceID;
-        node["x"] = x.ToString();
-        node["y"] = y.ToString();
+        int i = 0;
+        foreach (KeyValuePair<string, Vector3> pair in mobsToUpdate) 
+        {
+            node["mobs"][i]["mob_id"] = pair.Key;
+            node["mobs"][i]["x"] = pair.Value.x.ToString();
+            node["mobs"][i]["y"] = pair.Value.y.ToString();
+            i++;
+        }
 
-        CurrentSocket.Emit("mob_moved", node);
+        CurrentSocket.Emit("mobs_moved", node);
     }
 
     public void SendMobTookDamage(ActorInstance parentActor, Enemy enemyReference)

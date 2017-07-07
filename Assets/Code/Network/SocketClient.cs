@@ -7,6 +7,7 @@ using System;
 
 public class SocketClient : MonoBehaviour
 {
+    private const int BITCH_WAIT_FRAMES = 5;
 
     #region Config
     public bool DebugMode = false;
@@ -255,7 +256,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Bitch Please");
 
         JSONNode data = (JSONNode)args[0];
-        SendBitchPlease(data["key"].Value);
+        StartCoroutine(BitchPleaseCoroutine(data["key"].Value));
     }
 
     protected void OnActorBitch(Socket socket, Packet packet, params object[] args)
@@ -840,6 +841,16 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
         CurrentSocket.Emit("stopped_climbing", node);
+    }
+
+    protected IEnumerator BitchPleaseCoroutine(string requestKey)
+    {
+        // wait for X frames, to make sure the client doesn't have FPS issues
+        for (int i = 0; i < BITCH_WAIT_FRAMES; i++) 
+        {
+            yield return 0;
+        }
+        SendBitchPlease(requestKey);
     }
 
     public void SendBitchPlease(string requestKey)

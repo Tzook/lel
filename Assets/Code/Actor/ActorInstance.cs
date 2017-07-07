@@ -582,7 +582,7 @@ public class ActorInstance : MonoBehaviour
     {
         ItemInfo item = Info.Inventory.GetItemAt(slot);
         int stackPicked = stack - item.Stack;
-        InGameMainMenuUI.Instance.MinilogMessage("Picked up " + stackPicked.ToString("N0") + " '" + item.Name + "'s ");
+        InGameMainMenuUI.Instance.MinilogMessage((stackPicked > 0 ? "Picked up " : "Removed ") + Mathf.Abs(stackPicked).ToString("N0") + " " + item.Name + "s ");
         
         Info.Inventory.ChangeItemStack(slot, stack);
 

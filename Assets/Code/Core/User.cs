@@ -54,12 +54,16 @@ public class User {
     {
         if (!KnownCharacters.ContainsKey(info.Name))
         {
-            KnownCharacters.Add(info.Name, new KnownCharacter(info));
+            KnownCharacter character = new KnownCharacter(info);
+            character.isLoggedIn = true;
+            KnownCharacters.Add(info.Name, character);
         }
         else
         {
             KnownCharacters[info.Name].Info = info;
         }
+
+        
     }
 
     public void RemoveKnownCharacter(string cName)

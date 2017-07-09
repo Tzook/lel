@@ -85,7 +85,6 @@ public class PartyWindowUI : MonoBehaviour {
             }
             else
             {
-                //TODO Get tzook to send known info on logged off chars!
                 tempObj.GetComponent<PartyMemberUI>().SetInfo(partyMembers[i], (partyMembers[i] == LocalUserInfo.Me.CurrentParty.Leader));
             }
     }
@@ -95,5 +94,6 @@ public class PartyWindowUI : MonoBehaviour {
     {
         SocketClient.Instance.SendLeaveParty();
 
+        Close();
     }
 }

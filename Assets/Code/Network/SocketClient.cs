@@ -771,12 +771,12 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value + " has joined the party");
 
+        LocalUserInfo.Me.CurrentParty.Members.Add(data["char_name"].Value);
+
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
         if(actor != null && LocalUserInfo.Me.ClientCharacter != actor)
         {
-
-            LocalUserInfo.Me.CurrentParty.Members.Add(data["char_name"].Value);
             actor.Instance.MovementController.ShowHealth();
         }
 

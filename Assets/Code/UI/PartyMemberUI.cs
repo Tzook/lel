@@ -26,6 +26,7 @@ public class PartyMemberUI : MonoBehaviour {
 
         if (character.isLoggedIn)
         {
+            Debug.Log(character.Info.CurrentRoom + " | " + LocalUserInfo.Me.ClientCharacter.CurrentRoom);
             if (character.Info.CurrentRoom == LocalUserInfo.Me.ClientCharacter.CurrentRoom)
             {
                 HealthBar.transform.parent.gameObject.SetActive(true);

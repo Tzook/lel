@@ -20,20 +20,27 @@ public class PartyMemberUI : MonoBehaviour {
     [SerializeField]
     Text LocationText;
 
+    [SerializeField]
+    GameObject KickIcon;
+
+    KnownCharacter CurrentCharacter;
+
     public void SetInfo(KnownCharacter character, bool isLeader)
     {
+        CurrentCharacter = character;
+
         NameText.text = character.Name;
 
         if (character.isLoggedIn)
         {
-            Debug.Log(character.Info.CurrentRoom + " | " + LocalUserInfo.Me.ClientCharacter.CurrentRoom);
             if (character.Info.CurrentRoom == LocalUserInfo.Me.ClientCharacter.CurrentRoom)
             {
                 HealthBar.transform.parent.gameObject.SetActive(true);
 
                 LocationText.gameObject.SetActive(false);
 
-                SetHealth(character.Info.CurrentHealth / character.Info.MaxHealth);
+
+                SetHealth((character.Info.CurrentHealth*1f) / (character.Info.MaxHealth*1f));
             }
             else
             {
@@ -52,6 +59,7 @@ public class PartyMemberUI : MonoBehaviour {
         }
 
         LeaderIcon.SetActive(isLeader);
+        KickIcon.SetActive(LocalUserInfo.Me.CurrentParty.Leader == LocalUserInfo.Me.ClientCharacter.Name && LocalUserInfo.Me.ClientCharacter.Name != CurrentCharacter.Name);
     }
 
     public void SetInfo(string sName, bool isLeader)
@@ -84,5 +92,11 @@ public class PartyMemberUI : MonoBehaviour {
             SetDed(false);
             HealthBar.fillAmount = HPPrecent;
         }
+    }
+
+    public void KickPlayer()
+    {
+        SocketClient.Instance.SendKickFromParty(CurrentCharacter.Name);
+        this.gameObject.SetActive(false);
     }
 }

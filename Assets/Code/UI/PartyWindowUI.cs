@@ -18,8 +18,6 @@ public class PartyWindowUI : MonoBehaviour {
 
 	public void Open()
     {
-        ClearContainer();
-
         m_Anim.SetBool("isOpen", true);
 
         Refresh();
@@ -52,6 +50,9 @@ public class PartyWindowUI : MonoBehaviour {
 
     public void Refresh()
     {
+        ClearContainer();
+
+
         //Party still exists?
         if (LocalUserInfo.Me.CurrentParty == null || LocalUserInfo.Me.CurrentParty.Members.Count == 0)
         {
@@ -94,6 +95,8 @@ public class PartyWindowUI : MonoBehaviour {
     {
         SocketClient.Instance.SendLeaveParty();
 
-        Close();
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Left The Party", Color.black, false);
+
+        this.gameObject.SetActive(false);
     }
 }

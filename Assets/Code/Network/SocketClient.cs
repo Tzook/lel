@@ -506,6 +506,13 @@ public class SocketClient : MonoBehaviour
         }
         else
         {
+
+            KnownCharacter knownCharacter = LocalUserInfo.Me.GetKnownCharacter(actor.Name);
+            if (knownCharacter != null)
+            {
+                knownCharacter.Info.CurrentHealth = actor.CurrentHealth;
+            }
+
             actor.Instance.Hurt();
             actor.Instance.MovementController.RefreshHealth();
         }
@@ -746,11 +753,21 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value +  " was kicked from party");
 
-        LocalUserInfo.Me.CurrentParty.Members.Remove(data["char_name"].Value);
+        if (LocalUserInfo.Me.ClientCharacter.Name == data["char_name"].Value)
+        {
+            LocalUserInfo.Me.CurrentParty = null;
+            InGameMainMenuUI.Instance.HideParty();
 
-        InGameMainMenuUI.Instance.RefreshParty();
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("You were kicked from the party.", Color.red, true);
+        }
+        else
+        {
+            LocalUserInfo.Me.CurrentParty.Members.Remove(data["char_name"].Value);
 
-        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " was kicked from the party.", Color.green, true);
+            InGameMainMenuUI.Instance.RefreshParty();
+
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " was kicked from the party.", Color.red, true);
+        }
     }
 
     private void OnActorLeaveParty(Socket socket, Packet packet, object[] args)
@@ -1246,9 +1263,6 @@ public class SocketClient : MonoBehaviour
         node["char_name"] = characterName;
 
         CurrentSocket.Emit("invite_to_party", node);
-
-        LocalUserInfo.Me.CurrentParty = null;
-        InGameMainMenuUI.Instance.HideParty();
     }
 
     public void SendKickFromParty(string characterName)

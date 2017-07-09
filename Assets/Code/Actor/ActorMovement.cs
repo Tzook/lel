@@ -38,9 +38,9 @@ public class ActorMovement : MonoBehaviour
 
         HitBox = GetComponent<BoxCollider2D>();
 
-        if (LocalUserInfo.Me.ClientCharacter.CurrentParty != null)
+        if (LocalUserInfo.Me.CurrentParty != null)
         {
-            if (LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Contains(Instance.Info.Name))
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(Instance.Info.Name))
             {
                 ShowHealth();
             }

@@ -53,33 +53,42 @@ public class PartyWindowUI : MonoBehaviour {
     public void Refresh()
     {
         //Party still exists?
-        if (LocalUserInfo.Me.ClientCharacter.CurrentParty == null || LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Count == 0)
+        if (LocalUserInfo.Me.CurrentParty == null || LocalUserInfo.Me.CurrentParty.Members.Count == 0)
         {
-            LocalUserInfo.Me.ClientCharacter.CurrentParty = null;
+            LocalUserInfo.Me.CurrentParty = null;
             this.gameObject.SetActive(false);
             return;
         }
 
-        ActorInfo actor;
+        KnownCharacter knownActor;
         GameObject tempObj;
-        List<string> partyMembers = LocalUserInfo.Me.ClientCharacter.CurrentParty.Members;
+        List<string> partyMembers = LocalUserInfo.Me.CurrentParty.Members;
 
         for (int i = 0; i < partyMembers.Count; i++)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("PartyMemberUI");
             tempObj.transform.SetParent(Container, false);
 
-            actor = Game.Instance.CurrentScene.GetActorByName(partyMembers[i]);//TODO Get actors also not from scene...
-
-            if (actor != null)
+            if (partyMembers[i] == LocalUserInfo.Me.ClientCharacter.Name)
             {
-                tempObj.GetComponent<PartyMemberUI>().SetInfo(actor, (partyMembers[i] == LocalUserInfo.Me.ClientCharacter.CurrentParty.Leader));
+                knownActor = new KnownCharacter(LocalUserInfo.Me.ClientCharacter);
+                knownActor.isLoggedIn = true;
             }
             else
             {
-                tempObj.GetComponent<PartyMemberUI>().SetInfo(partyMembers[i], (partyMembers[i] == LocalUserInfo.Me.ClientCharacter.CurrentParty.Leader));
+                knownActor = LocalUserInfo.Me.GetKnownCharacter(partyMembers[i]);
             }
-        }
+
+            if (knownActor != null)
+            {
+                tempObj.GetComponent<PartyMemberUI>().SetInfo(knownActor, (partyMembers[i] == LocalUserInfo.Me.CurrentParty.Leader));
+            }
+            else
+            {
+                //TODO Get tzook to send known info on logged off chars!
+                tempObj.GetComponent<PartyMemberUI>().SetInfo(partyMembers[i], (partyMembers[i] == LocalUserInfo.Me.CurrentParty.Leader));
+            }
+    }
     }
 
     public void LeaveParty()

@@ -20,15 +20,35 @@ public class PartyMemberUI : MonoBehaviour {
     [SerializeField]
     Text LocationText;
 
-    public void SetInfo(ActorInfo info, bool isLeader)
+    public void SetInfo(KnownCharacter character, bool isLeader)
     {
-        NameText.text = info.Name;
+        NameText.text = character.Name;
 
-        HealthBar.transform.parent.gameObject.SetActive(true);
+        if (character.isLoggedIn)
+        {
+            if (character.Info.CurrentRoom == LocalUserInfo.Me.ClientCharacter.CurrentRoom)
+            {
+                HealthBar.transform.parent.gameObject.SetActive(true);
 
-        LocationText.gameObject.SetActive(false);
+                LocationText.gameObject.SetActive(false);
 
-        SetHealth(info.CurrentHealth / info.MaxHealth);
+                SetHealth(character.Info.CurrentHealth / character.Info.MaxHealth);
+            }
+            else
+            {
+                HealthBar.transform.parent.gameObject.SetActive(false);
+                LocationText.gameObject.SetActive(true);
+                LocationText.text = "In " + character.Info.CurrentRoom;
+            }
+        }
+        else
+        {
+            HealthBar.transform.parent.gameObject.SetActive(false);
+
+            LocationText.gameObject.SetActive(true);
+
+            LocationText.text = "OFFLINE";
+        }
 
         LeaderIcon.SetActive(isLeader);
     }
@@ -41,7 +61,7 @@ public class PartyMemberUI : MonoBehaviour {
 
         LocationText.gameObject.SetActive(true);
 
-        LocationText.text = "NOT IN ROOM";
+        LocationText.text = "OFFLINE";
 
         LeaderIcon.SetActive(isLeader);
     }

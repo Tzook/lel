@@ -89,8 +89,6 @@ public class ActorInfo
 
     public int Gold;
 
-    public Party CurrentParty;
-
     public ActorInfo()
     {
         Equipment = new Equipment(new JSONClass(), this);

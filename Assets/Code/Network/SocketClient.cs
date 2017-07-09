@@ -115,7 +115,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("known_info", OnKnownInfo);
         CurrentSocket.On("known_move_room", OnKnownMoveRoom);
-        CurrentSocket.On("known_logout ", OnKnownLogOut);
+        CurrentSocket.On("known_logout", OnKnownLogOut);
         CurrentSocket.On("known_login", OnKnownLogIn);
 
         LoadingWindowUI.Instance.Register(this);

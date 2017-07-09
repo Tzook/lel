@@ -22,12 +22,12 @@ public class GoldDropWindowUI : MonoBehaviour {
             }
             else
             {
-                ShockMessageUI.Instance.CallMessage("Don't have enough gold!");
+                InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("Don't have enough gold!");
             }
         }
         else
         {
-            ShockMessageUI.Instance.CallMessage("Please type a number in the field.");
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("Please type a number in the field.");
         }
     }
 }

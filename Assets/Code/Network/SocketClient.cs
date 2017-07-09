@@ -153,7 +153,7 @@ public class SocketClient : MonoBehaviour
 
         if (data["display"].AsBool)
         {
-            ShockMessageUI.Instance.CallMessage(data["error"].Value);
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["error"].Value);
         }
     }
 
@@ -722,6 +722,8 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.CurrentParty = new Party(LocalUserInfo.Me.ClientCharacter.Name, members);
 
         InGameMainMenuUI.Instance.ShowParty();
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Created a new party.", Color.black, false);
     }
 
     private void OnActorLeadParty(Socket socket, Packet packet, object[] args)
@@ -734,6 +736,8 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.CurrentParty.Leader = data["char_name"].Value;
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " is the new party leader.", Color.black, false);
     }
 
     private void OnActorKickedFromParty(Socket socket, Packet packet, object[] args)
@@ -745,6 +749,8 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.CurrentParty.Members.Remove(data["char_name"].Value);
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " was kicked from the party.", Color.green, true);
     }
 
     private void OnActorLeaveParty(Socket socket, Packet packet, object[] args)
@@ -763,6 +769,8 @@ public class SocketClient : MonoBehaviour
         }
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has left the party.", Color.red, true);
     }
     
     private void OnActorJoinParty(Socket socket, Packet packet, object[] args)
@@ -781,6 +789,8 @@ public class SocketClient : MonoBehaviour
         }
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has joined the party!", Color.green, true);
     }
 
     private void OnPartyInvitation(Socket socket, Packet packet, object[] args)
@@ -790,6 +800,8 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["leader_name"].Value + " has sent an invitation to party");
 
         InGameMainMenuUI.Instance.AddAcceptDeclineMessage(data["leader_name"].Value + " has invited you to party!", data["leader_name"].Value, SendJoinParty);
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("New party invite!", Color.black, false);
     }
 
 
@@ -853,6 +865,8 @@ public class SocketClient : MonoBehaviour
                 InGameMainMenuUI.Instance.RefreshParty();
             }
         }
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["name"].Value + " is now OFFLINE.", Color.red, true);
     }
 
     private void OnKnownLogIn(Socket socket, Packet packet, object[] args)
@@ -875,6 +889,8 @@ public class SocketClient : MonoBehaviour
                 InGameMainMenuUI.Instance.RefreshParty();
             }
         }
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["name"].Value + " is now ONLINE!", Color.green, true);
     }
 
 

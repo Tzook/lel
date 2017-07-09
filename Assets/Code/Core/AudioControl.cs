@@ -16,6 +16,9 @@ public class AudioControl : MonoBehaviour {
     [SerializeField]
     protected Transform m_tInstancesContainer;
 
+    [SerializeField]
+    protected AudioSource MusicSource;
+
     void Awake()
     {
         m_res = GetComponent<ResourcesLoader>();
@@ -25,6 +28,38 @@ public class AudioControl : MonoBehaviour {
     #endregion
 
     #region Methods
+
+    public void PlayInPosition(string gClip, Vector3 pos)
+    {
+        GameObject currentInstance = null;
+
+        for (int i = 0; i < m_listInstances.Count; i++)
+        {
+            if (!m_listInstances[i].GetComponent<AudioSource>().isPlaying)
+            {
+                currentInstance = m_listInstances[i];
+                break;
+            }
+        }
+
+        if (currentInstance == null)
+        {
+            currentInstance = (GameObject)Instantiate(m_res.GetObject(m_sInstancePrefab));
+            currentInstance.transform.parent = m_tInstancesContainer;
+            m_listInstances.Add(currentInstance);
+        }
+
+        currentInstance.transform.position = pos;
+        currentInstance.GetComponent<AudioSource>().spatialBlend = 1f;
+        currentInstance.GetComponent<AudioSource>().pitch = 1f;
+        currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
+        currentInstance.GetComponent<AudioSource>().Play();
+
+        if (m_dicVolumeGroup.ContainsKey(currentInstance.tag))
+        {
+            currentInstance.GetComponent<AudioSource>().volume = m_dicVolumeGroup[currentInstance.tag];
+        }
+    }
 
     public void Play(string gClip)
     {
@@ -46,6 +81,7 @@ public class AudioControl : MonoBehaviour {
             m_listInstances.Add(currentInstance);
         }
 
+        currentInstance.GetComponent<AudioSource>().spatialBlend = 0f;
         currentInstance.GetComponent<AudioSource>().pitch = 1f;
         currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
         currentInstance.GetComponent<AudioSource>().Play();
@@ -76,6 +112,7 @@ public class AudioControl : MonoBehaviour {
             m_listInstances.Add(currentInstance);
         }
 
+        currentInstance.GetComponent<AudioSource>().spatialBlend = 0f;
         currentInstance.GetComponent<AudioSource>().pitch = 1f;
         currentInstance.GetComponent<AudioSource>().loop = gLoop;
         currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
@@ -108,6 +145,7 @@ public class AudioControl : MonoBehaviour {
             m_listInstances.Add(currentInstance);
         }
 
+        currentInstance.GetComponent<AudioSource>().spatialBlend = 0f;
         currentInstance.GetComponent<AudioSource>().pitch = 1f;
         currentInstance.GetComponent<AudioSource>().loop = gLoop;
         currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
@@ -161,6 +199,7 @@ public class AudioControl : MonoBehaviour {
             m_listInstances.Add(currentInstance);
         }
 
+        currentInstance.GetComponent<AudioSource>().spatialBlend = 0f;
         currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
         currentInstance.GetComponent<AudioSource>().pitch = fPitch;
         currentInstance.GetComponent<AudioSource>().Play();
@@ -168,6 +207,25 @@ public class AudioControl : MonoBehaviour {
         if (m_dicVolumeGroup.ContainsKey(currentInstance.tag))
         {
             currentInstance.GetComponent<AudioSource>().volume = m_dicVolumeGroup[currentInstance.tag];
+        }
+    }
+
+    public void SetMusic(string gClip, float fPitch = 1f)
+    {
+        if(string.IsNullOrEmpty(gClip))
+        {
+            MusicSource.Stop();
+            MusicSource.clip = null;
+            return;
+        }
+
+        MusicSource.pitch = fPitch;
+
+        if(MusicSource.clip == null || MusicSource.clip.name != gClip)
+        {
+            MusicSource.Stop();
+            MusicSource.clip = ResourcesLoader.Instance.GetClip(gClip);
+            MusicSource.Play();
         }
     }
 

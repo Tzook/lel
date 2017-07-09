@@ -229,11 +229,11 @@ public class Game : MonoBehaviour {
 
     public ItemInstance SpawnItem(ItemInfo info, string instanceID, string owner, float x, float y)
     {
-        AudioControl.Instance.Play("impact");
-
         ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
         itemInstance.transform.position = new Vector3(x, y, 0f);
         itemInstance.SetInfo(info, instanceID, owner);
+
+        AudioControl.Instance.PlayInPosition("impact", itemInstance.transform.position);
 
         CurrentScene.Items.Add(instanceID, itemInstance);
 
@@ -349,6 +349,8 @@ public class Game : MonoBehaviour {
         InGameMainMenuUI.Instance.ShowGameUI();
 
         CurrentScene.UpdateAllQuestProgress();
+
+        AudioControl.Instance.SetMusic(SceneInfo.Instance.BGMusic);
 
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());

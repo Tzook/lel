@@ -93,6 +93,12 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     PartyWindowUI PartyWindow;
 
+    [SerializeField]
+    public ShockMessageUI ShockMessageCenter;
+
+    [SerializeField]
+    public ShockMessageUI ShockMessageTop;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;

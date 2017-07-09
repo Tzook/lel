@@ -17,7 +17,7 @@ public class AnimationAssist : MonoBehaviour {
 
     public void PlaySound(string soundKey)
     {
-        AudioControl.Instance.Play(soundKey);
+        AudioControl.Instance.PlayInPosition(soundKey, transform.position);
     }
 
     public void BeginChargeAttack()

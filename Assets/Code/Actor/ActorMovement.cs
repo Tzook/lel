@@ -235,4 +235,9 @@ public class ActorMovement : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        HideHealth();
+    }
+
 }

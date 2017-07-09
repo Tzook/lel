@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour {
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
 
-        AudioControl.Instance.Play(WoundSounds[Random.Range(0, WoundSounds.Count)]);
+        AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
 
         if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour {
 
             CurrentTarget = null;
 
-            AudioControl.Instance.Play(DeathSounds[Random.Range(0, WoundSounds.Count)]);
+            AudioControl.Instance.PlayInPosition(DeathSounds[Random.Range(0, WoundSounds.Count)], transform.position);
 
             UnregisterEnemy();
 

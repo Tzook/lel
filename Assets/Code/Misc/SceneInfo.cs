@@ -8,6 +8,8 @@ public class SceneInfo : MonoBehaviour {
 
     public string NearestTownScene;
 
+    public string BGMusic;
+
     public List<GatePortal> ScenePortals = new List<GatePortal>();
 
     public List<MonsterSpawner> Spawners = new List<MonsterSpawner>();

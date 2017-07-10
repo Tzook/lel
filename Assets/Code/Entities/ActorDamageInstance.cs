@@ -44,7 +44,7 @@ public class ActorDamageInstance : MonoBehaviour {
 
                 //TODO To be replaced with sound based on the actors weapon.
                 int rnd = Random.Range(0, 3);
-                AudioControl.Instance.Play("sound_hit_" + (rnd + 1));
+                AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
 
                 GameObject tempHit;
                 tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");

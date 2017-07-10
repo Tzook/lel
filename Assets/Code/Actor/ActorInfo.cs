@@ -89,8 +89,6 @@ public class ActorInfo
 
     public int Gold;
 
-    public Party CurrentParty;
-
     public ActorInfo()
     {
         Equipment = new Equipment(new JSONClass(), this);
@@ -268,7 +266,7 @@ public class ActorInfo
 
                     if(Equipment.Weapon.SubType != "range")
                     {
-                        ShockMessageUI.Instance.CallMessage("'Range' ability requires a BOW equipped!");
+                        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("'Range' ability requires a BOW equipped!");
                         return false;
                     }
 
@@ -380,12 +378,12 @@ public class ActorInfo
 
                             if (QuestsInProgress[i].WasNowCompleted)
                             {
-                                ShockMessageUI.Instance.CallMessage(QuestsInProgress[i].Name + " Completed!", Color.black, false);
+                                InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(QuestsInProgress[i].Name + " Completed!", Color.black, false);
                             }
                             // if the quest condition wasn't completed already or if it was and now it isn't
                             else if (cond.CurrentProgress - value < cond.TargetProgress || cond.CurrentProgress < cond.TargetProgress)
                             {
-                                ShockMessageUI.Instance.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
+                                InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(Content.Instance.GetItem(type).Name + " " + cond.CurrentProgress + " / " + cond.TargetProgress, Color.black, false);
                             }
 
                             break;
@@ -417,11 +415,11 @@ public class ActorInfo
 
         if (tempQuest.WasNowCompleted)
         {
-            ShockMessageUI.Instance.CallMessage(tempQuest.Name + " Completed!", Color.black, false);
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(tempQuest.Name + " Completed!", Color.black, false);
             return;
         }
 
-        ShockMessageUI.Instance.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
     }
 }
 

@@ -14,7 +14,7 @@ public class ParticlesExecuter : MonoBehaviour {
     {
         if(!string.IsNullOrEmpty(ExecuteSoundKey))
         {
-            AudioControl.Instance.Play(ExecuteSoundKey);
+            AudioControl.Instance.PlayInPosition(ExecuteSoundKey, transform.position);
         }
 
         foreach(ParticleSystem particles in ParticlesList)

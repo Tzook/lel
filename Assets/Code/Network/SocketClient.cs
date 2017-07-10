@@ -114,6 +114,9 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("party_members", OnPartyMembersUpdate);
 
         CurrentSocket.On("known_info", OnKnownInfo);
+        CurrentSocket.On("known_move_room", OnKnownMoveRoom);
+        CurrentSocket.On("known_logout", OnKnownLogOut);
+        CurrentSocket.On("known_login", OnKnownLogIn);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -150,13 +153,15 @@ public class SocketClient : MonoBehaviour
 
         if (data["display"].AsBool)
         {
-            ShockMessageUI.Instance.CallMessage(data["error"].Value);
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["error"].Value);
         }
     }
 
     private void OnDisconnect(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("On disconnect");
+
+        LocalUserInfo.Me.DisposeCurrentCharacter();
     }
 
     protected void OnConnect(Socket socket, Packet packet, params object[] args)
@@ -465,16 +470,19 @@ public class SocketClient : MonoBehaviour
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor Got Wounded");
+        BroadcastEvent("Actor Leveled Up");
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-
 
         if (actor == LocalUserInfo.Me.ClientCharacter)
         {
             AudioControl.Instance.Play("sound_positive2");
 
             InGameMainMenuUI.Instance.MinilogMessage("Leveled Up!");
+        }
+        else
+        {
+            LocalUserInfo.Me.GetKnownCharacter(actor.Name).Info.LVL = data["stats"]["lvl"].AsInt;
         }
 
         actor.Instance.LevelUp();
@@ -498,6 +506,13 @@ public class SocketClient : MonoBehaviour
         }
         else
         {
+
+            KnownCharacter knownCharacter = LocalUserInfo.Me.GetKnownCharacter(actor.Name);
+            if (knownCharacter != null)
+            {
+                knownCharacter.Info.CurrentHealth = actor.CurrentHealth;
+            }
+
             actor.Instance.Hurt();
             actor.Instance.MovementController.RefreshHealth();
         }
@@ -682,9 +697,9 @@ public class SocketClient : MonoBehaviour
 
     private void OnPartyMembersUpdate(Socket socket, Packet packet, object[] args)
     {
-        BroadcastEvent("Register party members");
-
         JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent("Register party members: " + data["chars_names"].Count);
 
         List<string> members = new List<string>();
 
@@ -695,7 +710,7 @@ public class SocketClient : MonoBehaviour
 
         Party party = new Party(data["leader_name"].Value, members);
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty = party;
+        LocalUserInfo.Me.CurrentParty = party;
 
         InGameMainMenuUI.Instance.ShowParty();
     }
@@ -711,9 +726,11 @@ public class SocketClient : MonoBehaviour
 
         members.Add(LocalUserInfo.Me.ClientCharacter.Name);
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty = new Party(LocalUserInfo.Me.ClientCharacter.Name, members);
+        LocalUserInfo.Me.CurrentParty = new Party(LocalUserInfo.Me.ClientCharacter.Name, members);
 
         InGameMainMenuUI.Instance.ShowParty();
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Created a new party.", Color.black, false);
     }
 
     private void OnActorLeadParty(Socket socket, Packet packet, object[] args)
@@ -723,9 +740,11 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty.Leader = data["char_name"].Value;
+        LocalUserInfo.Me.CurrentParty.Leader = data["char_name"].Value;
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " is the new party leader.", Color.black, false);
     }
 
     private void OnActorKickedFromParty(Socket socket, Packet packet, object[] args)
@@ -734,9 +753,21 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value +  " was kicked from party");
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Remove(data["char_name"].Value);
+        if (LocalUserInfo.Me.ClientCharacter.Name == data["char_name"].Value)
+        {
+            LocalUserInfo.Me.CurrentParty = null;
+            InGameMainMenuUI.Instance.HideParty();
 
-        InGameMainMenuUI.Instance.RefreshParty();
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("You were kicked from the party.", Color.red, true);
+        }
+        else
+        {
+            LocalUserInfo.Me.CurrentParty.Members.Remove(data["char_name"].Value);
+
+            InGameMainMenuUI.Instance.RefreshParty();
+
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " was kicked from the party.", Color.red, true);
+        }
     }
 
     private void OnActorLeaveParty(Socket socket, Packet packet, object[] args)
@@ -745,7 +776,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value + " has left the party");
 
-        LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Remove(data["char_name"].Value);
+        LocalUserInfo.Me.CurrentParty.Members.Remove(data["char_name"].Value);
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
@@ -755,6 +786,8 @@ public class SocketClient : MonoBehaviour
         }
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has left the party.", Color.red, true);
     }
     
     private void OnActorJoinParty(Socket socket, Packet packet, object[] args)
@@ -763,16 +796,18 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value + " has joined the party");
 
+        LocalUserInfo.Me.CurrentParty.Members.Add(data["char_name"].Value);
+
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
         if(actor != null && LocalUserInfo.Me.ClientCharacter != actor)
         {
-
-            LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Add(data["char_name"].Value);
             actor.Instance.MovementController.ShowHealth();
         }
 
         InGameMainMenuUI.Instance.RefreshParty();
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has joined the party!", Color.green, true);
     }
 
     private void OnPartyInvitation(Socket socket, Packet packet, object[] args)
@@ -782,6 +817,8 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["leader_name"].Value + " has sent an invitation to party");
 
         InGameMainMenuUI.Instance.AddAcceptDeclineMessage(data["leader_name"].Value + " has invited you to party!", data["leader_name"].Value, SendJoinParty);
+
+        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("New party invite!", Color.black, false);
     }
 
 
@@ -790,8 +827,89 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent("Recieved info on "+data["char"].ToString());
+        BroadcastEvent("Recieved info on "+data.ToString());
+
+        LocalUserInfo.Me.AddKnownCharacter(new ActorInfo(data["character"]));
+
+        if (LocalUserInfo.Me.CurrentParty != null)
+        {
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(data["character"]["name"].Value))
+            {
+                InGameMainMenuUI.Instance.RefreshParty();
+            }
+        }
     }
+
+    private void OnKnownMoveRoom(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent( data["name"].Value + " Moved room to "+ data["room"].Value);
+
+        KnownCharacter knownChar = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+
+        if(knownChar != null)
+        {
+            knownChar.Info.CurrentRoom = data["room"].Value;
+        }
+
+        if (LocalUserInfo.Me.CurrentParty != null)
+        {
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(data["name"].Value))
+            {
+                InGameMainMenuUI.Instance.RefreshParty();
+            }
+        }
+    }
+
+    private void OnKnownLogOut(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["name"].Value + " Logged Out");
+
+        KnownCharacter knownChar = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+
+        if (knownChar != null)
+        {
+            knownChar.isLoggedIn = false;
+        }
+
+        if (LocalUserInfo.Me.CurrentParty != null)
+        {
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(data["name"].Value))
+            {
+                InGameMainMenuUI.Instance.RefreshParty();
+            }
+        }
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["name"].Value + " is now OFFLINE.", Color.red, true);
+    }
+
+    private void OnKnownLogIn(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["name"].Value + " Logged In");
+
+        KnownCharacter knownChar = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+
+        if (knownChar != null)
+        {
+            knownChar.isLoggedIn = true;
+        }
+
+        if (LocalUserInfo.Me.CurrentParty != null)
+        {
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(data["name"].Value))
+            {
+                InGameMainMenuUI.Instance.RefreshParty();
+            }
+        }
+
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["name"].Value + " is now ONLINE!", Color.green, true);
+    }
+
 
 
     #endregion
@@ -1145,9 +1263,6 @@ public class SocketClient : MonoBehaviour
         node["char_name"] = characterName;
 
         CurrentSocket.Emit("invite_to_party", node);
-
-        LocalUserInfo.Me.ClientCharacter.CurrentParty = null;
-        InGameMainMenuUI.Instance.HideParty();
     }
 
     public void SendKickFromParty(string characterName)

@@ -229,11 +229,11 @@ public class Game : MonoBehaviour {
 
     public ItemInstance SpawnItem(ItemInfo info, string instanceID, string owner, float x, float y)
     {
-        AudioControl.Instance.Play("impact");
-
         ItemInstance itemInstance = ResourcesLoader.Instance.GetRecycledObject("ItemInstance").GetComponent<ItemInstance>();
         itemInstance.transform.position = new Vector3(x, y, 0f);
         itemInstance.SetInfo(info, instanceID, owner);
+
+        AudioControl.Instance.PlayInPosition("impact", itemInstance.transform.position);
 
         CurrentScene.Items.Add(instanceID, itemInstance);
 
@@ -350,6 +350,8 @@ public class Game : MonoBehaviour {
 
         CurrentScene.UpdateAllQuestProgress();
 
+        AudioControl.Instance.SetMusic(SceneInfo.Instance.BGMusic);
+
         GameCamera.Instance.InstantFocusCamera();
         yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
 
@@ -380,11 +382,13 @@ public class Game : MonoBehaviour {
 
     private IEnumerator SpawnItemsRoutine(List<ItemInfo> infos, List<string> ids, List<string> owners, float x, float y)
     {
-        SpawnItem(infos[0], ids[0], owners[0], x, y);
+        Rigidbody2D tempRigid;
+
+        tempRigid = SpawnItem(infos[0], ids[0], owners[0], x, y+0.1f).GetComponent<Rigidbody2D>();
+        tempRigid.AddForce(new Vector2(1f, 6f), ForceMode2D.Impulse);
 
         yield return 0;
 
-        Rigidbody2D tempRigid;
         bool ThrowRight = true;
 
         List<ItemInstance> ItemInstances = new List<ItemInstance>();
@@ -393,17 +397,17 @@ public class Game : MonoBehaviour {
         {
             ThrowRight = !ThrowRight;
 
-            tempRigid = SpawnItem(infos[i], ids[i], owners[i], x, y).GetComponent<Rigidbody2D>();
+            tempRigid = SpawnItem(infos[i], ids[i], owners[i], x, y + 0.1f).GetComponent<Rigidbody2D>();
             ItemInstances.Add(tempRigid.GetComponent<ItemInstance>());
 
             float sideOffset = (i + 1) / 2; // round down so both side have equal distances
             if(ThrowRight)
             {
-                tempRigid.AddForce(new Vector2(1f * sideOffset, 4f), ForceMode2D.Impulse);
+                tempRigid.AddForce(new Vector2(1f * sideOffset, 6f), ForceMode2D.Impulse);
             }
             else
             {
-                tempRigid.AddForce(new Vector2(-1f * sideOffset, 4f), ForceMode2D.Impulse);
+                tempRigid.AddForce(new Vector2(-1f * sideOffset, 6f), ForceMode2D.Impulse);
             }
 
             yield return new WaitForSeconds(0.1f);

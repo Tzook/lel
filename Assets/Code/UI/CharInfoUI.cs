@@ -84,7 +84,7 @@ public class CharInfoUI : MonoBehaviour {
 
     public void InviteToParty()
     {
-        if (LocalUserInfo.Me.ClientCharacter.CurrentParty == null)
+        if (LocalUserInfo.Me.CurrentParty == null)
         {
             SocketClient.Instance.SendCreateParty();
         }
@@ -96,12 +96,12 @@ public class CharInfoUI : MonoBehaviour {
 
     public bool CanSendPartyInvite(string charName)
     {
-        if(LocalUserInfo.Me.ClientCharacter.CurrentParty == null)
+        if(LocalUserInfo.Me.CurrentParty == null)
         {
             return true;
         }
 
-        Party party = LocalUserInfo.Me.ClientCharacter.CurrentParty;
+        Party party = LocalUserInfo.Me.CurrentParty;
 
         return (!party.Members.Contains(charName)
                 && party.Leader == LocalUserInfo.Me.ClientCharacter.Name

@@ -17,12 +17,17 @@ public class CharacterSelectionPageUI : MonoBehaviour
     [SerializeField]
     protected Button createCharacterButton;
 
+    [SerializeField]
+    protected GameObject NoCharactersHint;
+
     protected const int MAX_CHARACTERS = 8;
 
     public IEnumerator LoadCharactersCoroutine(User user)
     {
         yield return 0;
         ClearPlayerCharacters();
+
+        NoCharactersHint.gameObject.SetActive(user.Characters.Count <= 0);
 
         for (int i = 0; i < user.Characters.Count; i++)
         {

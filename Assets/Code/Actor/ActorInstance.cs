@@ -481,7 +481,7 @@ public class ActorInstance : MonoBehaviour
         GameObject arrow = ResourcesLoader.Instance.GetRecycledObject("Projectile_Arrow");
 
         arrow.transform.position = Weapon.transform.position;
-        arrow.transform.rotation = m_Chest.transform.rotation;
+        arrow.transform.rotation = TorsoBone.transform.rotation;
         arrow.GetComponent<ProjectileArrow>().Launch(this, isPlayer);
     }
 

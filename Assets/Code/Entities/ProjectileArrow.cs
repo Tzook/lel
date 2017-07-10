@@ -68,7 +68,7 @@ public class ProjectileArrow : MonoBehaviour {
             {
                 CurrentHitbox = TargetCollider.GetComponent<HitBox>();
 
-                AudioControl.Instance.Play("sound_arrow_hit");
+                AudioControl.Instance.PlayInPosition("sound_arrow_hit", transform.position);
 
                 if (TriggerHit)
                 {
@@ -77,7 +77,7 @@ public class ProjectileArrow : MonoBehaviour {
             }
             else
             {
-                AudioControl.Instance.Play("sound_arrow_blunt");
+                AudioControl.Instance.PlayInPosition("sound_arrow_blunt", transform.position);
                 m_Anim.SetTrigger("Bounce");
             }
 

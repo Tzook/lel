@@ -43,6 +43,53 @@ public class User {
 
     public List<ActorInfo> Characters = new List<ActorInfo>();
 
+    public Dictionary<string, KnownCharacter> KnownCharacters = new Dictionary<string, KnownCharacter>();
 
+    public void ClearKnownCharacters()
+    {
+        KnownCharacters.Clear();
+    }
 
+    public void AddKnownCharacter(ActorInfo info)
+    {
+        if (!KnownCharacters.ContainsKey(info.Name))
+        {
+            KnownCharacter character = new KnownCharacter(info);
+            character.isLoggedIn = true;
+            KnownCharacters.Add(info.Name, character);
+        }
+        else
+        {
+            KnownCharacters[info.Name].Info = info;
+        }
+
+        
+    }
+
+    public void RemoveKnownCharacter(string cName)
+    {
+        if (!KnownCharacters.ContainsKey(cName))
+        {
+            KnownCharacters.Remove(cName);
+        }
+    }
+
+    public KnownCharacter GetKnownCharacter(string key)
+    {
+        if(KnownCharacters.ContainsKey(key))
+        {
+            return KnownCharacters[key];
+        }
+
+        return null;
+    }
+
+    public Party CurrentParty;
+
+    public void DisposeCurrentCharacter()
+    {
+        ClientCharacter = null;
+        CurrentParty = null;
+        ClearKnownCharacters();
+    }
 }

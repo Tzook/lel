@@ -38,9 +38,9 @@ public class ActorMovement : MonoBehaviour
 
         HitBox = GetComponent<BoxCollider2D>();
 
-        if (LocalUserInfo.Me.ClientCharacter.CurrentParty != null)
+        if (LocalUserInfo.Me.CurrentParty != null)
         {
-            if (LocalUserInfo.Me.ClientCharacter.CurrentParty.Members.Contains(Instance.Info.Name))
+            if (LocalUserInfo.Me.CurrentParty.Members.Contains(Instance.Info.Name))
             {
                 ShowHealth();
             }
@@ -132,7 +132,7 @@ public class ActorMovement : MonoBehaviour
     {
         if(m_HealthBar != null)
         {
-            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, -HitBox.bounds.max.y), Time.deltaTime * 3f);
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y - ((HitBox.bounds.max.y- HitBox.bounds.min.y)/2f) - 0.25f), Time.deltaTime * 8f);
         }
     }
 
@@ -233,6 +233,11 @@ public class ActorMovement : MonoBehaviour
             m_HealthBar.gameObject.SetActive(false);
             m_HealthBar = null;
         }
+    }
+
+    void OnDestroy()
+    {
+        HideHealth();
     }
 
 }

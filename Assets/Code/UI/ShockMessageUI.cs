@@ -11,14 +11,6 @@ public class ShockMessageUI : MonoBehaviour {
     [SerializeField]
     CanvasGroup m_CanvasGroup;
 
-    public static ShockMessageUI Instance;
-
-    void Awake()
-    {
-        Instance = this;
-        this.gameObject.SetActive(false);
-    }
-
 	public void CallMessage(string content)
     {
         this.gameObject.SetActive(true);

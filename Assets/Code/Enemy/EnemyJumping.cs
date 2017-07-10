@@ -98,7 +98,7 @@ public class EnemyJumping : EnemyMoving
             {
                 yield return StartCoroutine(TryJumpOverRight());
 
-                if (isLeftBlocked())
+                if (isRightBlocked())
                 {
                     break;
                 }
@@ -112,6 +112,7 @@ public class EnemyJumping : EnemyMoving
 
     protected override IEnumerator ChaseTargetRoutine()
     {
+
         float currentDistance = Mathf.NegativeInfinity;
 
         while (currentDistance < MaxChaseDistance)
@@ -136,7 +137,8 @@ public class EnemyJumping : EnemyMoving
                     }
                     else
                     {
-                        WalkRight();
+                        yield return StartCoroutine(WanderRightRotuine());
+                        CurrentAction = AIAction.Chasing;
                     }
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
@@ -151,7 +153,8 @@ public class EnemyJumping : EnemyMoving
                     }
                     else
                     {
-                        WalkLeft();
+                        yield return StartCoroutine(WanderLeftRotuine());
+                        CurrentAction = AIAction.Chasing;
                     }
                 }
             }

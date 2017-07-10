@@ -64,12 +64,16 @@ public class EnemyMoving : Enemy
     {
         SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f, GroundLayerMask);
 
+        Debug.DrawRay(transform.position, transform.right * 1f, Color.red);
+
         return (SideRayRight.normal.x < -0.3f || SideRayRight.normal.x > 0.3f);
     }
 
     public bool isLeftBlocked()
     {
         SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f, GroundLayerMask);
+
+        Debug.DrawRay(transform.position, -transform.right * 1f, Color.red);
 
         return (SideRayLeft.normal.x < -0.3f || SideRayLeft.normal.x > 0.3f);
     }
@@ -255,7 +259,8 @@ public class EnemyMoving : Enemy
                     }
                     else
                     {
-                        WalkRight();
+                        yield return StartCoroutine(WanderRightRotuine());
+                        CurrentAction = AIAction.Chasing;
                     }
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
@@ -266,7 +271,8 @@ public class EnemyMoving : Enemy
                     }
                     else
                     {
-                        WalkLeft();
+                        yield return StartCoroutine(WanderLeftRotuine());
+                        CurrentAction = AIAction.Chasing;
                     }
                 }
             }

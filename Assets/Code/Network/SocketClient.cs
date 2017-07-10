@@ -293,12 +293,12 @@ public class SocketClient : MonoBehaviour
         List<string> idsList = new List<string>();
         List<string> ownersList = new List<string>();
 
-        Debug.Log(data.ToString());
+        //Debug.Log(data.ToString());
 
         for(int i=0;i<data.Count;i++)
         {
             JSONNode item = data[i]["item"];
-            Debug.Log("ITEM - " + item["key"].Value);
+           // Debug.Log("ITEM - " + item["key"].Value);
             infoList.Add(new ItemInfo(Content.Instance.GetItem(item["key"].Value), item["stack"].AsInt));
             idsList.Add(data[i]["item_id"].Value);
             ownersList.Add(data[i]["owner"].Value);
@@ -363,7 +363,7 @@ public class SocketClient : MonoBehaviour
 
         ItemInfo swappedItem = null;
 
-        Debug.Log(data.ToString());
+        //Debug.Log(data.ToString());
 
         if (!string.IsNullOrEmpty(data["equipped_item"]["key"]))
         {
@@ -877,7 +877,7 @@ public class SocketClient : MonoBehaviour
 
     public void SendPickedItem(string ItemID)
     {
-        Debug.Log("picking up " + ItemID);
+        //Debug.Log("picking up " + ItemID);
         JSONNode node = new JSONClass();
 
         node["item_id"] = ItemID;
@@ -931,7 +931,7 @@ public class SocketClient : MonoBehaviour
         node["from"] = fromSlot;
         node["to"].AsInt = toIndex;
 
-        Debug.Log(node);
+        //Debug.Log(node);
 
         CurrentSocket.Emit("unequipped_item", node);
     }

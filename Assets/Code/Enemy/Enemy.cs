@@ -139,8 +139,7 @@ public class Enemy : MonoBehaviour {
             m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
             m_HealthBar.transform.position = transform.position;
         }
-
-        Debug.Log(Info.CurrentHealth + " | " + currentHP + " | " +Info.MaxHealth);
+			
         m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
         Info.CurrentHealth = currentHP;
     }

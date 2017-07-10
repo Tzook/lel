@@ -9,6 +9,9 @@ public class CharspotUI : MonoBehaviour {
     [SerializeField]
     protected Text txtName;
 
+    [SerializeField]
+    protected Text txtInfo;
+
     ActorInstance Actor;
 
     public void Load(ActorInfo info)
@@ -37,6 +40,8 @@ public class CharspotUI : MonoBehaviour {
         Actor.nameHidden = true;
         Actor.UpdateVisual(info);
         txtName.text = info.Name;
+
+        txtInfo.text = "LVL " + info.LVL + " " + info.Class;
     }
 
 }

@@ -103,6 +103,8 @@ public class ActorController : MonoBehaviour
     void Start()
     {
         initScale = Anim.transform.localScale;
+        InturruptAttack();
+
     }
 
     void Update()
@@ -494,7 +496,7 @@ public class ActorController : MonoBehaviour
             }
             else
             {
-                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees);
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees - 4f);
             }
         }
         else
@@ -513,7 +515,7 @@ public class ActorController : MonoBehaviour
             }
             else
             {
-                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees);
+                Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees + 4f);
             }
         }
     }

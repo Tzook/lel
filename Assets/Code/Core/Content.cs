@@ -74,6 +74,7 @@ public class Content : MonoBehaviour {
 
     public Texture2D DefaultCursor;
     public Texture2D ClickableCursor;
+    public Texture2D CrosshairCursor;
 
     public List<string> StartingGear = new List<string>();
 

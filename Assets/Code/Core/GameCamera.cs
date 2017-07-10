@@ -64,27 +64,35 @@ public class GameCamera : MonoBehaviour {
 
         CurrentMouseHit = Physics2D.Raycast(Cam.ScreenToWorldPoint(Input.mousePosition), transform.forward, Mathf.Infinity);
 
-        if(CurrentMouseHit.collider != null)
+
+        if (Input.GetMouseButton(1))
         {
-            if(CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor")
+            Cursor.SetCursor(Content.Instance.CrosshairCursor, Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            if (CurrentMouseHit.collider != null)
             {
-                Cursor.SetCursor(Content.Instance.ClickableCursor, Vector2.zero, CursorMode.Auto);
+                if (CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor")
+                {
+                    Cursor.SetCursor(Content.Instance.ClickableCursor, Vector2.zero, CursorMode.Auto);
+                }
+                else
+                {
+                    Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
+                }
             }
             else
             {
                 Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
             }
-        }
-        else
-        {
-            Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
-        }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (DoubleClickInstance == null)
+            if (Input.GetMouseButtonDown(0))
             {
-                DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
+                if (DoubleClickInstance == null)
+                {
+                    DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
+                }
             }
         }
     }

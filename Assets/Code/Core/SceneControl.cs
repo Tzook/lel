@@ -94,6 +94,11 @@ public class SceneControl
         return null;
     }
 
+    public ActorInfo GetActorByIndex(int index)
+    {
+        return actors[actors.Keys.ElementAt(index)];
+    }
+
     public GatePortal GetPortal(string targetScene)
     {
         for(int i=0;i<Portals.Count;i++)

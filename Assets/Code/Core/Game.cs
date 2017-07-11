@@ -284,7 +284,14 @@ public class Game : MonoBehaviour {
         CurrentScene.Leave(ClientCharacter.GetComponent<ActorInstance>().Info.ID);
 
         ClientCharacter = null;
+    }
 
+    public void RemoveAllOtherPlayerCharacters()
+    {
+        for (int i = 0; i < CurrentScene.ActorCount;i++)
+        {
+            RemoveOtherPlayerCharacter(CurrentScene.GetActorByIndex(i).ID);
+        }
     }
 
     public void RemoveOtherPlayerCharacter(string id)

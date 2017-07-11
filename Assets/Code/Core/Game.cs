@@ -389,42 +389,38 @@ public class Game : MonoBehaviour {
 
     private IEnumerator SpawnItemsRoutine(List<ItemInfo> infos, List<string> ids, List<string> owners, float x, float y)
     {
-        Rigidbody2D tempRigid;
+        float side = 1f;
 
-        tempRigid = SpawnItem(infos[0], ids[0], owners[0], x, y+0.1f).GetComponent<Rigidbody2D>();
-        tempRigid.AddForce(new Vector2(1f, 6f), ForceMode2D.Impulse);
-
-        yield return 0;
-
-        bool ThrowRight = true;
-
-        List<ItemInstance> ItemInstances = new List<ItemInstance>();
-
-        for(int i=1;i<infos.Count;i++)
+        for(int i = 0; i < infos.Count; i++)
         {
-            ThrowRight = !ThrowRight;
+            side *= -1;
 
-            tempRigid = SpawnItem(infos[i], ids[i], owners[i], x, y + 0.1f).GetComponent<Rigidbody2D>();
-            ItemInstances.Add(tempRigid.GetComponent<ItemInstance>());
+            Rigidbody2D tempRigid = SpawnItem(infos[i], ids[i], owners[i], x, y + 0.1f).GetComponent<Rigidbody2D>();
 
-            float sideOffset = (i + 1) / 2; // round down so both side have equal distances
-            if(ThrowRight)
-            {
-                tempRigid.AddForce(new Vector2(1f * sideOffset, 6f), ForceMode2D.Impulse);
-            }
-            else
-            {
-                tempRigid.AddForce(new Vector2(-1f * sideOffset, 6f), ForceMode2D.Impulse);
-            }
+            float sideOffset = side * ((i + 1) / 2); // round down so both side have equal distances
+            tempRigid.AddForce(new Vector2(sideOffset, 6f), ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        if (isBitch && ItemInstances.Count > 0)
+        yield return new WaitForSeconds(2f);
+        // we have an item that moves to the side - we want to update its location once it lands
+        if (isBitch && infos.Count > 1) 
         {
-            yield return new WaitForSeconds(2f);
+            List<ItemInstance> itemInstances = new List<ItemInstance>();
+            for(int i = 1; i < ids.Count; i++)
+            {
+                if (CurrentScene.Items.ContainsKey(ids[i])) 
+                {
+                    itemInstances.Add(CurrentScene.Items[ids[i]]);
+                }
+            }
 
-            SocketClient.Instance.SendItemPositions(ItemInstances);
+            if (itemInstances.Count > 0) 
+            {
+                SocketClient.Instance.SendItemPositions(itemInstances);
+            }
+
         }
     }
 

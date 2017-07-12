@@ -47,6 +47,7 @@ public class GameCamera : MonoBehaviour {
     void Start()
     {
         initPos = transform.position;
+
         InGameMainMenuUI.Instance.SetCurrentCamera(this.Cam);
     }
 
@@ -149,7 +150,7 @@ public class GameCamera : MonoBehaviour {
             }
             else if (this.CamType == CameraType.Static)
             {
-                
+                targetPos = initPos;
             }
             else
             {

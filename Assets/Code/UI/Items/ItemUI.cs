@@ -88,6 +88,16 @@ public class ItemUI : MonoBehaviour {
         InGameMainMenuUI.Instance.isDraggingItem = true;
     }
 
+    public void UnClicked()
+    {
+        if (CurrentItem == null)
+        {
+            return;
+        }
+
+        InGameMainMenuUI.Instance.isDraggingItem = false;
+    }
+
     public void Hover()
     {
         InGameMainMenuUI.Instance.SetHoverSlot(this);

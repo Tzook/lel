@@ -7,42 +7,54 @@ public class ChatboxUI : MonoBehaviour {
     [SerializeField]
     InputField m_txtField;
 
-
-
-	public void Open()
+    public void onDeselectChat()
     {
-        this.gameObject.SetActive(true);
+        // we are no longer in chat, even though the chat is still open.
+        Game.Instance.InChat = false;
+    }
+
+
+    public void ChatClicked()
+    {
+        if (Game.Instance.InChat)
+        {
+            SendChat();
+        }
+        else
+        {
+            OpenChat();
+        }
+    }
+
+    private void SendChat()
+    {
+        if (!string.IsNullOrEmpty(m_txtField.text))
+        {
+            Game.Instance.SendChatMessage(m_txtField.text);
+        }
+        m_txtField.text = "";
+        Hide();
+    }
+
+    private void OpenChat()
+    {
+        ActivateChat();
         m_txtField.Select();
-        m_txtField.ActivateInputField();
         Game.Instance.InChat = true;
     }
 
-    void Update()
+    private void ActivateChat()
     {
-        if (Input.GetKeyDown(InputMap.Map["Chat"]))
+        if (!gameObject.activeInHierarchy)
         {
-            if (!string.IsNullOrEmpty(m_txtField.text))
-            {
-                Game.Instance.SendChatMessage(m_txtField.text);
-                m_txtField.text = "";
-            }
-
-            Hide();
-        }
-
-        if (Input.GetKeyDown(InputMap.Map["Chat"]))
-        {
-            m_txtField.text = "";
-            Hide();
+            gameObject.SetActive(true);
+            m_txtField.ActivateInputField();
         }
     }
 
     public void Hide()
     {
         Game.Instance.InChat = false;
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
-   
-
-
 }

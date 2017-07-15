@@ -157,7 +157,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                     }
                 }
 
-                Game.Instance.InChat = false;
+                chatPanel.onDeselectChat();
                 StatsInfo.Hide();
                 itemInfoPanel.Hide();
             }
@@ -167,6 +167,14 @@ public class InGameMainMenuUI : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Escape) && !DialogManager.Instance.inDialog)
             {
                 menuPanel.SetActive(true);
+            }
+        }
+
+        if (Game.Instance.InGame)
+        {
+            if (Input.GetKeyDown(InputMap.Map["Chat"]))
+            {
+                chatPanel.ChatClicked();
             }
         }
 
@@ -196,14 +204,6 @@ public class InGameMainMenuUI : MonoBehaviour {
                 {
                     equipmentPanel.Hide();
                     itemInfoPanel.Hide();
-                }
-            }
-
-            if (Input.GetKeyDown(InputMap.Map["Chat"]))
-            {
-                if (!chatPanel.gameObject.activeInHierarchy)
-                {
-                    chatPanel.Open();
                 }
             }
 

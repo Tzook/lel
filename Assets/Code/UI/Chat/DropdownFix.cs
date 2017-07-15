@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
-public class DropdownSortingFix : MonoBehaviour 
+public class DropdownFix : MonoBehaviour
 {    
     public void Start()
     {

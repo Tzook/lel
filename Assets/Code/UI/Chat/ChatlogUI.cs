@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class ChatlogUI : MonoBehaviour 
 {
@@ -13,24 +14,18 @@ public class ChatlogUI : MonoBehaviour
     [SerializeField]
     int LogCap = 15;
 
+    private Dictionary<Color, bool> toggleState;
+
     void Awake()
     {
         Instance = this;
+        toggleState = new Dictionary<Color, bool>();
+        toggleState[ChatConfig.COLOR_AREA] = toggleState[ChatConfig.COLOR_PARTY] = toggleState[ChatConfig.COLOR_WHISPER] = true;
     }
 
     internal void AddMessage(string name, string message, Color color)
     {
         AddRow(name + ": \"" + message + "\"", color);
-    }
-
-    internal void AddPartyMessage(string name, string message)
-    {
-        AddRow(name + ": \"" + message + "\"", ChatConfig.COLOR_PARTY);
-    }
-
-    internal void AddWhisper(string name, string message, bool fromTarget)
-    {
-        AddRow(name + (fromTarget ? ">>" : "<<") + ": \"" + message + "\"", ChatConfig.COLOR_WHISPER);
     }
 
     protected void AddRow(string message, Color color)
@@ -39,12 +34,44 @@ public class ChatlogUI : MonoBehaviour
         tempObj.transform.SetParent(Container, false);
         tempObj.transform.SetAsFirstSibling();
         tempObj.GetComponent<ChatPieceUI>().SetMessage(message, color);
+        tempObj.SetActive(toggleState[color]);
 
         if(Container.childCount > LogCap)
         {
             Destroy(Container.GetChild(0));
         }
     }
+
+    public void toggleArea()
+    {
+        toggleChatType(ChatConfig.COLOR_AREA);
+    }
+
+    public void toggleParty()
+    {
+        toggleChatType(ChatConfig.COLOR_PARTY);
+    }
+
+    public void toggleWhisper()
+    {
+        toggleChatType(ChatConfig.COLOR_WHISPER);
+    }
+
+    private void toggleChatType(Color color)
+    {
+        bool value = !toggleState[color];
+        toggleState[color] = value;
+        for (int i = 0; i < Container.childCount; i++)
+        {
+            GameObject child = Container.transform.GetChild(i).gameObject;
+            ChatPieceUI chatPiece = child.GetComponent<ChatPieceUI>();
+            if (chatPiece.color == color)
+            {
+                child.SetActive(value);
+            }
+        }
+    }
+
 
     public void ClearLog()
     {

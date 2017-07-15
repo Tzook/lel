@@ -46,7 +46,7 @@ public class ChatHandler: MonoBehaviour
 
     public void ReceiveWhisper(string name, string message)
     {
-        ChatlogUI.Instance.AddWhisper(name, message, true);
+        // TODO handle
     }
 
     public void SendChatMessage(string text)

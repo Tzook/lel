@@ -2,10 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class MessageBubbleUI : MonoBehaviour {
-
+public class MessageBubbleUI : MonoBehaviour 
+{
     [SerializeField]
     Text m_txtField;
+
+    [SerializeField]
+    Image m_bubbleImage;
 
     [SerializeField]
     CanvasGroup m_CanvasGroup;
@@ -15,7 +18,7 @@ public class MessageBubbleUI : MonoBehaviour {
         StopAllCoroutines();
         this.gameObject.SetActive(true);
         m_txtField.text = content;
-        // TODO set background color of the message
+        m_bubbleImage.color = color;
         StartCoroutine(PopEffect());
     }
 

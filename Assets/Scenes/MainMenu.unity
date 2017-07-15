@@ -5279,7 +5279,6 @@ GameObject:
   - component: {fileID: 1242}
   - component: {fileID: 2612}
   - component: {fileID: 2611}
-  - component: {fileID: 376}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -5340,17 +5339,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d8149c5baa840cc89d3e08d2447311, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &377
 GameObject:
   m_ObjectHideFlags: 0
@@ -8161,6 +8149,7 @@ GameObject:
   - component: {fileID: 1416}
   - component: {fileID: 2924}
   - component: {fileID: 2923}
+  - component: {fileID: 602}
   m_Layer: 5
   m_Name: ChatType
   m_TagString: Untagged
@@ -8185,6 +8174,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9a7620123c74f0293f307465e8cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &606
 GameObject:
   m_ObjectHideFlags: 0
@@ -33833,7 +33833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.48201, y: -124.902664}
+  m_AnchoredPosition: {x: 84.48201, y: -124.90266}
   m_SizeDelta: {x: 168.96402, y: 35.686474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1629
@@ -37914,7 +37914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50253, y: -235.19269}
+  m_AnchoredPosition: {x: 136.50253, y: -235.1927}
   m_SizeDelta: {x: 273.00507, y: 67.197914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1864
@@ -66241,6 +66241,7 @@ GameObject:
   - component: {fileID: 350250771}
   - component: {fileID: 350250770}
   - component: {fileID: 350250769}
+  - component: {fileID: 350250772}
   m_Layer: 5
   m_Name: All
   m_TagString: Untagged
@@ -66374,6 +66375,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 350250767}
+--- !u!114 &350250772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 350250767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9a7620123c74f0293f307465e8cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365367319
 GameObject:
   m_ObjectHideFlags: 0
@@ -70205,9 +70217,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 775806120}
+  - component: {fileID: 775806121}
   - component: {fileID: 775806123}
   - component: {fileID: 775806122}
-  - component: {fileID: 775806121}
+  - component: {fileID: 775806124}
   m_Layer: 5
   m_Name: Whisper
   m_TagString: Untagged
@@ -70324,6 +70337,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &775806124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 775806119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9a7620123c74f0293f307465e8cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &793987524
 GameObject:
   m_ObjectHideFlags: 0
@@ -72144,9 +72168,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1080232340}
+  - component: {fileID: 1080232341}
   - component: {fileID: 1080232343}
   - component: {fileID: 1080232342}
-  - component: {fileID: 1080232341}
+  - component: {fileID: 1080232344}
   m_Layer: 5
   m_Name: Party
   m_TagString: Untagged
@@ -72263,6 +72288,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1080232344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080232339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9a7620123c74f0293f307465e8cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1090779397
 GameObject:
   m_ObjectHideFlags: 0
@@ -74346,9 +74382,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1370875838}
+  - component: {fileID: 1370875839}
   - component: {fileID: 1370875841}
   - component: {fileID: 1370875840}
-  - component: {fileID: 1370875839}
+  - component: {fileID: 1370875842}
   m_Layer: 5
   m_Name: Area
   m_TagString: Untagged
@@ -74465,6 +74502,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1370875842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1370875837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9a7620123c74f0293f307465e8cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1388329266
 GameObject:
   m_ObjectHideFlags: 0

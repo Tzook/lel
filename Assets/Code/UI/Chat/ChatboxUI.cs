@@ -12,6 +12,9 @@ public class ChatboxUI : MonoBehaviour
     InputField m_txtField;
 
     [SerializeField]
+    Toggle m_remainOpenToggle;
+
+    [SerializeField]
     Dropdown m_chatType;
 
     public void Awake()
@@ -23,6 +26,7 @@ public class ChatboxUI : MonoBehaviour
     {
         // we are no longer in chat, even though the chat is still open.
         Game.Instance.InChat = false;
+        Game.Instance.Focus();
     }
 
     public void onSelectChat()
@@ -114,7 +118,10 @@ public class ChatboxUI : MonoBehaviour
 
     public void Hide()
     {
-        Game.Instance.InChat = false;
-        gameObject.SetActive(false);
+        onDeselectChat();
+        if (!m_remainOpenToggle.isOn)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

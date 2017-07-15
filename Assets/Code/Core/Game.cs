@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 //using SimpleJSON;
 
 public class Game : MonoBehaviour {
@@ -69,6 +70,14 @@ public class Game : MonoBehaviour {
         }
 
         Destroy(this.gameObject);
+    }
+
+    public void Focus()
+    {
+        if (!EventSystem.current.alreadySelecting)
+        {
+            EventSystem.current.SetSelectedGameObject(GetComponent<GameObject>(), null);
+        }
     }
 
     #region Items

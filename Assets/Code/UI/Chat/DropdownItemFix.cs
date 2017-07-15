@@ -10,7 +10,7 @@ public class DropdownItemFix : MonoBehaviour, IPointerEnterHandler, IPointerExit
     
     public void Start()
     {
-        Blur();
+        Game.Instance.Focus();
     }
 
     public void Update()
@@ -18,13 +18,8 @@ public class DropdownItemFix : MonoBehaviour, IPointerEnterHandler, IPointerExit
         // the dropdown item has focus by default. We have to disable it
         if (inDropdown)
         {
-            Blur();
+            Game.Instance.Focus();
         }
-    }
-
-    private void Blur()
-    {
-        EventSystem.current.SetSelectedGameObject(Game.Instance.GetComponent<GameObject>(), null);
     }
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)

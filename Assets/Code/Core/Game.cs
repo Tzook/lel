@@ -11,11 +11,13 @@ public class Game : MonoBehaviour {
     public bool InChat = false;
     public bool CanUseUI = true;
     public bool isDraggingWindow = false;
+    public bool isClickingOnUI = false;
     public bool isInteractingWithUI
     {
         get
         {
             return isDraggingWindow
+                    || isClickingOnUI
                     || InGameMainMenuUI.Instance.isDraggingItem
                     || InGameMainMenuUI.Instance.isFullScreenWindowOpen;
         }

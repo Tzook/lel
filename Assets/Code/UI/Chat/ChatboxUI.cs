@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class ChatboxUI : MonoBehaviour 
 {
@@ -41,22 +42,26 @@ public class ChatboxUI : MonoBehaviour
             switch (m_chatType.value) 
             {
                 case (int)ChatConfig.TYPE_AREA:
-                    Debug.Log("Chat message");
                     ChatHandler.Instance.SendChatMessage(m_txtField.text);
+                    m_txtField.text = "";
                     break;
                 case (int)ChatConfig.TYPE_PARTY:
-                    Debug.Log("Chat Party");
                     ChatHandler.Instance.SendPartyMessage(m_txtField.text);
+                    m_txtField.text = "";
                     break;
                 case (int)ChatConfig.TYPE_WHISPER:
-                    Debug.Log("Chat Whisper");
-                    // TODO
-                    // ChatHandler.Instance.SendWhisper(m_txtField.text);
+                    // whisper is built like this: "name text part" => ["name", "text part"]
+                    string[] text = m_txtField.text.Split(new char[] { ' ' }, 2);
+                    if (text.Length == 2 && text[0].Length > 0 && text[1].Length > 0)
+                    {
+                        ChatHandler.Instance.SendWhisper(text[1], text[0]);
+                        m_txtField.text = text[0] + " ";
+
+                    }
                     break;
 
             }
         }
-        m_txtField.text = "";
         Hide();
     }
 
@@ -66,12 +71,6 @@ public class ChatboxUI : MonoBehaviour
         FocusChat();
     }
 
-    public void FocusChat()
-    {
-        m_txtField.Select();
-        Game.Instance.InChat = true;
-    }
-
     private void ActivateChat()
     {
         if (!gameObject.activeInHierarchy)
@@ -79,6 +78,19 @@ public class ChatboxUI : MonoBehaviour
             gameObject.SetActive(true);
             m_txtField.ActivateInputField();
         }
+    }
+
+    public void FocusChat()
+    {
+        m_txtField.Select();
+        Game.Instance.InChat = true;
+        StartCoroutine(MoveCursorToEnd());
+    }
+
+    private IEnumerator MoveCursorToEnd()
+    {
+        yield return 0;
+        m_txtField.MoveTextEnd(false);
     }
 
     public void Hide()

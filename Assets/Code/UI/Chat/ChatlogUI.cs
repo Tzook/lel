@@ -72,7 +72,6 @@ public class ChatlogUI : MonoBehaviour
         }
     }
 
-
     public void ClearLog()
     {
         while(Container.childCount > 0)

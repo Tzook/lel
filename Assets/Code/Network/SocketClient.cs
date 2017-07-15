@@ -53,7 +53,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("bitch_please", OnBitchPlease);
         CurrentSocket.On("actor_bitch", OnActorBitch);
 
-        CurrentSocket.On("shout", OnShout);
         CurrentSocket.On("chat", OnChatMessage);
         CurrentSocket.On("party_chat", OnPartyChat);
         CurrentSocket.On("whisper", OnWhisper);
@@ -227,23 +226,16 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Chat Message!");
 
         JSONNode data = (JSONNode)args[0];
-        ChatHandler.Instance.ReceivePartyMessage(data["name"], data["msg"]);
+        ChatHandler.Instance.ReceivePartyMessage(data["id"], data["name"], data["msg"]);
     }
 
-    protected void OnShout(Socket socket, Packet packet, params object[] args)
-    {
-        BroadcastEvent("Shout Message!");
-
-        JSONNode data = (JSONNode)args[0];
-        ChatHandler.Instance.ReceiveWhisper(data["name"], data["msg"]);
-    }
 
     protected void OnWhisper(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("Whisper Message!");
 
         JSONNode data = (JSONNode)args[0];
-        ChatHandler.Instance.ReceiveWhisper(data["name"], data["msg"]);
+        ChatHandler.Instance.ReceiveWhisper(data["id"], data["name"], data["msg"]);
     }
 
     protected void OnMoveRoom(Socket socket, Packet packet, params object[] args)

@@ -29,7 +29,7 @@ public class DropdownFix : MonoBehaviour
     {
         if (valueChanged)
         {
-            ChatboxUI.Instance.FocusChat(true);
+            ChatboxUI.Instance.FocusChat();
         }
     }
 }

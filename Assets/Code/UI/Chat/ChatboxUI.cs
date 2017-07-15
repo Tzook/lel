@@ -12,6 +12,9 @@ public class ChatboxUI : MonoBehaviour
     InputField m_txtField;
 
     [SerializeField]
+    Text m_placeholderField;
+
+    [SerializeField]
     Toggle m_remainOpenToggle;
 
     [SerializeField]
@@ -20,6 +23,7 @@ public class ChatboxUI : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+        TypeChanged();
     }
 
     public void onDeselectChat()
@@ -79,7 +83,7 @@ public class ChatboxUI : MonoBehaviour
     private void OpenChat()
     {
         ActivateChat();
-        FocusChat(false);
+        FocusChat();
     }
 
     private void ActivateChat()
@@ -91,23 +95,11 @@ public class ChatboxUI : MonoBehaviour
         }
     }
 
-    public void FocusChat(bool valueChanged)
+    public void FocusChat()
     {
         m_txtField.Select();
         Game.Instance.InChat = true;
-        if (shouldHintWhisper(valueChanged))
-        {
-            m_txtField.text = "WhisperName AndTextAfterIt";
-        }
-        else
-        {
-            StartCoroutine(MoveCursorToEnd());
-        }
-    }
-
-    private bool shouldHintWhisper(bool valueChanged)
-    {
-        return valueChanged && m_chatType.value == ChatConfig.TYPE_WHISPER && String.IsNullOrEmpty(m_txtField.text);
+        StartCoroutine(MoveCursorToEnd());
     }
 
     private IEnumerator MoveCursorToEnd()
@@ -123,5 +115,20 @@ public class ChatboxUI : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void CheckShortcuts()
+    {
+        int index = Array.IndexOf(ChatConfig.SHORTCUTS, m_txtField.text);
+        if (index > -1)
+        {
+            m_chatType.value = index;
+            m_txtField.text = "";
+        }
+    }
+
+    public void TypeChanged()
+    {
+        m_placeholderField.text = ChatConfig.PLACEHOLDERS[m_chatType.value];
     }
 }

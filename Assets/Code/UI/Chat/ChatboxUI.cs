@@ -6,11 +6,18 @@ using System;
 
 public class ChatboxUI : MonoBehaviour 
 {
+    public static ChatboxUI Instance;
+
     [SerializeField]
     InputField m_txtField;
 
     [SerializeField]
     Dropdown m_chatType;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     public void onDeselectChat()
     {
@@ -37,19 +44,19 @@ public class ChatboxUI : MonoBehaviour
 
     private void SendChat()
     {
-        if (!string.IsNullOrEmpty(m_txtField.text))
+        if (!String.IsNullOrEmpty(m_txtField.text))
         {
             switch (m_chatType.value) 
             {
-                case (int)ChatConfig.TYPE_AREA:
+                case ChatConfig.TYPE_AREA:
                     ChatHandler.Instance.SendChatMessage(m_txtField.text);
                     m_txtField.text = "";
                     break;
-                case (int)ChatConfig.TYPE_PARTY:
+                case ChatConfig.TYPE_PARTY:
                     ChatHandler.Instance.SendPartyMessage(m_txtField.text);
                     m_txtField.text = "";
                     break;
-                case (int)ChatConfig.TYPE_WHISPER:
+                case ChatConfig.TYPE_WHISPER:
                     // whisper is built like this: "name text part" => ["name", "text part"]
                     string[] text = m_txtField.text.Split(new char[] { ' ' }, 2);
                     if (text.Length == 2 && text[0].Length > 0 && text[1].Length > 0)
@@ -68,7 +75,7 @@ public class ChatboxUI : MonoBehaviour
     private void OpenChat()
     {
         ActivateChat();
-        FocusChat();
+        FocusChat(false);
     }
 
     private void ActivateChat()
@@ -80,11 +87,23 @@ public class ChatboxUI : MonoBehaviour
         }
     }
 
-    public void FocusChat()
+    public void FocusChat(bool valueChanged)
     {
         m_txtField.Select();
         Game.Instance.InChat = true;
-        StartCoroutine(MoveCursorToEnd());
+        if (shouldHintWhisper(valueChanged))
+        {
+            m_txtField.text = "WhisperName AndTextAfterIt";
+        }
+        else
+        {
+            StartCoroutine(MoveCursorToEnd());
+        }
+    }
+
+    private bool shouldHintWhisper(bool valueChanged)
+    {
+        return valueChanged && m_chatType.value == ChatConfig.TYPE_WHISPER && String.IsNullOrEmpty(m_txtField.text);
     }
 
     private IEnumerator MoveCursorToEnd()

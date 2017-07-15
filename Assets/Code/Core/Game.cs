@@ -69,61 +69,6 @@ public class Game : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    #region Chat
-
-    public void ReceiveChatMessage(string actorID, string message)
-    {
-        ActorInfo actorInfo = CurrentScene.GetActor(actorID);
-
-        if (actorInfo != null && actorInfo.Instance)
-        {
-            actorInfo.Instance.ChatBubble(message);
-            ChatlogUI.Instance.AddMessage(actorInfo, message);
-            InGameMainMenuUI.Instance.SetLastChatMessage(message);
-            InGameMainMenuUI.Instance.SetLastChatMessage(actorInfo.Name + " : \"" + message + "\"");
-        }
-        else
-        {
-            Debug.LogError(actorID + " is no longer in the room for this event to occur.");
-        }
-    }
-
-    public void ReceiveWhisper(string name, string message)
-    {
-        ChatlogUI.Instance.AddWhisperFrom(name, message);
-    }
-
-    public void ReceiveWhisperFail(string name)
-    {
-        ChatlogUI.Instance.AddWhisperFail(name);
-    }
-
-    public void SendChatMessage(string text)
-    {
-        SocketClient.Instance.SendChatMessage(text);
-        ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
-        actor.ChatBubble(text);
-        ChatlogUI.Instance.AddMessage(actor.Info, text);
-        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \"" + text + "\"");
-    }
-
-    public void SendPartyMessage(string text)
-    {
-        SocketClient.Instance.SendPartyMessage(text);
-        ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
-        actor.ChatBubble(text);
-        ChatlogUI.Instance.AddMessage(actor.Info, text);
-        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \"" + text + "\"");
-    }
-
-    public void SendWhisper(string givenText, string targetName)
-    {
-        SocketClient.Instance.SendWhisper(givenText, targetName);
-        ChatlogUI.Instance.AddWhisperTo(targetName, givenText);
-    }
-
-    #endregion
-
     #region Items
 
     public void MoveInventoryItem(int from, int to)

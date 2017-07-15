@@ -439,13 +439,13 @@ public class ActorInstance : MonoBehaviour
 
     #endregion
 
-
-    public void ChatBubble(string Message)
+    public void ChatBubble(string Message, Color color)
     {
-        if (Message.Length < 65)
+        if (Message.Length >= 65)
         {
-            MessageBubble.GetComponent<MessageBubbleUI>().PopMessage(Message);
+            Message = Message.Substring(0, 62) + "...";
         }
+        MessageBubble.GetComponent<MessageBubbleUI>().PopMessage(Message, color);
     }
 
     public void SetElementsLayer(string layer = "Default", int minLevel = 0, Material matType = null)

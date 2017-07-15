@@ -5,14 +5,6 @@ using System.Collections.Generic;
 
 public class ChatboxUI : MonoBehaviour 
 {
-    // This is the chat types WITH THE ORDER THEY APPEAR
-    private enum CHAT_TYPES
-    {
-        AREA,
-        PARTY,
-        WHISPER,
-    }
-
     [SerializeField]
     InputField m_txtField;
 
@@ -48,18 +40,18 @@ public class ChatboxUI : MonoBehaviour
         {
             switch (m_chatType.value) 
             {
-                case (int)CHAT_TYPES.AREA:
+                case (int)ChatConfig.TYPE_AREA:
                     Debug.Log("Chat message");
-                    Game.Instance.SendChatMessage(m_txtField.text);
+                    ChatHandler.Instance.SendChatMessage(m_txtField.text);
                     break;
-                case (int)CHAT_TYPES.PARTY:
+                case (int)ChatConfig.TYPE_PARTY:
                     Debug.Log("Chat Party");
-                    Game.Instance.SendPartyMessage(m_txtField.text);
+                    ChatHandler.Instance.SendPartyMessage(m_txtField.text);
                     break;
-                case (int)CHAT_TYPES.WHISPER:
+                case (int)ChatConfig.TYPE_WHISPER:
                     Debug.Log("Chat Whisper");
                     // TODO
-                    // Game.Instance.SendWhisper(m_txtField.text);
+                    // ChatHandler.Instance.SendWhisper(m_txtField.text);
                     break;
 
             }

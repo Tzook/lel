@@ -10,8 +10,9 @@ public class ChatPieceUI : MonoBehaviour {
     [SerializeField]
     Text m_txtContent;
 
-    public void SetMessage(string text)
+    public void SetMessage(string text, Color color)
     {
         m_txtContent.text = text;
+        m_txtContent.color = color;
     }
 }

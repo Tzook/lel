@@ -10,11 +10,12 @@ public class MessageBubbleUI : MonoBehaviour {
     [SerializeField]
     CanvasGroup m_CanvasGroup;
 
-    public void PopMessage(string content)
+    public void PopMessage(string content, Color color)
     {
         StopAllCoroutines();
         this.gameObject.SetActive(true);
         m_txtField.text = content;
+        // TODO set background color of the message
         StartCoroutine(PopEffect());
     }
 

@@ -55,8 +55,8 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("shout", OnShout);
         CurrentSocket.On("chat", OnChatMessage);
+        CurrentSocket.On("party_chat", OnPartyChat);
         CurrentSocket.On("whisper", OnWhisper);
-        CurrentSocket.On("whisper_fail", OnWhisperFail);
 
         CurrentSocket.On("movement", OnMovement);
 
@@ -219,7 +219,15 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Chat Message!");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.ReceiveChatMessage(data["id"], data["msg"]);
+        ChatHandler.Instance.ReceiveChatMessage(data["id"], data["msg"]);
+    }
+
+    protected void OnPartyChat(Socket socket, Packet packet, params object[] args)
+    {
+        BroadcastEvent("Chat Message!");
+
+        JSONNode data = (JSONNode)args[0];
+        ChatHandler.Instance.ReceivePartyMessage(data["name"], data["msg"]);
     }
 
     protected void OnShout(Socket socket, Packet packet, params object[] args)
@@ -227,7 +235,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Shout Message!");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.ReceiveWhisper(data["name"], data["msg"]);
+        ChatHandler.Instance.ReceiveWhisper(data["name"], data["msg"]);
     }
 
     protected void OnWhisper(Socket socket, Packet packet, params object[] args)
@@ -235,15 +243,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Whisper Message!");
 
         JSONNode data = (JSONNode)args[0];
-        Game.Instance.ReceiveWhisper(data["name"], data["msg"]);
-    }
-
-    protected void OnWhisperFail(Socket socket, Packet packet, params object[] args)
-    {
-        BroadcastEvent("Whisper Fail!");
-
-        JSONNode data = (JSONNode)args[0];
-        Game.Instance.ReceiveWhisperFail(data["name"]);
+        ChatHandler.Instance.ReceiveWhisper(data["name"], data["msg"]);
     }
 
     protected void OnMoveRoom(Socket socket, Packet packet, params object[] args)

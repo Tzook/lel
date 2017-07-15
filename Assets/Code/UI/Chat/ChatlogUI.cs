@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class ChatlogUI : MonoBehaviour {
+public class ChatlogUI : MonoBehaviour 
+{
 
     public static ChatlogUI Instance;
 
@@ -17,34 +18,27 @@ public class ChatlogUI : MonoBehaviour {
         Instance = this;
     }
 
-    internal void AddMessage(ActorInfo actorInfo, string message)
+    internal void AddMessage(string name, string message, Color color)
     {
-        AddRow(actorInfo.Name + ": \"" + message + " \"", Color.white);
+        AddRow(name + ": \"" + message + "\"", color);
     }
 
-    internal void AddWhisperTo(string name, string message)
+    internal void AddPartyMessage(string name, string message)
     {
-        // TODO think better how to display whispers
-        AddRow(name + ">>: \"" + message + " \"", Color.blue);
+        AddRow(name + ": \"" + message + "\"", ChatConfig.COLOR_PARTY);
     }
 
-    internal void AddWhisperFrom(string name, string message)
+    internal void AddWhisper(string name, string message, bool fromTarget)
     {
-        // TODO think better how to display whispers
-        AddRow(name + "<<: \"" + message + " \"", Color.blue);
+        AddRow(name + (fromTarget ? ">>" : "<<") + ": \"" + message + "\"", ChatConfig.COLOR_WHISPER);
     }
 
-    internal void AddWhisperFail(string name)
-    {
-        AddRow("Failed sending message to " + name, Color.red);
-    }
-
-    protected void AddRow(string message, Color clr)
+    protected void AddRow(string message, Color color)
     {
         GameObject tempObj = Instantiate(ResourcesLoader.Instance.GetObject("ChatLogPiece"));
         tempObj.transform.SetParent(Container, false);
         tempObj.transform.SetAsFirstSibling();
-        tempObj.GetComponent<ChatPieceUI>().SetMessage(message);
+        tempObj.GetComponent<ChatPieceUI>().SetMessage(message, color);
 
         if(Container.childCount > LogCap)
         {

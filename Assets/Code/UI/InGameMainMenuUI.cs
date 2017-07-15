@@ -290,9 +290,10 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
     }
 
-    public void SetLastChatMessage(string text)
+    public void SetLastChatMessage(string text, Color color)
     {
         LastChatMessageText.text = text;
+        LastChatMessageText.color = color;
     }
 
 

@@ -13,6 +13,11 @@ public class ChatboxUI : MonoBehaviour {
         Game.Instance.InChat = false;
     }
 
+    public void onSelectChat()
+    {
+        Game.Instance.InChat = true;
+    }
+
 
     public void ChatClicked()
     {

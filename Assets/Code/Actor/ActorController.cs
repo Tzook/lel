@@ -109,7 +109,7 @@ public class ActorController : MonoBehaviour
 
     void Update()
     {
-        if (CanInput)
+        if (CanDoAction())
         {
             if (Input.GetMouseButton(1) && !OnRope)
             {
@@ -127,7 +127,7 @@ public class ActorController : MonoBehaviour
 
             for (int i = 0; i < Instance.Info.PrimaryAbilities.Count; i++)
             {
-                if (Input.GetKeyDown(InputMap.Map["PrimaryAbility"+(i+1)]))
+                if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
                 {
                     Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i]);
                     InturruptAttack();
@@ -146,7 +146,7 @@ public class ActorController : MonoBehaviour
 
         if (Input.GetKeyDown(InputMap.Map["Wink Emote"]))
         {
-            if(Instance.EyesEmoteInstance == null)
+            if (Instance.EyesEmoteInstance == null)
             {
                 SocketClient.Instance.SendEmote("eyes", "wink");
                 Instance.PlayEyesEmote("wink");
@@ -203,11 +203,16 @@ public class ActorController : MonoBehaviour
 
     }
 
+    private bool CanDoAction()
+    {
+        return CanInput && !Game.Instance.InChat;
+    }
+
     void LateUpdate()
     {
         CollidingEnemy = null;
 
-        if (CanInput && !Game.Instance.isInteractingWithUI)
+        if (CanDoAction() && !Game.Instance.isInteractingWithUI)
         {
             AttackCharge();
         }
@@ -242,7 +247,7 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
-        if (CanInput)
+        if (CanDoAction())
         {
             if (!OnRope)
             {

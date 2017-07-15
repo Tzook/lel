@@ -1,11 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class ChatboxUI : MonoBehaviour {
+public class ChatboxUI : MonoBehaviour 
+{
+    // This is the chat types WITH THE ORDER THEY APPEAR
+    private enum CHAT_TYPES
+    {
+        AREA,
+        PARTY,
+        WHISPER,
+    }
 
     [SerializeField]
     InputField m_txtField;
+
+    [SerializeField]
+    Dropdown m_chatType;
 
     public void onDeselectChat()
     {
@@ -17,7 +29,6 @@ public class ChatboxUI : MonoBehaviour {
     {
         Game.Instance.InChat = true;
     }
-
 
     public void ChatClicked()
     {
@@ -35,7 +46,23 @@ public class ChatboxUI : MonoBehaviour {
     {
         if (!string.IsNullOrEmpty(m_txtField.text))
         {
-            Game.Instance.SendChatMessage(m_txtField.text);
+            switch (m_chatType.value) 
+            {
+                case (int)CHAT_TYPES.AREA:
+                    Debug.Log("Chat message");
+                    Game.Instance.SendChatMessage(m_txtField.text);
+                    break;
+                case (int)CHAT_TYPES.PARTY:
+                    Debug.Log("Chat Party");
+                    Game.Instance.SendPartyMessage(m_txtField.text);
+                    break;
+                case (int)CHAT_TYPES.WHISPER:
+                    Debug.Log("Chat Whisper");
+                    // TODO
+                    // Game.Instance.SendWhisper(m_txtField.text);
+                    break;
+
+            }
         }
         m_txtField.text = "";
         Hide();
@@ -44,6 +71,11 @@ public class ChatboxUI : MonoBehaviour {
     private void OpenChat()
     {
         ActivateChat();
+        FocusChat();
+    }
+
+    public void FocusChat()
+    {
         m_txtField.Select();
         Game.Instance.InChat = true;
     }

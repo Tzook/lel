@@ -5267,6 +5267,7 @@ GameObject:
   - component: {fileID: 1242}
   - component: {fileID: 2612}
   - component: {fileID: 2611}
+  - component: {fileID: 376}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -5327,6 +5328,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d8149c5baa840cc89d3e08d2447311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &377
 GameObject:
   m_ObjectHideFlags: 0
@@ -8137,6 +8149,7 @@ GameObject:
   - component: {fileID: 1416}
   - component: {fileID: 2924}
   - component: {fileID: 2923}
+  - component: {fileID: 602}
   m_Layer: 5
   m_Name: ChatType
   m_TagString: Untagged
@@ -8161,6 +8174,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 600}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &606
 GameObject:
   m_ObjectHideFlags: 0
@@ -37441,7 +37484,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -40224,7 +40267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 355.3, y: 1.5}
+  m_AnchoredPosition: {x: 350, y: 1.5}
   m_SizeDelta: {x: 97.3, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2009
@@ -42295,6 +42338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_txtField: {fileID: 2265}
+  m_chatType: {fileID: 2923}
 --- !u!114 &2124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59071,8 +59115,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2627}
   m_HandleRect: {fileID: 1837}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.2
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -61536,13 +61580,24 @@ MonoBehaviour:
     m_Options:
     - m_Text: To Area
       m_Image: {fileID: 0}
-    - m_Text: Whisper
+    - m_Text: To Party
       m_Image: {fileID: 0}
-    - m_Text: Global
+    - m_Text: Whisper
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2123}
+        m_MethodName: FocusChat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2924

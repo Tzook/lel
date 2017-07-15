@@ -98,13 +98,22 @@ public class Game : MonoBehaviour {
         ChatlogUI.Instance.AddWhisperFail(name);
     }
 
-    public void SendChatMessage(string givenText)
+    public void SendChatMessage(string text)
     {
-        SocketClient.Instance.SendChatMessage(givenText);
+        SocketClient.Instance.SendChatMessage(text);
         ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
-        actor.ChatBubble(givenText);
-        ChatlogUI.Instance.AddMessage(actor.Info, givenText);
-        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \""+givenText+"\"");
+        actor.ChatBubble(text);
+        ChatlogUI.Instance.AddMessage(actor.Info, text);
+        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \"" + text + "\"");
+    }
+
+    public void SendPartyMessage(string text)
+    {
+        SocketClient.Instance.SendPartyMessage(text);
+        ActorInstance actor = ClientCharacter.GetComponent<ActorInstance>();
+        actor.ChatBubble(text);
+        ChatlogUI.Instance.AddMessage(actor.Info, text);
+        InGameMainMenuUI.Instance.SetLastChatMessage(actor.Info.Name + " : \"" + text + "\"");
     }
 
     public void SendWhisper(string givenText, string targetName)

@@ -985,6 +985,13 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("chatted", node);
     }
 
+    public void SendPartyMessage(string message)
+    {
+        JSONNode node = new JSONClass();
+        node["msg"] = message;
+        CurrentSocket.Emit("party_chatted", node);
+    }
+
     public void SendWhisper(string message, string targetName)
     {
         JSONNode node = new JSONClass();

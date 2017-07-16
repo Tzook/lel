@@ -13,15 +13,17 @@ public class ChatConfig
     public static Color COLOR_WHISPER = new Color(93f / 255f, 183f / 255f, 93f / 255f);
 
     // Shortcuts
-    public const string SHORTCUT_AREA = "\\a";
-    public const string SHORTCUT_PARTY = "\\p";
-    public const string SHORTCUT_WHISPER = "\\w";
+    public const string SHORTCUT_AREA = "/a";
+    public const string SHORTCUT_PARTY = "/p";
+    public const string SHORTCUT_WHISPER = "/w";
+    public const string SHORTCUT_REPLY = "/r";
     // Keep in this order! it's synced with the types
-    public static string[] SHORTCUTS = {SHORTCUT_AREA, SHORTCUT_PARTY, SHORTCUT_WHISPER};
+    public static string[] SHORTCUTS = {SHORTCUT_AREA, SHORTCUT_PARTY, SHORTCUT_WHISPER, /* Keep this one last! */ SHORTCUT_REPLY};
 
-    public const string PLACEHOLDER_GENERAL = "Switch chats with: " + SHORTCUT_AREA + ", " + SHORTCUT_PARTY + " and " + SHORTCUT_WHISPER + ".";
-    public const string PLACEHOLDER_AREA = "Talk to everyone... " + PLACEHOLDER_GENERAL;
-    public const string PLACEHOLDER_PARTY = "Party time! " + PLACEHOLDER_GENERAL;
-    public const string PLACEHOLDER_WHISPER = "Whisper. Example: \"Jon Hi there\". " + PLACEHOLDER_GENERAL;
+    public const string PLACEHOLDER_WELCOME = "Welcome to lul!";
+    public const string PLACEHOLDER_HOW_TO_SWITCH = "Switch chats with: " + SHORTCUT_AREA + " (area), " + SHORTCUT_PARTY + " (party), " + SHORTCUT_WHISPER + " (whisper) and " + SHORTCUT_REPLY + " (reply).";
+    public const string PLACEHOLDER_AREA = "Talk to everyone...";
+    public const string PLACEHOLDER_PARTY = "Party time!";
+    public const string PLACEHOLDER_WHISPER = "Whisper. Example: \"Jon Hi there\"";
     public static string[] PLACEHOLDERS = {PLACEHOLDER_AREA, PLACEHOLDER_PARTY, PLACEHOLDER_WHISPER};
 }

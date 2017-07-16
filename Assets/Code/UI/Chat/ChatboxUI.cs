@@ -20,6 +20,8 @@ public class ChatboxUI : MonoBehaviour
     [SerializeField]
     Dropdown m_chatType;
 
+    public string lastWhisperer = "";
+
     public void Awake()
     {
         Instance = this;
@@ -70,8 +72,7 @@ public class ChatboxUI : MonoBehaviour
                     if (text.Length == 2 && text[0].Length > 0 && text[1].Length > 0)
                     {
                         ChatHandler.Instance.SendWhisper(text[1], text[0]);
-                        m_txtField.text = text[0] + " ";
-
+                        InitWhisperInput(text[0]);
                     }
                     break;
 
@@ -122,9 +123,24 @@ public class ChatboxUI : MonoBehaviour
         int index = Array.IndexOf(ChatConfig.SHORTCUTS, m_txtField.text);
         if (index > -1)
         {
-            m_chatType.value = index;
-            m_txtField.text = "";
+            // if reply, auto fill whisper
+            if (ChatConfig.SHORTCUTS[index] == ChatConfig.SHORTCUT_REPLY)
+            {
+                m_chatType.value = ChatConfig.TYPE_WHISPER;
+                InitWhisperInput(lastWhisperer);
+                StartCoroutine(MoveCursorToEnd());
+            }
+            else
+            {
+                m_chatType.value = index;
+                m_txtField.text = "";
+            }
         }
+    }
+
+    private void InitWhisperInput(string name)
+    {
+        m_txtField.text = name.Length > 0 ? name + " " : "";
     }
 
     public void TypeChanged()

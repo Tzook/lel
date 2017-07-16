@@ -21,6 +21,8 @@ public class ChatlogUI : MonoBehaviour
         Instance = this;
         toggleState = new Dictionary<Color, bool>();
         toggleState[ChatConfig.COLOR_AREA] = toggleState[ChatConfig.COLOR_PARTY] = toggleState[ChatConfig.COLOR_WHISPER] = true;
+        AddRow(ChatConfig.PLACEHOLDER_WELCOME, ChatConfig.COLOR_AREA);
+        AddRow(ChatConfig.PLACEHOLDER_HOW_TO_SWITCH, ChatConfig.COLOR_AREA);
     }
 
     internal void AddMessage(string name, string message, Color color)

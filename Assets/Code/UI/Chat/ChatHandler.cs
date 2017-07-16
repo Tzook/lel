@@ -33,6 +33,7 @@ public class ChatHandler: MonoBehaviour
     {
         ActorInstance actorInstance = GetActorIfInRoom(id);
         ShowMessage(actorInstance, message, ChatConfig.COLOR_WHISPER, name + "<");
+        ChatboxUI.Instance.lastWhisperer = name;
     }
 
     private ActorInstance GetActorIfInRoom(string id)

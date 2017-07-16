@@ -147,4 +147,9 @@ public class ChatboxUI : MonoBehaviour
     {
         m_placeholderField.text = ChatConfig.PLACEHOLDERS[m_chatType.value];
     }
+
+    public bool IsInputFocused()
+    {
+        return m_txtField.isFocused;
+    }
 }

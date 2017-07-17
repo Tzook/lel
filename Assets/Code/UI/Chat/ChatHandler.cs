@@ -68,6 +68,7 @@ public class ChatHandler: MonoBehaviour
 
     private void ShowMyMessage(string text, Color color, string name = "")
     {
+        ChatHistory.Instance.PushHistoryRow(text);
         ActorInstance actor = Game.Instance.ClientCharacter.GetComponent<ActorInstance>();
         ShowMessage(actor, text, color, name);
     }

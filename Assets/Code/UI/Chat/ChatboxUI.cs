@@ -56,7 +56,7 @@ public class ChatboxUI : MonoBehaviour
     {
         if (!String.IsNullOrEmpty(m_txtField.text))
         {
-            switch (m_chatType.value) 
+            switch (m_chatType.value)
             {
                 case ChatConfig.TYPE_AREA:
                     ChatHandler.Instance.SendChatMessage(m_txtField.text);
@@ -67,18 +67,23 @@ public class ChatboxUI : MonoBehaviour
                     m_txtField.text = "";
                     break;
                 case ChatConfig.TYPE_WHISPER:
-                    // whisper is built like this: "name text part" => ["name", "text part"]
-                    string[] text = m_txtField.text.Split(new char[] { ' ' }, 2);
-                    if (text.Length == 2 && text[0].Length > 0 && text[1].Length > 0)
+                    string[] parts = GetWhisperParts();
+                    if (parts.Length == 2 && parts[0].Length > 0 && parts[1].Length > 0)
                     {
-                        ChatHandler.Instance.SendWhisper(text[1], text[0]);
-                        InitWhisperInput(text[0]);
+                        ChatHandler.Instance.SendWhisper(parts[1], parts[0]);
+                        InitWhisperInput(parts[0]);
                     }
                     break;
 
             }
         }
         Hide();
+    }
+
+    private string[] GetWhisperParts()
+    {
+        // whisper is built like this: "name text part" => ["name", "text part"]        
+        return m_txtField.text.Split(new char[] { ' ' }, 2);
     }
 
     private void OpenChat()
@@ -100,17 +105,28 @@ public class ChatboxUI : MonoBehaviour
     {
         m_txtField.Select();
         Game.Instance.InChat = true;
-        StartCoroutine(MoveCursorToEnd());
+        MoveCursorToEnd(true);
     }
 
-    private IEnumerator MoveCursorToEnd()
+
+    private void MoveCursorToEnd(bool coroutine)
     {
-        yield return 0;
+        StartCoroutine(MoveCursorToEndCoroutine(coroutine));
+    }
+
+    private IEnumerator MoveCursorToEndCoroutine(bool coroutine)
+    {
+        if (coroutine) 
+        {
+            yield return 0;
+        }
         m_txtField.MoveTextEnd(false);
+        yield return 1;
     }
 
     public void Hide()
     {
+        ChatHistory.Instance.ResetHistoryIndex();
         onDeselectChat();
         if (!m_remainOpenToggle.isOn)
         {
@@ -128,7 +144,7 @@ public class ChatboxUI : MonoBehaviour
             {
                 m_chatType.value = ChatConfig.TYPE_WHISPER;
                 InitWhisperInput(lastWhisperer);
-                StartCoroutine(MoveCursorToEnd());
+                MoveCursorToEnd(true);
             }
             else
             {
@@ -151,5 +167,20 @@ public class ChatboxUI : MonoBehaviour
     public bool IsInputFocused()
     {
         return m_txtField.isFocused;
+    }
+
+    public void SetInputValue(string value)
+    {
+        if (m_chatType.value == ChatConfig.TYPE_WHISPER)
+        {
+            string[] parts = GetWhisperParts();
+            InitWhisperInput(parts[0]);
+        }
+        else 
+        {
+            m_txtField.text = "";
+        }
+        m_txtField.text += value;
+        MoveCursorToEnd(false);
     }
 }

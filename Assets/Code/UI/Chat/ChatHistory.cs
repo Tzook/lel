@@ -7,56 +7,40 @@ using UnityEngine.EventSystems;
 
 public class ChatHistory : MonoBehaviour 
 {
-    private static ChatHistory Instance;
+    public static ChatHistory Instance;
  
     private bool navigating = false;
 
+    // a list of the chat history sent by the user. looks like this: ["", "third", "second", "first"]
     private List<string> history = new List<string>();
 
-    private int index;
+    private int index = 0;
 
     public void Awake()
     {
         Instance = this;
-        // history.Add("One");
-        // history.Add("Two");
-        // history.Add("Three");
-        // index = 2;
+        // add an empty history value - so when you click down it will put empty if it's the first
+        history.Add("");
     }
 
-    // TODO - 1. add new messages to chat history. 2. clicking up / down should manipulate the chat with history
     public void Update()
     {
         if (!navigating && history.Count > 0 && ChatboxUI.Instance.IsInputFocused())
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                if (index > 0)
+                if (index < history.Count - 1)
                 {
-                    index--;
-                    string current = history[index];
-                    Debug.Log("up - Index is fine - " + current);
-                }
-                else 
-                {
-                    Debug.Log("up - Index crosses");
+                    string current = history[++index];
+                    ChatboxUI.Instance.SetInputValue(current);
                 }
                 StartCoroutine(ThrottleNavigation());
 
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
-                if (index < history.Count - 1)
-                {
-                    index++;
-                    string current = history[index];
-                    Debug.Log("down - Index is fine - " + current);
-                }
-                else 
-                {
-                    string current = "";
-                    Debug.Log("down - Index crosses");
-                }
+                string current = index > 0 ? history[--index] : "";
+                ChatboxUI.Instance.SetInputValue(current);                
                 StartCoroutine(ThrottleNavigation());
             }
         }
@@ -66,7 +50,18 @@ public class ChatHistory : MonoBehaviour
     {
         // disable the input for a few milliseconds, so spamming up / down won't go so much in history
         navigating = true;
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.1f);
         navigating = false;
+    }
+
+    public void PushHistoryRow(string text)
+    {
+        // put the row after the empty line
+        history.Insert(1, text);
+    }
+
+    public void ResetHistoryIndex()
+    {
+        index = 0;
     }
 }

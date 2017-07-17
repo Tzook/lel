@@ -28,6 +28,14 @@ public class ChatboxUI : MonoBehaviour
         TypeChanged();
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) && IsInputFocused())
+        {
+            m_chatType.value = (m_chatType.value + 1) % ChatConfig.TYPES.Length;
+        }
+    }
+
     public void onDeselectChat()
     {
         // we are no longer in chat, even though the chat is still open.

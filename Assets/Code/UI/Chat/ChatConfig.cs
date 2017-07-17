@@ -7,6 +7,8 @@ public class ChatConfig
     public const int TYPE_PARTY = 1;
     public const int TYPE_WHISPER = 2;
 
+    public static int[] TYPES = {TYPE_AREA, TYPE_PARTY, TYPE_WHISPER};
+
     // Chat colors
     public static Color COLOR_AREA = new Color(248f / 255f, 248f / 255f, 248f / 255f);
     public static Color COLOR_PARTY = new Color(248 / 255f, 160f / 255f, 160f / 255f);

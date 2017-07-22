@@ -138,6 +138,8 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public GameObject CurrentDragged;
 
+    public Coroutine FadeCoroutine;
+
     void Awake()
     {
         Instance = this;
@@ -375,6 +377,16 @@ public class InGameMainMenuUI : MonoBehaviour {
             m_DimmerCanvasGroup.alpha -= 2f * Time.deltaTime;
             yield return 0;
         }
+    }
+
+    public Coroutine StartFadeCoroutine(IEnumerator Fade)
+    {
+        if (FadeCoroutine != null) 
+        {
+            StopCoroutine(FadeCoroutine);
+        }
+        FadeCoroutine = StartCoroutine(Fade);
+        return FadeCoroutine;
     }
 
     public void BeginDrag(ItemUI slot)

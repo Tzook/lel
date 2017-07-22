@@ -287,7 +287,7 @@ public class Game : MonoBehaviour {
 
     protected IEnumerator LoadSceneRoutine(string scene, ActorInfo actorInfo)
     {
-        yield return StartCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
+        yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 
         string lastScene = SceneManager.GetActiveScene().name;
 
@@ -317,7 +317,6 @@ public class Game : MonoBehaviour {
 
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
-
         InGameMainMenuUI.Instance.ShowGameUI();
 
         CurrentScene.UpdateAllQuestProgress();
@@ -325,10 +324,10 @@ public class Game : MonoBehaviour {
         AudioControl.Instance.SetMusic(SceneInfo.Instance.BGMusic);
 
         GameCamera.Instance.InstantFocusCamera();
-        yield return StartCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
 
         MovingTroughPortal = false;
         InGame = true;
+        yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
     }
 
     public void SetBitch(bool isbitch)

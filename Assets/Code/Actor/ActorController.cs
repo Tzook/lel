@@ -20,8 +20,7 @@ public class ActorController : MonoBehaviour
     Animator Anim;
 
     [SerializeField]
-    bool ClientOnly = false;
-
+    
     public GatePortal CurrentPortal;
     public BoxCollider2D CurrentRope;
 
@@ -205,7 +204,7 @@ public class ActorController : MonoBehaviour
 
     private bool CanDoAction()
     {
-        return CanInput && !Game.Instance.InChat;
+        return CanInput && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal;
     }
 
     void LateUpdate()
@@ -259,12 +258,12 @@ public class ActorController : MonoBehaviour
                 RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
 
 
-                if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope && !Game.Instance.InChat)
+                if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope)
                 {
                     MoveLeft();
                     Anim.SetBool("Walking", true);
                 }
-                else if (Input.GetKey(InputMap.Map["Move Right"]) && !RightSlope && !Game.Instance.InChat)
+                else if (Input.GetKey(InputMap.Map["Move Right"]) && !RightSlope)
                 {
                     MoveRight();
                     Anim.SetBool("Walking", true);
@@ -274,7 +273,7 @@ public class ActorController : MonoBehaviour
                     StandStill();
                 }
 
-                if (Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat)
+                if (Input.GetKey(InputMap.Map["Jump"]))
                 {
                     Jump();
                     //Anim.SetBool("Walking", true);
@@ -292,7 +291,7 @@ public class ActorController : MonoBehaviour
                     Anim.SetBool("InAir", true);
                 }
 
-                if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                if (Input.GetKey(InputMap.Map["Enter Portal"]))
                 {
                     if (CurrentRope != null && IsCharBelowRope())
                     {
@@ -303,7 +302,7 @@ public class ActorController : MonoBehaviour
                         EnterPortal();
                     }
                 }
-                else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat && CurrentRope != null && IsCharAboveRope())
+                else if (Input.GetKey(InputMap.Map["Climb Down"]) && CurrentRope != null && IsCharAboveRope())
                 {
                     ClimbRope();
                 }
@@ -318,7 +317,7 @@ public class ActorController : MonoBehaviour
                 {
                     transform.position = Vector2.Lerp(transform.position, new Vector2(CurrentRope.transform.position.x, transform.position.y), Time.deltaTime * 5f);
 
-                    if (Input.GetKey(InputMap.Map["Enter Portal"]) && !Game.Instance.InChat)
+                    if (Input.GetKey(InputMap.Map["Enter Portal"]))
                     {
                         // if rope is above our upper body
                         if (IsCharBelowRope())
@@ -333,7 +332,7 @@ public class ActorController : MonoBehaviour
                             UnclimbRope();
                         }
                     }
-                    else if (Input.GetKey(InputMap.Map["Climb Down"]) && !Game.Instance.InChat)
+                    else if (Input.GetKey(InputMap.Map["Climb Down"]))
                     {
                         if (IsCharAboveRope()) 
                         {
@@ -353,7 +352,7 @@ public class ActorController : MonoBehaviour
                         Anim.SetBool("ClimbingDown", false);
                     }
 
-                    if ((Input.GetKey(InputMap.Map["Jump"]) && !Game.Instance.InChat))
+                    if ((Input.GetKey(InputMap.Map["Jump"])))
                     {
                         UnclimbRope();
                     }
@@ -366,7 +365,7 @@ public class ActorController : MonoBehaviour
             StandStill();
         }
 
-        if (!ClientOnly)
+        if (!Game.Instance.MovingTroughPortal)
         {
             if (lastSentPosition != transform.position || lastSentAngle != rotDegrees)
             {
@@ -389,7 +388,7 @@ public class ActorController : MonoBehaviour
 
     private void EnterPortal()
     {
-        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null && !Game.Instance.MovingTroughPortal)
+        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null)
         {
             Game.Instance.MovingTroughPortal = true;
             SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);

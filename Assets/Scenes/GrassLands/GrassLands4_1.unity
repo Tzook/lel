@@ -19773,10 +19773,31 @@ MonoBehaviour:
       Value: FatAlbert
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+      CLR: {r: 0.9411765, g: 0.93124926, b: 0.58131486, a: 1}
     - Title: Not thank you
       Event: EndDialog
       Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: QuestComplete
+    Pieces:
+    - Content: Wow...
+      LetterDelay: 0.03
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: You really took him out!
+      LetterDelay: 0.03
+      Pitch: 1
+      AnimationTrigger: 
+    - Content: I'm impressed! Here's my part of the deal.
+      LetterDelay: 0.02
+      Pitch: 0.85
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: FatAlbert
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}

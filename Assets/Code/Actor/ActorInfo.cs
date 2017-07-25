@@ -277,6 +277,28 @@ public class ActorInfo
         return true;
     }
 
+    public bool CanEquipItem(ItemInfo item)
+    {
+        if (item.Stats.RequiresDEX > this.DEX)
+        {
+            return false;
+        }
+        if (item.Stats.RequiresSTR > this.STR)
+        {
+            return false;
+        }
+        if (item.Stats.RequiresMAG > this.MAG)
+        {
+            return false;
+        }
+        if (item.Stats.RequiresLVL > this.LVL)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public void RefreshBonuses()
     {
         BonusSTR = 0;

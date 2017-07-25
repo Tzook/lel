@@ -42,7 +42,7 @@ public class DialogManager : MonoBehaviour {
 
         SetBlur(true);
 
-        Game.Instance.ClientCharacter.GetComponent<ActorController>().CanInput = false;
+        Game.Instance.ClientCharacter.GetComponent<ActorController>().InteractWithNpc();
         Game.Instance.CanUseUI = false;
 
         CurrentNPCBubble = ResourcesLoader.Instance.GetRecycledObject("NPCBubble");

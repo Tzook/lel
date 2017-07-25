@@ -102,7 +102,7 @@ public class ActorController : MonoBehaviour
     void Start()
     {
         initScale = Anim.transform.localScale;
-        InturruptAttack();
+        EndAttack();
 
     }
 
@@ -130,6 +130,8 @@ public class ActorController : MonoBehaviour
                 {
                     Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i]);
                     InturruptAttack();
+                    EndAttack();
+                    
                 }
             }
 
@@ -210,7 +212,7 @@ public class ActorController : MonoBehaviour
     {
         CollidingEnemy = null;
 
-        if (CanDoAction() && !Game.Instance.isInteractingWithUI)
+        if (CanDoAction() && !Game.Instance.isInteractingWithUI && !OnRope)
         {
             AttackCharge();
         }
@@ -221,22 +223,27 @@ public class ActorController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            switch (Instance.Info.CurrentPrimaryAbility)
-            {
-                case "melee":
-                    {
-                        Anim.SetInteger("AttackType", Random.Range(0, 3));
-                        break;
-                    }
-                case "range":
-                    {
-                        Anim.SetInteger("AttackType", 3);
-                        break;
-                    }
-            }
+            SetAttackAnimation();
         }
 
         Anim.SetBool("Charging", Input.GetMouseButton(0));
+    }
+
+    private void SetAttackAnimation()
+    {
+        switch (Instance.Info.CurrentPrimaryAbility)
+        {
+            case "melee":
+                {
+                    Anim.SetInteger("AttackType", Random.Range(0, 3));
+                    break;
+                }
+            case "range":
+                {
+                    Anim.SetInteger("AttackType", 3);
+                    break;
+                }
+        }
     }
 
     void FixedUpdate()
@@ -396,6 +403,8 @@ public class ActorController : MonoBehaviour
 
     private void ClimbRope()
     {
+        EndAttack();
+        InturruptAttack();
         OnRope = true;
         Anim.SetBool("OnRope", true);
         Rigid.velocity = Vector2.zero;
@@ -403,7 +412,7 @@ public class ActorController : MonoBehaviour
         Instance.SortingGroup.enabled = false;
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         StopAim();
-        InturruptAttack();
+        EndAttack();
 
         SocketClient.Instance.SendStartedClimbing();
     }
@@ -419,6 +428,7 @@ public class ActorController : MonoBehaviour
 
         SocketClient.Instance.SendStoppedClimbing();
     }
+
 
     #endregion
 
@@ -520,13 +530,26 @@ public class ActorController : MonoBehaviour
                 Instance.TorsoBone.transform.rotation = Quaternion.Euler(0, 0, rotDegrees + 4f);
             }
         }
+
     }
 
     private void StopAim()
     {
         Anim.SetBool("Aim", false);
-        Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
-        Instance.TorsoBone.transform.localScale = Vector3.one;
+        
+        
+
+        if (aimRight)
+        {
+            Instance.TorsoBone.transform.localScale = Vector3.one;
+            Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
+        else
+        {
+            Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
+            Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f,0f,180f);
+        }
+
         rotDegrees = 0f;
     }
 
@@ -569,7 +592,6 @@ public class ActorController : MonoBehaviour
 
     public void ActivatePrimaryAbility()
     {
-        InturruptAttack();
 
         switch (Instance.Info.CurrentPrimaryAbility)
         {
@@ -588,6 +610,13 @@ public class ActorController : MonoBehaviour
 
     public void InturruptAttack()
     {
+        SetAttackAnimation();
+        Anim.SetTrigger("InturruptAttack");
+    }
+
+    public void EndAttack()
+    {
+
         Instance.StartCombatMode();
 
         if (LoadAttackValueInstance != null)
@@ -611,6 +640,14 @@ public class ActorController : MonoBehaviour
 
         CanInput = false;
         Game.Instance.CanUseUI = false;
+    }
+
+    public void InteractWithNpc()
+    {
+        InturruptAttack();
+        CanInput = false;
+        Anim.SetBool("ClimbingUp", false);
+        Anim.SetBool("ClimbingDown", false);
     }
 
     #endregion
@@ -663,7 +700,7 @@ public class ActorController : MonoBehaviour
         if (!Invincible)
         {
 
-            InturruptAttack();
+            EndAttack();
 
             SocketClient.Instance.SendTookDMG(enemy.Info);
             Instance.Hurt();

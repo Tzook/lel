@@ -31,8 +31,23 @@ public class ItemInfoUI : MonoBehaviour {
 
         ClearStats();
 
+        if(LocalUserInfo.Me.ClientCharacter.CanEquipItem(info))
+        {
+            txtTitle.color = Color.white;
+            txtDecription.color = Color.white;
+            txtType.color = Color.white;
+            imgIcon.color = Color.white;
+        }
+        else
+        {
+            txtTitle.color = Color.red;
+            txtDecription.color = Color.red;
+            txtType.color = Color.red;
+            imgIcon.color = Color.red;
+        }
+
         this.gameObject.SetActive(true);
-        transform.position = GameCamera.MousePosition;
+        transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z);
         txtTitle.text = info.Name;
         txtDecription.text = info.Description;
         txtType.text = info.Type;

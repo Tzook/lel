@@ -199,7 +199,6 @@ public class ActorController : MonoBehaviour
                 Instance.PlayMouthEmote("surprised");
             }
         }
-
     }
 
     private bool CanDoAction()
@@ -428,10 +427,10 @@ public class ActorController : MonoBehaviour
     public void MoveLeft()
     {
         //TODO Remove if no problems occur
-        //Rigidbody.position += (Vector2.left * InternalSpeed * Time.deltaTime);
+        Rigid.position += (Vector2.left * InternalSpeed * Time.deltaTime);
 
 
-        Rigid.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigid.velocity.y);
+        //Rigid.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigid.velocity.y);
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
         Anim.SetBool("ReverseWalk", aimRight);
@@ -440,9 +439,9 @@ public class ActorController : MonoBehaviour
     public void MoveRight()
     {
         //TODO Remove if no problems occur
-        //Rigidbody.position += (Vector2.right * InternalSpeed * Time.deltaTime);
+        Rigid.position += (Vector2.right * InternalSpeed * Time.deltaTime);
 
-        Rigid.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigid.velocity.y);
+        //Rigid.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigid.velocity.y);
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("ReverseWalk", !aimRight);
@@ -450,7 +449,6 @@ public class ActorController : MonoBehaviour
 
     public void StandStill()
     {
-        Rigid.velocity = new Vector2(0f, Rigid.velocity.y);
     }
 
     public void Jump()
@@ -664,6 +662,9 @@ public class ActorController : MonoBehaviour
     {
         if (!Invincible)
         {
+
+            InturruptAttack();
+
             SocketClient.Instance.SendTookDMG(enemy.Info);
             Instance.Hurt();
 
@@ -674,14 +675,12 @@ public class ActorController : MonoBehaviour
 
             if (enemy.transform.position.x < transform.position.x)
             {
-                Rigid.AddForce((InternalJumpForce * 2f * transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce((InternalJumpForce * 0.5f * transform.right), ForceMode2D.Impulse);
             }
             else
             {
-                Rigid.AddForce((InternalJumpForce * 2f * -transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce((InternalJumpForce * 0.5f * -transform.right), ForceMode2D.Impulse);
             }
-
-            InturruptAttack();
         }
     }
 

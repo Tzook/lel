@@ -87,6 +87,8 @@ public class ActorInstance : MonoBehaviour
     public ActorMovement MovementController;
     public bool nameHidden = false;
 
+    Coroutine BlinkingInstance;
+
     #endregion
 
     #region Public Methods
@@ -151,6 +153,11 @@ public class ActorInstance : MonoBehaviour
         UpdateFace();
         UpdateHair();
         UpdateEquipment();
+
+        if(BlinkingInstance == null)
+        {
+            BlinkingInstance = StartCoroutine(BlinkingRoutine());
+        }
     }
 
     protected void UpadeNameLabel()
@@ -742,6 +749,30 @@ public class ActorInstance : MonoBehaviour
     public void UnbendBow()
     {
         SubWeapon.sprite = ResourcesLoader.Instance.GetSprite(Info.Equipment.Weapon.Sprites.ElementAt(0).Value);
+    }
+
+    private IEnumerator BlinkingRoutine()
+    {
+        float TimeBetweenBlinks;
+        while (true)
+        {
+            TimeBetweenBlinks = Random.Range(1f, 5f);
+            yield return new WaitForSeconds(TimeBetweenBlinks);
+
+            m_Eyes.sprite = null;
+            yield return new WaitForSeconds(0.1f);
+            m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+
+            if (Random.Range(0,3) == 0)
+            {
+                m_Eyes.sprite = null;
+                yield return new WaitForSeconds(0.1f);
+                m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+
+            }
+
+
+        }
     }
 
     #endregion

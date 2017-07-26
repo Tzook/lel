@@ -34,6 +34,7 @@ public class ActorController : MonoBehaviour
     public bool LeftSlope = false;
     public bool RightSlope = false;
     public bool CanInput = true;
+    public bool isAiming;
 
     [SerializeField]
     float GroundedThreshold;
@@ -444,6 +445,12 @@ public class ActorController : MonoBehaviour
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
         Anim.SetBool("ReverseWalk", aimRight);
+
+        if (!isAiming)
+        {
+            Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
+            Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
     }
 
     public void MoveRight()
@@ -455,6 +462,12 @@ public class ActorController : MonoBehaviour
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("ReverseWalk", !aimRight);
+
+        if (!isAiming)
+        {
+            Instance.TorsoBone.transform.localScale = Vector3.one;
+            Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
     }
 
     public void StandStill()
@@ -489,6 +502,7 @@ public class ActorController : MonoBehaviour
         tempRot.Normalize();
         rotDegrees = Mathf.Atan2(tempRot.y, tempRot.x) * Mathf.Rad2Deg;
 
+        isAiming = true;
         Anim.SetBool("Aim", true);
 
         if (rotDegrees < 0 && rotDegrees > -90f || rotDegrees > 0 && rotDegrees < 90f)
@@ -536,7 +550,8 @@ public class ActorController : MonoBehaviour
     private void StopAim()
     {
         Anim.SetBool("Aim", false);
-        
+
+        isAiming = false;
         
 
         if (aimRight)

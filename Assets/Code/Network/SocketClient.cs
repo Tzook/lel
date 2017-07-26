@@ -1199,7 +1199,7 @@ public class SocketClient : MonoBehaviour
         JSONNode node = new JSONClass();
 
         Game.Instance.RemovePlayerCharacter();
-        Game.Instance.RemoveAllOtherPlayerCharacters();
+        Game.Instance.RemoveAllSceneEntityInstances();
 
         CurrentSocket.Emit("release_death", node);
 

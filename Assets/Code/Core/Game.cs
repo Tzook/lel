@@ -251,11 +251,16 @@ public class Game : MonoBehaviour {
         ClientCharacter = null;
     }
 
-    public void RemoveAllOtherPlayerCharacters()
+    public void RemoveAllSceneEntityInstances()
     {
-        for (int i = 0; i < CurrentScene.ActorCount;i++)
+        while(CurrentScene.ActorCount > 0)
         {
-            RemoveOtherPlayerCharacter(CurrentScene.GetActorByIndex(i).ID);
+            RemoveOtherPlayerCharacter(CurrentScene.GetActorByIndex(0).ID);
+        }
+
+        while(CurrentScene.EnemyCount > 0)
+        {
+            RemoveEnemy(CurrentScene.GetEnemyByIndex(0).Info.ID);
         }
     }
 
@@ -266,6 +271,12 @@ public class Game : MonoBehaviour {
         Destroy(leavingPlayer);
 
         CurrentScene.Leave(id);
+    }
+
+    public void RemoveEnemy(string id)
+    {
+        CurrentScene.GetEnemy(id).gameObject.SetActive(false);
+        CurrentScene.RemoveSceneEnemy(CurrentScene.GetEnemy(id));
     }
 
     public void LoadPlayerCharacter(ActorInfo actorInfo)

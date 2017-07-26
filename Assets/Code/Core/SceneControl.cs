@@ -20,6 +20,8 @@ public class SceneControl
 
     public int ActorCount { get { return actors.Count; } }
 
+    public int EnemyCount { get { return Enemies.Count; } }
+
     public void Join(ActorInfo info)
     {
         if (!actors.ContainsKey(info.ID))
@@ -97,6 +99,11 @@ public class SceneControl
     public ActorInfo GetActorByIndex(int index)
     {
         return actors[actors.Keys.ElementAt(index)];
+    }
+
+    public Enemy GetEnemyByIndex(int index)
+    {
+        return Enemies[index];
     }
 
     public GatePortal GetPortal(string targetScene)

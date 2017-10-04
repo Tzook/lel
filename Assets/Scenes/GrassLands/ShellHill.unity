@@ -17905,24 +17905,12 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hmm...?
+    - Content: '...?'
       LetterDelay: 0.03
       Pitch: 1.1
       AnimationTrigger: 
     Options:
-    - Title: Turtle Challenge
-      Event: StartDialog
-      Value: TurtleChallenge
-      Condition: QuestAvailable
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
-    - Title: Complete Quest
-      Event: StartDialog
-      Value: TurtleChallengeComplete
-      Condition: QuestComplete
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.8951319, b: 0.30882353, a: 1}
-    - Title: Nothing...
+    - Title: '...!'
       Event: EndDialog
       Value: 
       Condition: 
@@ -30734,24 +30722,12 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hmm...?
+    - Content: '...'
       LetterDelay: 0.03
-      Pitch: 1.1
+      Pitch: 1
       AnimationTrigger: 
     Options:
-    - Title: Turtle Challenge
-      Event: StartDialog
-      Value: TurtleChallenge
-      Condition: QuestAvailable
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
-    - Title: Complete Quest
-      Event: StartDialog
-      Value: TurtleChallengeComplete
-      Condition: QuestComplete
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.8951319, b: 0.30882353, a: 1}
-    - Title: Nothing...
+    - Title: '...'
       Event: EndDialog
       Value: 
       Condition: 
@@ -37231,7 +37207,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153402374}
-  m_LocalRotation: {x: -0, y: -0, z: -0.117886126, w: 0.9930271}
+  m_LocalRotation: {x: -0, y: -0, z: -0.11788613, w: 0.99302715}
   m_LocalPosition: {x: -0.43, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -49570,24 +49546,12 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hmm...?
+    - Content: '...!'
       LetterDelay: 0.03
       Pitch: 1.1
       AnimationTrigger: 
     Options:
-    - Title: Turtle Challenge
-      Event: StartDialog
-      Value: TurtleChallenge
-      Condition: QuestAvailable
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
-    - Title: Complete Quest
-      Event: StartDialog
-      Value: TurtleChallengeComplete
-      Condition: QuestComplete
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.8951319, b: 0.30882353, a: 1}
-    - Title: Nothing...
+    - Title: '...?'
       Event: EndDialog
       Value: 
       Condition: 
@@ -73251,24 +73215,65 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hmm...?
+    - Content: Well met!
       LetterDelay: 0.03
-      Pitch: 1.1
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: I assume you came here to join the royal army!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: You are in the right place!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: We will have a use for a few more recruits, I can tell you that!
+      LetterDelay: 0.03
+      Pitch: 0.8
       AnimationTrigger: 
     Options:
-    - Title: Turtle Challenge
+    - Title: I wish to become a warrior.
       Event: StartDialog
-      Value: TurtleChallenge
-      Condition: QuestAvailable
-      ConditionValue: turtleProblem
+      Value: BecomingWarrior
+      Condition: 
+      ConditionValue: 
       CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
-    - Title: Complete Quest
+    - Title: Nope.
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: BecomingWarrior
+    Pieces:
+    - Content: That's good for you but are you capable of doing so?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Let's see, are you experienced enough in combat? (Level 10)
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Are you one of a kind when it comes to the sword?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: Are you even capable of holding a sword?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: If so, then you might be ready...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    Options:
+    - Title: I wish to become a warrior.
       Event: StartDialog
-      Value: TurtleChallengeComplete
-      Condition: QuestComplete
-      ConditionValue: turtleProblem
-      CLR: {r: 1, g: 0.8951319, b: 0.30882353, a: 1}
-    - Title: Nothing...
+      Value: BecomingWarrior
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
+    - Title: Nope.
       Event: EndDialog
       Value: 
       Condition: 

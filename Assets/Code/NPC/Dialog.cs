@@ -20,6 +20,8 @@ public class DialogPiece
 
     public float Pitch = 1f;
 
+    public string SoundKey;
+
     public string AnimationTrigger = "";
 }
 

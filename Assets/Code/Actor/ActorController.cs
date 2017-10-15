@@ -674,6 +674,10 @@ public class ActorController : MonoBehaviour
         {
             CurrentPortal = obj.GetComponent<GatePortal>();
         }
+        else if(obj.tag == "StrobeObject")
+        {
+            obj.GetComponent<PlayerStayStrobe>().Activate();
+        }
         else if (obj.tag == "Rope")
         {
             CurrentRope = obj as BoxCollider2D;
@@ -695,6 +699,10 @@ public class ActorController : MonoBehaviour
         if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
         {
             CurrentPortal = null;
+        }
+        else if (obj.tag == "StrobeObject")
+        {
+            obj.GetComponent<PlayerStayStrobe>().Deactivate();
         }
         else if (obj.tag == "Rope" && CurrentRope == obj.GetComponent<BoxCollider2D>())
         {

@@ -29584,6 +29584,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Banbo sent me...
+      Event: StartDialog
+      Value: BanboSent
+      Condition: QuestInProgress
+      ConditionValue: carrotSupply
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: AskSomeoneElse
     Pieces:
     - Content: I'll be happy-
@@ -29608,6 +29614,27 @@ MonoBehaviour:
       AnimationTrigger: 
     - Content: Go and ask some other turtle!
       LetterDelay: 0.025
+      Pitch: 0.8
+      AnimationTrigger: 
+    Options:
+    - Title: Leave
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: BanboSent
+    Pieces:
+    - Content: Oh Banbo
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: There you go...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      AnimationTrigger: 
+    - Content: What happend to the old errand boy?
+      LetterDelay: 0.03
       Pitch: 0.8
       AnimationTrigger: 
     Options:
@@ -34904,7 +34931,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: RabbitRaids
     Pieces:
-    - Content: Hey handsome!
+    - Content: Hey!
       LetterDelay: 0.03
       Pitch: 0.8
       AnimationTrigger: 

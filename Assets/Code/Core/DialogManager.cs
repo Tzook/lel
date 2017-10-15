@@ -140,6 +140,11 @@ public class DialogManager : MonoBehaviour {
                 currentNPC.TriggerAnimation(CurrentDialog.Pieces[i].AnimationTrigger);
             }
 
+            if(!string.IsNullOrEmpty(CurrentDialog.Pieces[i].SoundKey))
+            {
+                AudioControl.Instance.Play(CurrentDialog.Pieces[i].SoundKey);
+            }
+
             //Display text on bubble
             while (BubbleText.text.Length < CurrentDialog.Pieces[i].Content.Length)
             {

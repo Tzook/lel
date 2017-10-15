@@ -47201,6 +47201,28 @@ MonoBehaviour:
     - PartKey: weapon
       SpritePlaceable: {fileID: 0}
       Sprite: fishing_pole
+  - Key: carrotSack
+    Name: Supply Of Carrots
+    Description: A sack filled with carrots
+    IconPlaceable: {fileID: 21300044, guid: d2b99573d91a11a4db48ba7066505059, type: 3}
+    Icon: GrassLandsAssets_04_22
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 0
+    GoldValue: 0
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with
@@ -47401,6 +47423,33 @@ MonoBehaviour:
       Icon: {fileID: 0}
     RewardClass: 
     RewardExp: 350
+  - Name: Carrot Supply
+    Key: carrotSupply
+    InProgressDescription: Without Banbo's supply chain, there will be no food in
+      Shell Hill, so this task must be important, I must speak to one of the farmers
+      at the carrot farm right outside of town and get a supply of carrots from them.
+    QuestCompleteDescription: Banbo once sent me to pick up supplies from the carrot
+      farm outside of town.
+    FacePrefab: BanboQuest
+    Conditions:
+    - Condition: loot
+      Type: carrotSack
+      CurrentProgress: 0
+      TargetProgress: 1
+    RequiredCompletedQuests: []
+    RequiredClass: 
+    MinimumLevel: 5
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+    RewardClass: 
+    RewardExp: 50
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78710,7 +78759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -339.19995, y: -139.8002}
+  m_AnchoredPosition: {x: -339.19995, y: -139.80023}
   m_SizeDelta: {x: -678.4, y: -313.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2054930169

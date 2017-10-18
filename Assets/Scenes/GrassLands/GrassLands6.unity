@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 57555339}
   - component: {fileID: 57555338}
   m_Layer: 14
-  m_Name: NPC (1)
+  m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,8 +504,8 @@ MonoBehaviour:
     - Title: I wish to become a warrior.
       Event: StartDialog
       Value: BecomingWarrior
-      Condition: 
-      ConditionValue: 
+      Condition: QuestAvailable
+      ConditionValue: becomingWarrior
       CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
     - Title: Nope.
       Event: EndDialog
@@ -513,6 +513,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I've completed the task.
+      Event: StartDialog
+      Value: CompleteWarriorTask
+      Condition: QuestComplete
+      ConditionValue: becomingWarrior
+      CLR: {r: 1, g: 0.9607844, b: 0.654902, a: 1}
   - DialogKey: BecomingWarrior
     Pieces:
     - Content: That's good for you but are you capable of doing so?
@@ -541,11 +547,11 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: I wish to become a warrior.
-      Event: StartDialog
-      Value: BecomingWarrior
-      Condition: 
-      ConditionValue: 
+    - Title: I am.
+      Event: StartQuest
+      Value: becomingWarrior
+      Condition: QuestAvailable
+      ConditionValue: becomingWarrior
       CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
     - Title: Nope.
       Event: EndDialog
@@ -553,7 +559,42 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
+  - DialogKey: CompleteWarriorTask
+    Pieces:
+    - Content: You did?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Oh well...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I didn't think you would to be honest...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Alright then...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You deserve it!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: becomingWarrior
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9618661, b: 0.6544118, a: 1}
+  GivingQuests:
+  - becomingWarrior
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
@@ -9766,7 +9807,7 @@ Prefab:
     - target: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
         type: 2}
       propertyPath: TargetLevel
-      value: GrassLands4
+      value: ShellHill
       objectReference: {fileID: 0}
     - target: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5, type: 2}
       propertyPath: m_LocalScale.x

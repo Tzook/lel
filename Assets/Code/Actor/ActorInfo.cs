@@ -214,6 +214,8 @@ public class ActorInfo
 
         this.EXP = node["exp"].AsInt;
 
+        this.Class = node["class"].Value;
+
         this.STR = node["str"].AsInt;
         this.MAG = node["mag"].AsInt;
         this.DEX = node["dex"].AsInt;

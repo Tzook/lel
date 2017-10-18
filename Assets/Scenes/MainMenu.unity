@@ -9627,7 +9627,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.015686275, g: 0.101960786, b: 0.17254902, a: 0.019607844}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -34727,7 +34727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.48201, y: -124.902664}
+  m_AnchoredPosition: {x: 84.48201, y: -124.90266}
   m_SizeDelta: {x: 168.96402, y: 35.686474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1629
@@ -35027,7 +35027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 342.75, y: 187.43}
+  m_AnchoredPosition: {x: 342.75, y: 187.43001}
   m_SizeDelta: {x: -685.5, y: -374.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1647
@@ -38808,7 +38808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50253, y: -235.19269}
+  m_AnchoredPosition: {x: 136.50253, y: -235.1927}
   m_SizeDelta: {x: 273.00507, y: 67.197914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1864
@@ -47381,7 +47381,7 @@ MonoBehaviour:
       TargetProgress: 4
     RequiredCompletedQuests: []
     RequiredClass: 
-    MinimumLevel: 4
+    MinimumLevel: 0
     RewardItems:
     - ItemKey: gold
       MinStack: 60
@@ -47451,6 +47451,26 @@ MonoBehaviour:
       Name: 
       Icon: {fileID: 0}
     RewardClass: 
+    RewardExp: 50
+  - Name: Become a Warrior
+    Key: becomingWarrior
+    InProgressDescription: Complete this quest to become a warrior...
+    QuestCompleteDescription: I've had to complete this task to become a warrior.
+    FacePrefab: WarriorQuest
+    Conditions: []
+    RequiredCompletedQuests: []
+    RequiredClass: adventurer
+    MinimumLevel: 0
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+    RewardClass: warrior
     RewardExp: 50
 --- !u!114 &2254
 MonoBehaviour:
@@ -66565,7 +66585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 15.800049, y: 17.450012}
+  m_AnchoredPosition: {x: 15.800049, y: 17.449951}
   m_SizeDelta: {x: 29.482, y: 25.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172753073
@@ -77084,7 +77104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -384.20007, y: -129.09}
+  m_AnchoredPosition: {x: -384.20004, y: -129.09}
   m_SizeDelta: {x: -769.46, y: -262.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482446311
@@ -80225,7 +80245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -339.19995, y: -139.80023}
+  m_AnchoredPosition: {x: -339.19995, y: -139.80022}
   m_SizeDelta: {x: -678.4, y: -313.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2054930169

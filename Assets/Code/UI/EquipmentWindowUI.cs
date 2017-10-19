@@ -55,6 +55,11 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
 
         StartCoroutine(OpenRoutine());
     }
+
+    public void Open()
+    {
+        Open(LocalUserInfo.Me.ClientCharacter);
+    }
     
     public void Hide()
     {

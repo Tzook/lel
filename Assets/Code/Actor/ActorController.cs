@@ -633,6 +633,7 @@ public class ActorController : MonoBehaviour
 
     public void InturruptAttack()
     {
+        EndAttack();
         SetAttackAnimation();
         Anim.SetTrigger("InturruptAttack");
     }

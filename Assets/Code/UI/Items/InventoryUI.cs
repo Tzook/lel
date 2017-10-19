@@ -40,6 +40,11 @@ public class InventoryUI : ItemSlotsContainerUI
         RefreshInventory();
     }
 
+    public void ShowInventory()
+    {
+        ShowInventory(LocalUserInfo.Me.ClientCharacter);
+    }
+
     public void RefreshInventory()
     {
         Clear();

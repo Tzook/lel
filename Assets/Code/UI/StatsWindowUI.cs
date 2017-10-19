@@ -31,6 +31,11 @@ public class StatsWindowUI : MonoBehaviour
         Refresh(info);
     }
 
+    public void Show()
+    {
+        Show(LocalUserInfo.Me.ClientCharacter);
+    }
+
     public void Refresh(ActorInfo info)
     {
         this.EXPText.text = info.EXP.ToString("N0");

@@ -38,6 +38,22 @@ public class GameCamera : MonoBehaviour {
     public static GameCamera Instance;
     public static Vector3 MousePosition;
 
+    public bool HoveringOnInteractable
+    {
+        get
+        {
+            return CurrentMouseHit.collider != null && isMouseHitInteractable;
+        }
+    }
+
+    bool isMouseHitInteractable
+    {
+        get
+        {
+            return CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor";
+        }
+    }
+
 	void Awake()
     {
         Instance = this;
@@ -74,7 +90,7 @@ public class GameCamera : MonoBehaviour {
         {
             if (CurrentMouseHit.collider != null)
             {
-                if (CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor")
+                if (isMouseHitInteractable)
                 {
                     Cursor.SetCursor(Content.Instance.ClickableCursor, Vector2.zero, CursorMode.Auto);
                 }
@@ -87,13 +103,13 @@ public class GameCamera : MonoBehaviour {
             {
                 Cursor.SetCursor(Content.Instance.DefaultCursor, Vector2.zero, CursorMode.Auto);
             }
+        }
 
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && HoveringOnInteractable && !InGameMainMenuUI.Instance.isWindowOpen)
+        {
+            if (DoubleClickInstance == null)
             {
-                if (DoubleClickInstance == null)
-                {
-                    DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
-                }
+                DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
             }
         }
     }

@@ -142,6 +142,8 @@ public class Enemy : MonoBehaviour {
 			
         m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
         Info.CurrentHealth = currentHP;
+
+        m_AlphaGroup.BlinkDamage();
     }
 
     public virtual void Death()

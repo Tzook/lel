@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpriteAlphaGroup : MonoBehaviour {
 
     public float Alpha;
+
+    Color OriginalColor;
 
     public void SetAlpha(float fValue)
     {
@@ -59,5 +60,43 @@ public class SpriteAlphaGroup : MonoBehaviour {
         {
             RefreshChildrenAlpha(currentChild.transform.GetChild(i));
         }
+    }
+
+
+    protected void SetChildrenColor(Transform currentChild, Color clr)
+    {
+        SpriteRenderer renderer = currentChild.GetComponent<SpriteRenderer>();
+
+        if (renderer != null)
+        {
+            renderer.color = clr;
+        }
+
+        for (int i = 0; i < currentChild.transform.childCount; i++)
+        {
+            SetChildrenColor(currentChild.transform.GetChild(i), clr);
+        }
+    }
+
+    Coroutine BlinkDamageInstance;
+    public void BlinkDamage()
+    {
+        if(BlinkDamageInstance != null)
+        {
+            StopCoroutine(BlinkDamageInstance);
+        }
+
+        BlinkDamageInstance = StartCoroutine(BlinkDamageRoutine());
+    }
+
+    private IEnumerator BlinkDamageRoutine()
+    {
+        SetChildrenColor(transform, Color.black);
+
+        yield return new WaitForSeconds(0.05f);
+
+        SetChildrenColor(transform, Color.white);
+
+        BlinkDamageInstance = null;
     }
 }

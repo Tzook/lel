@@ -76,6 +76,8 @@ public class ActorController : MonoBehaviour
 
     public Enemy CollidingEnemy;
 
+    float AimTimeout;
+
     float LoadAttackValue = 0f;
     Coroutine LoadAttackValueInstance;
 
@@ -111,14 +113,15 @@ public class ActorController : MonoBehaviour
     {
         if (CanDoAction())
         {
-            if (Input.GetMouseButton(1) && !OnRope)
+            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !OnRope)
             {
                 Aim();
             }
-            else if (Input.GetMouseButtonUp(1))
+            else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
             {
                 StopAim();
             }
+
 
             if (Input.GetKeyDown(InputMap.Map["Pick Up"]))
             {
@@ -201,6 +204,11 @@ public class ActorController : MonoBehaviour
                 SocketClient.Instance.SendEmote("mouth", "surprised");
                 Instance.PlayMouthEmote("surprised");
             }
+        }
+
+        if(!isAiming && AimTimeout > 0)
+        {
+            AimTimeout -= 1f * Time.deltaTime;
         }
     }
 
@@ -445,7 +453,7 @@ public class ActorController : MonoBehaviour
 
         Anim.SetBool("ReverseWalk", aimRight);
 
-        if (!isAiming)
+        if (!isAiming && AimTimeout <= 0)
         {
             Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
@@ -462,7 +470,7 @@ public class ActorController : MonoBehaviour
 
         Anim.SetBool("ReverseWalk", !aimRight);
 
-        if (!isAiming)
+        if (!isAiming && AimTimeout <= 0)
         {
             Instance.TorsoBone.transform.localScale = Vector3.one;
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -551,21 +559,22 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("Aim", false);
 
         isAiming = false;
-        
 
-        if (aimRight)
-        {
-            Instance.TorsoBone.transform.localScale = Vector3.one;
-            Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
-        }
-        else
-        {
-            Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
-            Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f,0f,180f);
-        }
+        AimTimeout = 1f;
+        //if (aimRight)
+        //{
+        //    Instance.TorsoBone.transform.localScale = Vector3.one;
+        //    Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+        //}
+        //else
+        //{
+        //    Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
+        //    Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f,0f,180f);
+        //}
 
         rotDegrees = 0f;
     }
+
 
     public void BeginLoadAttack()
     {

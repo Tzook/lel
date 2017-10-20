@@ -10,6 +10,8 @@ public class NPC : MonoBehaviour {
 
     public List<string> GivingQuests = new List<string>();
 
+    public List<string> SellingItems = new List<string>();
+
     public string DefaultDialog;
 
     public string IntroAnimation;

@@ -55,6 +55,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CompletedQuestsWindowUI completedQuestsPanel;
 
     [SerializeField]
+    protected AbandonQuestWindowUI AbandonQuestWindow;
+
+    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
@@ -575,6 +578,11 @@ public class InGameMainMenuUI : MonoBehaviour {
         QuestRewardWindow.Show(quest);
     }
 
+    public void AbandonQuest(Quest quest)
+    {
+        AbandonQuestWindow.Show(quest);
+    }
+
     public void ShowPrimaryAbilities()
     {
         PrimaryAbilitiesGrid.Show();
@@ -625,4 +633,6 @@ public class InGameMainMenuUI : MonoBehaviour {
             PartyWindow.Refresh();
         }
     }
+
+
 }

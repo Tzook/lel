@@ -445,6 +445,11 @@ public class ActorInfo
 
         InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
     }
+
+    public void AbandonQuest(string QuestKey)
+    {
+        QuestsInProgress.Remove(GetQuest(QuestKey));
+    }
 }
 
 public enum Gender

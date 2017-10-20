@@ -17,8 +17,12 @@ public class QuestPanelUI : MonoBehaviour {
     [SerializeField]
     Transform ConditionContainer;
 
+    Quest Info;
+
     public void SetInfo(Quest quest)
     {
+        Info = quest;
+
         txtTitle.text = quest.Name;
         txtDescription.text = quest.InProgressDescription;
 
@@ -79,5 +83,10 @@ public class QuestPanelUI : MonoBehaviour {
             ConditionContainer.transform.GetChild(0).gameObject.SetActive(false);
             ConditionContainer.transform.GetChild(0).SetParent(transform);
         }
+    }
+
+    public void AbandonQuest()
+    {
+        InGameMainMenuUI.Instance.AbandonQuest(Info);
     }
 }

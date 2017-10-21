@@ -474,10 +474,17 @@ public class SocketClient : MonoBehaviour
         }
         else
         {
-            LocalUserInfo.Me.GetKnownCharacter(actor.Name).Info.LVL = data["stats"]["lvl"].AsInt;
+            KnownCharacter known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+            if (known != null) 
+            {
+                known.Info.LVL = data["stats"]["lvl"].AsInt;
+            }
         }
 
-        actor.Instance.LevelUp();
+        if (actor != null)
+        {
+            actor.Instance.LevelUp();
+        }
     }
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)

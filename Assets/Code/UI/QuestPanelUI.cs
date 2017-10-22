@@ -62,6 +62,12 @@ public class QuestPanelUI : MonoBehaviour {
 
                         break;
                     }
+                case "ok":
+                    {
+                        conContent = quest.Conditions[i].ExtraDescription;
+
+                        break;
+                    }
             }
 
             tempObject.transform.GetChild(0).GetComponent<Text>().text = conContent;

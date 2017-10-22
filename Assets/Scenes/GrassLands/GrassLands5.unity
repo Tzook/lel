@@ -29657,6 +29657,7 @@ MonoBehaviour:
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
+  SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
@@ -34925,6 +34926,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: rabbitRaids
       CLR: {r: 1, g: 0.9496957, b: 0.5441177, a: 1}
+    - Title: Banbo sent me...
+      Event: StartDialog
+      Value: CarrotSupply
+      Condition: QuestInProgress
+      ConditionValue: carrotSupply
+      CLR: {r: 1, g: 0.9496957, b: 0.5441177, a: 1}
   - DialogKey: AskSomeoneElse
     Pieces:
     - Content: What am I?
@@ -35053,8 +35060,43 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.9670385, b: 0.52205884, a: 1}
+  - DialogKey: CarrotSupply
+    Pieces:
+    - Content: Banbo?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: That rabbithead again?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Where's his errand boy anyways?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Oh well, if he asked for it, no problem.
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'll send it to him right now.
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete
+      Event: QuestOK
+      Value: carrotSupply
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9670385, b: 0.52205884, a: 1}
   GivingQuests:
   - rabbitRaids
+  SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 

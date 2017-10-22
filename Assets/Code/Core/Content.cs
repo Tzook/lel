@@ -412,6 +412,7 @@ public class QuestCondition
         tempCondition.Type = this.Type;
         tempCondition.CurrentProgress = this.CurrentProgress;
         tempCondition.TargetProgress = this.TargetProgress;
+        tempCondition.ExtraDescription = this.ExtraDescription;
 
         return tempCondition;
     }
@@ -420,6 +421,8 @@ public class QuestCondition
     public string Type;
     public int CurrentProgress;
     public int TargetProgress;
+
+    public string ExtraDescription;
 }
 
 [System.Serializable]

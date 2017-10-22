@@ -119,6 +119,12 @@ public class NPC : MonoBehaviour {
                     InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue));
                     break;
                 }
+            case "QuestOK":
+                {
+                    SocketClient.Instance.SendQuestOK(eventValue);
+                    DialogManager.Instance.StopDialogMode();
+                    break;
+                }
         }
     }
 

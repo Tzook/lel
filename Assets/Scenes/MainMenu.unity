@@ -34728,7 +34728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.48201, y: -124.90266}
+  m_AnchoredPosition: {x: 84.48201, y: -124.902664}
   m_SizeDelta: {x: 168.96402, y: 35.686474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1629
@@ -38809,7 +38809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50253, y: -235.1927}
+  m_AnchoredPosition: {x: 136.50253, y: -235.19269}
   m_SizeDelta: {x: 273.00507, y: 67.197914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1864
@@ -47282,10 +47282,12 @@ MonoBehaviour:
       Type: Turtle
       CurrentProgress: 0
       TargetProgress: 5
+      ExtraDescription: 
     - Condition: hunt
       Type: OldTurtle
       CurrentProgress: 0
       TargetProgress: 1
+      ExtraDescription: 
     QuestsStates: []
     RequiredClass: 
     MinimumLevel: 0
@@ -47318,6 +47320,7 @@ MonoBehaviour:
       Type: turtleShellOld
       CurrentProgress: 0
       TargetProgress: 5
+      ExtraDescription: 
     QuestsStates:
     - QuestKey: turtleProblem
       EnumState: 1
@@ -47377,10 +47380,12 @@ MonoBehaviour:
       Type: Rabbit
       CurrentProgress: 0
       TargetProgress: 10
+      ExtraDescription: 
     - Condition: hunt
       Type: FatRabbit
       CurrentProgress: 0
       TargetProgress: 4
+      ExtraDescription: 
     QuestsStates: []
     RequiredClass: 
     MinimumLevel: 0
@@ -47413,6 +47418,7 @@ MonoBehaviour:
       Type: oldTurtleShell
       CurrentProgress: 0
       TargetProgress: 1
+      ExtraDescription: 
     QuestsStates: []
     RequiredClass: 
     MinimumLevel: 5
@@ -47439,13 +47445,14 @@ MonoBehaviour:
       farm outside of town.
     FacePrefab: BanboQuest
     Conditions:
-    - Condition: loot
-      Type: carrotSack
+    - Condition: ok
+      Type: carrotSupply
       CurrentProgress: 0
       TargetProgress: 1
+      ExtraDescription: Carrot Supply
     QuestsStates: []
     RequiredClass: 
-    MinimumLevel: 5
+    MinimumLevel: 0
     RewardItems: []
     RewardSTR: 0
     RewardMAG: 0

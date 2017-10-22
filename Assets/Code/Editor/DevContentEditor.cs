@@ -265,9 +265,10 @@ public class DevContentEditor : Editor
                 node["quests"][i]["conditions"][c]["targetProgress"] = Quests[i].Conditions[c].TargetProgress.ToString();
             }
 
-            for (int rc = 0; rc < Quests[i].RequiredCompletedQuests.Count; rc++)
+            for (int rc = 0; rc < Quests[i].QuestsStates.Count; rc++)
             {
-                node["quests"][i]["RequiredQuests"][rc]["key"] = Quests[i].RequiredCompletedQuests[rc];
+                node["quests"][i]["RequiredQuests"][rc]["key"] = Quests[i].QuestsStates[rc].QuestKey;
+                node["quests"][i]["RequiredQuests"][rc]["phase"] = Quests[i].QuestsStates[rc].State;
             }
 
             node["quests"][i]["requiredClass"] = Quests[i].RequiredClass;

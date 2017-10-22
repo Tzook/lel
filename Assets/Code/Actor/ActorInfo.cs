@@ -428,11 +428,11 @@ public class ActorInfo
             InGameMainMenuUI.Instance.RefreshCompletedQuestProgress();
         }
     }
-    
-    public void UpdateQuestProgress(string questKey, string mobKey, int Value)
+
+    public void UpdateQuestProgress(string questKey, string typeKey, int Value)
     {
         Quest tempQuest = GetQuest(questKey);
-        QuestCondition condition = GetQuestCondition(tempQuest, mobKey);
+        QuestCondition condition = GetQuestCondition(tempQuest, typeKey);
 
         condition.CurrentProgress = Value;
 
@@ -443,8 +443,16 @@ public class ActorInfo
             return;
         }
 
-        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(Content.Instance.GetMonster(mobKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
+        if (condition.Condition == "hunt")
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(Content.Instance.GetMonster(typeKey).MonsterName + " " + Value + " / " + condition.TargetProgress, Color.black, false);
+        }
+        else if (condition.Condition == "ok")
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(typeKey + " " + Value + " / " + condition.TargetProgress, Color.black, false);
+        }
     }
+
 
     public void AbandonQuest(string QuestKey)
     {

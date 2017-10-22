@@ -227,7 +227,7 @@ public class Quest
 
     public List<QuestCondition> Conditions = new List<QuestCondition>();
 
-    public List<string> RequiredCompletedQuests = new List<string>();
+    public List<QuestState> QuestsStates = new List<QuestState>();
 
     public string RequiredClass;
 
@@ -274,11 +274,46 @@ public class Quest
         }
 
         //Is it a chain quest?
-        for (int i=0;i< RequiredCompletedQuests.Count;i++)
+        for (int i=0;i< QuestsStates.Count;i++)
         {
-            if(!character.CompletedQuests.Contains(RequiredCompletedQuests[i]))
+            switch (QuestsStates[i].State)
             {
-                return false;
+                case "InProgress":
+                    {
+                        if(character.GetQuest(QuestsStates[i].QuestKey) == null)
+                        {
+                            return false;
+                        }
+
+                        break;
+                    }
+                case "Completed":
+                    {
+                        if (!character.CompletedQuests.Contains(QuestsStates[i].QuestKey))
+                        {
+                            return false;
+                        }
+
+                        break;
+                    }
+                case "NotInProgress":
+                    {
+                        if (character.GetQuest(QuestsStates[i].QuestKey) != null)
+                        {
+                            return false;
+                        }
+
+                        break;
+                    }
+                case "NotCompleted":
+                    {
+                        if (character.CompletedQuests.Contains(QuestsStates[i].QuestKey))
+                        {
+                            return false;
+                        }
+
+                        break;
+                    }
             }
         }
 
@@ -341,7 +376,7 @@ public class Quest
             tempQuest.Conditions.Add(this.Conditions[i].Clone());
         }
 
-        tempQuest.RequiredCompletedQuests.AddRange(this.RequiredCompletedQuests);
+        tempQuest.QuestsStates.AddRange(this.QuestsStates);
         tempQuest.RequiredClass = this.RequiredClass;
         tempQuest.MinimumLevel  = this.MinimumLevel;
 
@@ -387,3 +422,46 @@ public class QuestCondition
     public int TargetProgress;
 }
 
+[System.Serializable]
+public class QuestState
+{
+    public string QuestKey;
+
+    public string State
+    {
+        get
+        {
+            switch(this.EnumState)
+            {
+                case QuestEnumState.InProgress :
+                    {
+                        return "InProgress";
+                    }
+                case QuestEnumState.Completed:
+                    {
+                        return "Completed";
+                    }
+                case QuestEnumState.NotInProgress:
+                    {
+                        return "NotInProgress";
+                    }
+                case QuestEnumState.NotCompleted:
+                    {
+                        return "NotCompleted";
+                    }
+            }
+
+            return "NOSTATE";
+        }
+    }
+
+    [SerializeField]
+    QuestEnumState EnumState;
+    
+
+
+    public enum QuestEnumState
+    {
+        InProgress,Completed,NotInProgress,NotCompleted
+    }
+}

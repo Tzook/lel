@@ -103,6 +103,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("quest_complete", OnQuestComplete);
         CurrentSocket.On("quest_abort", OnQuestAbort);
         CurrentSocket.On("quest_hunt_progress", OnQuestHuntProgress);
+        CurrentSocket.On("quest_ok_progress", OnQuestOkProgress);
 
         CurrentSocket.On("create_party", OnCreateParty);
         CurrentSocket.On("party_invitation", OnPartyInvitation);
@@ -694,6 +695,17 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
     }
 
+    private void OnQuestOkProgress(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["id"].Value + " - OK " + data["ok"].Value + " is " + data["value"].Value);
+
+        LocalUserInfo.Me.ClientCharacter.UpdateQuestProgress(data["id"].Value, data["ok"].Value, data["value"].AsInt);
+        InGameMainMenuUI.Instance.RefreshQuestProgress();
+        Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
+    }
+
     private void OnPartyMembersUpdate(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
@@ -1237,6 +1249,16 @@ public class SocketClient : MonoBehaviour
         node["id"] = questID;
 
         CurrentSocket.Emit("quest_aborted", node);
+    }
+
+    public void SendQuestOK(string okKey, int okValue = 1)
+    {
+        JSONNode node = new JSONClass();
+
+        node["ok"] = okKey;
+        node["value"] = okValue.ToString();
+
+        CurrentSocket.Emit("quest_ok_progress", node);
     }
 
 

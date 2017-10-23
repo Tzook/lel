@@ -6,6 +6,7 @@ public class ui_pageMenu : MonoBehaviour {
 
 	public List<GameObject> m_listPages = new List<GameObject>();
 
+    public int m_iLastIndex;
 	public int 	 m_iIndex = 0;
 	public float m_fSpeed = 0.5f;
     public float m_fDelay = 0f;
@@ -16,7 +17,10 @@ public class ui_pageMenu : MonoBehaviour {
 
     public string m_sPageSwitchSound = "sound_pagefold";
 
-	void Start()
+    [SerializeField]
+    StepOffset m_ParallaxBackground;
+
+    void Start()
 	{
 		if(m_bUpdateOnStart)
 		{
@@ -27,6 +31,8 @@ public class ui_pageMenu : MonoBehaviour {
 	//Will switch the page to a provided index.
 	public void SwitchTo(int gIndex)
 	{
+        m_iLastIndex = m_iIndex;
+             
         if (gIndex < m_listPages.Count && gIndex >= 0)
 		{
 			m_iIndex = gIndex;
@@ -56,7 +62,13 @@ public class ui_pageMenu : MonoBehaviour {
 
 		m_listPages[m_iIndex].transform.SetAsLastSibling();
 
-		for(int i=0;i<m_listPages.Count;i++)
+        if (m_ParallaxBackground != null)
+        {
+            Debug.Log(m_iLastIndex - m_iIndex);
+            m_ParallaxBackground.Step(new Vector2(m_iIndex - m_iLastIndex, 0));
+        }
+
+        for (int i=0;i<m_listPages.Count;i++)
 		{
 			StartCoroutine(RelocatePage(i));
 		}
@@ -87,13 +99,14 @@ public class ui_pageMenu : MonoBehaviour {
 			A = currentRect.TransformPoint(currentRect.rect.x+currentRect.rect.width,currentRect.rect.y+currentRect.rect.height,0).y;
 			B = currentRect.TransformPoint(currentRect.rect.x,currentRect.rect.y,0).y;
 			sizePenalty = A - B;
+
 		}
 		else
 		{
 			A = currentRect.TransformPoint(currentRect.rect.x+currentRect.rect.width,currentRect.rect.y+currentRect.rect.height,0).x;
 			B = currentRect.TransformPoint(currentRect.rect.x,currentRect.rect.y,0).x;
 			sizePenalty = A - B;
-		}
+        }
 
 		change = sizePenalty*(selfIndex - m_iIndex);
 

@@ -11052,6 +11052,12 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: carrotSupply
       CLR: {r: 1, g: 0.9207911, b: 0.47794116, a: 1}
+    - Title: I asked for your supply...
+      Event: StartDialog
+      Value: CompleteCarrotSupplyQuest
+      Condition: QuestComplete
+      ConditionValue: carrotSupply
+      CLR: {r: 1, g: 0.9207911, b: 0.47794116, a: 1}
   - DialogKey: CarrotSupplyQuest
     Pieces:
     - Content: What are you bored or something?...
@@ -11126,8 +11132,62 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: CompleteCarrotSupplyQuest
+    Pieces:
+    - Content: You did?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Oh well, thanks, I assume...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Bye...
+      Event: StartDialog
+      Value: CompleteCarrotSupplyQuest2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.99264705, g: 0.96294814, b: 0.5620134, a: 1}
+  - DialogKey: CompleteCarrotSupplyQuest2
+    Pieces:
+    - Content: Wait!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Wait...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'm sorry for being impatient with you...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You proved yourself helpful...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So, I've got some more stuff for you if you want...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: carrotSupply
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.99264705, g: 0.96294814, b: 0.5620134, a: 1}
   GivingQuests:
   - carrotSupply
+  SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 

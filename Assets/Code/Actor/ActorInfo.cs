@@ -143,7 +143,7 @@ public class ActorInfo
             KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
             string questKey = current.Key;
             Quest quest = AddQuest(questKey);
-            fillInitialProgress(quest, node["quests"]["hunt"]);
+            fillInitialProgress(quest, node["quests"]);
         }
 
         RefreshBonuses();
@@ -370,10 +370,15 @@ public class ActorInfo
         for (int i = 0; i < quest.Conditions.Count; i++)
         {
             QuestCondition cond = quest.Conditions[i];
-            if (initialHunt[cond.Type] != null) 
+            if (initialHunt["hunt"][cond.Type] != null) 
             {
-                cond.CurrentProgress = initialHunt[cond.Type][quest.Key].AsInt;
+                cond.CurrentProgress = initialHunt["hunt"][cond.Type][quest.Key].AsInt;
             }
+            else if (initialHunt["ok"][cond.Type] != null)
+            {
+                cond.CurrentProgress = initialHunt["ok"][cond.Type][quest.Key].AsInt;
+            }
+
         }
     }
 

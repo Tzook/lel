@@ -64,6 +64,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected Canvas SubCanvas;
 
     [SerializeField]
+    protected Canvas VendorCanvas;
+
+    [SerializeField]
     Text LastChatMessageText;
 
     [SerializeField]
@@ -634,5 +637,14 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
     }
 
+    public void ShowVendorPanel(string itemKey)
+    {
+        VendorCanvas.GetComponent<VendorPanelUI>().Show(itemKey);
+    }
+
+    public void HideVendorPanel()
+    {
+        VendorCanvas.GetComponent<VendorPanelUI>().Hide();
+    }
 
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 216a614752628ef4882e2ee77ade8019
-timeCreated: 1497486952
+timeCreated: 1508880587
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -26,6 +26,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -41,10 +43,13 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -54,7 +59,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 40
+  spritePixelsToUnits: 250
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -88,6 +93,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,9 +113,10 @@ TextureImporter:
         width: 130
         height: 127
       alignment: 9
-      pivot: {x: 0.42593402, y: 0.43682045}
+      pivot: {x: 0.16438866, y: 0.14163761}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: weapon_short_club
@@ -113,9 +127,10 @@ TextureImporter:
         width: 134
         height: 123
       alignment: 9
-      pivot: {x: 0.39221737, y: 0.38257828}
+      pivot: {x: 0.12221413, y: 0.12386762}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: weapon_short_axe
@@ -126,9 +141,10 @@ TextureImporter:
         width: 139
         height: 119
       alignment: 9
-      pivot: {x: 0.32682416, y: 0.35166046}
+      pivot: {x: 0.13552615, y: 0.16117898}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: weapon_scimitar
@@ -139,22 +155,24 @@ TextureImporter:
         width: 174
         height: 168
       alignment: 9
-      pivot: {x: 0.416995, y: 0.3662698}
+      pivot: {x: 0.14893596, y: 0.14572035}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_normal_charged
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 579
         width: 135
         height: 245
       alignment: 9
-      pivot: {x: 0.70208144, y: 0.5}
+      pivot: {x: 0.9580999, y: 0.49620137}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_normal
@@ -164,10 +182,11 @@ TextureImporter:
         y: 579
         width: 57
         height: 245
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.88464487, y: 0.49999976}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_improved_charged
@@ -178,9 +197,10 @@ TextureImporter:
         width: 141
         height: 245
       alignment: 9
-      pivot: {x: 0.67071944, y: 0.48689985}
+      pivot: {x: 0.9339524, y: 0.49869958}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_improved
@@ -190,10 +210,11 @@ TextureImporter:
         y: 579
         width: 63
         height: 245
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.82942706, y: 0.50000024}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_oak_charged
@@ -204,9 +225,10 @@ TextureImporter:
         width: 145
         height: 245
       alignment: 9
-      pivot: {x: 0.654943, y: 0.48034993}
+      pivot: {x: 0.912319, y: 0.48919976}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_oak
@@ -216,10 +238,11 @@ TextureImporter:
         y: 579
         width: 90
         height: 245
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.8305746, y: 0.50000024}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_metal_charged
@@ -230,22 +253,24 @@ TextureImporter:
         width: 119
         height: 240
       alignment: 9
-      pivot: {x: 0.78319377, y: 0.48662695}
+      pivot: {x: 0.9392504, y: 0.4918509}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bow_metal
       rect:
         serializedVersion: 2
-        x: 228
+        x: 229
         y: 318
         width: 48
         height: 239
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.8516534, y: 0.50000024}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: arrow
@@ -259,6 +284,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: weapon_short_dagger
@@ -268,12 +294,14 @@ TextureImporter:
         y: 888
         width: 77
         height: 75
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.27579328, y: 0.2186613}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     outline: []
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

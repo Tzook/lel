@@ -10,7 +10,7 @@ public class NPC : MonoBehaviour {
 
     public List<string> GivingQuests = new List<string>();
 
-    public List<string> SellingItems = new List<string>();
+    public List<StoreProduct> SellingItems = new List<StoreProduct>();
 
     public string DefaultDialog;
 
@@ -125,6 +125,11 @@ public class NPC : MonoBehaviour {
                     DialogManager.Instance.StopDialogMode();
                     break;
                 }
+            case "Trade":
+                {
+                    DialogManager.Instance.StartVendorMode();
+                    break;
+                }
         }
     }
 
@@ -211,4 +216,11 @@ public class NPC : MonoBehaviour {
 
         return false;
     }
+}
+
+[System.Serializable]
+public class StoreProduct
+{
+    public string itemKey;
+    public GameObject ItemObject;
 }

@@ -25,8 +25,11 @@ public class GameCamera : MonoBehaviour {
     Blur m_BlurEffect;
 
     public Camera Cam;
+    public Camera BlurCam;
 
     RaycastHit2D CurrentMouseHit;
+
+    public bool CamFollowing = true;
 
     #endregion
 
@@ -58,6 +61,7 @@ public class GameCamera : MonoBehaviour {
     {
         Instance = this;
         Cam = GetComponent<Camera>();
+        BlurCam = BlurCamera.GetComponent<Camera>();
     }
 
     void Start()
@@ -112,6 +116,7 @@ public class GameCamera : MonoBehaviour {
                 DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
             }
         }
+       
     }
 
     private IEnumerator DoubleClickRoutine()
@@ -154,26 +159,29 @@ public class GameCamera : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (followingObject != null)
+        if (CamFollowing)
         {
-            if (this.CamType == CameraType.Horizontal)
+            if (followingObject != null)
             {
-                targetPos = new Vector3(followingObject.transform.position.x, transform.position.y + AddedY, initPos.z);
-            }
-            else if (this.CamType == CameraType.Vertical)
-            {
-                targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
-            }
-            else if (this.CamType == CameraType.Static)
-            {
-                targetPos = initPos;
-            }
-            else
-            {
-                targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
-            }
+                if (this.CamType == CameraType.Horizontal)
+                {
+                    targetPos = new Vector3(followingObject.transform.position.x, transform.position.y + AddedY, initPos.z);
+                }
+                else if (this.CamType == CameraType.Vertical)
+                {
+                    targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
+                }
+                else if (this.CamType == CameraType.Static)
+                {
+                    targetPos = initPos;
+                }
+                else
+                {
+                    targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
+                }
 
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos ,ref dampRef, FollowSpeed);
+                transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref dampRef, FollowSpeed);
+            }
         }
     }
 
@@ -205,5 +213,55 @@ public class GameCamera : MonoBehaviour {
     public enum CameraType
     {
         Normal, Vertical, Horizontal, Static
+    }
+
+    public void FocusOnTransform(Transform targetTransform)
+    {
+        StopAllCoroutines();
+
+        CamFollowing = false;
+
+        StartCoroutine(FocusOnTransformRoutine(targetTransform));
+    }
+
+    IEnumerator FocusOnTransformRoutine(Transform targetTransform)
+    {
+        while (true)
+        {
+            targetPos = new Vector3(targetTransform.position.x, targetTransform.position.y, initPos.z);
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref dampRef, FollowSpeed * 2f);
+
+            Cam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 1.5f, Time.deltaTime * 2f);
+            BlurCam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 1.5f, Time.deltaTime * 2f);
+
+            yield return 0;
+        }
+    }
+
+    public void FocusDefault()
+    {
+        StopAllCoroutines();
+
+        CamFollowing = true;
+
+        StartCoroutine(FocusDefaultRoutine());
+    }
+
+    IEnumerator FocusDefaultRoutine()
+    {
+        float t = 0f;
+        while(t<1f)
+        {
+            t += 1f * Time.deltaTime;
+
+            Cam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 5f, t);
+            BlurCam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 5f, t);
+
+            yield return 0;
+        }
+
+        Cam.orthographicSize = 5f;
+        BlurCam.orthographicSize = 5f;
     }
 }

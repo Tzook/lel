@@ -22,6 +22,9 @@ public class ItemInfoUI : MonoBehaviour {
     [SerializeField]
     Color requiredColor;
 
+    [SerializeField]
+    bool isFollowingMouse = true;
+
     public void Show(ItemInfo info)
     {
         if(info==null)
@@ -47,7 +50,12 @@ public class ItemInfoUI : MonoBehaviour {
         }
 
         this.gameObject.SetActive(true);
-        transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z);
+
+        if (isFollowingMouse)
+        {
+            transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z);
+        }
+
         txtTitle.text = info.Name;
         txtDecription.text = info.Description;
         txtType.text = info.Type;
@@ -61,7 +69,10 @@ public class ItemInfoUI : MonoBehaviour {
 
         SetStats(info.Stats);
 
-        FollowMouseRoutine = StartCoroutine(FollowMouse());
+        if (isFollowingMouse)
+        {
+            FollowMouseRoutine = StartCoroutine(FollowMouse());
+        }
     }
 
     public void Hide()
@@ -84,6 +95,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusSTR + " Strength", ResourcesLoader.Instance.GetSprite("sword_of_elad"), bonusColor);
         }
 
@@ -92,6 +104,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusMAG + " Magic", ResourcesLoader.Instance.GetSprite("magicicon"), bonusColor);
         }
 
@@ -100,6 +113,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusDEX + " Dextirity", ResourcesLoader.Instance.GetSprite("arrowsicon"), bonusColor);
         }
 
@@ -108,6 +122,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusHP + " Max Health", ResourcesLoader.Instance.GetSprite("xIcon"), bonusColor);
         }
 
@@ -124,6 +139,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresSTR + " Strength", ResourcesLoader.Instance.GetSprite("sword_of_elad"), requiredColor);
         }
 
@@ -132,6 +148,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresMAG + " Magic", ResourcesLoader.Instance.GetSprite("magicicon"), requiredColor);
         }
 
@@ -140,6 +157,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresDEX + " Dextirity", ResourcesLoader.Instance.GetSprite("arrowsicon"), requiredColor);
         }
 
@@ -148,6 +166,7 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
+            tempObj.transform.localScale = Vector3.one;
             tempObj.GetComponent<ItemStatUI>().SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), requiredColor);
         }
 

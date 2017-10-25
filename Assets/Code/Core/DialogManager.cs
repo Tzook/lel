@@ -15,6 +15,10 @@ public class DialogManager : MonoBehaviour {
     GameObject CurrentOptionsFrame;
 
     Coroutine CurrentDialogRoutine;
+    Coroutine CurrentGlowProductRoutine;
+
+    int PreviousItemIndex = 0;
+    int CurrentVendorItemIndex = 0;
 
     void Awake()
     {
@@ -28,6 +32,7 @@ public class DialogManager : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 StopDialogMode();
+                StopVendorMode();
             }
         }
     }
@@ -316,4 +321,105 @@ public class DialogManager : MonoBehaviour {
             Game.Instance.ClientCharacter.GetComponent<ActorInstance>().SetRenderingLayer(8);
         }
     }
+
+    public void StartVendorMode()
+    {
+        CurrentNPCBubble.gameObject.SetActive(false);
+        CurrentNPCBubble = null;
+
+        CurrentOptionsFrame.gameObject.SetActive(false);
+        CurrentOptionsFrame = null;
+
+        CurrentVendorItemIndex = 0;
+        RefreshVendorItem();
+    }
+
+    public void NextItem()
+    {
+        PreviousItemIndex = CurrentVendorItemIndex;
+        CurrentVendorItemIndex++;
+
+        if (CurrentVendorItemIndex >= currentNPC.SellingItems.Count)
+        {
+            CurrentVendorItemIndex = 0;
+        }
+
+        RefreshVendorItem();
+    }
+
+    public void PreviousItem()
+    {
+        PreviousItemIndex = CurrentVendorItemIndex;
+        CurrentVendorItemIndex--;
+
+        if (CurrentVendorItemIndex < 0)
+        {
+            CurrentVendorItemIndex = currentNPC.SellingItems.Count - 1;
+        }
+
+        RefreshVendorItem();
+    }
+
+    public void RefreshVendorItem()
+    {
+        GameCamera.Instance.FocusOnTransform(currentNPC.SellingItems[CurrentVendorItemIndex].ItemObject.transform);
+        InGameMainMenuUI.Instance.ShowVendorPanel(currentNPC.SellingItems[CurrentVendorItemIndex].itemKey);
+
+        if(CurrentGlowProductRoutine != null)
+        {
+            StopCoroutine(CurrentGlowProductRoutine);
+        }
+
+        CurrentGlowProductRoutine = StartCoroutine(GlowProductItem(currentNPC.SellingItems[CurrentVendorItemIndex].ItemObject));
+    }
+
+    IEnumerator GlowProductItem(GameObject item)
+    {
+        SpriteRenderer previousImg = currentNPC.SellingItems[PreviousItemIndex].ItemObject.GetComponent<SpriteRenderer>();
+        previousImg.color = new Color(previousImg.color.r, previousImg.color.g, previousImg.color.b, 1f);
+        
+        SpriteRenderer img = item.GetComponent<SpriteRenderer>();
+
+        float t;
+        while (true)
+        {
+            t = 1f;
+            while (t > 0f)
+            {
+                t -= 3f * Time.deltaTime;
+
+                img.color = new Color(img.color.r, img.color.g, img.color.b, t);
+
+                yield return 0;
+            }
+
+            t = 0f;
+            while (t < 1f)
+            {
+                t += 3f * Time.deltaTime;
+
+                img.color = new Color(img.color.r, img.color.g, img.color.b, t);
+
+                yield return 0;
+            }
+        }
+    }
+
+    public void StopVendorMode()
+    {
+        GameCamera.Instance.FocusDefault();
+        InGameMainMenuUI.Instance.HideVendorPanel();
+
+        if (CurrentGlowProductRoutine != null)
+        {
+            StopCoroutine(CurrentGlowProductRoutine);
+            CurrentGlowProductRoutine = null;
+        }
+
+        SpriteRenderer lastItemImg = currentNPC.SellingItems[CurrentVendorItemIndex].ItemObject.GetComponent<SpriteRenderer>();
+        lastItemImg.color = new Color(lastItemImg.color.r, lastItemImg.color.g, lastItemImg.color.b, 1f);
+
+        StopDialogMode();
+    }
+
 }

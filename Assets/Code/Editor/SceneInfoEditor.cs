@@ -55,7 +55,7 @@ public class SceneInfoEditor : Editor {
 
                 for(int a = 0 ; a < currentInfo.Npcs[i].SellingItems.Count ; a++ )
                 {
-                    node["scene"]["NPC"][i]["sell"][a]["itemKey"] = currentInfo.Npcs[i].SellingItems[a];
+                    node["scene"]["NPC"][i]["sell"][a]["itemKey"] = currentInfo.Npcs[i].SellingItems[a].itemKey;
                 }
             }
 

@@ -637,9 +637,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
     }
 
-    public void ShowVendorPanel(string itemKey)
+    public void ShowVendorPanel(string itemKey, NPC Vendor)
     {
-        VendorCanvas.GetComponent<VendorPanelUI>().Show(itemKey);
+        VendorCanvas.GetComponent<VendorPanelUI>().Show(itemKey, Vendor);
     }
 
     public void HideVendorPanel()

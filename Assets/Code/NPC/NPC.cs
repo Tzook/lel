@@ -216,6 +216,20 @@ public class NPC : MonoBehaviour {
 
         return false;
     }
+
+
+    public int GetItemIndex(string key)
+    {
+        for (int i = 0; i < SellingItems.Count; i++)
+        {
+            if (SellingItems[i].itemKey == key)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
 
 [System.Serializable]

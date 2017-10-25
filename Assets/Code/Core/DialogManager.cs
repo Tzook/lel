@@ -362,8 +362,10 @@ public class DialogManager : MonoBehaviour {
 
     public void RefreshVendorItem()
     {
+        AudioControl.Instance.Play("swosh");
+
         GameCamera.Instance.FocusOnTransform(currentNPC.SellingItems[CurrentVendorItemIndex].ItemObject.transform);
-        InGameMainMenuUI.Instance.ShowVendorPanel(currentNPC.SellingItems[CurrentVendorItemIndex].itemKey);
+        InGameMainMenuUI.Instance.ShowVendorPanel(currentNPC.SellingItems[CurrentVendorItemIndex].itemKey, currentNPC);
 
         if(CurrentGlowProductRoutine != null)
         {

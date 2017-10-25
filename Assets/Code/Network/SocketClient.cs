@@ -118,6 +118,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("known_logout", OnKnownLogOut);
         CurrentSocket.On("known_login", OnKnownLogIn);
 
+        CurrentSocket.On("actor_transaction", OnTransaction);
+
         LoadingWindowUI.Instance.Register(this);
     }
 
@@ -921,6 +923,12 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["name"].Value + " is now ONLINE!", Color.green, true);
     }
 
+    private void OnTransaction(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+    }
 
 
     #endregion
@@ -1312,6 +1320,28 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("change_party_leader", node);
     }
 
+
+    public void SendSellVendorItem(string npcKey, int slot, int stack = 1)
+    {
+        JSONNode node = new JSONClass();
+
+        node["npcKey"] = npcKey;
+        node["slot"] = slot.ToString();
+        node["stack"] = stack.ToString();
+
+        CurrentSocket.Emit("sell_item", node);
+    }
+
+    public void SendBuyVendorItem(string npcKey, int itemIndex, int stack = 1)
+    {
+        JSONNode node = new JSONClass();
+
+        node["npcKey"] = npcKey;
+        node["index"] = itemIndex.ToString();
+        node["stack"] = stack.ToString();
+
+        CurrentSocket.Emit("buy_item", node);
+    }
 
     #endregion
 

@@ -406,6 +406,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         CurrentDragged.transform.SetParent(transform, false);
         CurrentDragged.transform.SetAsLastSibling();
 
+        Game.Instance.CurrentScene.StartSellMode(slot.CurrentItem);
+
         if (DragRoutineInstance != null)
         {
             StopCoroutine(DragRoutineInstance);
@@ -429,6 +431,8 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     protected void ReleaseDraggedItem(ItemUI slot)
     {
+        Game.Instance.CurrentScene.StopSellMode();
+
         DraggedSlot.UnDrag();
         CurrentDragged.gameObject.SetActive(false);
         CurrentDragged = null;
@@ -465,8 +469,22 @@ public class InGameMainMenuUI : MonoBehaviour {
                 }
                 else // --TO SPACE
                 {
-                    SocketClient.Instance.SendDroppedItem(draggedIndex);
-                    AudioControl.Instance.Play("sound_throw");
+                    if (GameCamera.Instance.CurrentHovered != null 
+                        && GameCamera.Instance.CurrentHovered.tag == "NPC" 
+                        && GameCamera.Instance.CurrentHovered.GetComponent<NPC>().SellingItems.Count > 0)
+                    {
+                        NPC tempNPC = GameCamera.Instance.CurrentHovered.GetComponent<NPC>();
+                        
+                        SocketClient.Instance.SendSellVendorItem(tempNPC.Key, draggedIndex, DraggedSlot.CurrentItem.Stack);
+                        AudioControl.Instance.Play("sound_coins");
+
+                        ResourcesLoader.Instance.GetRecycledObject("CoinSplash").transform.position = GameCamera.MousePosition;
+                    }
+                    else
+                    {
+                        SocketClient.Instance.SendDroppedItem(draggedIndex);
+                        AudioControl.Instance.Play("sound_throw");
+                    }
                 }
             }
             if (DraggedSlot.ParentContainer == equipmentPanel)// -FROM EQUIPMENT

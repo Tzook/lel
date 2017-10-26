@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class SceneControl
 {
@@ -175,5 +176,34 @@ public class SceneControl
         }
 
         return null;
+    }
+
+    List<GameObject> sellingSigns = new List<GameObject>();
+    public void StartSellMode(ItemInfo item)
+    {
+        sellingSigns.Clear();
+
+        GameObject tempSign;
+        for(int i=0;i<Npcs.Count;i++)
+        {
+            if(Npcs[i].SellingItems.Count > 0)
+            {
+                tempSign = ResourcesLoader.Instance.GetRecycledObject("SellHereIcon");
+                tempSign.transform.position = Npcs[i].QuestSpot.position;
+                tempSign.transform.GetChild(tempSign.transform.childCount - 1).GetComponent<Text>().text = Content.Instance.GetItem(item.Key).GoldValue.ToString();
+
+                sellingSigns.Add(tempSign);
+            }
+        }
+    }
+
+    public void StopSellMode()
+    {
+        foreach(GameObject obj in sellingSigns)
+        {
+            obj.SetActive(false);
+        }
+
+        sellingSigns.Clear();
     }
 }

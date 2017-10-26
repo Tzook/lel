@@ -57,6 +57,19 @@ public class GameCamera : MonoBehaviour {
         }
     }
 
+    public GameObject CurrentHovered
+    {
+        get
+        {
+            if(CurrentMouseHit.collider != null)
+            {
+                return CurrentMouseHit.collider.gameObject;
+            }
+
+            return null;
+        }
+    }
+
 	void Awake()
     {
         Instance = this;

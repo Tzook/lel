@@ -594,9 +594,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         completedQuestsPanel.Refresh();
     }
 
-    public void RecieveQuestReward(Quest quest)
+    public void RecieveQuestReward(Quest quest, string npcKey)
     {
-        QuestRewardWindow.Show(quest);
+        QuestRewardWindow.Show(quest, npcKey);
     }
 
     public void AbandonQuest(Quest quest)

@@ -57,6 +57,16 @@ public class SceneInfoEditor : Editor {
                 {
                     node["scene"]["NPC"][i]["sell"][a]["itemKey"] = currentInfo.Npcs[i].SellingItems[a].itemKey;
                 }
+
+                for (int b = 0; b < currentInfo.Npcs[i].GivingQuests.Count; b++)
+                {
+                    node["scene"]["NPC"][i]["GivingQuests"][b] = currentInfo.Npcs[i].GivingQuests[b];
+                }
+
+                for (int c = 0; c < currentInfo.Npcs[i].EndingQuests.Count; c++)
+                {
+                    node["scene"]["NPC"][i]["EndingQuests"][c] = currentInfo.Npcs[i].EndingQuests[c];
+                }
             }
 
 

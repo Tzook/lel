@@ -13,11 +13,14 @@ public class QuestRewardsWindowUI : MonoBehaviour {
 
     string TargetQuest;
 
-	public void Show(Quest quest)
+    string TargetNpcKey;
+
+	public void Show(Quest quest, string npcKey)
     {
         this.gameObject.SetActive(true);
 
         TargetQuest = quest.Key;
+        TargetNpcKey = npcKey;
 
         QuestTitle.text = quest.Name;
 
@@ -54,7 +57,7 @@ public class QuestRewardsWindowUI : MonoBehaviour {
 
     public void RecieveReward()
     {
-        SocketClient.Instance.SendQuestCompleted(TargetQuest);
+        SocketClient.Instance.SendQuestCompleted(TargetQuest, TargetNpcKey);
         this.gameObject.SetActive(false);
     }
 }

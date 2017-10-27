@@ -1232,20 +1232,22 @@ public class SocketClient : MonoBehaviour
 
     }
 
-    public void SendQuestStarted(string questID)
+    public void SendQuestStarted(string questID, string npcKey)
     {
         JSONNode node = new JSONClass();
 
         node["id"] = questID;
+        node["npc"] = npcKey;
 
         CurrentSocket.Emit("quest_started", node);
     }
 
-    public void SendQuestCompleted(string questID)
+    public void SendQuestCompleted(string questID, string npcKey)
     {
         JSONNode node = new JSONClass();
 
         node["id"] = questID;
+        node["npc"] = npcKey;
 
         CurrentSocket.Emit("quest_completed", node);
     }

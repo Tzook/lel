@@ -10,6 +10,8 @@ public class NPC : MonoBehaviour {
 
     public List<string> GivingQuests = new List<string>();
 
+    public List<string> EndingQuests = new List<string>();
+
     public List<StoreProduct> SellingItems = new List<StoreProduct>();
 
     public string DefaultDialog;
@@ -110,13 +112,13 @@ public class NPC : MonoBehaviour {
             case "StartQuest":
                 {
                     DialogManager.Instance.StopDialogMode();
-                    SocketClient.Instance.SendQuestStarted(eventValue);
+                    SocketClient.Instance.SendQuestStarted(eventValue, Key);
                     break;
                 }
             case "CompleteQuest":
                 {
                     DialogManager.Instance.StopDialogMode();
-                    InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue));
+                    InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue), Key);
                     break;
                 }
             case "QuestOK":

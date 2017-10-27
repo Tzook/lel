@@ -556,6 +556,16 @@ public class ActorController : MonoBehaviour
 
     private void StopAim()
     {
+        if (aimRight)
+        {
+            Instance.LastFireRot = Quaternion.Euler(0, 0, rotDegrees - 4f);
+        }
+        else
+        {
+            Instance.LastFireRot = Quaternion.Euler(0, 0, rotDegrees + 4f);
+        }
+        Debug.Log(Instance.LastFireRot);
+
         Anim.SetBool("Aim", false);
 
         isAiming = false;
@@ -778,6 +788,4 @@ public class ActorController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
-
 }

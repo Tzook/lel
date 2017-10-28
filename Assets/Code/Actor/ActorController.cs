@@ -51,9 +51,6 @@ public class ActorController : MonoBehaviour
     [SerializeField]
     float JumpDelay = 0.1f;
 
-    [SerializeField]
-    public ActorDamageInstance OneHandDamageInstance;
-
 
 
     Coroutine JumpRoutineInstance;
@@ -630,7 +627,7 @@ public class ActorController : MonoBehaviour
         {
             case "melee":
                 {
-                    OneHandDamageInstance.gameObject.SetActive(true);
+                    Instance.AttackMelee(true);
                     break;
                 }
             case "range":

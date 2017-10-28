@@ -495,6 +495,17 @@ public class ActorInstance : MonoBehaviour
         arrow.GetComponent<ProjectileArrow>().Launch(this, isPlayer);
     }
 
+    public void AttackMelee(bool isPlayer)
+    {
+        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_OneHand");
+
+        damageZone.GetComponent<ActorDamageInstance>().ParentActor = this;
+
+        damageZone.transform.position = Weapon.transform.position;
+        damageZone.transform.rotation = LastFireRot;
+        damageZone.gameObject.SetActive(true);
+    }
+
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
     {
         m_Renderer.sortingLayerName = layer;

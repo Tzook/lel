@@ -40,6 +40,7 @@ public class DialogManager : MonoBehaviour {
 	public void StartDialogMode(NPC npc)
     {
         currentNPC = npc;
+        Debug.Log("STARTED DIALOG" + currentNPC);
 
         currentNPC.ShowName();
 
@@ -100,11 +101,17 @@ public class DialogManager : MonoBehaviour {
         Game.Instance.ClientCharacter.GetComponent<ActorController>().CanInput = true;
         Game.Instance.CanUseUI = true;
 
-        CurrentNPCBubble.gameObject.SetActive(false);
-        CurrentNPCBubble = null;
+        if (CurrentNPCBubble != null)
+        {
+            CurrentNPCBubble.gameObject.SetActive(false);
+            CurrentNPCBubble = null;
+        }
 
-        CurrentOptionsFrame.gameObject.SetActive(false);
-        CurrentOptionsFrame = null;
+        if (CurrentOptionsFrame != null)
+        {
+            CurrentOptionsFrame.gameObject.SetActive(false);
+            CurrentOptionsFrame = null;
+        }
     }
 
     private IEnumerator DialogRoutine(string dialogKey)
@@ -209,6 +216,7 @@ public class DialogManager : MonoBehaviour {
             {
                 tempOption = ResourcesLoader.Instance.GetRecycledObject("DialogOption");
                 tempOption.transform.SetParent(CurrentOptionsFrame.transform.GetChild(0), false);
+                tempOption.GetComponent<Button>().onClick.RemoveAllListeners();
 
                 if (CurrentDialog.Options[i].CLR == Color.white)
                 {

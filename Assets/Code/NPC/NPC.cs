@@ -207,9 +207,9 @@ public class NPC : MonoBehaviour {
     private bool HasQuestComplete()
     {
         Quest tempQuest;
-        for (int i = 0; i < GivingQuests.Count; i++)
+        for (int i = 0; i < EndingQuests.Count; i++)
         {
-            tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(GivingQuests[i]);
+            tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(EndingQuests[i]);
             if (tempQuest != null && tempQuest.CanBeCompleted)
             {
                 return true;

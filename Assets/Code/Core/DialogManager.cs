@@ -20,6 +20,8 @@ public class DialogManager : MonoBehaviour {
     int PreviousItemIndex = 0;
     int CurrentVendorItemIndex = 0;
 
+    bool isVendorMode = false;
+
     void Awake()
     {
         Instance = this;
@@ -32,7 +34,11 @@ public class DialogManager : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 StopDialogMode();
-                StopVendorMode();
+
+                if (isVendorMode)
+                {
+                    StopVendorMode();
+                }
             }
         }
     }
@@ -332,6 +338,8 @@ public class DialogManager : MonoBehaviour {
 
     public void StartVendorMode()
     {
+        isVendorMode = true;
+
         CurrentNPCBubble.gameObject.SetActive(false);
         CurrentNPCBubble = null;
 
@@ -417,6 +425,7 @@ public class DialogManager : MonoBehaviour {
 
     public void StopVendorMode()
     {
+        isVendorMode = false;
         GameCamera.Instance.FocusDefault();
         InGameMainMenuUI.Instance.HideVendorPanel();
 

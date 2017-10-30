@@ -157,7 +157,7 @@ public class ActorInstance : MonoBehaviour
         UpdateHair();
         UpdateEquipment();
 
-        if(BlinkingInstance == null)
+        if(BlinkingInstance == null && this.gameObject.activeInHierarchy)
         {
             BlinkingInstance = StartCoroutine(BlinkingRoutine());
         }

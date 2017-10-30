@@ -419,6 +419,9 @@ public class ActorController : MonoBehaviour
         StopAim();
         EndAttack();
 
+        Instance.TorsoBone.transform.localScale = Vector3.one;
+        Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+
         SocketClient.Instance.SendStartedClimbing();
     }
 

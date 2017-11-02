@@ -26,6 +26,7 @@ public class Game : MonoBehaviour {
     }
     public bool MovingTroughPortal = false;
     public bool isBitch = false;
+    public bool isLoadingScene = false;
 
     public static Game Instance;
 
@@ -299,6 +300,8 @@ public class Game : MonoBehaviour {
 
     protected IEnumerator LoadSceneRoutine(string scene, ActorInfo actorInfo)
     {
+        isLoadingScene = true;
+
         yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 
         string lastScene = SceneManager.GetActiveScene().name;
@@ -340,6 +343,8 @@ public class Game : MonoBehaviour {
         MovingTroughPortal = false;
         InGame = true;
         yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
+
+        isLoadingScene = false;
     }
 
     public void SetBitch(bool isbitch)

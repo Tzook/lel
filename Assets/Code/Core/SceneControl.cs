@@ -188,9 +188,10 @@ public class SceneControl
         {
             if(Npcs[i].SellingItems.Count > 0)
             {
+
                 tempSign = ResourcesLoader.Instance.GetRecycledObject("SellHereIcon");
                 tempSign.transform.position = Npcs[i].QuestSpot.position;
-                tempSign.transform.GetChild(tempSign.transform.childCount - 1).GetComponent<Text>().text = Content.Instance.GetItem(item.Key).GoldValue.ToString();
+                tempSign.transform.GetChild(tempSign.transform.childCount - 1).GetComponent<Text>().text = ((Content.Instance.GetItem(item.Key).GoldValue * item.Stack) / 2).ToString();
 
                 sellingSigns.Add(tempSign);
             }

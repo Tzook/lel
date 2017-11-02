@@ -63,6 +63,5 @@ public class VendorPanelUI : MonoBehaviour {
 
         SocketClient.Instance.SendBuyVendorItem(CurrentVendor.Key, CurrentVendor.GetItemIndex(CurrentItem.Key));
         LocalUserInfo.Me.ClientCharacter.Gold -= ReferenceItem.GoldValue;
-        DialogManager.Instance.StopVendorMode();
     }
 }

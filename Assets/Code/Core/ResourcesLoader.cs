@@ -98,7 +98,7 @@ public class ResourcesLoader : MonoBehaviour {
         }
         else
         {
-            Debug.LogError("Resource Loader - " + gKey + " could not be provided by the dictionary. (Doesn't exists in the Resources/UI ?)");
+            Debug.LogError("Resource Loader - " + gKey + " could not be provided by the dictionary. (Doesn't exists in the Resources/Audio ?)");
         }
 
         return null;

@@ -19,7 +19,10 @@ public class TalentGroup
 public class TalentContent
 {
     public string Key;
+
+    [TextArea(16, 9)]
     public string Description;
+
     public int PointCap;
     public List<TalentRequirement> Requirements = new List<TalentRequirement>();
     public List<TalentRank> Ranks = new List<TalentRank>();
@@ -35,8 +38,8 @@ public class TalentRequirement
 [System.Serializable]
 public class TalentRank
 {
-    int Rank;
-    int MPCost;
+    public int Rank;
+    public int MPCost;
     public List<ActiveTalentEffect> ActiveEffects = new List<ActiveTalentEffect>();
     public List<PassiveTalentEffect> PassiveEffects = new List<PassiveTalentEffect>();
     public List<string> Buffs = new List<string>();
@@ -49,36 +52,36 @@ public class Buff
     public string Key;
     public float Duration;
 
-    float BaseDmgPercent;
-    float Interval;
-    float Speed;
-    bool Stunned;
-    bool manaLess;
-    float StrBonusPrecent;
-    float MagicBonusPrecent;
-    float DexBonusPrecent;
-    float HPBonusPrecent;
-    float MPBonusPrecent;
+    public float BaseDmgPercent;
+    public float Interval;
+    public float Speed;
+    public bool Stunned;
+    public bool manaLess;
+    public float StrBonusPrecent;
+    public float MagicBonusPrecent;
+    public float DexBonusPrecent;
+    public float HPBonusPrecent;
+    public float MPBonusPrecent;
 }
 
 [System.Serializable]
 public class ActiveTalentEffect
 {
-    int attacksCount;
-    int mobsAffectedCount;
-    float baseDmgPercent;
-    float threatBonusPercent;
-    float splashDmgPercent;
-    float splashMobsAffectedCount;
+    public int attacksCount;
+    public int mobsAffectedCount;
+    public float baseDmgPercent;
+    public float threatBonusPercent;
+    public float splashDmgPercent;
+    public float splashMobsAffectedCount;
 }
 
 [System.Serializable]
 public class PassiveTalentEffect
 {
-    float baseDmgBonusPercent;
-	float chargeStunsChance;
-    float chargeDmgPercentBonus;
-    int hpPerStrBonus;
-    float reflectMeeleBaseDmgPercent;
-    float blockDmgReductionPrecent;
+    public float baseDmgBonusPercent;
+    public float chargeStunsChance;
+    public float chargeDmgPercentBonus;
+    public int hpPerStrBonus;
+    public float reflectMeeleBaseDmgPercent;
+    public float blockDmgReductionPrecent;
 }

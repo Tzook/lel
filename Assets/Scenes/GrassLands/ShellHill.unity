@@ -1409,52 +1409,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1001 &48283938
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1572964365}
-    m_Modifications:
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.046
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.0072140717
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.999974
-      objectReference: {fileID: 0}
-    - target: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1261437044694780, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-      propertyPath: m_Name
-      value: NPC
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d825c746adee8ff41a9fd9b4ad9731bb, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &49178497
 GameObject:
   m_ObjectHideFlags: 0
@@ -18094,7 +18048,7 @@ Transform:
   m_LocalScale: {x: 0.9821215, y: 1.0541553, z: 1}
   m_Children: []
   m_Father: {fileID: 1572964365}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.827}
 --- !u!212 &465089498
 SpriteRenderer:
@@ -39868,7 +39822,7 @@ MonoBehaviour:
   Spawners: []
   Npcs:
   - {fileID: 1301612023}
-  - {fileID: 1024555721}
+  - {fileID: 0}
   - {fileID: 1960995092}
   - {fileID: 993316035}
   - {fileID: 1616717456}
@@ -43718,17 +43672,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!4 &1024555718 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4481017125369934, guid: d825c746adee8ff41a9fd9b4ad9731bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 48283938}
---- !u!114 &1024555721 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114196603658557548, guid: d825c746adee8ff41a9fd9b4ad9731bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 48283938}
-  m_Script: {fileID: 11500000, guid: fe75e3b60ce437d438cd0a933fb28c30, type: 3}
 --- !u!1 &1029015379
 GameObject:
   m_ObjectHideFlags: 0
@@ -47297,7 +47240,7 @@ Transform:
   m_LocalScale: {x: 0.9821215, y: 1.0541553, z: 1}
   m_Children: []
   m_Father: {fileID: 1572964365}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.827}
 --- !u!212 &1188818535
 SpriteRenderer:
@@ -76666,7 +76609,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900868994}
-  - {fileID: 1024555718}
   - {fileID: 1188818534}
   - {fileID: 465089497}
   m_Father: {fileID: 0}

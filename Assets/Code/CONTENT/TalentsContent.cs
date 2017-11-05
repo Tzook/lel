@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalentsContent : MonoBehaviour {
+public class TalentsContent : MonoBehaviour
+{
 
     public List<TalentGroup> TalentGroups = new List<TalentGroup>();
     public List<Buff> Buffs = new List<Buff>();

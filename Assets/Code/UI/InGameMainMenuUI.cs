@@ -58,6 +58,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected AbandonQuestWindowUI AbandonQuestWindow;
 
     [SerializeField]
+    protected TalentsWindowUI TalentWindow;
+
+    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
@@ -250,6 +253,18 @@ public class InGameMainMenuUI : MonoBehaviour {
                 else
                 {
                     completedQuestsPanel.Hide();
+                }
+            }
+
+            if (Input.GetKeyDown(InputMap.Map["Talents"]) && LocalUserInfo.Me.ClientCharacter.Class != "adventurer")
+            {
+                if (!TalentWindow.gameObject.activeInHierarchy)
+                {
+                    TalentWindow.Show();
+                }
+                else
+                {
+                    TalentWindow.Hide();
                 }
             }
         }

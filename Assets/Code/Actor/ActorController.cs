@@ -564,7 +564,6 @@ public class ActorController : MonoBehaviour
         {
             Instance.LastFireRot = Quaternion.Euler(0, 0, rotDegrees + 4f);
         }
-        Debug.Log(Instance.LastFireRot);
 
         Anim.SetBool("Aim", false);
 

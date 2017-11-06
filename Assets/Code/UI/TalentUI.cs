@@ -11,8 +11,16 @@ public class TalentUI : MonoBehaviour {
     [SerializeField]
     GameObject Lock;
 
+    [SerializeField]
+    string TalentKey;
+
+    TalentContent Talent;
+
     public void Set()
     {
+        Talent = TalentsContent.Instance.GetTalent(TalentKey);
+
+        PointCount.text = "0/"+Talent.PointCap;
 
     }
 }

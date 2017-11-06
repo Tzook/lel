@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class TalentsContent : MonoBehaviour
 {
+    public static TalentsContent Instance;
 
     public List<TalentGroup> TalentGroups = new List<TalentGroup>();
-    public List<Buff> Buffs = new List<Buff>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public TalentContent GetTalent(string key)
+    {
+        for(int a=0;a<TalentGroups.Count;a++)
+        {
+            for(int b=0;b<TalentGroups[a].Talents.Count;b++)
+            {
+                if(TalentGroups[a].Talents[b].Key == key)
+                {
+                    return TalentGroups[a].Talents[b];
+                }
+            }
+        }
+
+        return null;
+    }
 }
 
 [System.Serializable]
@@ -41,48 +62,13 @@ public class TalentRank
 {
     public int Rank;
     public int MPCost;
-    public List<ActiveTalentEffect> ActiveEffects = new List<ActiveTalentEffect>();
-    public List<PassiveTalentEffect> PassiveEffects = new List<PassiveTalentEffect>();
-    public List<string> Buffs = new List<string>();
-    public List<string> Dots = new List<string>();
+    public List<TalentEffect> ActiveEffects = new List<TalentEffect>();
+    public List<TalentEffect> PassiveEffects = new List<TalentEffect>();
 }
 
 [System.Serializable]
-public class Buff
+public class TalentEffect
 {
     public string Key;
-    public float Duration;
-
-    public float BaseDmgPercent;
-    public float Interval;
-    public float Speed;
-    public bool Stunned;
-    public bool manaLess;
-    public float StrBonusPrecent;
-    public float MagicBonusPrecent;
-    public float DexBonusPrecent;
-    public float HPBonusPrecent;
-    public float MPBonusPrecent;
-}
-
-[System.Serializable]
-public class ActiveTalentEffect
-{
-    public int attacksCount;
-    public int mobsAffectedCount;
-    public float baseDmgPercent;
-    public float threatBonusPercent;
-    public float splashDmgPercent;
-    public float splashMobsAffectedCount;
-}
-
-[System.Serializable]
-public class PassiveTalentEffect
-{
-    public float baseDmgBonusPercent;
-    public float chargeStunsChance;
-    public float chargeDmgPercentBonus;
-    public int hpPerStrBonus;
-    public float reflectMeeleBaseDmgPercent;
-    public float blockDmgReductionPrecent;
+    public string Value;
 }

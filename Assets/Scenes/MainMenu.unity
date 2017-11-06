@@ -34731,7 +34731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.48201, y: -124.90266}
+  m_AnchoredPosition: {x: 84.48201, y: -124.902664}
   m_SizeDelta: {x: 168.96402, y: 35.686474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1629
@@ -38058,7 +38058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.162, y: 0}
   m_AnchorMax: {x: 0.8245263, y: 0.086592436}
-  m_AnchoredPosition: {x: 1, y: -3}
+  m_AnchoredPosition: {x: 1, y: -2.9999924}
   m_SizeDelta: {x: -91, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1820
@@ -38812,7 +38812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50253, y: -235.1927}
+  m_AnchoredPosition: {x: 136.50253, y: -235.19269}
   m_SizeDelta: {x: 273.00507, y: 67.197914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1864
@@ -71115,6 +71115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointCount: {fileID: 199236134}
   Lock: {fileID: 1963443939}
+  TalentKey: 
 --- !u!1 &461458823
 GameObject:
   m_ObjectHideFlags: 0
@@ -72088,7 +72089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.44999, y: -20.719997}
+  m_AnchoredPosition: {x: 40.44998, y: -20.719997}
   m_SizeDelta: {x: 33.83, y: 30.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &527643689
@@ -74773,8 +74774,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4391f8b8be5e59442b77a3edf854b73d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TalentGroups: []
-  Buffs: []
+  TalentGroups:
+  - jobKey: warrior
+    Talents:
+    - Key: Blade Spin
+      Description: Will spin around and hit the surrounding enemies with minimum damage
+        + (5% * POINT)
+      PointCap: 3
+      Requirements: []
+      Ranks:
+      - Rank: 1
+        MPCost: 30
+        ActiveEffects:
+        - Key: mobsAffectedCount
+          Value: 6
+        - Key: minDmgBonusPercent
+          Value: 0.05
+        PassiveEffects: []
+      - Rank: 2
+        MPCost: 30
+        ActiveEffects:
+        - Key: mobsAffectedCount
+          Value: 6
+        - Key: minDmgBonusPercent
+          Value: 0.1
+        PassiveEffects: []
+      - Rank: 3
+        MPCost: 30
+        ActiveEffects:
+        - Key: mobsAffectedCount
+          Value: 6
+        - Key: minDmgBonusPercent
+          Value: 0.15
+        PassiveEffects: []
+    - Key: Endure Pain
+      Description: Adds 1 more HP per STR point.
+      PointCap: 5
+      Requirements: []
+      Ranks:
+      - Rank: 1
+        MPCost: 0
+        ActiveEffects: []
+        PassiveEffects:
+        - Key: hpPerSTRBonus
+          Value: 1
+      - Rank: 2
+        MPCost: 0
+        ActiveEffects: []
+        PassiveEffects:
+        - Key: hpPerSTRBonus
+          Value: 2
+      - Rank: 3
+        MPCost: 0
+        ActiveEffects: []
+        PassiveEffects:
+        - Key: hpPerSTRBonus
+          Value: 3
+      - Rank: 4
+        MPCost: 0
+        ActiveEffects: []
+        PassiveEffects:
+        - Key: hpPerSTRBonus
+          Value: 4
+      - Rank: 5
+        MPCost: 0
+        ActiveEffects: []
+        PassiveEffects:
+        - Key: hpPerSTRBonus
+          Value: 5
+    - Key: Tackle
+      Description: 'Will sprint towards the aiming direction and stun enemies standing
+        in the way.
+
+        Each point adds to the amount of enemies stunned.'
+      PointCap: 3
+      Requirements: []
+      Ranks:
+      - Rank: 1
+        MPCost: 30
+        ActiveEffects:
+        - Key: stunned
+          Value: True
+        - Key: dotDuration
+          Value: 3
+        - Key: mobsAffectedCount
+          Value: 1
+        PassiveEffects: []
+      - Rank: 2
+        MPCost: 30
+        ActiveEffects:
+        - Key: stunned
+          Value: True
+        - Key: dotDuration
+          Value: 3
+        - Key: mobsAffectedCount
+          Value: 2
+        PassiveEffects: []
+      - Rank: 3
+        MPCost: 30
+        ActiveEffects:
+        - Key: stunned
+          Value: True
+        - Key: dotDuration
+          Value: 3
+        - Key: mobsAffectedCount
+          Value: 3
+        PassiveEffects: []
 --- !u!1 &758073230
 GameObject:
   m_ObjectHideFlags: 0
@@ -76910,7 +77015,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.22625001, y: 0.5844445}
   m_AnchorMax: {x: 0.47250003, y: 0.6355556}
-  m_AnchoredPosition: {x: -1.1999054, y: -0.2999878}
+  m_AnchoredPosition: {x: -1.1998901, y: -0.2999878}
   m_SizeDelta: {x: 3.1999998, y: 1.4000015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &891243387
@@ -90459,7 +90564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1883320852
 RectTransform:
   m_ObjectHideFlags: 0

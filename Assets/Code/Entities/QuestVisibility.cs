@@ -9,11 +9,17 @@ public class QuestVisibility : MonoBehaviour {
 
     private void Start()
     {
-        switch(HideState)
+        Refresh();
+        Game.Instance.CurrentScene.AddQuestVisibilityObject(this);
+    }
+
+    public void Refresh()
+    {
+        switch (HideState)
         {
             case QuestState.QuestEnumState.Completed:
                 {
-                    if(LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(HideQuestKey))
+                    if (LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(HideQuestKey))
                     {
                         Hide();
                     }
@@ -47,10 +53,15 @@ public class QuestVisibility : MonoBehaviour {
 
                     break;
                 }
+            default:
+                {
+                    this.gameObject.SetActive(true);
+                    break;
+                }
         }
     }
 
-    void Hide()
+    public void Hide()
     {
         this.gameObject.SetActive(false);
     }

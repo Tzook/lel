@@ -12,6 +12,7 @@ public class SceneControl
     public List<Enemy>                      Enemies = new List<Enemy>();
     public Dictionary<string, ItemInstance> Items = new Dictionary<string, ItemInstance>();
     public List<NPC>                        Npcs = new List<NPC>();
+    public List<QuestVisibility> QVObjects = new List<QuestVisibility>();
 
     public int SceneItemsCount
     {
@@ -162,8 +163,17 @@ public class SceneControl
                 UpdateQuestProgress(Npcs[i].GivingQuests[q]);
             }
         }
+
+        foreach(QuestVisibility qvObj in QVObjects)
+        {
+            qvObj.Refresh();
+        }
     }
 
+    public void AddQuestVisibilityObject(QuestVisibility qvObject)
+    {
+        QVObjects.Add(qvObject);
+    }
 
     public NPC GetQuestNPC(string questKey)
     {

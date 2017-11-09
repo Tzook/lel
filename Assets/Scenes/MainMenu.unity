@@ -38058,7 +38058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.162, y: 0}
   m_AnchorMax: {x: 0.8245263, y: 0.086592436}
-  m_AnchoredPosition: {x: 1, y: -2.9999924}
+  m_AnchoredPosition: {x: 1, y: -3}
   m_SizeDelta: {x: -91, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1820
@@ -40191,7 +40191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41, y: -39.000244}
+  m_AnchoredPosition: {x: 41, y: -39.000305}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -46410,6 +46410,63 @@ MonoBehaviour:
     - ItemKey: shortScimitar
       MinStack: 1
       MaxStack: 1
+  - MonsterKey: Plant
+    MonsterName: Moving Plant
+    MonsterHP: 50
+    MonsterLevel: 4
+    MinDMG: 5
+    MaxDMG: 20
+    RewardEXP: 30
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 8
+      MaxStack: 22
+    - ItemKey: plantFlower
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -47429,6 +47486,28 @@ MonoBehaviour:
     SubType: 
     DropChance: 0
     GoldValue: 1
+    StackCap: 20
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+  - Key: plantFlower
+    Name: Yellow Flower
+    Description: Not sure if this was the plant's head, or just a flower after all.
+    IconPlaceable: {fileID: 21300000, guid: 7c9d99f9c7093e64ea3dcf565fbac392, type: 3}
+    Icon: icon_plantFlower
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 80
+    GoldValue: 2
     StackCap: 20
     Stats:
       RequiresSTR: 0
@@ -74778,7 +74857,7 @@ MonoBehaviour:
   - jobKey: warrior
     Talents:
     - Key: Blade Spin
-      Description: Will spin around and hit the surrounding enemies with minimum damage
+      Description: Will spin around and hit the surrounding enemies with STR damage
         + (5% * POINT)
       PointCap: 3
       Requirements: []
@@ -74788,7 +74867,7 @@ MonoBehaviour:
         ActiveEffects:
         - Key: mobsAffectedCount
           Value: 6
-        - Key: minDmgBonusPercent
+        - Key: strDmgBonusPercent
           Value: 0.05
         PassiveEffects: []
       - Rank: 2
@@ -83493,7 +83572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -384.20007, y: -129.09}
+  m_AnchoredPosition: {x: -384.20004, y: -129.09}
   m_SizeDelta: {x: -769.46, y: -262.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482446311
@@ -90564,7 +90643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1883320852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -92695,7 +92774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -339.19995, y: -139.8002}
+  m_AnchoredPosition: {x: -339.19995, y: -139.80023}
   m_SizeDelta: {x: -678.4, y: -313.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2054930169

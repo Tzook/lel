@@ -118,7 +118,7 @@ public class DevContentEditor : Editor
 
         if (GUILayout.Button("Update Primary Abilities"))
         {
-            SendPrimaryAbilities(currentInfo.PrimaryAbilities);
+            SendPrimaryAbilities(currentInfo.PrimaryAbilities, currentInfo.Perks);
         }
 
         if (GUILayout.Button("Restart Server"))
@@ -220,7 +220,7 @@ public class DevContentEditor : Editor
         });
     }
 
-    private void SendPrimaryAbilities(List<PrimaryAbility> primaryAbilities)
+    private void SendPrimaryAbilities(List<DevPrimaryAbility> primaryAbilities, List<DevPAPerk> perks)
     {
         JSONNode node = new JSONClass();
 
@@ -228,7 +228,26 @@ public class DevContentEditor : Editor
 
         for (int i = 0; i < primaryAbilities.Count; i++)
         {
-            node["primaryAbilities"][i]["key"] = primaryAbilities[i].Name;
+            node["talents"][i]["primaryAbility"] = primaryAbilities[i].Name;
+
+            for(int a = 0; a < primaryAbilities[i].Perks.Count; a++)
+            {
+                node["talents"][i]["perks"][a]["atLeastLvl"] = primaryAbilities[i].Perks[a].MinLevel.ToString();
+                node["talents"][i]["perks"][a]["perksOffered"] = primaryAbilities[i].Perks[a].PerksOffered.ToString();
+
+                for (int b = 0; b < primaryAbilities[i].Perks[a].AddToPool.Count; b++)
+                {
+                    node["talents"][i]["perks"][a]["addToPool"][b] = primaryAbilities[i].Perks[a].AddToPool[b].ToString();
+                }
+            }
+        }
+
+        for(int i=0;i<perks.Count;i++)
+        {
+            node["perkCollection"][i]["key"] = perks[i].Key;
+            node["perkCollection"][i]["value"] = perks[i].PrecentPerUpgrade.ToString();
+            node["perkCollection"][i]["max"] = perks[i].UpgradeCap.ToString();
+            node["perkCollection"][i]["default"] = perks[i].StartingValue.ToString();
         }
 
         Debug.Log("Sending Primary Abilities...");
@@ -239,7 +258,7 @@ public class DevContentEditor : Editor
         headers.Add("Content-Type", "application/json");
 
 
-        WWW req = new WWW(Config.BASE_URL + "/primaryAbilities", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + "/talents/generate", rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

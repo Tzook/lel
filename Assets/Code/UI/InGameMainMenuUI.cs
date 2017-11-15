@@ -58,9 +58,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected AbandonQuestWindowUI AbandonQuestWindow;
 
     [SerializeField]
-    protected TalentsWindowUI TalentWindow;
-
-    [SerializeField]
     protected CanvasGroup m_DimmerCanvasGroup;
 
     [SerializeField]
@@ -107,6 +104,15 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     [SerializeField]
     public ShockMessageUI ShockMessageTop;
+
+    [SerializeField]
+    public PAWindowUI PrimaryAbilityWindow;
+
+    [SerializeField]
+    public UpgradeCounterUI UpgradeCounterPanel;
+
+    [SerializeField]
+    public MasteryUpgradeWindowUI MasteryUpgradePanel;
 
     public static InGameMainMenuUI Instance;
 
@@ -256,15 +262,15 @@ public class InGameMainMenuUI : MonoBehaviour {
                 }
             }
 
-            if (Input.GetKeyDown(InputMap.Map["Talents"]) && LocalUserInfo.Me.ClientCharacter.Class != "adventurer")
+            if (Input.GetKeyDown(InputMap.Map["Talents"]))
             {
-                if (!TalentWindow.gameObject.activeInHierarchy)
+                if (!PrimaryAbilityWindow.gameObject.activeInHierarchy)
                 {
-                    TalentWindow.Show();
+                    ShowPrimaryAbilitiesWindow();
                 }
                 else
                 {
-                    TalentWindow.Hide();
+                    HidePrimaryAbilitiesWindow();
                 }
             }
         }
@@ -298,6 +304,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshLevel(info);
 
         PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility).Icon;
+
+        UpdateUpgradeCounter(info.UnspentPerkPoints);
     }
 
     public void HideGameUI()
@@ -680,4 +688,53 @@ public class InGameMainMenuUI : MonoBehaviour {
         VendorCanvas.GetComponent<VendorPanelUI>().Hide();
     }
 
+    public void ShowPrimaryAbilitiesWindow()
+    {
+        PrimaryAbilityWindow.Show();
+    }
+
+    public void HidePrimaryAbilitiesWindow()
+    {
+        PrimaryAbilityWindow.Hide();
+    }
+
+    public void RefreshPrimaryAbilitiesWindow()
+    {
+        if (PrimaryAbilityWindow.gameObject.activeInHierarchy)
+        {
+            PrimaryAbilityWindow.RefreshWindow();
+        }
+    }
+
+    public void UpdateUpgradeCounter(int Value)
+    {
+        UpgradeCounterPanel.SetValue(Value);
+    }
+
+    public void EnableUpgradeCounter()
+    {
+        UpgradeCounterPanel.Interactable = true;
+    }
+
+    public void DisableUpgradeCounter()
+    {
+        UpgradeCounterPanel.Interactable = false;
+    }
+
+
+    public void ShowMasteryUpgradeWindow()
+    {
+        MasteryUpgradePanel.ShowLatest();
+    }
+
+    public void HideMasteryUpgradeWindow()
+    {
+        MasteryUpgradePanel.Hide();
+    }
+
+    public void ChooseMasteryUpgradePerk(string perkKey)
+    {
+        MasteryUpgradePanel.DisableButtons();
+        SocketClient.Instance.SendChoosePerk(MasteryUpgradePanel.CurrentAbility.Key, perkKey);
+    }
 }

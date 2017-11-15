@@ -229,6 +229,20 @@ public class AudioControl : MonoBehaviour {
         }
     }
 
+    public void StopSound(string gClip)
+    {
+        foreach(GameObject obj in m_listInstances)
+        {
+            if(obj.GetComponent<AudioSource>().isPlaying)
+            {
+                if(obj.GetComponent<AudioSource>().clip.name == gClip)
+                {
+                    obj.GetComponent<AudioSource>().Stop();
+                }
+            }
+        }
+    }
+
 
     #endregion
 }

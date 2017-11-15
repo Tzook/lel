@@ -120,6 +120,12 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("actor_transaction", OnTransaction);
 
+        CurrentSocket.On("ability_gain_exp", OnAbilityGainEXP);
+        CurrentSocket.On("ability_lvl_up", OnAbilityLevelUp);
+        CurrentSocket.On("ability_choose_perk", OnAbilityChoosePerk);
+        CurrentSocket.On("ability_gain_perk", OnAbilityGainPerk);
+
+
         LoadingWindowUI.Instance.Register(this);
     }
 
@@ -930,6 +936,69 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data.ToString());
     }
 
+    private void OnAbilityGainEXP(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        PrimaryAbility tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        tempPA.Exp = data["now"].AsInt;
+
+        InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+    }
+
+    private void OnAbilityLevelUp(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        PrimaryAbility tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        tempPA.LVL = data["lvl"].AsInt;
+
+        LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
+
+        //TODO TEMPPPPPPPPPPPPPPP MUST REPLACE!
+        tempPA.Points++;
+
+        InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+
+        InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+    }
+
+    private void OnAbilityChoosePerk(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        PrimaryAbility tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+
+        tempAbility.PerkPool.Clear();
+
+        for(int i=0;i<data["pool"].Count;i++)
+        {
+            tempAbility.PerkPool.Add(data["pool"][i].Value);
+        }
+    }
+
+    private void OnAbilityGainPerk(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        PrimaryAbility tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+
+        tempAbility.GainPerk(data["perk"].Value);
+        tempAbility.Points--;
+
+        InGameMainMenuUI.Instance.EnableUpgradeCounter();
+        InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+
+        InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+    }
 
     #endregion
 
@@ -1343,6 +1412,19 @@ public class SocketClient : MonoBehaviour
         node["stack"] = stack.ToString();
 
         CurrentSocket.Emit("buy_item", node);
+    }
+
+
+    public void SendChoosePerk(string ability, string perk)
+    {
+        JSONNode node = new JSONClass();
+
+        node["ability"] = ability;
+        node["perk"] = perk;
+
+        CurrentSocket.Emit("choose_perk", node);
+
+        InGameMainMenuUI.Instance.DisableUpgradeCounter();
     }
 
     #endregion

@@ -633,6 +633,15 @@ public class ActorInstance : MonoBehaviour
 
         temObj.GetComponent<LevelUpEffect>().Play();
     }
+    
+    public void MasteryUp()
+    {
+        GameObject temObj = ResourcesLoader.Instance.GetRecycledObject("MasteryUpEffect");
+
+        temObj.transform.position = transform.position;
+
+        temObj.GetComponent<LevelUpEffect>().Play();
+    }
 
     public void PopHint(string text, Color clr)
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using SimpleJSON;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class ActorInfo
 {
@@ -77,8 +78,23 @@ public class ActorInfo
     }
 
 
-    public List<string> PrimaryAbilities = new List<string>();
+    public List<PrimaryAbility> PrimaryAbilities = new List<PrimaryAbility>();
     public string CurrentPrimaryAbility;
+
+    public int UnspentPerkPoints
+    {
+        get
+        {
+            int Counter = 0;
+
+            for(int i=0;i<PrimaryAbilities.Count;i++)
+            {
+                Counter += PrimaryAbilities[i].Points;
+            }
+
+            return Counter;
+        }
+    }
 
     public Inventory Inventory;
 
@@ -127,9 +143,41 @@ public class ActorInfo
         {
             SetStats(node["stats"]);
         }
-        
+
+        IEnumerator enumerator;
+        KeyValuePair<string, JSONNode> currentPair;
+
+        PAPerk tempPerk;
+        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        {
+            enumerator = node["talents"][PrimaryAbilities[i].Key]["perks"].AsObject.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                tempPerk = new PAPerk();
+
+                currentPair = (KeyValuePair<string, JSONNode>)enumerator.Current;
+
+                tempPerk.Key = currentPair.Key;
+                tempPerk.Points = currentPair.Value.AsInt;
+
+
+                PrimaryAbilities[i].Perks.Add(tempPerk);
+            }
+
+            for (int p = 0; p < node["talents"][PrimaryAbilities[i].Key]["pool"].Count; p++)
+            {
+                PrimaryAbilities[i].PerkPool.Add(node["talents"][PrimaryAbilities[i].Key]["pool"][p].Value);
+            }
+
+            PrimaryAbilities[i].Points = node["talents"][PrimaryAbilities[i].Key]["points"].AsInt;
+            PrimaryAbilities[i].Exp = node["talents"][PrimaryAbilities[i].Key]["exp"].AsInt;
+            PrimaryAbilities[i].LVL = node["talents"][PrimaryAbilities[i].Key]["lvl"].AsInt;
+
+        }
+
         // Get the JSON keys
-        IEnumerator enumerator = node["quests"]["done"].AsObject.GetEnumerator();
+        enumerator = node["quests"]["done"].AsObject.GetEnumerator();
         while (enumerator.MoveNext()) 
         {
             KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
@@ -225,23 +273,28 @@ public class ActorInfo
         this.CurrentMana = node["mp"]["now"].AsInt;
 
         this.PrimaryAbilities.Clear();
-        for(int i=0;i<node["abilities"].Count;i++)
+
+        PrimaryAbility ability;
+        for (int i=0;i<node["abilities"].Count;i++)
         {
-            this.PrimaryAbilities.Add(node["abilities"][i].Value);
+            ability = new PrimaryAbility();
+            ability.Key = node["abilities"][i].Value;
+
+            this.PrimaryAbilities.Add(ability);
         }
 
         SetPrimaryAbility(node["primaryAbility"].Value);
-
     }
 
     public void SwitchPrimaryAbility(string key)
     {
-        if(PrimaryAbilities.Contains(key) && CanUsePrimaryAbility(key))
+        for(int i=0;i<PrimaryAbilities.Count;i++)
         {
-            SocketClient.Instance.SendChangedAbility(key);
-
-            SetPrimaryAbility(key);
-
+            if(PrimaryAbilities[i].Key == key && CanUsePrimaryAbility(key))
+            {
+                SocketClient.Instance.SendChangedAbility(key);
+                SetPrimaryAbility(key);
+            }
         }
     }
 
@@ -463,9 +516,23 @@ public class ActorInfo
     {
         QuestsInProgress.Remove(GetQuest(QuestKey));
     }
+
+    public PrimaryAbility GetPrimaryAbility(string key)
+    {
+        for(int i=0;i<PrimaryAbilities.Count;i++)
+        {
+            if(PrimaryAbilities[i].Key == key)
+            {
+                return PrimaryAbilities[i];
+            }
+        }
+
+        return null;
+    }
 }
 
 public enum Gender
 {
     Male, Female
 }
+

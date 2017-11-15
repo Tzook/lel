@@ -18,7 +18,9 @@ public class Content : MonoBehaviour {
 
     public List<ContentPiece> InfoBank = new List<ContentPiece>();
 
-    public List<PrimaryAbility> PrimaryAbilities = new List<PrimaryAbility>();
+    public List<DevPrimaryAbility> PrimaryAbilities = new List<DevPrimaryAbility>();
+
+    public List<DevPAPerk> Perks = new List<DevPAPerk>();
 
     public ContentPiece GetInfo(string Key)
     {
@@ -33,7 +35,7 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public PrimaryAbility GetPrimaryAbility(string key)
+    public DevPrimaryAbility GetPrimaryAbility(string key)
     {
         for (int i = 0; i < PrimaryAbilities.Count; i++)
         {
@@ -87,6 +89,19 @@ public class Content : MonoBehaviour {
             if(Quests[i].Key == questKey)
             {
                 return Quests[i];
+            }
+        }
+
+        return null;
+    }
+
+    public DevPAPerk GetPerk(string Key)
+    {
+        for(int i=0;i<Perks.Count;i++)
+        {
+            if(Perks[i].Key == Key)
+            {
+                return Perks[i];
             }
         }
 
@@ -203,11 +218,34 @@ public class ContentPiece
 }
 
 [System.Serializable]
-public class PrimaryAbility
+public class DevPrimaryAbility
 {
     public string Name;
 
     public Sprite Icon;
+
+    public Color PAColor;
+
+    public List<PerkStage> Perks = new List<PerkStage>();
+}
+
+[System.Serializable]
+public class PerkStage
+{
+    public int MinLevel;
+    public int PerksOffered;
+    public List<string> AddToPool = new List<string>();
+}
+
+[System.Serializable]
+public class DevPAPerk
+{
+    public string Key;
+    public string Name;
+    public Sprite Icon;
+    public float PrecentPerUpgrade;
+    public float UpgradeCap;
+    public float StartingValue;
 }
 
 [System.Serializable]
@@ -241,7 +279,7 @@ public class Quest
     public int RewardHP;
     public int RewardMP;
 
-    public PrimaryAbility RewardPrimaryAbility;
+    public DevPrimaryAbility RewardPrimaryAbility;
 
     public string RewardClass;
     

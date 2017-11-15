@@ -64,6 +64,7 @@ namespace SimpleJSON
 
     public abstract class JSONNode
     {
+        public object Keys;
         #region common interface
 
         public virtual void Add(string aKey, JSONNode aItem)

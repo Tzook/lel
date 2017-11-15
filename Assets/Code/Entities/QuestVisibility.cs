@@ -10,6 +10,17 @@ public class QuestVisibility : MonoBehaviour {
     private void Start()
     {
         Refresh();
+        StartCoroutine(Initialize());
+        
+    }
+
+    IEnumerator Initialize()
+    {
+        while(Game.Instance.CurrentScene == null)
+        {
+            yield return 0;
+        }
+
         Game.Instance.CurrentScene.AddQuestVisibilityObject(this);
     }
 

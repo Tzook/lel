@@ -1268,9 +1268,10 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
-        node["mob_id"] = enemyReference.Info.ID;
+        // TODO send all mobs in the area
+        node["mobs"][0] = enemyReference.Info.ID;
 
-        CurrentSocket.Emit("mob_took_dmg", node);
+        CurrentSocket.Emit("mobs_took_dmg", node);
     }
 
     public void SendItemPositions(List<ItemInstance> ItemInstances)

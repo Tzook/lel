@@ -4806,17 +4806,29 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hey... Welcome!
+    - Content: The god of land embraces you with his sweet kiss
       LetterDelay: 0.03
-      Pitch: 1.1
+      Pitch: 0.9
       SoundKey: 
-      AnimationTrigger: Greet
-    - Content: Is there anything I could get you?
+      AnimationTrigger: 
+    - Content: My child
       LetterDelay: 0.03
-      Pitch: 1.1
+      Pitch: 0.9
       SoundKey: 
-      AnimationTrigger: Greet
+      AnimationTrigger: 
     Options:
+    - Title: Bye...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Trade
+      Event: Trade
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0.2965517, b: 1, a: 1}
     - Title: Bye...
       Event: EndDialog
       Value: 

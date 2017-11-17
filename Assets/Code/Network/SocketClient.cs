@@ -1274,6 +1274,7 @@ public class SocketClient : MonoBehaviour
         {
             node["mobs"][i] = enemyReferences[i].Info.ID;
             Debug.Log(enemyReferences[i].Info.ID);
+
         }
         
         CurrentSocket.Emit("mob_took_dmg", node);

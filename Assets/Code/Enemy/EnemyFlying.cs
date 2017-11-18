@@ -10,6 +10,7 @@ public class EnemyFlying : Enemy {
 
     [SerializeField]
     protected float MovementSpeed = 1f;
+    protected float OriginalMovementSpeed;
 
     [SerializeField]
     protected float MaxChaseDistance = 20f;
@@ -25,6 +26,33 @@ public class EnemyFlying : Enemy {
 
     [SerializeField]
     float SpawnerPatrolRadius = 5f;
+
+    protected bool Stunned;
+    protected bool Slowed
+    {
+        set
+        {
+            slowed = value;
+            if (value)
+            {
+                MovementSpeed = OriginalMovementSpeed * 0.5f;
+            }
+            else
+            {
+                MovementSpeed = OriginalMovementSpeed;
+            }
+        }
+        get
+        {
+            return slowed;
+        }
+    }
+    protected bool slowed;
+
+    protected void Awake()
+    {
+        OriginalMovementSpeed = MovementSpeed;
+    }
 
     public override void SetAION()
     {
@@ -199,7 +227,7 @@ public class EnemyFlying : Enemy {
             }
 
 
-            if (isDirectionBlocked(targetPos))
+            if (isDirectionBlocked(targetPos) || Stunned)
             {
                 break;
             }
@@ -218,7 +246,7 @@ public class EnemyFlying : Enemy {
         {
             currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
             
-            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f)
+            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f || Stunned)
             {
                 StandStill();
             }
@@ -293,7 +321,42 @@ public class EnemyFlying : Enemy {
         return (Physics2D.Raycast(transform.position, dir, 1f, GroundLayerMask));
     }
 
+    protected override void StartBuffEffect(string buffKey)
+    {
+        switch (buffKey)
+        {
+            case "stunChance":
+                {
+                    this.Stunned = true;
+                    break;
+                }
+            case "crippleChance":
+                {
+                    this.Slowed = true;
+                    break;
+                }
+        }
+    }
 
+    protected override void StopBuffEffect(string buffKey)
+    {
+        if (GetBuff(buffKey) == null)
+        {
+            switch (buffKey)
+            {
+                case "stunChance":
+                    {
+                        this.Stunned = false;
+                        break;
+                    }
+                case "crippleChance":
+                    {
+                        this.Slowed = false;
+                        break;
+                    }
+            }
+        }
+    }
 
     #endregion
 

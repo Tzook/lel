@@ -24,6 +24,11 @@ public class EnemyJumping : EnemyMoving
         }
     }
 
+    protected void Awake()
+    {
+        OriginalMovementSpeed = MovementSpeed;
+    }
+
     void FixedUpdate()
     {
         if (Game.Instance.isBitch)
@@ -67,7 +72,7 @@ public class EnemyJumping : EnemyMoving
             {
                 yield return StartCoroutine(TryJumpOverLeft());
 
-                if (isLeftBlocked())
+                if (isLeftBlocked() || Stunned)
                 {
                     break;
                 }
@@ -98,7 +103,7 @@ public class EnemyJumping : EnemyMoving
             {
                 yield return StartCoroutine(TryJumpOverRight());
 
-                if (isRightBlocked())
+                if (isRightBlocked() || Stunned)
                 {
                     break;
                 }
@@ -130,7 +135,7 @@ public class EnemyJumping : EnemyMoving
                     if (isRightBlocked())
                     {
                         yield return StartCoroutine(TryJumpOverRight());
-                        if(isRightBlocked())
+                        if(isRightBlocked() || Stunned)
                         {
                             break;
                         }
@@ -146,7 +151,7 @@ public class EnemyJumping : EnemyMoving
                     if (isLeftBlocked())
                     {
                         yield return StartCoroutine(TryJumpOverLeft());
-                        if (isLeftBlocked())
+                        if (isLeftBlocked() || Stunned)
                         {
                             break;
                         }

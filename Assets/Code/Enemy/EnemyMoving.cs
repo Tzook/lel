@@ -10,6 +10,7 @@ public class EnemyMoving : Enemy
 
     [SerializeField]
     protected float MovementSpeed = 1f;
+    protected float OriginalMovementSpeed;
 
     [SerializeField]
     protected float MaxChaseDistance = 20f;
@@ -25,7 +26,31 @@ public class EnemyMoving : Enemy
     protected Coroutine CurrentActionRoutine;
 
     protected bool Stunned;
-    protected bool Slowed;
+    protected bool Slowed
+    {
+        set
+        {
+            slowed = value;
+            if(value)
+            {
+                MovementSpeed = OriginalMovementSpeed * 0.5f; ;
+            }
+            else
+            {
+                MovementSpeed = OriginalMovementSpeed;
+            }
+        }
+        get
+        {
+            return slowed;
+        }
+    }
+    protected bool slowed;
+
+    protected void Awake()
+    {
+        OriginalMovementSpeed = MovementSpeed;
+    }
 
     public override void SetAION()
     {

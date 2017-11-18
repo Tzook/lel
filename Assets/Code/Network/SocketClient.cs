@@ -428,9 +428,22 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent("Actor Gained " + data["hp"].AsInt + " HP");
 
-        LocalUserInfo.Me.ClientCharacter.CurrentHealth = data["now"].AsInt;
-
-        InGameMainMenuUI.Instance.RefreshHP();
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        int hp = data["now"].AsInt;
+        if (actor != null)
+        {
+            actor.CurrentHealth = hp;
+            if (actor == LocalUserInfo.Me.ClientCharacter) 
+            {
+                InGameMainMenuUI.Instance.RefreshHP();
+            }
+            else 
+            {
+                actor.Instance.MovementController.RefreshHealth();
+            }
+        }
+        string name = data["name"].Value;
+        UpdateKnownHealth(name, hp);
     }
 
     protected void OnActorGainMP(Socket socket, Packet packet, object[] args)
@@ -499,34 +512,38 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
     {
-
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Got Wounded");
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
-        actor.CurrentHealth = data["hp"].AsInt;
-
-
-        if (actor == LocalUserInfo.Me.ClientCharacter)
+        int hp = data["hp"].AsInt;
+        if (actor != null) 
         {
-            actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
-            InGameMainMenuUI.Instance.RefreshHP();
-        }
-        else
-        {
-
-            KnownCharacter knownCharacter = LocalUserInfo.Me.GetKnownCharacter(actor.Name);
-            if (knownCharacter != null)
+            actor.CurrentHealth = hp;
+            if (actor == LocalUserInfo.Me.ClientCharacter)
             {
-                knownCharacter.Info.CurrentHealth = actor.CurrentHealth;
+                actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+                InGameMainMenuUI.Instance.RefreshHP();
             }
-
-            actor.Instance.Hurt();
-            actor.Instance.MovementController.RefreshHealth();
+            else
+            {
+                actor.Instance.Hurt();
+                actor.Instance.MovementController.RefreshHealth();
+            }
         }
+        string name = data["name"].Value;
+        UpdateKnownHealth(name, hp);
+    }
 
-        InGameMainMenuUI.Instance.RefreshParty();
+    protected void UpdateKnownHealth(string name, int hp) 
+    {
+        KnownCharacter knownCharacter = LocalUserInfo.Me.GetKnownCharacter(name);
+        if (knownCharacter != null)
+        {
+            knownCharacter.Info.CurrentHealth = hp;
+            InGameMainMenuUI.Instance.RefreshParty();
+        }
     }
 
     protected void OnActorDed(Socket socket, Packet packet, object[] args)

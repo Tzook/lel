@@ -125,6 +125,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("ability_choose_perk", OnAbilityChoosePerk);
         CurrentSocket.On("ability_gain_perk", OnAbilityGainPerk);
 
+        CurrentSocket.On("buff_activated", OnBuffActivated);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -635,7 +636,7 @@ public class SocketClient : MonoBehaviour
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
         ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
         
-        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt);
+        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value);
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)
@@ -998,6 +999,20 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+    }
+
+
+    private void OnBuffActivated(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
+        if (tempEnemy != null) //IS MOB
+        {
+            tempEnemy.AddBuff(data["key"].Value, data["duration"].AsFloat);
+        }
     }
 
     #endregion

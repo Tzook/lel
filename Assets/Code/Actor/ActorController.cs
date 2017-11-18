@@ -237,7 +237,7 @@ public class ActorController : MonoBehaviour
 
     private void SetAttackAnimation()
     {
-        switch (Instance.Info.CurrentPrimaryAbility)
+        switch (Instance.Info.CurrentPrimaryAbility.Key)
         {
             case "melee":
                 {
@@ -625,7 +625,7 @@ public class ActorController : MonoBehaviour
     public void ActivatePrimaryAbility()
     {
 
-        switch (Instance.Info.CurrentPrimaryAbility)
+        switch (Instance.Info.CurrentPrimaryAbility.Key)
         {
             case "melee":
                 {

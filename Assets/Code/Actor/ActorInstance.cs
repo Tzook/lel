@@ -739,7 +739,7 @@ public class ActorInstance : MonoBehaviour
 
     public void LoadAttack()
     {
-        switch (Info.CurrentPrimaryAbility)
+        switch (Info.CurrentPrimaryAbility.Key)
         {
             case "melee":
                 {

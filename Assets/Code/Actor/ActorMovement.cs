@@ -198,7 +198,7 @@ public class ActorMovement : MonoBehaviour
 
     public void ActivatePrimaryAbility()
     {
-        switch (Instance.Info.CurrentPrimaryAbility)
+        switch (Instance.Info.CurrentPrimaryAbility.Key)
         {
             case "range":
                 {

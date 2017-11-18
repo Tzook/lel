@@ -45,12 +45,14 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     public HealthBar m_HealthBar;
 
+    List<Buff> CurrentBuffs = new List<Buff>();
+
     protected Vector3 initScale;
 
     public ActorInstance CurrentTarget;
 
     public bool Dead = false;
-    
+
     public virtual void Initialize(string instanceID ,DevMonsterInfo givenInfo ,int currentHP = 0)
     {
         Info = new EnemyInfo(givenInfo, instanceID);
@@ -116,20 +118,56 @@ public class Enemy : MonoBehaviour {
         CurrentTarget = target;
     }
 
-    public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0)
+    public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0, string cause = "attack")
     {
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
 
-        AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
+        switch (cause)
+        {
+            case "attack":
+                {
+                    AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
 
-        if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
-        {
-            PopHint(damage.ToString("N0"), Color.green);
-        }
-        else
-        {
-            PopHint(damage.ToString("N0"), Color.blue);
+                    if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        PopHint(damage.ToString("N0"), Color.green);
+                    }
+                    else
+                    {
+                        PopHint(damage.ToString("N0"), Color.blue);
+                    }
+
+
+                    m_AlphaGroup.BlinkDamage();
+                    break;
+                }
+            case "aoe":
+                {
+                    AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
+
+                    if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        PopHint("<color=#ffff00ff><size=25>" + damage.ToString("N0") + "</size></color>", Color.green);
+                    }
+                    else
+                    {
+                        PopHint("<size=25>" + damage.ToString("N0") + "</size>", Color.blue);
+                    }
+
+                    break;
+                }
+            case "bleed":
+                {
+                    AudioControl.Instance.PlayInPosition("sound_smallHit", attackSource.transform.position);
+
+                    if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        PopHint("<color=#ffff00ff><size=25>" + damage.ToString("N0") + "</size></color>", Color.green);
+                    }
+
+                    break;
+                }
         }
 
 
@@ -142,8 +180,6 @@ public class Enemy : MonoBehaviour {
 			
         m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
         Info.CurrentHealth = currentHP;
-
-        m_AlphaGroup.BlinkDamage();
     }
 
     public virtual void Death()
@@ -160,6 +196,8 @@ public class Enemy : MonoBehaviour {
             CurrentTarget = null;
 
             AudioControl.Instance.PlayInPosition(DeathSounds[Random.Range(0, WoundSounds.Count)], transform.position);
+
+            ClearBuffs();
 
             UnregisterEnemy();
 
@@ -219,4 +257,93 @@ public class Enemy : MonoBehaviour {
             Anim.SetTrigger("IdleVarriation");
         }
     }
+
+    public void ClearBuffs()
+    {
+        for(int i=0;i<CurrentBuffs.Count;i++)
+        {
+            StopCoroutine(CurrentBuffs[i].RunningRoutine);
+
+            CurrentBuffs[i].EffectPrefab.transform.SetParent(null);
+            CurrentBuffs[i].EffectPrefab.gameObject.SetActive(false);
+        }
+
+        CurrentBuffs.Clear();
+    }
+
+    public void AddBuff(string buffKey, float buffDuration)
+    {
+        Buff tempBuff = new Buff(buffKey, Info.ID, buffDuration);
+
+        CurrentBuffs.Add(tempBuff);
+
+        tempBuff.RunningRoutine = StartCoroutine(HandleBuff(tempBuff));
+
+        if(Game.Instance.isBitch)
+        {
+            StartBuffEffect(buffKey);
+        }
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        if(buff.RunningRoutine != null)
+        {
+            StopCoroutine(buff.RunningRoutine);
+        }
+
+        buff.EffectPrefab.transform.SetParent(null);
+        buff.EffectPrefab.transform.gameObject.SetActive(false);
+
+        CurrentBuffs.Remove(buff);
+
+        if (Game.Instance.isBitch)
+        {
+            StopBuffEffect(buff.Key);
+        }
+    }
+
+    public Buff GetBuff(string buffKey)
+    {
+        for(int i=0;i<CurrentBuffs.Count;i++)
+        {
+            if(CurrentBuffs[i].Key == buffKey)
+            {
+                return CurrentBuffs[i];
+            }
+        }
+
+        return null;
+    }
+
+    protected virtual void StartBuffEffect(string buffKey)
+    {
+    }
+
+    protected virtual void StopBuffEffect(string buffKey)
+    {
+    }
+
+    protected IEnumerator HandleBuff(Buff buff)
+    {
+        DevBuff buffRef = Content.Instance.GetBuff(buff.Key);
+
+        buff.EffectPrefab = ResourcesLoader.Instance.GetRecycledObject(buffRef.EffectPrefab);
+
+        buff.EffectPrefab.transform.SetParent(transform);
+        buff.EffectPrefab.transform.position = transform.position;
+
+        AudioControl.Instance.Play(buffRef.AudioKey);
+
+        while(buff.Duration > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            buff.Duration--;
+        }
+
+        buff.RunningRoutine = null;
+        RemoveBuff(buff);
+    }
+
+
 }

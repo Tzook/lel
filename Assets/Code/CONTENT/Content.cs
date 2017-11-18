@@ -22,6 +22,8 @@ public class Content : MonoBehaviour {
 
     public List<DevPAPerk> Perks = new List<DevPAPerk>();
 
+    public List<DevBuff> Buffs = new List<DevBuff>();
+
     public ContentPiece GetInfo(string Key)
     {
         for (int i = 0; i < InfoBank.Count; i++)
@@ -108,6 +110,18 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public DevBuff GetBuff(string buffKey)
+    {
+        for (int i = 0; i < Buffs.Count; i++)
+        {
+            if (Buffs[i].Key == buffKey)
+            {
+                return Buffs[i];
+            }
+        }
+
+        return null;
+    }
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -246,6 +260,20 @@ public class DevPAPerk
     public float PrecentPerUpgrade;
     public float UpgradeCap;
     public float StartingValue;
+}
+
+[System.Serializable]
+public class DevBuff
+{
+    public string Key;
+
+    public string Name;
+
+    public Sprite Icon;
+
+    public string EffectPrefab;
+
+    public string AudioKey;
 }
 
 [System.Serializable]

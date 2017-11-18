@@ -271,9 +271,9 @@ public class EnemyFlying : Enemy {
         Anim.SetInteger("FlyDir", 0);
     }
 
-    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0)
+    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack")
     {
-        base.Hurt(actor, damage, currentHP);
+        base.Hurt(actor, damage, currentHP, cause);
 
         if (Game.Instance.isBitch)
         {
@@ -292,6 +292,8 @@ public class EnemyFlying : Enemy {
     {
         return (Physics2D.Raycast(transform.position, dir, 1f, GroundLayerMask));
     }
+
+
 
     #endregion
 

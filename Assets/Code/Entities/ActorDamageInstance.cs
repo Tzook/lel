@@ -48,14 +48,13 @@ public class ActorDamageInstance : MonoBehaviour {
             {
                 sentTargets = new List<Enemy>();
 
-                collectedColliders = Physics2D.OverlapBoxAll(m_Collider.offset, m_Collider.size, m_Collider.transform.rotation.eulerAngles.z);
+                collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size*2f, 0f);
 
                 for (int i = 0; i < collectedColliders.Length; i++)
                 {
                     if(collectedColliders[i].tag == "Enemy")
                     {
                         sentTargets.Add(collectedColliders[i].GetComponent<HitBox>().EnemyReference);
-                        Debug.Log("$$$$ "+collectedColliders[i].GetComponent<HitBox>().EnemyReference);
                     }
                 }
 

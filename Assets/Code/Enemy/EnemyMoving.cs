@@ -24,6 +24,9 @@ public class EnemyMoving : Enemy
 
     protected Coroutine CurrentActionRoutine;
 
+    protected bool Stunned;
+    protected bool Slowed;
+
     public override void SetAION()
     {
         base.SetAION();
@@ -205,7 +208,7 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            if (isLeftBlocked())
+            if (Stunned || isLeftBlocked())
             {
                 break;
             }
@@ -226,7 +229,7 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            if (isRightBlocked())
+            if (Stunned || isRightBlocked())
             {
                 break;
             }
@@ -253,7 +256,7 @@ public class EnemyMoving : Enemy
             {
                 if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
                 {
-                    if (isRightBlocked())
+                    if (Stunned || isRightBlocked())
                     {
                         StandStill();
                     }
@@ -265,7 +268,7 @@ public class EnemyMoving : Enemy
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
-                    if (isLeftBlocked())
+                    if (Stunned ||isLeftBlocked())
                     {
                         StandStill();
                     }
@@ -309,9 +312,9 @@ public class EnemyMoving : Enemy
         Anim.SetBool("Walk", true);
     }
 
-    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0)
+    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack")
     {
-        base.Hurt(actor,damage, currentHP);
+        base.Hurt(actor,damage, currentHP, cause);
 
         if (Game.Instance.isBitch)
         {
@@ -334,6 +337,43 @@ public class EnemyMoving : Enemy
         Rigid.velocity = Vector2.zero;
 
         base.Death();
+    }
+
+    protected override void StartBuffEffect(string buffKey)
+    {
+        switch (buffKey)
+        {
+            case "stunChance":
+                {
+                    this.Stunned = true;
+                    break;
+                }
+            case "crippleChance":
+                {
+                    this.Slowed = true;
+                    break;
+                }
+        }
+    }
+
+    protected override void StopBuffEffect(string buffKey)
+    {
+        if (GetBuff(buffKey) == null)
+        {
+            switch (buffKey)
+            {
+                case "stunChance":
+                    {
+                        this.Stunned = false;
+                        break;
+                    }
+                case "crippleChance":
+                    {
+                        this.Slowed = false;
+                        break;
+                    }
+            }
+        }
     }
 
     #endregion

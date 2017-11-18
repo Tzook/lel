@@ -79,7 +79,7 @@ public class ActorInfo
 
 
     public List<PrimaryAbility> PrimaryAbilities = new List<PrimaryAbility>();
-    public string CurrentPrimaryAbility;
+    public PrimaryAbility CurrentPrimaryAbility;
 
     public int UnspentPerkPoints
     {
@@ -227,7 +227,7 @@ public class ActorInfo
     //if current equipment won't allow the current ability.
     public void ValidatePrimaryAbility()
     {
-        switch(CurrentPrimaryAbility)
+        switch(CurrentPrimaryAbility.Key)
         {
             case "range":
                 {
@@ -300,7 +300,7 @@ public class ActorInfo
 
     public void SetPrimaryAbility(string key)
     {
-        CurrentPrimaryAbility = key;
+        CurrentPrimaryAbility = GetPrimaryAbility(key);
 
         if (this == LocalUserInfo.Me.ClientCharacter)
         {

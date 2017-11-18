@@ -114,6 +114,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     public MasteryUpgradeWindowUI MasteryUpgradePanel;
 
+    [SerializeField]
+    public Image PAExpBar;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -303,7 +306,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshMP(info);
         RefreshLevel(info);
 
-        PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility).Icon;
+        PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility.Key).Icon;
+
+        RefreshPAExpBar();
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
     }
@@ -652,7 +657,8 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshCurrentPrimaryAbility()
     {
-        PrimaryAbilityIcon.sprite = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility).Icon;
+        PrimaryAbilityIcon.sprite = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Icon;
+        RefreshPAExpBar();
     }
 
     public void AddAcceptDeclineMessage(string content,string key, Action<string> acceptCallback)
@@ -704,6 +710,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         {
             PrimaryAbilityWindow.RefreshWindow();
         }
+
+        RefreshPAExpBar();
     }
 
     public void UpdateUpgradeCounter(int Value)
@@ -736,5 +744,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         MasteryUpgradePanel.DisableButtons();
         SocketClient.Instance.SendChoosePerk(MasteryUpgradePanel.CurrentAbility.Key, perkKey);
+    }
+
+    public void RefreshPAExpBar()
+    {
+        PAExpBar.fillAmount = (LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Exp*1f) / LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.NextLevelXP;
     }
 }

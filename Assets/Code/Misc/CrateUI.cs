@@ -51,6 +51,7 @@ public class CrateUI : MonoBehaviour
 
     public void Set(string perkKey)
     {
+        Debug.Log("SD" + perkKey);
         CurrentPerk = Content.Instance.GetPerk(perkKey);
 
         m_Image.sprite = CurrentPerk.Icon;

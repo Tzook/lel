@@ -272,15 +272,16 @@ public class ActorInfo
 
         this.CurrentMana = node["mp"]["now"].AsInt;
 
-        this.PrimaryAbilities.Clear();
-
         PrimaryAbility ability;
-        for (int i=0;i<node["abilities"].Count;i++)
+        for (int i = 0; i < node["abilities"].Count; i++)
         {
-            ability = new PrimaryAbility();
-            ability.Key = node["abilities"][i].Value;
+            if (GetPrimaryAbility(node["abilities"][i].Value) == null)
+            {
+                ability = new PrimaryAbility();
+                ability.Key = node["abilities"][i].Value;
 
-            this.PrimaryAbilities.Add(ability);
+                this.PrimaryAbilities.Add(ability);
+            }
         }
 
         SetPrimaryAbility(node["primaryAbility"].Value);

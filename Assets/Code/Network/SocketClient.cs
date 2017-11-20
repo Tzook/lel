@@ -474,7 +474,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
-        BroadcastEvent("Actor Gained Stats");
+        BroadcastEvent("Actor Gained Stats | "+data.ToString());
 
         LocalUserInfo.Me.ClientCharacter.SetStats(data["stats"]);
         InGameMainMenuUI.Instance.RefreshStats();
@@ -485,7 +485,7 @@ public class SocketClient : MonoBehaviour
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor Leveled Up");
+        BroadcastEvent("Actor Leveled Up | "+data.ToString());
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
@@ -974,11 +974,10 @@ public class SocketClient : MonoBehaviour
 
         PrimaryAbility tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
         tempPA.LVL = data["lvl"].AsInt;
+        tempPA.Points = data["points"].AsInt;
 
         LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
 
-        //TODO TEMPPPPPPPPPPPPPPP MUST REPLACE!
-        tempPA.Points++;
 
         InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
 

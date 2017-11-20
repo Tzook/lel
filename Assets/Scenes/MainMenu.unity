@@ -35519,7 +35519,7 @@ RectTransform:
   m_GameObject: {fileID: 168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -9}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 2070}
   - {fileID: 1821}
@@ -39468,7 +39468,7 @@ RectTransform:
   m_GameObject: {fileID: 435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -9}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 1787}
   - {fileID: 1723}
@@ -40127,7 +40127,7 @@ RectTransform:
   m_GameObject: {fileID: 484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 1827}
   - {fileID: 1957}
@@ -40528,7 +40528,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 522}
   m_LocalRotation: {x: 0, y: 0, z: 0.0015822117, w: 0.99999875}
-  m_LocalPosition: {x: 441, y: -264.00018, z: 0}
+  m_LocalPosition: {x: 441, y: -264.00012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1535}
@@ -40537,7 +40537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 41, y: -39.000183}
+  m_AnchoredPosition: {x: 41, y: -39.000122}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -40946,7 +40946,7 @@ RectTransform:
   m_GameObject: {fileID: 557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -9}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 2035}
   m_Father: {fileID: 0}
@@ -46814,6 +46814,63 @@ MonoBehaviour:
     - ItemKey: shortScimitar
       MinStack: 1
       MaxStack: 1
+  - MonsterKey: BlueMushroom
+    MonsterName: Blue Mushroom
+    MonsterHP: 100
+    MonsterLevel: 6
+    MinDMG: 15
+    MaxDMG: 36
+    RewardEXP: 80
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 3
+      MaxStack: 12
+    - ItemKey: plantFlower
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -47977,7 +48034,7 @@ MonoBehaviour:
     PrecentPerUpgrade: 0.05
     UpgradeCap: 0.8
     StartingValue: 0.2
-  - Key: fullyChargedBonus
+  - Key: fullyChargeBonus
     Name: Fully Charged Bonus
     Icon: {fileID: 21300012, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.05
@@ -48474,6 +48531,44 @@ MonoBehaviour:
       Perks: []
     RewardClass: 
     RewardExp: 100
+  - Name: Examine Lost Supplies
+    Key: examineLostSupplies
+    InProgressDescription: I can examine the lost stash hidden in the bottom of the
+      cave.
+    QuestCompleteDescription: I've examined the lost stash of supplies...
+    FacePrefab: StashQuest
+    Conditions: []
+    QuestsStates: []
+    RequiredClass: 
+    MinimumLevel: 0
+    RewardItems:
+    - ItemKey: gold
+      MinStack: 35
+      MaxStack: 35
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: bigFish
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: smallFish
+      MinStack: 3
+      MaxStack: 3
+    - ItemKey: blueJellyBean
+      MinStack: 1
+      MaxStack: 1
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+    RewardClass: 
+    RewardExp: 5
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70113,7 +70208,7 @@ RectTransform:
   m_GameObject: {fileID: 328983425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalScale: {x: 0.022222223, y: 0.022222223, z: 0.022222223}
   m_Children:
   - {fileID: 2035413854}
   m_Father: {fileID: 0}
@@ -78346,7 +78441,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 891243385}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -121.69988, y: 49.200043, z: 0}
+  m_LocalPosition: {x: -121.69991, y: 49.200043, z: 0}
   m_LocalScale: {x: 0.99989986, y: 0.99989986, z: 0.9998999}
   m_Children: []
   m_Father: {fileID: 1747}
@@ -78354,7 +78449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.22625001, y: 0.5844445}
   m_AnchorMax: {x: 0.47250003, y: 0.6355556}
-  m_AnchoredPosition: {x: -1.1998901, y: -0.2999878}
+  m_AnchoredPosition: {x: -1.1999207, y: -0.2999878}
   m_SizeDelta: {x: 3.1999998, y: 1.4000015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &891243387

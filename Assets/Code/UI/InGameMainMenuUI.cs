@@ -146,7 +146,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         get
         {
-            return (GoldDropWindow.gameObject.activeInHierarchy || questsPanel.gameObject.activeInHierarchy || completedQuestsPanel.gameObject.activeInHierarchy);
+            return (GoldDropWindow.gameObject.activeInHierarchy || questsPanel.gameObject.activeInHierarchy || completedQuestsPanel.gameObject.activeInHierarchy || MasteryUpgradePanel.gameObject.activeInHierarchy);
         }
     }
 

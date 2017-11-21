@@ -13,15 +13,6 @@ public class ClickableUI: MonoBehaviour, IPointerDownHandler
 
         // 2. mark the game as clicking the ui until mouse releases, so it can disable things like attacking
         Game.Instance.isClickingOnUI = true;
-        StartCoroutine(RemoveClickingFlagWhenDone());
-    }
-
-    private IEnumerator RemoveClickingFlagWhenDone()
-    {
-        while (Input.GetMouseButton(0))
-        {
-            yield return 0;
-        }
-        Game.Instance.isClickingOnUI = false;
+        Game.Instance.StartCoroutine(Game.Instance.RemoveClickingFlagWhenDone());
     }
 }

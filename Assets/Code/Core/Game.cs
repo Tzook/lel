@@ -421,6 +421,14 @@ public class Game : MonoBehaviour {
         return Vector3.Lerp(SplineST, SplineTM, t);
     }
 
+    public IEnumerator RemoveClickingFlagWhenDone()
+    {
+        while (Input.GetMouseButton(0))
+        {
+            yield return 0;
+        }
+        isClickingOnUI = false;
+    }
 
     #region Debug
 

@@ -447,8 +447,6 @@ public class ActorController : MonoBehaviour
         //TODO Remove if no problems occur
         Rigid.position += (Vector2.left * InternalSpeed * Time.deltaTime);
 
-
-        //Rigid.velocity = new Vector2(-InternalSpeed * Time.deltaTime , Rigid.velocity.y);
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
         Anim.SetBool("ReverseWalk", aimRight);
@@ -465,7 +463,8 @@ public class ActorController : MonoBehaviour
         //TODO Remove if no problems occur
         Rigid.position += (Vector2.right * InternalSpeed * Time.deltaTime);
 
-        //Rigid.velocity = new Vector2(InternalSpeed * Time.deltaTime, Rigid.velocity.y);
+        
+
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("ReverseWalk", !aimRight);

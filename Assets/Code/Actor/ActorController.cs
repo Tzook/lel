@@ -322,7 +322,7 @@ public class ActorController : MonoBehaviour
             {
                 if (CurrentRope == null)
                 {
-                    UnclimbRope();
+                    //UnclimbRope();
                 }
                 else
                 {
@@ -445,7 +445,7 @@ public class ActorController : MonoBehaviour
     public void MoveLeft()
     {
         //TODO Remove if no problems occur
-        Rigid.position += (Vector2.left * InternalSpeed * Time.deltaTime);
+        Rigid.position += ((Vector2.left + Vector2.up * 0.1f) * InternalSpeed * Time.deltaTime);
 
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
@@ -461,9 +461,7 @@ public class ActorController : MonoBehaviour
     public void MoveRight()
     {
         //TODO Remove if no problems occur
-        Rigid.position += (Vector2.right * InternalSpeed * Time.deltaTime);
-
-        
+        Rigid.position += ((Vector2.right + Vector2.up*0.1f) * InternalSpeed * Time.deltaTime);
 
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
@@ -713,7 +711,6 @@ public class ActorController : MonoBehaviour
     void OnTriggerExit2D(Collider2D obj)
     {
         //Debug.Log("OUT -"+obj.gameObject.name);
-
         if (obj.tag == "GatePortal" && CurrentPortal == obj.GetComponent<GatePortal>())
         {
             CurrentPortal = null;

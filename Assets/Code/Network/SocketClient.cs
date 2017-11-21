@@ -837,9 +837,19 @@ public class SocketClient : MonoBehaviour
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
-        if(actor != null && LocalUserInfo.Me.ClientCharacter != actor)
+        if (actor != null)
         {
-            actor.Instance.MovementController.ShowHealth();
+            if (LocalUserInfo.Me.ClientCharacter == actor)
+            {
+                for(int i=0;i<LocalUserInfo.Me.CurrentParty.Members.Count;i++)
+                {
+                    Game.Instance.CurrentScene.GetActorByName(LocalUserInfo.Me.CurrentParty.Members[i]).Instance.MovementController.ShowHealth();
+                }
+            }
+            else
+            {
+                actor.Instance.MovementController.ShowHealth();
+            }
         }
 
         InGameMainMenuUI.Instance.RefreshParty();

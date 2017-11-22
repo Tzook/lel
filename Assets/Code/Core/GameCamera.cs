@@ -41,6 +41,8 @@ public class GameCamera : MonoBehaviour {
     public static GameCamera Instance;
     public static Vector3 MousePosition;
 
+    float InitCamSize;
+
     public bool HoveringOnInteractable
     {
         get
@@ -82,6 +84,8 @@ public class GameCamera : MonoBehaviour {
         initPos = transform.position;
 
         InGameMainMenuUI.Instance.SetCurrentCamera(this.Cam);
+
+        InitCamSize = Cam.orthographicSize;
     }
 
     public void Register(GameObject objToFollow)
@@ -268,13 +272,13 @@ public class GameCamera : MonoBehaviour {
         {
             t += 1f * Time.deltaTime;
 
-            Cam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 5f, t);
-            BlurCam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, 5f, t);
+            Cam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, InitCamSize, t);
+            BlurCam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, InitCamSize, t);
 
             yield return 0;
         }
 
-        Cam.orthographicSize = 5f;
-        BlurCam.orthographicSize = 5f;
+        Cam.orthographicSize = InitCamSize;
+        BlurCam.orthographicSize = InitCamSize;
     }
 }

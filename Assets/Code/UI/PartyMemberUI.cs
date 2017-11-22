@@ -24,12 +24,14 @@ public class PartyMemberUI : MonoBehaviour {
     GameObject KickIcon;
 
     KnownCharacter CurrentCharacter;
+    string CharacterName;
 
     public void SetInfo(KnownCharacter character, bool isLeader)
     {
         CurrentCharacter = character;
+        CharacterName = character.Name;
 
-        NameText.text = character.Name;
+        NameText.text = CharacterName;
 
         if (character.isLoggedIn)
         {
@@ -64,7 +66,8 @@ public class PartyMemberUI : MonoBehaviour {
 
     public void SetInfo(string sName, bool isLeader)
     {
-        NameText.text = sName;
+        CharacterName = sName;
+        NameText.text = CharacterName;
 
         HealthBar.transform.parent.gameObject.SetActive(false);
 
@@ -96,7 +99,7 @@ public class PartyMemberUI : MonoBehaviour {
 
     public void KickPlayer()
     {
-        SocketClient.Instance.SendKickFromParty(CurrentCharacter.Name);
+        SocketClient.Instance.SendKickFromParty(CharacterName);
         this.gameObject.SetActive(false);
     }
 }

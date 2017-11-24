@@ -741,6 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61778630}
   - component: {fileID: 61778631}
+  - component: {fileID: 61778632}
   m_Layer: 14
   m_Name: eyes
   m_TagString: Untagged
@@ -805,6 +806,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &61778632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 61778629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525a8a569d0bee44497ed5a26fc1aafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginalEyes: {fileID: 21300020, guid: 39210b0f9ff81fb4ebbabd479dc887d9, type: 3}
+  m_Renderer: {fileID: 61778631}
+  BlinkEyes: {fileID: 21300022, guid: 39210b0f9ff81fb4ebbabd479dc887d9, type: 3}
+  Delay: 6
+  BlinkTime: 0.3
 --- !u!43 &69995028
 Mesh:
   m_ObjectHideFlags: 0
@@ -5660,6 +5677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503944439}
   - component: {fileID: 503944440}
+  - component: {fileID: 503944441}
   m_Layer: 14
   m_Name: eyes
   m_TagString: Untagged
@@ -5724,6 +5742,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &503944441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503944438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525a8a569d0bee44497ed5a26fc1aafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginalEyes: {fileID: 21300006, guid: 39210b0f9ff81fb4ebbabd479dc887d9, type: 3}
+  m_Renderer: {fileID: 503944440}
+  BlinkEyes: {fileID: 21300012, guid: 39210b0f9ff81fb4ebbabd479dc887d9, type: 3}
+  Delay: 3
+  BlinkTime: 1
 --- !u!1 &505614452
 GameObject:
   m_ObjectHideFlags: 0

@@ -456,7 +456,7 @@ public class ActorInfo
 
                 switch(cond.Condition)
                 {
-                    case "collect":
+                    case "loot":
                         {
 
                             if (QuestsInProgress[i].WasNowCompleted)

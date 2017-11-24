@@ -56,7 +56,7 @@ public class QuestPanelUI : MonoBehaviour {
                        
                         break;
                     }
-                case "collect":
+                case "loot":
                     {
                         conContent = Content.Instance.GetItem(quest.Conditions[i].Type).Name + " Collected ";
 

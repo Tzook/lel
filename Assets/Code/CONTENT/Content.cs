@@ -241,6 +241,8 @@ public class DevPrimaryAbility
     public Color PAColor;
 
     public List<PerkStage> Perks = new List<PerkStage>();
+
+    public List<SpellStage> Spells = new List<SpellStage>();
 }
 
 [System.Serializable]
@@ -249,6 +251,14 @@ public class PerkStage
     public int MinLevel;
     public int PerksOffered;
     public List<string> AddToPool = new List<string>();
+}
+
+[System.Serializable]
+public class SpellStage
+{
+    public string Key;
+    public int Level;
+    public int Mana;
 }
 
 [System.Serializable]

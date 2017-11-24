@@ -230,7 +230,7 @@ public class DevContentEditor : Editor
         {
             node["talents"][i]["primaryAbility"] = primaryAbilities[i].Name;
 
-            for(int a = 0; a < primaryAbilities[i].Perks.Count; a++)
+            for (int a = 0; a < primaryAbilities[i].Perks.Count; a++)
             {
                 node["talents"][i]["perks"][a]["atLeastLvl"] = primaryAbilities[i].Perks[a].MinLevel.ToString();
                 node["talents"][i]["perks"][a]["perksOffered"] = primaryAbilities[i].Perks[a].PerksOffered.ToString();
@@ -240,9 +240,16 @@ public class DevContentEditor : Editor
                     node["talents"][i]["perks"][a]["addToPool"][b] = primaryAbilities[i].Perks[a].AddToPool[b].ToString();
                 }
             }
+
+            for (int a = 0; a < primaryAbilities[i].Spells.Count; a++)
+            {
+                node["talents"][i]["spells"][a]["key"] = primaryAbilities[i].Spells[a].Key.ToString();
+                node["talents"][i]["spells"][a]["level"] = primaryAbilities[i].Spells[a].Level.ToString();
+                node["talents"][i]["spells"][a]["mana"] = primaryAbilities[i].Spells[a].Mana.ToString();
+            }
         }
 
-        for(int i=0;i<perks.Count;i++)
+        for (int i=0;i<perks.Count;i++)
         {
             node["perkCollection"][i]["key"] = perks[i].Key;
             node["perkCollection"][i]["value"] = perks[i].PrecentPerUpgrade.ToString();

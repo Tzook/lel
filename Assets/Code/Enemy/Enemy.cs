@@ -182,6 +182,20 @@ public class Enemy : MonoBehaviour {
         Info.CurrentHealth = currentHP;
     }
 
+    public virtual void Miss(ActorInstance attackSource, string cause = "attack")
+    {
+        AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
+
+        if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+        {
+            PopHint("MISS", Color.green);
+        }
+        else
+        {
+            PopHint("MISS", Color.blue);
+        }
+    }
+
     public virtual void Death()
     {
         if (!Dead)

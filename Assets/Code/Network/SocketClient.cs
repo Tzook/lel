@@ -96,6 +96,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("mob_spawn", OnMobSpawn);
         CurrentSocket.On("mob_die", OnMobDeath);
         CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
+        CurrentSocket.On("mob_take_miss", OnMobTakeMiss);
         CurrentSocket.On("mob_move", OnMobMovement);
         CurrentSocket.On("aggro", OnAggro);
 
@@ -654,6 +655,18 @@ public class SocketClient : MonoBehaviour
         ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
         
         monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value);
+    }
+
+    private void OnMobTakeMiss(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["mob_id"].Value + " Took Miss from " + data["id"].Value);
+
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
+        
+        monster.Miss(attackingPlayer, data["cause"].Value);
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)

@@ -337,9 +337,9 @@ public class EnemyMoving : Enemy
         Anim.SetBool("Walk", true);
     }
 
-    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack")
+    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)
     {
-        base.Hurt(actor,damage, currentHP, cause);
+        base.Hurt(actor, damage, currentHP, cause, crit);
 
         if (Game.Instance.isBitch)
         {

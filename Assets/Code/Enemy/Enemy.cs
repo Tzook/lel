@@ -118,10 +118,16 @@ public class Enemy : MonoBehaviour {
         CurrentTarget = target;
     }
 
-    public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0, string cause = "attack")
+    public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)
     {
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
+
+        string dmgMessage = damage.ToString("N0");
+        if (crit) {
+            // TODO use a nicer way to display critical
+            dmgMessage += " (crit!)";
+        }
 
         switch (cause)
         {
@@ -131,11 +137,11 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint(damage.ToString("N0"), Color.green);
+                        PopHint(dmgMessage, Color.green);
                     }
                     else
                     {
-                        PopHint(damage.ToString("N0"), Color.blue);
+                        PopHint(dmgMessage, Color.blue);
                     }
 
 
@@ -148,11 +154,11 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=25>" + damage.ToString("N0") + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size=25>" + dmgMessage + "</size></color>", Color.green);
                     }
                     else
                     {
-                        PopHint("<size=25>" + damage.ToString("N0") + "</size>", Color.blue);
+                        PopHint("<size=25>" + dmgMessage + "</size>", Color.blue);
                     }
 
                     break;
@@ -163,7 +169,7 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=25>" + damage.ToString("N0") + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size=25>" + dmgMessage + "</size></color>", Color.green);
                     }
 
                     break;

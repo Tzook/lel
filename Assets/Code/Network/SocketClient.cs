@@ -654,7 +654,7 @@ public class SocketClient : MonoBehaviour
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
         ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
         
-        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value);
+        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value, data["crit"].AsBool);
     }
 
     private void OnMobTakeMiss(Socket socket, Packet packet, object[] args)

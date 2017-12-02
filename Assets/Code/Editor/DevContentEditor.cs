@@ -246,6 +246,12 @@ public class DevContentEditor : Editor
                 node["talents"][i]["spells"][a]["key"] = primaryAbilities[i].Spells[a].Key.ToString();
                 node["talents"][i]["spells"][a]["level"] = primaryAbilities[i].Spells[a].Level.ToString();
                 node["talents"][i]["spells"][a]["mana"] = primaryAbilities[i].Spells[a].Mana.ToString();
+                
+                for (int b = 0; b < primaryAbilities[i].Spells[a].Perks.Count; b++)
+                {
+                    node["talents"][i]["spells"][a]["perks"][b]["key"] = primaryAbilities[i].Spells[a].Perks[b].Key.ToString();
+                    node["talents"][i]["spells"][a]["perks"][b]["value"] = primaryAbilities[i].Spells[a].Perks[b].Value.ToString();
+                }
             }
         }
 

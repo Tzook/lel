@@ -259,6 +259,13 @@ public class SpellStage
     public string Key;
     public int Level;
     public int Mana;
+    public List<SpellPerk> Perks = new List<SpellPerk>();
+}
+[System.Serializable]
+public class SpellPerk
+{
+    public string Key;
+    public float Value;
 }
 
 [System.Serializable]

@@ -456,6 +456,7 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.ClientCharacter.CurrentMana = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshMP();
+        InGameMainMenuUI.Instance.RefreshSpellAreaMana();
     }
 
     protected void OnActorGainXP(Socket socket, Packet packet, object[] args)
@@ -611,6 +612,8 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(actor.Name + " Changed ability Attack");
 
         actor.SetPrimaryAbility(data["ability"].Value);
+
+        
 
     }
 

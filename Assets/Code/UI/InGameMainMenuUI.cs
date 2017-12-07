@@ -759,4 +759,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         SpellAreaPanel.Refresh(AbilitySwitch);
     }
+
+    public void RefreshSpellAreaMana()
+    {
+        SpellAreaPanel.RefreshMana();
+    }
 }

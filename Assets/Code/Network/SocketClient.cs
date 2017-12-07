@@ -1001,6 +1001,10 @@ public class SocketClient : MonoBehaviour
 
         LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
 
+        if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
+        {
+            InGameMainMenuUI.Instance.RefreshSpellArea();
+        }
 
         InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
 

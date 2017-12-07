@@ -117,6 +117,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     public Image PAExpBar;
 
+    [SerializeField]
+    SpellAreaUI SpellAreaPanel;
+
     public static InGameMainMenuUI Instance;
 
     public StatsInfoUI StatsInfo;
@@ -309,6 +312,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility.Key).Icon;
 
         RefreshPAExpBar();
+        RefreshSpellArea(true);
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
     }
@@ -749,5 +753,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void RefreshPAExpBar()
     {
         PAExpBar.fillAmount = (LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Exp*1f) / LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.NextLevelXP;
+    }
+
+    public void RefreshSpellArea(bool AbilitySwitch = false)
+    {
+        SpellAreaPanel.Refresh(AbilitySwitch);
     }
 }

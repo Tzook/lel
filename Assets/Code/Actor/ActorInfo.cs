@@ -306,6 +306,7 @@ public class ActorInfo
         if (this == LocalUserInfo.Me.ClientCharacter)
         {
             InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
+            InGameMainMenuUI.Instance.RefreshSpellArea(true);
         }
     }
 

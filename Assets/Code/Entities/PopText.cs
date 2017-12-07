@@ -14,14 +14,21 @@ public class PopText : MonoBehaviour {
     CanvasGroup CG;
 
     float TimeAlive = 0f;
-    public void Pop(string Content, Color clr)
+    public void Pop(string Content, Color clr, Color outlineClr = new Color())
     {
         TextContent.text = Content;
         TextContentBG.text = Content;
 
         TextContent.color = clr;
 
-        TextContentBG.color = new Color(clr.r - (clr.r / 10f), clr.g - (clr.g / 10f), clr.b - (clr.b / 10f), clr.a);
+        if (outlineClr.r == 0f && outlineClr.g == 0f && outlineClr.b == 0f && outlineClr.a == 0f)
+        {
+            TextContentBG.color = new Color(clr.r - (clr.r / 10f), clr.g - (clr.g / 10f), clr.b - (clr.b / 10f), clr.a);
+        }
+        else
+        {
+            TextContentBG.color = outlineClr;
+        }
 
         CG.alpha = 1f;
 

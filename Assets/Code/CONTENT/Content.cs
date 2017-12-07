@@ -122,6 +122,55 @@ public class Content : MonoBehaviour {
 
         return null;
     }
+
+    public DevSpell GetSpell(string spellKey)
+    {
+        for(int i=0; i < PrimaryAbilities.Count; i++)
+        {
+            for(int a=0; a < PrimaryAbilities[i].Spells.Count; a++)
+            {
+                if(PrimaryAbilities[i].Spells[a].Key == spellKey)
+                {
+                    return PrimaryAbilities[i].Spells[a];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public DevSpell GetSpellAtLevel(int lvl)
+    {
+        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        {
+            for (int a = 0; a < PrimaryAbilities[i].Spells.Count; a++)
+            {
+                if (PrimaryAbilities[i].Spells[a].Level == lvl)
+                {
+                    return PrimaryAbilities[i].Spells[a];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public int GetSpellIndex(DevSpell spell)
+    {
+        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        {
+            for (int a = 0; a < PrimaryAbilities[i].Spells.Count; a++)
+            {
+                if (PrimaryAbilities[i].Spells[a]== spell)
+                {
+                    return a;
+                }
+            }
+        }
+
+        return 0;
+    }
+    
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);
@@ -242,7 +291,7 @@ public class DevPrimaryAbility
 
     public List<PerkStage> Perks = new List<PerkStage>();
 
-    public List<SpellStage> Spells = new List<SpellStage>();
+    public List<DevSpell> Spells = new List<DevSpell>();
 }
 
 [System.Serializable]
@@ -254,15 +303,16 @@ public class PerkStage
 }
 
 [System.Serializable]
-public class SpellStage
+public class DevSpell
 {
     public string Key;
     public int Level;
     public int Mana;
-    public List<SpellPerk> Perks = new List<SpellPerk>();
+    public List<DevSpellPerk> Perks = new List<DevSpellPerk>();
+    public Sprite Icon;
 }
 [System.Serializable]
-public class SpellPerk
+public class DevSpellPerk
 {
     public string Key;
     public float Value;

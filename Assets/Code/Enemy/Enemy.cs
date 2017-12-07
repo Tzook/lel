@@ -106,11 +106,11 @@ public class Enemy : MonoBehaviour {
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
-    public void PopHint(string text, Color clr)
+    public void PopHint(string text, Color clr, Color outlineClr = new Color())
     {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
         pop.transform.position = transform.position + new Vector3(0f, 1f, 0f);
-        pop.GetComponent<PopText>().Pop(text, clr);
+        pop.GetComponent<PopText>().Pop(text, clr, outlineClr);
     }
 
     public virtual void SetTarget(ActorInstance target)
@@ -124,25 +124,43 @@ public class Enemy : MonoBehaviour {
         Anim.SetTrigger("Hurt");
 
         string dmgMessage = damage.ToString("N0");
-        if (crit) {
-            // TODO use a nicer way to display critical
-            dmgMessage += " (crit!)";
+
+        int TextSize = 40; 
+
+        if (crit)
+        {
+            TextSize = 60;
         }
 
         switch (cause)
         {
             case "attack":
                 {
-                    AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
-
-                    if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    if (crit)
                     {
-                        PopHint(dmgMessage, Color.green);
+                        AudioControl.Instance.PlayInPosition("sound_crit", attackSource.transform.position);
                     }
                     else
                     {
-                        PopHint(dmgMessage, Color.blue);
+                        AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
                     }
+
+                    if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        if (crit)
+                        {
+                            PopHint("<size=" + TextSize + "> " + dmgMessage + "</size>", new Color(1f, 0.619f, 0.325f, 1f), Color.black);
+                        }
+                        else
+                        {
+                            PopHint("<size=" + TextSize + "> " + dmgMessage + "</size>", Color.green);
+                        }
+                    }
+                    else
+                    {
+                        PopHint("<size=" + TextSize + "> " + dmgMessage + "</size>", Color.blue);
+                    }
+
 
 
                     m_AlphaGroup.BlinkDamage();
@@ -150,11 +168,13 @@ public class Enemy : MonoBehaviour {
                 }
             case "aoe":
                 {
+                    TextSize -= 15;
+
                     AudioControl.Instance.PlayInPosition(WoundSounds[Random.Range(0, WoundSounds.Count)], attackSource.transform.position);
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=25>" + dmgMessage + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size=" + TextSize +"> " + dmgMessage + "</size></color>", Color.green);
                     }
                     else
                     {
@@ -165,11 +185,13 @@ public class Enemy : MonoBehaviour {
                 }
             case "bleed":
                 {
+                    TextSize -= 15;
+
                     AudioControl.Instance.PlayInPosition("sound_smallHit", attackSource.transform.position);
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=25>" + dmgMessage + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size="+TextSize+">" + dmgMessage + "</size></color>", Color.green);
                     }
 
                     break;

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 public class ActorInstance : MonoBehaviour
 {
@@ -85,6 +86,7 @@ public class ActorInstance : MonoBehaviour
 
     public ActorInfo Info;
     public ActorMovement MovementController;
+    public ActorController InputController;
     public bool nameHidden = false;
 
     public Quaternion LastFireRot;
@@ -495,15 +497,11 @@ public class ActorInstance : MonoBehaviour
         arrow.GetComponent<ProjectileArrow>().Launch(this, isPlayer);
     }
 
-    public void AttackMelee(bool isPlayer)
+    public void CastSpell(DevSpell spell)
     {
-        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_OneHand");
-
-        damageZone.GetComponent<ActorDamageInstance>().ParentActor = this;
-
-        damageZone.transform.position = Weapon.transform.position;
-        damageZone.transform.rotation = LastFireRot;
-        damageZone.gameObject.SetActive(true);
+        Anim.SetInteger("PrimaryAbility", Content.Instance.GetPrimaryAbilityIndex(Info.CurrentPrimaryAbility.Key));
+        Anim.SetInteger("SpellNumber", Content.Instance.GetSpellIndex(spell));
+        Anim.SetTrigger("CastSpell");
     }
 
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)

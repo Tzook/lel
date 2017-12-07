@@ -127,6 +127,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("ability_gain_perk", OnAbilityGainPerk);
 
         CurrentSocket.On("buff_activated", OnBuffActivated);
+        CurrentSocket.On("actor_use_spell", OnActorUsedSpell);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -1061,6 +1062,20 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    private void OnActorUsedSpell(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        if(LocalUserInfo.Me.ClientCharacter.ID != data["char_id"].Value)
+        {
+            DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
+            Game.Instance.CurrentScene.GetActor(data["char_id"].Value).Instance.CastSpell(spell);
+        }
+    }
+
+
     #endregion
 
     #region Emittions
@@ -1325,17 +1340,15 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("mobs_moved", node);
     }
 
-    public void SendMobTookDamage(ActorInstance parentActor, List<Enemy> enemyReferences)
+    public void SendMobTookDamage(ActorInstance parentActor, List<string> targetIDs)
     {
         JSONNode node = new JSONClass();
 
         //node["mob_id"] = enemyReference[0].Info.ID;
 
-        for(int i = 0; i < enemyReferences.Count; i++)
+        for(int i = 0; i < targetIDs.Count; i++)
         {
-            node["mobs"][i] = enemyReferences[i].Info.ID;
-            Debug.Log(enemyReferences[i].Info.ID);
-
+            node["mobs"][i] = targetIDs[i];
         }
         
         CurrentSocket.Emit("mobs_took_dmg", node);
@@ -1493,6 +1506,20 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("choose_perk", node);
 
         InGameMainMenuUI.Instance.DisableUpgradeCounter();
+    }
+
+    public void SendUsedSpell(string spellKey, List<string> targetIDs)
+    {
+        JSONNode node = new JSONClass();
+
+        node["spell_key"] = spellKey;
+
+        for (int i = 0; i < targetIDs.Count; i++)
+        {
+            node["target_ids"][i] = targetIDs[i];
+        }
+
+        CurrentSocket.Emit("used_spell", node);
     }
 
     #endregion

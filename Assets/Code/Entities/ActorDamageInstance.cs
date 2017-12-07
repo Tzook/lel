@@ -6,15 +6,20 @@ using UnityEngine;
 public class ActorDamageInstance : MonoBehaviour {
 
     public ActorInstance ParentActor;
+    string ActionKey;
+    string ActionValue;
+
     float TimeAlive = 0.1f;
     bool Hit = false;
 
     [SerializeField]
     BoxCollider2D m_Collider;
 
-    public void Open(ActorInstance instance)
+    public void Open(ActorInstance instance, string actionKey, string actionValue = "")
     {
         this.ParentActor = instance;
+        this.ActionKey = actionKey;
+        this.ActionValue = actionValue;
         this.gameObject.SetActive(true);
     }
 
@@ -61,16 +66,7 @@ public class ActorDamageInstance : MonoBehaviour {
                 sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
                 sentTargets.Insert(0 ,TargetCollider.GetComponent<HitBox>().EnemyReference);
 
-                SocketClient.Instance.SendMobTookDamage(ParentActor, sentTargets);
-
-                //TODO To be replaced with sound based on the actors weapon.
-                int rnd = Random.Range(0, 3);
-                AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
-
-                GameObject tempHit;
-                tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
-                tempHit.transform.position = ParentActor.Weapon.transform.position;
-                tempHit.GetComponent<HitEffect>().Play();
+                LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
 
                 Hit = true;
                 this.gameObject.SetActive(false);

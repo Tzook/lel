@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -223,6 +224,13 @@ public class ActorController : MonoBehaviour
             AttackCharge();
         }
 
+        for (int i = 0; i < 5; i++)
+        {
+            if (Input.GetKeyDown(InputMap.Map["Spell"+(i+1)]))
+            {
+                CastSpell(i);
+            }
+        }
     }
 
     private void AttackCharge()
@@ -437,6 +445,39 @@ public class ActorController : MonoBehaviour
         SocketClient.Instance.SendStoppedClimbing();
     }
 
+    public void AttackMelee()
+    {
+        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_OneHand");
+
+        damageZone.transform.position = Instance.transform.position;
+        damageZone.transform.rotation = Instance.LastFireRot;
+
+        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "melee");
+    }
+
+    public void ShootArrow()
+    {
+        Instance.ShootArrow(true);
+    }
+
+    private void CastSpell(int spellIndex)
+    {
+        DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
+
+        if(spell.Mana <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        {
+            LocalUserInfo.Me.ClientCharacter.CurrentMana -= spell.Mana;
+            Instance.CastSpell(spell);
+
+            GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(spell.ColliderPrefab);
+
+            damageZone.transform.position = Instance.transform.position;
+            damageZone.transform.rotation = Instance.LastFireRot;
+
+            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", spell.Key);
+        }
+    }
+
 
     #endregion
 
@@ -483,6 +524,48 @@ public class ActorController : MonoBehaviour
         if(JumpRoutineInstance==null && Grounded)
         {
             JumpRoutineInstance = StartCoroutine(JumpRoutine());
+        }
+    }
+
+    internal void ColliderHitMobs(List<Enemy> sentTargets, string actionKey, string actionValue = "")
+    {
+        List<string> targetIDs = new List<string>();
+
+        for(int i=0;i<sentTargets.Count;i++)
+        {
+            targetIDs.Add(sentTargets[i].Info.ID);
+        }
+
+        switch(actionKey)
+        {
+            case "melee":
+                {
+                    SocketClient.Instance.SendMobTookDamage(Instance, targetIDs);
+
+                    int rnd = Random.Range(0, 3);
+                    AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+
+                    GameObject tempHit;
+                    tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+                    tempHit.transform.position = Instance.Weapon.transform.position;
+                    tempHit.GetComponent<HitEffect>().Play();
+
+                    break;
+                }
+            case "spell":
+                {
+                    SocketClient.Instance.SendUsedSpell(actionValue, targetIDs);
+
+                    int rnd = Random.Range(0, 3);
+                    AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+
+                    GameObject tempHit;
+                    tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+                    tempHit.transform.position = Instance.Weapon.transform.position;
+                    tempHit.GetComponent<HitEffect>().Play();
+
+                    break;
+                }
         }
     }
 
@@ -621,17 +704,16 @@ public class ActorController : MonoBehaviour
 
     public void ActivatePrimaryAbility()
     {
-
         switch (Instance.Info.CurrentPrimaryAbility.Key)
         {
             case "melee":
                 {
-                    Instance.AttackMelee(true);
+                    AttackMelee();
                     break;
                 }
             case "range":
                 {
-                    Instance.ShootArrow(true);
+                    ShootArrow();
                     break;
                 }
         }

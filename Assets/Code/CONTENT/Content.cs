@@ -50,6 +50,19 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public int GetPrimaryAbilityIndex(string key)
+    {
+        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        {
+            if (PrimaryAbilities[i].Name == key)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
     public DevItemInfo GetItem(string itemKey)
     {
         for(int i=0;i<Items.Count;i++)
@@ -154,6 +167,12 @@ public class Content : MonoBehaviour {
 
         return null;
     }
+
+    public DevSpell GetSpellAtIndex(int iIndex)
+    {
+        return GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Spells[iIndex];
+    }
+
 
     public int GetSpellIndex(DevSpell spell)
     {
@@ -308,6 +327,7 @@ public class DevSpell
     public string Key;
     public int Level;
     public int Mana;
+    public string ColliderPrefab;
     public List<DevSpellPerk> Perks = new List<DevSpellPerk>();
     public Sprite Icon;
 }

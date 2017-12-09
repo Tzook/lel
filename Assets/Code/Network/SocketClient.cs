@@ -127,7 +127,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("ability_gain_perk", OnAbilityGainPerk);
 
         CurrentSocket.On("buff_activated", OnBuffActivated);
-        CurrentSocket.On("actor_use_spell", OnActorUsedSpell);
+        CurrentSocket.On("spell_activated", OnSpellActivated);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -1062,15 +1062,17 @@ public class SocketClient : MonoBehaviour
         }
     }
 
-    private void OnActorUsedSpell(Socket socket, Packet packet, object[] args)
+    private void OnSpellActivated(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
         BroadcastEvent(data.ToString());
 
-        if(LocalUserInfo.Me.ClientCharacter.ID != data["char_id"].Value)
+        DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
+        string id = data["activator_id"].Value;
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(id);
+        if (actorInfo != null) // IS ACTOR
         {
-            DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
             Game.Instance.CurrentScene.GetActor(data["char_id"].Value).Instance.CastSpell(spell);
         }
     }

@@ -228,7 +228,7 @@ public class DevMonsterInfo
 
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     
-    public List<DevMobSpell> Spells = new List<DevMobSpell>();
+    public List<DevSpell> Spells = new List<DevSpell>();
     
 }
 
@@ -251,13 +251,6 @@ public class LootInstance
     public int MaxStack = 1;
 }
 
-
-[System.Serializable]
-public class DevMobSpell
-{
-    public string Key;
-    public List<DevPerkMap> Perks = new List<DevPerkMap>();
-}
 
 [System.Serializable]
 public class DevItemInfo

@@ -39,6 +39,23 @@ public class DevContentEditor : Editor
                     node["mobs"][i]["drops"][a]["minStack"] = currentInfo.Monsters[i].PossibleLoot[a].MinStack.ToString();
                     node["mobs"][i]["drops"][a]["maxStack"] = currentInfo.Monsters[i].PossibleLoot[a].MaxStack.ToString();
                 }
+
+                for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
+                {
+                    node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
+                    node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
+                }
+
+                for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
+                {
+                    node["mobs"][i]["spells"][a]["key"] = currentInfo.Monsters[i].Spells[a].Key.ToString();
+
+                    for (int b = 0; b < currentInfo.Monsters[i].Spells[a].Perks.Count; b++)
+                    {
+                        node["mobs"][i]["spells"][a]["perks"][b]["key"] = currentInfo.Monsters[i].Spells[a].Perks[b].Key.ToString();
+                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = currentInfo.Monsters[i].Spells[a].Perks[b].Value.ToString();
+                    }
+                }
             }
 
             SendMonstersInfo(node);

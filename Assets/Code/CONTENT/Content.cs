@@ -226,8 +226,10 @@ public class DevMonsterInfo
     [SerializeField]
     public List<LootInstance> PossibleLoot = new List<LootInstance>();
 
-
-
+    public List<DevPerkMap> Perks = new List<DevPerkMap>();
+    
+    public List<DevMobSpell> Spells = new List<DevMobSpell>();
+    
 }
 
 [System.Serializable]
@@ -247,6 +249,14 @@ public class LootInstance
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
+}
+
+
+[System.Serializable]
+public class DevMobSpell
+{
+    public string Key;
+    public List<DevPerkMap> Perks = new List<DevPerkMap>();
 }
 
 [System.Serializable]
@@ -328,11 +338,11 @@ public class DevSpell
     public int Level;
     public int Mana;
     public string ColliderPrefab;
-    public List<DevSpellPerk> Perks = new List<DevSpellPerk>();
+    public List<DevPerkMap> Perks = new List<DevPerkMap>();
     public Sprite Icon;
 }
 [System.Serializable]
-public class DevSpellPerk
+public class DevPerkMap
 {
     public string Key;
     public float Value;

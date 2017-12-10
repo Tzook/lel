@@ -46567,9 +46567,13 @@ MonoBehaviour:
       Value: 5
     Spells:
     - Key: fireball
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
       Perks:
       - Key: stunChance
         Value: 10
+      Icon: {fileID: 0}
   - MonsterKey: Bat
     MonsterName: Bat
     MonsterHP: 10
@@ -48098,12 +48102,12 @@ MonoBehaviour:
     PrecentPerUpgrade: 1
     UpgradeCap: 6
     StartingValue: 1
-  - Key: threatBonusChance
-    Name: Threat Bonus Chance
+  - Key: threatBonus
+    Name: Threat Bonus
     Icon: {fileID: 21300014, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.1
     UpgradeCap: 1
-    StartingValue: 0
+    StartingValue: 0.2
   - Key: critChance
     Name: Crit Chance
     Icon: {fileID: 21300042, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
@@ -48128,8 +48132,8 @@ MonoBehaviour:
     PrecentPerUpgrade: 1
     UpgradeCap: 6
     StartingValue: 2
-  - Key: bonusDamage
-    Name: Bonus Damage
+  - Key: damageBonus
+    Name: Damage Bonus
     Icon: {fileID: 21300030, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.1
     UpgradeCap: 1
@@ -48152,6 +48156,18 @@ MonoBehaviour:
     PrecentPerUpgrade: 0.05
     UpgradeCap: 2
     StartingValue: 1
+  - Key: blockChance
+    Name: Block Chance
+    Icon: {fileID: 0}
+    PrecentPerUpgrade: 0.05
+    UpgradeCap: 0.9
+    StartingValue: 0
+  - Key: damageReduction
+    Name: Damage Reduction
+    Icon: {fileID: 0}
+    PrecentPerUpgrade: 0.05
+    UpgradeCap: 0.9
+    StartingValue: 0
   Buffs:
   - Key: bleedChance
     Name: Bleed

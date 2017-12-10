@@ -86,6 +86,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+        CurrentSocket.On("actor_blocked", OnActorBlocked);
         CurrentSocket.On("actor_ded", OnActorDed);
         CurrentSocket.On("actor_resurrect", OnActorResurrect);
 
@@ -537,6 +538,20 @@ public class SocketClient : MonoBehaviour
         }
         string name = data["name"].Value;
         UpdateKnownHealth(name, hp);
+    }
+    
+    protected void OnActorBlocked(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor Blocked Attack");
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        if (actor != null) 
+        {
+            // TODO style 'block' better
+            actor.Instance.PopHint(String.Format("{0:n0}", "BLOCKED") , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+        }
     }
 
     protected void UpdateKnownHealth(string name, int hp) 

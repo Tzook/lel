@@ -79,6 +79,8 @@ public class ActorController : MonoBehaviour
     float LoadAttackValue = 0f;
     Coroutine LoadAttackValueInstance;
 
+    float SpellCooldown;
+
     #endregion
 
     #region Mono
@@ -222,14 +224,23 @@ public class ActorController : MonoBehaviour
         if (CanDoAction() && !Game.Instance.isInteractingWithUI && !OnRope)
         {
             AttackCharge();
+
+            if (SpellCooldown <= 0)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
+                    {
+                        CastSpell(i);
+                        SpellCooldown = 1f;
+                    }
+                }
+            }
         }
 
-        for (int i = 0; i < 5; i++)
+        if(SpellCooldown > 0)
         {
-            if (Input.GetKeyDown(InputMap.Map["Spell"+(i+1)]))
-            {
-                CastSpell(i);
-            }
+            SpellCooldown -= 1f * Time.deltaTime;
         }
     }
 
@@ -475,6 +486,9 @@ public class ActorController : MonoBehaviour
             damageZone.transform.rotation = Instance.LastFireRot;
 
             damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", spell.Key);
+
+            InGameMainMenuUI.Instance.RefreshMP();
+            InGameMainMenuUI.Instance.RefreshSpellAreaMana();
         }
     }
 

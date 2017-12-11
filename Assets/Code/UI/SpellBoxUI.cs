@@ -37,7 +37,7 @@ public class SpellBoxUI : MonoBehaviour {
 
     public void RefreshMana()
     {
-        if(CurrentSpell.Mana < LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        if(CurrentSpell.Mana > LocalUserInfo.Me.ClientCharacter.CurrentMana)
         {
             m_Icon.color = new Color(Color.white.r, Color.white.g, Color.white.b, 0.3f);
         }

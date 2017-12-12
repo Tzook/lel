@@ -1536,8 +1536,6 @@ public class SocketClient : MonoBehaviour
             node["target_ids"][i] = targetIDs[i];
         }
 
-        Debug.LogError(node);
-
         CurrentSocket.Emit("used_spell", node);
     }
 

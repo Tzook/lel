@@ -504,6 +504,14 @@ public class ActorInstance : MonoBehaviour
         Anim.SetTrigger("CastSpell");
     }
 
+    public void CastSpellComplete()
+    {
+        if(LocalUserInfo.Me.ClientCharacter == this.Info)
+        {
+            InputController.CastSpellComplete();
+        }
+    }
+
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
     {
         m_Renderer.sortingLayerName = layer;

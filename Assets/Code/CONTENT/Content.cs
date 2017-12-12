@@ -333,6 +333,7 @@ public class DevSpell
     public string ColliderPrefab;
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     public Sprite Icon;
+    public string HitSound;
 }
 [System.Serializable]
 public class DevPerkMap

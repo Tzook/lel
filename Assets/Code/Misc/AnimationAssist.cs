@@ -15,6 +15,9 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     Enemy Enemy;
 
+    [SerializeField]
+    Transform WeaponBone;
+
     public void PlaySound(string soundKey)
     {
         AudioControl.Instance.PlayInPosition(soundKey, transform.position);
@@ -46,6 +49,15 @@ public class AnimationAssist : MonoBehaviour {
         m_Particles.Stop();
     }
 
+    public void SpawnEffect(string EffectKey)
+    {
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(EffectKey);
+
+        tempObj.transform.position = transform.position;
+
+        tempObj.GetComponent<ParticleSystem>().Play();
+    }
+
     public void UnbendBow()
     {
         Controller.GetComponent<ActorInstance>().UnbendBow();
@@ -61,4 +73,8 @@ public class AnimationAssist : MonoBehaviour {
         Enemy.TryIdleVarriation();
     }
 
+    public void CastSpellComplete()
+    {
+        Controller.GetComponent<ActorInstance>().CastSpellComplete();
+    }
 }

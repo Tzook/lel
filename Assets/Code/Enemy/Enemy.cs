@@ -200,6 +200,7 @@ public class Enemy : MonoBehaviour {
 
 
 
+
         if(m_HealthBar == null)
         {
             m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();

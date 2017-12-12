@@ -81,6 +81,8 @@ public class ActorController : MonoBehaviour
 
     float SpellCooldown;
 
+    DevSpell CurrentSpellInCast = null;
+
     #endregion
 
     #region Mono
@@ -214,7 +216,7 @@ public class ActorController : MonoBehaviour
 
     private bool CanDoAction()
     {
-        return CanInput && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal;
+        return CanInput && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal && CurrentSpellInCast == null;
     }
 
     void LateUpdate()
@@ -232,7 +234,7 @@ public class ActorController : MonoBehaviour
                     if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
                     {
                         CastSpell(i);
-                        SpellCooldown = 1f;
+                        SpellCooldown = 0.5f;
                     }
                 }
             }
@@ -473,22 +475,22 @@ public class ActorController : MonoBehaviour
 
     private void CastSpell(int spellIndex)
     {
+        Aim();
+        StopAim();
         DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
 
-        if(spell.Mana <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
+
+        if (spell.Mana <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
         {
             LocalUserInfo.Me.ClientCharacter.CurrentMana -= spell.Mana;
-            Instance.CastSpell(spell);
-
-            GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(spell.ColliderPrefab);
-
-            damageZone.transform.position = Instance.transform.position;
-            damageZone.transform.rotation = Instance.LastFireRot;
-
-            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", spell.Key);
 
             InGameMainMenuUI.Instance.RefreshMP();
             InGameMainMenuUI.Instance.RefreshSpellAreaMana();
+
+            CurrentSpellInCast = spell;
+
+            Instance.CastSpell(spell);
         }
     }
 
@@ -571,12 +573,17 @@ public class ActorController : MonoBehaviour
                     SocketClient.Instance.SendUsedSpell(actionValue, targetIDs);
 
                     int rnd = Random.Range(0, 3);
-                    AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
 
                     GameObject tempHit;
                     tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
                     tempHit.transform.position = Instance.Weapon.transform.position;
                     tempHit.GetComponent<HitEffect>().Play();
+
+                    DevSpell tempSpell = Content.Instance.GetSpell(actionValue);
+                    if (!string.IsNullOrEmpty(tempSpell.HitSound))
+                    {
+                        AudioControl.Instance.PlayInPosition(tempSpell.HitSound, tempHit.transform.position);
+                    }
 
                     break;
                 }
@@ -738,6 +745,8 @@ public class ActorController : MonoBehaviour
         EndAttack();
         SetAttackAnimation();
         Anim.SetTrigger("InturruptAttack");
+
+        CurrentSpellInCast = null;
     }
 
     public void EndAttack()
@@ -776,6 +785,17 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("ClimbingDown", false);
     }
 
+    public void CastSpellComplete()
+    {
+        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
+
+        damageZone.transform.position = Instance.transform.position;
+        damageZone.transform.rotation = Instance.LastFireRot;
+
+        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key);
+
+        CurrentSpellInCast = null;
+    }
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)

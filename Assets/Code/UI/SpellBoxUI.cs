@@ -11,6 +11,9 @@ public class SpellBoxUI : MonoBehaviour {
     [SerializeField]
     Image m_Icon;
 
+    [SerializeField]
+    Image m_MarkerIcon;
+
     DevSpell CurrentSpell;
 
     public void Set(DevSpell spell)
@@ -22,10 +25,11 @@ public class SpellBoxUI : MonoBehaviour {
     public void Refresh()
     {
         m_Icon.sprite = CurrentSpell.Icon;
+        m_MarkerIcon.sprite = m_Icon.sprite;
 
         string BindingName = InputMap.Map["Spell" + (Content.Instance.GetSpellIndex(CurrentSpell) + 1)].ToString();
 
-        if(BindingName.Substring(0,5) == "Alpha")
+        if(BindingName.Length > 5 && BindingName.Substring(0,5) == "Alpha")
         {
             BindingName = BindingName.Substring(BindingName.Length - 1, 1);
         }
@@ -58,5 +62,38 @@ public class SpellBoxUI : MonoBehaviour {
         m_BindText.enabled = false;
         m_Icon.enabled = false;
     }
+
+    public void Activate()
+    {
+
+    }
+
+    public void Activated()
+    {
+        StopAllCoroutines();
+
+        StartCoroutine(ActivatedRoutine());
+    }
+
+    IEnumerator ActivatedRoutine()
+    {
+        float t = 0f;
+        while(t < 1f)
+        {
+            t += 6f * Time.deltaTime;
+            m_MarkerIcon.color = Color.Lerp(m_MarkerIcon.color, new Color(Color.white.r, Color.white.g, Color.white.b, 0.6f), t);
+            yield return 0;
+        }
+
+        t = 0f;
+        while (t < 1f)
+        {
+            t += 6f * Time.deltaTime;
+            m_MarkerIcon.color = Color.Lerp(m_MarkerIcon.color, new Color(Color.white.r, Color.white.g, Color.white.b, 0f), t);
+            yield return 0;
+        }
+    }
+
+
 
 }

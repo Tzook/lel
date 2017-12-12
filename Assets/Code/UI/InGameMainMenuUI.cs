@@ -764,4 +764,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         SpellAreaPanel.RefreshMana();
     }
+
+    public void ActivatedSpell(string spellKey)
+    {
+        SpellAreaPanel.ActivatedSpell(spellKey);
+    }
 }

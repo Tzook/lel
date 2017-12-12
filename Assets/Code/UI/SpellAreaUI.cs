@@ -102,4 +102,25 @@ public class SpellAreaUI : MonoBehaviour
 
         yield return tempBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, targetTransform, 1f, Random.Range(-3f, 3f));
     }
+
+    public SpellBoxUI GetSpellBox(DevSpell withSpell)
+    {
+        SpellBoxUI tempBox;
+        for(int i=0;i<SpellContainer.childCount;i++)
+        {
+            tempBox = SpellContainer.GetChild(i).GetComponent<SpellBoxUI>();
+
+            if(tempBox != null)
+            {
+                return tempBox;
+            }
+        }
+
+        return null;
+    }
+
+    public void ActivatedSpell(string spellKey)
+    {
+        GetSpellBox(Content.Instance.GetSpell(spellKey)).Activated();
+    }
 }

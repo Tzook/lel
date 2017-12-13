@@ -1075,6 +1075,14 @@ public class SocketClient : MonoBehaviour
         {
             tempEnemy.AddBuff(data["key"].Value, data["duration"].AsFloat);
         }
+        else
+        {
+            ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
+            if (actor != null)
+            {
+                actor.Instance.AddBuff(data["key"].Value, data["duration"].AsFloat);
+            }
+        }
     }
 
     private void OnSpellActivated(Socket socket, Packet packet, object[] args)

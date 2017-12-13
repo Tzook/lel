@@ -46442,7 +46442,9 @@ MonoBehaviour:
     - ItemKey: blackPants
       MinStack: 1
       MaxStack: 1
-    Perks: []
+    Perks:
+    - Key: 
+      Value: 0
     Spells: []
   - MonsterKey: SpikedTurtle
     MonsterName: Spiked Turtle
@@ -46504,7 +46506,11 @@ MonoBehaviour:
     - ItemKey: shortScimitar
       MinStack: 1
       MaxStack: 1
-    Perks: []
+    Perks:
+    - Key: bleedDuration
+      Value: 3
+    - Key: bleedChance
+      Value: 0.1
     Spells: []
   - MonsterKey: Spike
     MonsterName: Spike
@@ -46564,17 +46570,10 @@ MonoBehaviour:
       MaxStack: 1
     Perks:
     - Key: stunChance
-      Value: 5
-    Spells:
-    - Key: fireball
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks:
-      - Key: stunChance
-        Value: 10
-      Icon: {fileID: 0}
-      HitSound: 
+      Value: 0.25
+    - Key: crippleChance
+      Value: 0.25
+    Spells: []
   - MonsterKey: Bat
     MonsterName: Bat
     MonsterHP: 10
@@ -46738,7 +46737,15 @@ MonoBehaviour:
     - ItemKey: shortScimitar
       MinStack: 1
       MaxStack: 1
-    Perks: []
+    Perks:
+    - Key: stunDuration
+      Value: 4
+    - Key: stunChance
+      Value: 0.25
+    - Key: crippleDuration
+      Value: 5
+    - Key: crippleChance
+      Value: 0.25
     Spells: []
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
@@ -46915,7 +46922,9 @@ MonoBehaviour:
     - ItemKey: shortScimitar
       MinStack: 1
       MaxStack: 1
-    Perks: []
+    Perks:
+    - Key: manaSteal
+      Value: 0.5
     Spells: []
   Items:
   - Key: leatherVest
@@ -48072,7 +48081,7 @@ MonoBehaviour:
       - Key: aoeCap
         Value: 6
       Icon: {fileID: 21300038, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
-      HitSound: 
+      HitSound: sound_hitSpray
   - Name: range
     Icon: {fileID: 21300000, guid: 65170a2ee353f074196f138dfaa281dd, type: 3}
     PAColor: {r: 0.43248153, g: 1, b: 0.32549024, a: 1}
@@ -48138,14 +48147,14 @@ MonoBehaviour:
     Icon: {fileID: 21300012, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.05
     UpgradeCap: 1
-    StartingValue: 0.05
+    StartingValue: 0
   - Key: aoeCap
     Name: Multi Hit Cap
     Icon: {fileID: 21300012, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 1
     UpgradeCap: 6
     StartingValue: 2
-  - Key: damageBonus
+  - Key: bonusDamage
     Name: Damage Bonus
     Icon: {fileID: 21300030, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.1
@@ -48171,13 +48180,19 @@ MonoBehaviour:
     StartingValue: 1
   - Key: blockChance
     Name: Block Chance
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300034, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.05
     UpgradeCap: 0.9
     StartingValue: 0
   - Key: damageReduction
     Name: Damage Reduction
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300020, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
+    PrecentPerUpgrade: 0.05
+    UpgradeCap: 0.9
+    StartingValue: 0
+  - Key: threatBonusChance
+    Name: Threat Bonus Chance
+    Icon: {fileID: 21300014, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     PrecentPerUpgrade: 0.05
     UpgradeCap: 0.9
     StartingValue: 0

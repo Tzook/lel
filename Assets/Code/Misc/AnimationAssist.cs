@@ -23,6 +23,11 @@ public class AnimationAssist : MonoBehaviour {
         AudioControl.Instance.PlayInPosition(soundKey, transform.position);
     }
 
+    public void PlayRandomMissSound()
+    {
+        PlaySound("sword_miss_" + Random.Range(0, 3));
+    }
+
     public void BeginChargeAttack()
     {
         if(Controller!=null && Controller.enabled)
@@ -54,6 +59,11 @@ public class AnimationAssist : MonoBehaviour {
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(EffectKey);
 
         tempObj.transform.position = transform.position;
+
+        if(tempObj.GetComponent<PosFollower>() != null)
+        {
+            tempObj.GetComponent<PosFollower>().SetTransform(transform);
+        }
 
         tempObj.GetComponent<ParticleSystem>().Play();
     }

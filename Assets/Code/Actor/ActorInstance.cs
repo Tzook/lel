@@ -91,8 +91,9 @@ public class ActorInstance : MonoBehaviour
 
     public Quaternion LastFireRot;
 
-
     Coroutine BlinkingInstance;
+
+    List<Buff> CurrentBuffs = new List<Buff>();
 
     #endregion
 
@@ -802,6 +803,87 @@ public class ActorInstance : MonoBehaviour
 
 
         }
+    }
+
+
+
+    public void ClearBuffs()
+    {
+        for (int i = 0; i < CurrentBuffs.Count; i++)
+        {
+            StopCoroutine(CurrentBuffs[i].RunningRoutine);
+
+            CurrentBuffs[i].EffectPrefab.transform.SetParent(null);
+            CurrentBuffs[i].EffectPrefab.gameObject.SetActive(false);
+        }
+
+        CurrentBuffs.Clear();
+    }
+
+    public void AddBuff(string buffKey, float buffDuration)
+    {
+        Buff tempBuff = new Buff(buffKey, Info.ID, buffDuration);
+
+        CurrentBuffs.Add(tempBuff);
+
+        tempBuff.RunningRoutine = StartCoroutine(HandleBuff(tempBuff));
+
+        if (Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+        {
+            InputController.StartBuffEffect(buffKey);
+        }
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        if (buff.RunningRoutine != null)
+        {
+            StopCoroutine(buff.RunningRoutine);
+        }
+
+        buff.EffectPrefab.transform.SetParent(null);
+        buff.EffectPrefab.transform.gameObject.SetActive(false);
+
+        CurrentBuffs.Remove(buff);
+
+        if (Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+        {
+            InputController.StopBuffEffect(buff.Key);
+        }
+    }
+
+    public Buff GetBuff(string buffKey)
+    {
+        for (int i = 0; i < CurrentBuffs.Count; i++)
+        {
+            if (CurrentBuffs[i].Key == buffKey)
+            {
+                return CurrentBuffs[i];
+            }
+        }
+
+        return null;
+    }
+
+    protected IEnumerator HandleBuff(Buff buff)
+    {
+        DevBuff buffRef = Content.Instance.GetBuff(buff.Key);
+
+        buff.EffectPrefab = ResourcesLoader.Instance.GetRecycledObject(buffRef.EffectPrefab);
+
+        buff.EffectPrefab.transform.SetParent(transform);
+        buff.EffectPrefab.transform.position = transform.position;
+
+        AudioControl.Instance.Play(buffRef.AudioKey);
+
+        while (buff.Duration > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            buff.Duration--;
+        }
+
+        buff.RunningRoutine = null;
+        RemoveBuff(buff);
     }
 
     #endregion

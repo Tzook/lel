@@ -43,7 +43,7 @@ public class DevContentEditor : Editor
                 for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
                 {
                     node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
-                    node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
+                    node["mobs"][i]["perks"][a]["value"] = (currentInfo.Monsters[i].Perks[a].Value * 100).ToString();
                 }
 
                 for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
@@ -53,7 +53,7 @@ public class DevContentEditor : Editor
                     for (int b = 0; b < currentInfo.Monsters[i].Spells[a].Perks.Count; b++)
                     {
                         node["mobs"][i]["spells"][a]["perks"][b]["key"] = currentInfo.Monsters[i].Spells[a].Perks[b].Key.ToString();
-                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = currentInfo.Monsters[i].Spells[a].Perks[b].Value.ToString();
+                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = (currentInfo.Monsters[i].Spells[a].Perks[b].Value * 100).ToString();
                     }
                 }
             }

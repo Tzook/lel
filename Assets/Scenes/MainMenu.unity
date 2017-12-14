@@ -48774,6 +48774,67 @@ MonoBehaviour:
       Spells: []
     RewardClass: 
     RewardExp: 100
+  - Name: The Ruined Painting
+    Key: ruinedPainting
+    InProgressDescription: Burtle accidently ruined his father's painting, I suppose
+      I could ask his mother about who exactly made this painting.
+    QuestCompleteDescription: I investigated the source of the painting.
+    FacePrefab: BurtleQuest
+    Conditions:
+    - Condition: ok
+      Type: PaintingSource
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Find out who painted this painting.
+    QuestsStates: []
+    RequiredClass: 
+    MinimumLevel: 5
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+    RewardClass: 
+    RewardExp: 50
+  - Name: Find Cosmo
+    Key: findCosmo
+    InProgressDescription: Burtle needs a replacement for his father's painting, the
+      one who originally made the painting is called 'Cosmo', they say he lives underground
+      near the entrance to 'Rabbit-Land'.
+    QuestCompleteDescription: Cosmo was hard to find.
+    FacePrefab: BurtleQuest
+    Conditions:
+    - Condition: ok
+      Type: CosmoAgreed
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Find out who painted this painting.
+    QuestsStates:
+    - QuestKey: TheRuinedPainting
+      EnumState: 1
+    RequiredClass: 
+    MinimumLevel: 5
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+    RewardClass: 
+    RewardExp: 1200
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

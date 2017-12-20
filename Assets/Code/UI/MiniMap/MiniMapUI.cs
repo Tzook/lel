@@ -20,6 +20,7 @@ public class MiniMapUI : MonoBehaviour
 
     private float? originalPanelHeight;
 
+    //TODO Make this listen to "Post Change Scene Case".
     public void Update()
     {
         sceneName.text = SceneManager.GetActiveScene().name;

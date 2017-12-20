@@ -789,14 +789,17 @@ public class ActorController : MonoBehaviour
 
     public void CastSpellComplete()
     {
-        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
+        if (CurrentSpellInCast != null)
+        {
+            GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
-        damageZone.transform.position = Instance.transform.position;
-        damageZone.transform.rotation = Instance.LastFireRot;
+            damageZone.transform.position = Instance.transform.position;
+            damageZone.transform.rotation = Instance.LastFireRot;
 
-        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key);
+            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key);
 
-        CurrentSpellInCast = null;
+            CurrentSpellInCast = null;
+        }
     }
 
 

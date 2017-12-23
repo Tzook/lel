@@ -17,7 +17,10 @@ public class MiniMapUI : MonoBehaviour
     
     [SerializeField]
     Image actor;
-
+     
+    private float toggleHeight;
+    private float panelWidth;
+    private float panelHeight;
     private float? originalPanelHeight;
 
     public void Awake()
@@ -26,19 +29,25 @@ public class MiniMapUI : MonoBehaviour
         SceneManager.activeSceneChanged += OnSceneChanged;
         // initialize with the first scene
         UpdateToNewScene(SceneManager.GetActiveScene());
+        // pre-calculate heights for computations
+        toggleHeight = toggle.GetComponent<RectTransform>().sizeDelta.y;
+        Vector2 sizeDelta = contentPanel.sizeDelta;
+        panelWidth = sizeDelta.x - 10;
+        panelHeight = sizeDelta.y - toggleHeight - 10;
     }
 
     public void LateUpdate()
     {
         // painting the minimap in late update so the content will be first calculated in update
-        if (IsPanelOpen()) 
+        if (IsPanelOpen() && SceneInfo.Instance.miniMapInfo != null)
         {
             // TODO draw the minimap based on map points
             // PolygonCollider2D[] coliders = Object.FindObjectsOfType<PolygonCollider2D>();
             // Vector2[] points = coliders[0].points;
 
-            // TODO draw the actor based on his position compare to all the points
-            // Transform actorTransform = Game.Instance.CurrentScene.ClientCharacter.Instance.transform;
+            Vector2 actorPosition = Game.Instance.CurrentScene.ClientCharacter.Instance.transform.position;
+            Vector2 percentPosition = SceneInfo.Instance.miniMapInfo.getPercentLocation(actorPosition);
+            actor.transform.position = contentPanel.TransformPoint(new Vector2(percentPosition.x * panelWidth, percentPosition.y * (float)panelHeight));
         }
     }
 
@@ -78,7 +87,6 @@ public class MiniMapUI : MonoBehaviour
     protected void ClosePanel()
     {
         originalPanelHeight = contentPanel.sizeDelta.y;
-        float toggleHeight = toggle.GetComponent<RectTransform>().sizeDelta.y;
         contentPanel.sizeDelta = new Vector2(contentPanel.sizeDelta.x, toggleHeight);
         TogglePanelElement(actor, false);
     }

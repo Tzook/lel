@@ -88,6 +88,7 @@ public class SceneInfoEditor : Editor {
         Ferr2DT_PathTerrain[] terrains = Resources.FindObjectsOfTypeAll<Ferr2DT_PathTerrain>();
         foreach (Ferr2DT_PathTerrain terrain in terrains) 
         {
+            // TODO why is the coliders verts not accurate
             List<List<Vector2>> currentColliders = terrains[0].GetColliderVerts();
             foreach (List<Vector2> collidersGroup in currentColliders) 
             {

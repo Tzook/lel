@@ -69,12 +69,56 @@ public class SceneInfoEditor : Editor {
                 }
             }
 
+            WriteMiniMap(currentInfo);
 
             SendSceneInfo(node);
         }
 
         GUILayout.EndHorizontal();
 
+    }
+
+    protected void WriteMiniMap(SceneInfo currentInfo)
+    {
+        float left = 9999;
+        float right = -9999;
+        float top = -9999;
+        float bottom = 9999;
+        List<ColiderGroup> coliders = new List<ColiderGroup>();
+        Ferr2DT_PathTerrain[] terrains = Resources.FindObjectsOfTypeAll<Ferr2DT_PathTerrain>();
+        foreach (Ferr2DT_PathTerrain terrain in terrains) 
+        {
+            List<List<Vector2>> currentColliders = terrains[0].GetColliderVerts();
+            foreach (List<Vector2> collidersGroup in currentColliders) 
+            {
+                ColiderGroup worldColliders = new ColiderGroup();
+
+                // find the top/bottom/right/left so we can draw things relatively
+                foreach (Vector2 vector in collidersGroup) 
+                {
+                    // convert the vector to be relative to the world
+                    Vector2 worldVector = terrain.transform.TransformPoint(vector);
+                    worldColliders.coliders.Add(worldVector);
+
+                    if (worldVector.x < left)   left = worldVector.x;
+                    if (right < worldVector.x)  right = worldVector.x;
+                    if (top < worldVector.y)    top = worldVector.y;
+                    if (worldVector.y < bottom) bottom = worldVector.y;
+                }
+
+                if (worldColliders.coliders.Count > 0) 
+                {
+                    coliders.Add(worldColliders);
+                }
+                
+            }
+        }
+
+        currentInfo.miniMapInfo.left = left;
+        currentInfo.miniMapInfo.right = right;
+        currentInfo.miniMapInfo.top = top;
+        currentInfo.miniMapInfo.bottom = bottom;
+        currentInfo.miniMapInfo.coliders = coliders;
     }
 
     private void SendSceneInfo(JSONNode node)

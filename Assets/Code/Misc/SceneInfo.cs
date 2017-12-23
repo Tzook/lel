@@ -16,6 +16,8 @@ public class SceneInfo : MonoBehaviour {
 
     public List<NPC> Npcs = new List<NPC>();
 
+    public MiniMapInfo miniMapInfo = new MiniMapInfo();
+
     public static SceneInfo Instance;
 
     void Awake()

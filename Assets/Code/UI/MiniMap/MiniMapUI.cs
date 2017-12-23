@@ -20,10 +20,12 @@ public class MiniMapUI : MonoBehaviour
 
     private float? originalPanelHeight;
 
-    //TODO Make this listen to "Post Change Scene Case".
-    public void Update()
+    public void Awake()
     {
-        sceneName.text = SceneManager.GetActiveScene().name;
+        // listen to scene change and update accordingly
+        SceneManager.activeSceneChanged += OnSceneChanged;
+        // initialize with the first scene
+        UpdateToNewScene(SceneManager.GetActiveScene());
     }
 
     public void LateUpdate()
@@ -38,6 +40,22 @@ public class MiniMapUI : MonoBehaviour
             // TODO draw the actor based on his position compare to all the points
             // Transform actorTransform = Game.Instance.CurrentScene.ClientCharacter.Instance.transform;
         }
+    }
+
+    public void Destroy()
+    {
+        // cleanup
+        SceneManager.activeSceneChanged -= OnSceneChanged;
+    }
+
+    public void OnSceneChanged(Scene previousScene, Scene newScene)
+    {
+        UpdateToNewScene(newScene);
+    }
+
+    protected void UpdateToNewScene(Scene scene) 
+    {
+        sceneName.text = scene.name;
     }
 
     public void TogglePanel()

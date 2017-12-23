@@ -27,6 +27,7 @@ public class Game : MonoBehaviour {
     public bool MovingTroughPortal = false;
     public bool isBitch = false;
     public bool isLoadingScene = false;
+    bool isEnteringWorld = false;
 
     public static Game Instance;
 
@@ -34,11 +35,20 @@ public class Game : MonoBehaviour {
 
     public List<GameObject> DontDestroyMeOnLoadList = new List<GameObject>();
 
+    //Custom quests routines
+    List<OkRoutineInstance> OkRoutineInstances = new List<OkRoutineInstance>();
+
     void Awake()
     {
         Instance = this;
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
+    }
+
+    public void EnterGameWorld()
+    {
+        SocketClient.Instance.ConnectToGame();
+        isEnteringWorld = true;
     }
 
     public void LoadScene(string scene, ActorInfo actorInfo)
@@ -296,6 +306,13 @@ public class Game : MonoBehaviour {
         actorController.enabled = true;
         ClientCharacter.GetComponent<PlayerShortcuts>().isMe = true;
         ClientCharacter.GetComponent<Rigidbody2D>().isKinematic = false;
+
+        if(isEnteringWorld)
+        {
+            InitializeOkRoutines();
+
+            isEnteringWorld = false;
+        }
     }
 
     protected IEnumerator LoadSceneRoutine(string scene, ActorInfo actorInfo)
@@ -430,6 +447,78 @@ public class Game : MonoBehaviour {
         isClickingOnUI = false;
     }
 
+    
+    void InitializeOkRoutines()
+    {
+        for(int i=0; i < LocalUserInfo.Me.ClientCharacter.QuestsInProgress.Count; i++)
+        {
+            HandleOkRoutines(LocalUserInfo.Me.ClientCharacter.QuestsInProgress[i]);
+        }
+    }
+
+    public void HandleOkRoutines(string QuestKey)
+    {
+        HandleOkRoutines(Content.Instance.GetQuest(QuestKey));
+    }
+
+    public void HandleOkRoutines(Quest quest)
+    {
+        OkRoutineInstance tempInstance;
+
+        for (int i = 0; i < quest.Conditions.Count; i++)
+        {
+            if (quest.Conditions[i].Condition == "ok")
+            {
+                switch (quest.Conditions[i].Type)
+                {
+                    case "CosmoFinished":
+                        {
+                            tempInstance = new OkRoutineInstance(quest.Conditions[i].Type, StartCoroutine(CustomQuestWait(quest.Key, quest.Conditions[i].Type, 60f)));
+                            OkRoutineInstances.Add(tempInstance);
+                            break;
+                        }
+                }
+            }
+        }
+    }
+
+    public void HandleAbandonOkRoutines(string abandonedQuestKey)
+    {
+        Quest quest = Content.Instance.GetQuest(abandonedQuestKey);
+
+        for(int i=0; i < quest.Conditions.Count; i++)
+        {
+            if (quest.Conditions[i].Condition == "ok")
+            {
+                for (int c = 0; c < OkRoutineInstances.Count; c++)
+                {
+                    if(OkRoutineInstances[c].okKey == quest.Conditions[i].Type)
+                    {
+                        StopCoroutine(OkRoutineInstances[c].RoutineInstnace);
+                        OkRoutineInstances.RemoveAt(c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    IEnumerator CustomQuestWait(string questKey, string okKey, float Wait)
+    {
+        yield return new WaitForSeconds(Wait);
+
+        for(int i=0;i<OkRoutineInstances.Count;i++)
+        {
+            if(OkRoutineInstances[i].okKey == okKey)
+            {
+                OkRoutineInstances.RemoveAt(i);
+                break;
+            }
+        }
+
+        SocketClient.Instance.SendQuestOK(okKey);
+    }
+
     #region Debug
 
     //[SerializeField]
@@ -456,5 +545,17 @@ public class Game : MonoBehaviour {
 
     #endregion
 
+}
+
+class OkRoutineInstance
+{
+    public string okKey;
+    public Coroutine RoutineInstnace;
+
+    public OkRoutineInstance(string key, Coroutine routine)
+    {
+        this.okKey = key;
+        this.RoutineInstnace = routine;
+    }
 }
 

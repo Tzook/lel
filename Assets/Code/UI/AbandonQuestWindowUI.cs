@@ -22,6 +22,7 @@ public class AbandonQuestWindowUI : MonoBehaviour {
         LocalUserInfo.Me.ClientCharacter.AbandonQuest(CurrentQuest.Key);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(CurrentQuest.Key);
+        Game.Instance.HandleAbandonOkRoutines(CurrentQuest.Key);
 
         CurrentQuest = null;
 

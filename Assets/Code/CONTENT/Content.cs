@@ -609,6 +609,10 @@ public class QuestState
                     {
                         return "NotCompleted";
                     }
+                case QuestEnumState.CanBeCompleted:
+                    {
+                        return "CanBeCompleted";
+                    }
             }
 
             return "NOSTATE";
@@ -622,6 +626,6 @@ public class QuestState
 
     public enum QuestEnumState
     {
-        InProgress,Completed,NotInProgress,NotCompleted
+        InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted
     }
 }

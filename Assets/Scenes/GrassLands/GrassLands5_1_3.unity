@@ -1443,6 +1443,79 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &342394362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 342394363}
+  - component: {fileID: 342394364}
+  m_Layer: 0
+  m_Name: New Sprite (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342394363
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 342394362}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000000007450579, w: 1}
+  m_LocalPosition: {x: 0.9106535, y: 1.1074103, z: 0}
+  m_LocalScale: {x: 0.99998647, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1887169126}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.379001}
+--- !u!212 &342394364
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 342394362}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1780669385
+  m_SortingLayer: 3
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: 8beba6323d1e00b4fbb8f22166b671b2, type: 3}
+  m_Color: {r: 0.68349916, g: 0.6972077, b: 0.9485294, a: 0.928}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.56, y: 1.86}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &385357001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538913256}
   - component: {fileID: 538913255}
+  - component: {fileID: 538913257}
   m_Layer: 0
   m_Name: bg (1)
   m_TagString: Untagged
@@ -2494,6 +2568,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 66
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.000001}
+--- !u!61 &538913257
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538913254}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.01, y: 0.01}
+    newSize: {x: 19.2, y: 10.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.01}
+  m_EdgeRadius: 0
 --- !u!1 &580124762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2869,6 +2968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677465995}
   - component: {fileID: 677465994}
+  - component: {fileID: 677465996}
   m_Layer: 0
   m_Name: bg (2)
   m_TagString: Untagged
@@ -2935,6 +3035,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 15}
+--- !u!61 &677465996
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 677465993}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.01, y: 0.01}
+    newSize: {x: 19.2, y: 10.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.01}
+  m_EdgeRadius: 0
 --- !u!1 &722603143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,6 +3279,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 88
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.0400002}
+--- !u!1 &784274942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 784274945}
+  - component: {fileID: 784274944}
+  - component: {fileID: 784274943}
+  m_Layer: 0
+  m_Name: RuinedPainting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!114 &784274943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 784274942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: findCosmo2
+  HideState: 2
+--- !u!212 &784274944
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 784274942}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: db3660a964d89b249922f19ffdb01c1e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1780669385
+  m_SortingLayer: 3
+  m_SortingOrder: 9
+  m_Sprite: {fileID: 21300108, guid: d2b99573d91a11a4db48ba7066505059, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 9, y: 4.07}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!4 &784274945
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 784274942}
+  m_LocalRotation: {x: -0, y: -0, z: 0.06258059, w: -0.99803996}
+  m_LocalPosition: {x: -73.519, y: -84.097, z: 1.038306}
+  m_LocalScale: {x: 0.8829596, y: 0.8829596, z: 0.8829596}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 92
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.176}
 --- !u!1 &813651679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,7 +4078,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 6.102969, y: -0.10291386}
+  m_Offset: {x: 5.9984117, y: -0.10291386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3877,7 +4089,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.615936, y: 0.61417234}
+  m_Size: {x: 18.602444, y: 0.61417234}
   m_EdgeRadius: 0
 --- !u!212 &987208964
 SpriteRenderer:
@@ -6004,6 +6216,24 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Done?
+      Event: StartDialog
+      Value: CosmoNotDone
+      Condition: QuestInProgress
+      ConditionValue: findCosmo2
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: '*Give her the painting*'
+      Event: StartDialog
+      Value: FindCosmo2Quest
+      Condition: QuestAvailable
+      ConditionValue: findCosmo2
+      CLR: {r: 1, g: 0.9626775, b: 0.66176474, a: 1}
+    - Title: Done?
+      Event: StartDialog
+      Value: CosmoDone
+      Condition: QuestComplete
+      ConditionValue: findCosmo2
+      CLR: {r: 1, g: 0.9607844, b: 0.6627451, a: 1}
     - Title: Wrong Number...
       Event: EndDialog
       Value: 
@@ -6050,6 +6280,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I need this painting fixed...
+      Event: StartDialog
+      Value: FindCosmo
+      Condition: QuestComplete
+      ConditionValue: findCosmo
+      CLR: {r: 1, g: 0.96653146, b: 0.7794118, a: 1}
     - Title: This is disgusting...
       Event: StartDialog
       Value: Disgusting
@@ -6282,8 +6518,372 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: FindCosmo
+    Pieces:
+    - Content: My -"Rabbit - Turtle Conflict" paintings are not protected by warranty.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Due to high risk of vandalism.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So... In other words...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: No.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: WHAT?
+      Event: StartDialog
+      Value: FindCosmoAngry
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9327586, b: 0.71323526, a: 1}
+    - Title: Please.
+      Event: StartDialog
+      Value: FindCosmoPolite
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.941785, b: 0.6985294, a: 1}
+    - Title: Bye.
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: FindCosmoAngry
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I DIDN'T CLIMB ALL THE WAY HERE TO BE REJECTED
+      Event: StartDialog
+      Value: FindCosmoAngry2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+    - Title: '@#$@#%$!!!'
+      Event: StartDialog
+      Value: FindCosmoAngry2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+  - DialogKey: FindCosmoAngry2
+    Pieces:
+    - Content: Don't speak to me with that tone, I owe you nothing.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: CAN'T YOU SEE HOW ANGRY I AM?
+      Event: StartDialog
+      Value: FindCosmoAngry3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+    - Title: FIX THIS PAINTING!
+      Event: StartDialog
+      Value: FindCosmoAngry3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+  - DialogKey: FindCosmoAngry3
+    Pieces:
+    - Content: No, being angry doesn't grant you a special care...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Being mad is basically your fault.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'LL TAKE IT BY FORCE!~
+      Event: StartDialog
+      Value: FindCosmoAngry4
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+    - Title: Okay, you are right.
+      Event: StartDialog
+      Value: FindCosmoPolite
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: AHHHHHGHGH!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.19999993, g: 1, b: 0, a: 1}
+  - DialogKey: FindCosmoAngry4
+    Pieces:
+    - Content: You can't.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Technically.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: '...'
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0, b: 0, a: 1}
+  - DialogKey: FindCosmoPolite
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: This is for a friend of mine...
+      Event: StartDialog
+      Value: FindCosmoPolite2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite2
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: He is a turtle child from Shellhill.
+      Event: StartDialog
+      Value: FindCosmoPolite3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite3
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: He accidently ruined his father's painting...
+      Event: StartDialog
+      Value: FindCosmoPolite4
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite4
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: The poor child was in panic...
+      Event: StartDialog
+      Value: FindCosmoPolite5
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite5
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I had to help him...
+      Event: StartDialog
+      Value: FindCosmoPolite6
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite6
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: And I climbed a lot to get here...
+      Event: StartDialog
+      Value: FindCosmoPolite7
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite7
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Could you please help me out?
+      Event: StartDialog
+      Value: FindCosmoPolite8
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmoPolite8
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Okay...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: For the child turtle...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: findCosmo
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+  - DialogKey: FindCosmo2Quest
+    Pieces:
+    - Content: Oh...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: It's a mess...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Alright, it'll take me a minute to fix it.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So you'll have to wait a full minute, not knowing what to do...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Are you ready for this challenge?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'm Ready.
+      Event: StartQuest
+      Value: findCosmo2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.906288, b: 0.5147059, a: 1}
+    - Title: I'm Not Ready.
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: CosmoNotDone
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: NO!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Can't you wait a full minute without bothering me?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Okay... Okay..
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: CosmoDone
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: NO!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: 'Kidding!, Kidding! '
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: There you go...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Now, begone.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I have a lot of work to do.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: findCosmo2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.93975663, b: 0.60294116, a: 1}
+  GivingQuests:
+  - findCosmo2
+  EndingQuests:
+  - findCosmo
+  - findCosmo2
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -7646,6 +8246,94 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.000001}
+--- !u!1 &1887169122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1887169126}
+  - component: {fileID: 1887169125}
+  - component: {fileID: 1887169124}
+  m_Layer: 0
+  m_Name: New Sprite (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1887169124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1887169122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: findCosmo2
+  HideState: 2
+--- !u!212 &1887169125
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1887169122}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1780669385
+  m_SortingLayer: 3
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: 8beba6323d1e00b4fbb8f22166b671b2, type: 3}
+  m_Color: {r: 0.68349916, g: 0.6972077, b: 0.9485294, a: 0.716}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.56, y: 1.86}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!4 &1887169126
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1887169122}
+  m_LocalRotation: {x: -0, y: -0, z: -0.027952742, w: -0.99960923}
+  m_LocalPosition: {x: -73.671, y: -84.217, z: 1.038306}
+  m_LocalScale: {x: 0.2580135, y: 0.2821289, z: 0.16661036}
+  m_Children:
+  - {fileID: 342394363}
+  m_Father: {fileID: 0}
+  m_RootOrder: 93
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.379001}
 --- !u!1 &1907312009
 GameObject:
   m_ObjectHideFlags: 0

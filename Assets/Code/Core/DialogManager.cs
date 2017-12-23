@@ -46,7 +46,6 @@ public class DialogManager : MonoBehaviour {
 	public void StartDialogMode(NPC npc)
     {
         currentNPC = npc;
-        Debug.Log("STARTED DIALOG" + currentNPC);
 
         currentNPC.ShowName();
 

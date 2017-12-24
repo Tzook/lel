@@ -17,6 +17,9 @@ public class ItemStats
     public int BonusHP = 0;
     public int BonusMP = 0;
 
+    public int JumpBonus = 0;
+    public int SpeedBonus = 0;
+
     public ItemStats Clone()
     {
         ItemStats stats = new ItemStats();
@@ -31,6 +34,9 @@ public class ItemStats
         stats.BonusDEX = this.BonusDEX;
         stats.BonusHP = this.BonusHP;
         stats.BonusMP = this.BonusMP;
+
+        stats.JumpBonus = this.JumpBonus;
+        stats.SpeedBonus = this.SpeedBonus;
 
         return stats;
     }
@@ -47,5 +53,7 @@ public class ItemStats
         this.BonusDEX = node["bonusDEX"].AsInt;
         this.BonusHP = node["bonusHP"].AsInt;
         this.BonusMP = node["bonusMP"].AsInt;
+        this.JumpBonus = 0;
+        this.SpeedBonus = 0;
     }
 }

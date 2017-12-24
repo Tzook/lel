@@ -6702,6 +6702,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: findCosmo2
       CLR: {r: 1, g: 0.9607844, b: 0.6627451, a: 1}
+    - Title: Collect Painting
+      Event: StartQuest
+      Value: findCosmo3
+      Condition: QuestAvailable
+      ConditionValue: findCosmo3
+      CLR: {r: 1, g: 0.9607844, b: 0.6627451, a: 1}
     - Title: Wrong Number...
       Event: EndDialog
       Value: 
@@ -7330,16 +7336,6 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
-    - Content: Now, begone.
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: I have a lot of work to do.
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -7349,6 +7345,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 0.93975663, b: 0.60294116, a: 1}
   GivingQuests:
   - findCosmo2
+  - findCosmo3
   EndingQuests:
   - findCosmo
   - findCosmo2
@@ -9672,6 +9669,12 @@ MonoBehaviour:
   Spawners: []
   Npcs:
   - {fileID: 1466581649}
+  miniMapInfo:
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    coliders: []
 --- !u!4 &2098596821
 Transform:
   m_ObjectHideFlags: 0

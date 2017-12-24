@@ -46,6 +46,9 @@ public class ActorInfo
     public int BonusHP;
     public int BonusMP;
 
+    public int JumpBonus;
+    public int SpeedBonus;
+
     public int MaxHealth
     {
         get
@@ -363,6 +366,8 @@ public class ActorInfo
         BonusDEX = 0;
         BonusHP = 0;
         BonusMP = 0;
+        JumpBonus = 0;
+        SpeedBonus = 0;
 
         AddItemBonus(Equipment.Chest);
         AddItemBonus(Equipment.Gloves);
@@ -379,6 +384,8 @@ public class ActorInfo
         BonusDEX = 0;
         BonusHP = 0;
         BonusMP = 0;
+        JumpBonus = 0;
+        SpeedBonus = 0;
 
         AddItemBonus(equips.Chest);
         AddItemBonus(equips.Gloves);
@@ -400,6 +407,8 @@ public class ActorInfo
         BonusDEX += item.Stats.BonusDEX;
         BonusHP += item.Stats.BonusHP;
         BonusMP += item.Stats.BonusMP;
+        JumpBonus += item.Stats.JumpBonus;
+        SpeedBonus+= item.Stats.SpeedBonus;
     }
 
     public Quest AddQuest(string questKey)

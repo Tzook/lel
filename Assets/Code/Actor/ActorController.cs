@@ -504,7 +504,7 @@ public class ActorController : MonoBehaviour
     public void MoveLeft()
     {
         //TODO Remove if no problems occur
-        Rigid.position += ((Vector2.left + Vector2.up * 0.1f) * (InternalSpeed / (Slowed?2f:1f)) * Time.deltaTime);
+        Rigid.position += ((Vector2.left + Vector2.up * 0.1f) * ((InternalSpeed / (Slowed?2f:1f) + Instance.Info.SpeedBonus)) * Time.deltaTime);
 
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
 
@@ -520,7 +520,7 @@ public class ActorController : MonoBehaviour
     public void MoveRight()
     {
         //TODO Remove if no problems occur
-        Rigid.position += ((Vector2.right + Vector2.up*0.1f) * (InternalSpeed / (Slowed ? 2f : 1f)) * Time.deltaTime);
+        Rigid.position += ((Vector2.right + Vector2.up*0.1f) * ((InternalSpeed / (Slowed ? 2f : 1f)) + Instance.Info.SpeedBonus) * Time.deltaTime);
 
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
@@ -597,7 +597,7 @@ public class ActorController : MonoBehaviour
 
         if (Rigid.velocity.y <= 1.5f)
         {
-            Rigid.AddForce(InternalJumpForce * transform.up, ForceMode2D.Impulse);
+            Rigid.AddForce((InternalJumpForce + Instance.Info.JumpBonus) * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
         }
 

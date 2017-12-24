@@ -447,6 +447,16 @@ public class ActorInstance : MonoBehaviour
                     SubWeapon.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
                     break;
                 }
+            case "hair":
+                {
+                    m_Hair.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
+            case "hairBack":
+                {
+                    m_HairBack.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
         }
     }
 

@@ -134,6 +134,23 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusMP + " Max Mana", ResourcesLoader.Instance.GetSprite("magicalM"), bonusColor);
         }
 
+        if (stats.JumpBonus > 0)
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
+            tempObj.transform.SetParent(transform, false);
+            tempObj.transform.SetAsLastSibling();
+            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.JumpBonus + " Jumping Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+        }
+
+        if (stats.SpeedBonus > 0)
+        {
+            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
+            tempObj.transform.SetParent(transform, false);
+            tempObj.transform.SetAsLastSibling();
+            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+        }
+
+
         if (stats.RequiresSTR > 0)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");

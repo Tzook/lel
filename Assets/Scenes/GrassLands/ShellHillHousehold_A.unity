@@ -4280,6 +4280,12 @@ MonoBehaviour:
   - {fileID: 1905537198}
   - {fileID: 598047150}
   - {fileID: 2074542526}
+  miniMapInfo:
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    coliders: []
 --- !u!4 &205720643
 Transform:
   m_ObjectHideFlags: 0
@@ -6338,6 +6344,12 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: findCosmo
       CLR: {r: 1, g: 0.9419879, b: 0.61764705, a: 1}
+    - Title: I've got the painting fixed!
+      Event: StartDialog
+      Value: FixedPainting
+      Condition: QuestComplete
+      ConditionValue: findCosmo3
+      CLR: {r: 1, g: 0.9419879, b: 0.61764705, a: 1}
   - DialogKey: RuinedPainting1
     Pieces:
     - Content: Oh no!
@@ -6545,11 +6557,41 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98904663, b: 0.60294116, a: 1}
+  - DialogKey: FixedPainting
+    Pieces:
+    - Content: You have fixed it!
+      LetterDelay: 0.03
+      Pitch: 1.5
+      SoundKey: 
+      AnimationTrigger: Panic
+    - Content: Yes!
+      LetterDelay: 0.03
+      Pitch: 1.5
+      SoundKey: 
+      AnimationTrigger: Panic
+    - Content: And papa didn't notice!
+      LetterDelay: 0.03
+      Pitch: 1.5
+      SoundKey: 
+      AnimationTrigger: Panic
+    - Content: Here, take these, they are not for my feet or size anyways.
+      LetterDelay: 0.03
+      Pitch: 1.5
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: findCosmo3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.98904663, b: 0.60294116, a: 1}
   GivingQuests:
   - ruinedPainting
   - findCosmo
   EndingQuests:
   - ruinedPainting
+  - findCosmo3
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 

@@ -19,8 +19,6 @@ public class MiniMapUI : MonoBehaviour
     Image actor;
      
     private float toggleHeight;
-    private float panelWidth;
-    private float panelHeight;
     private float? originalPanelHeight;
 
     public void Awake()
@@ -31,9 +29,6 @@ public class MiniMapUI : MonoBehaviour
         UpdateToNewScene(SceneManager.GetActiveScene());
         // pre-calculate heights for computations
         toggleHeight = toggle.GetComponent<RectTransform>().sizeDelta.y;
-        Vector2 sizeDelta = contentPanel.sizeDelta;
-        panelWidth = sizeDelta.x - 10;
-        panelHeight = sizeDelta.y - toggleHeight - 10;
     }
 
     public void LateUpdate()
@@ -42,12 +37,15 @@ public class MiniMapUI : MonoBehaviour
         if (IsPanelOpen() && SceneInfo.Instance.miniMapInfo != null)
         {
             // TODO draw the minimap based on map points
-            // PolygonCollider2D[] coliders = Object.FindObjectsOfType<PolygonCollider2D>();
-            // Vector2[] points = coliders[0].points;
+
+            Vector2 sizeDelta = contentPanel.sizeDelta;
+            float panelWidth = sizeDelta.x - 10;
+            float panelHeight = sizeDelta.y - toggleHeight - 10;
 
             Vector2 actorPosition = Game.Instance.CurrentScene.ClientCharacter.Instance.transform.position;
             Vector2 percentPosition = SceneInfo.Instance.miniMapInfo.getPercentLocation(actorPosition);
-            actor.transform.position = contentPanel.TransformPoint(new Vector2(percentPosition.x * panelWidth, percentPosition.y * (float)panelHeight));
+            Vector2 newActorPosition = new Vector2(percentPosition.x * panelWidth - panelWidth / 2, -percentPosition.y * panelHeight - toggleHeight);
+            actor.transform.localPosition = newActorPosition;
         }
     }
 

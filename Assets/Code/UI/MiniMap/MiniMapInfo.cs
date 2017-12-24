@@ -16,7 +16,7 @@ public class MiniMapInfo
         Vector2 percentPosition = new Vector2();
         
         percentPosition.x = (position.x - left) / (right - left);
-        percentPosition.y = -(position.y - top) / (bottom - top);
+        percentPosition.y = (position.y - top) / (bottom - top);
 
         return percentPosition;
     }

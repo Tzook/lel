@@ -47090,6 +47090,41 @@ MonoBehaviour:
     - Key: manaSteal
       Value: 0.5
     Spells: []
+  - MonsterKey: Thorns
+    MonsterName: Thorns
+    MonsterHP: 100
+    MonsterLevel: 1
+    MinDMG: 1
+    MaxDMG: 5
+    RewardEXP: 10
+    Type: 0
+    PossibleLoot: []
+    Perks:
+    - Key: crippleChance
+      Value: 6
+    Spells: []
+  - MonsterKey: Sack
+    MonsterName: Sack
+    MonsterHP: 100
+    MonsterLevel: 1
+    MinDMG: 0
+    MaxDMG: 0
+    RewardEXP: 0
+    Type: 0
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 1
+      MaxStack: 5
+    - ItemKey: smallFish
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: bigFish
+      MinStack: 1
+      MaxStack: 1
+    Perks:
+    - Key: crippleChance
+      Value: 6
+    Spells: []
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -90799,78 +90834,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011972609366, guid: a517cca850296594f906c19dbc6215da, type: 2}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 346.88553
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010503796354, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -8.0460005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000011577891460, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000013095080436, guid: a517cca850296594f906c19dbc6215da,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000013095080436, guid: a517cca850296594f906c19dbc6215da,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000013095080436, guid: a517cca850296594f906c19dbc6215da,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000013095080436, guid: a517cca850296594f906c19dbc6215da,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -44082,6 +44082,24 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Karen sent me...
+      Event: StartDialog
+      Value: KarenQuest
+      Condition: QuestComplete
+      ConditionValue: petRansom
+      CLR: {r: 1, g: 0.9505071, b: 0.5514706, a: 1}
+    - Title: How do I free you? by the way...
+      Event: StartDialog
+      Value: HowToFree
+      Condition: QuestAvailable
+      ConditionValue: petRansom2
+      CLR: {r: 1, g: 0.9490197, b: 0.5529412, a: 1}
+    - Title: You are now free!
+      Event: StartDialog
+      Value: RansomComplete
+      Condition: QuestComplete
+      ConditionValue: petRansom2
+      CLR: {r: 1, g: 0.9490197, b: 0.5529412, a: 1}
     - Title: Bye.
       Event: EndDialog
       Value: 
@@ -44160,13 +44178,382 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: KarenQuest
+    Pieces:
+    - Content: Karen!?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: That girl again!?
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'm not coming back!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She treats me like a toy!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: AM I A TOY!?
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: DO I LOOK LIKE A TOY!?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I've got goals of my own!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: A life of my own!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: She want's me to buy your freedom.
+      Event: StartDialog
+      Value: KarenQuest2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: You are a toy.
+      Event: StartDialog
+      Value: YouAreToy
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: YouAreToy
+    Pieces:
+    - Content: I've had it with you humans!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You want some toy to play with so you adopt a pet.
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Then after being bored with it you set it aside...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Neglect it...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Forget about it, "I'm done with my toy..."
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Not me!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'll do what I want.
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I atleast put myself in this cage on my own!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: '...'
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: KarenQuest2
+    Pieces:
+    - Content: She does!?
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Well, I wouldn't refuse to such offer...
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: But I will be fair...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She must understand I won't be coming back...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I decided to stay.
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Stay and be Shell Hill's tour guide.
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So, she might be disappointed in any case...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'm sorry...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: She just told me to ransom you...
+      Event: StartDialog
+      Value: KarenQuest3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.97009605, g: 0.99264705, b: 0.58391005, a: 1}
+    - Title: '...'
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: KarenQuest3
+    Pieces:
+    - Content: '...'
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Nothing about you promising to come back...
+      Event: StartDialog
+      Value: KarenQuest4
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.97009605, g: 0.99264705, b: 0.58391005, a: 1}
+  - DialogKey: KarenQuest4
+    Pieces:
+    - Content: Thanks then!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I shouldn't have talked like I did about her...
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She's a good friend after all...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: And she did take care of me in times...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Okay.
+      Event: CompleteQuest
+      Value: petRansom
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.97009605, g: 0.99264705, b: 0.58391005, a: 1}
+  - DialogKey: HowToFree
+    Pieces:
+    - Content: All you have to do...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Is to speak to pay the ransom to the turtle over there...
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I assume he wouldn't be convinced so quickly, so...
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Do we have a plan?
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: 'Maybe... '
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You first ask him about the ransom price...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Then you say, hey... Here's more, now set him free!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Offer the money before he will have any time for reluctance...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: No no.. This won't work...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Maybe... First you ask him alot of questions...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: About my qualities... and my good will...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: And after wasting a lot of his time and making me sound like a bad
+        deal...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Then strike!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: No no... This won't make any difference...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Maybe... Just tell him that if he won't accept the ransom...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You'll capture HIM! At night! When he sleeps!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: No... He wouldn't care...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Maybe a family member!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Let me take care of this...
+      Event: StartQuest
+      Value: petRansom2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.97009605, g: 0.99264705, b: 0.58391005, a: 1}
+  - DialogKey: RansomComplete
+    Pieces:
+    - Content: I am!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Breathing fresh air... Being free...
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The first the of the rest of my life!
+      LetterDelay: 0.02
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Tell Karen about me...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: And that I will never forget her!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Or don't.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I don't mind...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She'll be fine...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Or do!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She might be doing something crazy to find me!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Or don't... She's not that type of-
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: OK.
+      Event: CompleteQuest
+      Value: petRansom2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.97009605, g: 0.99264705, b: 0.58391005, a: 1}
+  GivingQuests:
+  - petRansom2
+  EndingQuests:
+  - petRansom
+  - petRansom2
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Caged Turtle
+  Name: Pet Turtle
   Key: cagedTurtle
   Body: {fileID: 876292086}
   Anim: {fileID: 876292087}
@@ -57779,12 +58166,47 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: Point
     Options:
+    - Title: I came to ransom that turtle...
+      Event: StartDialog
+      Value: RansomPetTurtle
+      Condition: QuestInProgress
+      ConditionValue: petRansom2
+      CLR: {r: 1, g: 0.98681533, b: 0.52205884, a: 1}
     - Title: OK
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: RansomPetTurtle
+    Pieces:
+    - Content: This turtle?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Take him away for free!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: He talks too much!
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: He's a real headache, just take him away!.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Alright!
+      Event: QuestOK
+      Value: PetRansomed
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.98681533, b: 0.52205884, a: 1}
   GivingQuests: []
   EndingQuests: []
   SellingItems: []

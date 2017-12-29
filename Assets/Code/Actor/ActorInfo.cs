@@ -194,7 +194,11 @@ public class ActorInfo
             KeyValuePair<string, JSONNode> current = (KeyValuePair<string, JSONNode>)enumerator.Current;
             string questKey = current.Key;
             Quest quest = AddQuest(questKey);
-            fillInitialProgress(quest, node["quests"]);
+
+            if (quest != null)
+            {
+                fillInitialProgress(quest, node["quests"]);
+            }
         }
 
         RefreshBonuses();
@@ -413,7 +417,15 @@ public class ActorInfo
 
     public Quest AddQuest(string questKey)
     {
-        Quest tempQuest = Content.Instance.GetQuest(questKey).Clone();
+        Quest tempQuest = Content.Instance.GetQuest(questKey);
+
+        if(tempQuest == null)
+        {
+            return null;
+        }
+
+        tempQuest.Clone();
+
         Dictionary<string, int> inventoryCounts = Inventory.GetInventoryCounts();
 
         // loop through all conditions and add the item count from inventory to the quest progress

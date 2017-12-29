@@ -63,6 +63,10 @@ public class MiniMapUI : MonoBehaviour
     protected void UpdateToNewScene(Scene scene) 
     {
         sceneName.text = scene.name;
+        if(SceneInfo.Instance.miniMapInfo == null || SceneInfo.Instance.miniMapInfo.coliders.Count == 0)
+        {
+            ClosePanel();
+        }
     }
 
     public void TogglePanel()

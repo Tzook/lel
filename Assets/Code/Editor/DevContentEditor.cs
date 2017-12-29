@@ -1,14 +1,31 @@
-﻿using System.Collections;
+﻿/* 
+ * Items:
+ * item delete 'ItemKey / index'
+ * 
+ * Monsters:
+ * monster delete 'MonserKey / Index'
+ * monster addLoot 'MonserKey' 'ItemKey'
+ * monster addLootAll 'ItemKey'
+ * monster deleteLootAll 'ItemKey'
+ * monster addLootMonsterLevel 'ItemKey' 'MonsterLevel'     - Will add this item in monsters above level
+ * monster deleteLootMonsterLevel 'ItemKey' 'MonsterLevel'  - Will delete this item in monsters below level
+ * monster ClearLootDuplicates
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using SimpleJSON;
 using BestHTTP;
 using System.Text;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(Content))]
 public class DevContentEditor : Editor
 {
+    string CurrentCommand;
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -136,6 +153,16 @@ public class DevContentEditor : Editor
         if (GUILayout.Button("Update Primary Abilities"))
         {
             SendPrimaryAbilities(currentInfo.PrimaryAbilities, currentInfo.Perks);
+        }
+
+        GUILayout.Label("Command line");
+
+        CurrentCommand = EditorGUILayout.TextField(CurrentCommand);
+
+        if (GUILayout.Button("Execute"))
+        {
+            HandleCommand(CurrentCommand);
+            CurrentCommand = "";
         }
 
         if (GUILayout.Button("Restart Server"))
@@ -359,5 +386,241 @@ public class DevContentEditor : Editor
             if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
             Debug.Log("WWW result : " + req.text);
         });
+    }
+
+    private void HandleCommand(string cmd)
+    {
+        Content currentInfo = (Content)target;
+
+        if (string.IsNullOrEmpty(cmd))
+        {
+            return;
+        }
+
+        if (WordNumber(0) == "item")
+        {
+            if (WordNumber(1) == "delete")
+            {
+                int tempIndex;
+                if (int.TryParse(WordNumber(2), out tempIndex))
+                {
+                    Undo.RecordObject(target, "Remove Item");
+                    currentInfo.Items.RemoveAt(tempIndex);
+                    return;
+                }
+                else
+                {
+                    string tempWord = WordNumber(2);
+                    for (int i = 0; i < currentInfo.Items.Count; i++)
+                    {
+                        if (currentInfo.Items[i].Key == tempWord)
+                        {
+                            Undo.RecordObject(target, "Remove Item");
+                            currentInfo.Items.RemoveAt(i);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        else if (WordNumber(0) == "monster")
+        {
+            if (WordNumber(1) == "delete")
+            {
+                int tempIndex;
+                if (int.TryParse(WordNumber(2), out tempIndex))
+                {
+                    Undo.RecordObject(target, "Remove Monster");
+                    currentInfo.Monsters.RemoveAt(tempIndex);
+                    return;
+                }
+                else
+                {
+                    string tempWord = WordNumber(2);
+                    for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                    {
+                        if (currentInfo.Monsters[i].MonsterKey == tempWord)
+                        {
+                            Undo.RecordObject(target, "Remove Monster");
+                            currentInfo.Monsters.RemoveAt(i);
+                            return;
+                        }
+                    }
+                }
+            }
+            else if (WordNumber(1) == "addLoot")
+            {
+                string tempWord = WordNumber(2);
+                for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                {
+                    if (currentInfo.Monsters[i].MonsterKey == tempWord)
+                    {
+                        Undo.RecordObject(target, "Add Monster Loot");
+                        currentInfo.Monsters[i].PossibleLoot.Add(new LootInstance(WordNumber(3)));
+                        return;
+                    }
+                }
+            }
+            else if (WordNumber(1) == "deleteLoot")
+            {
+                string tempWord = WordNumber(2);
+                for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                {
+                    if (currentInfo.Monsters[i].MonsterKey == tempWord)
+                    {
+                        for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+                        {
+                            if (currentInfo.Monsters[i].PossibleLoot[a].ItemKey == WordNumber(3))
+                            {
+                                Undo.RecordObject(target, "Remove Monster Loot");
+                                currentInfo.Monsters[i].PossibleLoot.RemoveAt(a);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (WordNumber(1) == "addLootAll")
+            {
+                Undo.RecordObject(target, "Add All Monsters Loot");
+
+                string tempWord = WordNumber(2);
+                for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                {
+                    currentInfo.Monsters[i].PossibleLoot.Add(new LootInstance(tempWord));
+                }
+            }
+            else if (WordNumber(1) == "deleteLootAll")
+            {
+                Undo.RecordObject(target, "Delete All Monsters Loot");
+
+                string tempWord = WordNumber(2);
+                for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                {
+                    for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+                    {
+                        if (currentInfo.Monsters[i].PossibleLoot[a].ItemKey == tempWord)
+                        {
+                            currentInfo.Monsters[i].PossibleLoot.RemoveAt(a);
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (WordNumber(1) == "addLootMonsterLevel")
+            {
+                Undo.RecordObject(target, "Add Monsters Loot in monsters above level");
+
+                string tempWord = WordNumber(2);
+
+                int level;
+                if (int.TryParse(WordNumber(3), out level))
+                {
+                    for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                    {
+                        if (currentInfo.Monsters[i].MonsterLevel > level)
+                        {
+                            currentInfo.Monsters[i].PossibleLoot.Add(new LootInstance(tempWord));
+                        }
+                    }
+                }
+            }
+            else if (WordNumber(1) == "deleteLootMonsterLevel")
+            {
+                Undo.RecordObject(target, "Delete Monsters Loot in monsters below level");
+
+                string tempWord = WordNumber(2); //item
+
+                int level;
+                if (int.TryParse(WordNumber(3), out level))
+                {
+                    for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                    {
+                        if (currentInfo.Monsters[i].MonsterLevel < level)
+                        {
+                            for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+                            {
+                                if (currentInfo.Monsters[i].PossibleLoot[a].ItemKey == tempWord)
+                                {
+                                    currentInfo.Monsters[i].PossibleLoot.RemoveAt(a);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if (WordNumber(1) == "ClearLootDuplicates")
+            {
+                Undo.RecordObject(target, "Clear Monster Loot Duplicates");
+
+                List<LootInstance> toDelete = new List<LootInstance>();
+                bool containsFlag;
+
+                for (int t = 0; t < currentInfo.Items.Count; t++)
+                {
+                    for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                    {
+                        toDelete.Clear();
+                        containsFlag = false;
+
+                        for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+                        {
+                            if (currentInfo.Monsters[i].PossibleLoot[a].ItemKey == currentInfo.Items[t].Key)
+                            {
+                                if (!containsFlag)
+                                {
+                                    containsFlag = true;
+                                }
+                                else
+                                {
+                                    toDelete.Add(currentInfo.Monsters[i].PossibleLoot[a]);
+                                }
+                            }
+                        }
+
+                        for (int b = 0; b < toDelete.Count; b++)
+                        {
+                            currentInfo.Monsters[i].PossibleLoot.Remove(toDelete[b]);
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    private string WordNumber(int number)
+    {
+        int cnt = 0;
+        string tempString = "";
+        for(int i=0; i< CurrentCommand.Length; i++)
+        {
+            if(CurrentCommand[i] == ' ' || i == CurrentCommand.Length - 1)
+            {
+                if(i == CurrentCommand.Length - 1)
+                {
+                    tempString += CurrentCommand[i];
+                }
+
+                if(number == cnt)
+                {
+                    return tempString;
+                }
+                else
+                {
+                    cnt++;
+                }
+
+                tempString = "";
+            }
+            else
+            {
+                tempString += CurrentCommand[i];
+            }
+        }
+
+        return "";
     }
 }

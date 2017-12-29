@@ -8668,17 +8668,7 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Oh!
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Finally!
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: A human!
+    - Content: '...'
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
@@ -8696,18 +8686,18 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: findKaren
       CLR: {r: 1, g: 0.9876268, b: 0.5514706, a: 1}
-    - Title: What stops you from getting those beans?
+    - Title: What stops you from freeing him?
       Event: StartDialog
-      Value: GettingBeans
+      Value: FreeingPet
       Condition: QuestAvailable
-      ConditionValue: getJellyBeans
+      ConditionValue: petRansom
       CLR: {r: 1, g: 0.9876268, b: 0.5514706, a: 1}
-    - Title: I've got the beans!
+    - Title: The pet is free!
       Event: StartDialog
-      Value: GotTheBeans
+      Value: RansomedPet
       Condition: QuestComplete
-      ConditionValue: getJellyBeans
-      CLR: {r: 1, g: 0.9876268, b: 0.5514706, a: 1}
+      ConditionValue: petRansom2
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: FoundKaren
     Pieces:
     - Content: That's me!
@@ -8740,7 +8730,7 @@ MonoBehaviour:
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: Not untill I get my jelly beans!
+    - Content: Not untill I get my friend back from captivity.
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
@@ -8752,7 +8742,7 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: Jelly Beans!?
+    - Title: Captivity!?
       Event: StartDialog
       Value: FoundKaren3
       Condition: 
@@ -8766,41 +8756,34 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: FoundKaren3
     Pieces:
-    - Content: Jelly Beans!
+    - Content: Yes!
       LetterDelay: 0.02
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: The turtles in "Shell Hill" are known for their unique Jelly Beans!
+    - Content: 'The turtles in "Shell Hill" took my pet friend. '
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: There's no chance that I pass by the island without picking some for
-        myself!
+    - Content: There's no chance that I pass by the island without setting him free!
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: Did you know that your favorite jelly bean color tell's alot abot your
-        personality?
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: That's proven! And the truth!
+    - Content: He's a small turtle which knows how to talk!
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: Yes.
+    - Title: I see...
       Event: CompleteQuest
       Value: findKaren
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
-  - DialogKey: GettingBeans
+  - DialogKey: FreeingPet
     Pieces:
     - Content: I can't find that town!
       LetterDelay: 0.02
@@ -8812,7 +8795,7 @@ MonoBehaviour:
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: Maybe it's just me, bad at directions...
+    - Content: Maybe it's just me, bad with directions...
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
@@ -8822,12 +8805,12 @@ MonoBehaviour:
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: Could you look for the Jelly Bean merchant and buy some for me?
+    - Content: Could you ransom my poor pet turtle for me? Just set him free!
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: One of each color!
+    - Content: So he could roam the island on his own once again.
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
@@ -8838,98 +8821,71 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: I'll get you the jelly beans.
+    - Title: I'll ransom him for you.
       Event: StartQuest
-      Value: getJellyBeans
+      Value: petRansom
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
-  - DialogKey: GotTheBeans
+  - DialogKey: RansomedPet
     Pieces:
-    - Content: How nice!
+    - Content: He is!?
       LetterDelay: 0.02
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: Let me see!
+    - Content: Where is he then?
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
-    - Content: '...'
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: You didn't get my favorite!
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Turquoise...
-      LetterDelay: 0.03
-      Pitch: 1.8
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: No reward.
+    - Content: Oh no... Is he hiding from me?
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: What? Give me the reward.
+    - Title: He didn't want to come back.
       Event: StartDialog
-      Value: GoTheBeans2
+      Value: RansomedPet2
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
-    - Title: Waste of my time.
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: GotTheBeans2
+  - DialogKey: RansomedPet2
     Pieces:
-    - Content: No.
+    - Content: He didn't? Why?
       LetterDelay: 0.02
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: You didn't get my favorite jelly bean.
+    - Content: Well... I suppose the sea is not a fitting place for a pet turtle...
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: That's not what we agreed upon!
+    - Title: He is having fun there actually!
       Event: StartDialog
-      Value: GoTheBeans3
+      Value: RansomedPet3
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
-    - Title: Bye
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: GotTheBeans3
+  - DialogKey: RansomedPet3
     Pieces:
-    - Content: No? What did we agree on?
+    - Content: I'm happy to hear that...
       LetterDelay: 0.02
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: I asked for the jelly bean's so I could go back, I don't owe you anything.
+    - Content: What is he doing there anyways?
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: Yea, but for your own good name...
+    - Title: He decided to be a tour guide.
       Event: StartDialog
-      Value: GoTheBeans4
+      Value: RansomedPet4
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
@@ -8939,30 +8895,34 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: GotTheBeans4
+  - DialogKey: RansomedPet4
     Pieces:
     - Content: '...'
       LetterDelay: 0.02
       Pitch: 1.9
       SoundKey: 
       AnimationTrigger: 
-    - Content: Uh... Whatever...
+    - Content: That's what he chose to do?
+      LetterDelay: 0.03
+      Pitch: 1.8
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Well... Whatever... If he likes it...
       LetterDelay: 0.03
       Pitch: 1.8
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: Complete Quest
-      Event: CompleteQuest
-      Value: getJellyBeans
+    - Title: Goodbye...
+      Event: EndDialog
+      Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 0.98823535, b: 0.5529412, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests:
-  - getJellyBeans
+  - petRansom
   EndingQuests:
   - findKaren
-  - getJellyBeans
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -9028,7 +8988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HideQuestKey: getJellyBeans
+  HideQuestKey: petRansom2
   HideState: 1
 --- !u!1 &772751700
 GameObject:
@@ -24334,6 +24294,12 @@ MonoBehaviour:
   - {fileID: 769508655}
   - {fileID: 899387670}
   - {fileID: 757381073}
+  miniMapInfo:
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    coliders: []
 --- !u!4 &2005480949
 Transform:
   m_ObjectHideFlags: 0

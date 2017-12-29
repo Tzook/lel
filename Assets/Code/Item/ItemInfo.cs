@@ -22,28 +22,47 @@ public class ItemInfo {
 
     public ItemInfo(DevItemInfo storedItem, int stack = 1)
     {
-        if (stack == 0)
+        try
         {
-            stack = 1;
+            if (stack == 0)
+            {
+                stack = 1;
+            }
+
+            this.Stack = stack;
+
+            this.Key = storedItem.Key;
+            this.Name = storedItem.Name;
+            this.Description = storedItem.Description;
+            this.IconKey = storedItem.Icon;
+            this.UseSound = storedItem.UseSound;
+            this.Type = storedItem.Type;
+            this.SubType = storedItem.SubType;
+            this.StackCap = storedItem.StackCap;
+
+            this.Stats = storedItem.Stats.Clone();
+
+            Sprites.Clear();
+            for (int i = 0; i < storedItem.ItemSprites.Count; i++)
+            {
+                Sprites.Add(storedItem.ItemSprites[i].PartKey, storedItem.ItemSprites[i].Sprite);
+            }
         }
-
-        this.Stack = stack;
-
-        this.Key = storedItem.Key;
-        this.Name = storedItem.Name;
-        this.Description = storedItem.Description;
-        this.IconKey = storedItem.Icon;
-        this.UseSound = storedItem.UseSound;
-        this.Type = storedItem.Type;
-        this.SubType = storedItem.SubType;
-        this.StackCap = storedItem.StackCap;
-
-        this.Stats = storedItem.Stats.Clone();
-
-        Sprites.Clear();
-        for (int i = 0; i < storedItem.ItemSprites.Count; i++)
+        catch
         {
-            Sprites.Add(storedItem.ItemSprites[i].PartKey, storedItem.ItemSprites[i].Sprite);
+            Debug.LogError("Problematic Item!");
+
+            this.Stack = 1;
+
+            this.Key = "unknown";
+            this.Name = "Unknown / Removed Item";
+            this.Description = "This item is not existing / causes problems.";
+            this.IconKey = "xIcon";
+            this.StackCap = 1;
+
+            this.Stats = new ItemStats();
+
+            Sprites.Clear();
         }
     }
 }

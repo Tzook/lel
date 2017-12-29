@@ -13,98 +13,33 @@ public class WikiItems : MonoBehaviour {
 
     private void OnEnable()
     {
-        for(int i=0;i<Container.childCount;i++)
+        ShowType("chest");
+    }
+
+    public void ShowType(string type)
+    {
+        for (int i = 0; i < Container.childCount; i++)
         {
             Destroy(Container.GetChild(i).gameObject, 0.1f);
         }
 
-        DevItemInfo tempItem;
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "misc")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i=0;i<Content.Instance.Items.Count;i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "weapon")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "chest")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "legs")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "gloves")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "shoes")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
-
-        for (int i = 0; i < Content.Instance.Items.Count; i++)
-        {
-            tempItem = Content.Instance.Items[i];
-            if (tempItem.Type == "head")
-            {
-                tempItem = Content.Instance.Items[i];
-                Content.Instance.Items.RemoveAt(i);
-                Content.Instance.Items.Insert(0, tempItem);
-            }
-        }
+        Content.Instance.Items.Sort((x, y) => x.Stats.RequiresLVL.CompareTo(y.Stats.RequiresLVL));
 
         GameObject tempObj;
-        for(int i=0;i<Content.Instance.Items.Count;i++)
+        for (int i = 0; i < Content.Instance.Items.Count; i++)
         {
-            tempObj = (GameObject)Instantiate(ItemObject);
-            tempObj.transform.SetParent(Container, false);
+            if (Content.Instance.Items[i].Type == type)
+            {
+                tempObj = (GameObject)Instantiate(ItemObject);
+                tempObj.transform.SetParent(Container, false);
 
-            tempObj.transform.GetChild(0).GetComponent<Text>().text = Content.Instance.Items[i].Name;
-            tempObj.transform.GetChild(1).GetComponent<Image>().sprite = Content.Instance.Items[i].IconPlaceable;
+                tempObj.transform.GetChild(0).GetComponent<Text>().text = Content.Instance.Items[i].Name;
+                tempObj.transform.GetChild(1).GetComponent<Image>().sprite = Content.Instance.Items[i].IconPlaceable;
+                tempObj.transform.GetChild(2).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresDEX.ToString();
+                tempObj.transform.GetChild(3).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresMAG.ToString();
+                tempObj.transform.GetChild(4).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresSTR.ToString();
+                tempObj.transform.GetChild(5).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresLVL.ToString();
+            }
         }
 
     }

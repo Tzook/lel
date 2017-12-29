@@ -235,6 +235,15 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
+    public string ItemKey;
+    public int MinStack = 1;
+    public int MaxStack = 1;
+
+    public LootInstance(string key = "")
+    {
+        this.ItemKey = key;
+    }
+
     public LootInstance Clone()
     {
         LootInstance tempLoot = new LootInstance();
@@ -246,9 +255,6 @@ public class LootInstance
         return tempLoot;
     }
 
-    public string ItemKey;
-    public int MinStack = 1;
-    public int MaxStack = 1;
 }
 
 

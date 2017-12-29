@@ -25,6 +25,7 @@ public class Equipment {
             if (!string.IsNullOrEmpty(node[i]["key"].Value))
             {
                 partKey = ((JSONClass)node).GetKey(i);
+
                 SetItem(partKey, new ItemInfo(Content.Instance.GetItem(node[partKey]["key"].Value)));
             }
         }

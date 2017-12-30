@@ -129,6 +129,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("buff_activated", OnBuffActivated);
         CurrentSocket.On("spell_activated", OnSpellActivated);
+        CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
 
         LoadingWindowUI.Instance.Register(this);
     }
@@ -1092,12 +1093,23 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data.ToString());
 
         DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
-        string id = data["activator_id"].Value;
+        string id = data["char_id"].Value;
         ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(id);
-        if (actorInfo != null) // IS ACTOR
+        if (actorInfo != null)
         {
-            Game.Instance.CurrentScene.GetActor(data["char_id"].Value).Instance.CastSpell(spell);
+            actorInfo.Instance.CastSpell(spell);
         }
+    }
+
+    private void OnMobSpellActivated(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
+        string id = data["mob_id"].Value;
+        // TODO activate mob spell
     }
 
 
@@ -1533,7 +1545,16 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.DisableUpgradeCounter();
     }
 
-    public void SendUsedSpell(string spellKey, List<string> targetIDs)
+    public void SendUsedSpell(string spellKey)
+    {
+        JSONNode node = new JSONClass();
+
+        node["spell_key"] = spellKey;
+
+        CurrentSocket.Emit("used_spell", node);
+    }
+
+    public void SendHitSpell(string spellKey, List<string> targetIDs)
     {
         JSONNode node = new JSONClass();
 
@@ -1544,7 +1565,7 @@ public class SocketClient : MonoBehaviour
             node["target_ids"][i] = targetIDs[i];
         }
 
-        CurrentSocket.Emit("used_spell", node);
+        CurrentSocket.Emit("hit_spell", node);
     }
 
     #endregion

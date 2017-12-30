@@ -62,7 +62,7 @@ public class ActorInfo
     {
         get
         {
-            return (MAG * 5) + (BonusMAG * 5) + BonusMP;
+            return (MAG * 6) + (BonusMAG * 6) + BonusMP;
         }
     }
     public int CurrentMana;

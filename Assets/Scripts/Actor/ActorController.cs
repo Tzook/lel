@@ -492,6 +492,8 @@ public class ActorController : MonoBehaviour
 
             CurrentSpellInCast = spell;
 
+            SocketClient.Instance.SendUsedSpell(spell.Key);
+
             Instance.CastSpell(spell);
         }
     }
@@ -572,7 +574,7 @@ public class ActorController : MonoBehaviour
                 }
             case "spell":
                 {
-                    SocketClient.Instance.SendUsedSpell(actionValue, targetIDs);
+                    SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
 
                     int rnd = Random.Range(0, 3);
 

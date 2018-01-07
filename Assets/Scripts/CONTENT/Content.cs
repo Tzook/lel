@@ -89,6 +89,19 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public DevMonsterInfo GetMonsterByName(string monsterName)
+    {
+        for (int i = 0; i < Monsters.Count; i++)
+        {
+            if (Monsters[i].MonsterName == monsterName)
+            {
+                return Monsters[i];
+            }
+        }
+
+        return null;
+    }
+
     public Texture2D DefaultCursor;
     public Texture2D ClickableCursor;
     public Texture2D CrosshairCursor;

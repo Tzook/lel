@@ -526,8 +526,7 @@ public class Quest
                 {
                     return false;
                 }
-
-                if (Conditions[i].CurrentProgress == Conditions[i].TargetProgress)
+                else
                 {
                     HasEqual = true;
                 }

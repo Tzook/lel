@@ -345,7 +345,7 @@ public class ActorController : MonoBehaviour
             {
                 if (CurrentRope == null)
                 {
-                    //UnclimbRope();
+                    UnclimbRope();
                 }
                 else
                 {
@@ -353,42 +353,58 @@ public class ActorController : MonoBehaviour
 
                     if (Input.GetKey(InputMap.Map["Enter Portal"]))
                     {
-                        // if rope is above our upper body
-                        if (IsCharBelowRope())
+                        if (Input.GetKey(InputMap.Map["Jump"]))
                         {
-                            Anim.SetBool("ClimbingUp", true);
+                            Anim.SetBool("ClimbingUp", false);
                             Anim.SetBool("ClimbingDown", false);
-
-                            transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
                         }
                         else
                         {
-                            UnclimbRope();
+                            if (IsCharBelowRope())
+                            {
+                                Anim.SetBool("ClimbingUp", true);
+                                Anim.SetBool("ClimbingDown", false);
+
+                                transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            }
+                            else
+                            {
+                                UnclimbRope();
+                            }
                         }
                     }
                     else if (Input.GetKey(InputMap.Map["Climb Down"]))
                     {
-                        if (IsCharAboveRope()) 
+                        if (Input.GetKey(InputMap.Map["Jump"]))
                         {
-                            Anim.SetBool("ClimbingDown", true);
                             Anim.SetBool("ClimbingUp", false);
+                            Anim.SetBool("ClimbingDown", false);
 
-                            transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
-                        } 
-                        else 
+                        }
+                        else
                         {
-                            UnclimbRope();
+                            if (IsCharAboveRope())
+                            {
+                                Anim.SetBool("ClimbingDown", true);
+                                Anim.SetBool("ClimbingUp", false);
+
+                                transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            }
+                            else
+                            {
+                                UnclimbRope();
+                            }
                         }
                     }
                     else
                     {
                         Anim.SetBool("ClimbingUp", false);
                         Anim.SetBool("ClimbingDown", false);
-                    }
 
-                    if ((Input.GetKey(InputMap.Map["Jump"])))
-                    {
-                        UnclimbRope();
+                        if ((Input.GetKey(InputMap.Map["Jump"])))
+                        {
+                            UnclimbRope();
+                        }
                     }
                 }
             }

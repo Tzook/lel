@@ -156,6 +156,7 @@ public class NPC : MonoBehaviour {
         else if(HasAvailableQuest())
         {
             CurrentQuestBubble = ResourcesLoader.Instance.GetRecycledObject("QuestBubble");
+
         }
         else if(HasQuestInProgress())
         {

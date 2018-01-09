@@ -17837,12 +17837,6 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: More Help?
-      Event: StartDialog
-      Value: LastHelp
-      Condition: QuestAvailable
-      ConditionValue: helpMaya
-      CLR: {r: 1, g: 0.9607844, b: 0.654902, a: 1}
   - DialogKey: TurtleChallenge
     Pieces:
     - Content: Hey you...
@@ -17992,102 +17986,6 @@ MonoBehaviour:
     - Title: Complete Quest
       Event: CompleteQuest
       Value: turtleProblem
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: LastHelp
-    Pieces:
-    - Content: Oh well...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Our expedition has been larger an hour ago...
-      LetterDelay: 0.03
-      Pitch: 1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: It looks like the rest of the sailors figured they could roam the area
-        freely...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: And do what they want...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: It would be quite nice if you could find them...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Help em' out of trouble so they would come back here...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    Options:
-    - Title: Where should I start?
-      Event: StartDialog
-      Value: LastHelp2
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 0.9446247, b: 0.71323526, a: 1}
-    - Title: Not interested...
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: LastHelp2
-    Pieces:
-    - Content: You should start with Maya...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: She is a some sort of...
-      LetterDelay: 0.03
-      Pitch: 1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: a wannabe interior designer...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Now she tries exteriors...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Whatever... Just get her back here...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: She should be lying about alittle bit to the east from here...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: She probably knows about the rest of the folk...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    Options:
-    - Title: I'll look for her...
-      Event: StartQuest
-      Value: helpMaya
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 0.9446247, b: 0.71323526, a: 1}
-    - Title: Nope.
-      Event: EndDialog
-      Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
@@ -37830,114 +37728,124 @@ MonoBehaviour:
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
-    - Content: Who the hell are you?
-      LetterDelay: 0.05
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
     Options:
-    - Title: Even I don't really know...
-      Event: StartDialog
-      Value: EvenIDontKnow
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: -You first!
-      Event: StartDialog
-      Value: YouFirst
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: None of your buisness...
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: Turtle Soup
-      Event: StartDialog
-      Value: Turtle Soup
-      Condition: QuestAvailable
-      ConditionValue: turtleSoup
-      CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
     - Title: Complete Quest
       Event: StartDialog
       Value: Turtle Soup Complete
       Condition: QuestComplete
       ConditionValue: turtleSoup
-      CLR: {r: 1, g: 0.9655173, b: 0.5, a: 1}
-  - DialogKey: EvenIDontKnow
-    Pieces:
-    - Content: "I see...\t\t"
-      LetterDelay: 0.05
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Go ahead and find out first...
-      LetterDelay: 0.05
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Then come back and speak to me...
-      LetterDelay: 0.05
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    Options:
-    - Title: On my way...
+      CLR: {r: 1, g: 0.96470594, b: 0.5019608, a: 1}
+    - Title: Turtle Soup
+      Event: StartDialog
+      Value: Turtle Soup
+      Condition: QuestAvailable
+      ConditionValue: turtleSoup
+      CLR: {r: 1, g: 0.96470594, b: 0.5019608, a: 1}
+    - Title: Where should I go?
+      Event: StartDialog
+      Value: WhereShould
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: More Help?
+      Event: StartDialog
+      Value: LastHelp
+      Condition: QuestAvailable
+      ConditionValue: helpMaya
+      CLR: {r: 1, g: 0.9607844, b: 0.41176474, a: 1}
+    - Title: Bye...
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: YouFirst
+  - DialogKey: Arrows
     Pieces:
-    - Content: Hm... Okay....
+    - Content: The arrows!
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Those wooden arrow signs!
       LetterDelay: 0.05
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
-    - Content: Helena
+    - Content: They will guide you to Shell Hill
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I already knew that...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Shell Hill?
+      Event: StartDialog
+      Value: ShellHill
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ShellHill
+    Pieces:
+    - Content: Shell hill is the nearest and probably only town in this island.
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: It's that place you have been looking for...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
-    - Content: '- Even tho'' you seem to already know that...'
-      LetterDelay: 0.05
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: For some strange reason...
-      LetterDelay: 0.04
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Which I can't put my finger on.
-      LetterDelay: 0.05
+    - Content: Isn't it?
+      LetterDelay: 0.03
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
     Options:
     - Title: That's right...
-      Event: StartDialog
-      Value: NoAnswer
+      Event: EndDialog
+      Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: NoAnswer
+    - Title: Yep!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: That was my plan!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Indeed...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: WhereShould
     Pieces:
-    - Content: No answer then...
+    - Content: You don't need to ask... Just follow the arrows!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
-    - Content: Uh... Nevermind.
-      LetterDelay: 0.04
-      Pitch: 1.2
-      SoundKey: 
-      AnimationTrigger: 
     Options:
-    - Title: '...'
+    - Title: The arrows...?
+      Event: StartDialog
+      Value: Arrows
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I got it...
       Event: EndDialog
       Value: 
       Condition: 
@@ -38045,6 +37953,46 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: LastHelp
+    Pieces:
+    - Content: Oh well...
+      LetterDelay: 0.04
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Our expedition has been larger an hour ago...
+      LetterDelay: 0.03
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: It looks like the rest of the sailors figured they could roam the area
+        freely...
+      LetterDelay: 0.03
+      Pitch: 1.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: And do what they want...
+      LetterDelay: 0.03
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: It would be quite nice if you could find them...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Help em' out of trouble so they would come back here...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Where should I start?
+      Event: StartDialog
+      Value: LastHelp2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
   - DialogKey: Turtle Soup Complete
     Pieces:
     - Content: Yummie!
@@ -38081,6 +38029,50 @@ MonoBehaviour:
     - Title: Complete Quest
       Event: CompleteQuest
       Value: turtleSoup
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+  - DialogKey: LastHelp2
+    Pieces:
+    - Content: You should start with Maya...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She is a some sort of...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: a wannabe interior designer...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Now she tries exteriors...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Whatever... Just get her back here...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She should be lying about alittle bit to the east from here...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She probably knows about the rest of the folk...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'll look for her...
+      Event: StartQuest
+      Value: helpMaya
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}

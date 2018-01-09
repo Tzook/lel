@@ -14,6 +14,9 @@ public class SlowStrobeEffect : MonoBehaviour
     [SerializeField]
     float Speed;
 
+    [SerializeField]
+    float Delay;
+
     Image m_SpriteRenderer;
 
     void Awake()
@@ -28,6 +31,8 @@ public class SlowStrobeEffect : MonoBehaviour
 
     private IEnumerator DimRoutine()
     {
+        yield return new WaitForSeconds(Delay);
+
         float t = 0f;
         while(true)
         {

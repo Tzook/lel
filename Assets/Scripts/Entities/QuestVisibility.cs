@@ -10,7 +10,11 @@ public class QuestVisibility : MonoBehaviour {
     private void Start()
     {
         Refresh();
-        StartCoroutine(Initialize());
+
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(Initialize());
+        }
         
     }
 

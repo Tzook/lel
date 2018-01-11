@@ -126,7 +126,7 @@ public class GameCamera : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && HoveringOnInteractable && !InGameMainMenuUI.Instance.isWindowOpen)
+        if (Input.GetMouseButtonDown(0) && HoveringOnInteractable)
         {
             if (DoubleClickInstance == null)
             {
@@ -160,7 +160,7 @@ public class GameCamera : MonoBehaviour {
 
     private void DoubleClick()
     {
-        if(Game.Instance.CanUseUI && CurrentMouseHit.collider != null)
+        if(Game.Instance.CanUseUI && !DialogManager.Instance.inDialog && !LocalUserInfo.Me.ClientCharacter.Instance.isDead && CurrentMouseHit.collider != null)
         {
             if(CurrentMouseHit.collider.GetComponent<ActorInstance>() != null)
             {

@@ -70,7 +70,7 @@ public class CreateCharacterUI : MonoBehaviour
         m_ActorInstance = tempObj.GetComponent<ActorInstance>();
         m_ActorInstance.nameHidden = true;
 
-        m_ActorInstance.Reset();
+        m_ActorInstance.ResetChar();
         m_ActorInfo = m_ActorInstance.Info;
         m_txtGender.text = m_ActorInfo.Gender.ToString();
         m_inputName.text = "";

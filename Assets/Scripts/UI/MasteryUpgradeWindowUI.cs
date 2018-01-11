@@ -84,11 +84,13 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
     {
         Vector3 RandomStartingPoint = GameCamera.Instance.Cam.ScreenToWorldPoint(new Vector2(Random.Range(0, Screen.width), -1f));
         RandomStartingPoint = new Vector3(RandomStartingPoint.x, RandomStartingPoint.y, 0f);
+        ResourcesLoader.Instance.GetRecycledObject("Crate").transform.position = RandomStartingPoint;
 
         float t = 0f;
         while(t<1f)
         {
             t += 1.5f * Time.deltaTime;
+
             crateObj.transform.position = Game.SplineLerp(RandomStartingPoint, targetTransfrom.position, 3f, t);
 
             yield return 0;

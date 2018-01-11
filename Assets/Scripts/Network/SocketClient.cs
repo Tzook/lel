@@ -725,6 +725,8 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["id"].Value + " Has Started");
 
+        AudioControl.Instance.Play("sound_quest_taken");
+
         LocalUserInfo.Me.ClientCharacter.AddQuest(data["id"].Value);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
@@ -736,6 +738,8 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
 
         BroadcastEvent(data["id"].Value + " Was Completed");
+
+        AudioControl.Instance.Play("sound_quest_complete");
 
         LocalUserInfo.Me.ClientCharacter.CompleteQuest(data["id"].Value);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
@@ -752,6 +756,8 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.ClientCharacter.UpdateQuestProgress(data["id"].Value, data["mob_id"].Value, data["value"].AsInt);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
+
+        AudioControl.Instance.Play("sound_quest_progress");
     }
 
     private void OnQuestOkProgress(Socket socket, Packet packet, object[] args)
@@ -763,6 +769,8 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.ClientCharacter.UpdateQuestProgress(data["id"].Value, data["ok"].Value, data["value"].AsInt);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
+
+        AudioControl.Instance.Play("sound_quest_progress");
     }
 
     private void OnPartyMembersUpdate(Socket socket, Packet packet, object[] args)

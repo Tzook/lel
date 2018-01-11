@@ -95,6 +95,7 @@ public class ActorInstance : MonoBehaviour
 
     List<Buff> CurrentBuffs = new List<Buff>();
 
+    public bool isDead;
     #endregion
 
     #region Public Methods
@@ -103,9 +104,11 @@ public class ActorInstance : MonoBehaviour
     {
         this.Info = info;
         this.Info.Instance = this;
+
+        isDead = false;
     }
 
-    public void Reset()
+    public void ResetChar()
     {
         UpdateVisual(new ActorInfo());
     }
@@ -640,6 +643,8 @@ public class ActorInstance : MonoBehaviour
 
         PlayEyesEmote("cry");
         PlayMouthEmote("angry");
+
+        isDead = true;
     }
 
     public void LevelUp()

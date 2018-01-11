@@ -5215,43 +5215,48 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Tert says we should have a waitress...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: Just so people would start tipping...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: I told him the tables are too close...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: And people can just pick up their stuff on their own...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: And why tips? Why not just give the waitress a paycheck?
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: And just raise the prices of our products...
-      LetterDelay: 0.03
-      Pitch: 1.1
-      SoundKey: 
-      AnimationTrigger: 
-    - Content: This whole "tipping" concept is messed up.
+    - Content: Welcome!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: OK
+    - Title: Do you know how to forge documents?
+      Event: StartDialog
+      Value: ForgeDocs
+      Condition: QuestAvailable
+      ConditionValue: jacksVengeance
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Hi...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs
+    Pieces:
+    - Content: Forge Documents?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Me? Nah...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: But Anna downstairs...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: She might know... Ask her.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I see...
       Event: EndDialog
       Value: 
       Condition: 
@@ -5263,7 +5268,7 @@ MonoBehaviour:
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Tavern Wench
+  Name: Pretty Jane
   Key: shellHillTavernWench
   Body: {fileID: 704063904}
   Anim: {fileID: 704063905}
@@ -38150,9 +38155,9 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: Greet
     Options:
-    - Title: Bye...
-      Event: EndDialog
-      Value: 
+    - Title: Forge Documents?
+      Event: StartDialog
+      Value: ForgeDocs
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
@@ -38162,6 +38167,48 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 0.58823526, g: 0.72738343, b: 1, a: 1}
+    - Title: Bye...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs
+    Pieces:
+    - Content: Forging Documents?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: No, I usually keep my hands clean and off these types of things.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: But Jane here next to me might know...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Forge Documents?
+      Event: StartDialog
+      Value: ForgeDocs
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Trade
+      Event: Trade
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.58823526, g: 0.72738343, b: 1, a: 1}
+    - Title: Bye...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
   SellingItems:

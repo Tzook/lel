@@ -5224,7 +5224,7 @@ MonoBehaviour:
     - Title: Do you know how to forge documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestAvailable
+      Condition: QuestInProgress
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Hi...
@@ -5245,12 +5245,12 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
-    - Content: But Anna downstairs...
+    - Content: But the fruit vendor outside...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
-    - Content: She might know... Ask her.
+    - Content: It is told that he runs a small ring...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
@@ -38158,8 +38158,8 @@ MonoBehaviour:
     - Title: Forge Documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: 
-      ConditionValue: 
+      Condition: QuestInProgress
+      ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Trade
       Event: Trade

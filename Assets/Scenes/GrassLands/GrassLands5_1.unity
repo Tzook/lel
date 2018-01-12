@@ -11901,6 +11901,8 @@ MonoBehaviour:
   Key: ShaftEntrance
   TargetPortal: LeftGate
   TargetLevel: GrassLands5_1_1
+  RequiresItems:
+  - cosmoTunnelKey
 --- !u!210 &1518814104
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -16363,6 +16365,7 @@ MonoBehaviour:
   Key: CosmoExit
   TargetPortal: RightGate
   TargetLevel: GrassLands5_1_3
+  RequiresItems: []
 --- !u!210 &1881029206
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -16780,6 +16783,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+        type: 2}
+      propertyPath: RequiresItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5, type: 2}
       propertyPath: m_LocalPosition.x
       value: -82.64
@@ -16883,6 +16891,11 @@ Prefab:
     - target: {fileID: 1259513383543036, guid: 0d3b515392740ee4384964be9225cac5, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+        type: 2}
+      propertyPath: RequiresItems.Array.data[0]
+      value: cosmoTunnelKey
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d3b515392740ee4384964be9225cac5, type: 2}

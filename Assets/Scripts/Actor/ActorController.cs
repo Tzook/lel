@@ -438,11 +438,23 @@ public class ActorController : MonoBehaviour
 
     private void EnterPortal()
     {
-        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null)
+        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal == null)
         {
-            Game.Instance.MovingTroughPortal = true;
-            SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
+            return;
         }
+
+        for(int i=0;i<CurrentPortal.RequiresItems.Count;i++)
+        {
+            if(LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(CurrentPortal.RequiresItems[i]) == null)
+            {
+                InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("Need the item: \"" + Content.Instance.GetItem(CurrentPortal.RequiresItems[i]).Name + "\" to enter.");
+                return;
+            }
+        }
+
+        Game.Instance.MovingTroughPortal = true;
+        SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
+        
     }
 
     private void ClimbRope()

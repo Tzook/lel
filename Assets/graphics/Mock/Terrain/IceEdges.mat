@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RockFill
-  m_Shader: {fileID: 4800000, guid: b6f50f69ba5b7b04a85b72ebf4511b9a, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_Name: IceEdges
+  m_Shader: {fileID: 4800000, guid: 188c7b6d8e591e345b7adf33bb6fefb9, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -18,14 +18,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Color:
-        m_Texture: {fileID: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: ab4c61ccf20c31f4f99ee9ab1c8312ef, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 65e27de4912ced742b16e4dec93e96f8, type: 3}
-        m_Scale: {x: 0.25, y: 0.25}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - PixelSnap: 0
+    - _PositionScale: -7.19
+    - _WaveSize: 0.21
+    - _WaveSizeX: 0
+    - _WaveSizeY: 0.1
+    - _WaveSpeed: 4.46
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

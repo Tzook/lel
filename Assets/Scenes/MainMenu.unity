@@ -48503,6 +48503,30 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 21300028, guid: 193db39ae25b146468eb51f0e92a839e,
         type: 3}
       Sprite: clothing_redGloves_male_foot
+  - Key: cosmoTunnelKey
+    Name: Cosmo's Tunnel Key
+    Description: This key open's the door to Cosmo's tunnel.
+    IconPlaceable: {fileID: 21300030, guid: 248cfe6a2304d384885f3246a1ef2c1a, type: 3}
+    Icon: 
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 0
+    GoldValue: 1
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    ItemSprites: []
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with
@@ -49244,7 +49268,10 @@ MonoBehaviour:
     QuestsStates: []
     RequiredClass: 
     MinimumLevel: 5
-    RewardItems: []
+    RewardItems:
+    - ItemKey: cosmoTunnelKey
+      MinStack: 1
+      MaxStack: 1
     RewardSTR: 0
     RewardMAG: 0
     RewardDEX: 0
@@ -49322,7 +49349,12 @@ MonoBehaviour:
       and bring it back to burtle.
     QuestCompleteDescription: I've given the fixed painting to Burtle.
     FacePrefab: BurtleQuest
-    Conditions: []
+    Conditions:
+    - Condition: loot
+      Type: cosmoTunnelKey
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
     QuestsStates:
     - QuestKey: findCosmo2
       EnumState: 1
@@ -90985,31 +91017,6 @@ Prefab:
     - target: {fileID: 1000011527837718, guid: 489423c93b04c2a43924495f708e13e2, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000010597469890, guid: 489423c93b04c2a43924495f708e13e2,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000010597469890, guid: 489423c93b04c2a43924495f708e13e2,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000010597469890, guid: 489423c93b04c2a43924495f708e13e2,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 5.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000010597469890, guid: 489423c93b04c2a43924495f708e13e2,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212000011518961308, guid: 489423c93b04c2a43924495f708e13e2,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 489423c93b04c2a43924495f708e13e2, type: 2}

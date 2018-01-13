@@ -134,4 +134,17 @@ public class Inventory
 
         return -1;
     }
+
+    public ItemInfo GetItem(string key)
+    {
+        for(int i=0;i < ContentArray.Length;i++)
+        {
+            if(ContentArray[i] != null && ContentArray[i].Key == key)
+            {
+                return ContentArray[i];
+            }
+        }
+
+        return null;
+    }
 }

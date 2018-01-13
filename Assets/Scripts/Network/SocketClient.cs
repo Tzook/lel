@@ -1576,6 +1576,16 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("hit_spell", node);
     }
 
+    public void SendNpcTeleport(string npcKey, string roomKey)
+    {
+        JSONNode node = new JSONClass();
+
+        node["npcKey"] = npcKey;
+        node["room"] = roomKey;
+
+        CurrentSocket.Emit("npc_teleport", node);
+    }
+
     #endregion
 
     #region Internal

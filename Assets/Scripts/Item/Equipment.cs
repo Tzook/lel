@@ -106,4 +106,39 @@ public class Equipment {
     {
         return (type == slot);
     }
+
+    public bool isEquipping(string itemKey)
+    {
+        if(Head != null && Head.Key == itemKey)
+        {
+            return true;
+        }
+
+        if (Chest != null && Chest.Key == itemKey)
+        {
+            return true;
+        }
+
+        if (Gloves != null && Gloves.Key == itemKey)
+        {
+            return true;
+        }
+
+        if (Legs != null && Legs.Key == itemKey)
+        {
+            return true;
+        }
+
+        if (Shoes != null && Shoes.Key == itemKey)
+        {
+            return true;
+        }
+
+        if (Weapon != null && Weapon.Key == itemKey)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

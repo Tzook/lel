@@ -1540,7 +1540,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("buy_item", node);
     }
 
-
     public void SendChoosePerk(string ability, string perk)
     {
         JSONNode node = new JSONClass();

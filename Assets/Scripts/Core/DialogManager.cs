@@ -295,6 +295,10 @@ public class DialogManager : MonoBehaviour {
 
                     break;
                 }
+            case "ItemEquipped":
+                {
+                    return LocalUserInfo.Me.ClientCharacter.Equipment.isEquipping(option.ConditionValue);
+                }
         }
 
         return false;

@@ -67,6 +67,12 @@ public class SceneInfoEditor : Editor {
                 {
                     node["scene"]["NPC"][i]["EndingQuests"][c] = currentInfo.Npcs[i].EndingQuests[c];
                 }
+
+                for (int d = 0; d < currentInfo.Npcs[i].TeleportableScenes.Count; d++)
+                {
+                    node["scene"]["NPC"][i]["teleportRooms"][d]["room"] = currentInfo.Npcs[i].TeleportableScenes[d].sceneKey;
+                    node["scene"]["NPC"][i]["teleportRooms"][d]["portal"] = currentInfo.Npcs[i].TeleportableScenes[d].portalKey;
+                }
             }
 
             WriteMiniMap(currentInfo);

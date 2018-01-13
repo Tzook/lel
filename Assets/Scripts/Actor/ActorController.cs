@@ -345,7 +345,7 @@ public class ActorController : MonoBehaviour
             {
                 if (CurrentRope == null)
                 {
-                    //UnclimbRope();
+                    UnclimbRope();
                 }
                 else
                 {
@@ -353,42 +353,58 @@ public class ActorController : MonoBehaviour
 
                     if (Input.GetKey(InputMap.Map["Enter Portal"]))
                     {
-                        // if rope is above our upper body
-                        if (IsCharBelowRope())
+                        if (Input.GetKey(InputMap.Map["Jump"]))
                         {
-                            Anim.SetBool("ClimbingUp", true);
+                            Anim.SetBool("ClimbingUp", false);
                             Anim.SetBool("ClimbingDown", false);
-
-                            transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
                         }
                         else
                         {
-                            UnclimbRope();
+                            if (IsCharBelowRope())
+                            {
+                                Anim.SetBool("ClimbingUp", true);
+                                Anim.SetBool("ClimbingDown", false);
+
+                                transform.position += Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            }
+                            else
+                            {
+                                UnclimbRope();
+                            }
                         }
                     }
                     else if (Input.GetKey(InputMap.Map["Climb Down"]))
                     {
-                        if (IsCharAboveRope()) 
+                        if (Input.GetKey(InputMap.Map["Jump"]))
                         {
-                            Anim.SetBool("ClimbingDown", true);
                             Anim.SetBool("ClimbingUp", false);
+                            Anim.SetBool("ClimbingDown", false);
 
-                            transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
-                        } 
-                        else 
+                        }
+                        else
                         {
-                            UnclimbRope();
+                            if (IsCharAboveRope())
+                            {
+                                Anim.SetBool("ClimbingDown", true);
+                                Anim.SetBool("ClimbingUp", false);
+
+                                transform.position += -Vector3.up * InternalClimbSpeed * Time.deltaTime;
+                            }
+                            else
+                            {
+                                UnclimbRope();
+                            }
                         }
                     }
                     else
                     {
                         Anim.SetBool("ClimbingUp", false);
                         Anim.SetBool("ClimbingDown", false);
-                    }
 
-                    if ((Input.GetKey(InputMap.Map["Jump"])))
-                    {
-                        UnclimbRope();
+                        if ((Input.GetKey(InputMap.Map["Jump"])))
+                        {
+                            UnclimbRope();
+                        }
                     }
                 }
             }
@@ -422,11 +438,23 @@ public class ActorController : MonoBehaviour
 
     private void EnterPortal()
     {
-        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal != null)
+        if (Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentPortal == null)
         {
-            Game.Instance.MovingTroughPortal = true;
-            SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
+            return;
         }
+
+        for(int i=0;i<CurrentPortal.RequiresItems.Count;i++)
+        {
+            if(LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(CurrentPortal.RequiresItems[i]) == null)
+            {
+                InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("Need the item: \"" + Content.Instance.GetItem(CurrentPortal.RequiresItems[i]).Name + "\" to enter.");
+                return;
+            }
+        }
+
+        Game.Instance.MovingTroughPortal = true;
+        SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
+        
     }
 
     private void ClimbRope()
@@ -895,7 +923,7 @@ public class ActorController : MonoBehaviour
 
     private void Hurt(Enemy enemy)
     {
-        if (!Invincible && Content.Instance.GetMonster(enemy.Info.Name).MaxDMG != 0)
+        if (!Invincible && Content.Instance.GetMonsterByName(enemy.Info.Name).MaxDMG != 0)
         {
 
 

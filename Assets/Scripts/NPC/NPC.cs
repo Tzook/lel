@@ -12,6 +12,8 @@ public class NPC : MonoBehaviour {
 
     public List<string> EndingQuests = new List<string>();
 
+    public List<TeleportableScene> TeleportableScenes = new List<TeleportableScene>();
+
     public List<StoreProduct> SellingItems = new List<StoreProduct>();
 
     public string DefaultDialog;
@@ -133,6 +135,12 @@ public class NPC : MonoBehaviour {
                     DialogManager.Instance.StartVendorMode();
                     break;
                 }
+            case "Teleport":
+                {
+                    DialogManager.Instance.StopDialogMode();
+                    SocketClient.Instance.SendNpcTeleport(Key, eventValue);
+                    break;   
+                }
         }
     }
 
@@ -156,6 +164,7 @@ public class NPC : MonoBehaviour {
         else if(HasAvailableQuest())
         {
             CurrentQuestBubble = ResourcesLoader.Instance.GetRecycledObject("QuestBubble");
+
         }
         else if(HasQuestInProgress())
         {
@@ -240,4 +249,11 @@ public class StoreProduct
 {
     public string itemKey;
     public GameObject ItemObject;
+}
+
+[System.Serializable]
+public class TeleportableScene
+{
+    public string sceneKey;
+    public string portalKey;
 }

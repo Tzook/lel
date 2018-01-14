@@ -42,7 +42,6 @@ public class ActorDamageInstance : MonoBehaviour {
     }
 
     Collider2D[] collectedColliders;
-    List<Enemy> sentTargets;
 
     void OnTriggerStay2D(Collider2D TargetCollider)
     {
@@ -51,7 +50,7 @@ public class ActorDamageInstance : MonoBehaviour {
 
             if (TargetCollider.tag == "Enemy")
             {
-                sentTargets = new List<Enemy>();
+                List<Enemy> sentTargets = new List<Enemy>();
 
                 collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size*2f, 0f);
 
@@ -67,6 +66,13 @@ public class ActorDamageInstance : MonoBehaviour {
                 sentTargets.Insert(0 ,TargetCollider.GetComponent<HitBox>().EnemyReference);
 
                 LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+
+                Hit = true;
+                this.gameObject.SetActive(false);
+            }
+            else if(TargetCollider.tag == "HitEntity")
+            {
+                TargetCollider.GetComponent<HittableEntity>().Hurt();
 
                 Hit = true;
                 this.gameObject.SetActive(false);

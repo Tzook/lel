@@ -8,6 +8,9 @@ public class GatePortal : MonoBehaviour {
     public string TargetPortal;
     public string TargetLevel;
 
+    [SerializeField]
+    bool StartShut = false;
+
     public List<string> RequiresItems = new List<string>();
 
     void Start()
@@ -23,5 +26,10 @@ public class GatePortal : MonoBehaviour {
         }
 
         Game.Instance.CurrentScene.AddScenePortal(this); 
+
+        if(StartShut)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

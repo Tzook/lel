@@ -335,6 +335,36 @@ public class DevPrimaryAbility
     public List<PerkStage> Perks = new List<PerkStage>();
 
     public List<DevSpell> Spells = new List<DevSpell>();
+    
+
+    public string MainStat
+    {
+        get
+        {
+            switch(this.statEnumState)
+            {
+                default:
+                case StatEnumState.Str:
+                    {
+                        return "str";
+                    }
+                case StatEnumState.Dex:
+                    {
+                        return "dex";
+                    }
+                case StatEnumState.Mag:
+                    {
+                        return "mag";
+                    }
+            }
+        }
+    }
+    [SerializeField]
+    StatEnumState statEnumState;
+    public enum StatEnumState
+    {
+        Str,Dex,Mag
+    }
 }
 
 [System.Serializable]

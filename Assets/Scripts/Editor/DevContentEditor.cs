@@ -299,6 +299,8 @@ public class DevContentEditor : Editor
                     node["talents"][i]["spells"][a]["perks"][b]["value"] = primaryAbilities[i].Spells[a].Perks[b].Value.ToString();
                 }
             }
+
+            node["talents"][i]["mainStat"] = primaryAbilities[i].MainStat;
         }
 
         for (int i=0;i<perks.Count;i++)

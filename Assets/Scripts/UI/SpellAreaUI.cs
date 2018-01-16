@@ -121,6 +121,6 @@ public class SpellAreaUI : MonoBehaviour
 
     public void ActivatedSpell(string spellKey)
     {
-        GetSpellBox(Content.Instance.GetSpell(spellKey)).Activated();
+        GetSpellBox(Content.Instance.GetPlayerSpell(spellKey)).Activated();
     }
 }

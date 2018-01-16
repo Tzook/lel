@@ -40719,7 +40719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 40.999878, y: -39}
+  m_AnchoredPosition: {x: 40.999756, y: -39}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -42208,7 +42208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 34.5, y: -31}
+  m_AnchoredPosition: {x: 34.500122, y: -31}
   m_SizeDelta: {x: 148, y: 152}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &2041
@@ -46936,6 +46936,9 @@ MonoBehaviour:
     - ItemKey: blackShoes
       MinStack: 1
       MaxStack: 1
+    - ItemKey: magicCarrotSeeds
+      MinStack: 1
+      MaxStack: 1
     Perks:
     - Key: stunDuration
       Value: 4
@@ -46945,7 +46948,16 @@ MonoBehaviour:
       Value: 5
     - Key: crippleChance
       Value: 0.25
-    Spells: []
+    Spells:
+    - Key: CarrotThrow
+      Level: 5
+      Mana: 5
+      ColliderPrefab: CarrotExplosion
+      Perks:
+      - Key: stunChance
+        Value: 1
+      Icon: {fileID: 21300006, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
+      HitSound: sound_punch
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
     MonsterHP: 1800
@@ -48506,13 +48518,61 @@ MonoBehaviour:
   - Key: cosmoTunnelKey
     Name: Cosmo's Tunnel Key
     Description: This key open's the door to Cosmo's tunnel.
-    IconPlaceable: {fileID: 21300030, guid: 248cfe6a2304d384885f3246a1ef2c1a, type: 3}
+    IconPlaceable: {fileID: 21300000, guid: b70876ba4474a0b4caa186746bf4c04d, type: 3}
     Icon: 
     UseSound: 
     Type: misc
     SubType: 
     DropChance: 0
     GoldValue: 1
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    ItemSprites: []
+  - Key: rabbitLandEntrancePremission
+    Name: Rabbit Land Entrance Premission
+    Description: With this note, I'll be able to enter RabbitLand unharmed...
+    IconPlaceable: {fileID: 21300000, guid: b70876ba4474a0b4caa186746bf4c04d, type: 3}
+    Icon: 
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 0
+    GoldValue: 300
+    StackCap: 1
+    Stats:
+      RequiresSTR: 0
+      RequiresMAG: 0
+      RequiresDEX: 0
+      RequiresLVL: 0
+      BonusSTR: 0
+      BonusMAG: 0
+      BonusDEX: 0
+      BonusHP: 0
+      BonusMP: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    ItemSprites: []
+  - Key: magicCarrotSeeds
+    Name: Magic Carrot Seeds
+    Description: This sack contains magical carrot seeds
+    IconPlaceable: {fileID: 21300044, guid: d2b99573d91a11a4db48ba7066505059, type: 3}
+    Icon: GrassLandsAssets_04_22
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 0
     StackCap: 1
     Stats:
       RequiresSTR: 0
@@ -49408,15 +49468,75 @@ MonoBehaviour:
       Spells: []
     RewardClass: 
     RewardExp: 50
-  - Name: Jack's Vengeance
+  - Name: Jack's Revenge - Find The Seeds
     Key: jacksVengeance
     InProgressDescription: Jack want's me to infiltrate in to the rabbit land and
       talk to his agent inside.
-    QuestCompleteDescription: I infiltrated in to rabbit land and spoke with his agent.
+    QuestCompleteDescription: I infiltrated in to rabbit land and helped Jade De La
+      Rabbit...
     FacePrefab: JackQuest
     Conditions: []
     QuestsStates:
     - QuestKey: petRansom2
+      EnumState: 1
+    RequiredClass: 
+    MinimumLevel: 5
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+    RewardClass: 
+    RewardExp: 100
+  - Name: Jack's Vengeance - Bad News
+    Key: jacksVengeance2
+    InProgressDescription: Report back to Jack De La Rabbit and tell him the magic
+      carrot seeds are missing...
+    QuestCompleteDescription: I reported back to Jack about the missing magic carrot
+      seeds.
+    FacePrefab: JackQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: jacksVengeance
+      EnumState: 1
+    RequiredClass: 
+    MinimumLevel: 5
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+    RewardClass: 
+    RewardExp: 100
+  - Name: Jack's Vengeance - Rabbottle
+    Key: jacksVengeance3
+    InProgressDescription: Jack sent me to slay Rabbottle, the king in RabbitLand,
+      and retrieve the magic seeds from him. It's a difficult task which requires
+      a party group to complete...
+    QuestCompleteDescription: I retrieved the magic carrot seeds from Rabbottle
+    FacePrefab: JackQuest
+    Conditions:
+    - Condition: loot
+      Type: magicCarrotSeeds
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    QuestsStates:
+    - QuestKey: jacksVengeance2
       EnumState: 1
     RequiredClass: 
     MinimumLevel: 5

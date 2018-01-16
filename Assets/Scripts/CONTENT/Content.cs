@@ -149,7 +149,7 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public DevSpell GetSpell(string spellKey)
+    public DevSpell GetPlayerSpell(string spellKey)
     {
         for(int i=0; i < PrimaryAbilities.Count; i++)
         {
@@ -158,6 +158,22 @@ public class Content : MonoBehaviour {
                 if(PrimaryAbilities[i].Spells[a].Key == spellKey)
                 {
                     return PrimaryAbilities[i].Spells[a];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public DevSpell GetMobSpell(string spellKey)
+    {
+        for (int i = 0; i < Monsters.Count; i++)
+        {
+            for (int a = 0; a < Monsters[i].Spells.Count; a++)
+            {
+                if (Monsters[i].Spells[a].Key == spellKey)
+                {
+                    return Monsters[i].Spells[a];
                 }
             }
         }

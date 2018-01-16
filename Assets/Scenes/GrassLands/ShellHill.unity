@@ -29978,6 +29978,8 @@ MonoBehaviour:
   Key: ShellHillHousehold_AEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillHousehold_A
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &581409111
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -38902,6 +38904,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Forge Documents?
+      Event: StartDialog
+      Value: ForgeDocs
+      Condition: QuestInProgress
+      ConditionValue: jacksVengeance
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: Familiare
     Pieces:
     - Content: "Oh that happens alot!\t"
@@ -38936,8 +38944,45 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs
+    Pieces:
+    - Content: Shhhh...!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You want me to get caught!?
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I can help you...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: But you'll have to come with me...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Downstairs...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Downstairs...?
+      Event: Teleport
+      Value: WeatherVendorBasement
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.5421908, g: 1, b: 0.45588237, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes:
+  - sceneKey: WeatherVendorBasement
+    portalKey: Backdoor
   SellingItems:
   - itemKey: leatherVest
     ItemObject: {fileID: 1156003326}
@@ -38964,7 +39009,7 @@ MonoBehaviour:
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Clothing & Leather Vendor
+  Name: Weather Vender
   Key: shellHillClothingVendor
   Body: {fileID: 1401501709}
   Anim: {fileID: 1401501708}
@@ -41401,6 +41446,18 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: I have bad news...
+      Event: StartDialog
+      Value: BadNews
+      Condition: QuestInProgress
+      ConditionValue: jacksVengeance2
+      CLR: {r: 1, g: 0.882353, b: 0.21960786, a: 1}
+    - Title: What should we do now?
+      Event: StartDialog
+      Value: KillRabbottle
+      Condition: QuestAvailable
+      ConditionValue: jacksVengeance3
+      CLR: {r: 1, g: 0.882353, b: 0.21960786, a: 1}
     - Title: Bye
       Event: EndDialog
       Value: 
@@ -41875,8 +41932,166 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: BadNews
+    Pieces:
+    - Content: Huh!?
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: The seeds were missing from the storage room...
+      Event: StartDialog
+      Value: BadNews2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: BadNews2
+    Pieces:
+    - Content: Oh no...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: That means...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: They could be only in one place now...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Rabbottle!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The king of rabbits!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: jacksVengeance2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.8839757, b: 0.2352941, a: 1}
+  - DialogKey: KillRabbottle
+    Pieces:
+    - Content: We?
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: As you can see, I can't do a thing from here...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: But you...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You might be able get it from him...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: How?
+      Event: StartDialog
+      Value: KillRabbottle2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: KillRabbottle2
+    Pieces:
+    - Content: He probably carries the seeds with him...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So we must neutralize him to get it!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: If you know what I mean!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Do you think you can do that?
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Sure!
+      Event: StartDialog
+      Value: KillRabbottle3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9885396, g: 1, b: 0.16911763, a: 1}
+    - Title: No
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: KillRabbottle3
+    Pieces:
+    - Content: That's mah' boy!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I'd recommend you to not go alone...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Recruit yourself a party!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: He's powerful, this rabbit!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: 'You''ll find him in his throne room, east to rabbit land...
+
+'
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'll take care of him.
+      Event: StartQuest
+      Value: jacksVengeance3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9885396, g: 1, b: 0.16911763, a: 1}
+    - Title: No
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  GivingQuests:
+  - jacksVengeance
+  - jacksVengeance3
+  EndingQuests:
+  - jacksVengeance2
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -41884,7 +42099,7 @@ MonoBehaviour:
   Name: Jack De La Rabbit
   Key: jackdelarabbit
   Body: {fileID: 1696206390}
-  Anim: {fileID: 0}
+  Anim: {fileID: 1696206389}
   NameTag: {fileID: 901839081}
   ChatBubbleSpot: {fileID: 1107380418}
   QuestSpot: {fileID: 1449524027}
@@ -46213,6 +46428,7 @@ MonoBehaviour:
   EndingQuests:
   - petRansom
   - petRansom2
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -59998,6 +60214,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 0.98681533, b: 0.52205884, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -66909,6 +67126,8 @@ MonoBehaviour:
   Key: GraneryEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillGranery
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1414688505
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -71933,6 +72152,8 @@ MonoBehaviour:
   Key: ShellHillShrineEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillShrine
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1487656523
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -76210,6 +76431,8 @@ MonoBehaviour:
   Key: ShellHillHousehold_BEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillHousehold_B
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1528604509
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -81507,6 +81730,8 @@ MonoBehaviour:
   Key: InnEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillInn
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1580944871
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -82135,13 +82360,32 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: Point
     Options:
-    - Title: Trade
-      Event: StartVendor
+    - Title: Forge Documents?
+      Event: StartDialog
+      Value: ForgeDocs
+      Condition: QuestInProgress
+      ConditionValue: jacksVengeance
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Bye...
+      Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 0.44852942, g: 0.49797148, b: 1, a: 1}
-    - Title: Bye...
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs
+    Pieces:
+    - Content: 'Uh... '
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: What?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Never Mind...
       Event: EndDialog
       Value: 
       Condition: 
@@ -82149,6 +82393,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -86792,8 +87037,48 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Forge Documents?
+      Event: StartDialog
+      Value: ForgeDocs
+      Condition: QuestInProgress
+      ConditionValue: jacksVengeance
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs
+    Pieces:
+    - Content: Huh?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Nevermind...
+      Event: StartDialog
+      Value: ForgeDocs2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForgeDocs2
+    Pieces:
+    - Content: Pssst...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: That guy to your right might know something...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: '... Thanks?...'
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems:
   - itemKey: shortSword
     ItemObject: {fileID: 739390431}
@@ -104656,6 +104941,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 

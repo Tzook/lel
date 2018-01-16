@@ -299,6 +299,10 @@ public class DialogManager : MonoBehaviour {
                 {
                     return LocalUserInfo.Me.ClientCharacter.Equipment.isEquipping(option.ConditionValue);
                 }
+            case "HasItem":
+                {
+                    return (LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(option.ConditionValue) != null);
+                }
         }
 
         return false;

@@ -1100,7 +1100,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
+        DevSpell spell = Content.Instance.GetPlayerSpell(data["spell_key"].Value);
         string id = data["char_id"].Value;
         ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(id);
         if (actorInfo != null)
@@ -1115,9 +1115,15 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        DevSpell spell = Content.Instance.GetSpell(data["spell_key"].Value);
-        string id = data["mob_id"].Value;
-        // TODO activate mob spell
+        Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+
+        DevSpell spell = Content.Instance.GetMobSpell(data["spell_key"][0].Value);
+
+        if (tempEnemy != null)
+        {
+            tempEnemy.ActivateSpell(spell);
+
+        }
     }
 
 
@@ -1287,6 +1293,11 @@ public class SocketClient : MonoBehaviour
 
     public void SendUsedItem(int inventoryIndex)
     {
+        if(LocalUserInfo.Me.ClientCharacter.Inventory.ContentArray[inventoryIndex] == null)
+        {
+            return;
+        }
+
         JSONNode node = new JSONClass();
 
         node["slot"] = inventoryIndex.ToString();
@@ -1583,6 +1594,17 @@ public class SocketClient : MonoBehaviour
         node["room"] = roomKey;
 
         CurrentSocket.Emit("npc_teleport", node);
+    }
+
+    
+    public void SendTookSpellDamage(string spellKey, string mobID)
+    {
+        JSONNode node = new JSONClass();
+
+        node["spell_key"] = spellKey;
+        node["mob_id"] = mobID;
+
+        CurrentSocket.Emit("took_spell_dmg", node);
     }
 
     #endregion

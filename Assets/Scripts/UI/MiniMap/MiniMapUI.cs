@@ -34,7 +34,7 @@ public class MiniMapUI : MonoBehaviour
     public void LateUpdate()
     {
         // painting the minimap in late update so the content will be first calculated in update
-        if (IsPanelOpen() && SceneInfo.Instance.miniMapInfo != null)
+        if (IsPanelOpen() && !Game.Instance.isLoadingScene && SceneInfo.Instance.miniMapInfo != null)
         {
             // TODO draw the minimap based on map points
 

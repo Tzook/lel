@@ -49,6 +49,8 @@ public class Enemy : MonoBehaviour {
 
     protected Vector3 initScale;
 
+    public DevSpell SpellInCast;
+
     public ActorInstance CurrentTarget;
 
     public bool Dead = false;
@@ -396,5 +398,18 @@ public class Enemy : MonoBehaviour {
         RemoveBuff(buff);
     }
 
+    public void ActivateSpell(DevSpell spellRef)
+    {
+        Anim.SetTrigger(spellRef.Key);
+        SpellInCast = spellRef;
+    }
+
+    public void CastSpellComplete()
+    {
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(SpellInCast.ColliderPrefab);
+        tempObj.transform.position = transform.position;
+
+        tempObj.GetComponent<EnemyDamageInstance>().SetInfo(this, SpellInCast.Key);
+    }
 
 }

@@ -85,6 +85,13 @@ public class AnimationAssist : MonoBehaviour {
 
     public void CastSpellComplete()
     {
-        Controller.GetComponent<ActorInstance>().CastSpellComplete();
+        if (Controller != null)
+        {
+            Controller.GetComponent<ActorInstance>().CastSpellComplete();
+        }
+        else if (Enemy != null)
+        {
+            Enemy.CastSpellComplete();
+        }
     }
 }

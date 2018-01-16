@@ -5768,6 +5768,12 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 0.88174444, b: 0.2205882, a: 1}
+    - Title: I... Still want to help
+      Event: StartDialog
+      Value: StillWantQuest
+      Condition: QuestAvailable
+      ConditionValue: jacksVengeance2
+      CLR: {r: 1, g: 0.882353, b: 0.21960786, a: 1}
     - Title: Bye.
       Event: EndDialog
       Value: 
@@ -5828,7 +5834,45 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
+  - DialogKey: StillWantQuest
+    Pieces:
+    - Content: Oh!
+      LetterDelay: 0.01
+      Pitch: 1.6
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Look who's back!
+      LetterDelay: 0.01
+      Pitch: 1.6
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I can't leave this place don't you get it?
+      LetterDelay: 0.01
+      Pitch: 1.6
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: 'Go back to Shell Hill and tell him the magic carrot seeds are gone!
+
+'
+      LetterDelay: 0.01
+      Pitch: 1.6
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Alright.
+      Event: StartQuest
+      Value: jacksVengeance2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9811359, b: 0.31617647, a: 1}
+    - Title: Not ready yet...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  GivingQuests:
+  - jacksVengeance2
   EndingQuests: []
   TeleportableScenes:
   - sceneKey: RabbitStorageRoom

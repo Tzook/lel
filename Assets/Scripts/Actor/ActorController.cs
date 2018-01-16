@@ -611,7 +611,7 @@ public class ActorController : MonoBehaviour
                     tempHit.transform.position = Instance.Weapon.transform.position;
                     tempHit.GetComponent<HitEffect>().Play();
 
-                    DevSpell tempSpell = Content.Instance.GetSpell(actionValue);
+                    DevSpell tempSpell = Content.Instance.GetPlayerSpell(actionValue);
                     if (!string.IsNullOrEmpty(tempSpell.HitSound))
                     {
                         AudioControl.Instance.PlayInPosition(tempSpell.HitSound, tempHit.transform.position);
@@ -869,6 +869,13 @@ public class ActorController : MonoBehaviour
             }
         }
     }
+
+    
+    public void TookSpellDamage(EnemyDamageInstance instance)
+    {
+        SocketClient.Instance.SendTookSpellDamage(instance.ActionKey, instance.ParentEnemy.Info.ID);
+    }
+
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)

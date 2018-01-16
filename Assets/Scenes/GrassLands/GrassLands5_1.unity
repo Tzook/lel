@@ -677,6 +677,7 @@ MonoBehaviour:
   Key: RabbitLandEntrance
   TargetPortal: Entrance
   TargetLevel: GrassLands5_2
+  StartShut: 0
   RequiresItems: []
 --- !u!1 &88168351
 GameObject:
@@ -3755,6 +3756,12 @@ MonoBehaviour:
       Condition: ItemEquipped
       ConditionValue: rabbitCostume
       CLR: {r: 0.47423938, g: 1, b: 0.4044118, a: 1}
+    - Title: Ahm... I've got this premission note...
+      Event: StartDialog
+      Value: PremissionNote
+      Condition: HasItem
+      ConditionValue: rabbitLandEntrancePremission
+      CLR: {r: 0.47423938, g: 1, b: 0.4044118, a: 1}
   - DialogKey: RabbitLikeYou
     Pieces:
     - Content: '...'
@@ -3768,6 +3775,55 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     - Content: Indeed, come in.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Enter
+      Event: Teleport
+      Value: GrassLands5_2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.44117647, g: 1, b: 0.49127787, a: 1}
+  - DialogKey: PremissionNote
+    Pieces:
+    - Content: Hmmm... Let me see....
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Aha...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Aha...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: '...'
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Mhm...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Okay, come on in.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
@@ -11863,6 +11919,7 @@ MonoBehaviour:
   Key: ShaftEntrance
   TargetPortal: LeftGate
   TargetLevel: GrassLands5_1_1
+  StartShut: 0
   RequiresItems:
   - cosmoTunnelKey
 --- !u!210 &1518814104
@@ -15613,6 +15670,7 @@ MonoBehaviour:
   Key: CosmoExit
   TargetPortal: RightGate
   TargetLevel: GrassLands5_1_3
+  StartShut: 0
   RequiresItems: []
 --- !u!210 &1881029206
 SortingGroup:

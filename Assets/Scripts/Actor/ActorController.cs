@@ -54,7 +54,7 @@ public class ActorController : MonoBehaviour
 
 
 
-    Coroutine JumpRoutineInstance;
+    public Coroutine JumpRoutineInstance;
 
     LayerMask GroundLayerMask = 0 << 0 | 1;
 

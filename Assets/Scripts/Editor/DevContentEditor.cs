@@ -111,6 +111,8 @@ public class DevContentEditor : Editor
                 node["items"][i]["stats"]["hp"] = currentInfo.Items[i].Stats.BonusHP.ToString();
                 node["items"][i]["stats"]["mp"] = currentInfo.Items[i].Stats.BonusMP.ToString();
 
+                node["items"][i]["use"]["hp"] = currentInfo.Items[i].UseInfo.BonusHP.ToString();
+                node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
 
                 for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 {
@@ -297,6 +299,8 @@ public class DevContentEditor : Editor
                     node["talents"][i]["spells"][a]["perks"][b]["value"] = primaryAbilities[i].Spells[a].Perks[b].Value.ToString();
                 }
             }
+
+            node["talents"][i]["mainStat"] = primaryAbilities[i].MainStat;
         }
 
         for (int i=0;i<perks.Count;i++)

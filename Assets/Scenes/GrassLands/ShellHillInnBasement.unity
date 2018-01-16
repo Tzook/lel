@@ -246,6 +246,7 @@ MonoBehaviour:
   Key: BasementEntrance
   TargetPortal: BasementEntrance
   TargetLevel: ShellHillInn
+  StartShut: 0
   RequiresItems: []
 --- !u!210 &20574064
 SortingGroup:
@@ -1012,7 +1013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterKey: BlueMushroom
-  SpawnCap: 4
+  SpawnCap: 2
   RespawnTime: 10
 --- !u!4 &96478638
 Transform:
@@ -1021,7 +1022,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 96478636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.61, y: -2.22, z: 0}
+  m_LocalPosition: {x: 22.68, y: -2.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34667,6 +34668,7 @@ MonoBehaviour:
   Key: BasementTunnelEntrance
   TargetPortal: BasementTunnelEntrance
   TargetLevel: ShellHillInnBasement_1
+  StartShut: 0
   RequiresItems: []
 --- !u!210 &1923253407
 SortingGroup:
@@ -38552,6 +38554,7 @@ MonoBehaviour:
   Spawners:
   - {fileID: 96478637}
   - {fileID: 846380791}
+  - {fileID: 2132892338}
   Npcs:
   - {fileID: 1665782150}
   - {fileID: 676718399}
@@ -42676,6 +42679,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2132892337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2132892339}
+  - component: {fileID: 2132892338}
+  m_Layer: 0
+  m_Name: SPAWNER (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2132892338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2132892337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1089884df88e104478daebe0f14f730c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterKey: BlueMushroom
+  SpawnCap: 2
+  RespawnTime: 10
+--- !u!4 &2132892339
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2132892337}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.17, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 124
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2141080489
 GameObject:

@@ -5264,6 +5264,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -6933,6 +6934,8 @@ MonoBehaviour:
   Key: RoomsEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillInnRooms
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &276826865
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -19548,6 +19551,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -33894,6 +33898,8 @@ MonoBehaviour:
   Key: BasementEntrance
   TargetPortal: BasementEntrance
   TargetLevel: ShellHillInnBasement
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1030067289
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -38211,6 +38217,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems:
   - itemKey: whiteJellyBean
     ItemObject: {fileID: 352297764}
@@ -55715,7 +55722,7 @@ GameObject:
   - component: {fileID: 1569399344}
   - component: {fileID: 1569399343}
   m_Layer: 14
-  m_Name: NPC (2)
+  m_Name: NPC janiturtle
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55735,26 +55742,303 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: Hey...
+    - Content: If these walls could talk...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: Greet
     Options:
-    - Title: OK
+    - Title: What?
+      Event: StartDialog
+      Value: What?
+      Condition: QuestAvailable
+      ConditionValue: CleaningUp
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Cleaning Up
+      Event: StartDialog
+      Value: Cleaning Up
+      Condition: QuestComplete
+      ConditionValue: CleaningUp
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: OK....
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: What?
+    Pieces:
+    - Content: These walls have seen alot of dirty things...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Sometimes too dirty....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: And I'm always there to clean them up!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: You don't like being a janitor?
+      Event: StartDialog
+      Value: Like?
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: OK....
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Like?
+    Pieces:
+    - Content: Like!?
+      LetterDelay: 0.02
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Do you think it's fun to clean up after other people!?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: That's the only job that I can have that keeps me on the down low.
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Down low?
+      Event: StartDialog
+      Value: Down
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Good luck with that.
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Down
+    Pieces:
+    - Content: Listen
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I don't have time to explain you the turtle slang we have on this island.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: 'I''ve got bigger things on my mind right now. '
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Maybe I can help
+      Event: StartDialog
+      Value: Help
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: A complicated life for a janitor
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Help
+    Pieces:
+    - Content: You cool?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Heck yeah!
+      Event: StartDialog
+      Value: Quest
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.199827, g: 0.9705882, b: 0.42839754, a: 1}
+    - Title: Why certainly!
+      Event: StartDialog
+      Value: Snitch
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.40987238, g: 0.46080256, b: 0.97794116, a: 1}
+  - DialogKey: Quest
+    Pieces:
+    - Content: You sound cool so listen up
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I've got a 'fungus' problem in the basement, I need you to take care
+        of it
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: You down to that?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: You got it my shelled brother!
+      Event: StartQuest
+      Value: CleaningUp
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.199827, g: 0.9705882, b: 0.42839754, a: 1}
+    - Title: Yeah I can help you.
+      Event: StartQuest
+      Value: CleaningUp
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Go clean it up yourself
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Snitch
+    Pieces:
+    - Content: Forget it! You sound like a snitch!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: I'm not a snitch!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I never snitch.
+      Event: StartDialog
+      Value: Never
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Go handle it yourself
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Never
+    Pieces:
+    - Content: Alright, I'll trust you this time...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: But if Tert hears about this, I'll know it was you!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Just tell me what you need me to do.
+      Event: StartDialog
+      Value: Quest
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Forget it
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Cleaning Up
+    Pieces:
+    - Content: So, did you 'take care' of the problem?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Not entirely
+      Event: StartDialog
+      Value: Entirely
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Not yet
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Entirely
+    Pieces:
+    - Content: 'What do you mean ''not entirely''? '
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Did you kill those mushrooms or not?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: They just grow back..
+      Event: StartDialog
+      Value: Killed
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Not yet
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Killed
+    Pieces:
+    - Content: That's not good...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I guess I'll need to call up some old friends....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: CleaningUp
+      Condition: QuestComplete
+      ConditionValue: CleaningUp
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+  GivingQuests:
+  - CleaningUp
+  EndingQuests:
+  - CleaningUp
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Innkeeper
-  Key: shellHillInkeeper
+  Name: JaniTurtle
+  Key: ShellHillInnJani
   Body: {fileID: 844093645}
   Anim: {fileID: 844093646}
   NameTag: {fileID: 1649654957}
@@ -70418,6 +70702,8 @@ MonoBehaviour:
   Key: Entrance
   TargetPortal: InnEntrance
   TargetLevel: ShellHill
+  StartShut: 0
+  RequiresItems: []
 --- !u!1 &1966663384
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ public class CounterEntity : MonoBehaviour {
 
     public void SetNumber(int num)
     {
+        Count = num;
         m_Label.text = Count.ToString();
     }
 

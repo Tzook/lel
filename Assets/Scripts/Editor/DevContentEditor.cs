@@ -111,6 +111,8 @@ public class DevContentEditor : Editor
                 node["items"][i]["stats"]["hp"] = currentInfo.Items[i].Stats.BonusHP.ToString();
                 node["items"][i]["stats"]["mp"] = currentInfo.Items[i].Stats.BonusMP.ToString();
 
+                node["items"][i]["use"]["hp"] = currentInfo.Items[i].UseInfo.BonusHP.ToString();
+                node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
 
                 for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 {

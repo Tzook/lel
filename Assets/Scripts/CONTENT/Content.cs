@@ -295,6 +295,8 @@ public class DevItemInfo
     public int StackCap = 1;
 
     public ItemStats Stats;
+    
+    public UseItemInfo UseInfo;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
 }

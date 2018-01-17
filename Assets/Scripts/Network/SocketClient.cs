@@ -1117,7 +1117,7 @@ public class SocketClient : MonoBehaviour
 
         Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        DevSpell spell = Content.Instance.GetMobSpell(data["spell_key"][0].Value);
+        DevSpell spell = Content.Instance.GetMobSpell(data["spell_key"].Value);
 
         if (tempEnemy != null)
         {

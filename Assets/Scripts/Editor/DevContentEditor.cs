@@ -301,6 +301,12 @@ public class DevContentEditor : Editor
             }
 
             node["talents"][i]["mainStat"] = primaryAbilities[i].MainStat;
+
+            for (int a = 0; a < primaryAbilities[i].InitialPerks.Count; a++)
+            {
+                node["talents"][i]["initialPerks"][a]["key"] = primaryAbilities[i].InitialPerks[a].Key.ToString();
+                node["talents"][i]["initialPerks"][a]["value"] = primaryAbilities[i].InitialPerks[a].Value.ToString();
+            }
         }
 
         for (int i=0;i<perks.Count;i++)

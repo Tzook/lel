@@ -352,6 +352,7 @@ public class DevPrimaryAbility
 
     public List<DevSpell> Spells = new List<DevSpell>();
     
+    public List<DevPerkMap> InitialPerks = new List<DevPerkMap>();
 
     public string MainStat
     {

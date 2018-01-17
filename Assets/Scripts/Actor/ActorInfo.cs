@@ -142,13 +142,20 @@ public class ActorInfo
 
         Equipment = new Equipment(node["equips"], this);
 
+        IEnumerator enumerator = node["talents"].AsObject.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            PrimaryAbility ability = new PrimaryAbility();
+            ability.Key = ((KeyValuePair<string, JSONNode>)enumerator.Current).Key;
+            if (GetPrimaryAbility(ability.Key) == null) {
+                PrimaryAbilities.Add(ability);
+            }
+        }
+
         if (node["stats"] != null)
         {
             SetStats(node["stats"]);
         }
-
-        IEnumerator enumerator;
-        KeyValuePair<string, JSONNode> currentPair;
 
         PAPerk tempPerk;
         for (int i = 0; i < PrimaryAbilities.Count; i++)
@@ -159,7 +166,7 @@ public class ActorInfo
             {
                 tempPerk = new PAPerk();
 
-                currentPair = (KeyValuePair<string, JSONNode>)enumerator.Current;
+                KeyValuePair<string, JSONNode> currentPair = (KeyValuePair<string, JSONNode>)enumerator.Current;
 
                 tempPerk.Key = currentPair.Key;
                 tempPerk.Points = currentPair.Value.AsInt;
@@ -279,18 +286,6 @@ public class ActorInfo
         this.CurrentHealth = node["hp"]["now"].AsInt;
 
         this.CurrentMana = node["mp"]["now"].AsInt;
-
-        PrimaryAbility ability;
-        for (int i = 0; i < node["abilities"].Count; i++)
-        {
-            if (GetPrimaryAbility(node["abilities"][i].Value) == null)
-            {
-                ability = new PrimaryAbility();
-                ability.Key = node["abilities"][i].Value;
-
-                this.PrimaryAbilities.Add(ability);
-            }
-        }
 
         SetPrimaryAbility(node["primaryAbility"].Value);
     }

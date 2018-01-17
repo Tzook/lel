@@ -265,6 +265,7 @@ public class ActorInfo
 
     public void SetStats(JSONNode node)
     {
+
         this.LVL = node["lvl"].AsInt;
 
         this.EXP = node["exp"].AsInt;

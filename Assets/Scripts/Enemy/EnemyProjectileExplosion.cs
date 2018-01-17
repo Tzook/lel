@@ -12,6 +12,7 @@ public class EnemyProjectileExplosion : EnemyDamageInstance
 
     protected override void OnEnable()
     {
+        TimeAlive = 2f;
         Hit = false;
     }
 
@@ -27,10 +28,6 @@ public class EnemyProjectileExplosion : EnemyDamageInstance
             tempObj.transform.position = transform.position;
             tempObj.transform.rotation = Quaternion.Euler(0f, 0f, i * (360f / Amount));
         }
-    }
-
-    protected override void Update()
-    {
     }
 
     protected override void OnTriggerStay2D(Collider2D TargetCollider)

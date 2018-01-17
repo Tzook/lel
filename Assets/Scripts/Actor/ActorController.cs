@@ -260,6 +260,9 @@ public class ActorController : MonoBehaviour
 
     private void SetAttackAnimation()
     {
+        Debug.Log(Instance);
+        Debug.Log(Instance.Info);
+        Debug.Log(Instance.Info.CurrentPrimaryAbility);
         switch (Instance.Info.CurrentPrimaryAbility.Key)
         {
             case "melee":

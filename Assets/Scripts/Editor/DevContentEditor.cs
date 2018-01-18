@@ -307,6 +307,9 @@ public class DevContentEditor : Editor
                 node["talents"][i]["initialPerks"][a]["key"] = primaryAbilities[i].InitialPerks[a].Key.ToString();
                 node["talents"][i]["initialPerks"][a]["value"] = primaryAbilities[i].InitialPerks[a].Value.ToString();
             }
+
+            node["talents"][i]["hitType"] = primaryAbilities[i].HitType;
+            node["talents"][i]["manaCost"] = primaryAbilities[i].ManaCost.ToString();
         }
 
         for (int i=0;i<perks.Count;i++)

@@ -358,7 +358,7 @@ public class DevPrimaryAbility
     {
         get
         {
-            switch(this.statEnumState)
+            switch (statEnumState)
             {
                 default:
                 case StatEnumState.Str:
@@ -382,6 +382,33 @@ public class DevPrimaryAbility
     {
         Str,Dex,Mag
     }
+
+    public string HitType
+    {
+        get
+        {
+            switch (hitTypeEnumState)
+            {
+                default:
+                case HitTypeEnumState.Attack:
+                    {
+                        return "atk";
+                    }
+                case HitTypeEnumState.Heal:
+                    {
+                        return "heal";
+                    }
+            }
+        }
+    }
+    [SerializeField]
+    HitTypeEnumState hitTypeEnumState;
+    public enum HitTypeEnumState
+    {
+        Attack,Heal
+    }
+
+    public int ManaCost;
 }
 
 [System.Serializable]

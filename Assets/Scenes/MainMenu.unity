@@ -49674,11 +49674,9 @@ MonoBehaviour:
       Rabbit...
     FacePrefab: JackQuest
     Conditions: []
-    QuestsStates:
-    - QuestKey: petRansom2
-      EnumState: 1
+    QuestsStates: []
     RequiredClass: 
-    MinimumLevel: 5
+    MinimumLevel: 7
     RewardItems: []
     RewardSTR: 0
     RewardMAG: 0
@@ -49707,7 +49705,7 @@ MonoBehaviour:
     - QuestKey: jacksVengeance
       EnumState: 1
     RequiredClass: 
-    MinimumLevel: 5
+    MinimumLevel: 7
     RewardItems: []
     RewardSTR: 0
     RewardMAG: 0
@@ -49741,7 +49739,39 @@ MonoBehaviour:
     - QuestKey: jacksVengeance2
       EnumState: 1
     RequiredClass: 
-    MinimumLevel: 5
+    MinimumLevel: 7
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 0
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+      InitialPerks: []
+      statEnumState: 0
+    RewardClass: 
+    RewardExp: 100
+  - Name: Cleaning Up
+    Key: CleaningUp
+    InProgressDescription: "The janitor in ShellHill's Inn has asked me to 'Take Care'\r
+      of the mushrooms in the basement."
+    QuestCompleteDescription: "I killed some of the mushrooms, but they just keep
+      on\r coming"
+    FacePrefab: BanboQuest
+    Conditions:
+    - Condition: hunt
+      Type: BlueMushroom
+      CurrentProgress: 0
+      TargetProgress: 10
+      ExtraDescription: 
+    QuestsStates: []
+    RequiredClass: 
+    MinimumLevel: 6
     RewardItems: []
     RewardSTR: 0
     RewardMAG: 0

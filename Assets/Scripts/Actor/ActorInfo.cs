@@ -152,11 +152,6 @@ public class ActorInfo
             }
         }
 
-        if (node["stats"] != null)
-        {
-            SetStats(node["stats"]);
-        }
-
         PAPerk tempPerk;
         for (int i = 0; i < PrimaryAbilities.Count; i++)
         {
@@ -184,6 +179,11 @@ public class ActorInfo
             PrimaryAbilities[i].Exp = node["talents"][PrimaryAbilities[i].Key]["exp"].AsInt;
             PrimaryAbilities[i].LVL = node["talents"][PrimaryAbilities[i].Key]["lvl"].AsInt;
 
+        }
+
+        if (node["stats"] != null)
+        {
+            SetStats(node["stats"]);
         }
 
         // Get the JSON keys
@@ -304,7 +304,7 @@ public class ActorInfo
 
     public void SetPrimaryAbility(string key)
     {
-        if (this == LocalUserInfo.Me.ClientCharacter)
+        if (LocalUserInfo.Me.ClientCharacter != null && this.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
             CurrentPrimaryAbility = GetPrimaryAbility(key);
 

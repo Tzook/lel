@@ -349,6 +349,7 @@ public class Game : MonoBehaviour {
 
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
+        
         InGameMainMenuUI.Instance.ShowGameUI();
 
         CurrentScene.UpdateAllQuestProgress();

@@ -778,7 +778,7 @@ public class ActorInstance : MonoBehaviour
         Anim.SetBool("Charging", true);
     }
 
-    public void PreformAttack(float AttackValue)
+    public void PreformAttack(float chargeValue)
     {
         Anim.SetBool("Charging", false);
 

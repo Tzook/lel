@@ -304,12 +304,17 @@ public class ActorInfo
 
     public void SetPrimaryAbility(string key)
     {
-        CurrentPrimaryAbility = GetPrimaryAbility(key);
-
         if (this == LocalUserInfo.Me.ClientCharacter)
         {
+            CurrentPrimaryAbility = GetPrimaryAbility(key);
+
             InGameMainMenuUI.Instance.RefreshCurrentPrimaryAbility();
             InGameMainMenuUI.Instance.RefreshSpellArea(true);
+        }
+        else
+        {
+            CurrentPrimaryAbility = new PrimaryAbility();
+            CurrentPrimaryAbility.Key = key;
         }
     }
 

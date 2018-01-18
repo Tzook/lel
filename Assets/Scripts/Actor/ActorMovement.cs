@@ -198,14 +198,19 @@ public class ActorMovement : MonoBehaviour
 
     public void ActivatePrimaryAbility()
     {
-        switch (Instance.Info.CurrentPrimaryAbility.Key)
-        {
-            case "range":
-                {
-                    Instance.ShootArrow(false);
-                    break;
-                }
-        }
+        //switch (Instance.Info.CurrentPrimaryAbility.Key)
+        //{
+        //    case "melee":
+        //        {
+        //            Instance.PreformAttack(0.5f);
+        //            break;
+        //        }
+        //    case "range":
+        //        {
+        //            Instance.ShootArrow(false);
+        //            break;
+        //        }
+        //}
     }
 
     public void RefreshHealth()

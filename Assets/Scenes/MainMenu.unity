@@ -46958,10 +46958,10 @@ MonoBehaviour:
       HitSound: sound_punch
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
-    MonsterHP: 1800
+    MonsterHP: 2000
     MonsterLevel: 5
-    MinDMG: 15
-    MaxDMG: 45
+    MinDMG: 5
+    MaxDMG: 20
     RewardEXP: 650
     Type: 1
     PossibleLoot:
@@ -47032,7 +47032,18 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
+    Spells:
+    - Key: TurtleBossSmash
+      Level: 5
+      Mana: 0
+      ColliderPrefab: 
+      Perks:
+      - Key: damageModifier
+        Value: 0.1
+      - Key: stunChance
+        Value: 1
+      Icon: {fileID: 21300036, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
+      HitSound: sound_stun
   - MonsterKey: Plant
     MonsterName: Moving Plant
     MonsterHP: 50
@@ -48716,7 +48727,7 @@ MonoBehaviour:
     UseSound: 
     Type: misc
     SubType: 
-    DropChance: 1
+    DropChance: 100
     GoldValue: 0
     StackCap: 1
     Stats:

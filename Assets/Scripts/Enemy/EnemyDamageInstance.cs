@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageInstance : MonoBehaviour {
+public class EnemyDamageInstance  : MonoBehaviour {
 
     public Enemy ParentEnemy;
     public string ActionKey;

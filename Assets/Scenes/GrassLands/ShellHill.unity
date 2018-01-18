@@ -41443,7 +41443,7 @@ MonoBehaviour:
     - Title: I've got some questions...
       Event: StartDialog
       Value: Questions
-      Condition: QuestAvailable
+      Condition: QuestInProgress
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 0}
     - Title: I have bad news...
@@ -41456,6 +41456,12 @@ MonoBehaviour:
       Event: StartDialog
       Value: KillRabbottle
       Condition: QuestAvailable
+      ConditionValue: jacksVengeance3
+      CLR: {r: 1, g: 0.882353, b: 0.21960786, a: 1}
+    - Title: Done
+      Event: StartDialog
+      Value: KilledRabottle
+      Condition: QuestComplete
       ConditionValue: jacksVengeance3
       CLR: {r: 1, g: 0.882353, b: 0.21960786, a: 1}
     - Title: Bye
@@ -42052,6 +42058,48 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     - Content: I'd recommend you to not go alone...
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Recruit yourself a party!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: He's powerful, this rabbit!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: 'You''ll find him in his throne room, east to rabbit land...
+
+'
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'll take care of him.
+      Event: StartQuest
+      Value: jacksVengeance3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9885396, g: 1, b: 0.16911763, a: 1}
+    - Title: No
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: KilledRabottle
+    Pieces:
+    - Content: That's mah' boy!
+      LetterDelay: 0.01
+      Pitch: 1.4
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The seeds!
       LetterDelay: 0.01
       Pitch: 1.4
       SoundKey: 

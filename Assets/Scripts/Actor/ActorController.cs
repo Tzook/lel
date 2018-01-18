@@ -591,7 +591,7 @@ public class ActorController : MonoBehaviour
         {
             case "melee":
                 {
-                    SocketClient.Instance.SendMobTookDamage(Instance, targetIDs);
+                    SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
 
                     int rnd = Random.Range(0, 3);
                     AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);

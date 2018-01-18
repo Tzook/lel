@@ -1396,18 +1396,16 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("mobs_moved", node);
     }
 
-    public void SendMobTookDamage(ActorInstance parentActor, List<string> targetIDs)
+    public void SendUsedPrimaryAbility(List<string> targetIDs)
     {
         JSONNode node = new JSONClass();
 
-        //node["mob_id"] = enemyReference[0].Info.ID;
-
         for(int i = 0; i < targetIDs.Count; i++)
         {
-            node["mobs"][i] = targetIDs[i];
+            node["target_ids"][i] = targetIDs[i];
         }
         
-        CurrentSocket.Emit("mobs_took_dmg", node);
+        CurrentSocket.Emit("used_ability", node);
     }
 
     public void SendItemPositions(List<ItemInstance> ItemInstances)

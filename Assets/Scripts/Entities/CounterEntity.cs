@@ -28,24 +28,31 @@ public class CounterEntity : MonoBehaviour {
 
         if(TargetNumber < Count)
         {
-            BelowNumber.Invoke();
+            AboveNumber.Invoke();
         }
         else if (TargetNumber > Count)
         {
-            AboveNumber.Invoke();
+            BelowNumber.Invoke();
         }
         else
         {
             HitNumber.Invoke();
         }
-
-        m_Label.text = Count.ToString();
+              
+        if (m_Label != null)
+        {
+            m_Label.text = Count.ToString();
+        }
     }
 
     public void SetNumber(int num)
     {
         Count = num;
-        m_Label.text = Count.ToString();
+
+        if (m_Label != null)
+        {
+            m_Label.text = Count.ToString();
+        }
     }
 
 

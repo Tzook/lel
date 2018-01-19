@@ -66,6 +66,7 @@ public class NPC : MonoBehaviour {
 
     public void Interact()
     {
+        Debug.Log("Hey!#!@#!#@1");
         DialogManager.Instance.StartDialogMode(this);
     }
 

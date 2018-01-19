@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour {
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
 
-        string dmgMessage = damage.ToString("N0");
+        string dmgMessage = damage > 0 ? damage.ToString("N0") : "BLOCKED";
 
         int TextSize = 40; 
 

@@ -99,6 +99,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_take_miss", OnMobTakeMiss);
         CurrentSocket.On("mob_move", OnMobMovement);
+        CurrentSocket.On("mob_blocked", OnMobBlocked);
         CurrentSocket.On("aggro", OnAggro);
 
         CurrentSocket.On("quest_start", OnQuestStart);
@@ -528,7 +529,12 @@ public class SocketClient : MonoBehaviour
             actor.CurrentHealth = hp;
             if (actor == LocalUserInfo.Me.ClientCharacter)
             {
-                actor.Instance.PopHint(String.Format("{0:n0}", data["dmg"].AsInt) , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+                string text = String.Format("{0:n0}", data["dmg"].AsInt);
+                if (data["crit"].AsBool) {
+                    // TODO make this beautiful, lel
+                    text += " (CRIT)";
+                }
+                actor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
                 InGameMainMenuUI.Instance.RefreshHP();
             }
             else
@@ -644,6 +650,18 @@ public class SocketClient : MonoBehaviour
 
         monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat);
 
+    }
+    
+    protected void OnMobBlocked(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data["mob_id"].Value + " Blocked DMG from " + data["id"].Value);
+
+        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
+        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
+        
+        monster.Hurt(attackingPlayer, 0, data["hp"].AsInt);
     }
 
     private void OnAggro(Socket socket, Packet packet, object[] args)

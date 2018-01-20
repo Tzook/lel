@@ -136,6 +136,18 @@ public class Content : MonoBehaviour {
         return null;
     }
 
+    public bool IsInitialPerkValue(DevPrimaryAbility primaryAbility, PAPerk perk)
+    {
+        for(int i = 0; i < primaryAbility.InitialPerks.Count;i++)
+        {
+            if(primaryAbility.InitialPerks[i].Key == perk.Key)
+            {
+                return primaryAbility.InitialPerks[i].Value == perk.Points;
+            }
+        }
+        return false;
+    }
+
     public DevBuff GetBuff(string buffKey)
     {
         for (int i = 0; i < Buffs.Count; i++)

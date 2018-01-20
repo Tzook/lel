@@ -16,9 +16,24 @@ public class UpgradeInfoUI : MonoBehaviour {
 
     DevPAPerk currentPerk;
 
-    public void SetInfo(PAPerk perk)
+    Color originalTextColor;
+    Color initialPerkColor;
+
+    void Awake() 
+    {
+        originalTextColor = txtPrecent.color;
+            
+        // darken the color by 70%
+        float r = originalTextColor.r * 0.3f;
+        float g = originalTextColor.g * 0.3f;
+        float b = originalTextColor.b * 0.3f;
+        initialPerkColor = new Color(r, g, b);
+    }
+
+    public void SetInfo(DevPrimaryAbility devPA, PAPerk perk)
     {
         currentPerk = Content.Instance.GetPerk(perk.Key);
+        bool isInitialValue = Content.Instance.IsInitialPerkValue(devPA, perk);
 
         txtTitle.text = currentPerk.Name;
         iconImage.sprite = currentPerk.Icon;
@@ -31,5 +46,6 @@ public class UpgradeInfoUI : MonoBehaviour {
         {
             txtPrecent.text = perk.Points.ToString();
         }
+        txtPrecent.color = isInitialValue ? initialPerkColor : originalTextColor;
     }
 }

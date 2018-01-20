@@ -96,10 +96,8 @@ public class PAWindowUI : MonoBehaviour {
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("UpgradeInfoPanel");
             tempObj.transform.SetParent(UpgradeContainer, false);
-            tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentPA.Perks[i]);
+            tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentDevPA, CurrentPA.Perks[i]);
         }
-        
-        
     }
 
     public void AddPASelectionListener(Button btn, int gIndex)

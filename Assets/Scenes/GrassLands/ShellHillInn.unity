@@ -5227,6 +5227,12 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Do you know where I can buy some beans?
+      Event: StartDialog
+      Value: Beans
+      Condition: QuestInProgress
+      ConditionValue: ABeanyRequest
+      CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Hi...
       Event: EndDialog
       Value: 
@@ -5257,6 +5263,80 @@ MonoBehaviour:
       AnimationTrigger: 
     Options:
     - Title: I see...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Beans
+    Pieces:
+    - Content: You don't look like a bean guy to me
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Did he put you up to this?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: You know him?
+      Event: StartDialog
+      Value: Know
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I don't know what you're talking about
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Know
+    Pieces:
+    - Content: Yes, he was a very different man before he discovered....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The beans!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Now they are his only desire
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: So where can I get them?
+      Event: StartDialog
+      Value: Where
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I heard enough
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Where
+    Pieces:
+    - Content: From the bartender next to me.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Make sure you act natural when you buy the beans
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Thanks
       Event: EndDialog
       Value: 
       Condition: 
@@ -19543,6 +19623,42 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     Options:
+    - Title: Do you know where I can buy some beans?
+      Event: StartDialog
+      Value: Beans
+      Condition: QuestInProgress
+      ConditionValue: ABeanyRequest
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: OK
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Beans
+    Pieces:
+    - Content: Hmm....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I think that the bartender sells some
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I heard that they are a real treat!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Thanks, good luck with your crisis
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: OK
       Event: EndDialog
       Value: 
@@ -38167,12 +38283,24 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I heard you got some strong beans!
+      Event: StartDialog
+      Value: Strong
+      Condition: QuestInProgress
+      ConditionValue: ABeanyRequest
+      CLR: {r: 0.2, g: 0.972549, b: 0.42745098, a: 1}
+    - Title: Do you have some.. Beans?
+      Event: StartDialog
+      Value: Beans
+      Condition: QuestInProgress
+      ConditionValue: ABeanyRequest
+      CLR: {r: 0.5882353, g: 0.7254902, b: 1, a: 1}
     - Title: Trade
       Event: Trade
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 0.58823526, g: 0.72738343, b: 1, a: 1}
+      CLR: {r: 0.5882353, g: 0.7254902, b: 1, a: 1}
     - Title: Bye...
       Event: EndDialog
       Value: 
@@ -38209,6 +38337,96 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 0.58823526, g: 0.72738343, b: 1, a: 1}
+    - Title: Bye...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Strong
+    Pieces:
+    - Content: Strong beans?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Did that guy put you up to this!?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I told him! Enough is enough!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: No beans for him!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: The beans are for me.
+      Event: StartDialog
+      Value: ForMe
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Bye..
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Beans
+    Pieces:
+    - Content: I do have some beans.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Let me show you
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Trade
+      Event: Trade
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.5882353, g: 0.7254902, b: 1, a: 1}
+    - Title: Bye...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: ForMe
+    Pieces:
+    - Content: Oh...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: In that case I do have some
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Take a look
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Trade
+      Event: Trade
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.5882353, g: 0.7254902, b: 1, a: 1}
     - Title: Bye...
       Event: EndDialog
       Value: 
@@ -55760,6 +55978,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: CleaningUp
       CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Do you know where I can buy some beans?
+      Event: StartDialog
+      Value: NotTheBeans
+      Condition: QuestInProgress
+      ConditionValue: ABeanyRequest
+      CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: OK....
       Event: EndDialog
       Value: 
@@ -56028,6 +56252,30 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: CleaningUp
       CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+  - DialogKey: NotTheBeans
+    Pieces:
+    - Content: Did you just say...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Beans!?
+      LetterDelay: 0.01
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Stay away from the beans!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Okay...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
   GivingQuests:
   - CleaningUp
   EndingQuests:

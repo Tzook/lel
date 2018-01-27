@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MessageBubbleUI : MonoBehaviour 
 {
+    const float MINIMUM_CHAT_SECONDS = 3f;
     [SerializeField]
     Text m_txtField;
 
@@ -32,7 +33,7 @@ public class MessageBubbleUI : MonoBehaviour
             yield return 0;
         }
 
-        yield return new WaitForSeconds((m_txtField.text.Length / 4f));
+        yield return new WaitForSeconds(System.Math.Max(m_txtField.text.Length / 10f, MINIMUM_CHAT_SECONDS));
 
         t = 0f;
         while (t < 1f)

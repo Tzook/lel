@@ -38,6 +38,8 @@ public class GameCamera : MonoBehaviour {
     protected Vector3 initPos;
     protected Vector3 targetPos;
 
+    protected Coroutine ShakeInstance;
+
     public static GameCamera Instance;
     public static Vector3 MousePosition;
 
@@ -98,6 +100,7 @@ public class GameCamera : MonoBehaviour {
 
     void Update()
     {
+
         MousePosition = (Vector2)Cam.ScreenToWorldPoint(Input.mousePosition);
 
         CurrentMouseHit = Physics2D.Raycast(Cam.ScreenToWorldPoint(Input.mousePosition), transform.forward, Mathf.Infinity);
@@ -265,6 +268,16 @@ public class GameCamera : MonoBehaviour {
         StartCoroutine(FocusDefaultRoutine());
     }
 
+    public void Shake(float Duration, float Power)
+    {
+        if(ShakeInstance != null)
+        {
+            StopCoroutine(ShakeInstance);
+        }
+
+        ShakeInstance = StartCoroutine(ShakeRoutine(Duration, Power));
+    }
+
     IEnumerator FocusDefaultRoutine()
     {
         float t = 0f;
@@ -281,4 +294,44 @@ public class GameCamera : MonoBehaviour {
         Cam.orthographicSize = InitCamSize;
         BlurCam.orthographicSize = InitCamSize;
     }
+
+    IEnumerator ShakeRoutine(float startDuration, float ShakePower, bool smooth = true )
+    {
+        transform.localRotation = Quaternion.identity;
+
+        float shakePercentage;
+        float shakeDuration = startDuration;
+
+        while (shakeDuration > 0.01f)
+        {
+            Vector3 rotationAmount = Random.insideUnitSphere * ShakePower;//A Vector3 to add to the Local Rotation
+            rotationAmount.z = 0;//Don't change the Z; it looks funny.
+
+            shakePercentage = shakeDuration / startDuration;//Used to set the amount of shake (% * startAmount).
+
+            ShakePower = ShakePower * shakePercentage;//Set the amount of shake (% * startAmount).
+            shakeDuration = Mathf.Lerp(shakeDuration, 0, Time.deltaTime);//Lerp the time, so it is less and tapers off towards the end.
+
+
+            if (smooth)
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * ShakePower);
+            else
+                transform.localRotation = Quaternion.Euler(rotationAmount);//Set the local rotation the be the rotation amount.
+
+            yield return 0;
+        }
+
+        float t = 0f;
+        while(t > 1f)
+        {
+            t += 1f * Time.deltaTime;
+
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, t);
+
+            yield return 0;
+        }
+        transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
+        ShakeInstance = null;
+    }
+
 }

@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4549312162685218}
   - component: {fileID: 61866069571000622}
-  - component: {fileID: 114266984523564564}
   - component: {fileID: 198430637423110310}
   - component: {fileID: 199920447879695342}
+  - component: {fileID: 114723836705150874}
   m_Layer: 0
   m_Name: TurtleBossSmash
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364124367180838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.84, y: -21.04, z: -0.044333402}
+  m_LocalPosition: {x: 34.876503, y: 18.872778, z: -0.044333402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.15196419, y: -0.77883816}
@@ -68,7 +68,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.793362, y: 0.5567379}
   m_EdgeRadius: 0
---- !u!114 &114266984523564564
+--- !u!114 &114723836705150874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -76,13 +76,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1364124367180838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b14b5df48ad35540945132b5f1ab6b9, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c576ab80e226d4399be74b140c05ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PopSound: 
   ParentEnemy: {fileID: 0}
   ActionKey: 
   ActionValue: 
   m_Collider: {fileID: 61866069571000622}
+  InitTimeAlive: 1.5
+  InitHitTime: 0.1
 --- !u!198 &198430637423110310
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -93,7 +96,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -143,7 +146,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1372958136
+  randomSeed: 2117377546
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -191,7 +194,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -295,7 +298,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.61
+      scalar: 2.46
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -586,8 +589,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 5
     enabled: 1
-    type: 5
-    angle: 25
+    type: 4
+    angle: 4.650304
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -608,7 +611,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.4072309
       mode: 0
       spread: 0
       speed:
@@ -782,15 +785,60 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 1
+    m_BurstCount: 2
     m_Bursts:
     - serializedVersion: 2
       time: 0
       countCurve:
         serializedVersion: 2
-        minMaxState: 0
+        minMaxState: 3
         scalar: 35
-        minScalar: 0
+        minScalar: 15
+        maxCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 2
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        minCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 2
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+      cycleCount: 1
+      repeatInterval: 0.01
+    - serializedVersion: 2
+      time: 0.2
+      countCurve:
+        serializedVersion: 2
+        minMaxState: 3
+        scalar: 30
+        minScalar: 15
         maxCurve:
           serializedVersion: 2
           m_Curve:
@@ -1499,7 +1547,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1
+      scalar: -5
       minScalar: 0
       maxCurve:
         serializedVersion: 2

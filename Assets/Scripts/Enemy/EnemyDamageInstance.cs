@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyDamageInstance  : MonoBehaviour {
 
+    public string PopSound;
     public Enemy ParentEnemy;
     public string ActionKey;
     public string ActionValue;
@@ -27,6 +28,14 @@ public class EnemyDamageInstance  : MonoBehaviour {
     {
         TimeAlive = 0.1f;
         Hit = false;
+    }
+
+    protected virtual void Start()
+    {
+        if(!string.IsNullOrEmpty(PopSound))
+        {
+            AudioControl.Instance.PlayInPosition(PopSound, transform.position);
+        }
     }
 
     protected virtual void Update()

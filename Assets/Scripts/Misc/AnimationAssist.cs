@@ -94,4 +94,9 @@ public class AnimationAssist : MonoBehaviour {
             Enemy.CastSpellComplete();
         }
     }
+
+    public void CameraShake(float Power)
+    {
+        GameCamera.Instance.Shake(10f, Power);
+    }
 }

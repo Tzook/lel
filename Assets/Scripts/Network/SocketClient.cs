@@ -1602,12 +1602,15 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("hit_spell", node);
     }
 
-    public void SendNpcTeleport(string npcKey, string roomKey)
+    public void SendNpcTeleport(string npcKey, string roomKey, bool instance = false)
     {
         JSONNode node = new JSONClass();
 
         node["npcKey"] = npcKey;
         node["room"] = roomKey;
+        if (instance) {
+            node["instance"] = "true";
+        }
 
         CurrentSocket.Emit("npc_teleport", node);
     }

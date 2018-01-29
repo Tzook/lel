@@ -142,6 +142,12 @@ public class NPC : MonoBehaviour {
                     SocketClient.Instance.SendNpcTeleport(Key, eventValue);
                     break;   
                 }
+            case "TeleportToInstance":
+                {
+                    DialogManager.Instance.StopDialogMode();
+                    SocketClient.Instance.SendNpcTeleport(Key, eventValue, true);
+                    break;   
+                }
         }
     }
 

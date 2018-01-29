@@ -54,7 +54,7 @@ public class Inventory
     public bool canPickItem(ItemInstance item)
     {
         bool canPick = false;
-        if (!String.IsNullOrEmpty(item.Owner) && item.Owner != LocalUserInfo.Me.ClientCharacter.Name) 
+        if (!canPickItemByOwner(item)) 
         {
             // item has an owner and it is not you
             canPick = false;
@@ -89,6 +89,11 @@ public class Inventory
             }
         }
         return canPick;
+    }
+
+    protected bool canPickItemByOwner(ItemInstance item)
+    {
+        return String.IsNullOrEmpty(item.Owner) || item.Owner == LocalUserInfo.Me.ClientCharacter.Name || (LocalUserInfo.Me.CurrentParty != null && LocalUserInfo.Me.CurrentParty.Members.Contains(item.Owner));
     }
 
     public void SwapSlots(int fromIndex, int toIndex)

@@ -55984,6 +55984,12 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: ABeanyRequest
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: How's the shroom problem going?
+      Event: StartDialog
+      Value: OldFriends
+      Condition: QuestAvailable
+      ConditionValue: OldFriends
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
     - Title: OK....
       Event: EndDialog
       Value: 
@@ -56276,8 +56282,166 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
+  - DialogKey: OldFriends
+    Pieces:
+    - Content: Keep it down!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Don't mention this next to Tert!
+      LetterDelay: 0.01
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: And since you asked...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I'm still trying to deal with the problem
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I'm even considering something abit drastic...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: What kind of drastic?
+      Event: StartDialog
+      Value: OldFriends2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Okay...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
+  - DialogKey: OldFriends2
+    Pieces:
+    - Content: Your weapon wasn't that usefull in dealing with them....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: So I was thinking about contacting some old friends who have.....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Different methods of killing.....
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Where are your friends?
+      Event: StartDialog
+      Value: OldFriends3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This sounds too shady for me
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
+  - DialogKey: OldFriends3
+    Pieces:
+    - Content: I'm glad that you asked...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: They live in the caves
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: And to be more accurate
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: In the caves that are under this inn.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: I want you to reach them and tell them that I sent you.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: They will equip you with the right 'tools' for the job.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: What do you say?
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: You can count on me!
+      Event: StartDialog
+      Value: Forgot
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This sounds too shady for me
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
+  - DialogKey: Forgot
+    Pieces:
+    - Content: Almost forgot...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: When you reach to their door
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: Remember to jump infront of it several times.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    - Content: 'They won''t answer unless you do it.
+
+        Alright?'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+    Options:
+    - Title: Got it.
+      Event: StartQuest
+      Value: OldFriends
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This sounds too shady for me
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
   GivingQuests:
   - CleaningUp
+  - OldFriends
   EndingQuests:
   - CleaningUp
   TeleportableScenes: []

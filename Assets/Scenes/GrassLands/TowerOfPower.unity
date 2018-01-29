@@ -21714,20 +21714,149 @@ MonoBehaviour:
       SoundKey: 
       AnimationTrigger: 
     Options:
-    - Title: ..
+    - Title: I want to learn to use a bow.
+      Event: StartDialog
+      Value: UseABow
+      Condition: QuestAvailable
+      ConditionValue: RangerTest
+      CLR: {r: 1, g: 0.9823529, b: 0.3602941, a: 1}
+  - DialogKey: UseABow
+    Pieces:
+    - Content: Then you came to the right place!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The only place!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: TOWER OF POWER!
+      LetterDelay: 0.04
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Which belongs to the...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: TOWER RANGERS!!!!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: '...'
+      Event: StartDialog
+      Value: UseABow2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: UseABow2
+    Pieces:
+    - Content: But before I'll teach you anything...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You must prove me that you worth my...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: precious...
+      LetterDelay: 0.04
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: precious...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: time...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: How?
+      Event: StartDialog
+      Value: UseABow3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: UseABow3
+    Pieces:
+    - Content: By beating one of our villains!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: The Infamous...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Sir "Flaw Ware"!
+      LetterDelay: 0.04
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: He triest to take over the world by using his minions
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Giant living flower plants.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Note that he is quite dangerous, and won't give away so quickly...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I can beat him.
+      Event: BeginQuest
+      Value: RangerTest
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.9364098, b: 0.5808823, a: 1}
+    - Title: I think I can't handle it.
+      Event: StartDialog
+      Value: CantHandle
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: CantHandle
+    Pieces:
+    - Content: Then you are not worthy of my time...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Bye...
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  GivingQuests:
+  - RangerTest
+  EndingQuests:
+  - RangerTest
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Tower Ranger Officer
+  Name: 'Master Ranger '
   Key: shellHillRanger
   Body: {fileID: 613546710}
   Anim: {fileID: 613546709}

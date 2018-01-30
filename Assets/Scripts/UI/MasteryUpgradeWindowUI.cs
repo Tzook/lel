@@ -84,7 +84,9 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
     {
         Vector3 RandomStartingPoint = GameCamera.Instance.Cam.ScreenToWorldPoint(new Vector2(Random.Range(0, Screen.width), -1f));
         RandomStartingPoint = new Vector3(RandomStartingPoint.x, RandomStartingPoint.y, 0f);
-        ResourcesLoader.Instance.GetRecycledObject("Crate").transform.position = RandomStartingPoint;
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("Crate");
+        tempObj.transform.position = RandomStartingPoint;
+        UpgradeBubbles.Add(tempObj);
 
         float t = 0f;
         while(t<1f)

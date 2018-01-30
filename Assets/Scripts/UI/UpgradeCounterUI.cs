@@ -85,6 +85,10 @@ public class UpgradeCounterUI : MonoBehaviour {
     {
         GameObject tempBlob = ResourcesLoader.Instance.GetRecycledObject("PowerBlobEffect");
 
+        tempBlob.transform.position = LocalUserInfo.Me.ClientCharacter.Instance.transform.position;
+
+        tempBlob.GetComponent<TrailRenderer>().Clear();
+
         yield return tempBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, transform, 1f, Random.Range(-3f, 3f));
 
         BurstParticles.Play();

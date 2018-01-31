@@ -73,7 +73,9 @@ public class ProjectileArrow : MonoBehaviour {
                 if (TriggerHit)
                 {
                     //TODO Fix me
-                    //SocketClient.Instance.SendMobTookDamage(ParentActor, TargetCollider.GetComponent<HitBox>().EnemyReference);
+                    List<string> tempList = new List<string>();
+                    tempList.Add(TargetCollider.GetComponent<HitBox>().EnemyReference.Info.ID);
+                    SocketClient.Instance.SendUsedPrimaryAbility(tempList);
                 }
             }
             else

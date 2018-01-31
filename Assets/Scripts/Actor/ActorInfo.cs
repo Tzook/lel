@@ -145,40 +145,9 @@ public class ActorInfo
         IEnumerator enumerator = node["talents"].AsObject.GetEnumerator();
         while (enumerator.MoveNext())
         {
-            PrimaryAbility ability = new PrimaryAbility();
-            ability.Key = ((KeyValuePair<string, JSONNode>)enumerator.Current).Key;
-            if (GetPrimaryAbility(ability.Key) == null) {
-                PrimaryAbilities.Add(ability);
-            }
-        }
-
-        PAPerk tempPerk;
-        for (int i = 0; i < PrimaryAbilities.Count; i++)
-        {
-            enumerator = node["talents"][PrimaryAbilities[i].Key]["perks"].AsObject.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                tempPerk = new PAPerk();
-
-                KeyValuePair<string, JSONNode> currentPair = (KeyValuePair<string, JSONNode>)enumerator.Current;
-
-                tempPerk.Key = currentPair.Key;
-                tempPerk.Points = currentPair.Value.AsInt;
-
-
-                PrimaryAbilities[i].Perks.Add(tempPerk);
-            }
-
-            for (int p = 0; p < node["talents"][PrimaryAbilities[i].Key]["pool"].Count; p++)
-            {
-                PrimaryAbilities[i].PerkPool.Add(node["talents"][PrimaryAbilities[i].Key]["pool"][p].Value);
-            }
-
-            PrimaryAbilities[i].Points = node["talents"][PrimaryAbilities[i].Key]["points"].AsInt;
-            PrimaryAbilities[i].Exp = node["talents"][PrimaryAbilities[i].Key]["exp"].AsInt;
-            PrimaryAbilities[i].LVL = node["talents"][PrimaryAbilities[i].Key]["lvl"].AsInt;
-
+            string key = ((KeyValuePair<string, JSONNode>)enumerator.Current).Key;
+            JSONNode talent = node["talents"][key];
+            AddPrimaryAbility(key, talent);
         }
 
         if (node["stats"] != null)
@@ -209,6 +178,41 @@ public class ActorInfo
         }
 
         RefreshBonuses();
+    }
+
+    public void AddPrimaryAbility(string key, JSONNode Ability)
+    {
+        IEnumerator enumerator;
+        PrimaryAbility ability = new PrimaryAbility();
+        ability.Key = key;
+        if (GetPrimaryAbility(ability.Key) == null)
+        {
+            PrimaryAbilities.Add(ability);
+        }
+        enumerator = Ability["perks"].AsObject.GetEnumerator();
+
+        while (enumerator.MoveNext())
+        {
+            PAPerk tempPerk;
+            tempPerk = new PAPerk();
+
+            KeyValuePair<string, JSONNode> currentPair = (KeyValuePair<string, JSONNode>)enumerator.Current;
+
+            tempPerk.Key = currentPair.Key;
+            tempPerk.Points = currentPair.Value.AsInt;
+
+
+            ability.Perks.Add(tempPerk);
+        }
+
+        for (int p = 0; p < Ability["pool"].Count; p++)
+        {
+            ability.PerkPool.Add(Ability["pool"][p].Value);
+        }
+
+        ability.Points = Ability["points"].AsInt;
+        ability.Exp = Ability["exp"].AsInt;
+        ability.LVL = Ability["lvl"].AsInt;
     }
 
     public Quest GetQuest(string questKey)

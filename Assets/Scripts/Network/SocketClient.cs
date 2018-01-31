@@ -84,6 +84,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
+        CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
         CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
         CurrentSocket.On("actor_blocked", OnActorBlocked);
@@ -514,6 +515,14 @@ public class SocketClient : MonoBehaviour
         {
             actor.Instance.LevelUp();
         }
+    }
+
+    protected void OnActorGainAbility(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor gain ability | " + data.ToString());
+
+        LocalUserInfo.Me.ClientCharacter.AddPrimaryAbility(data["key"].Value, data["ability"]);
     }
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)

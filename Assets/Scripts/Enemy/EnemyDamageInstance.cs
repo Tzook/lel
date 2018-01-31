@@ -22,20 +22,17 @@ public class EnemyDamageInstance  : MonoBehaviour {
         this.ActionKey = actionKey;
         this.ActionValue = actionValue;
         this.gameObject.SetActive(true);
+
+        if (!string.IsNullOrEmpty(PopSound))
+        {
+            AudioControl.Instance.PlayInPosition(PopSound, transform.position);
+        }
     }
 
     protected virtual void OnEnable()
     {
         TimeAlive = 0.1f;
         Hit = false;
-    }
-
-    protected virtual void Start()
-    {
-        if(!string.IsNullOrEmpty(PopSound))
-        {
-            AudioControl.Instance.PlayInPosition(PopSound, transform.position);
-        }
     }
 
     protected virtual void Update()

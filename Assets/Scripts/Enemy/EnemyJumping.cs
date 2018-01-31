@@ -68,11 +68,16 @@ public class EnemyJumping : EnemyMoving
 
             WalkLeft();
 
+            if((Stunnable && Stunned))
+            {
+                break;
+            }
+
             if (isLeftBlocked())
             {
                 yield return StartCoroutine(TryJumpOverLeft());
 
-                if (isLeftBlocked() || Stunned)
+                if (isLeftBlocked())
                 {
                     break;
                 }
@@ -99,11 +104,16 @@ public class EnemyJumping : EnemyMoving
 
             WalkRight();
 
+            if((Stunnable && Stunned))
+            {
+                break;
+            }
+
             if (isRightBlocked())
             {
                 yield return StartCoroutine(TryJumpOverRight());
 
-                if (isRightBlocked() || Stunned)
+                if (isRightBlocked())
                 {
                     break;
                 }
@@ -132,10 +142,15 @@ public class EnemyJumping : EnemyMoving
             {
                 if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
                 {
+                    if((Stunnable && Stunned))
+                    {
+                        break;
+                    }
+
                     if (isRightBlocked())
                     {
                         yield return StartCoroutine(TryJumpOverRight());
-                        if(isRightBlocked() || Stunned)
+                        if(isRightBlocked())
                         {
                             break;
                         }
@@ -148,10 +163,15 @@ public class EnemyJumping : EnemyMoving
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
+                    if((Stunnable && Stunned))
+                    {
+                        break;
+                    }
+
                     if (isLeftBlocked())
                     {
                         yield return StartCoroutine(TryJumpOverLeft());
-                        if (isLeftBlocked() || Stunned)
+                        if (isLeftBlocked())
                         {
                             break;
                         }

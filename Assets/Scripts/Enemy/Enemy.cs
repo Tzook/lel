@@ -248,7 +248,7 @@ public class Enemy : MonoBehaviour {
 
             CurrentTarget = null;
 
-            AudioControl.Instance.PlayInPosition(DeathSounds[Random.Range(0, WoundSounds.Count)], transform.position);
+            AudioControl.Instance.PlayInPosition(DeathSounds[Random.Range(0, DeathSounds.Count)], transform.position);
 
             ClearBuffs();
 

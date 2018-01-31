@@ -18,6 +18,9 @@ public class EnemyMoving : Enemy
     [SerializeField]
     protected BoxCollider2D Collider;
 
+    [SerializeField]
+    protected bool Stunnable = true;
+
     protected RaycastHit2D SideRayRight;
     protected RaycastHit2D SideRayLeft;
 
@@ -233,7 +236,7 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            if (Stunned || isLeftBlocked())
+            if ((Stunnable && Stunned) || isLeftBlocked())
             {
                 break;
             }
@@ -254,7 +257,7 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            if (Stunned || isRightBlocked())
+            if ((Stunnable && Stunned) || isRightBlocked())
             {
                 break;
             }
@@ -281,7 +284,7 @@ public class EnemyMoving : Enemy
             {
                 if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
                 {
-                    if (Stunned || isRightBlocked())
+                    if ((Stunnable && Stunned) || isRightBlocked())
                     {
                         StandStill();
                     }
@@ -293,7 +296,7 @@ public class EnemyMoving : Enemy
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
-                    if (Stunned ||isLeftBlocked())
+                    if ((Stunnable && Stunned) || isLeftBlocked())
                     {
                         StandStill();
                     }

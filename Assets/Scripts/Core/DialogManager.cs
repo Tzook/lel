@@ -295,6 +295,10 @@ public class DialogManager : MonoBehaviour {
 
                     break;
                 }
+            case "QuestCompleted":
+                {
+                    return LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(option.ConditionValue);
+                }
             case "ItemEquipped":
                 {
                     return LocalUserInfo.Me.ClientCharacter.Equipment.isEquipping(option.ConditionValue);

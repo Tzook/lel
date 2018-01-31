@@ -10,9 +10,16 @@ public class EnemyProjectileExplosion : EnemyDamageInstance
     [SerializeField]
     protected int Amount;
 
+    [SerializeField]
+    protected float Delay = 0f;
+
+    [SerializeField]
+    protected float InitTimeAlive = 1f;
+
+
     protected override void OnEnable()
     {
-        TimeAlive = 2f;
+        TimeAlive = InitTimeAlive;
         Hit = false;
     }
 
@@ -20,11 +27,27 @@ public class EnemyProjectileExplosion : EnemyDamageInstance
     {
         base.SetInfo(instance, actionKey, actionValue);
 
+        StartCoroutine(TimerRoutine());
+    }
+
+    IEnumerator TimerRoutine()
+    {
+        yield return new WaitForSeconds(Delay);
+
         GameObject tempObj;
         for (int i = 0; i < Amount; i++)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject(ProjectilePrefab);
-            tempObj.GetComponent<EnemyProjectile>().SetInfo(this.ParentEnemy, this.ActionKey, this.ActionValue);
+
+            if (tempObj.GetComponent<EnemyProjectile>() != null)
+            {
+                tempObj.GetComponent<EnemyProjectile>().SetInfo(this.ParentEnemy, this.ActionKey, this.ActionValue);
+            }
+            else if(tempObj.GetComponent<EnemyDamageInstance>() != null)
+            {
+                tempObj.GetComponent<EnemyDamageInstance>().SetInfo(this.ParentEnemy, this.ActionKey, this.ActionValue);
+            }
+
             tempObj.transform.position = transform.position;
             tempObj.transform.rotation = Quaternion.Euler(0f, 0f, i * (360f / Amount));
         }

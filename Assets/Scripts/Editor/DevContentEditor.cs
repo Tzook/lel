@@ -10,6 +10,7 @@
  * monster addLootMonsterLevel 'ItemKey' 'MonsterLevel'     - Will add this item in monsters above level
  * monster deleteLootMonsterLevel 'ItemKey' 'MonsterLevel'  - Will delete this item in monsters below level
  * monster ClearLootDuplicates
+ * monster cloneLoot 'FromMonsterKey' 'ToMonsterKey' 
  */
 
 using System.Collections;
@@ -597,6 +598,18 @@ public class DevContentEditor : Editor
                             currentInfo.Monsters[i].PossibleLoot.Remove(toDelete[b]);
                         }
                     }
+                }
+            }
+            else if(WordNumber(1) == "cloneLoot")
+            {
+                Undo.RecordObject(target, "Clone loot from monster to monster");
+
+                DevMonsterInfo monsterFrom = currentInfo.GetMonster(WordNumber(2));
+                DevMonsterInfo monsterTo = currentInfo.GetMonster(WordNumber(3));
+
+                foreach(LootInstance loot in monsterFrom.PossibleLoot)
+                {
+                    monsterTo.PossibleLoot.Add(loot);
                 }
             }
 

@@ -2207,19 +2207,20 @@ MonoBehaviour:
   - {fileID: 633287671}
   - {fileID: 1892973669}
   - {fileID: 575300230}
-  Npcs: []
+  Npcs:
+  - {fileID: 1639302277}
   miniMapInfo:
-    left: -91.22629
-    right: -24.101398
-    top: -12.385612
-    bottom: -48.299934
+    left: -105.3685
+    right: -17.764793
+    top: -12.369573
+    bottom: -48.75705
     coliders:
     - coliders:
-      - {x: -91.22629, y: -48.18663}
-      - {x: -90.53428, y: -20.696377}
-      - {x: -90.53428, y: -20.696377}
-      - {x: -84.09394, y: -20.755466}
-      - {x: -84.09394, y: -20.755466}
+      - {x: -105.281166, y: -47.71966}
+      - {x: -105.3685, y: -20.817068}
+      - {x: -105.3685, y: -20.817068}
+      - {x: -84.08971, y: -20.75092}
+      - {x: -84.08971, y: -20.75092}
       - {x: -85.77927, y: -22.564068}
       - {x: -85.63985, y: -24.20234}
       - {x: -85.63985, y: -24.20234}
@@ -2230,20 +2231,19 @@ MonoBehaviour:
       - {x: -35.155727, y: -20.854774}
       - {x: -35.495617, y: -17.998175}
       - {x: -35.495617, y: -17.998175}
-      - {x: -34.348583, y: -17.880516}
-      - {x: -34.348583, y: -17.880516}
-      - {x: -34.528515, y: -15.258748}
-      - {x: -35.651897, y: -13.710244}
-      - {x: -36.67584, y: -12.385612}
-      - {x: -36.67584, y: -12.385612}
-      - {x: -33.387035, y: -12.54842}
-      - {x: -24.101398, y: -13.011216}
-      - {x: -24.101398, y: -13.011216}
-      - {x: -25.531765, y: -20.766544}
-      - {x: -25.376198, y: -23.026375}
-      - {x: -26.895924, y: -48.299934}
-      - {x: -26.895924, y: -48.299934}
-      - {x: -91.22629, y: -48.18663}
+      - {x: -34.34876, y: -17.880535}
+      - {x: -34.34876, y: -17.880535}
+      - {x: -34.532104, y: -15.247469}
+      - {x: -35.501255, y: -13.330428}
+      - {x: -35.501255, y: -13.330428}
+      - {x: -36.99983, y: -12.369573}
+      - {x: -36.99983, y: -12.369573}
+      - {x: -33.38585, y: -12.548483}
+      - {x: -20.04741, y: -13.390216}
+      - {x: -20.04741, y: -13.390216}
+      - {x: -17.764793, y: -48.75705}
+      - {x: -17.764793, y: -48.75705}
+      - {x: -105.281166, y: -47.71966}
     - coliders:
       - {x: -85.78313, y: -23.974422}
       - {x: -82.772575, y: -23.056364}
@@ -2258,10 +2258,14 @@ MonoBehaviour:
       - {x: -47.955936, y: -23.305052}
     - coliders:
       - {x: -47.57707, y: -21.946297}
-      - {x: -43.988075, y: -21.358686}
+      - {x: -43.97077, y: -21.354046}
+      - {x: -42.590305, y: -20.488646}
     - coliders:
-      - {x: -43.67885, y: -19.054085}
-      - {x: -40.89891, y: -19.005747}
+      - {x: -42.746445, y: -19.692083}
+      - {x: -41.680458, y: -19.716944}
+    - coliders:
+      - {x: -41.976063, y: -20.562916}
+      - {x: -40.711845, y: -21.747889}
     - coliders:
       - {x: -39.552975, y: -20.545933}
       - {x: -38.943054, y: -21.087336}
@@ -4352,7 +4356,7 @@ MonoBehaviour:
     - Content: Don't lie to me...
       LetterDelay: 0.05
       Pitch: 1
-      SoundKey: 
+      SoundKey: sound_buhaha_normal
       AnimationTrigger: 
     - Content: You are not one of them...
       LetterDelay: 0.03
@@ -4362,7 +4366,7 @@ MonoBehaviour:
     - Content: I can identify a tower-ranger when I see one.
       LetterDelay: 0.05
       Pitch: 0.9
-      SoundKey: 
+      SoundKey: sound_buhaha_heavy
       AnimationTrigger: 
     Options:
     - Title: GO GO TOWER RANGERS!!!
@@ -4423,7 +4427,7 @@ MonoBehaviour:
     - Content: With my minion flowers!
       LetterDelay: 0.05
       Pitch: 0.9
-      SoundKey: swosh
+      SoundKey: sound_buhaha_heaviest
       AnimationTrigger: Swap
     Options:
     - Title: Let's fight!
@@ -4437,12 +4441,12 @@ MonoBehaviour:
     - Content: Damn them indeed!
       LetterDelay: 0.05
       Pitch: 1
-      SoundKey: 
+      SoundKey: sound_buhaha_normal
       AnimationTrigger: 
     - Content: Join me instead!
       LetterDelay: 0.03
       Pitch: 0.9
-      SoundKey: 
+      SoundKey: sound_buhaha_heavy
       AnimationTrigger: 
     Options:
     - Title: GO GO TOWER RANGERS!!!
@@ -4462,17 +4466,17 @@ MonoBehaviour:
     - Content: Yes....!
       LetterDelay: 0.05
       Pitch: 1
-      SoundKey: 
+      SoundKey: sound_buhaha_heaviest
       AnimationTrigger: 
     - Content: YESS!!
       LetterDelay: 0.03
       Pitch: 0.9
-      SoundKey: 
+      SoundKey: sound_buhaha_heavy
       AnimationTrigger: 
     - Content: YESS!
       LetterDelay: 0.03
       Pitch: 0.9
-      SoundKey: 
+      SoundKey: sound_buhaha_normal
       AnimationTrigger: 
     Options:
     - Title: GO GO TOWER RANGERS!!!
@@ -4489,7 +4493,9 @@ MonoBehaviour:
       CLR: {r: 1, g: 0.007352948, b: 0.007352948, a: 1}
   GivingQuests: []
   EndingQuests: []
-  TeleportableScenes: []
+  TeleportableScenes:
+  - sceneKey: FlowerArena
+    portalKey: Entrance
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 

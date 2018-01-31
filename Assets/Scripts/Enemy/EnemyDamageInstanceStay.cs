@@ -6,6 +6,7 @@ public class EnemyDamageInstanceStay : EnemyDamageInstance
 {
     public float InitTimeAlive = 1f;
     public float InitHitTime = 1f;
+    public bool Shake = false;
 
     float HitTime;
 
@@ -14,6 +15,11 @@ public class EnemyDamageInstanceStay : EnemyDamageInstance
         TimeAlive = InitTimeAlive;
         HitTime = InitHitTime;
         Hit = false;
+
+        if (Shake)
+        {
+            GameCamera.Instance.Shake(10f, 10f);
+        }
     }
 
     protected override void Update()

@@ -6,6 +6,8 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     ActorController Controller;
 
+    Animator m_Anim;
+
     [SerializeField]
     ParticleSystem m_Particles;
 
@@ -17,6 +19,11 @@ public class AnimationAssist : MonoBehaviour {
 
     [SerializeField]
     Transform WeaponBone;
+
+    private void Awake()
+    {
+        m_Anim = GetComponent<Animator>();
+    }
 
     public void PlaySound(string soundKey)
     {
@@ -98,5 +105,15 @@ public class AnimationAssist : MonoBehaviour {
     public void CameraShake(float Power)
     {
         GameCamera.Instance.Shake(10f, Power);
+    }
+
+    public void SetAnimatorBoolTrue(string boolKey)
+    {
+        m_Anim.SetBool(boolKey, true);
+    }
+
+    public void SetAnimatorBoolFalse(string boolKey)
+    {
+        m_Anim.SetBool(boolKey, false);
     }
 }

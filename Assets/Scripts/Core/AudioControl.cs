@@ -23,11 +23,18 @@ public class AudioControl : MonoBehaviour {
     {
         m_res = GetComponent<ResourcesLoader>();
         Instance = this;
+
+        m_dicVolumeGroup.Add("Default", 1f);
     }
 
     #endregion
 
     #region Methods
+    
+    public float GetVolumeByTag(string tag)
+    {
+        return m_dicVolumeGroup[tag];
+    }
 
     public void PlayInPosition(string gClip, Vector3 pos)
     {
@@ -58,6 +65,9 @@ public class AudioControl : MonoBehaviour {
         if (m_dicVolumeGroup.ContainsKey(currentInstance.tag))
         {
             currentInstance.GetComponent<AudioSource>().volume = m_dicVolumeGroup[currentInstance.tag];
+        }
+        else
+        {
         }
     }
 

@@ -2363,8 +2363,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 225727453}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.51, y: 11.03, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -7.51, y: 11.07, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 1199024581}
   - {fileID: 1153884652}
@@ -5978,8 +5978,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543962034}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.332, y: -0.17, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -1.332, y: -0.13000004, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 122800026}
   - {fileID: 1750191872}
@@ -16409,8 +16409,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573707202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.68, y: 3.65, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -4.68, y: 3.69, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 1829094085}
   - {fileID: 191143495}
@@ -16656,8 +16656,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1592090423}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.001, y: 3.749, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -7.001, y: 3.789, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 1005645933}
   - {fileID: 1208915980}
@@ -20475,8 +20475,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1953060630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.095, y: 10.961, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -2.095, y: 11.001, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 2114528939}
   - {fileID: 2112386127}
@@ -21720,6 +21720,24 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: RangerTest
       CLR: {r: 1, g: 0.9823529, b: 0.3602941, a: 1}
+    - Title: '"Sir Flaw Ware" is no longer a problem.'
+      Event: StartDialog
+      Value: BeatenVillain
+      Condition: QuestComplete
+      ConditionValue: RangerTest
+      CLR: {r: 1, g: 0.9843138, b: 0.36078432, a: 1}
+    - Title: Tell me more about firing arrows...
+      Event: StartDialog
+      Value: TellMeMoreRanged
+      Condition: QuestCompleted
+      ConditionValue: RangerTest
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: '...'
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: UseABow
     Pieces:
     - Content: Then you came to the right place!
@@ -21771,7 +21789,7 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
-    - Content: precious...
+    - Content: very precious...
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
@@ -21805,12 +21823,12 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
-    - Content: He triest to take over the world by using his minions
+    - Content: He currently tries to take over the world along with his minions...
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
-    - Content: Giant living flower plants.
+    - Content: Giant living flowers.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
@@ -21820,9 +21838,15 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+    - Content: His current location must be in the flower garden below the bridge
+        to the right...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
     Options:
     - Title: I can beat him.
-      Event: BeginQuest
+      Event: StartQuest
       Value: RangerTest
       Condition: 
       ConditionValue: 
@@ -21847,6 +21871,76 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: BeatenVillain
+    Pieces:
+    - Content: GREAT!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: GO GO TOWER RANGERS!!!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Now, I'll teach you how to use a bow...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: If you wanna know more about firing arrows, feel free to ask...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: RangerTest
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.90851927, b: 0.39705884, a: 1}
+  - DialogKey: TellMeMoreRanged
+    Pieces:
+    - Content: Well, now you have the "Ranged" ability...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You can switch to "Ranged" by pressing on the "Primary Ability" button
+        at the bottom right of the screen...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Or by pressing "Tab" and the on the ability's number.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You can only use it with a ranged weapon...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You can also train your ability by hitting enemies with arrows...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Training the ability will get you rewarded with more perks and special
+        skills!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: Thanks!
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests:
   - RangerTest
   EndingQuests:
@@ -21896,8 +21990,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2042211572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.225, y: 11.329003, z: 0}
-  m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
+  m_LocalPosition: {x: -6.225, y: 11.369003, z: 0}
+  m_LocalScale: {x: 0.2834963, y: 0.28349623, z: 0.28349623}
   m_Children:
   - {fileID: 425814903}
   - {fileID: 645490204}

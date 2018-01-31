@@ -105,7 +105,10 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
     {
         foreach (GameObject obj in UpgradeBubbles)
         {
-            obj.SetActive(false);
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
         }
 
         UpgradeBubbles.Clear();

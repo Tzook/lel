@@ -13,6 +13,7 @@ public class ShortcutsController : MonoBehaviour
 
     public void Update()
     {
+        return;
         if (!Game.Instance.InGame || Game.Instance.InChat)
         {
             return;

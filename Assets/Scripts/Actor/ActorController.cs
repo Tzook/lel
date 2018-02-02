@@ -511,6 +511,16 @@ public class ActorController : MonoBehaviour
         Aim();
         StopAim();
         DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
+        
+        if(spell == null)
+        {
+            return;
+        }
+
+        if(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL < spell.Level)
+        {
+            return;
+        }
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 

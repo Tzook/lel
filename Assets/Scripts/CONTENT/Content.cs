@@ -211,7 +211,14 @@ public class Content : MonoBehaviour {
 
     public DevSpell GetSpellAtIndex(int iIndex)
     {
-        return GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Spells[iIndex];
+        DevPrimaryAbility tempPA = GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
+
+        if (iIndex < tempPA.Spells.Count)
+        {
+            return tempPA.Spells[iIndex];
+        }
+
+        return null;
     }
 
 

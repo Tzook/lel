@@ -323,22 +323,20 @@ public class Game : MonoBehaviour {
 
         string lastScene = SceneManager.GetActiveScene().name;
 
-        if (lastScene != scene)
+        ResourcesLoader.Instance.ClearObjectPool();
+
+        CurrentScene = null;
+
+        SceneManager.LoadScene(scene);
+
+        yield return 0;
+
+        while (!SceneManager.GetSceneByName(scene).isLoaded)
         {
-            ResourcesLoader.Instance.ClearObjectPool();
-
-            CurrentScene = null;
-
-            SceneManager.LoadScene(scene);
-
-            while (lastScene == SceneManager.GetActiveScene().name)
-            {
-                yield return 0;
-            }
-
-            CurrentScene = new SceneControl();
-
+            yield return 0;
         }
+
+        CurrentScene = new SceneControl();
 
         SocketClient.Instance.EmitLoadedScene(actorInfo);
 

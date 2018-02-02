@@ -885,11 +885,19 @@ public class SocketClient : MonoBehaviour
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
-        if (actor != null && LocalUserInfo.Me.ClientCharacter != actor)
+        if (actor != null)
         {
-            actor.Instance.MovementController.HideHealth();
+            if (LocalUserInfo.Me.ClientCharacter != actor)
+            {
+                actor.Instance.MovementController.HideHealth();
+            }
+            else
+            {
+                LocalUserInfo.Me.CurrentParty = null;
+            }
         }
 
+        
         InGameMainMenuUI.Instance.RefreshParty();
 
         InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has left the party.", Color.red, true);
@@ -901,7 +909,10 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["char_name"].Value + " has joined the party");
 
-        LocalUserInfo.Me.CurrentParty.Members.Add(data["char_name"].Value);
+        if (!LocalUserInfo.Me.CurrentParty.Members.Contains(data["char_name"].Value))
+        {
+            LocalUserInfo.Me.CurrentParty.Members.Add(data["char_name"].Value);
+        }
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActorByName(data["char_name"].Value);
 
@@ -909,9 +920,15 @@ public class SocketClient : MonoBehaviour
         {
             if (LocalUserInfo.Me.ClientCharacter == actor)
             {
+                ActorInfo otherActor;
                 for(int i=0;i<LocalUserInfo.Me.CurrentParty.Members.Count;i++)
                 {
-                    Game.Instance.CurrentScene.GetActorByName(LocalUserInfo.Me.CurrentParty.Members[i]).Instance.MovementController.ShowHealth();
+                    otherActor = Game.Instance.CurrentScene.GetActorByName(LocalUserInfo.Me.CurrentParty.Members[i]);
+                    if (otherActor.ID != LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        otherActor.Instance.MovementController.ShowHealth();
+                    }
+                    
                 }
             }
             else

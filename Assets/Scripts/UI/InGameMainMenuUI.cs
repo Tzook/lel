@@ -88,7 +88,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     QuestRewardsWindowUI QuestRewardWindow;
 
     [SerializeField]
-    PrimaryAbilitiesGridUI PrimaryAbilitiesGrid;
+    public PrimaryAbilitiesGridUI PrimaryAbilitiesGrid;
 
     [SerializeField]
     Image PrimaryAbilityIcon;
@@ -279,6 +279,11 @@ public class InGameMainMenuUI : MonoBehaviour {
                     HidePrimaryAbilitiesWindow();
                 }
             }
+        }
+
+        if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
+        {
+            TogglePrimaryAbilities();
         }
 
     }

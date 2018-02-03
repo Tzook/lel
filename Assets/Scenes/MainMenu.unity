@@ -40731,7 +40731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 40.999756, y: -39}
+  m_AnchoredPosition: {x: 40.999756, y: -38.99994}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -42220,7 +42220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 34.5, y: -31}
+  m_AnchoredPosition: {x: 34.5, y: -30.999939}
   m_SizeDelta: {x: 148, y: 152}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &2041
@@ -46374,19 +46374,19 @@ MonoBehaviour:
   - Name: Quests
     KeyCode: 108
   - Name: PrimaryAbility1
-    KeyCode: 260
+    KeyCode: 49
   - Name: PrimaryAbility2
-    KeyCode: 283
+    KeyCode: 50
   - Name: PrimaryAbility3
-    KeyCode: 284
+    KeyCode: 51
   - Name: PrimaryAbility4
-    KeyCode: 285
+    KeyCode: 52
   - Name: PrimaryAbility5
-    KeyCode: 286
+    KeyCode: 53
   - Name: PrimaryAbility6
-    KeyCode: 287
+    KeyCode: 54
   - Name: PrimaryAbility7
-    KeyCode: 288
+    KeyCode: 55
   - Name: CompletedQuests
     KeyCode: 112
   - Name: Shortcuts
@@ -46405,6 +46405,8 @@ MonoBehaviour:
     KeyCode: 53
   - Name: Spell6
     KeyCode: 54
+  - Name: Primary Abilities Panel
+    KeyCode: 9
 --- !u!114 &2252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50057,7 +50059,7 @@ MonoBehaviour:
     InProgressDescription: The Janitor in ShellHill's inn is getting stranger and
       stranger. He asked me to meet some of his 'old friends' who live in a cave below
       the inn
-    QuestCompleteDescription: 'This was a chilling surprise
+    QuestCompleteDescription: 'This was a chilling surprise...!
 
 '
     FacePrefab: BanboQuest
@@ -50111,6 +50113,39 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility:
       Name: range
+      Icon: {fileID: 0}
+      PAColor: {r: 0, g: 0, b: 0, a: 0}
+      Perks: []
+      Spells: []
+      InitialPerks: []
+      statEnumState: 0
+      hitTypeEnumState: 0
+      ManaCost: 0
+    RewardClass: 
+    RewardExp: 100
+  - Name: Frost Test
+    Key: FrostTest
+    InProgressDescription: To join the frost cult I must prove the face of frost my
+      strength
+    QuestCompleteDescription: I've proven my strength to the face of frost...
+    FacePrefab: FaceOfFrostQuest
+    Conditions:
+    - Condition: hunt
+      Type: FlowerManBoss
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    QuestsStates: []
+    RequiredClass: 
+    MinimumLevel: 8
+    RewardItems: []
+    RewardSTR: 0
+    RewardMAG: 0
+    RewardDEX: 3
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility:
+      Name: 
       Icon: {fileID: 0}
       PAColor: {r: 0, g: 0, b: 0, a: 0}
       Perks: []
@@ -69026,7 +69061,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 103338240}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40486dda9b1287c41838ef4f6b7624b8, type: 3}
   m_Name: 
@@ -87842,6 +87877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CG: {fileID: 1298705611}
   Container: {fileID: 1298705608}
+  isOpen: 0
 --- !u!1 &1301409799
 GameObject:
   m_ObjectHideFlags: 0

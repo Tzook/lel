@@ -16,7 +16,7 @@ public class ChatlogUI : MonoBehaviour
 
     private Dictionary<Color, bool> toggleState;
 
-    void Awake()
+    void Start()
     {
         Instance = this;
         toggleState = new Dictionary<Color, bool>();

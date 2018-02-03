@@ -14,6 +14,11 @@ public class SpellAreaUI : MonoBehaviour
 
     public void Refresh(bool AbilitySwitch = false)
     {
+        if(!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         StopAllCoroutines();
 
         StartCoroutine(RefreshRoutine(AbilitySwitch));

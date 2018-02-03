@@ -11,28 +11,27 @@ public class ShortcutsController : MonoBehaviour
     private Dictionary<string, Action> keyToAction = new Dictionary<string, Action>();
     private List<GameObject> bubbles = new List<GameObject>();
 
-    public void Update()
-    {
-        return;
-        if (!Game.Instance.InGame || Game.Instance.InChat)
-        {
-            return;
-        }
-        if (inMood)
-        {
-            // TODO disable other actions when in mood
-            // TODO improve UI for being in the mood
-            WaitForActionKey();
-            WaitForExitingKey();
-        }
-        else 
-        {
-            if (Input.GetKeyDown(InputMap.Map["Shortcuts"])) 
-            {
-                MapActionsToKeys();
-            }
-        }
-    }
+    //public void Update()
+    //{
+    //    if (!Game.Instance.InGame || Game.Instance.InChat)
+    //    {
+    //        return;
+    //    }
+    //    if (inMood)
+    //    {
+    //        // TODO disable other actions when in mood
+    //        // TODO improve UI for being in the mood
+    //        WaitForActionKey();
+    //        WaitForExitingKey();
+    //    }
+    //    else 
+    //    {
+    //        if (Input.GetKeyDown(InputMap.Map["Shortcuts"])) 
+    //        {
+    //            MapActionsToKeys();
+    //        }
+    //    }
+    //}
 
     private void WaitForActionKey()
     {

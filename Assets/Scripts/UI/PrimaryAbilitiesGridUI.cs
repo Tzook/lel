@@ -12,10 +12,12 @@ public class PrimaryAbilitiesGridUI : MonoBehaviour {
     [SerializeField]
     Transform Container;
 
+    public bool isOpen;
+
 	public void Show()
     {
         this.gameObject.SetActive(true);
-
+        isOpen = true;
         ClearGrid();
 
         GameObject tempObj;
@@ -51,11 +53,12 @@ public class PrimaryAbilitiesGridUI : MonoBehaviour {
 
     public void Hide()
     {
+        isOpen = false;
         StopAllCoroutines();
         this.gameObject.SetActive(false);
     }
 
-    public void SetPrimaryAbilitiy(string key)
+    public void SetPrimaryAbility(string key)
     {
         LocalUserInfo.Me.ClientCharacter.SwitchPrimaryAbility(key);
         Hide();
@@ -65,7 +68,7 @@ public class PrimaryAbilitiesGridUI : MonoBehaviour {
     {
         button.onClick.AddListener(delegate
         {
-            SetPrimaryAbilitiy(abilityKey);
+            SetPrimaryAbility(abilityKey);
         });
     }
 

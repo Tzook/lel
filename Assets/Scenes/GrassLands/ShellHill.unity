@@ -38254,6 +38254,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 256
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.827}
+--- !u!1 &738709477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1259513383543036, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 738709481}
+  - component: {fileID: 738709480}
+  - component: {fileID: 738709479}
+  - component: {fileID: 738709478}
+  m_Layer: 2
+  m_Name: Portal (7)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!61 &738709478
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 61002359517793564, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738709477}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.22219056, y: -0.31088322}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.97, y: 1.97}
+    newSize: {x: 1.97, y: 1.97}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5256189, y: 1.3482336}
+  m_EdgeRadius: 0
+--- !u!114 &738709479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738709477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: ShellHillAlleyEntrance
+  TargetPortal: Entrance
+  TargetLevel: ShellHillAlley
+  StartShut: 0
+  RequiresItems: []
+--- !u!210 &738709480
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 210953425027317772, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738709477}
+  m_Enabled: 1
+  m_SortingLayerID: -1262447697
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+--- !u!4 &738709481
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738709477}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -62.11, y: -18.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.7352292}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 422
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &739390431
 GameObject:
   m_ObjectHideFlags: 0
@@ -43630,6 +43717,7 @@ MonoBehaviour:
   - {fileID: 1528604508}
   - {fileID: 1487656522}
   - {fileID: 392253650}
+  - {fileID: 738709479}
   Spawners: []
   Npcs:
   - {fileID: 1301612023}

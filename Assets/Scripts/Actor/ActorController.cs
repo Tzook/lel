@@ -132,16 +132,15 @@ public class ActorController : MonoBehaviour
                 Instance.AttemptPickUp();
             }
 
-            for (int i = 0; i < Instance.Info.PrimaryAbilities.Count; i++)
-            {
-                if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
-                {
-                    Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i].Key);
-                    InturruptAttack();
-                    EndAttack();
+            //for (int i = 0; i < Instance.Info.PrimaryAbilities.Count; i++)
+            //{
+            //    if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
+            //    {
+            //        Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i].Key);
                     
-                }
-            }
+                    
+            //    }
+            //}
 
 
             if (!Invincible)
@@ -229,14 +228,29 @@ public class ActorController : MonoBehaviour
         {
             AttackCharge();
 
-            if (SpellCooldown <= 0)
+            if (InGameMainMenuUI.Instance.PrimaryAbilitiesGrid.isOpen)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < LocalUserInfo.Me.ClientCharacter.PrimaryAbilities.Count; i++)
                 {
-                    if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
+                    if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
                     {
-                        CastSpell(i);
-                        SpellCooldown = 0.5f;
+                        InGameMainMenuUI.Instance.PrimaryAbilitiesGrid.SetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
+                        InturruptAttack();
+                        EndAttack();
+                    }
+                }
+            }
+            else
+            {
+                if (SpellCooldown <= 0)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
+                        {
+                            CastSpell(i);
+                            SpellCooldown = 0.5f;
+                        }
                     }
                 }
             }

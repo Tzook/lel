@@ -377,7 +377,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399450611759512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.37106133, y: -26.918, z: 0}
+  m_LocalPosition: {x: 7.280147, y: -17.001558, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4763122979054452}
@@ -628,7 +628,7 @@ MonoBehaviour:
   Anim: {fileID: 95510743238670904}
   m_HitBox: {fileID: 61072550079561762}
   m_AlphaGroup: {fileID: 114509358650249398}
-  HurtTypes: 2
+  HurtTypes: 3
   DeathTypes: 2
   Sprites:
   - {fileID: 212803346542560290}
@@ -651,12 +651,21 @@ MonoBehaviour:
   IdleVarriations: 1
   VarriationChance: 3
   m_HealthBar: {fileID: 0}
+  SpellInCast:
+    Key: 
+    Level: 0
+    Mana: 0
+    ColliderPrefab: 
+    Perks: []
+    Icon: {fileID: 0}
+    HitSound: 
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 0.3
   MaxChaseDistance: 20
   Collider: {fileID: 61000012732278876, guid: bbbe71b709742d9408e6ffb2bfb72740, type: 2}
+  Stunnable: 1
 --- !u!114 &114329787711994672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -672,6 +681,7 @@ MonoBehaviour:
   m_Particles: {fileID: 198866875190612776}
   ArrowObject: {fileID: 0}
   Enemy: {fileID: 114108471569125690}
+  WeaponBone: {fileID: 0}
 --- !u!114 &114509358650249398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,7 +775,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       scalar: 2
-      minScalar: 0
+      minScalar: 0.0001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1210,11 +1220,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -1883,6 +1893,47 @@ ParticleSystem:
           time: 1
           value: 0.5
           inSlope: 0.5
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    speedModifier:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
@@ -3243,6 +3294,7 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
+    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -3287,12 +3339,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
+    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0

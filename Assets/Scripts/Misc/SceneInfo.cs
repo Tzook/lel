@@ -20,8 +20,17 @@ public class SceneInfo : MonoBehaviour {
 
     public static SceneInfo Instance;
 
+    public List<SceneStateObject> SceneState = new List<SceneStateObject>();
+
     void Awake()
     {
         Instance = this;
     }
+}
+
+[System.Serializable]
+public class SceneStateObject
+{
+    public string Key;
+    public string Value;
 }

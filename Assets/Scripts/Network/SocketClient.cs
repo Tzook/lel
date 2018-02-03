@@ -52,6 +52,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_move_room", OnMoveRoom);
         CurrentSocket.On("bitch_please", OnBitchPlease);
         CurrentSocket.On("actor_bitch", OnActorBitch);
+        CurrentSocket.On("room_state", OnRoomState);
 
         CurrentSocket.On("chat", OnChatMessage);
         CurrentSocket.On("party_chat", OnPartyChat);
@@ -279,6 +280,17 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor Bitch "+ data["is_bitch"].AsBool);
 
         Game.Instance.SetBitch(data["is_bitch"].AsBool);
+    }
+
+    protected void OnRoomState(Socket socket, Packet packet, params object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        string key = data["key"].Value;
+        string value = data["value"].Value;
+        BroadcastEvent("Room State "+ key + ": " + value);
+
+        SceneState.Instance.OnStateChanged(key, value);
     }
 
     protected void OnItemDisappear(Socket socket, Packet packet, object[] args)
@@ -1235,6 +1247,16 @@ public class SocketClient : MonoBehaviour
         JSONNode node = new JSONClass();
         node["key"] = requestKey;
         CurrentSocket.Emit("bitch_please", node);
+    }
+
+    public void SendUpdateRoomState(string key, string value)
+    {
+        JSONNode node = new JSONClass();
+        
+        node["key"] = key;
+        node["value"] = value;
+        
+        CurrentSocket.Emit("update_room_state", node);
     }
 
     public void SendChatMessage(string message)

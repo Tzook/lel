@@ -22,4 +22,12 @@ public class ParticlesExecuter : MonoBehaviour {
             particles.Play();
         }
     }
+
+    public void StopParticles()
+    {
+        foreach (ParticleSystem particles in ParticlesList)
+        {
+            particles.Stop();
+        }
+    }
 }

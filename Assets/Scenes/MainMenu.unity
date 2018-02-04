@@ -40731,7 +40731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.1813}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 40.999756, y: -38.99994}
+  m_AnchoredPosition: {x: 40.999756, y: -39}
   m_SizeDelta: {x: 141, y: 139}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &1952
@@ -47332,6 +47332,92 @@ MonoBehaviour:
         Value: 10
       Icon: {fileID: 0}
       HitSound: sound_hit_4
+  - MonsterKey: FrostWizardBoss
+    MonsterName: Frost Wizard
+    MonsterHP: 700
+    MonsterLevel: 1
+    MinDMG: 2
+    MaxDMG: 6
+    RewardEXP: 300
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: plantFlower
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells:
+    - Key: FrostBall
+      Level: 1
+      Mana: 0
+      ColliderPrefab: FrostBall
+      Perks:
+      - Key: damageModifier
+        Value: 10
+      Icon: {fileID: 0}
+      HitSound: sound_impactCold
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -50126,12 +50212,12 @@ MonoBehaviour:
   - Name: Frost Test
     Key: FrostTest
     InProgressDescription: To join the frost cult I must prove the face of frost my
-      strength
+      strength, ask him to teleport you in to the strength test arena.
     QuestCompleteDescription: I've proven my strength to the face of frost...
     FacePrefab: FaceOfFrostQuest
     Conditions:
     - Condition: hunt
-      Type: FlowerManBoss
+      Type: FrostWizardBoss
       CurrentProgress: 0
       TargetProgress: 1
       ExtraDescription: 
@@ -101584,7 +101670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.22625001, y: 0.5177777}
   m_AnchorMax: {x: 0.47250003, y: 0.5733335}
-  m_AnchoredPosition: {x: -1.1001358, y: -0.8999939}
+  m_AnchoredPosition: {x: -1.1001587, y: -0.8999939}
   m_SizeDelta: {x: 3.1999817, y: -0.5999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1921865905

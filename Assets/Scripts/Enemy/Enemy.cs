@@ -45,6 +45,9 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     public HealthBar m_HealthBar;
 
+    [SerializeField]
+    protected Transform SpellSource;
+
     List<Buff> CurrentBuffs = new List<Buff>();
 
     protected Vector3 initScale;
@@ -407,7 +410,15 @@ public class Enemy : MonoBehaviour {
     public void CastSpellComplete()
     {
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(SpellInCast.ColliderPrefab);
-        tempObj.transform.position = transform.position;
+
+        if(SpellSource != null)
+        {
+            tempObj.transform.position = SpellSource.position;
+        }
+        else
+        {
+            tempObj.transform.position = transform.position;
+        }
 
         tempObj.GetComponent<EnemyDamageInstance>().SetInfo(this, SpellInCast.Key);
     }

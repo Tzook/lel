@@ -17,6 +17,12 @@ public class EnemyProjectile : EnemyDamageInstance
     [SerializeField]
     protected string HitSound;
 
+    [SerializeField]
+    protected bool AimedAtTarget = false;
+
+    [SerializeField]
+    protected bool Shake = false;
+
     protected Rigidbody2D m_Rigid;
 
     protected virtual void Awake()
@@ -28,6 +34,16 @@ public class EnemyProjectile : EnemyDamageInstance
     {
         TimeAlive = InitTimeAlive;
         Hit = false;
+    }
+
+    public override void SetInfo(Enemy instance, string actionKey, string actionValue = "")
+    {
+        base.SetInfo(instance, actionKey, actionValue);
+
+        if (AimedAtTarget)
+        {
+            transform.right = ParentEnemy.CurrentTarget.transform.position - transform.position;
+        }
     }
 
     protected void FixedUpdate()
@@ -50,6 +66,11 @@ public class EnemyProjectile : EnemyDamageInstance
                 {
                     actorInstance.InputController.TookSpellDamage(this);
                 }
+            }
+
+            if(Shake)
+            {
+                GameCamera.Instance.Shake(10f, 10f);
             }
 
             Hit = true;

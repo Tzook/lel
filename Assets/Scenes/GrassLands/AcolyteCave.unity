@@ -1893,6 +1893,7 @@ MonoBehaviour:
       - {x: -26.46436, y: -0.62277985}
       - {x: -15.706888, y: -0.8234196}
       - {x: -5.112241, y: -1.0215454}
+  SceneState: []
 --- !u!4 &426347158
 Transform:
   m_ObjectHideFlags: 0
@@ -9561,7 +9562,13 @@ MonoBehaviour:
       Value: Join
       Condition: QuestAvailable
       ConditionValue: FrostTest
-      CLR: {r: 0.99249494, g: 1, b: 0.45588237, a: 1}
+      CLR: {r: 1, g: 0.9294118, b: 0.62352943, a: 1}
+    - Title: I'm ready for the test.
+      Event: TeleportToInstance
+      Value: FrostArena
+      Condition: QuestInProgress
+      ConditionValue: FrostTest
+      CLR: {r: 1, g: 0.92758626, b: 0.625, a: 1}
     - Title: What are you?
       Event: StartDialog
       Value: What
@@ -9772,7 +9779,9 @@ MonoBehaviour:
   - FrostTest
   EndingQuests:
   - FrostTest
-  TeleportableScenes: []
+  TeleportableScenes:
+  - sceneKey: FrostArena
+    portalKey: Entrance
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: talk

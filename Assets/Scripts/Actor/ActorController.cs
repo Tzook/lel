@@ -56,7 +56,7 @@ public class ActorController : MonoBehaviour
 
     public Coroutine JumpRoutineInstance;
 
-    LayerMask GroundLayerMask = 0 << 0 | 1;
+    LayerMask GroundLayerMask = 0 << 0 | 1 | 16;
 
     Vector3 initScale;
 

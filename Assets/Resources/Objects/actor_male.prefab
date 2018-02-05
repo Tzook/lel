@@ -637,6 +637,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1381445829644646
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4381660332310848}
+  m_Layer: 8
+  m_Name: SpellSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1423462430068446
 GameObject:
   m_ObjectHideFlags: 1
@@ -1156,9 +1171,23 @@ Transform:
   - {fileID: 4894614486788176}
   - {fileID: 4929917999476552}
   - {fileID: 4814048091367478}
+  - {fileID: 4381660332310848}
   m_Father: {fileID: 4000013212842048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 309.593}
+--- !u!4 &4381660332310848
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381445829644646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4381299353925942}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4514659274557100
 Transform:
   m_ObjectHideFlags: 1
@@ -1619,6 +1648,7 @@ MonoBehaviour:
   m_Hat: {fileID: 212000013095080436}
   Weapon: {fileID: 212529901446604180}
   SubWeapon: {fileID: 212000010784557114}
+  SpellSpot: {fileID: 4381660332310848}
   NameLabel: {fileID: 1000012879334916}
   MessageBubble: {fileID: 114000011306192618}
   Anim: {fileID: 95000013133792608}

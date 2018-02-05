@@ -429,7 +429,7 @@ public class ActorInfo
             return null;
         }
 
-        tempQuest.Clone();
+        tempQuest = tempQuest.Clone();
 
         Dictionary<string, int> inventoryCounts = Inventory.GetInventoryCounts();
 
@@ -437,7 +437,7 @@ public class ActorInfo
         for (int i = 0; i < tempQuest.Conditions.Count; i++)
         {
             QuestCondition cond = tempQuest.Conditions[i];
-            if (inventoryCounts.ContainsKey(cond.Type)) 
+            if (cond.Condition == "loot" && inventoryCounts.ContainsKey(cond.Type)) 
             {
                 cond.CurrentProgress = inventoryCounts[cond.Type];
             }

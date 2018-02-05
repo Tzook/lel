@@ -67,6 +67,9 @@ public class ActorInstance : MonoBehaviour
     [SerializeField]
     public SpriteRenderer SubWeapon;
 
+    [SerializeField]
+    public Transform SpellSpot;
+
 
     [SerializeField]
     public GameObject NameLabel;
@@ -82,7 +85,7 @@ public class ActorInstance : MonoBehaviour
 
     #endregion
 
-    #region Public Parameters
+    #region Parameters
 
     public ActorInfo Info;
     public ActorMovement MovementController;
@@ -96,6 +99,8 @@ public class ActorInstance : MonoBehaviour
     List<Buff> CurrentBuffs = new List<Buff>();
 
     public bool isDead;
+
+    GameObject CurrentGrowEffect;
     #endregion
 
     #region Public Methods
@@ -502,13 +507,24 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(SubWeapon, layer, minLevel, matType);
     }
 
-    public void ShootArrow(bool isPlayer)
+    public void FireProjectile(bool isPlayer, float ChargeValue)
     {
-        GameObject arrow = ResourcesLoader.Instance.GetRecycledObject("Projectile_Arrow");
+        DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(Info.CurrentPrimaryAbility.Key);
 
-        arrow.transform.position = Weapon.transform.position;
-        arrow.transform.rotation = LastFireRot;
-        arrow.GetComponent<ProjectileArrow>().Launch(this, isPlayer);
+        GameObject projectile = ResourcesLoader.Instance.GetRecycledObject(dPA.ProjectilePrefab);
+
+        if (!string.IsNullOrEmpty(dPA.GrowingEffect))
+        {
+            projectile.transform.localScale = Mathf.Lerp(1f, 2f, ChargeValue) * Vector3.one;
+            projectile.transform.position = SpellSpot.position;
+        }
+        else
+        {
+            projectile.transform.position = Weapon.transform.position;
+        }
+
+        projectile.transform.rotation = LastFireRot;
+        projectile.GetComponent<ProjectileArrow>().Launch(this,Info.CurrentPrimaryAbility.Key , isPlayer);
     }
 
     public void CastSpell(DevSpell spell)
@@ -761,30 +777,54 @@ public class ActorInstance : MonoBehaviour
 
     public void LoadAttack()
     {
-        switch (Info.CurrentPrimaryAbility.Key)
-        {
-            case "melee":
-                {
-                    Anim.SetInteger("AttackType", Random.Range(0, 3));
-                    break;
-                }
-            case "range":
-                {
-                    Anim.SetInteger("AttackType", 3);
-                    break;
-                }
-        }
+        SetAttackAnimation();
 
         Anim.SetBool("Charging", true);
+    }
+
+    public void SetAttackAnimation()
+    {
+        DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(Info.CurrentPrimaryAbility.Key);
+
+        if (CurrentGrowEffect != null)
+        {
+            CurrentGrowEffect.gameObject.SetActive(false);
+            CurrentGrowEffect = null;
+        }
+
+        if (!string.IsNullOrEmpty(dPA.GrowingEffect))
+        {
+            CurrentGrowEffect = ResourcesLoader.Instance.GetRecycledObject(dPA.GrowingEffect);
+            CurrentGrowEffect.transform.SetParent(SpellSpot);
+            CurrentGrowEffect.transform.position = SpellSpot.position;
+            CurrentGrowEffect.transform.localScale = Vector3.one * 2f;
+        }
+
+        Anim.SetInteger("AttackType", Random.Range(dPA.AttackTypeMin, dPA.AttackTypeMax));
+
     }
 
     public void PreformAttack(float chargeValue)
     {
         Anim.SetBool("Charging", false);
 
+        if (CurrentGrowEffect != null)
+        {
+            CurrentGrowEffect.gameObject.SetActive(false);
+            CurrentGrowEffect = null;
+        }
+
         StartCombatMode();
     }
 
+    public void InturruptAttack()
+    {
+        if(CurrentGrowEffect != null)
+        {
+            CurrentGrowEffect.SetActive(false);
+            CurrentGrowEffect = null;
+        }
+    }
 
     public void BendBow()
     {

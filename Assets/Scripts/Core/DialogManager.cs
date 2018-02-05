@@ -106,12 +106,22 @@ public class DialogManager : MonoBehaviour {
         Game.Instance.ClientCharacter.GetComponent<ActorController>().CanInput = true;
         Game.Instance.CanUseUI = true;
 
+        HideNPCBubble();
+
+        HideOptionsBubble();
+    }
+
+    public void HideNPCBubble()
+    {
         if (CurrentNPCBubble != null)
         {
             CurrentNPCBubble.gameObject.SetActive(false);
             CurrentNPCBubble = null;
         }
+    }
 
+    public void HideOptionsBubble()
+    {
         if (CurrentOptionsFrame != null)
         {
             CurrentOptionsFrame.gameObject.SetActive(false);
@@ -277,7 +287,8 @@ public class DialogManager : MonoBehaviour {
                 }
             case "QuestInProgress":
                 {
-                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(option.ConditionValue) != null)
+                    Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(option.ConditionValue);
+                    if (tempQuest != null && !tempQuest.CanBeCompleted)
                     {
                         return true;
                     }

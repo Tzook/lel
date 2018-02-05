@@ -43,7 +43,8 @@ public class QuestVisibility : MonoBehaviour {
                 }
             case QuestState.QuestEnumState.InProgress:
                 {
-                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey) != null)
+                    Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey);
+                    if (tempQuest != null && !tempQuest.CanBeCompleted)
                     {
                         Hide();
                     }

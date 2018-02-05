@@ -42220,7 +42220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 34.5, y: -30.999939}
+  m_AnchoredPosition: {x: 34.5, y: -31}
   m_SizeDelta: {x: 148, y: 152}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &2041
@@ -47337,7 +47337,7 @@ MonoBehaviour:
     MonsterHP: 700
     MonsterLevel: 1
     MinDMG: 2
-    MaxDMG: 6
+    MaxDMG: 8
     RewardEXP: 300
     Type: 1
     PossibleLoot:
@@ -47362,9 +47362,6 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 5
       MaxStack: 15
-    - ItemKey: plantFlower
-      MinStack: 1
-      MaxStack: 1
     - ItemKey: shortClub
       MinStack: 1
       MaxStack: 1
@@ -47415,7 +47412,7 @@ MonoBehaviour:
       ColliderPrefab: FrostBall
       Perks:
       - Key: damageModifier
-        Value: 10
+        Value: 12
       Icon: {fileID: 0}
       HitSound: sound_impactCold
   Items:
@@ -48968,7 +48965,7 @@ MonoBehaviour:
   PrimaryAbilities:
   - Name: melee
     Icon: {fileID: 21300000, guid: 087a5b74d3a9c2b48abf376c54be1563, type: 3}
-    PAColor: {r: 1, g: 0.8980392, b: 0.3254902, a: 1}
+    PAColor: {r: 1, g: 0.32549024, b: 0.32549024, a: 1}
     Perks:
     - MinLevel: 3
       PerksOffered: 2
@@ -49027,6 +49024,13 @@ MonoBehaviour:
     statEnumState: 0
     hitTypeEnumState: 0
     ManaCost: 0
+    AttackTypeMin: 0
+    AttackTypeMax: 3
+    GrowingEffect: 
+    ProjectilePrefab: 
+    ProjectileHitSound: 
+    ProjectileWallSound: 
+    ProjectileStayAfterHit: 0
   - Name: range
     Icon: {fileID: 21300000, guid: 65170a2ee353f074196f138dfaa281dd, type: 3}
     PAColor: {r: 0.43248153, g: 1, b: 0.32549024, a: 1}
@@ -49036,15 +49040,45 @@ MonoBehaviour:
     statEnumState: 1
     hitTypeEnumState: 0
     ManaCost: 0
+    AttackTypeMin: 3
+    AttackTypeMax: 3
+    GrowingEffect: 
+    ProjectilePrefab: Projectile_Arrow
+    ProjectileHitSound: sound_arrow_hit
+    ProjectileWallSound: sound_arrow_blunt
+    ProjectileStayAfterHit: 1
   - Name: heal
     Icon: {fileID: 21300010, guid: c5f9099fa2b10f249a892c86cf10dcc7, type: 3}
-    PAColor: {r: 0.32549024, g: 0.69298184, b: 1, a: 1}
+    PAColor: {r: 1, g: 0.9274848, b: 0.52205884, a: 1}
     Perks: []
     Spells: []
     InitialPerks: []
     statEnumState: 2
     hitTypeEnumState: 1
     ManaCost: 5
+    AttackTypeMin: 0
+    AttackTypeMax: 0
+    GrowingEffect: 
+    ProjectilePrefab: 
+    ProjectileHitSound: 
+    ProjectileWallSound: 
+    ProjectileStayAfterHit: 0
+  - Name: frost
+    Icon: {fileID: 21300000, guid: a16a563e044578845960645e69c15a13, type: 3}
+    PAColor: {r: 0.7136678, g: 0.85364515, b: 0.9705882, a: 1}
+    Perks: []
+    Spells: []
+    InitialPerks: []
+    statEnumState: 2
+    hitTypeEnumState: 0
+    ManaCost: 5
+    AttackTypeMin: 4
+    AttackTypeMax: 7
+    GrowingEffect: FrostBallGrowing
+    ProjectilePrefab: Projectile_FrostBall
+    ProjectileHitSound: sound_impactCold
+    ProjectileWallSound: sound_impactCold
+    ProjectileStayAfterHit: 0
   Perks:
   - Key: bleedChance
     Name: Bleed Chance
@@ -49240,6 +49274,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 60
   - Name: Turtle Soup
@@ -49282,6 +49323,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 80
   - Name: Turtle Lore
@@ -49313,6 +49361,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 80
   - Name: Rabbit Raids
@@ -49359,6 +49414,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 150
   - Name: Albert's Challenge
@@ -49396,6 +49458,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 350
   - Name: Carrot Supply
@@ -49431,6 +49500,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Become a Warrior
@@ -49458,6 +49534,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: warrior
     RewardExp: 50
   - Name: Meet Maya.
@@ -49488,6 +49571,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 20
   - Name: Spiked Turtles
@@ -49526,6 +49616,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Find Alex
@@ -49556,6 +49653,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Help Alex
@@ -49595,6 +49699,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Find Karen
@@ -49625,6 +49736,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Pet Ransom
@@ -49655,6 +49773,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Examine Lost Supplies
@@ -49698,6 +49823,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 5
   - Name: Investigate Slam's anger...
@@ -49730,6 +49862,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 20
   - Name: Help Jax The Dog
@@ -49765,6 +49904,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: The Ruined Painting
@@ -49801,6 +49947,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Find Cosmo
@@ -49832,6 +49985,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 1200
   - Name: Wait for Cosmo to fix the painting
@@ -49867,6 +50027,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 200
   - Name: Return to Burtle with the fixed painting
@@ -49905,6 +50072,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 200
   - Name: Free Turtle
@@ -49940,6 +50114,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 50
   - Name: Jack's Revenge - Find The Seeds
@@ -49969,6 +50150,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Jack's Vengeance - Bad News
@@ -50000,6 +50188,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Jack's Vengeance - Rabbottle
@@ -50036,6 +50231,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Cleaning Up
@@ -50070,6 +50272,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: A Beany Request
@@ -50138,6 +50347,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Old Friends
@@ -50171,6 +50387,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Ranger Test
@@ -50207,6 +50430,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
   - Name: Frost Test
@@ -50226,12 +50456,12 @@ MonoBehaviour:
     MinimumLevel: 8
     RewardItems: []
     RewardSTR: 0
-    RewardMAG: 0
-    RewardDEX: 3
+    RewardMAG: 3
+    RewardDEX: 0
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility:
-      Name: 
+      Name: frost
       Icon: {fileID: 0}
       PAColor: {r: 0, g: 0, b: 0, a: 0}
       Perks: []
@@ -50240,6 +50470,13 @@ MonoBehaviour:
       statEnumState: 0
       hitTypeEnumState: 0
       ManaCost: 0
+      AttackTypeMin: 0
+      AttackTypeMax: 0
+      GrowingEffect: 
+      ProjectilePrefab: 
+      ProjectileHitSound: 
+      ProjectileWallSound: 
+      ProjectileStayAfterHit: 0
     RewardClass: 
     RewardExp: 100
 --- !u!114 &2254
@@ -92107,14 +92344,6 @@ Prefab:
     - target: {fileID: 1000011972609366, guid: a517cca850296594f906c19dbc6215da, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4814048091367478, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 4814048091367478, guid: a517cca850296594f906c19dbc6215da, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.62
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a517cca850296594f906c19dbc6215da, type: 2}

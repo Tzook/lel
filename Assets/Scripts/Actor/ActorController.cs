@@ -266,30 +266,10 @@ public class ActorController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SetAttackAnimation();
+            Instance.SetAttackAnimation();
         }
 
         Anim.SetBool("Charging", Input.GetMouseButton(0));
-    }
-
-    private void SetAttackAnimation()
-    {
-        Debug.Log(Instance);
-        Debug.Log(Instance.Info);
-        Debug.Log(Instance.Info.CurrentPrimaryAbility);
-        switch (Instance.Info.CurrentPrimaryAbility.Key)
-        {
-            case "melee":
-                {
-                    Anim.SetInteger("AttackType", Random.Range(0, 3));
-                    break;
-                }
-            case "range":
-                {
-                    Anim.SetInteger("AttackType", 3);
-                    break;
-                }
-        }
     }
 
     void FixedUpdate()
@@ -515,9 +495,9 @@ public class ActorController : MonoBehaviour
         damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "melee");
     }
 
-    public void ShootArrow()
+    public void FireProjectile()
     {
-        Instance.ShootArrow(true);
+        Instance.FireProjectile(true, LoadAttackValue);
     }
 
     private void CastSpell(int spellIndex)
@@ -777,40 +757,51 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.StopChargingAttack();
         SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
-        LoadAttackValue = 0f;
 
         ActivatePrimaryAbility();
+
+        LoadAttackValue = 0f;
     }
 
     public void ActivatePrimaryAbility()
     {
-        switch (Instance.Info.CurrentPrimaryAbility.Key)
+        //switch (Instance.Info.CurrentPrimaryAbility.Key)
+        //{
+        //    case "melee":
+        //        {
+        //            AttackMelee();
+        //            break;
+        //        }
+        //    case "range":
+        //        {
+        //            FireProjectile();
+        //            break;
+        //        }
+        //}
+
+        if(string.IsNullOrEmpty(Content.Instance.GetPrimaryAbility(Instance.Info.CurrentPrimaryAbility.Key).ProjectilePrefab))
         {
-            case "melee":
-                {
-                    AttackMelee();
-                    break;
-                }
-            case "range":
-                {
-                    ShootArrow();
-                    break;
-                }
+            AttackMelee();
+        }
+        else
+        {
+            FireProjectile();
         }
     }
 
     public void InturruptAttack()
     {
         EndAttack();
-        SetAttackAnimation();
+        Instance.SetAttackAnimation();
         Anim.SetTrigger("InturruptAttack");
+
+        Instance.InturruptAttack();
 
         CurrentSpellInCast = null;
     }
 
     public void EndAttack()
     {
-
         Instance.StartCombatMode();
 
         if (LoadAttackValueInstance != null)

@@ -66,7 +66,6 @@ public class NPC : MonoBehaviour {
 
     public void Interact()
     {
-        Debug.Log("Hey!#!@#!#@1");
         DialogManager.Instance.StartDialogMode(this);
     }
 
@@ -147,6 +146,37 @@ public class NPC : MonoBehaviour {
                     DialogManager.Instance.StopDialogMode();
                     SocketClient.Instance.SendNpcTeleport(Key, eventValue, true);
                     break;   
+                }
+            case "InteractWithNPC":
+                {
+                    DialogManager.Instance.StopDialogMode();
+
+                    string brokenValueA = "";
+                    string brokenValueB = "";
+
+                    for (int i=0;i<eventValue.Length;i++)
+                    {
+                        if(eventValue[i] == '_')
+                        {
+                            brokenValueA = eventValue.Substring(0, i);
+                            brokenValueB = eventValue.Substring(i + 1, eventValue.Length - (i + 1));
+
+                            Debug.Log(brokenValueA + " | " + brokenValueB);
+
+                            break;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(brokenValueA) && !string.IsNullOrEmpty(brokenValueB))
+                    {
+                        DialogManager.Instance.HideNPCBubble();
+                        DialogManager.Instance.HideOptionsBubble();
+
+                        NPC tempNPC = Game.Instance.CurrentScene.GetNPC(brokenValueA);
+                        tempNPC.Interact();
+                        DialogManager.Instance.StartDialog(brokenValueB);
+                    }
+                    break;
                 }
         }
     }

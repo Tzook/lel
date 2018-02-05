@@ -499,6 +499,8 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshStats();
         InGameMainMenuUI.Instance.RefreshXP();
         InGameMainMenuUI.Instance.RefreshLevel();
+
+        Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)
@@ -511,6 +513,8 @@ public class SocketClient : MonoBehaviour
         if (actor == LocalUserInfo.Me.ClientCharacter)
         {
             AudioControl.Instance.Play("sound_positive2");
+
+            
 
             InGameMainMenuUI.Instance.MinilogMessage("Leveled Up!");
         }

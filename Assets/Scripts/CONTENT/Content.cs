@@ -428,6 +428,27 @@ public class DevPrimaryAbility
     }
 
     public int ManaCost;
+
+    [SerializeField]
+    public int AttackTypeMin;
+
+    [SerializeField]
+    public int AttackTypeMax;
+
+    [SerializeField]
+    public string GrowingEffect;
+
+    [SerializeField]
+    public string ProjectilePrefab;
+
+    [SerializeField]
+    public string ProjectileHitSound;
+
+    [SerializeField]
+    public string ProjectileWallSound;
+
+    [SerializeField]
+    public bool ProjectileStayAfterHit;
 }
 
 [System.Serializable]

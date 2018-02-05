@@ -5,6 +5,7 @@
  * Monsters:
  * monster delete 'MonserKey / Index'
  * monster addLoot 'MonserKey' 'ItemKey'
+ * monster deleteLoot 'MonsterKey' 'ItemKey'
  * monster addLootAll 'ItemKey'
  * monster deleteLootAll 'ItemKey'
  * monster addLootMonsterLevel 'ItemKey' 'MonsterLevel'     - Will add this item in monsters above level
@@ -474,6 +475,31 @@ public class DevContentEditor : Editor
                         return;
                     }
                 }
+            }
+            else if (WordNumber(1) == "deleteLoot")
+            {
+                string monster = WordNumber(2);
+                string item = WordNumber(3);
+
+                for (int i = 0; i < currentInfo.Monsters.Count; i++)
+                {
+                    if (currentInfo.Monsters[i].MonsterKey == monster)
+                    {
+                        Undo.RecordObject(target, "Delete Monster Loot");
+                        for (int l = 0; l < currentInfo.Monsters[i].PossibleLoot.Count; l++)
+                        {
+                            if(currentInfo.Monsters[i].PossibleLoot[l].ItemKey == item)
+                            {
+                                currentInfo.Monsters[i].PossibleLoot.RemoveAt(l);
+                                return;
+                            }
+                        }
+
+                        return;
+                    }
+                }
+
+                return;
             }
             else if (WordNumber(1) == "deleteLoot")
             {

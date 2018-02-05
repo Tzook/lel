@@ -9569,6 +9569,12 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: FrostTest
       CLR: {r: 1, g: 0.92758626, b: 0.625, a: 1}
+    - Title: I've beaten the frost wizard.
+      Event: StartDialog
+      Value: BeatenTest
+      Condition: QuestComplete
+      ConditionValue: FrostTest
+      CLR: {r: 1, g: 0.9294118, b: 0.62352943, a: 1}
     - Title: What are you?
       Event: StartDialog
       Value: What
@@ -9775,6 +9781,74 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: BeatenTest
+    Pieces:
+    - Content: You...
+      LetterDelay: 0.035
+      Pitch: 0.1
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: talk
+    - Content: Impress...
+      LetterDelay: 0.01
+      Pitch: 0.05
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: happy
+    - Content: Me...
+      LetterDelay: 0.01
+      Pitch: 0.05
+      SoundKey: sound_coldgod_2
+      AnimationTrigger: 
+    - Content: I
+      LetterDelay: 0.035
+      Pitch: 0.1
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: happy
+    - Content: See
+      LetterDelay: 0.035
+      Pitch: 0.1
+      SoundKey: sound_coldgod_2
+      AnimationTrigger: 
+    - Content: Potential
+      LetterDelay: 0.035
+      Pitch: 0.1
+      SoundKey: sound_coldgod_1
+      AnimationTrigger: 
+    Options:
+    - Title: '...'
+      Event: InteractWithNPC
+      Value: acolyte6_FrostTestComplete
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.99249494, g: 1, b: 0.45588237, a: 1}
+  - DialogKey: FrostTestComplete
+    Pieces:
+    - Content: Do
+      LetterDelay: 0.035
+      Pitch: 0.1
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: talk
+    - Content: Not
+      LetterDelay: 0.01
+      Pitch: 0.05
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: angry
+    - Content: Disappoint
+      LetterDelay: 0.01
+      Pitch: 0.05
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: 
+    - Content: Us
+      LetterDelay: 0.01
+      Pitch: 0.05
+      SoundKey: sound_coldgod_3
+      AnimationTrigger: happy
+    Options:
+    - Title: Complete Quest
+      Event: CompleteQuest
+      Value: FrostTest
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.99249494, g: 1, b: 0.45588237, a: 1}
   GivingQuests:
   - FrostTest
   EndingQuests:
@@ -10532,6 +10606,46 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.9849898, b: 0.45588237, a: 1}
+  - DialogKey: FrostTestComplete
+    Pieces:
+    - Content: The frost god sees potential in you...
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: You passed his test of strength
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Even though I merely used a quarter of my full power.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: So, you are permitted to worship the god of frost and use his powers
+        for your own will...
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: Without serving him for years like the rest of us did...
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    - Content: I will teach you the basics of frost magic...
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+    Options:
+    - Title: I'm eager to learn...
+      Event: InteractWithNPC
+      Value: mouthOfFrost_FrostTestComplete
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests:
   - OldFriends
@@ -10541,7 +10655,7 @@ MonoBehaviour:
   IntroAnimation: 
   EndAnimation: 
   Name: Frost Wizard
-  Key: acolyte5
+  Key: acolyte6
   Body: {fileID: 220524820}
   Anim: {fileID: 220524819}
   NameTag: {fileID: 1262616080}

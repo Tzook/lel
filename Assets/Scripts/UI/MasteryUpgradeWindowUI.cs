@@ -76,7 +76,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         {
             UpgradeBubbles[i].GetComponent<CrateUI>().Unpack();
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.4f);
         }
     }
 
@@ -91,7 +91,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         float t = 0f;
         while(t<1f)
         {
-            t += 1.5f * Time.deltaTime;
+            t += 1.75f * Time.deltaTime;
 
             crateObj.transform.position = Game.SplineLerp(RandomStartingPoint, targetTransfrom.position, 3f, t);
 

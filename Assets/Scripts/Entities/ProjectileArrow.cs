@@ -19,16 +19,21 @@ public class ProjectileArrow : MonoBehaviour {
     [SerializeField]
     ParticleSystem m_Particles;
 
+    [SerializeField]
+    string ImpactEffect;
+
     public bool InFlight = false;
 
     public bool TriggerHit;
 
     public ActorInstance ParentActor;
 
+    public string PrimaryAbilitySourceKey;
+
     private HitBox CurrentHitbox;
     private float CurrentDecay;
 
-    public void Launch(ActorInstance parent ,bool triggerHit = false ,float speed = 15f)
+    public void Launch(ActorInstance parent,string primaryAbilitySourceKey ,bool triggerHit = false ,float speed = 15f)
     {
         this.ParentActor = parent;
 
@@ -38,6 +43,8 @@ public class ProjectileArrow : MonoBehaviour {
 
         InFlight = true;
         m_Particles.Play();
+
+        PrimaryAbilitySourceKey = primaryAbilitySourceKey;
     }
 
     void FixedUpdate()
@@ -61,6 +68,8 @@ public class ProjectileArrow : MonoBehaviour {
     {
         if (InFlight)
         {
+            DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(PrimaryAbilitySourceKey);
+
             m_Particles.Stop();
             InFlight = false;
 
@@ -68,7 +77,7 @@ public class ProjectileArrow : MonoBehaviour {
             {
                 CurrentHitbox = TargetCollider.GetComponent<HitBox>();
 
-                AudioControl.Instance.PlayInPosition("sound_arrow_hit", transform.position);
+                AudioControl.Instance.PlayInPosition(dPA.ProjectileHitSound, transform.position);
 
                 if (TriggerHit)
                 {
@@ -80,13 +89,33 @@ public class ProjectileArrow : MonoBehaviour {
             }
             else
             {
-                AudioControl.Instance.PlayInPosition("sound_arrow_blunt", transform.position);
-                m_Anim.SetTrigger("Bounce");
+                AudioControl.Instance.PlayInPosition(dPA.ProjectileWallSound, transform.position);
+
+                if (m_Anim != null)
+                {
+                    m_Anim.SetTrigger("Bounce");
+                }
             }
 
-            transform.SetParent(TargetCollider.transform, true);
+            if(!string.IsNullOrEmpty(ImpactEffect))
+            {
+                GameObject impactEffect = ResourcesLoader.Instance.GetRecycledObject(ImpactEffect);
+                impactEffect.transform.position = transform.position;
+                impactEffect.transform.right = ParentActor.transform.position - transform.position;
+                impactEffect.transform.SetParent(TargetCollider.transform, true);
+                impactEffect.transform.localScale = Vector3.one;
+            }
 
-            StartCoroutine(DeathRoutine());
+            if (dPA.ProjectileStayAfterHit)
+            {
+                transform.SetParent(TargetCollider.transform, true);
+
+                StartCoroutine(DeathRoutine());
+            }
+            else
+            {
+                Shut();
+            }
         }
     }
 

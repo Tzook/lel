@@ -175,6 +175,19 @@ public class SceneControl
         QVObjects.Add(qvObject);
     }
 
+    public NPC GetNPC(string npcKey)
+    {
+        for (int i = 0; i < Npcs.Count; i++)
+        {
+            if (Npcs[i].Key == npcKey)
+            {
+                return Npcs[i];
+            }
+        }
+
+        return null;
+    }
+
     public NPC GetQuestNPC(string questKey)
     {
         for(int i=0 ; i < Npcs.Count ; i++)

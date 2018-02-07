@@ -38,7 +38,7 @@ public class ProjectileArrow : MonoBehaviour {
         this.ParentActor = parent;
 
         CurrentDecay = DecayTime;
-        MovementSpeed = speed;
+        //MovementSpeed = speed;
         TriggerHit = triggerHit;
 
         InFlight = true;

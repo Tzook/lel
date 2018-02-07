@@ -515,7 +515,7 @@ public class ActorInstance : MonoBehaviour
 
         if (!string.IsNullOrEmpty(dPA.GrowingEffect))
         {
-            projectile.transform.localScale = Mathf.Lerp(1f, 2f, ChargeValue) * Vector3.one;
+            projectile.transform.localScale = Mathf.Lerp(0.1f, 2.5f, ChargeValue) * Vector3.one;
             projectile.transform.position = SpellSpot.position;
         }
         else

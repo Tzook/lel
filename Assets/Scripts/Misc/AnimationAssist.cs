@@ -27,7 +27,7 @@ public class AnimationAssist : MonoBehaviour {
 
     public void PlaySound(string soundKey)
     {
-        AudioControl.Instance.PlayInPosition(soundKey, transform.position);
+        AudioControl.Instance.PlayInPosition(soundKey, transform.position, 30f);
     }
 
     public void PlayRandomMissSound()

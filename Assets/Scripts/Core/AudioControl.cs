@@ -36,7 +36,7 @@ public class AudioControl : MonoBehaviour {
         return m_dicVolumeGroup[tag];
     }
 
-    public void PlayInPosition(string gClip, Vector3 pos)
+    public void PlayInPosition(string gClip, Vector3 pos, float MaxDistance = 47f)
     {
         GameObject currentInstance = null;
 
@@ -58,6 +58,7 @@ public class AudioControl : MonoBehaviour {
 
         currentInstance.transform.position = pos;
         currentInstance.GetComponent<AudioSource>().spatialBlend = 1f;
+        currentInstance.GetComponent<AudioSource>().maxDistance = MaxDistance;
         currentInstance.GetComponent<AudioSource>().pitch = 1f;
         currentInstance.GetComponent<AudioSource>().clip = m_res.GetClip(gClip);
         currentInstance.GetComponent<AudioSource>().Play();

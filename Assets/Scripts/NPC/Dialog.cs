@@ -23,6 +23,13 @@ public class DialogPiece
     public string SoundKey;
 
     public string AnimationTrigger = "";
+
+    [SerializeField]
+    public string PostPieceEvent;
+
+    [SerializeField]
+    public string PostPieceEventValue;
+
 }
 
 [System.Serializable]

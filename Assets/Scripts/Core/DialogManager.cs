@@ -200,6 +200,12 @@ public class DialogManager : MonoBehaviour {
             {
                 if (ContinueChat())
                 {
+                    if (!string.IsNullOrEmpty(CurrentDialog.Pieces[i].PostPieceEvent))
+                    {
+                        currentNPC.ExecuteEvent(CurrentDialog.Pieces[i].PostPieceEvent, CurrentDialog.Pieces[i].PostPieceEventValue);
+                        yield break;
+                    }
+
                     break;
                 }
 
@@ -218,6 +224,12 @@ public class DialogManager : MonoBehaviour {
 
             if(CurrentDialog == null)
             {
+                yield break;
+            }
+
+            if (!string.IsNullOrEmpty(CurrentDialog.Pieces[i].PostPieceEvent))
+            {
+                currentNPC.ExecuteEvent(CurrentDialog.Pieces[i].PostPieceEvent, CurrentDialog.Pieces[i].PostPieceEventValue);
                 yield break;
             }
         }

@@ -12,6 +12,7 @@
  * monster deleteLootMonsterLevel 'ItemKey' 'MonsterLevel'  - Will delete this item in monsters below level
  * monster ClearLootDuplicates
  * monster cloneLoot 'FromMonsterKey' 'ToMonsterKey' 
+ * pa clonePerks 'FromPA' 'ToPa'
  */
 
 using System.Collections;
@@ -640,7 +641,24 @@ public class DevContentEditor : Editor
             }
 
         }
+        else if (WordNumber(0) == "pa")
+        {
+            if (WordNumber(1) == "clonePerks")
+            {
+                Undo.RecordObject(target, "Clone Perks");
 
+                DevPrimaryAbility paFrom = currentInfo.GetPrimaryAbility(WordNumber(2));
+                DevPrimaryAbility paTo = currentInfo.GetPrimaryAbility(WordNumber(3));
+
+                paTo.InitialPerks.Clear();
+                paTo.InitialPerks.InsertRange(0, paFrom.InitialPerks);
+
+                paTo.Perks.Clear();
+                paTo.Perks.InsertRange(0, paFrom.Perks);
+
+                return;
+            }
+        }
     }
 
     private string WordNumber(int number)

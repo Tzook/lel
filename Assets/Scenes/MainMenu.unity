@@ -49034,9 +49034,38 @@ MonoBehaviour:
   - Name: range
     Icon: {fileID: 21300000, guid: 65170a2ee353f074196f138dfaa281dd, type: 3}
     PAColor: {r: 0.43248153, g: 1, b: 0.32549024, a: 1}
-    Perks: []
+    Perks:
+    - MinLevel: 3
+      PerksOffered: 2
+      AddToPool:
+      - bleedChance
+      - crippleChance
+      - crippleDuration
+      - bleedDuration
+    - MinLevel: 10
+      PerksOffered: 3
+      AddToPool:
+      - critChance
+      - fullyChargeModifier
+      - aoeChance
+      - aoeCap
+    - MinLevel: 20
+      PerksOffered: 5
+      AddToPool:
+      - damageModifier
+      - lifeSteal
     Spells: []
-    InitialPerks: []
+    InitialPerks:
+    - Key: bleedChance
+      Value: 1
+    - Key: stunChance
+      Value: 0
+    - Key: crippleChance
+      Value: 1
+    - Key: threatModifier
+      Value: 2
+    - Key: blockChance
+      Value: 0
     statEnumState: 1
     hitTypeEnumState: 0
     ManaCost: 0
@@ -49064,11 +49093,41 @@ MonoBehaviour:
     ProjectileWallSound: 
     ProjectileStayAfterHit: 0
   - Name: frost
-    Icon: {fileID: 21300000, guid: a16a563e044578845960645e69c15a13, type: 3}
+    Icon: {fileID: 21300030, guid: f270c55a0996f174c94a615b3512ee44, type: 3}
     PAColor: {r: 0.7136678, g: 0.85364515, b: 0.9705882, a: 1}
-    Perks: []
+    Perks:
+    - MinLevel: 3
+      PerksOffered: 2
+      AddToPool:
+      - crippleChance
+      - stunChance
+      - stunDuration
+      - crippleDuration
+    - MinLevel: 10
+      PerksOffered: 3
+      AddToPool:
+      - critChance
+      - fullyChargeModifier
+      - aoeChance
+      - aoeCap
+    - MinLevel: 20
+      PerksOffered: 5
+      AddToPool:
+      - damageModifier
+      - lifeSteal
+      - threatModifier
     Spells: []
-    InitialPerks: []
+    InitialPerks:
+    - Key: bleedChance
+      Value: 1
+    - Key: stunChance
+      Value: 1
+    - Key: crippleChance
+      Value: 1
+    - Key: threatModifier
+      Value: 2
+    - Key: blockChance
+      Value: 1
     statEnumState: 2
     hitTypeEnumState: 0
     ManaCost: 5

@@ -31,7 +31,7 @@ public class SpellAreaUI : MonoBehaviour
 
         Clear();
 
-        DevPrimaryAbility ability = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
+        DevAbility ability = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
 
         List<DevSpell> AvailableSpells = new List<DevSpell>();
 

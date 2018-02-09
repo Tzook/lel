@@ -155,9 +155,9 @@ public class DevContentEditor : Editor
             SendStartingGear(currentInfo.StartingGear);
         }
 
-        if (GUILayout.Button("Update Primary Abilities"))
+        if (GUILayout.Button("Update Abilities"))
         {
-            SendPrimaryAbilities(currentInfo.PrimaryAbilities, currentInfo.Perks);
+            SendAbilities(currentInfo.Abilities, currentInfo.Perks);
         }
 
         GUILayout.Label("Command line");
@@ -269,50 +269,50 @@ public class DevContentEditor : Editor
         });
     }
 
-    private void SendPrimaryAbilities(List<DevPrimaryAbility> primaryAbilities, List<DevPAPerk> perks)
+    private void SendAbilities(List<DevAbility> abilities, List<DevPAPerk> perks)
     {
         JSONNode node = new JSONClass();
 
         node["pass"] = "b0ss123";
 
-        for (int i = 0; i < primaryAbilities.Count; i++)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            node["talents"][i]["primaryAbility"] = primaryAbilities[i].Name;
+            node["talents"][i]["ability"] = abilities[i].Name;
 
-            for (int a = 0; a < primaryAbilities[i].Perks.Count; a++)
+            for (int a = 0; a < abilities[i].Perks.Count; a++)
             {
-                node["talents"][i]["perks"][a]["atLeastLvl"] = primaryAbilities[i].Perks[a].MinLevel.ToString();
-                node["talents"][i]["perks"][a]["perksOffered"] = primaryAbilities[i].Perks[a].PerksOffered.ToString();
+                node["talents"][i]["perks"][a]["atLeastLvl"] = abilities[i].Perks[a].MinLevel.ToString();
+                node["talents"][i]["perks"][a]["perksOffered"] = abilities[i].Perks[a].PerksOffered.ToString();
 
-                for (int b = 0; b < primaryAbilities[i].Perks[a].AddToPool.Count; b++)
+                for (int b = 0; b < abilities[i].Perks[a].AddToPool.Count; b++)
                 {
-                    node["talents"][i]["perks"][a]["addToPool"][b] = primaryAbilities[i].Perks[a].AddToPool[b].ToString();
+                    node["talents"][i]["perks"][a]["addToPool"][b] = abilities[i].Perks[a].AddToPool[b].ToString();
                 }
             }
 
-            for (int a = 0; a < primaryAbilities[i].Spells.Count; a++)
+            for (int a = 0; a < abilities[i].Spells.Count; a++)
             {
-                node["talents"][i]["spells"][a]["key"] = primaryAbilities[i].Spells[a].Key.ToString();
-                node["talents"][i]["spells"][a]["level"] = primaryAbilities[i].Spells[a].Level.ToString();
-                node["talents"][i]["spells"][a]["mana"] = primaryAbilities[i].Spells[a].Mana.ToString();
+                node["talents"][i]["spells"][a]["key"] = abilities[i].Spells[a].Key.ToString();
+                node["talents"][i]["spells"][a]["level"] = abilities[i].Spells[a].Level.ToString();
+                node["talents"][i]["spells"][a]["mana"] = abilities[i].Spells[a].Mana.ToString();
                 
-                for (int b = 0; b < primaryAbilities[i].Spells[a].Perks.Count; b++)
+                for (int b = 0; b < abilities[i].Spells[a].Perks.Count; b++)
                 {
-                    node["talents"][i]["spells"][a]["perks"][b]["key"] = primaryAbilities[i].Spells[a].Perks[b].Key.ToString();
-                    node["talents"][i]["spells"][a]["perks"][b]["value"] = primaryAbilities[i].Spells[a].Perks[b].Value.ToString();
+                    node["talents"][i]["spells"][a]["perks"][b]["key"] = abilities[i].Spells[a].Perks[b].Key.ToString();
+                    node["talents"][i]["spells"][a]["perks"][b]["value"] = abilities[i].Spells[a].Perks[b].Value.ToString();
                 }
             }
 
-            node["talents"][i]["mainStat"] = primaryAbilities[i].MainStat;
+            node["talents"][i]["mainStat"] = abilities[i].MainStat;
 
-            for (int a = 0; a < primaryAbilities[i].InitialPerks.Count; a++)
+            for (int a = 0; a < abilities[i].InitialPerks.Count; a++)
             {
-                node["talents"][i]["initialPerks"][a]["key"] = primaryAbilities[i].InitialPerks[a].Key.ToString();
-                node["talents"][i]["initialPerks"][a]["value"] = primaryAbilities[i].InitialPerks[a].Value.ToString();
+                node["talents"][i]["initialPerks"][a]["key"] = abilities[i].InitialPerks[a].Key.ToString();
+                node["talents"][i]["initialPerks"][a]["value"] = abilities[i].InitialPerks[a].Value.ToString();
             }
 
-            node["talents"][i]["hitType"] = primaryAbilities[i].HitType;
-            node["talents"][i]["manaCost"] = primaryAbilities[i].ManaCost.ToString();
+            node["talents"][i]["hitType"] = abilities[i].HitType;
+            node["talents"][i]["manaCost"] = abilities[i].ManaCost.ToString();
         }
 
         for (int i=0;i<perks.Count;i++)
@@ -647,8 +647,8 @@ public class DevContentEditor : Editor
             {
                 Undo.RecordObject(target, "Clone Perks");
 
-                DevPrimaryAbility paFrom = currentInfo.GetPrimaryAbility(WordNumber(2));
-                DevPrimaryAbility paTo = currentInfo.GetPrimaryAbility(WordNumber(3));
+                DevAbility paFrom = currentInfo.GetAbility(WordNumber(2));
+                DevAbility paTo = currentInfo.GetAbility(WordNumber(3));
 
                 paTo.InitialPerks.Clear();
                 paTo.InitialPerks.InsertRange(0, paFrom.InitialPerks);

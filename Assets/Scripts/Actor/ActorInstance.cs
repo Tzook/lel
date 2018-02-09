@@ -509,7 +509,7 @@ public class ActorInstance : MonoBehaviour
 
     public void FireProjectile(bool isPlayer, float ChargeValue)
     {
-        DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(Info.CurrentPrimaryAbility.Key);
+        DevAbility dPA = Content.Instance.GetAbility(Info.CurrentPrimaryAbility.Key);
 
         GameObject projectile = ResourcesLoader.Instance.GetRecycledObject(dPA.ProjectilePrefab);
 
@@ -529,7 +529,7 @@ public class ActorInstance : MonoBehaviour
 
     public void CastSpell(DevSpell spell)
     {
-        Anim.SetInteger("PrimaryAbility", Content.Instance.GetPrimaryAbilityIndex(Info.CurrentPrimaryAbility.Key));
+        Anim.SetInteger("PrimaryAbility", Content.Instance.GetAbilityIndex(Info.CurrentPrimaryAbility.Key));
         Anim.SetInteger("SpellNumber", Content.Instance.GetSpellIndex(spell));
         Anim.SetTrigger("CastSpell");
     }
@@ -784,7 +784,7 @@ public class ActorInstance : MonoBehaviour
 
     public void SetAttackAnimation()
     {
-        DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(Info.CurrentPrimaryAbility.Key);
+        DevAbility dPA = Content.Instance.GetAbility(Info.CurrentPrimaryAbility.Key);
 
         if (CurrentGrowEffect != null)
         {

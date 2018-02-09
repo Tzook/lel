@@ -779,7 +779,7 @@ public class ActorController : MonoBehaviour
         //        }
         //}
 
-        if(string.IsNullOrEmpty(Content.Instance.GetPrimaryAbility(Instance.Info.CurrentPrimaryAbility.Key).ProjectilePrefab))
+        if(string.IsNullOrEmpty(Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key).ProjectilePrefab))
         {
             AttackMelee();
         }

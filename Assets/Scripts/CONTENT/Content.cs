@@ -18,7 +18,7 @@ public class Content : MonoBehaviour {
 
     public List<ContentPiece> InfoBank = new List<ContentPiece>();
 
-    public List<DevPrimaryAbility> PrimaryAbilities = new List<DevPrimaryAbility>();
+    public List<DevAbility> Abilities = new List<DevAbility>();
 
     public List<DevPAPerk> Perks = new List<DevPAPerk>();
 
@@ -37,24 +37,24 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public DevPrimaryAbility GetPrimaryAbility(string key)
+    public DevAbility GetAbility(string key)
     {
-        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        for (int i = 0; i < Abilities.Count; i++)
         {
-            if (PrimaryAbilities[i].Name == key)
+            if (Abilities[i].Name == key)
             {
-                return PrimaryAbilities[i];
+                return Abilities[i];
             }
         }
 
         return null;
     }
 
-    public int GetPrimaryAbilityIndex(string key)
+    public int GetAbilityIndex(string key)
     {
-        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        for (int i = 0; i < Abilities.Count; i++)
         {
-            if (PrimaryAbilities[i].Name == key)
+            if (Abilities[i].Name == key)
             {
                 return i;
             }
@@ -136,13 +136,13 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public bool IsInitialPerkValue(DevPrimaryAbility primaryAbility, PAPerk perk)
+    public bool IsInitialPerkValue(DevAbility ability, PAPerk perk)
     {
-        for(int i = 0; i < primaryAbility.InitialPerks.Count;i++)
+        for(int i = 0; i < ability.InitialPerks.Count;i++)
         {
-            if(primaryAbility.InitialPerks[i].Key == perk.Key)
+            if(ability.InitialPerks[i].Key == perk.Key)
             {
-                return primaryAbility.InitialPerks[i].Value == perk.Points;
+                return ability.InitialPerks[i].Value == perk.Points;
             }
         }
         return false;
@@ -163,13 +163,13 @@ public class Content : MonoBehaviour {
 
     public DevSpell GetPlayerSpell(string spellKey)
     {
-        for(int i=0; i < PrimaryAbilities.Count; i++)
+        for(int i=0; i < Abilities.Count; i++)
         {
-            for(int a=0; a < PrimaryAbilities[i].Spells.Count; a++)
+            for(int a=0; a < Abilities[i].Spells.Count; a++)
             {
-                if(PrimaryAbilities[i].Spells[a].Key == spellKey)
+                if(Abilities[i].Spells[a].Key == spellKey)
                 {
-                    return PrimaryAbilities[i].Spells[a];
+                    return Abilities[i].Spells[a];
                 }
             }
         }
@@ -195,13 +195,13 @@ public class Content : MonoBehaviour {
 
     public DevSpell GetSpellAtLevel(int lvl)
     {
-        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        for (int i = 0; i < Abilities.Count; i++)
         {
-            for (int a = 0; a < PrimaryAbilities[i].Spells.Count; a++)
+            for (int a = 0; a < Abilities[i].Spells.Count; a++)
             {
-                if (PrimaryAbilities[i].Spells[a].Level == lvl)
+                if (Abilities[i].Spells[a].Level == lvl)
                 {
-                    return PrimaryAbilities[i].Spells[a];
+                    return Abilities[i].Spells[a];
                 }
             }
         }
@@ -211,7 +211,7 @@ public class Content : MonoBehaviour {
 
     public DevSpell GetSpellAtIndex(int iIndex)
     {
-        DevPrimaryAbility tempPA = GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
+        DevAbility tempPA = GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
 
         if (iIndex < tempPA.Spells.Count)
         {
@@ -224,11 +224,11 @@ public class Content : MonoBehaviour {
 
     public int GetSpellIndex(DevSpell spell)
     {
-        for (int i = 0; i < PrimaryAbilities.Count; i++)
+        for (int i = 0; i < Abilities.Count; i++)
         {
-            for (int a = 0; a < PrimaryAbilities[i].Spells.Count; a++)
+            for (int a = 0; a < Abilities[i].Spells.Count; a++)
             {
-                if (PrimaryAbilities[i].Spells[a]== spell)
+                if (Abilities[i].Spells[a]== spell)
                 {
                     return a;
                 }
@@ -359,7 +359,7 @@ public class ContentPiece
 }
 
 [System.Serializable]
-public class DevPrimaryAbility
+public class DevAbility
 {
     public string Name;
 
@@ -533,7 +533,7 @@ public class Quest
     public int RewardHP;
     public int RewardMP;
 
-    public DevPrimaryAbility RewardPrimaryAbility;
+    public DevAbility RewardPrimaryAbility;
 
     public string RewardClass;
     

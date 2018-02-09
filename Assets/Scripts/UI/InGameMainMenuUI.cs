@@ -314,7 +314,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshMP(info);
         RefreshLevel(info);
 
-        PrimaryAbilityImage.sprite = Content.Instance.GetPrimaryAbility(info.CurrentPrimaryAbility.Key).Icon;
+        PrimaryAbilityImage.sprite = Content.Instance.GetAbility(info.CurrentPrimaryAbility.Key).Icon;
 
         RefreshPAExpBar();
         RefreshSpellArea(true);
@@ -666,7 +666,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshCurrentPrimaryAbility()
     {
-        PrimaryAbilityIcon.sprite = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Icon;
+        PrimaryAbilityIcon.sprite = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Icon;
         RefreshPAExpBar();
     }
 

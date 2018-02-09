@@ -30,7 +30,7 @@ public class UpgradeInfoUI : MonoBehaviour {
         initialPerkColor = new Color(r, g, b);
     }
 
-    public void SetInfo(DevPrimaryAbility devPA, PAPerk perk)
+    public void SetInfo(DevAbility devPA, PAPerk perk)
     {
         currentPerk = Content.Instance.GetPerk(perk.Key);
         bool isInitialValue = Content.Instance.IsInitialPerkValue(devPA, perk);

@@ -17,7 +17,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
     [SerializeField]
     List<GameObject> UpgradeBubbles = new List<GameObject>();
 
-    public PrimaryAbility CurrentAbility = null;
+    public Ability CurrentAbility = null;
 
     public void ShowLatest()
     {
@@ -41,7 +41,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         StartCoroutine(ShowRoutine(CurrentAbility));
     }
 
-    IEnumerator ShowRoutine(PrimaryAbility ability)
+    IEnumerator ShowRoutine(Ability ability)
     {
         Clear();
 

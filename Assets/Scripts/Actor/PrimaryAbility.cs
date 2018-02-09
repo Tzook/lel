@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PrimaryAbility
+public class Ability
 {
     public string Key;
     public int Points;

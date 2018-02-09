@@ -21,7 +21,7 @@ public class PrimaryAbilitiesGridUI : MonoBehaviour {
         ClearGrid();
 
         GameObject tempObj;
-        DevPrimaryAbility tempAbility;
+        DevAbility tempAbility;
         for(int i=0;i<LocalUserInfo.Me.ClientCharacter.PrimaryAbilities.Count;i++)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("PrimaryAbilityOption");
@@ -30,7 +30,7 @@ public class PrimaryAbilitiesGridUI : MonoBehaviour {
             tempObj
                 .transform.localScale = Vector2.one;
 
-            tempAbility = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
+            tempAbility = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
 
             tempObj.transform.GetChild(0).GetComponent<Image>().sprite = tempAbility.Icon;
             AddAbilityListener(tempObj.GetComponent<Button>(), LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);

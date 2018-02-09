@@ -68,7 +68,7 @@ public class ProjectileArrow : MonoBehaviour {
     {
         if (InFlight)
         {
-            DevPrimaryAbility dPA = Content.Instance.GetPrimaryAbility(PrimaryAbilitySourceKey);
+            DevAbility dPA = Content.Instance.GetAbility(PrimaryAbilitySourceKey);
 
             m_Particles.Stop();
             InFlight = false;

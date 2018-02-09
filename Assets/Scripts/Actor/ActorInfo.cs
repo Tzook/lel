@@ -81,8 +81,9 @@ public class ActorInfo
     }
 
 
-    public List<PrimaryAbility> PrimaryAbilities = new List<PrimaryAbility>();
-    public PrimaryAbility CurrentPrimaryAbility;
+    public List<Ability> PrimaryAbilities = new List<Ability>();
+    public List<Ability> CharAbilities = new List<Ability>();
+    public Ability CurrentPrimaryAbility;
 
     public int UnspentPerkPoints
     {
@@ -150,6 +151,14 @@ public class ActorInfo
             AddPrimaryAbility(key, talent);
         }
 
+        enumerator = node["charTalents"].AsObject.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            string key = ((KeyValuePair<string, JSONNode>)enumerator.Current).Key;
+            JSONNode talent = node["charTalents"][key];
+            AddCharAbility(key, talent);
+        }
+
         if (node["stats"] != null)
         {
             SetStats(node["stats"]);
@@ -180,16 +189,32 @@ public class ActorInfo
         RefreshBonuses();
     }
 
-    public void AddPrimaryAbility(string key, JSONNode Ability)
+    public void AddPrimaryAbility(string key, JSONNode AbilityNode)
     {
-        IEnumerator enumerator;
-        PrimaryAbility ability = new PrimaryAbility();
+        Ability ability = new Ability();
         ability.Key = key;
         if (GetPrimaryAbility(ability.Key) == null)
         {
             PrimaryAbilities.Add(ability);
         }
-        enumerator = Ability["perks"].AsObject.GetEnumerator();
+        FillAbility(ability, AbilityNode);
+    }
+
+    public void AddCharAbility(string key, JSONNode AbilityNode)
+    {
+        Ability ability = new Ability();
+        ability.Key = key;
+        if (GetPrimaryAbility(ability.Key) == null)
+        {
+            CharAbilities.Add(ability);
+        }
+        FillAbility(ability, AbilityNode);
+    }
+
+    protected void FillAbility(Ability ability, JSONNode AbilityNode)
+    {
+        IEnumerator enumerator;
+        enumerator = AbilityNode["perks"].AsObject.GetEnumerator();
 
         while (enumerator.MoveNext())
         {
@@ -205,14 +230,14 @@ public class ActorInfo
             ability.Perks.Add(tempPerk);
         }
 
-        for (int p = 0; p < Ability["pool"].Count; p++)
+        for (int p = 0; p < AbilityNode["pool"].Count; p++)
         {
-            ability.PerkPool.Add(Ability["pool"][p].Value);
+            ability.PerkPool.Add(AbilityNode["pool"][p].Value);
         }
 
-        ability.Points = Ability["points"].AsInt;
-        ability.Exp = Ability["exp"].AsInt;
-        ability.LVL = Ability["lvl"].AsInt;
+        ability.Points = AbilityNode["points"].AsInt;
+        ability.Exp = AbilityNode["exp"].AsInt;
+        ability.LVL = AbilityNode["lvl"].AsInt;
     }
 
     public Quest GetQuest(string questKey)
@@ -317,7 +342,7 @@ public class ActorInfo
         }
         else
         {
-            CurrentPrimaryAbility = new PrimaryAbility();
+            CurrentPrimaryAbility = new Ability();
             CurrentPrimaryAbility.Key = key;
         }
     }
@@ -545,7 +570,7 @@ public class ActorInfo
         QuestsInProgress.Remove(GetQuest(QuestKey));
     }
 
-    public PrimaryAbility GetPrimaryAbility(string key)
+    public Ability GetPrimaryAbility(string key)
     {
         for(int i=0;i<PrimaryAbilities.Count;i++)
         {

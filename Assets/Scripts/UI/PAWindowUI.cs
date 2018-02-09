@@ -31,8 +31,8 @@ public class PAWindowUI : MonoBehaviour {
 
     public int SelectedPA = 0;
 
-    PrimaryAbility CurrentPA;
-    DevPrimaryAbility CurrentDevPA;
+    Ability CurrentPA;
+    DevAbility CurrentDevPA;
 
     public void Show()
     {
@@ -50,12 +50,12 @@ public class PAWindowUI : MonoBehaviour {
     public void RefreshWindow()
     {
         CurrentPA = LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[SelectedPA];
-        CurrentDevPA = Content.Instance.GetPrimaryAbility(CurrentPA.Key);
+        CurrentDevPA = Content.Instance.GetAbility(CurrentPA.Key);
 
         ClearContainers();
         
         GameObject tempObj;
-        DevPrimaryAbility tempDevPA;
+        DevAbility tempDevPA;
         for (int i = 0; i < LocalUserInfo.Me.ClientCharacter.PrimaryAbilities.Count; i++)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("PASelectionButtonUI");
@@ -63,7 +63,7 @@ public class PAWindowUI : MonoBehaviour {
 
             AddPASelectionListener(tempObj.GetComponent<Button>(), i);
 
-            tempDevPA = Content.Instance.GetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
+            tempDevPA = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
 
             tempObj.GetComponent<Image>().color = tempDevPA.PAColor;
 

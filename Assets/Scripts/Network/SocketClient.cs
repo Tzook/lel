@@ -1071,7 +1071,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        PrimaryAbility tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        Ability tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
         tempPA.Exp = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
@@ -1083,7 +1083,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        PrimaryAbility tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        Ability tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
         tempPA.LVL = data["lvl"].AsInt;
         tempPA.Points = data["points"].AsInt;
 
@@ -1105,7 +1105,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        PrimaryAbility tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        Ability tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
 
         tempAbility.PerkPool.Clear();
 
@@ -1121,7 +1121,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        PrimaryAbility tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        Ability tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
 
         tempAbility.GainPerk(data["perk"].Value);
         tempAbility.Points--;

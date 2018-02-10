@@ -40442,7 +40442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.0396}
   m_AnchorMin: {x: 0.0075000008, y: 0.6997804}
   m_AnchorMax: {x: 0.9925001, y: 1}
-  m_AnchoredPosition: {x: 0, y: 3.4999847}
+  m_AnchoredPosition: {x: 0, y: 3.5}
   m_SizeDelta: {x: -3, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1931
@@ -46970,6 +46970,8 @@ MonoBehaviour:
         Value: 1
       Icon: {fileID: 21300006, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
       HitSound: sound_punch
+      MinTime: 4
+      MaxTime: 10
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
     MonsterHP: 2000
@@ -47058,6 +47060,8 @@ MonoBehaviour:
         Value: 1
       Icon: {fileID: 21300036, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
       HitSound: sound_stun
+      MinTime: 4
+      MaxTime: 10
   - MonsterKey: Plant
     MonsterName: Moving Plant
     MonsterHP: 60
@@ -47332,6 +47336,8 @@ MonoBehaviour:
         Value: 10
       Icon: {fileID: 0}
       HitSound: sound_hit_4
+      MinTime: 4
+      MaxTime: 10
   - MonsterKey: FrostWizardBoss
     MonsterName: Frost Wizard
     MonsterHP: 700
@@ -47415,6 +47421,8 @@ MonoBehaviour:
         Value: 12
       Icon: {fileID: 0}
       HitSound: sound_impactCold
+      MinTime: 4
+      MaxTime: 10
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -48999,6 +49007,8 @@ MonoBehaviour:
         Value: 0.9
       Icon: {fileID: 21300030, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
       HitSound: sound_hit_4
+      MinTime: 0
+      MaxTime: 0
     - Key: Whirlewind
       Level: 12
       Mana: 10
@@ -49010,6 +49020,8 @@ MonoBehaviour:
         Value: 6
       Icon: {fileID: 21300038, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
       HitSound: sound_hitSpray
+      MinTime: 0
+      MaxTime: 0
     InitialPerks:
     - Key: bleedChance
       Value: 1

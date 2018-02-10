@@ -469,6 +469,8 @@ public class DevSpell
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     public Sprite Icon;
     public string HitSound;
+    public float MinTime;
+    public float MaxTime;
 }
 [System.Serializable]
 public class DevPerkMap

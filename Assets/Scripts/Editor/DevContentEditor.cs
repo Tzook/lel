@@ -75,6 +75,8 @@ public class DevContentEditor : Editor
                         node["mobs"][i]["spells"][a]["perks"][b]["key"] = currentInfo.Monsters[i].Spells[a].Perks[b].Key.ToString();
                         node["mobs"][i]["spells"][a]["perks"][b]["value"] = (currentInfo.Monsters[i].Spells[a].Perks[b].Value).ToString();
                     }
+                    node["mobs"][i]["spells"][a]["minTime"] = currentInfo.Monsters[i].Spells[a].MinTime.ToString();
+                    node["mobs"][i]["spells"][a]["maxTime"] = currentInfo.Monsters[i].Spells[a].MaxTime.ToString();
                 }
             }
 

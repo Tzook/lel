@@ -474,7 +474,7 @@ public class ActorInstance : MonoBehaviour
     {
         if (Message.Length >= 65)
         {
-            Message = Message.Substring(0, 62) + "...";
+            Message = "<size=" + 22 + ">" + Message + "</size>";
         }
         MessageBubble.GetComponent<MessageBubbleUI>().PopMessage(Message, color);
     }

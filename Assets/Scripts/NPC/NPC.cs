@@ -178,6 +178,14 @@ public class NPC : MonoBehaviour {
                     }
                     break;
                 }
+            case "TriggerAnimation":
+                {
+                    DialogManager.Instance.StopDialogMode();
+
+                    TriggerAnimation(eventValue);
+
+                    break;
+                }
         }
     }
 

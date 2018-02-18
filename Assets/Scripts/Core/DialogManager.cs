@@ -69,6 +69,8 @@ public class DialogManager : MonoBehaviour {
             currentNPC.TriggerAnimation(currentNPC.IntroAnimation);
         }
 
+       
+
         StartDialog(npc.DefaultDialog);
     }
 
@@ -153,6 +155,8 @@ public class DialogManager : MonoBehaviour {
             BubbleText.text = "";
 
             yield return 0;
+
+            CurrentNPCBubble.transform.position = currentNPC.ChatBubbleSpot.position;
 
             //Fade in bubble
             CurrentNPCBubble.GetComponent<CanvasGroup>().alpha = 0f;

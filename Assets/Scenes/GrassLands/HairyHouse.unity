@@ -5898,6 +5898,7 @@ GameObject:
   - component: {fileID: 1329117874}
   - component: {fileID: 1329117873}
   - component: {fileID: 1329117872}
+  - component: {fileID: 1329117875}
   m_Layer: 14
   m_Name: NPC
   m_TagString: NPC
@@ -5921,15 +5922,65 @@ MonoBehaviour:
     Pieces:
     - Content: Hey...
       LetterDelay: 0.03
-      Pitch: 1.1
+      Pitch: 0.8
       SoundKey: 
-      AnimationTrigger: Greet
+      AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
     - Title: What the hell!?
       Event: StartDialog
+      Value: TheHell
+      Condition: QuestAvailable
+      ConditionValue: hairPotion
+      CLR: {r: 1, g: 0.9399594, b: 0.45588237, a: 1}
+    - Title: OK
+      Event: EndDialog
       Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: TheHell
+    Pieces:
+    - Content: Yeah...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: What a mess, right?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Well...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I deserve it...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I suppose...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: What happened?
+      Event: StartDialog
+      Value: Happened
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
@@ -5939,8 +5990,176 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: Happened
+    Pieces:
+    - Content: If you didn't manage to identify...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: This is my beard filling the room...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Because of the warlocks potion...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I used to be bald, you see...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So I asked the warlock for a hair potion...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: His owl just threw a potion at me and went away...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It was quite cheap so...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I said what the heck...
+      LetterDelay: 0.02
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: What they didn't tell me is that if you put it on your head...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You grow a beard!
+      LetterDelay: 0.02
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And if you put it on your chin...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You grow hair!
+      LetterDelay: 0.02
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They also didn't tell me how strong this thing is...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So, yeah... Can you help me?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I've been stuck here for a few days now...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: How
+      Event: StartDialog
+      Value: HowHelp
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: Not my problem...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: HowHelp
+    Pieces:
+    - Content: I want you...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: To file a complaint and get me my money back!
+      LetterDelay: 0.01
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: What about the hair...?
+      Event: StartDialog
+      Value: AboutHair
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: AboutHair
+    Pieces:
+    - Content: Oh, don't worry about that...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I quite like it...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Oh well...
+      Event: StartQuest
+      Value: hairPotion
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  GivingQuests:
+  - hairPotion
+  EndingQuests:
+  - hairPotion
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
@@ -5996,6 +6215,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1329117875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1329117871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: hairPotion
+  HideState: 1
 --- !u!1 &1366747437
 GameObject:
   m_ObjectHideFlags: 0

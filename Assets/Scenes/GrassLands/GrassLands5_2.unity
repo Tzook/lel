@@ -1906,6 +1906,8 @@ MonoBehaviour:
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Do you like my drawing of a rabbit?
 
 '
@@ -1913,6 +1915,8 @@ MonoBehaviour:
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Close
       Event: EndDialog
@@ -5761,11 +5765,13 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...!'
       Event: StartDialog
       Value: JackAgent
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 0.88174444, b: 0.2205882, a: 1}
     - Title: I... Still want to help
@@ -5787,6 +5793,8 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I am!
       Event: StartDialog
@@ -5801,26 +5809,36 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: If Jack trusts you, I do.
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Lets make it quick.
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: The magic carrot seeds are stored in the storage room.
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can get you inside...
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Lets go!
       Event: Teleport
@@ -5841,16 +5859,22 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Look who's back!
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can't leave this place don't you get it?
       LetterDelay: 0.01
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Go back to Shell Hill and tell him the magic carrot seeds are gone!
 
 '
@@ -5858,6 +5882,8 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Alright.
       Event: StartQuest
@@ -5873,7 +5899,8 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests:
   - jacksVengeance2
-  EndingQuests: []
+  EndingQuests:
+  - jacksVengeance
   TeleportableScenes:
   - sceneKey: RabbitStorageRoom
     portalKey: Entrance
@@ -5884,7 +5911,7 @@ MonoBehaviour:
   Name: Jade De La Rabbit
   Key: jadedelarabbit
   Body: {fileID: 1814406524}
-  Anim: {fileID: 0}
+  Anim: {fileID: 1814406525}
   NameTag: {fileID: 1927296450}
   ChatBubbleSpot: {fileID: 679877728}
   QuestSpot: {fileID: 1939599362}
@@ -22204,6 +22231,7 @@ MonoBehaviour:
       - {x: 69.22234, y: -2.0097713}
       - {x: 68.81234, y: -9.255503}
       - {x: 67.45559, y: -50.70354}
+  SceneState: []
 --- !u!4 &1921520286
 Transform:
   m_ObjectHideFlags: 0

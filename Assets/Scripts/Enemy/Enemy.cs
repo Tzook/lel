@@ -196,6 +196,7 @@ public class Enemy : MonoBehaviour {
 
                     break;
                 }
+            case "burn":
             case "bleed":
                 {
                     TextSize -= 15;

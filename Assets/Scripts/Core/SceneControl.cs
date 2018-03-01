@@ -13,6 +13,7 @@ public class SceneControl
     public Dictionary<string, ItemInstance> Items = new Dictionary<string, ItemInstance>();
     public List<NPC>                        Npcs = new List<NPC>();
     public List<QuestVisibility> QVObjects = new List<QuestVisibility>();
+    public List<NetStateEntity> NetEntities = new List<NetStateEntity>();
 
     public int SceneItemsCount
     {
@@ -73,6 +74,11 @@ public class SceneControl
             Npcs.Add(npc);
         }
     }
+    
+    public void AddNetStateEntity(NetStateEntity nEntity)
+    {
+        NetEntities.Add(nEntity);
+    }
 
 
     public ActorInfo GetActorByName(string Name)
@@ -128,6 +134,19 @@ public class SceneControl
             if(Enemies[i].Info.ID == instanceID)
             {
                 return Enemies[i];
+            }
+        }
+
+        return null;
+    }
+    
+    public NetStateEntity GetEntity(string key)
+    {
+        for(int i=0;i<NetEntities.Count;i++)
+        {
+            if(NetEntities[i].Key == key)
+            {
+                return NetEntities[i];
             }
         }
 
@@ -229,5 +248,10 @@ public class SceneControl
         }
 
         sellingSigns.Clear();
+    }
+
+    public void SetNetEntityState(string entityKey, string state)
+    {
+        GetEntity(entityKey).OnNetStateChange(state);
     }
 }

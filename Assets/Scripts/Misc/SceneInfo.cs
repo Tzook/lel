@@ -20,17 +20,22 @@ public class SceneInfo : MonoBehaviour {
 
     public static SceneInfo Instance;
 
-    public List<SceneStateObject> SceneState = new List<SceneStateObject>();
+    public List<NetStateEntity> NetStateEntities = new List<NetStateEntity>();
+
+    public void UpdateStateChange(string entityKey, string stateValue)
+    {
+        for(int i=0;i<NetStateEntities.Count;i++)
+        {
+            if(NetStateEntities[i].Key == entityKey)
+            {
+                NetStateEntities[i].OnNetStateChange(stateValue);
+                return;
+            }
+        }
+    }
 
     void Awake()
     {
         Instance = this;
     }
-}
-
-[System.Serializable]
-public class SceneStateObject
-{
-    public string Key;
-    public string Value;
 }

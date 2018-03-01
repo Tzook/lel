@@ -290,7 +290,7 @@ public class SocketClient : MonoBehaviour
         string value = data["value"].Value;
         BroadcastEvent("Room State "+ key + ": " + value);
 
-        SceneState.Instance.OnStateChanged(key, value);
+        SceneInfo.Instance.UpdateStateChange(key, value);
     }
 
     protected void OnItemDisappear(Socket socket, Packet packet, object[] args)

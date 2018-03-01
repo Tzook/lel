@@ -1137,6 +1137,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1124393290}
+        m_MethodName: SetTime
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!61 &144687890
@@ -1685,6 +1696,8 @@ MonoBehaviour:
       Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -4865,6 +4878,7 @@ GameObject:
   - component: {fileID: 1124393288}
   - component: {fileID: 1124393287}
   - component: {fileID: 1124393289}
+  - component: {fileID: 1124393290}
   m_Layer: 0
   m_Name: LeverBase
   m_TagString: Untagged
@@ -4942,6 +4956,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fadf46f76047417429fccaa9b65910dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1124393290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124393286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c6d4ab0e7e9914089bd6264426c95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnReachZero:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1989576838}
+        m_MethodName: Hurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  CurrentTime: 0
 --- !u!1 &1132071471
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,6 +5832,7 @@ MonoBehaviour:
       - {x: -91.99184, y: -60.135956}
       - {x: -89.94145, y: -43.170376}
       - {x: -87.36023, y: -33.93129}
+  SceneState: []
 --- !u!4 &1334995630
 Transform:
   m_ObjectHideFlags: 0

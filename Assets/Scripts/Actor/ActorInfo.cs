@@ -89,15 +89,27 @@ public class ActorInfo
     {
         get
         {
-            int Counter = 0;
-
-            for(int i=0;i<PrimaryAbilities.Count;i++)
-            {
-                Counter += PrimaryAbilities[i].Points;
-            }
-
-            return Counter;
+            return GetUnspectPerkPoints(PrimaryAbilities);
         }
+    }
+
+    public int UnspentCharPerkPoints
+    {
+        get
+        {
+            return GetUnspectPerkPoints(CharAbilities);
+        }
+    }
+    private int GetUnspectPerkPoints(List<Ability> abilities)
+    {
+        int Counter = 0;
+
+        for (int i = 0; i < abilities.Count; i++)
+        {
+            Counter += abilities[i].Points;
+        }
+
+        return Counter;
     }
 
     public Inventory Inventory;
@@ -572,16 +584,28 @@ public class ActorInfo
 
     public Ability GetPrimaryAbility(string key)
     {
-        for(int i=0;i<PrimaryAbilities.Count;i++)
+        return GetAbility(PrimaryAbilities, key);
+    }
+
+    public Ability GetCharAbility(string key)
+    {
+        return GetAbility(CharAbilities, key);
+    }    
+
+    private Ability GetAbility(List<Ability> abilites, string key)
+    {
+        for (int i = 0; i < abilites.Count; i++)
         {
-            if(PrimaryAbilities[i].Key == key)
+            if (abilites[i].Key == key)
             {
-                return PrimaryAbilities[i];
+                return abilites[i];
             }
         }
 
         return null;
     }
+
+
 }
 
 public enum Gender

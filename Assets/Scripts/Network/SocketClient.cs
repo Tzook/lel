@@ -1072,6 +1072,10 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data.ToString());
 
         Ability tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        if (tempPA == null)
+        {
+            tempPA = LocalUserInfo.Me.ClientCharacter.GetCharAbility(data["ability"].Value);
+        }
         tempPA.Exp = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
@@ -1083,18 +1087,32 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
+        bool isCharAbility = false;
         Ability tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        if (tempPA == null)
+        {
+            isCharAbility = true;
+            tempPA = LocalUserInfo.Me.ClientCharacter.GetCharAbility(data["ability"].Value);
+        }
+
         tempPA.LVL = data["lvl"].AsInt;
         tempPA.Points = data["points"].AsInt;
 
-        LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
 
         if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
         {
             InGameMainMenuUI.Instance.RefreshSpellArea();
         }
 
-        InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+        if (isCharAbility)
+        {
+            InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentCharPerkPoints);
+        } 
+        else 
+        {
+            LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
+            InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+        }
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
     }
@@ -1106,6 +1124,10 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data.ToString());
 
         Ability tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        if (tempAbility == null)
+        {
+            tempAbility = LocalUserInfo.Me.ClientCharacter.GetCharAbility(data["ability"].Value);
+        }
 
         tempAbility.PerkPool.Clear();
 
@@ -1121,13 +1143,26 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
+        bool isCharAbility = false;
         Ability tempAbility = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
+        if (tempAbility == null)
+        {
+            isCharAbility = true;
+            tempAbility = LocalUserInfo.Me.ClientCharacter.GetCharAbility(data["ability"].Value);
+        }
 
         tempAbility.GainPerk(data["perk"].Value);
         tempAbility.Points--;
 
         InGameMainMenuUI.Instance.EnableUpgradeCounter();
-        InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+        if (isCharAbility)
+        {
+            InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentCharPerkPoints);
+        } 
+        else 
+        {
+            InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
+        }
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
     }

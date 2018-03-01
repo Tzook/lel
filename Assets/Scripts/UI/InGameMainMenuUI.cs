@@ -109,7 +109,10 @@ public class InGameMainMenuUI : MonoBehaviour {
     public PAWindowUI PrimaryAbilityWindow;
 
     [SerializeField]
-    public UpgradeCounterUI UpgradeCounterPanel;
+    public UpgradeCounterUI PrimaryAbilitiesUpgradeCounterPanel;
+
+    [SerializeField]
+    public UpgradeCounterUI CharAbilitiesUpgradeCounterPanel;
 
     [SerializeField]
     public MasteryUpgradeWindowUI MasteryUpgradePanel;
@@ -320,6 +323,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshSpellArea(true);
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
+        UpdateCharUpgradeCounter(info.UnspentCharPerkPoints);
     }
 
     public void HideGameUI()
@@ -725,23 +729,34 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void UpdateUpgradeCounter(int Value)
     {
-        UpgradeCounterPanel.SetValue(Value);
+        PrimaryAbilitiesUpgradeCounterPanel.SetValue(Value);
+    }
+    
+    public void UpdateCharUpgradeCounter(int Value)
+    {
+        CharAbilitiesUpgradeCounterPanel.SetValue(Value);
     }
 
     public void EnableUpgradeCounter()
     {
-        UpgradeCounterPanel.Interactable = true;
+        PrimaryAbilitiesUpgradeCounterPanel.Interactable = true;
+        CharAbilitiesUpgradeCounterPanel.Interactable = true;
     }
 
     public void DisableUpgradeCounter()
     {
-        UpgradeCounterPanel.Interactable = false;
+        PrimaryAbilitiesUpgradeCounterPanel.Interactable = false;
+        CharAbilitiesUpgradeCounterPanel.Interactable = false;
     }
-
 
     public void ShowMasteryUpgradeWindow()
     {
-        MasteryUpgradePanel.ShowLatest();
+        MasteryUpgradePanel.ShowLatest(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities);
+    }
+
+    public void ShowCharMasteryUpgradeWindow()
+    {
+        MasteryUpgradePanel.ShowLatest(LocalUserInfo.Me.ClientCharacter.CharAbilities);
     }
 
     public void HideMasteryUpgradeWindow()

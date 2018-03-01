@@ -19,20 +19,20 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
 
     public Ability CurrentAbility = null;
 
-    public void ShowLatest()
+    public void ShowLatest(List<Ability> abilities)
     {
         this.gameObject.SetActive(true);
 
-        for(int i=0; i<LocalUserInfo.Me.ClientCharacter.PrimaryAbilities.Count;i++)
+        for(int i = 0; i < abilities.Count; i++)
         {
-            if(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].PerkPool.Count > 0 && LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Points > 0)
+            if (abilities[i].PerkPool.Count > 0 && abilities[i].Points > 0)
             {
-                CurrentAbility = LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i];
+                CurrentAbility = abilities[i];
                 break;
             }
         }
 
-        if(CurrentAbility == null)
+        if (CurrentAbility == null)
         {
             Hide();
             return;

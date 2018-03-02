@@ -131,6 +131,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("ability_gain_perk", OnAbilityGainPerk);
 
         CurrentSocket.On("buff_activated", OnBuffActivated);
+        CurrentSocket.On("buff_resisted", OnBuffResisted);
         CurrentSocket.On("spell_activated", OnSpellActivated);
         CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
 
@@ -1185,6 +1186,30 @@ public class SocketClient : MonoBehaviour
             if (actor != null)
             {
                 actor.Instance.AddBuff(data["key"].Value, data["duration"].AsFloat);
+            }
+        }
+    }
+
+    private void OnBuffResisted(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
+        // TODO modify the resist based on data["key"].Value and make this pop more beautiful
+        string text = "Resist!";
+        Color clr = Color.red;
+        if (tempEnemy != null) //IS MOB
+        {
+            tempEnemy.PopHint(text, clr);
+        }
+        else
+        {
+            ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
+            if (actor != null)
+            {
+                actor.Instance.PopHint(text, clr);
             }
         }
     }

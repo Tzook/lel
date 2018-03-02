@@ -38,14 +38,28 @@ public class UpgradeInfoUI : MonoBehaviour {
         txtTitle.text = currentPerk.Name;
         iconImage.sprite = currentPerk.Icon;
 
+        float percentValue = GetPerkValue(currentPerk, perk);
+
         if (currentPerk.PrecentPerUpgrade < 1)
         {
-            txtPrecent.text = Mathf.FloorToInt((perk.Points * currentPerk.PrecentPerUpgrade) * 100f) + "%";
+            txtPrecent.text = Mathf.FloorToInt(percentValue * 100f) + "%";
         }
         else
         {
-            txtPrecent.text = perk.Points.ToString();
+            txtPrecent.text = percentValue.ToString();
         }
+
         txtPrecent.color = isInitialValue ? initialPerkColor : originalTextColor;
+    }
+
+    private float GetPerkValue(DevPAPerk currentPerk, PAPerk perk)
+    {
+        // Gauss formula => 1 + 2 + 3 + ... + n = n * (n + 1) / 2
+        float sumValuesUntilLevel = (perk.Points - 1) * perk.Points / 2;
+        // 1 * x + 2 * x + ... + n * x = (1 + 2 + 3 + ... + n) * x
+        float accelerationPoint = sumValuesUntilLevel * currentPerk.PrecentAccelerationPerUpgrade;
+        
+        float percentValue = currentPerk.StartingValue + perk.Points * currentPerk.PrecentPerUpgrade + accelerationPoint;
+        return percentValue;
     }
 }

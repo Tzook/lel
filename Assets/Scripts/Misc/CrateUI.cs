@@ -49,7 +49,7 @@ public class CrateUI : MonoBehaviour
         AudioControl.Instance.StopSound(Key);
     }
 
-    public void Set(string perkKey)
+    public void Set(string perkKey, PAPerk currentAbilityPerk = null)
     {
         Debug.Log("SD" + perkKey);
         CurrentPerk = Content.Instance.GetPerk(perkKey);
@@ -59,14 +59,15 @@ public class CrateUI : MonoBehaviour
         m_Animator.SetTrigger("Reset");
 
         int showValue;
+        float PercentValue = CurrentPerk.PrecentPerUpgrade + CurrentPerk.PrecentAccelerationPerUpgrade * (currentAbilityPerk == null ? 0 : currentAbilityPerk.Points);
         if (CurrentPerk.PrecentPerUpgrade >= 1f)
         {
-            showValue = Mathf.FloorToInt(CurrentPerk.PrecentPerUpgrade);
+            showValue = Mathf.FloorToInt(PercentValue);
             m_Title.text = "+" + showValue + " " + CurrentPerk.Name;
         }
         else
         {
-            showValue = Mathf.FloorToInt(CurrentPerk.PrecentPerUpgrade * 100f);
+            showValue = Mathf.FloorToInt(PercentValue * 100f);
             m_Title.text = "+" + showValue + "% " + CurrentPerk.Name;
         }
     }

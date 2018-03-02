@@ -64,7 +64,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("Crate");
             tempObj.transform.SetParent(transform, false);
-            tempObj.GetComponent<CrateUI>().Set(ability.PerkPool[i]);
+            tempObj.GetComponent<CrateUI>().Set(ability.PerkPool[i], ability.GetPerk(ability.PerkPool[i]));
             tempObj.GetComponent<CrateUI>().Interactable = true;
 
             UpgradeBubbles.Add(tempObj);

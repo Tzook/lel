@@ -41116,7 +41116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25758728}
   m_AnchorMax: {x: 0.17187499, y: 0.47179365}
-  m_AnchoredPosition: {x: -0.5, y: 3.5}
+  m_AnchoredPosition: {x: -0.49998474, y: 3.5}
   m_SizeDelta: {x: -3, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1976
@@ -49146,9 +49146,8 @@ MonoBehaviour:
     - MinLevel: 2
       PerksOffered: 2
       AddToPool:
-      - crippleChance
-      - stunChance
-      - bleedChance
+      - hpBonus
+      - mpBonus
     Spells: []
     InitialPerks: []
     statEnumState: 0
@@ -49280,7 +49279,7 @@ MonoBehaviour:
     PrecentPerUpgrade: 0.05
     UpgradeCap: 0.9
     StartingValue: 0
-    PrecentAccelerationPerUpgrade: 0.1
+    PrecentAccelerationPerUpgrade: 0
   - Key: hpRegenModifier
     Name: Health Regeneration Percent
     Icon: {fileID: 21300048, guid: f50a944a8da574040a634bf4b07fca85, type: 3}
@@ -49351,6 +49350,20 @@ MonoBehaviour:
     UpgradeCap: 2
     StartingValue: 1
     PrecentAccelerationPerUpgrade: 0
+  - Key: hpBonus
+    Name: Health Bonus
+    Icon: {fileID: 21300000, guid: 4e696e9fc0fc6994bb416bdaadd0e3f6, type: 3}
+    PrecentPerUpgrade: 10
+    UpgradeCap: 0
+    StartingValue: 0
+    PrecentAccelerationPerUpgrade: 5
+  - Key: mpBonus
+    Name: Mana Bonus
+    Icon: {fileID: 21300000, guid: 4e696e9fc0fc6994bb416bdaadd0e3f6, type: 3}
+    PrecentPerUpgrade: 10
+    UpgradeCap: 0
+    StartingValue: 0
+    PrecentAccelerationPerUpgrade: 5
   Buffs:
   - Key: bleedChance
     Name: Bleed

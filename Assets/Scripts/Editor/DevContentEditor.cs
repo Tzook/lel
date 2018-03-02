@@ -323,6 +323,7 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["value"] = perks[i].PrecentPerUpgrade.ToString();
             node["perkCollection"][i]["max"] = perks[i].UpgradeCap.ToString();
             node["perkCollection"][i]["default"] = perks[i].StartingValue.ToString();
+            node["perkCollection"][i]["acc"] = perks[i].PrecentAccelerationPerUpgrade.ToString();
         }
 
         Debug.Log("Sending Primary Abilities...");

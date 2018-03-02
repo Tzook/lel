@@ -22,6 +22,9 @@ public class UpgradeCounterUI : MonoBehaviour {
     [SerializeField]
     GameObject TipPanel;
 
+    [SerializeField]
+    string UpgradeBlobPrefabKey = "PowerBlobEffect"; 
+
     bool FirstUpgrade = false;
 
     private void Awake()
@@ -83,7 +86,7 @@ public class UpgradeCounterUI : MonoBehaviour {
 
     IEnumerator GainEffectRoutine()
     {
-        GameObject tempBlob = ResourcesLoader.Instance.GetRecycledObject("PowerBlobEffect");
+        GameObject tempBlob = ResourcesLoader.Instance.GetRecycledObject(UpgradeBlobPrefabKey);
 
         tempBlob.transform.position = LocalUserInfo.Me.ClientCharacter.Instance.transform.position;
 

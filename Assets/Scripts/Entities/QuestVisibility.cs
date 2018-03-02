@@ -9,8 +9,6 @@ public class QuestVisibility : MonoBehaviour {
 
     private void Start()
     {
-        Refresh();
-
         if (this.gameObject.activeInHierarchy)
         {
             StartCoroutine(Initialize());
@@ -26,6 +24,8 @@ public class QuestVisibility : MonoBehaviour {
         }
 
         Game.Instance.CurrentScene.AddQuestVisibilityObject(this);
+
+        Refresh();
     }
 
     public void Refresh()
@@ -38,6 +38,10 @@ public class QuestVisibility : MonoBehaviour {
                     {
                         Hide();
                     }
+                    else
+                    {
+                        Show();
+                    }
 
                     break;
                 }
@@ -48,6 +52,10 @@ public class QuestVisibility : MonoBehaviour {
                     {
                         Hide();
                     }
+                    else
+                    {
+                        Show();
+                    }
 
                     break;
                 }
@@ -57,6 +65,10 @@ public class QuestVisibility : MonoBehaviour {
                     {
                         Hide();
                     }
+                    else
+                    {
+                        Show();
+                    }
 
                     break;
                 }
@@ -65,6 +77,10 @@ public class QuestVisibility : MonoBehaviour {
                     if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey) == null)
                     {
                         Hide();
+                    }
+                    else
+                    {
+                        Show();
                     }
 
                     break;
@@ -80,6 +96,11 @@ public class QuestVisibility : MonoBehaviour {
     public void Hide()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
     }
 }
 

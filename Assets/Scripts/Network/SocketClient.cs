@@ -788,6 +788,7 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.ClientCharacter.CompleteQuest(data["id"].Value);
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         InGameMainMenuUI.Instance.RefreshCompletedQuestProgress();
+
         Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 

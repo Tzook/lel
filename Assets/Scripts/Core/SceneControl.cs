@@ -183,6 +183,7 @@ public class SceneControl
             }
         }
 
+        Debug.Log(QVObjects.Count);
         foreach(QuestVisibility qvObj in QVObjects)
         {
             qvObj.Refresh();

@@ -47,6 +47,8 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
 
         m_CG.alpha = 0f;
 
+        m_txtTitle.text = Content.Instance.GetAbility(ability.Key).Name;
+
         while (m_CG.alpha < 1f)
         {
             m_CG.alpha += 1f * Time.deltaTime;

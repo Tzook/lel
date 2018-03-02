@@ -85,7 +85,17 @@ public class PAWindowUI : MonoBehaviour {
         PAIcon.sprite = CurrentDevPA.Icon;
         PALevel.text = CurrentPA.LVL.ToString();
 
-        float toLevelUpPrecent = (CurrentPA.Exp / (CurrentPA.NextLevelXP * 1f));
+        float toLevelUpPrecent;
+
+        if (CurrentPA.Key == "charTalent")
+        {
+            toLevelUpPrecent = (LocalUserInfo.Me.ClientCharacter.EXP / (LocalUserInfo.Me.ClientCharacter.NextLevelXP * 1f));
+        }
+        else
+        {
+            toLevelUpPrecent = (CurrentPA.Exp / (CurrentPA.NextLevelXP * 1f));
+        }
+
         PAEXPPrecent.text = (Mathf.FloorToInt(toLevelUpPrecent * 100)) + "%";
         PABar.fillAmount = toLevelUpPrecent;
 

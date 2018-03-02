@@ -279,7 +279,7 @@ public class DevContentEditor : Editor
 
         for (int i = 0; i < abilities.Count; i++)
         {
-            node["talents"][i]["ability"] = abilities[i].Name;
+            node["talents"][i]["ability"] = abilities[i].Key;
 
             for (int a = 0; a < abilities[i].Perks.Count; a++)
             {
@@ -384,7 +384,7 @@ public class DevContentEditor : Editor
             node["quests"][i]["rewardDEX"] = Quests[i].RewardDEX.ToString();
             node["quests"][i]["rewardHP"] = Quests[i].RewardHP.ToString();
             node["quests"][i]["rewardMP"] = Quests[i].RewardMP.ToString();
-            node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility.Name;
+            node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility.Key;
 
             node["quests"][i]["rewardExp"] = Quests[i].RewardExp.ToString();
 

@@ -41,7 +41,7 @@ public class Content : MonoBehaviour {
     {
         for (int i = 0; i < Abilities.Count; i++)
         {
-            if (Abilities[i].Name == key)
+            if (Abilities[i].Key == key)
             {
                 return Abilities[i];
             }
@@ -54,7 +54,7 @@ public class Content : MonoBehaviour {
     {
         for (int i = 0; i < Abilities.Count; i++)
         {
-            if (Abilities[i].Name == key)
+            if (Abilities[i].Key == key)
             {
                 return i;
             }
@@ -361,6 +361,7 @@ public class ContentPiece
 [System.Serializable]
 public class DevAbility
 {
+    public string Key;
     public string Name;
 
     public Sprite Icon;

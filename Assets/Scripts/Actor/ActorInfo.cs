@@ -83,6 +83,11 @@ public class ActorInfo
 
     public List<Ability> PrimaryAbilities = new List<Ability>();
     public List<Ability> CharAbilities = new List<Ability>();
+    public List<Ability> AllAbilities
+    {
+        get { return CharAbilities.Concat(PrimaryAbilities).ToList(); }
+    }
+
     public Ability CurrentPrimaryAbility;
 
     public int UnspentPerkPoints

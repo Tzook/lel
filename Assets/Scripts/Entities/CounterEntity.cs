@@ -21,7 +21,9 @@ public class CounterEntity : MonoBehaviour {
     [SerializeField]
     int TargetNumber;
 
-    int Count;
+    [SerializeField]
+    int Count = 0;
+
     public void AddNumber(int num)
     {
         Count += num;

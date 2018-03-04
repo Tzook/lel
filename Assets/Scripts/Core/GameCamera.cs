@@ -106,7 +106,7 @@ public class GameCamera : MonoBehaviour {
         CurrentMouseHit = Physics2D.Raycast(Cam.ScreenToWorldPoint(Input.mousePosition), transform.forward, Mathf.Infinity);
 
 
-        if (Input.GetMouseButton(0) && !InGameMainMenuUI.Instance.isWindowOpen)
+        if (Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI)
         {
             Cursor.SetCursor(Content.Instance.CrosshairCursor, Vector2.zero, CursorMode.Auto);
         }

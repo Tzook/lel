@@ -117,7 +117,7 @@ public class ActorController : MonoBehaviour
     {
         if (CanDoAction())
         {
-            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !OnRope)
+            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !Game.Instance.isInteractingWithUI && !OnRope)
             {
                 Aim();
             }

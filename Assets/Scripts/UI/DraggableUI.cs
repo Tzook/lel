@@ -47,16 +47,12 @@ public class DraggableUI : MonoBehaviour
 
     private IEnumerator DragRoutine()
     {
-        float deltaX = GameCamera.MousePosition.x;
-        float deltaY = GameCamera.MousePosition.y;
+        // remember the distance from where we clicked on the object and keep it from the updated mouse position
+        Vector3 offset = gameObject.transform.position - GameCamera.MousePosition;
 
         while (true)
         {
-            transform.position += new Vector3(GameCamera.MousePosition.x - deltaX, GameCamera.MousePosition.y - deltaY, 0f);
-            //transform.position += new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f);
-            deltaX = GameCamera.MousePosition.x;
-            deltaY = GameCamera.MousePosition.y;
-
+            transform.position = GameCamera.MousePosition + offset;
             yield return 0;
         }
     }

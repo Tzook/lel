@@ -35,7 +35,6 @@ public class ChatHistory : MonoBehaviour
                     ChatboxUI.Instance.SetInputValue(current);
                 }
                 StartCoroutine(ThrottleNavigation());
-
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -50,7 +49,7 @@ public class ChatHistory : MonoBehaviour
     {
         // disable the input for a few milliseconds, so spamming up / down won't go so much in history
         navigating = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.05f);
         navigating = false;
     }
 
@@ -62,6 +61,7 @@ public class ChatHistory : MonoBehaviour
 
     public void ResetHistoryIndex()
     {
+        navigating = false;
         index = 0;
     }
 }

@@ -5,13 +5,17 @@ using UnityEngine;
 public class Ability
 {
     public string Key;
-    public int Points;
-    public int Exp;
-    public int LVL;
+    public int Points = 0;
+    public int Exp = 0;
+    public int LVL = 1;
 
     public List<PAPerk> Perks = new List<PAPerk>();
     public List<string> PerkPool = new List<string>();
 
+    public Ability(string key) 
+    {
+        Key = key;
+    }
 
     public int NextLevelXP
     {

@@ -25,6 +25,11 @@ public class SceneInfoEditor : Editor {
             node["scene"]["name"] = currentInfo.Name;
             node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
 
+            for (int i = 0; i < currentInfo.RoomAbilities.Count; i++)
+            {
+                node["scene"]["abilities"][i] = currentInfo.RoomAbilities[i];
+            }
+
             for (int i=0;i<currentInfo.ScenePortals.Count;i++)
             {
                 //if (currentInfo.ScenePortals[i].gameObject.activeInHierarchy)

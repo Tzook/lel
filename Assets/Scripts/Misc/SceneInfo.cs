@@ -10,6 +10,8 @@ public class SceneInfo : MonoBehaviour {
 
     public string BGMusic;
 
+    public List<string> RoomAbilities = new List<string>();
+
     public List<GatePortal> ScenePortals = new List<GatePortal>();
 
     public List<MonsterSpawner> Spawners = new List<MonsterSpawner>();

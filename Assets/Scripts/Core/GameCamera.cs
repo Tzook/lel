@@ -57,7 +57,7 @@ public class GameCamera : MonoBehaviour {
     {
         get
         {
-            return CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "Actor";
+            return CurrentMouseHit.collider.tag == "NPC" || CurrentMouseHit.collider.tag == "NPCBubble" || CurrentMouseHit.collider.tag == "Actor";
         }
     }
 
@@ -173,7 +173,10 @@ public class GameCamera : MonoBehaviour {
             {
                 CurrentMouseHit.collider.GetComponent<NPC>().Interact();
             }
-
+            else if (CurrentMouseHit.collider.GetComponent<QuestBubbleCollider>() != null)
+            {
+                CurrentMouseHit.collider.GetComponent<QuestBubbleCollider>().npc.Interact();
+            }
         }
     }
 

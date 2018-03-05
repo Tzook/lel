@@ -187,7 +187,6 @@ public class EnemyJumping : EnemyMoving
             yield return 0;
         }
 
-        SetTarget(null);
         CurrentAction = AIAction.Thinking;
     }
 

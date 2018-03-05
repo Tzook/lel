@@ -706,6 +706,7 @@ public class SocketClient : MonoBehaviour
         {
             ActorInstance actor = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
             monster.SetTarget(actor);
+
         }
     }
 

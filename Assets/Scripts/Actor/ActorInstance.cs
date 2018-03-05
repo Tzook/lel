@@ -844,22 +844,22 @@ public class ActorInstance : MonoBehaviour
             TimeBetweenBlinks = Random.Range(1f, 5f);
             yield return new WaitForSeconds(TimeBetweenBlinks);
 
-            m_Eyes.sprite = null;
-            yield return new WaitForSeconds(0.1f);
-            m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+            yield return StartCoroutine(BlinkOnceRoutine());
 
             if (Random.Range(0,3) == 0)
             {
-                m_Eyes.sprite = null;
-                yield return new WaitForSeconds(0.1f);
-                m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
-
+                yield return new WaitForSeconds(0.2f);
+                yield return StartCoroutine(BlinkOnceRoutine());
             }
-
-
         }
     }
 
+    private IEnumerator BlinkOnceRoutine()
+    {
+        m_Eyes.sprite = ResourcesLoader.Instance.GetSprite("eyes_0a_closed");
+        yield return new WaitForSeconds(0.07f);
+        m_Eyes.sprite = ResourcesLoader.Instance.GetSprite(Info.Eyes);
+    }
 
 
     public void ClearBuffs()

@@ -71,6 +71,7 @@ public class ActorController : MonoBehaviour
     bool aimRight;
 
     bool Invincible;
+    bool TakingDamageInAir;
     bool Stunned;
     bool Slowed;
 
@@ -540,10 +541,9 @@ public class ActorController : MonoBehaviour
 
     public void MoveLeft()
     {
-        //TODO Remove if no problems occur
-        Rigid.position += ((Vector2.left + Vector2.up * 0.1f) * ((InternalSpeed / (Slowed?2f:1f) + Instance.Info.SpeedBonus)) * Time.deltaTime);
+        Rigid.position += GetNextMovementPosition(Vector2.left);
 
-        Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y,initScale.z);
+        Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("ReverseWalk", aimRight);
 
@@ -556,8 +556,7 @@ public class ActorController : MonoBehaviour
 
     public void MoveRight()
     {
-        //TODO Remove if no problems occur
-        Rigid.position += ((Vector2.right + Vector2.up*0.1f) * ((InternalSpeed / (Slowed ? 2f : 1f)) + Instance.Info.SpeedBonus) * Time.deltaTime);
+        Rigid.position += GetNextMovementPosition(Vector2.right);
 
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
 
@@ -568,6 +567,28 @@ public class ActorController : MonoBehaviour
             Instance.TorsoBone.transform.localScale = Vector3.one;
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
+    }
+
+    private Vector2 GetNextMovementPosition(Vector2 side)
+    {
+        return (side + Vector2.up * 0.1f) * GetMovementSpeed() * Time.deltaTime;
+    }
+
+    private float GetMovementSpeed()
+    {
+        float speed;
+        if (TakingDamageInAir) 
+        {
+            speed = 1f;
+        }
+        else 
+        {
+            speed = InternalSpeed + Instance.Info.SpeedBonus;
+            if (Slowed) {
+                speed /= 2f;
+            }
+        }
+        return speed;
     }
 
     public void StandStill()
@@ -950,8 +971,6 @@ public class ActorController : MonoBehaviour
     {
         if (!Invincible && Content.Instance.GetMonsterByName(enemy.Info.Name).MaxDMG != 0)
         {
-
-
             EndAttack();
 
             SocketClient.Instance.SendTookDMG(enemy.Info);
@@ -962,13 +981,15 @@ public class ActorController : MonoBehaviour
 
             StartCoroutine(InvincibilityRoutine());
 
+            StartCoroutine(DisableSpeedUntilGrounded());
+
             if (enemy.transform.position.x < transform.position.x)
             {
-                Rigid.AddForce((InternalJumpForce * 0.5f * transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce(2.5f * transform.right, ForceMode2D.Impulse);
             }
             else
             {
-                Rigid.AddForce((InternalJumpForce * 0.5f * -transform.right), ForceMode2D.Impulse);
+                Rigid.AddForce(2.5f * -transform.right, ForceMode2D.Impulse);
             }
         }
     }
@@ -999,4 +1020,15 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    private IEnumerator DisableSpeedUntilGrounded()
+    {
+        TakingDamageInAir = true;
+        // first take extra time for the addforce to kick in
+        yield return new WaitForSeconds(0.2f);
+        while (!Grounded)
+        {
+            yield return null;
+        }
+        TakingDamageInAir = false;
+    }
 }

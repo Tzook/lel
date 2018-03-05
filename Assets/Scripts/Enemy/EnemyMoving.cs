@@ -207,6 +207,8 @@ public class EnemyMoving : Enemy
             {
                 yield return CurrentActionRoutine;
             }
+
+            yield return 0;
         }
     }
 
@@ -274,6 +276,7 @@ public class EnemyMoving : Enemy
 
         while(currentDistance < MaxChaseDistance)
         {
+
             currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
 
             if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f)
@@ -311,7 +314,6 @@ public class EnemyMoving : Enemy
             yield return 0;
         }
 
-        SetTarget(null);
         CurrentAction = AIAction.Thinking;
     }
 

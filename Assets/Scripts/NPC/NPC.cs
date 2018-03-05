@@ -38,7 +38,7 @@ public class NPC : MonoBehaviour {
     public Transform QuestSpot;
 
     public GameObject CurrentQuestBubble;
-
+    
     void Start()
     {
         Initialize();
@@ -218,6 +218,7 @@ public class NPC : MonoBehaviour {
 
         if(CurrentQuestBubble != null)
         {
+            CurrentQuestBubble.GetComponent<QuestBubbleCollider>().npc = this;
             CurrentQuestBubble.transform.position = QuestSpot.position;
         }
     }

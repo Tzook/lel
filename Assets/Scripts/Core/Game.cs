@@ -345,6 +345,11 @@ public class Game : MonoBehaviour {
             yield return 0;
         }
 
+        for (int i = 0; i < SceneInfo.Instance.RoomAbilities.Count; i++)
+        {
+            actorInfo.AddRoomPrimaryAbility(SceneInfo.Instance.RoomAbilities[i]);
+        }
+
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
         

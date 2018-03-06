@@ -208,8 +208,7 @@ public class ActorInfo
 
     public void AddPrimaryAbility(string key, JSONNode AbilityNode)
     {
-        Ability ability = new Ability();
-        ability.Key = key;
+        Ability ability = new Ability(key);
         if (GetPrimaryAbility(ability.Key) == null)
         {
             PrimaryAbilities.Add(ability);
@@ -217,10 +216,18 @@ public class ActorInfo
         FillAbility(ability, AbilityNode);
     }
 
+    public void AddRoomPrimaryAbility(string key)
+    {
+        Ability ability = new Ability(key);
+        if (GetPrimaryAbility(ability.Key) == null)
+        {
+            PrimaryAbilities.Add(ability);
+        }
+    }
+
     public void AddCharAbility(string key, JSONNode AbilityNode)
     {
-        Ability ability = new Ability();
-        ability.Key = key;
+        Ability ability = new Ability(key);
         if (GetPrimaryAbility(ability.Key) == null)
         {
             CharAbilities.Add(ability);
@@ -359,8 +366,7 @@ public class ActorInfo
         }
         else
         {
-            CurrentPrimaryAbility = new Ability();
-            CurrentPrimaryAbility.Key = key;
+            CurrentPrimaryAbility = new Ability(key);
         }
     }
 

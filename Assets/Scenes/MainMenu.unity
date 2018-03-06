@@ -47751,8 +47751,8 @@ MonoBehaviour:
     MonsterName: Pirate Sailor
     MonsterHP: 200
     MonsterLevel: 1
-    MinDMG: 6
-    MaxDMG: 15
+    MinDMG: 3
+    MaxDMG: 10
     RewardEXP: 180
     Type: 1
     PossibleLoot:
@@ -47851,8 +47851,8 @@ MonoBehaviour:
     MonsterName: Pirate Sailor
     MonsterHP: 200
     MonsterLevel: 1
-    MinDMG: 6
-    MaxDMG: 15
+    MinDMG: 3
+    MaxDMG: 10
     RewardEXP: 180
     Type: 1
     PossibleLoot:
@@ -47951,8 +47951,8 @@ MonoBehaviour:
     MonsterName: Pirate Sailor
     MonsterHP: 200
     MonsterLevel: 1
-    MinDMG: 6
-    MaxDMG: 15
+    MinDMG: 3
+    MaxDMG: 10
     RewardEXP: 180
     Type: 1
     PossibleLoot:
@@ -51432,7 +51432,22 @@ MonoBehaviour:
       out the intruders.
     QuestCompleteDescription: I helped Nurtle break in to his spa
     FacePrefab: NurtleQuest
-    Conditions: []
+    Conditions:
+    - Condition: hunt
+      Type: PirateSailor1
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor2
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor3
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
     QuestsStates:
     - QuestKey: untieNurtle
       EnumState: 1

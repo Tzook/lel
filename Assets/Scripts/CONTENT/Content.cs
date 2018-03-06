@@ -765,6 +765,6 @@ public class QuestState
 
     public enum QuestEnumState
     {
-        InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted
+        InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted, NeverStarted
     }
 }

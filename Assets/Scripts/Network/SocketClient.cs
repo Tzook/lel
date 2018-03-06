@@ -762,6 +762,7 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data["id"].Value + " Aborted");
 
+        Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 
     private void OnQuestStart(Socket socket, Packet packet, object[] args)
@@ -776,6 +777,7 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshQuestProgress();
         Game.Instance.CurrentScene.UpdateQuestProgress(data["id"].Value);
 
+        Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 
     private void OnQuestComplete(Socket socket, Packet packet, object[] args)

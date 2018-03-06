@@ -85,6 +85,32 @@ public class QuestVisibility : MonoBehaviour {
 
                     break;
                 }
+            case QuestState.QuestEnumState.CanBeCompleted:
+                {
+                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey).CanBeCompleted)
+                    {
+                        Hide();
+                    }
+                    else
+                    {
+                        Show();
+                    }
+
+                    break;
+                }
+            case QuestState.QuestEnumState.NeverStarted:
+                {
+                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey) == null && !LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(HideQuestKey))
+                    {
+                        Hide();
+                    }
+                    else
+                    {
+                        Show();
+                    }
+
+                    break;
+                }
             default:
                 {
                     this.gameObject.SetActive(true);

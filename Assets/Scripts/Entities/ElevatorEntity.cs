@@ -44,7 +44,7 @@ public class ElevatorEntity : MonoBehaviour {
         while(t<1f)
         {
             t += Speed * Time.deltaTime;
-            rigid.position = Vector3.Lerp(rigid.position, target.position, t);
+            transform.position = Vector3.Lerp(transform.position, target.position, t);
 
             yield return 0;
         }

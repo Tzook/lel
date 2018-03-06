@@ -22996,6 +22996,77 @@ Transform:
   m_Father: {fileID: 1004928905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1770855683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1770855684}
+  - component: {fileID: 1770855686}
+  - component: {fileID: 1770855685}
+  m_Layer: 2
+  m_Name: Portal (3)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1770855684
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770855683}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.311, y: 0.591, z: 0}
+  m_LocalScale: {x: 1.28544, y: 1.14694, z: 1.04856}
+  m_Children: []
+  m_Father: {fileID: 1948426210}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770855685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770855683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: ShroomCo5
+  TargetPortal: ShroomCo6
+  TargetLevel: ShroomCoVault
+  StartShut: 0
+  RequiresItems: []
+--- !u!61 &1770855686
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770855683}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.135, y: 1.705}
+    newSize: {x: 0.01, y: 0.01}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.13, y: 1.71}
+  m_EdgeRadius: 0
 --- !u!1 &1808256810
 GameObject:
   m_ObjectHideFlags: 0
@@ -26919,6 +26990,7 @@ MonoBehaviour:
   BGMusic: 
   ScenePortals:
   - {fileID: 1318348625}
+  - {fileID: 1770855685}
   Spawners: []
   Npcs: []
   miniMapInfo:
@@ -27481,6 +27553,7 @@ Transform:
   - {fileID: 1582544957}
   - {fileID: 1173809080}
   - {fileID: 1318348624}
+  - {fileID: 1770855684}
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -17262,11 +17262,15 @@ MonoBehaviour:
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Please don't fall....
       LetterDelay: 0.03
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Close
       Event: EndDialog
@@ -17276,6 +17280,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -17563,6 +17568,8 @@ MonoBehaviour:
   Key: Tent1
   TargetPortal: Tent2
   TargetLevel: GrassLands4_2
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &1445608982
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -17663,6 +17670,7 @@ MonoBehaviour:
   Name: GrassLands4_1
   NearestTownScene: GrassLands4
   BGMusic: 
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 2013496339}
   - {fileID: 1445608981}
@@ -17676,6 +17684,7 @@ MonoBehaviour:
     top: 0
     bottom: 0
     coliders: []
+  NetStateEntities: []
 --- !u!4 &1483239870
 Transform:
   m_ObjectHideFlags: 0
@@ -21999,6 +22008,8 @@ MonoBehaviour:
       Pitch: 0.9
       SoundKey: 
       AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'What brings you to this side of the island?
 
 '
@@ -22006,6 +22017,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Just wandering around
       Event: StartDialog
@@ -22038,26 +22051,36 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: This used to be a good fishing spot..
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: But since those damn turtles started swimming
       LetterDelay: 0.02
       Pitch: 0.9
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I'm catching less fish every day!
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: GoMad
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: These turtles...
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Can't you fish in a different place?
       Event: StartDialog
@@ -22084,21 +22107,29 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: But my adventuring days are over.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can't handle all those hostile creatures on this island
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I just want to stay here and fish
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Nice fishing rod
       Event: StartDialog
@@ -22119,21 +22150,29 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I got a few extra fishing rods that I can give away.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: But I won't give them to any adventurer that wanders to this place.
       LetterDelay: 0.02
       Pitch: 0.85
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You got to prove yourself!
       LetterDelay: 0.02
       Pitch: 0.85
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: And how do I do that?
       Event: StartDialog
@@ -22148,27 +22187,37 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Back in the day I used to hunt turtles, the bigger the better. '
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: There is that one that turtle that was too big for me to handle
       LetterDelay: 0.02
       Pitch: 0.85
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Tell you what? '
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: If you can handle him and bring me his shell I will give you a fishing
         rod.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'What do you say?
 
 '
@@ -22176,6 +22225,8 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'm in!
       Event: StartQuest
@@ -22196,16 +22247,22 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You really took him out!
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I'm impressed! Here's my part of the deal.
       LetterDelay: 0.02
       Pitch: 0.85
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -22217,6 +22274,7 @@ MonoBehaviour:
   - FatAlbert
   EndingQuests:
   - FatAlbert
+  TeleportableScenes: []
   SellingItems:
   - itemKey: smallFish
     ItemObject: {fileID: 859733357}

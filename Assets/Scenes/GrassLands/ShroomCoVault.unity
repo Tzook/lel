@@ -5437,6 +5437,7 @@ MonoBehaviour:
   Name: ShroomCoVault
   NearestTownScene: ShellHill
   BGMusic: 
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 1028123546}
   Spawners: []
@@ -7820,6 +7821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817905946}
   - component: {fileID: 817905944}
+  - component: {fileID: 817905945}
   m_Layer: 14
   m_Name: Mat
   m_TagString: NPC
@@ -7845,7 +7847,7 @@ MonoBehaviour:
       LetterDelay: 0.03
       Pitch: 0.5
       SoundKey: 
-      AnimationTrigger: 
+      AnimationTrigger: Angry
       PostPieceEvent: 
       PostPieceEventValue: 
     - Content: What a "wiseguy"
@@ -7866,23 +7868,17 @@ MonoBehaviour:
       LetterDelay: 0.03
       Pitch: 0.5
       SoundKey: 
-      AnimationTrigger: 
+      AnimationTrigger: Angry
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
     - Title: Great, there's two of you.
-      Event: EndDialog
-      Value: 
+      Event: StartDialog
+      Value: Two
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Have fun being stuck to a wall
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: What the?
       Event: EndDialog
       Value: 
       Condition: 
@@ -7934,7 +7930,7 @@ MonoBehaviour:
       LetterDelay: 0
       Pitch: 0.5
       SoundKey: 
-      AnimationTrigger: 
+      AnimationTrigger: Angry
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
@@ -7944,6 +7940,184 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Two
+    Pieces:
+    - Content: "If you'll stay here for enough time \nyou'll become one of us as well"
+      LetterDelay: 0
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Shroomie_Right
+    Options: []
+  - DialogKey: Magic
+    Pieces:
+    - Content: So you came to burn this place to the ground?
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: 'Setting this place on fire will lead to a chain reaction '
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The kind that you don't want to see.
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Great, there's two of you.
+      Event: StartDialog
+      Value: Two
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I'm not here to burn anytihng
+      Event: StartDialog
+      Value: Here
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Best
+    Pieces:
+    - Content: I hate to say that he's right
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But he's right.
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Time to go home!
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Great, there's two of you.
+      Event: StartDialog
+      Value: Two
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Alright, I will leave you be
+      Event: StartDialog
+      Value: Leave
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Here
+    Pieces:
+    - Content: So why are you here?
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Who paid you to come here?
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: There's nothing for you to see here.
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Shroomie_Right
+    Options: []
+  - DialogKey: Leave
+    Pieces:
+    - Content: Good...
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Good.....
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I can't do this!
+      LetterDelay: 0.02
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Shroomie_Shutup
+    Options: []
+  - DialogKey: Over
+    Pieces:
+    - Content: We might be history!
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But our work isn't!
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Shroomie_Work
+    Options: []
+  - DialogKey: YourWork
+    Pieces:
+    - Content: Let me correct you on that one
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Our work did cause all of this.
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But we also succeeded
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We can't let our success drown in the failure
+      LetterDelay: 0.025
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Shroomie_Succeed
+    Options: []
   GivingQuests: []
   EndingQuests: []
   TeleportableScenes: []
@@ -7954,11 +8128,28 @@ MonoBehaviour:
   Name: Matthew The Shroom
   Key: Mat
   Body: {fileID: 2041136656}
-  Anim: {fileID: 0}
+  Anim: {fileID: 817905945}
   NameTag: {fileID: 753438874}
   ChatBubbleSpot: {fileID: 2138547071}
   QuestSpot: {fileID: 1077214491}
   CurrentQuestBubble: {fileID: 0}
+--- !u!95 &817905945
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 817905943}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f75301687be561428173d731945ad90, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &817905946
 Transform:
   m_ObjectHideFlags: 0
@@ -7966,7 +8157,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 817905943}
   m_LocalRotation: {x: -0, y: -0, z: 0.08643785, w: 0.99625725}
-  m_LocalPosition: {x: 2.347, y: -16.285, z: -0.22564545}
+  m_LocalPosition: {x: 2.347, y: -16.285, z: -0.2256455}
   m_LocalScale: {x: 0.2598023, y: 0.25980228, z: 0.25980228}
   m_Children:
   - {fileID: 2041136656}
@@ -20568,13 +20759,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1392723366}
-  m_LocalRotation: {x: -0, y: -0, z: -0.06442336, w: 0.99792266}
-  m_LocalPosition: {x: -0.17642368, y: -0.92762715, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.013838112, w: 0.9999043}
+  m_LocalPosition: {x: -0.136, y: -0.954, z: 0}
   m_LocalScale: {x: 0.9996737, y: 1.0003326, z: 1}
   m_Children: []
   m_Father: {fileID: 2041136656}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 106.219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.5860001}
 --- !u!212 &1392723368
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20890,22 +21081,22 @@ MonoBehaviour:
       PostPieceEvent: InteractWithNPC
       PostPieceEventValue: Mat_Smart
     Options: []
-  - DialogKey: Imagine
+  - DialogKey: Magic
     Pieces:
-    - Content: No, you don't imagine
+    - Content: Fire magic!?
       LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: This is my life now.
+    - Content: I thought the fire diety left this island
       LetterDelay: 0.03
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Mat_Magic
     Options:
     - Title: So you can really talk?
       Event: StartDialog
@@ -20928,6 +21119,102 @@ MonoBehaviour:
       AnimationTrigger: 
       PostPieceEvent: InteractWithNPC
       PostPieceEventValue: Mat_Messed
+    Options: []
+  - DialogKey: Right
+    Pieces:
+    - Content: He's right...
+      LetterDelay: 0.03
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You got to leave this place and make sure nobody comes here
+      LetterDelay: 0.03
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It's for the best....
+      LetterDelay: 0.03
+      Pitch: 0.4
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Mat_Best
+    Options: []
+  - DialogKey: Shutup
+    Pieces:
+    - Content: Shut up Mat!
+      LetterDelay: 0.01
+      Pitch: 0.7
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Just let him go!
+      LetterDelay: 0.01
+      Pitch: 0.7
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We're history!
+      LetterDelay: 0.03
+      Pitch: 0.4
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Mat_Over
+    Options: []
+  - DialogKey: Work
+    Pieces:
+    - Content: 'Enough Mat! '
+      LetterDelay: 0.01
+      Pitch: 0.7
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Our work has casued all of this
+      LetterDelay: 0.03
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It's time for it to be a thing of the past.
+      LetterDelay: 0.03
+      Pitch: 0.4
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Mat_YourWork
+    Options: []
+  - DialogKey: Succeed
+    Pieces:
+    - Content: You can't say it's a success
+      LetterDelay: 0.03
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We haven't tested those specimiens yet
+      LetterDelay: 0.03
+      Pitch: 0.5
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It's time for it to be a thing of the past.
+      LetterDelay: 0.03
+      Pitch: 0.4
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: Mat_YourWork
     Options: []
   GivingQuests: []
   EndingQuests: []

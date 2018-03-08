@@ -42,6 +42,7 @@ public class CharacterSelectionPageUI : MonoBehaviour
 
     public void ShowCharacterInfo(ActorInfo info)
     {
+        PlayerPrefs.SetString(MainMenuUI.LAST_LOGGED_IN_CHAR_ID_PREF_KEY, info.ID);
         m_CharacterSelectionPageMenu.SwitchTo(1);
         m_CharacterInfoUI.SetInfo(info);
     }
@@ -59,8 +60,7 @@ public class CharacterSelectionPageUI : MonoBehaviour
     {
         charspotButton.onClick.AddListener(delegate
         {
-            m_CharacterSelectionPageMenu.SwitchTo(1);
-            m_CharacterInfoUI.SetInfo(info);
+            ShowCharacterInfo(info);
         });
     }
 }

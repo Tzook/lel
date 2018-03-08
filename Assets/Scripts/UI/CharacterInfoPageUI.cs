@@ -84,9 +84,15 @@ public class CharacterInfoPageUI : MonoBehaviour {
         }
         else
         {
+            OnLeaveCharacterInfoPage();
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_CharacterSelectionPageMenu.SwitchTo(0);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);
         }
+    }
+
+    public void OnLeaveCharacterInfoPage()
+    {
+        PlayerPrefs.DeleteKey(MainMenuUI.LAST_LOGGED_IN_CHAR_ID_PREF_KEY);
     }
 }

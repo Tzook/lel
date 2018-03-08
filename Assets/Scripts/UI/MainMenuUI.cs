@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using SimpleJSON;
+using System;
 
 [RequireComponent(typeof(ui_pageMenu))]
 public class MainMenuUI : MonoBehaviour
@@ -38,11 +39,15 @@ public class MainMenuUI : MonoBehaviour
 
     #endregion
 
+    public const string LAST_LOGGED_IN_CHAR_ID_PREF_KEY = "LastLoggedInCharId";
+    protected string LastLoggedInCharId;
+
     #region Mono
 
     void Awake()
     {
         m_PageMenu = GetComponent<ui_pageMenu>();
+        LastLoggedInCharId = PlayerPrefs.GetString(LAST_LOGGED_IN_CHAR_ID_PREF_KEY);
     }
 
     void Start()
@@ -259,6 +264,14 @@ public class MainMenuUI : MonoBehaviour
             LocalUserInfo.Me.UpdateData(response["data"]);
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
+            for (int i = 0; i < LocalUserInfo.Me.Characters.Count; i++)
+            {
+                if (LocalUserInfo.Me.Characters[i].ID == LastLoggedInCharId)
+                {
+                    StartCoroutine(ShowCharacterInfoRoutine(LocalUserInfo.Me.Characters[i]));
+                }
+            }
+            LastLoggedInCharId = null;
             AudioControl.Instance.Play("sound_positive");
         }
     }

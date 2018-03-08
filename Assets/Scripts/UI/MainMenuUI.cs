@@ -176,6 +176,18 @@ public class MainMenuUI : MonoBehaviour
         StartCoroutine(m_CharacterSelectionUI.LoadCharactersCoroutine(user));
     }
 
+    public void SelectLastCharacter(User user)
+    {
+        StartCoroutine(ShowCharacterInfoRoutine(user.Characters[user.Characters.Count - 1]));
+    }
+
+    protected IEnumerator ShowCharacterInfoRoutine(ActorInfo info)
+    {
+        // wait for the page to first get back to the main menu
+        yield return new WaitForSeconds(m_PageMenu.m_fDelay + m_PageMenu.m_fSpeed);
+        m_CharacterSelectionUI.ShowCharacterInfo(info);
+    }
+
     public void ResetLoginFields()
     {
         m_UsernameField.text = "";

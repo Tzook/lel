@@ -40,6 +40,12 @@ public class CharacterSelectionPageUI : MonoBehaviour
         createCharacterButton.interactable = user.Characters.Count < MAX_CHARACTERS;
     }
 
+    public void ShowCharacterInfo(ActorInfo info)
+    {
+        m_CharacterSelectionPageMenu.SwitchTo(1);
+        m_CharacterInfoUI.SetInfo(info);
+    }
+
     protected void ClearPlayerCharacters()
     {
         for (int i = 0; i < CharactersContainer.childCount; i++)

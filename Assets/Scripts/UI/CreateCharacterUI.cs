@@ -325,12 +325,10 @@ public class CreateCharacterUI : MonoBehaviour
             LocalUserInfo.Me.SetCharacters(response["data"]);
             m_mainMenuUI.MoveToMenu(1);
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);
+            m_mainMenuUI.SelectLastCharacter(LocalUserInfo.Me);
             AudioControl.Instance.Play("sound_positiveprogress");
         }
     }
-
-
-
 
     protected IEnumerator RandomizeStatsRoutine()
     {

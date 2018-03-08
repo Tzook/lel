@@ -1922,7 +1922,7 @@ MonoBehaviour:
     - Title: Mike told me about you...
       Event: StartDialog
       Value: MikeTold
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: helpMaya
       CLR: {r: 1, g: 0.9586207, b: 0.625, a: 1}
     - Title: What would make you come back?
@@ -7376,6 +7376,7 @@ MonoBehaviour:
   Name: GrassLands1
   NearestTownScene: GrassLands1
   BGMusic: music_grasslands_1_moreepic
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 503753070}
   - {fileID: 726119467}
@@ -7587,7 +7588,7 @@ MonoBehaviour:
     - coliders:
       - {x: -50.86005, y: 13.731842}
       - {x: -44.961773, y: 13.677937}
-  SceneState: []
+  NetStateEntities: []
 --- !u!4 &793297814
 Transform:
   m_ObjectHideFlags: 0

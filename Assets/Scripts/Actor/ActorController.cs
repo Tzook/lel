@@ -225,7 +225,7 @@ public class ActorController : MonoBehaviour
     {
         CollidingEnemy = null;
 
-        if (CanDoAction() && !Game.Instance.isInteractingWithUI && !OnRope)
+        if (CanDoAction() && !OnRope)
         {
             AttackCharge();
 
@@ -270,7 +270,7 @@ public class ActorController : MonoBehaviour
             Instance.SetAttackAnimation();
         }
 
-        Anim.SetBool("Charging", Input.GetMouseButton(0));
+        Anim.SetBool("Charging", Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI);
     }
 
     void FixedUpdate()

@@ -13,9 +13,12 @@ public class KeyBindingPieceUI : MonoBehaviour {
     [SerializeField]
     Image m_Image;
 
+    [SerializeField]
+    public Button m_btn;
+
     public KeyCode CurrentKey;
 
-    bool isWaitingForKey = false;
+    public bool isWaitingForKey = false;
     Event keyEvent;
     Color initColor;
 
@@ -26,12 +29,26 @@ public class KeyBindingPieceUI : MonoBehaviour {
         m_txtKey.text = CurrentKey.ToString();
     }
 
-    public void SetBinding()
+    public void OnClick()
     {
+        SetBinding();
+    }
+
+    protected void SetBinding()
+    {
+        StopAllCoroutines();
         isWaitingForKey = true;
         initColor = m_Image.color;
         m_Image.color = Color.yellow;
         Game.Instance.InChat = true;
+    }
+
+    public void CloseBinding()
+    {
+        isWaitingForKey = false;
+        m_Image.color = initColor;
+
+        StartCoroutine(DelayedInChatDisable());
     }
 
     void OnGUI()
@@ -48,18 +65,15 @@ public class KeyBindingPieceUI : MonoBehaviour {
                     SetInfo(m_txtTitle.text, keyEvent.keyCode);
                 }
 
-
-                isWaitingForKey = false;
-                m_Image.color = initColor;
-
-                StartCoroutine(DelayedInChatDisable());
+                CloseBinding();
             }
         }
     }
 
     private IEnumerator DelayedInChatDisable()
     {
-        yield return 0;
+        // give the button a small delay before it starts working since the user just clicked it to set it
+        yield return new WaitForSeconds(0.2f);
 
         Game.Instance.InChat = false;
     }

@@ -84,6 +84,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_mp", OnActorGainMP);
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
+        CurrentSocket.On("update_actor_max_stats", OnUpdateActorMaxStats);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
@@ -502,6 +503,43 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.RefreshLevel();
 
         Game.Instance.CurrentScene.UpdateAllQuestProgress();
+    }
+
+    protected void OnUpdateActorMaxStats(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Update actor max stats | " + data.ToString());
+
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        KnownCharacter known = null;
+        if (actor == null)
+        {
+            known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+            if (known != null) 
+            {
+                actor = known.Info;
+            }
+        }
+
+        if (actor != null)
+        {
+            if (data["hp"] != null) {
+                actor.MaxHealth = data["hp"].AsInt;
+            }
+            if (data["mp"] != null) {
+                actor.MaxMana = data["mp"].AsInt;
+            }
+
+            if (actor == LocalUserInfo.Me.ClientCharacter)
+            {
+                InGameMainMenuUI.Instance.RefreshStats();
+            }
+            else if (known != null) 
+            {
+                InGameMainMenuUI.Instance.RefreshParty();
+            }
+        }
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)

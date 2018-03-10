@@ -49,22 +49,10 @@ public class ActorInfo
     public int JumpBonus;
     public int SpeedBonus;
 
-    public int MaxHealth
-    {
-        get
-        {
-            return (STR * 5) + (BonusSTR * 5) + BonusHP;
-        }
-    }
+    public int MaxHealth;
     public int CurrentHealth;
 
-    public int MaxMana
-    {
-        get
-        {
-            return (MAG * 6) + (BonusMAG * 6) + BonusMP;
-        }
-    }
+    public int MaxMana;
     public int CurrentMana;
 
     public int TotalSTR
@@ -337,8 +325,14 @@ public class ActorInfo
         this.DEX = node["dex"].AsInt;
 
         this.CurrentHealth = node["hp"]["now"].AsInt;
+        if (node["maxHp"] != null) {
+            this.MaxHealth = node["maxHp"].AsInt;
+        }
 
         this.CurrentMana = node["mp"]["now"].AsInt;
+        if (node["maxMp"] != null) {
+            this.MaxMana = node["maxMp"].AsInt;
+        }
 
         SetPrimaryAbility(node["primaryAbility"].Value);
     }

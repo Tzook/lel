@@ -63,7 +63,7 @@ public class DevContentEditor : Editor
                 for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
                 {
                     node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
-                    node["mobs"][i]["perks"][a]["value"] = (currentInfo.Monsters[i].Perks[a].Value).ToString();
+                    node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
                 }
 
                 for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
@@ -73,7 +73,7 @@ public class DevContentEditor : Editor
                     for (int b = 0; b < currentInfo.Monsters[i].Spells[a].Perks.Count; b++)
                     {
                         node["mobs"][i]["spells"][a]["perks"][b]["key"] = currentInfo.Monsters[i].Spells[a].Perks[b].Key.ToString();
-                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = (currentInfo.Monsters[i].Spells[a].Perks[b].Value).ToString();
+                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = currentInfo.Monsters[i].Spells[a].Perks[b].Value.ToString();
                     }
                     node["mobs"][i]["spells"][a]["minTime"] = currentInfo.Monsters[i].Spells[a].MinTime.ToString();
                     node["mobs"][i]["spells"][a]["maxTime"] = currentInfo.Monsters[i].Spells[a].MaxTime.ToString();
@@ -92,7 +92,6 @@ public class DevContentEditor : Editor
             for (int i = 0; i < currentInfo.Items.Count; i++)
             {
                 node["items"][i]["key"] = currentInfo.Items[i].Key;
-                //node["items"][i]["name"] = currentInfo.Items[i].Name;
 
                 if (currentInfo.Items[i].IconPlaceable != null)
                 {
@@ -118,6 +117,14 @@ public class DevContentEditor : Editor
 
                 node["items"][i]["use"]["hp"] = currentInfo.Items[i].UseInfo.BonusHP.ToString();
                 node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
+                
+                node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
+
+                for (int a = 0; a < currentInfo.Items[i].Perks.Count; a++)
+                {
+                    node["items"][i]["perks"][a]["key"] = currentInfo.Items[i].Perks[a].Key.ToString();
+                    node["items"][i]["perks"][a]["value"] = currentInfo.Items[i].Perks[a].Value.ToString();
+                }
 
                 for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
                 {
@@ -127,20 +134,6 @@ public class DevContentEditor : Editor
                     }
 
                 }
-
-                //for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
-                //{
-                //    node["items"][i]["ItemSprites"][a]["partKey"] = currentInfo.Items[i].ItemSprites[a].PartKey;
-
-                //    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
-                //    {
-                //        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
-                //    }
-                //    else
-                //    {
-                //        node["items"][i]["ItemSprites"][a]["sprite"] = currentInfo.Items[i].ItemSprites[a].Sprite;
-                //    }
-                //}
 
             }
 

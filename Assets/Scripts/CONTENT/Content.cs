@@ -331,6 +331,8 @@ public class DevItemInfo
 
     public ItemStats Stats;
     
+    public List<DevPerkMap> Perks = new List<DevPerkMap>();
+
     public UseItemInfo UseInfo;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();

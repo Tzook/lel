@@ -58,19 +58,19 @@ public class CrateUI : MonoBehaviour
 
         m_Animator.SetTrigger("Reset");
 
-        int showValue;
         int precentAccelerationPerUpgrade = 0;//CurrentPerk.PrecentAccelerationPerUpgrade;
         float PercentValue = CurrentPerk.PrecentPerUpgrade + precentAccelerationPerUpgrade * (currentAbilityPerk == null ? 0 : currentAbilityPerk.Points);
-        if (CurrentPerk.PrecentPerUpgrade >= 1f)
-        {
-            showValue = Mathf.FloorToInt(PercentValue);
-            m_Title.text = "+" + showValue + " " + CurrentPerk.Name;
-        }
-        else
-        {
-            showValue = Mathf.FloorToInt(PercentValue * 100f);
-            m_Title.text = "+" + showValue + "% " + CurrentPerk.Name;
-        }
+        string prefix = PercentValue >= 0 ? "+" : "";
+        string suffix = "";
+        if (CurrentPerk.PerkType == DevPAPerk.PerkTypeEnum.Percent) {
+            PercentValue *= 100f;
+            suffix = "%";
+        } else if (CurrentPerk.PerkType == DevPAPerk.PerkTypeEnum.Time) {
+            suffix = "s";
+        } 
+        bool hasFloatingPoint = PercentValue % 1 == 0;
+        string showValue = (hasFloatingPoint ? Mathf.FloorToInt(PercentValue) : PercentValue).ToString();
+        m_Title.text = prefix + showValue + suffix + " " + CurrentPerk.Name;
     }
 
     public void Unpack()

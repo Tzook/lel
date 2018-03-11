@@ -39,15 +39,18 @@ public class UpgradeInfoUI : MonoBehaviour {
         iconImage.sprite = currentPerk.Icon;
 
         float percentValue = GetPerkValue(currentPerk, perk);
+        
+        string suffix = "";
+        if (currentPerk.PerkType == DevPAPerk.PerkTypeEnum.Percent) {
+            percentValue *= 100f;
+            suffix = "%";
+        } else if (currentPerk.PerkType == DevPAPerk.PerkTypeEnum.Time) {
+            suffix = "s";
+        }
 
-        if (currentPerk.PrecentPerUpgrade < 1)
-        {
-            txtPrecent.text = Mathf.FloorToInt(percentValue * 100f) + "%";
-        }
-        else
-        {
-            txtPrecent.text = percentValue.ToString();
-        }
+        bool hasFloatingPoint = percentValue % 1 == 0;
+        string showValue = (hasFloatingPoint ? Mathf.FloorToInt(percentValue) : percentValue).ToString();
+        txtPrecent.text = showValue + suffix;
 
         txtPrecent.color = isInitialValue ? initialPerkColor : originalTextColor;
     }

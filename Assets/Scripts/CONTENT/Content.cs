@@ -492,6 +492,38 @@ public class DevPAPerk
     // acceleration - if value is 10 and acceleration is 5, the value at lvl 1 is 10, at lvl 2 the value is 10+15=25 and so on
     // currently disabled. will be re-used if we need it
     // public float PrecentAccelerationPerUpgrade;
+
+    public string Type
+    {
+        get
+        {
+            switch(this.PerkType)
+            {
+                case PerkTypeEnum.Percent:
+                    {
+                        return "Percent";
+                    }
+                case PerkTypeEnum.Time:
+                    {
+                        return "Time";
+                    }
+                case PerkTypeEnum.Number:
+                    {
+                        return "Number";
+                    }
+            }
+
+            return "NOTYPE";
+        }
+    }
+
+    [SerializeField]
+    public PerkTypeEnum PerkType;
+    
+    public enum PerkTypeEnum
+    {
+        Percent,Time,Number
+    }
 }
 
 [System.Serializable]

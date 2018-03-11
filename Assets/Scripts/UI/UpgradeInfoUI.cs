@@ -57,7 +57,8 @@ public class UpgradeInfoUI : MonoBehaviour {
         // Gauss formula => 1 + 2 + 3 + ... + n = n * (n + 1) / 2
         float sumValuesUntilLevel = (perk.Points - 1) * perk.Points / 2;
         // 1 * x + 2 * x + ... + n * x = (1 + 2 + 3 + ... + n) * x
-        float accelerationPoint = sumValuesUntilLevel * currentPerk.PrecentAccelerationPerUpgrade;
+        int precentAccelerationPerUpgrade = 0;//CurrentPerk.PrecentAccelerationPerUpgrade;        
+        float accelerationPoint = sumValuesUntilLevel * precentAccelerationPerUpgrade;
         
         float percentValue = currentPerk.StartingValue + perk.Points * currentPerk.PrecentPerUpgrade + accelerationPoint;
         return percentValue;

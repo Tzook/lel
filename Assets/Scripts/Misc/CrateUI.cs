@@ -59,7 +59,8 @@ public class CrateUI : MonoBehaviour
         m_Animator.SetTrigger("Reset");
 
         int showValue;
-        float PercentValue = CurrentPerk.PrecentPerUpgrade + CurrentPerk.PrecentAccelerationPerUpgrade * (currentAbilityPerk == null ? 0 : currentAbilityPerk.Points);
+        int precentAccelerationPerUpgrade = 0;//CurrentPerk.PrecentAccelerationPerUpgrade;
+        float PercentValue = CurrentPerk.PrecentPerUpgrade + precentAccelerationPerUpgrade * (currentAbilityPerk == null ? 0 : currentAbilityPerk.Points);
         if (CurrentPerk.PrecentPerUpgrade >= 1f)
         {
             showValue = Mathf.FloorToInt(PercentValue);

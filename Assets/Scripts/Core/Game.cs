@@ -293,7 +293,6 @@ public class Game : MonoBehaviour {
 
     public void LoadPlayerCharacter(ActorInfo actorInfo)
     {
-        LocalUserInfo.Me.ClientCharacter = actorInfo;
         ClientCharacter = SpawnPlayer(LocalUserInfo.Me.ClientCharacter);
         
         ActorController actorController = ClientCharacter.GetComponent<ActorController>();
@@ -318,6 +317,7 @@ public class Game : MonoBehaviour {
     protected IEnumerator LoadSceneRoutine(string scene, ActorInfo actorInfo)
     {
         isLoadingScene = true;
+        LocalUserInfo.Me.ClientCharacter = actorInfo;
 
         yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeInRoutine());
 

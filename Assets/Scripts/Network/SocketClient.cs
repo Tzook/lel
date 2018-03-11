@@ -510,15 +510,27 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Update actor max stats | " + data.ToString());
 
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-
+        ActorInfo actor = null;
         KnownCharacter known = null;
-        if (actor == null)
+        string id = data["id"].Value;
+        if (Game.Instance.CurrentScene == null)
         {
-            known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
-            if (known != null) 
+            if (LocalUserInfo.Me.ClientCharacter.ID == id)
             {
-                actor = known.Info;
+                actor = LocalUserInfo.Me.ClientCharacter;
+            }
+        }
+        else 
+        {
+            actor = Game.Instance.CurrentScene.GetActor(id);
+
+            if (actor == null)
+            {
+                known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
+                if (known != null) 
+                {
+                    actor = known.Info;
+                }
             }
         }
 
@@ -531,13 +543,16 @@ public class SocketClient : MonoBehaviour
                 actor.MaxMana = data["mp"].AsInt;
             }
 
-            if (actor == LocalUserInfo.Me.ClientCharacter)
+            if (!Game.Instance.isLoadingScene)
             {
-                InGameMainMenuUI.Instance.RefreshStats();
-            }
-            else if (known != null) 
-            {
-                InGameMainMenuUI.Instance.RefreshParty();
+                if (actor == LocalUserInfo.Me.ClientCharacter)
+                {
+                    InGameMainMenuUI.Instance.RefreshStats();
+                }
+                else if (known != null) 
+                {
+                    InGameMainMenuUI.Instance.RefreshParty();
+                }
             }
         }
     }

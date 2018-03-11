@@ -21,14 +21,6 @@ public class LevelUpEffect : MonoBehaviour {
         if (PlayRoutineInstance != null)
         {
             StopCoroutine(PlayRoutineInstance);
-            if (Sparkles.isPlaying)
-            {
-                Sparkles.Stop();
-            }
-            if (Smoke.isPlaying)
-            {
-                Smoke.Stop();
-            }
         }
 
         PlayRoutineInstance = StartCoroutine(PlayRoutine());

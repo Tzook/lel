@@ -49,7 +49,7 @@ public class ChatHistory : MonoBehaviour
     {
         // disable the input for a few milliseconds, so spamming up / down won't go so much in history
         navigating = true;
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.2f);
         navigating = false;
     }
 

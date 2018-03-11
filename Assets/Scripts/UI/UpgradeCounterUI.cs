@@ -25,6 +25,8 @@ public class UpgradeCounterUI : MonoBehaviour {
     [SerializeField]
     string UpgradeBlobPrefabKey = "PowerBlobEffect"; 
 
+    GameObject UpgradeBlob;
+
     bool FirstUpgrade = false;
 
     private void Awake()
@@ -47,7 +49,6 @@ public class UpgradeCounterUI : MonoBehaviour {
 
     public void SetValue(int gValue)
     {
-
         if (gValue > 0)
         {
             this.gameObject.SetActive(true);
@@ -60,6 +61,11 @@ public class UpgradeCounterUI : MonoBehaviour {
         }
         else
         {
+            if (UpgradeBlob != null)
+            {
+                UpgradeBlob.SetActive(false);
+                UpgradeBlob = null;
+            }
             this.gameObject.SetActive(false);
         }
 
@@ -86,13 +92,14 @@ public class UpgradeCounterUI : MonoBehaviour {
 
     IEnumerator GainEffectRoutine()
     {
-        GameObject tempBlob = ResourcesLoader.Instance.GetRecycledObject(UpgradeBlobPrefabKey);
+        UpgradeBlob = ResourcesLoader.Instance.GetRecycledObject(UpgradeBlobPrefabKey);
 
-        tempBlob.transform.position = LocalUserInfo.Me.ClientCharacter.Instance.transform.position;
+        UpgradeBlob.transform.position = LocalUserInfo.Me.ClientCharacter.Instance.transform.position;
 
-        tempBlob.GetComponent<TrailRenderer>().Clear();
+        UpgradeBlob.GetComponent<TrailRenderer>().Clear();
 
-        yield return tempBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, transform, 1f, Random.Range(-3f, 3f));
+        yield return UpgradeBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, transform, 1f, Random.Range(-3f, 3f));
+        UpgradeBlob = null;
 
         BurstParticles.Play();
     }

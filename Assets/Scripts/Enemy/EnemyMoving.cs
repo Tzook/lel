@@ -238,7 +238,7 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            if ((Stunnable && Stunned) || isLeftBlocked())
+            if (Stunned || isLeftBlocked())
             {
                 break;
             }
@@ -259,7 +259,7 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            if ((Stunnable && Stunned) || isRightBlocked())
+            if (Stunned || isRightBlocked())
             {
                 break;
             }
@@ -287,7 +287,7 @@ public class EnemyMoving : Enemy
             {
                 if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
                 {
-                    if ((Stunnable && Stunned) || isRightBlocked())
+                    if (Stunned || isRightBlocked())
                     {
                         StandStill();
                     }
@@ -299,7 +299,7 @@ public class EnemyMoving : Enemy
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
-                    if ((Stunnable && Stunned) || isLeftBlocked())
+                    if (Stunned || isLeftBlocked())
                     {
                         StandStill();
                     }

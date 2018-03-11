@@ -68,7 +68,7 @@ public class EnemyJumping : EnemyMoving
 
             WalkLeft();
 
-            if((Stunnable && Stunned))
+            if(Stunned)
             {
                 break;
             }
@@ -104,7 +104,7 @@ public class EnemyJumping : EnemyMoving
 
             WalkRight();
 
-            if((Stunnable && Stunned))
+            if(Stunned)
             {
                 break;
             }
@@ -142,7 +142,7 @@ public class EnemyJumping : EnemyMoving
             {
                 if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
                 {
-                    if((Stunnable && Stunned))
+                    if(Stunned)
                     {
                         break;
                     }
@@ -163,7 +163,7 @@ public class EnemyJumping : EnemyMoving
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
-                    if((Stunnable && Stunned))
+                    if(Stunned)
                     {
                         break;
                     }

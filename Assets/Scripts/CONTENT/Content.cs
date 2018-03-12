@@ -283,7 +283,7 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
-    [Popup(/* AUTO_GENERATED_LOOT_START */ "leatherVest", "adventurerShirt", "blackGloves", "clothPants", "greenPants", "leatherShoes", "strapShoes", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "gold", "blackPants", "leatherGloves", "apprenticeRobeWhite", "apprenticeRobeBlack", "shortSword", "shortClub", "shortAxe", "shortScimitar", "shortBow", "rabbitEar", "shortDagger", "batWing", "rabbitFurVest", "oldTurtleShell", "Fishing Rod", "carrotSack", "smallFish", "bigFish", "blackShoes", "whiteJellyBean", "blackJellyBean", "yellowJellyBean", "redJellyBean", "pinkJellyBean", "blueJellyBean", "orangeJellyBean", "greenJellyBean", "plantFlower", "blueMushroomCap", "strawHat", "peasantHat", "rabbitCostume", "whiteGloves", "greenGloves", "redGloves", "cosmoTunnelKey", "rabbitLandEntrancePremission", "magicCarrotSeeds" /* AUTO_GENERATED_LOOT_END */)]
+    [Popup(/* AUTO_GENERATED_LOOT_START */ "", "leatherVest", "adventurerShirt", "blackGloves", "clothPants", "greenPants", "leatherShoes", "strapShoes", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "gold", "blackPants", "leatherGloves", "apprenticeRobeWhite", "apprenticeRobeBlack", "shortSword", "shortClub", "shortAxe", "shortScimitar", "shortBow", "rabbitEar", "shortDagger", "batWing", "rabbitFurVest", "oldTurtleShell", "Fishing Rod", "carrotSack", "smallFish", "bigFish", "blackShoes", "whiteJellyBean", "blackJellyBean", "yellowJellyBean", "redJellyBean", "pinkJellyBean", "blueJellyBean", "orangeJellyBean", "greenJellyBean", "plantFlower", "blueMushroomCap", "strawHat", "peasantHat", "rabbitCostume", "whiteGloves", "greenGloves", "redGloves", "cosmoTunnelKey", "rabbitLandEntrancePremission", "magicCarrotSeeds" /* AUTO_GENERATED_LOOT_END */)]
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -431,7 +431,7 @@ public class PerkStage
 {
     public int MinLevel;
     public int PerksOffered;
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
     public List<string> AddToPool = new List<string>();
 }
 
@@ -451,7 +451,7 @@ public class DevSpell
 [System.Serializable]
 public class DevPerkMap
 {
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
 }
@@ -542,9 +542,8 @@ public class Quest
     public int RewardHP;
     public int RewardMP;
 
-    public DevAbility RewardPrimaryAbility;
-
-    public string RewardClass;
+    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "", "melee", "range", "heal", "frost", "charTalent" /* AUTO_GENERATED_ABILITIES_END */)]
+    public string RewardPrimaryAbility;
     
     public int RewardExp;
 
@@ -681,7 +680,6 @@ public class Quest
         tempQuest.RewardHP = this.RewardHP;
         tempQuest.RewardMP = this.RewardMP;
 
-        tempQuest.RewardClass = this.RewardClass;
         tempQuest.RewardPrimaryAbility = this.RewardPrimaryAbility;
 
         tempQuest.RewardExp = this.RewardExp;
@@ -718,7 +716,7 @@ public class QuestCondition
 [System.Serializable]
 public class QuestState
 {
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "turtleProblem", "turtleSoup", "TurtleQuizz", "rabbitRaids", "FatAlbert", "carrotSupply", "becomingWarrior", "helpMaya", "mayaSpikedTurtles", "findAlex", "helpAlex", "findKaren", "petRansom", "examineLostSupplies", "helpJaxTheDog", "helpJaxTheDog2", "ruinedPainting", "findCosmo", "findCosmo2", "findCosmo3", "petRansom2", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "CleaningUp", "ABeanyRequest", "OldFriends", "RangerTest", "FrostTest", "hairPotion", "untieNurtle", "breakIntoSpa" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "", "turtleProblem", "turtleSoup", "TurtleQuizz", "rabbitRaids", "FatAlbert", "carrotSupply", "becomingWarrior", "helpMaya", "mayaSpikedTurtles", "findAlex", "helpAlex", "findKaren", "petRansom", "examineLostSupplies", "helpJaxTheDog", "helpJaxTheDog2", "ruinedPainting", "findCosmo", "findCosmo2", "findCosmo3", "petRansom2", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "CleaningUp", "ABeanyRequest", "OldFriends", "RangerTest", "FrostTest", "hairPotion", "untieNurtle", "breakIntoSpa" /* AUTO_GENERATED_QUESTS_END */)]
     public string QuestKey;
 
     public string State

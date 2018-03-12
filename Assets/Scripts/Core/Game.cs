@@ -128,7 +128,6 @@ public class Game : MonoBehaviour {
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();
-            InGameMainMenuUI.Instance.RefreshStats();
         }
 
         actor.Instance.UpdateVisual();
@@ -148,7 +147,6 @@ public class Game : MonoBehaviour {
 
             InGameMainMenuUI.Instance.RefreshEquipment();
             InGameMainMenuUI.Instance.RefreshInventory();
-            InGameMainMenuUI.Instance.RefreshStats();
         }
 
         actor.Instance.UpdateVisual();

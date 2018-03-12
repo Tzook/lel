@@ -376,35 +376,6 @@ public class DevAbility
     
     public List<DevPerkMap> InitialPerks = new List<DevPerkMap>();
 
-    public string MainStat
-    {
-        get
-        {
-            switch (statEnumState)
-            {
-                default:
-                case StatEnumState.Str:
-                    {
-                        return "str";
-                    }
-                case StatEnumState.Dex:
-                    {
-                        return "dex";
-                    }
-                case StatEnumState.Mag:
-                    {
-                        return "mag";
-                    }
-            }
-        }
-    }
-    [SerializeField]
-    StatEnumState statEnumState;
-    public enum StatEnumState
-    {
-        Str,Dex,Mag
-    }
-
     public string HitType
     {
         get
@@ -567,9 +538,6 @@ public class Quest
 
     public List<LootInstance> RewardItems = new List<LootInstance>();
 
-    public int RewardSTR;
-    public int RewardMAG;
-    public int RewardDEX;
     public int RewardHP;
     public int RewardMP;
 
@@ -716,9 +684,6 @@ public class Quest
             tempQuest.RewardItems.Add(this.RewardItems[i].Clone());
         }
 
-        tempQuest.RewardSTR = this.RewardSTR;
-        tempQuest.RewardMAG = this.RewardMAG;
-        tempQuest.RewardDEX = this.RewardDEX;
         tempQuest.RewardHP = this.RewardHP;
         tempQuest.RewardMP = this.RewardMP;
 

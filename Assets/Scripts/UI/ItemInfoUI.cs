@@ -90,49 +90,6 @@ public class ItemInfoUI : MonoBehaviour {
     public void SetStats(ItemStats stats)
     {
         GameObject tempObj;
-        if(stats.BonusSTR > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusSTR + " Strength", ResourcesLoader.Instance.GetSprite("sword_of_elad"), bonusColor);
-        }
-
-        if (stats.BonusMAG > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusMAG + " Magic", ResourcesLoader.Instance.GetSprite("magicicon"), bonusColor);
-        }
-
-        if (stats.BonusDEX > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusDEX + " Dextirity", ResourcesLoader.Instance.GetSprite("arrowsicon"), bonusColor);
-        }
-
-        if (stats.BonusHP > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusHP + " Max Health", ResourcesLoader.Instance.GetSprite("xIcon"), bonusColor);
-        }
-
-        if (stats.BonusMP > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.BonusMP + " Max Mana", ResourcesLoader.Instance.GetSprite("magicalM"), bonusColor);
-        }
 
         if (stats.JumpBonus > 0)
         {
@@ -148,34 +105,6 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
             tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
-        }
-
-
-        if (stats.RequiresSTR > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresSTR + " Strength", ResourcesLoader.Instance.GetSprite("sword_of_elad"), requiredColor);
-        }
-
-        if (stats.RequiresMAG > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresMAG + " Magic", ResourcesLoader.Instance.GetSprite("magicicon"), requiredColor);
-        }
-
-        if (stats.RequiresDEX > 0)
-        {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("Requires " + stats.RequiresDEX + " Dextirity", ResourcesLoader.Instance.GetSprite("arrowsicon"), requiredColor);
         }
 
         if (stats.RequiresLVL > 0)

@@ -36,16 +36,6 @@ public class ActorInfo
 
     public string Class;
 
-    public int STR;
-    public int MAG;
-    public int DEX;
-
-    public int BonusSTR;
-    public int BonusMAG;
-    public int BonusDEX;
-    public int BonusHP;
-    public int BonusMP;
-
     public int JumpBonus;
     public int SpeedBonus;
 
@@ -54,20 +44,6 @@ public class ActorInfo
 
     public int MaxMana;
     public int CurrentMana;
-
-    public int TotalSTR
-    {
-        get { return BonusSTR + STR; }
-    }
-    public int TotalMAG
-    {
-        get { return BonusMAG + MAG; }
-    }
-    public int TotalDEX
-    {
-        get { return BonusDEX + DEX; }
-    }
-
 
     public List<Ability> PrimaryAbilities = new List<Ability>();
     public List<Ability> CharAbilities = new List<Ability>();
@@ -320,10 +296,6 @@ public class ActorInfo
 
         this.Class = node["class"].Value;
 
-        this.STR = node["str"].AsInt;
-        this.MAG = node["mag"].AsInt;
-        this.DEX = node["dex"].AsInt;
-
         this.CurrentHealth = node["hp"]["now"].AsInt;
         if (node["maxHp"] != null) {
             this.MaxHealth = node["maxHp"].AsInt;
@@ -390,18 +362,6 @@ public class ActorInfo
 
     public bool CanEquipItem(ItemInfo item)
     {
-        if (item.Stats.RequiresDEX > this.DEX)
-        {
-            return false;
-        }
-        if (item.Stats.RequiresSTR > this.STR)
-        {
-            return false;
-        }
-        if (item.Stats.RequiresMAG > this.MAG)
-        {
-            return false;
-        }
         if (item.Stats.RequiresLVL > this.LVL)
         {
             return false;
@@ -412,11 +372,6 @@ public class ActorInfo
 
     public void RefreshBonuses()
     {
-        BonusSTR = 0;
-        BonusMAG = 0;
-        BonusDEX = 0;
-        BonusHP = 0;
-        BonusMP = 0;
         JumpBonus = 0;
         SpeedBonus = 0;
 
@@ -430,11 +385,6 @@ public class ActorInfo
 
     public void RefreshBonuses(Equipment equips)
     {
-        BonusSTR = 0;
-        BonusMAG = 0;
-        BonusDEX = 0;
-        BonusHP = 0;
-        BonusMP = 0;
         JumpBonus = 0;
         SpeedBonus = 0;
 
@@ -453,11 +403,6 @@ public class ActorInfo
             return;
         }
 
-        BonusSTR += item.Stats.BonusSTR;
-        BonusMAG += item.Stats.BonusMAG;
-        BonusDEX += item.Stats.BonusDEX;
-        BonusHP += item.Stats.BonusHP;
-        BonusMP += item.Stats.BonusMP;
         JumpBonus += item.Stats.JumpBonus;
         SpeedBonus+= item.Stats.SpeedBonus;
     }

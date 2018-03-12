@@ -104,20 +104,9 @@ public class DevContentEditor : Editor
                 node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
                 node["items"][i]["stackCap"] = currentInfo.Items[i].StackCap.ToString();
 
-                node["items"][i]["req"]["str"] = currentInfo.Items[i].Stats.RequiresSTR.ToString();
-                node["items"][i]["req"]["mag"] = currentInfo.Items[i].Stats.RequiresMAG.ToString();
-                node["items"][i]["req"]["dex"] = currentInfo.Items[i].Stats.RequiresDEX.ToString();
                 node["items"][i]["req"]["lvl"] = currentInfo.Items[i].Stats.RequiresLVL.ToString();
 
-                node["items"][i]["stats"]["str"] = currentInfo.Items[i].Stats.BonusSTR.ToString();
-                node["items"][i]["stats"]["mag"] = currentInfo.Items[i].Stats.BonusMAG.ToString();
-                node["items"][i]["stats"]["dex"] = currentInfo.Items[i].Stats.BonusDEX.ToString();
-                node["items"][i]["stats"]["hp"] = currentInfo.Items[i].Stats.BonusHP.ToString();
-                node["items"][i]["stats"]["mp"] = currentInfo.Items[i].Stats.BonusMP.ToString();
-
                 node["items"][i]["use"]["hp"] = currentInfo.Items[i].UseInfo.BonusHP.ToString();
-                node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
-                
                 node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
 
                 for (int a = 0; a < currentInfo.Items[i].Perks.Count; a++)
@@ -298,8 +287,6 @@ public class DevContentEditor : Editor
                 }
             }
 
-            node["talents"][i]["mainStat"] = abilities[i].MainStat;
-
             for (int a = 0; a < abilities[i].InitialPerks.Count; a++)
             {
                 node["talents"][i]["initialPerks"][a]["key"] = abilities[i].InitialPerks[a].Key.ToString();
@@ -372,9 +359,6 @@ public class DevContentEditor : Editor
 
             node["quests"][i]["rewardClass"] = Quests[i].RewardClass;
 
-            node["quests"][i]["rewardSTR"] = Quests[i].RewardSTR.ToString();
-            node["quests"][i]["rewardMAG"] = Quests[i].RewardMAG.ToString();
-            node["quests"][i]["rewardDEX"] = Quests[i].RewardDEX.ToString();
             node["quests"][i]["rewardHP"] = Quests[i].RewardHP.ToString();
             node["quests"][i]["rewardMP"] = Quests[i].RewardMP.ToString();
             node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility.Key;

@@ -35,9 +35,6 @@ public class WikiItems : MonoBehaviour {
 
                 tempObj.transform.GetChild(0).GetComponent<Text>().text = Content.Instance.Items[i].Name;
                 tempObj.transform.GetChild(1).GetComponent<Image>().sprite = Content.Instance.Items[i].IconPlaceable;
-                tempObj.transform.GetChild(2).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresDEX.ToString();
-                tempObj.transform.GetChild(3).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresMAG.ToString();
-                tempObj.transform.GetChild(4).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresSTR.ToString();
                 tempObj.transform.GetChild(5).GetComponent<Text>().text = Content.Instance.Items[i].Stats.RequiresLVL.ToString();
             }
         }

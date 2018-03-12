@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour {
 
     List<Buff> CurrentBuffs = new List<Buff>();
 
-    [SerializeField]
+    //[SerializeField]
     protected Vector3 initScale;
 
     public DevSpell SpellInCast;

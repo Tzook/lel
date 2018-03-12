@@ -44,7 +44,7 @@ public class EnemyCrawling : EnemyMoving {
                 EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
             }
 
-            Anim.SetBool("inAir", !isGrounded);
+            //Anim.SetBool("inAir", !isGrounded);
         }
 
         if (CrawlerEntity.CurrentRotation == Quaternion.identity)

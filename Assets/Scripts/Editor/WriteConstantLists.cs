@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 public class WriteConstantLists
 {
         
-    private const string fileName = "Assets/Scripts/CONTENT/Content.cs";
+    private const string FILE_NAME_CONTENT = "Assets/Scripts/CONTENT/Content.cs";
+    private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
     private static WriteConstantLists _instance; 
     public static WriteConstantLists Instance
     {
@@ -22,36 +23,47 @@ public class WriteConstantLists
 
     public void WritePerksPopupList(List<DevPAPerk> perks)
     {
-        string text = File.ReadAllText(fileName);
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
 
         Regex rgx = new Regex("/\\* AUTO_GENERATED_PERKS_START \\*/ .* /\\* AUTO_GENERATED_PERKS_END \\*/");
         
         string listString = GetListString(perks.Select(perk => perk.Key).ToList());
 
         string result = rgx.Replace(text, "/* AUTO_GENERATED_PERKS_START */ " + listString + " /* AUTO_GENERATED_PERKS_END */");
-        File.WriteAllText(fileName, result);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
     }
 
     public void WriteLootPopupList(List<DevItemInfo> items)
     {
-        string text = File.ReadAllText(fileName);
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
         
         Regex rgx = new Regex("/\\* AUTO_GENERATED_LOOT_START \\*/ .* /\\* AUTO_GENERATED_LOOT_END \\*/");
         string listString = GetListString(items.Select(item => item.Key).ToList());
 
         string result = rgx.Replace(text, "/* AUTO_GENERATED_LOOT_START */ " + listString + " /* AUTO_GENERATED_LOOT_END */");
-        File.WriteAllText(fileName, result);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
     }
 
     public void WriteQuestsPopupList(List<Quest> quests)
     {
-        string text = File.ReadAllText(fileName);
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
         
         Regex rgx = new Regex("/\\* AUTO_GENERATED_QUESTS_START \\*/ .* /\\* AUTO_GENERATED_QUESTS_END \\*/");
         string listString = GetListString(quests.Select(quest => quest.Key).ToList());
 
         string result = rgx.Replace(text, "/* AUTO_GENERATED_QUESTS_START */ " + listString + " /* AUTO_GENERATED_QUESTS_END */");
-        File.WriteAllText(fileName, result);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
+    }
+
+    public void WriteMobsPopupList(List<DevMonsterInfo> mobs)
+    {
+        string text = File.ReadAllText(FILE_NAME_MONSTERS);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_MOBS_START \\*/ .* /\\* AUTO_GENERATED_MOBS_END \\*/");
+        string listString = GetListString(mobs.Select(mob => mob.MonsterKey).ToList());
+
+        string result = rgx.Replace(text, "/* AUTO_GENERATED_MOBS_START */ " + listString + " /* AUTO_GENERATED_MOBS_END */");
+        File.WriteAllText(FILE_NAME_MONSTERS, result);
     }
 
     private string GetListString(List<string> items)

@@ -81,6 +81,7 @@ public class DevContentEditor : Editor
             }
 
             SendMonstersInfo(node);
+            WriteConstantLists.Instance.WriteMobsPopupList(currentInfo.Monsters);
         }
 
         if (GUILayout.Button("Update Items"))

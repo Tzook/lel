@@ -113,10 +113,9 @@ public class ItemInfoUI : MonoBehaviour {
             tempObj.transform.SetParent(transform, false);
             tempObj.transform.SetAsLastSibling();
             tempObj.transform.localScale = Vector3.one;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), requiredColor);
+            Color minLevelColor = stats.RequiresLVL > LocalUserInfo.Me.ClientCharacter.LVL ? requiredColor : bonusColor;
+            tempObj.GetComponent<ItemStatUI>().SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), minLevelColor);
         }
-
-
     }
 
     public void ClearStats()

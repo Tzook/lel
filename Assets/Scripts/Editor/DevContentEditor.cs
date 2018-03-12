@@ -142,6 +142,7 @@ public class DevContentEditor : Editor
         if (GUILayout.Button("Update Abilities"))
         {
             SendAbilities(currentInfo.Abilities, currentInfo.Perks);
+            WriteConstantLists.Instance.WritePerksPopupList(currentInfo.Perks);
         }
 
         GUILayout.Label("Command line");
@@ -160,7 +161,6 @@ public class DevContentEditor : Editor
         }
 
         GUILayout.EndVertical();
-
     }
 
     private void SendMonstersInfo(JSONNode node)

@@ -91,7 +91,7 @@ public class EnemyMoving : Enemy
         }
     }
 
-    public bool isRightBlocked()
+    public virtual bool isRightBlocked()
     {
         SideRayRight = Physics2D.Raycast(transform.position, transform.right, 1f, GroundLayerMask);
 
@@ -100,7 +100,7 @@ public class EnemyMoving : Enemy
         return (SideRayRight.normal.x < -0.3f || SideRayRight.normal.x > 0.3f);
     }
 
-    public bool isLeftBlocked()
+    public virtual bool isLeftBlocked()
     {
         SideRayLeft = Physics2D.Raycast(transform.position, -transform.right, 1f, GroundLayerMask);
 
@@ -328,7 +328,7 @@ public class EnemyMoving : Enemy
 
     public virtual void WalkLeft()
     {
-        Rigid.position += -Vector2.right * MovementSpeed * Time.deltaTime;
+        Rigid.position += -(Vector2)Body.transform.right * MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( -initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
@@ -336,7 +336,7 @@ public class EnemyMoving : Enemy
 
     public virtual void WalkRight()
     {
-        Rigid.position += Vector2.right *  MovementSpeed * Time.deltaTime;
+        Rigid.position += (Vector2)Body.transform.right *  MovementSpeed * Time.deltaTime;
         Body.localScale = new Vector3( initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);

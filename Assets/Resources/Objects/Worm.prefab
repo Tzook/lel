@@ -120,6 +120,8 @@ GameObject:
   - component: {fileID: 61953132278813082}
   - component: {fileID: 50827150594154146}
   - component: {fileID: 210980633089477678}
+  - component: {fileID: 114941387361226810}
+  - component: {fileID: 114485270885267718}
   m_Layer: 8
   m_Name: Worm
   m_TagString: Untagged
@@ -214,8 +216,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1551375019105722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.46, y: -0.09, z: 0}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4965885128235992}
   m_Father: {fileID: 4244259087438186}
@@ -255,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1559584832943852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.3114, y: -2.048, z: 0}
+  m_LocalPosition: {x: -72.26, y: -1.6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4065025820607998}
@@ -298,7 +300,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967027222433444}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.88788855, y: 0.5234955, z: 0}
+  m_LocalPosition: {x: -0.65, y: 0.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4373471892399282}
@@ -338,14 +340,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1565483129126058}
-  m_LocalRotation: {x: -0, y: -0, z: 0.045278788, w: -0.9989744}
-  m_LocalPosition: {x: 1.4500046, y: -0.9500003, z: 0}
+  m_LocalRotation: {x: -0, y: 0, z: 0.5418247, w: -0.8404916}
+  m_LocalPosition: {x: -0.34, y: -1.11, z: 0}
   m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.99999994}
   m_Children:
   - {fileID: 4941461163312000}
   m_Father: {fileID: 4065025820607998}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.19}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -65.616005}
 --- !u!50 &50153029506368056
 Rigidbody2D:
   serializedVersion: 4
@@ -380,7 +382,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -434,7 +436,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.81213, y: 1.601603}
+  m_Size: {x: 1.601603, y: 1.601603}
   m_EdgeRadius: 0
 --- !u!95 &95266732735209670
 Animator:
@@ -453,6 +455,57 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114485270885267718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559584832943852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c20a49579e302499d4031b934ba66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Info:
+    ID: 
+    Name: 
+    Type: 0
+    CurrentHealth: 0
+    MaxHealth: 0
+  Rigid: {fileID: 50827150594154146}
+  Body: {fileID: 4065025820607998}
+  Anim: {fileID: 95266732735209670}
+  m_HitBox: {fileID: 61440738352367430}
+  m_AlphaGroup: {fileID: 114687585813072018}
+  HurtTypes: 0
+  DeathTypes: 0
+  Sprites: []
+  WoundSounds: []
+  DeathSounds: []
+  IdleVarriations: 0
+  VarriationChance: 3
+  m_HealthBar: {fileID: 0}
+  SpellSource: {fileID: 0}
+  initScale: {x: -0.5, y: 0.5, z: 0.5}
+  SpellInCast:
+    Key: 
+    Level: 0
+    Mana: 0
+    ColliderPrefab: 
+    Perks: []
+    Icon: {fileID: 0}
+    HitSound: 
+    MinTime: 0
+    MaxTime: 0
+  CurrentTarget: {fileID: 0}
+  Dead: 0
+  CurrentAction: 0
+  MovementSpeed: 1
+  MaxChaseDistance: 20
+  Collider: {fileID: 61953132278813082}
+  Stunnable: 1
+  GroundedThreshold: 0.1
+  CrawlerEntity: {fileID: 114941387361226810}
 --- !u!114 &114661679146210050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -494,6 +547,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyReference: {fileID: 0}
   Collisions: []
+--- !u!114 &114941387361226810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559584832943852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d588f7922869b546a5721595301b40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactRays:
+  - {x: 1, y: 0, z: 0}
+  - {x: 0.9, y: 0.9, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: -0.9, y: 0.9, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: -0.9, y: -0.9, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: 0.9, y: -0.9, z: 0}
+  Distance: 0.5
+  Origin: {fileID: 4065025820607998}
+  CurrentRotation: {x: 0, y: 0, z: 0, w: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!210 &210980633089477678
 SortingGroup:
   m_ObjectHideFlags: 1

@@ -58,6 +58,7 @@ public class ItemUI : MonoBehaviour {
         {
             IconImage.sprite = ResourcesLoader.Instance.GetSprite("xIcon");
         }
+        outline.enabled = !CurrentItem.SawItem;
     }
 
     public void Clear()
@@ -76,6 +77,7 @@ public class ItemUI : MonoBehaviour {
         IconImage.color = new Color(IconImage.color.r, IconImage.color.g, IconImage.color.b, 0.5f);
 
         InGameMainMenuUI.Instance.BeginDrag(this);
+        MarkItemAsSeen();
     }
 
     public void Clicked()
@@ -86,6 +88,7 @@ public class ItemUI : MonoBehaviour {
         }
 
         InGameMainMenuUI.Instance.isDraggingItem = true;
+        MarkItemAsSeen();
     }
 
     public void UnClicked()
@@ -103,6 +106,7 @@ public class ItemUI : MonoBehaviour {
         InGameMainMenuUI.Instance.SetHoverSlot(this);
 
         outline.enabled = true;
+        MarkItemAsSeen();
     }
 
     public void UnHover()
@@ -130,4 +134,16 @@ public class ItemUI : MonoBehaviour {
         GetComponent<Image>().raycastTarget = true;
     }
 
+    protected void MarkItemAsSeen()
+    {
+        if (CurrentItem != null)
+        {
+            CurrentItem.SawItem = true;
+        }
+    }
+
+    void OnDisable()
+    {
+        outline.enabled = false;
+    }
 }

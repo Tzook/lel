@@ -628,6 +628,7 @@ public class ActorInstance : MonoBehaviour
 
     public void AddItem(int slot, ItemInfo item)
     {
+        item.SawItem = false;
         Info.Inventory.AddItemAt(slot, item);
 
         InGameMainMenuUI.Instance.MinilogMessage("Picked '" + item.Name + "'");
@@ -638,6 +639,7 @@ public class ActorInstance : MonoBehaviour
     public void ChangeItemStack(int slot, int stack)
     {
         ItemInfo item = Info.Inventory.GetItemAt(slot);
+        item.SawItem = false;
         int stackPicked = stack - item.Stack;
         InGameMainMenuUI.Instance.MinilogMessage((stackPicked > 0 ? "Picked up " : "Removed ") + Mathf.Abs(stackPicked).ToString("N0") + " " + item.Name + "s ");
         

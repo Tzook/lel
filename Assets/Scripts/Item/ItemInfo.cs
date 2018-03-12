@@ -15,6 +15,7 @@ public class ItemInfo {
     public string SubType;
     public int StackCap;
     public int Stack = 1;
+    public bool SawItem = true;
 
     public ItemStats Stats;
 

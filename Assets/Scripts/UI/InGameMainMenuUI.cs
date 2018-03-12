@@ -37,6 +37,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     BlinkNumberUI LevelUI;
 
     [SerializeField]
+    BlinkNumberUI PALevelUI;
+
+    [SerializeField]
     protected GameObject m_GameUI;
 
     [SerializeField]
@@ -315,11 +318,9 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshXP(info);
         RefreshHP(info);
         RefreshMP(info);
-        RefreshLevel(info);
+        RefreshLevel();
 
-        PrimaryAbilityImage.sprite = Content.Instance.GetAbility(info.CurrentPrimaryAbility.Key).Icon;
-
-        RefreshPAExpBar();
+        RefreshCurrentPrimaryAbility();
         RefreshSpellArea(true);
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
@@ -584,14 +585,14 @@ public class InGameMainMenuUI : MonoBehaviour {
         MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
     }
 
-    public void RefreshLevel(ActorInfo info = null)
+    public void RefreshLevel()
     {
-        if (info == null)
-        {
-            info = LocalUserInfo.Me.ClientCharacter;
-        }
+        LevelUI.SetValue(LocalUserInfo.Me.ClientCharacter.LVL.ToString(), false);
+    }
 
-        LevelUI.SetValue(info.LVL.ToString());
+    public void RefreshPALevel(bool instant)
+    {
+        PALevelUI.SetValue(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL.ToString(), instant);
     }
 
     public void StartChargingAttack()
@@ -672,6 +673,7 @@ public class InGameMainMenuUI : MonoBehaviour {
     {
         PrimaryAbilityIcon.sprite = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key).Icon;
         RefreshPAExpBar();
+        RefreshPALevel(true);
     }
 
     public void AddAcceptDeclineMessage(string content,string key, Action<string> acceptCallback)

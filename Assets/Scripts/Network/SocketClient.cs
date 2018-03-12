@@ -1173,6 +1173,7 @@ public class SocketClient : MonoBehaviour
         }
 
         InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+        InGameMainMenuUI.Instance.RefreshPALevel(false);
     }
 
     private void OnAbilityChoosePerk(Socket socket, Packet packet, object[] args)

@@ -23,14 +23,21 @@ public class BlinkNumberUI : MonoBehaviour {
         InitColor = imageContent.color;
     }
 
-    public void SetValue(string content)
+    public void SetValue(string content, bool instant)
     {
         if(ChangeValueInstance != null)
         {
             StopCoroutine(ChangeValueInstance);
         }
 
-        ChangeValueInstance = StartCoroutine(ChangeValueRoutine(content));
+        if (this.isActiveAndEnabled && !instant)
+        {
+            ChangeValueInstance = StartCoroutine(ChangeValueRoutine(content));
+        }
+        else 
+        {
+            textContent.text = content;            
+        }
     }
 
     private IEnumerator ChangeValueRoutine(string content)

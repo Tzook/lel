@@ -133,6 +133,7 @@ public class DevContentEditor : Editor
         if (GUILayout.Button("Update Quests"))
         {
             SendQuestsInfo(currentInfo.Quests);
+            WriteConstantLists.Instance.WriteQuestsPopupList(currentInfo.Quests);
         }
 
         if (GUILayout.Button("Update Starting Gear"))

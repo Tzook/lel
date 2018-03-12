@@ -26,9 +26,9 @@ public class WriteConstantLists
 
         Regex rgx = new Regex("/\\* AUTO_GENERATED_PERKS_START \\*/ .* /\\* AUTO_GENERATED_PERKS_END \\*/");
         
-        string perksString = GetItemsString(perks.Select(perk => perk.Key).ToList());
+        string listString = GetListString(perks.Select(perk => perk.Key).ToList());
 
-        string result = rgx.Replace(text, "/* AUTO_GENERATED_PERKS_START */ " + perksString + " /* AUTO_GENERATED_PERKS_END */");
+        string result = rgx.Replace(text, "/* AUTO_GENERATED_PERKS_START */ " + listString + " /* AUTO_GENERATED_PERKS_END */");
         File.WriteAllText(fileName, result);
     }
 
@@ -37,13 +37,24 @@ public class WriteConstantLists
         string text = File.ReadAllText(fileName);
         
         Regex rgx = new Regex("/\\* AUTO_GENERATED_LOOT_START \\*/ .* /\\* AUTO_GENERATED_LOOT_END \\*/");
-        string lootString = GetItemsString(items.Select(item => item.Key).ToList());
+        string listString = GetListString(items.Select(item => item.Key).ToList());
 
-        string result = rgx.Replace(text, "/* AUTO_GENERATED_LOOT_START */ " + lootString + " /* AUTO_GENERATED_LOOT_END */");
+        string result = rgx.Replace(text, "/* AUTO_GENERATED_LOOT_START */ " + listString + " /* AUTO_GENERATED_LOOT_END */");
         File.WriteAllText(fileName, result);
     }
 
-    private string GetItemsString(List<string> items)
+    public void WriteQuestsPopupList(List<Quest> quests)
+    {
+        string text = File.ReadAllText(fileName);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_QUESTS_START \\*/ .* /\\* AUTO_GENERATED_QUESTS_END \\*/");
+        string listString = GetListString(quests.Select(quest => quest.Key).ToList());
+
+        string result = rgx.Replace(text, "/* AUTO_GENERATED_QUESTS_START */ " + listString + " /* AUTO_GENERATED_QUESTS_END */");
+        File.WriteAllText(fileName, result);
+    }
+
+    private string GetListString(List<string> items)
     {
         string itemsString = "";
         for (int i = 0; i < items.Count; i++)

@@ -8,6 +8,7 @@ public class WriteConstantLists
         
     private const string FILE_NAME_CONTENT = "Assets/Scripts/CONTENT/Content.cs";
     private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
+    private const string FILE_NAME_NPC = "Assets/Scripts/NPC/NPC.cs";
     private static WriteConstantLists _instance; 
     public static WriteConstantLists Instance
     {
@@ -38,10 +39,16 @@ public class WriteConstantLists
         string text = File.ReadAllText(FILE_NAME_CONTENT);
         
         Regex rgx = new Regex("/\\* AUTO_GENERATED_LOOT_START \\*/ .* /\\* AUTO_GENERATED_LOOT_END \\*/");
+        
         string listString = GetListString(items.Select(item => item.Key).ToList());
-
-        string result = rgx.Replace(text, "/* AUTO_GENERATED_LOOT_START */ " + listString + " /* AUTO_GENERATED_LOOT_END */");
+        
+        string replacement = "/* AUTO_GENERATED_LOOT_START */ " + listString + " /* AUTO_GENERATED_LOOT_END */";
+        string result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_CONTENT, result);
+
+        text = File.ReadAllText(FILE_NAME_NPC);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_NPC, result);
     }
 
     public void WriteQuestsPopupList(List<Quest> quests)
@@ -51,8 +58,13 @@ public class WriteConstantLists
         Regex rgx = new Regex("/\\* AUTO_GENERATED_QUESTS_START \\*/ .* /\\* AUTO_GENERATED_QUESTS_END \\*/");
         string listString = GetListString(quests.Select(quest => quest.Key).ToList());
 
-        string result = rgx.Replace(text, "/* AUTO_GENERATED_QUESTS_START */ " + listString + " /* AUTO_GENERATED_QUESTS_END */");
+        string replacement = "/* AUTO_GENERATED_QUESTS_START */ " + listString + " /* AUTO_GENERATED_QUESTS_END */";
+        string result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_CONTENT, result);
+
+        text = File.ReadAllText(FILE_NAME_NPC);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_NPC, result);
     }
 
     public void WriteMobsPopupList(List<DevMonsterInfo> mobs)

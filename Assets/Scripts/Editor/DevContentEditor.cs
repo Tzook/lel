@@ -127,6 +127,7 @@ public class DevContentEditor : Editor
             }
 
             SendItemsInfo(node);
+            WriteConstantLists.Instance.WriteLootPopupList(currentInfo.Items);
         }
 
         if (GUILayout.Button("Update Quests"))

@@ -283,6 +283,7 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
+    [Popup(/* AUTO_GENERATED_LOOT_START */ "leatherVest", "adventurerShirt", "blackGloves", "clothPants", "greenPants", "leatherShoes", "strapShoes", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "gold", "blackPants", "leatherGloves", "apprenticeRobeWhite", "apprenticeRobeBlack", "shortSword", "shortClub", "shortAxe", "shortScimitar", "shortBow", "rabbitEar", "shortDagger", "batWing", "rabbitFurVest", "oldTurtleShell", "Fishing Rod", "carrotSack", "smallFish", "bigFish", "blackShoes", "whiteJellyBean", "blackJellyBean", "yellowJellyBean", "redJellyBean", "pinkJellyBean", "blueJellyBean", "orangeJellyBean", "greenJellyBean", "plantFlower", "blueMushroomCap", "strawHat", "peasantHat", "rabbitCostume", "whiteGloves", "greenGloves", "redGloves", "cosmoTunnelKey", "rabbitLandEntrancePremission", "magicCarrotSeeds" /* AUTO_GENERATED_LOOT_END */)]
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -449,7 +450,7 @@ public class DevSpell
 [System.Serializable]
 public class DevPerkMap
 {
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance", "testinggg" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
 }

@@ -19,9 +19,6 @@ public class CharacterInfoPageUI : MonoBehaviour {
     protected Text txtLevel;
 
     [SerializeField]
-    protected Text txtClass;
-
-    [SerializeField]
     protected MainMenuUI m_mainMenuUI;
 
     [SerializeField]
@@ -62,7 +59,6 @@ public class CharacterInfoPageUI : MonoBehaviour {
         actorInstance.UpdateVisual(info);
         txtName.text = info.Name;
         txtLevel.text = "Level " + info.LVL;
-        txtClass.text = info.Class;
 
         LocalUserInfo.Me.ClientCharacter = info;
     }

@@ -34,8 +34,6 @@ public class ActorInfo
         private set { }
     }
 
-    public string Class;
-
     public int JumpBonus;
     public int SpeedBonus;
 
@@ -293,8 +291,6 @@ public class ActorInfo
         this.LVL = node["lvl"].AsInt;
 
         this.EXP = node["exp"].AsInt;
-
-        this.Class = node["class"].Value;
 
         this.CurrentHealth = node["hp"]["now"].AsInt;
         if (node["maxHp"] != null) {

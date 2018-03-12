@@ -41,7 +41,7 @@ public class CharspotUI : MonoBehaviour {
         Actor.UpdateVisual(info);
         txtName.text = info.Name;
 
-        txtInfo.text = "LVL " + info.LVL + " " + info.Class;
+        txtInfo.text = "LVL " + info.LVL;
     }
 
 }

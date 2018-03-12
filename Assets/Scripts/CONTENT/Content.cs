@@ -534,8 +534,6 @@ public class Quest
 
     public List<QuestState> QuestsStates = new List<QuestState>();
 
-    public string RequiredClass;
-
     public int MinimumLevel;
 
     public List<LootInstance> RewardItems = new List<LootInstance>();
@@ -559,12 +557,6 @@ public class Quest
 
         //Is already in progress?
         if(LocalUserInfo.Me.ClientCharacter.GetQuest(this.Key) != null)
-        {
-            return false;
-        }
-
-        //Is not for my class?
-        if (!string.IsNullOrEmpty(RequiredClass) && RequiredClass != character.Class)
         {
             return false;
         }
@@ -678,7 +670,6 @@ public class Quest
         }
 
         tempQuest.QuestsStates.AddRange(this.QuestsStates);
-        tempQuest.RequiredClass = this.RequiredClass;
         tempQuest.MinimumLevel  = this.MinimumLevel;
 
         for (int i = 0; i < this.RewardItems.Count; i++)

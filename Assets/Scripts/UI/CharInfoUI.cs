@@ -11,9 +11,6 @@ public class CharInfoUI : MonoBehaviour {
     Text m_txtGender;
 
     [SerializeField]
-    Text m_txtClass;
-
-    [SerializeField]
     Text m_txtLevel;
 
     [SerializeField]
@@ -48,7 +45,6 @@ public class CharInfoUI : MonoBehaviour {
     {
         m_txtName.text = Info.Name;
         m_txtGender.text = "Gender: " + Info.Gender.ToString();
-        m_txtClass.text = "Class: " + Info.Class;
         m_txtLevel.text = "Level: " + Info.LVL;
 
         m_btnAddFriend.interactable = false;

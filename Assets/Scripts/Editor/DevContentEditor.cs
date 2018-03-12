@@ -348,8 +348,6 @@ public class DevContentEditor : Editor
                 node["quests"][i]["RequiredQuests"][rc]["phase"] = Quests[i].QuestsStates[rc].State;
             }
 
-            node["quests"][i]["requiredClass"] = Quests[i].RequiredClass;
-
             node["quests"][i]["minLevel"] = Quests[i].MinimumLevel.ToString();
 
 

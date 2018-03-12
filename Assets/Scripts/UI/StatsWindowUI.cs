@@ -27,9 +27,14 @@ public class StatsWindowUI : MonoBehaviour
 
     public void Refresh(ActorInfo info)
     {
-        this.EXPText.text = info.EXP.ToString("N0");
-        this.MaxHealthText.text = info.MaxHealth.ToString("N0");
-        this.MaxManaText.text = info.MaxMana.ToString("N0");
+        this.EXPText.text = FormatStat(info.EXP, info.NextLevelXP);
+        this.MaxHealthText.text = FormatStat(info.CurrentHealth, info.MaxHealth);
+        this.MaxManaText.text = FormatStat(info.CurrentMana, info.MaxMana);
+    }
+
+    protected string FormatStat(int Current, int Max)
+    {
+        return Current.ToString("N0") + " / " + Max.ToString("N0");
     }
 
     public void Hide()

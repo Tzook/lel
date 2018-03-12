@@ -384,7 +384,6 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshStats()
     {
-        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);
         RefreshHP();
         RefreshMP();
     }
@@ -563,6 +562,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         XPBar.SetValue(info.EXP / (info.NextLevelXP * 1f));
+        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
 
     public void RefreshHP(ActorInfo info = null)
@@ -573,6 +573,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         HPBar.SetValue(info.CurrentHealth / (info.MaxHealth * 1f));
+        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
 
     public void RefreshMP(ActorInfo info = null)
@@ -583,6 +584,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
+        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
 
     public void RefreshLevel()

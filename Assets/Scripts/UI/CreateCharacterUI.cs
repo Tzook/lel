@@ -30,6 +30,8 @@ public class CreateCharacterUI : MonoBehaviour
     public List<string> AllowedEyes = new List<string>();
     public List<string> AllowedNose = new List<string>();
     public List<string> AllowedMouth = new List<string>();
+    public const int MAX_SKIN_INDEX = 2;
+
     int hairIndex;
     int eyesIndex;
     int noseIndex;
@@ -70,6 +72,7 @@ public class CreateCharacterUI : MonoBehaviour
         }
 
         ToggleGender();
+        Randomize();
     }
 
     public void ToggleGender()
@@ -245,7 +248,7 @@ public class CreateCharacterUI : MonoBehaviour
     {
         skinIndex++;
 
-        if (skinIndex >= 3)
+        if (skinIndex > MAX_SKIN_INDEX)
         {
             skinIndex = 0;
         }
@@ -260,10 +263,26 @@ public class CreateCharacterUI : MonoBehaviour
 
         if (skinIndex < 0)
         {
-            skinIndex = 2;
+            skinIndex = MAX_SKIN_INDEX;
         }
 
         m_ActorInfo.SkinColor = skinIndex;
+        m_ActorInstance.UpdateVisual();
+    }
+
+    public void Randomize()
+    {
+        m_ActorInfo.Hair = m_ActorInfo.Gender == Gender.Male ? AllowedHairMale[hairIndex = Random.Range(0, AllowedHairMale.Count)] : AllowedHairFemale[hairIndex = Random.Range(0, AllowedHairFemale.Count)];
+        m_ActorInfo.Eyes = AllowedEyes[eyesIndex = Random.Range(0, AllowedEyes.Count)];
+        m_ActorInfo.Nose = AllowedNose[noseIndex = Random.Range(0, AllowedNose.Count)];
+        m_ActorInfo.Mouth = AllowedMouth[mouthIndex = Random.Range(0, AllowedMouth.Count)];
+        skinIndex = Random.Range(0, MAX_SKIN_INDEX + 1);
+        // if it's the last index, try again
+        // this way, the chance to be black is 20% and not 33% 
+        // i'm going to hell for this
+        if (skinIndex == MAX_SKIN_INDEX) { skinIndex = Random.Range(0, MAX_SKIN_INDEX + 1); }
+        m_ActorInfo.SkinColor = skinIndex;
+        
         m_ActorInstance.UpdateVisual();
     }
 

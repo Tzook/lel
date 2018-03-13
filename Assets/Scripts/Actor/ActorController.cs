@@ -1031,4 +1031,9 @@ public class ActorController : MonoBehaviour
         }
         TakingDamageInAir = false;
     }
+
+    public void SetAttackSpeed(float attackSpeed)
+    {
+        Anim.SetFloat(AnimationAssist.PAREMETER_ATTACK_SPEED_MULTIPLIER, attackSpeed);        
+    }
 }

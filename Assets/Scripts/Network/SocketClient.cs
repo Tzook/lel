@@ -563,7 +563,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor update attack speed | " + data.ToString());
 
-        LocalUserInfo.Me.ClientCharacter.Instance.InputController.SetAttackSpeed(data["speed"].AsFloat);
+        LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["speed"].AsFloat);
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)

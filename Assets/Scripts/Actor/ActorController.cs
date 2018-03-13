@@ -109,6 +109,10 @@ public class ActorController : MonoBehaviour
 
     void Start()
     {
+        if (Instance.Info.AttackSpeed != null)
+        {
+            SetAttackSpeed((float)Instance.Info.AttackSpeed);
+        }
         initScale = Anim.transform.localScale;
         EndAttack();
 

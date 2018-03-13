@@ -34120,8 +34120,8 @@ RectTransform:
   m_Father: {fileID: 1709}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.9395238}
+  m_AnchorMin: {x: 0, y: 0.00000011920929}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00001001358, y: -0.099983215}
   m_SizeDelta: {x: 34.1, y: -0.2}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -35637,8 +35637,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58, y: -1.5999999}
-  m_SizeDelta: {x: 91, y: 31.8}
+  m_AnchoredPosition: {x: 55.32, y: -1.5000024}
+  m_SizeDelta: {x: 81.61, y: 18.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1673
 RectTransform:
@@ -38674,8 +38674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58, y: -1.5999999}
-  m_SizeDelta: {x: 91, y: 31.8}
+  m_AnchoredPosition: {x: 56.32, y: -1.5}
+  m_SizeDelta: {x: 80.27, y: 18.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1860
 RectTransform:
@@ -39714,8 +39714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58, y: -1.5999999}
-  m_SizeDelta: {x: 91, y: 31.8}
+  m_AnchoredPosition: {x: 55.99, y: -1.5000019}
+  m_SizeDelta: {x: 80.94, y: 18.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1930
 RectTransform:
@@ -41833,8 +41833,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 215, y: 210}
+  m_AnchoredPosition: {x: 0, y: -0.000017626831}
+  m_SizeDelta: {x: 215, y: 105}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &2067
 RectTransform:
@@ -47902,7 +47902,7 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 087a5b74d3a9c2b48abf376c54be1563, type: 3}
     PAColor: {r: 1, g: 0.32549024, b: 0.32549024, a: 1}
     Perks:
-    - MinLevel: 3
+    - MinLevel: 2
       PerksOffered: 2
       AddToPool:
       - bleedChance
@@ -47911,17 +47911,18 @@ MonoBehaviour:
       - bleedDuration
       - crippleChance
       - crippleDuration
-    - MinLevel: 10
+    - MinLevel: 8
       PerksOffered: 3
       AddToPool:
       - critChance
       - fullyChargeModifier
       - aoeChance
       - aoeCap
-    - MinLevel: 20
+      - meleeDamageBonus
+    - MinLevel: 15
       PerksOffered: 5
       AddToPool:
-      - damageModifier
+      - attackSpeedModifier
       - hpSteal
       - threatModifier
     Spells:
@@ -47975,25 +47976,28 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 65170a2ee353f074196f138dfaa281dd, type: 3}
     PAColor: {r: 0.43248153, g: 1, b: 0.32549024, a: 1}
     Perks:
-    - MinLevel: 3
+    - MinLevel: 2
       PerksOffered: 2
       AddToPool:
       - bleedChance
       - crippleChance
       - crippleDuration
       - bleedDuration
-    - MinLevel: 10
+    - MinLevel: 5
+      PerksOffered: 2
+      AddToPool:
+      - rangeDamageBonus
+    - MinLevel: 8
       PerksOffered: 3
       AddToPool:
       - critChance
       - fullyChargeModifier
-      - aoeChance
-      - aoeCap
-    - MinLevel: 20
+    - MinLevel: 15
       PerksOffered: 5
       AddToPool:
-      - damageModifier
+      - attackSpeedModifier
       - hpSteal
+      - critDamageModifier
     Spells: []
     InitialPerks:
     - Key: bleedChance
@@ -48087,16 +48091,18 @@ MonoBehaviour:
       - hpBonus
       - mpBonus
     - MinLevel: 5
-      PerksOffered: 4
+      PerksOffered: 3
       AddToPool:
       - stunResistance
       - crippleResistance
       - bleedResistance
     - MinLevel: 10
-      PerksOffered: 5
+      PerksOffered: 4
       AddToPool:
       - freezeResistance
       - burnResistance
+      - defenceBonus
+      - damageBonus
     - MinLevel: 15
       PerksOffered: 5
       AddToPool:
@@ -48188,7 +48194,7 @@ MonoBehaviour:
     StartingValue: 1
     PerkType: 0
   - Key: fullyChargeModifier
-    Name: Fully Charged Damage
+    Name: Charge Bonus
     Icon: {fileID: 21300000, guid: 608a73664079e854a9dd0687f7799860, type: 3}
     PrecentPerUpgrade: 0.05
     UpgradeCap: 2.3
@@ -51807,9 +51813,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5bf52d827c0b36141a799e9b431c789e, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 5
+    m_MaxSize: 14
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -55968,8 +55974,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2212}
   m_HandleRect: {fileID: 1583}
   m_Direction: 3
-  m_Value: 1
-  m_Size: 0.9395238
+  m_Value: 0
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -57777,9 +57783,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5bf52d827c0b36141a799e9b431c789e, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 5
+    m_MaxSize: 14
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -60286,9 +60292,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5bf52d827c0b36141a799e9b431c789e, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 5
+    m_MaxSize: 14
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

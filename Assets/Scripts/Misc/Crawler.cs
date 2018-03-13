@@ -32,10 +32,11 @@ public class Crawler : MonoBehaviour {
 
         for(int i=0;i< ContactRays.Count; i++)
         {
-            Hit = Physics2D.Raycast(Origin.position, ContactRays[i], 1f, mask);
+            Hit = Physics2D.Raycast(Origin.position, ContactRays[i], Distance, mask);
             if (Hit)
             {
                 ResultHit.Add(Hit);
+                Debug.DrawRay(Origin.position, ContactRays[i] * Distance, Color.red);
             }
         }
 

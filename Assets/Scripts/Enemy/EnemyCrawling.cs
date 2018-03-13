@@ -10,20 +10,6 @@ public class EnemyCrawling : EnemyMoving {
     [SerializeField]
     Crawler CrawlerEntity;
 
-    protected RaycastHit2D GroundRayRight;
-    protected RaycastHit2D GroundRayLeft;
-
-    public bool isGrounded
-    {
-        get
-        {
-            GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
-            GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
-
-            return (GroundRayRight || GroundRayLeft);
-        }
-    }
-
     protected void Awake()
     {
         OriginalMovementSpeed = MovementSpeed;
@@ -72,7 +58,121 @@ public class EnemyCrawling : EnemyMoving {
         }
     }
 
+    public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)
+    {
+        base.Hurt(actor, damage, currentHP, cause, crit);
+
+        if (Game.Instance.isBitch)
+        {
+
+            if (actor.transform.position.x < transform.position.x)
+            {
+                Rigid.gravityScale = 1f;
+
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * transform.right, ForceMode2D.Impulse);
+            }
+            else
+            {
+                Rigid.gravityScale = 1f;
+
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * -transform.right, ForceMode2D.Impulse);
+            }
+        }
+    }
+
     #region AI
+
+
+    public override IEnumerator AIRoutine()
+    {
+        int rndDecision;
+        while (true)
+        {
+            //MAKE DECISION
+            if (CurrentAction == AIAction.Thinking)
+            {
+                if (CurrentTarget != null)
+                {
+                    CurrentAction = AIAction.Chasing;
+                }
+                else
+                {
+                    rndDecision = Random.Range(0, 5);
+
+                    if (rndDecision == 0 || rndDecision == 1)
+                    {
+                        CurrentAction = AIAction.WanderingLeft;
+                    }
+                    else if (rndDecision == 2 || rndDecision == 3)
+                    {
+                        CurrentAction = AIAction.WanderingRight;
+                    }
+                    else
+                    {
+                        CurrentAction = AIAction.Idle;
+                    }
+                }
+            }
+
+            //ACT
+            switch (CurrentAction)
+            {
+                case AIAction.Thinking:
+                    {
+                        CurrentActionRoutine = null;
+
+                        yield return 0;
+                        break;
+                    }
+                case AIAction.Idle:
+                    {
+                        CurrentActionRoutine = StartCoroutine(IdleRoutine());
+                        break;
+                    }
+                case AIAction.WanderingLeft:
+                    {
+                        CurrentActionRoutine = StartCoroutine(WanderLeftRotuine());
+                        break;
+                    }
+                case AIAction.WanderingRight:
+                    {
+                        CurrentActionRoutine = StartCoroutine(WanderRightRotuine());
+                        break;
+                    }
+                case AIAction.Chasing:
+                    {
+                        CurrentActionRoutine = StartCoroutine(ChaseTargetRoutine());
+
+                        break;
+                    }
+            }
+
+            yield return 0;
+
+            if (CurrentActionRoutine != null)
+            {
+                yield return CurrentActionRoutine;
+            }
+
+            yield return 0;
+        }
+    }
+
+    protected override IEnumerator IdleRoutine()
+    {
+        float t = Random.Range(0.5f, 5f);
+
+        StandStill();
+
+        while (t > 0f)
+        {
+            t -= 1f * Time.deltaTime;
+
+            yield return 0;
+        }
+
+        CurrentAction = AIAction.Thinking;
+    }
 
     protected override IEnumerator WanderLeftRotuine()
     {
@@ -138,18 +238,7 @@ public class EnemyCrawling : EnemyMoving {
                         break;
                     }
 
-                    if (isRightBlocked())
-                    {
-                        if (isRightBlocked())
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        yield return StartCoroutine(WanderRightRotuine());
-                        CurrentAction = AIAction.Chasing;
-                    }
+                    yield return StartCoroutine(WanderRightRotuine());
                 }
                 else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
                 {
@@ -158,18 +247,7 @@ public class EnemyCrawling : EnemyMoving {
                         break;
                     }
 
-                    if (isLeftBlocked())
-                    {
-                        if (isLeftBlocked())
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        yield return StartCoroutine(WanderLeftRotuine());
-                        CurrentAction = AIAction.Chasing;
-                    }
+                    yield return StartCoroutine(WanderLeftRotuine());
                 }
             }
 
@@ -177,6 +255,31 @@ public class EnemyCrawling : EnemyMoving {
         }
 
         CurrentAction = AIAction.Thinking;
+    }
+
+    public override void StandStill()
+    {
+        Anim.SetBool("Walk", false);
+    }
+
+    public override void WalkLeft()
+    {
+        Rigid.position += -(Vector2)Body.transform.right * MovementSpeed * Time.deltaTime;
+        Body.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
+
+        Debug.DrawRay(transform.position, Body.transform.right, Color.blue);
+
+        Anim.SetBool("Walk", true);
+    }
+
+    public override void WalkRight()
+    {
+        Rigid.position += (Vector2)Body.transform.right * MovementSpeed * Time.deltaTime;
+        Body.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+
+        Debug.DrawRay(transform.position, -Body.transform.right, Color.blue);
+
+        Anim.SetBool("Walk", true);
     }
 
     #endregion

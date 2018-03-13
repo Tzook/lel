@@ -257,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1559584832943852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -72.97746, y: 9.871592, z: 0}
+  m_LocalPosition: {x: 31.159443, y: -10.627892, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4065025820607998}
@@ -488,8 +488,10 @@ MonoBehaviour:
   - {fileID: 212276840253730464}
   - {fileID: 212335033079048200}
   - {fileID: 212233952782453978}
-  WoundSounds: []
-  DeathSounds: []
+  WoundSounds:
+  - sound_punch
+  DeathSounds:
+  - brap
   IdleVarriations: 0
   VarriationChance: 3
   m_HealthBar: {fileID: 0}
@@ -552,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc81eb7829f04394fb3eb4b59955f65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyReference: {fileID: 0}
+  EnemyReference: {fileID: 114485270885267718}
   Collisions: []
 --- !u!114 &114941387361226810
 MonoBehaviour:

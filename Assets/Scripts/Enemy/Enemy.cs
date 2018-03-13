@@ -134,6 +134,7 @@ public class Enemy : MonoBehaviour {
 
     public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)
     {
+        Debug.Log("WAS HURT!");
         Anim.SetInteger("HurtType", Random.Range(0, HurtTypes));
         Anim.SetTrigger("Hurt");
 

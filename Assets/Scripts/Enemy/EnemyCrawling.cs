@@ -51,7 +51,6 @@ public class EnemyCrawling : EnemyMoving {
         {
             Rigid.gravityScale = 1f;
 
-            Debug.Log(Rigid.velocity.y);
             if (Rigid.velocity.y < -8f)
             {
                 Anim.SetBool("inAir", true);

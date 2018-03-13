@@ -37,6 +37,8 @@ public class ActorInfo
     public int JumpBonus;
     public int SpeedBonus;
 
+    public float? AttackSpeed;
+
     public int MaxHealth;
     public int CurrentHealth;
 
@@ -303,6 +305,16 @@ public class ActorInfo
         }
 
         SetPrimaryAbility(node["primaryAbility"].Value);
+    }
+
+    public void SetAttackSpeed(float attackSpeed)
+    {
+        AttackSpeed = attackSpeed;
+        // if it is null, the actorcontroller will set its speed when it initializes
+        if (Instance != null)
+        {
+            Instance.InputController.SetAttackSpeed(attackSpeed);
+        }
     }
 
     public void SwitchPrimaryAbility(string key)

@@ -20,8 +20,7 @@ public class Game : MonoBehaviour {
             return isDraggingWindow
                     || isClickingOnUI
                     || InGameMainMenuUI.Instance.isDraggingItem
-                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen
-                    || GameCamera.Instance.HoveringOnInteractable;
+                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen;
         }
     }
     public bool MovingTroughPortal = false;

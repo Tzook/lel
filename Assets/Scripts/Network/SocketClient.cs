@@ -85,6 +85,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
         CurrentSocket.On("update_actor_max_stats", OnUpdateActorMaxStats);
+        CurrentSocket.On("update_actor_attack_speed", OnUpdateActorAttackSpeed);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
@@ -555,6 +556,14 @@ public class SocketClient : MonoBehaviour
                 }
             }
         }
+    }
+
+    protected void OnUpdateActorAttackSpeed(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor update attack speed | " + data.ToString());
+
+        LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["speed"].AsFloat);
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)

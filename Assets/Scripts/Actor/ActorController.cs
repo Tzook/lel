@@ -109,6 +109,10 @@ public class ActorController : MonoBehaviour
 
     void Start()
     {
+        if (Instance.Info.AttackSpeed != null)
+        {
+            SetAttackSpeed((float)Instance.Info.AttackSpeed);
+        }
         initScale = Anim.transform.localScale;
         EndAttack();
 
@@ -1030,5 +1034,10 @@ public class ActorController : MonoBehaviour
             yield return null;
         }
         TakingDamageInAir = false;
+    }
+
+    public void SetAttackSpeed(float attackSpeed)
+    {
+        Anim.SetFloat(AnimationAssist.PAREMETER_ATTACK_SPEED_MULTIPLIER, attackSpeed);        
     }
 }

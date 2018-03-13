@@ -9,6 +9,7 @@ public class WriteConstantLists
     private const string FILE_NAME_CONTENT = "Assets/Scripts/CONTENT/Content.cs";
     private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
     private const string FILE_NAME_NPC = "Assets/Scripts/NPC/NPC.cs";
+    private const string FILE_NAME_SCENE = "Assets/Scripts/Misc/SceneInfo.cs";
     private static WriteConstantLists _instance; 
     public static WriteConstantLists Instance
     {
@@ -78,9 +79,25 @@ public class WriteConstantLists
         File.WriteAllText(FILE_NAME_MONSTERS, result);
     }
 
+    public void WriteAbilitiesPopupList(List<DevAbility> abilities)
+    {
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_ABILITIES_START \\*/ .* /\\* AUTO_GENERATED_ABILITIES_END \\*/");
+        string listString = GetListString(abilities.Select(ability => ability.Key).ToList());
+
+        string replacement = "/* AUTO_GENERATED_ABILITIES_START */ " + listString + " /* AUTO_GENERATED_ABILITIES_END */";
+        string result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
+
+        text = File.ReadAllText(FILE_NAME_SCENE);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_SCENE, result);
+    }
+
     private string GetListString(List<string> items)
     {
-        string itemsString = "";
+        string itemsString = "\"\", ";
         for (int i = 0; i < items.Count; i++)
         {
             itemsString += '"' + items[i] + '"';

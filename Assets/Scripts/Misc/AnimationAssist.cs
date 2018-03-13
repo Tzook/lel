@@ -20,6 +20,8 @@ public class AnimationAssist : MonoBehaviour {
     [SerializeField]
     Transform WeaponBone;
 
+    public const string PAREMETER_ATTACK_SPEED_MULTIPLIER = "AttackSpeedMultiplier";
+
     private void Awake()
     {
         m_Anim = GetComponent<Animator>();

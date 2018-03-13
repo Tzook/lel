@@ -146,6 +146,7 @@ public class DevContentEditor : Editor
         {
             SendAbilities(currentInfo.Abilities, currentInfo.Perks);
             WriteConstantLists.Instance.WritePerksPopupList(currentInfo.Perks);
+            WriteConstantLists.Instance.WriteAbilitiesPopupList(currentInfo.Abilities);
         }
 
         GUILayout.Label("Command line");
@@ -358,11 +359,9 @@ public class DevContentEditor : Editor
                 node["quests"][i]["rewardItems"][ri]["stack"] = Quests[i].RewardItems[ri].MinStack.ToString();
             }
 
-            node["quests"][i]["rewardClass"] = Quests[i].RewardClass;
-
             node["quests"][i]["rewardHP"] = Quests[i].RewardHP.ToString();
             node["quests"][i]["rewardMP"] = Quests[i].RewardMP.ToString();
-            node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility.Key;
+            node["quests"][i]["rewardPrimaryAbility"] = Quests[i].RewardPrimaryAbility;
 
             node["quests"][i]["rewardExp"] = Quests[i].RewardExp.ToString();
 

@@ -49,8 +49,7 @@ public class DevContentEditor : Editor
                 node["mobs"][i]["name"] = currentInfo.Monsters[i].MonsterName;
                 node["mobs"][i]["hp"] = currentInfo.Monsters[i].MonsterHP.ToString();
                 node["mobs"][i]["level"] = currentInfo.Monsters[i].MonsterLevel.ToString();
-                node["mobs"][i]["minDMG"] = currentInfo.Monsters[i].MinDMG.ToString();
-                node["mobs"][i]["maxDMG"] = currentInfo.Monsters[i].MaxDMG.ToString();
+                node["mobs"][i]["dmg"] = currentInfo.Monsters[i].DMG.ToString();
                 node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
 
                 for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
@@ -298,6 +297,7 @@ public class DevContentEditor : Editor
             }
 
             node["talents"][i]["hitType"] = abilities[i].HitType;
+            node["talents"][i]["powerType"] = abilities[i].PowerType;
             node["talents"][i]["manaCost"] = abilities[i].ManaCost.ToString();
         }
 

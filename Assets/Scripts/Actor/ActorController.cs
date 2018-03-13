@@ -973,7 +973,7 @@ public class ActorController : MonoBehaviour
 
     private void Hurt(Enemy enemy)
     {
-        if (!Invincible && Content.Instance.GetMonsterByName(enemy.Info.Name).MaxDMG != 0)
+        if (!Invincible && Content.Instance.GetMonsterByName(enemy.Info.Name).DMG != 0)
         {
             EndAttack();
 

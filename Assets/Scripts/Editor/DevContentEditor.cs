@@ -298,6 +298,7 @@ public class DevContentEditor : Editor
             }
 
             node["talents"][i]["hitType"] = abilities[i].HitType;
+            node["talents"][i]["powerType"] = abilities[i].PowerType;
             node["talents"][i]["manaCost"] = abilities[i].ManaCost.ToString();
         }
 

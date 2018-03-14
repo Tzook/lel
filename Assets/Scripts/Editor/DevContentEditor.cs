@@ -23,6 +23,7 @@ using SimpleJSON;
 using BestHTTP;
 using System.Text;
 using UnityEditor.SceneManagement;
+using System;
 
 [CustomEditor(typeof(Content))]
 public class DevContentEditor : Editor
@@ -43,41 +44,7 @@ public class DevContentEditor : Editor
 
             node["pass"] = "b0ss123";
 
-            for (int i = 0; i < currentInfo.Monsters.Count; i++)
-            {
-                node["mobs"][i]["key"] = currentInfo.Monsters[i].MonsterKey;
-                node["mobs"][i]["name"] = currentInfo.Monsters[i].MonsterName;
-                node["mobs"][i]["hp"] = currentInfo.Monsters[i].MonsterHP.ToString();
-                node["mobs"][i]["level"] = currentInfo.Monsters[i].MonsterLevel.ToString();
-                node["mobs"][i]["dmg"] = currentInfo.Monsters[i].DMG.ToString();
-                node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
-
-                for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
-                {
-                    node["mobs"][i]["drops"][a]["key"] = currentInfo.Monsters[i].PossibleLoot[a].ItemKey;
-                    node["mobs"][i]["drops"][a]["minStack"] = currentInfo.Monsters[i].PossibleLoot[a].MinStack.ToString();
-                    node["mobs"][i]["drops"][a]["maxStack"] = currentInfo.Monsters[i].PossibleLoot[a].MaxStack.ToString();
-                }
-
-                for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
-                {
-                    node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
-                    node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
-                }
-
-                for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
-                {
-                    node["mobs"][i]["spells"][a]["key"] = currentInfo.Monsters[i].Spells[a].Key.ToString();
-
-                    for (int b = 0; b < currentInfo.Monsters[i].Spells[a].Perks.Count; b++)
-                    {
-                        node["mobs"][i]["spells"][a]["perks"][b]["key"] = currentInfo.Monsters[i].Spells[a].Perks[b].Key.ToString();
-                        node["mobs"][i]["spells"][a]["perks"][b]["value"] = currentInfo.Monsters[i].Spells[a].Perks[b].Value.ToString();
-                    }
-                    node["mobs"][i]["spells"][a]["minTime"] = currentInfo.Monsters[i].Spells[a].MinTime.ToString();
-                    node["mobs"][i]["spells"][a]["maxTime"] = currentInfo.Monsters[i].Spells[a].MaxTime.ToString();
-                }
-            }
+            FillMonstersInfo(currentInfo, node);
 
             SendMonstersInfo(node);
             WriteConstantLists.Instance.WriteMobsPopupList(currentInfo.Monsters);
@@ -164,6 +131,56 @@ public class DevContentEditor : Editor
         }
 
         GUILayout.EndVertical();
+    }
+
+    private void FillMonstersInfo(Content currentInfo, JSONNode node)
+    {
+        for (int i = 0; i < currentInfo.Monsters.Count; i++)
+        {
+            node["mobs"][i]["key"] = currentInfo.Monsters[i].MonsterKey;
+            node["mobs"][i]["name"] = currentInfo.Monsters[i].MonsterName;
+            node["mobs"][i]["hp"] = currentInfo.Monsters[i].MonsterHP.ToString();
+            node["mobs"][i]["level"] = currentInfo.Monsters[i].MonsterLevel.ToString();
+            node["mobs"][i]["dmg"] = currentInfo.Monsters[i].DMG.ToString();
+            node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
+
+            for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+            {
+                node["mobs"][i]["drops"][a]["key"] = currentInfo.Monsters[i].PossibleLoot[a].ItemKey;
+                node["mobs"][i]["drops"][a]["minStack"] = currentInfo.Monsters[i].PossibleLoot[a].MinStack.ToString();
+                node["mobs"][i]["drops"][a]["maxStack"] = currentInfo.Monsters[i].PossibleLoot[a].MaxStack.ToString();
+            }
+
+            for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
+            {
+                node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
+                node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
+            }
+
+            for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
+            {
+                node["mobs"][i]["spells"][a]["key"] = ""; // initialize before passing as arg
+                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells[a], node["mobs"][i]["spells"][a]);
+            }
+            if (!String.IsNullOrEmpty(currentInfo.Monsters[i].DeathRattle.Key))
+            {
+                node["mobs"][i]["deathRattle"]["key"] = ""; // initialize before passing as arg
+                FillMonsterSpellInfo(currentInfo.Monsters[i].DeathRattle, node["mobs"][i]["deathRattle"]);
+            }
+        }
+    }
+
+    private static void FillMonsterSpellInfo(DevSpell devSpell, JSONNode node)
+    {
+        node["key"] = devSpell.Key.ToString();
+
+        for (int b = 0; b < devSpell.Perks.Count; b++)
+        {
+            node["perks"][b]["key"] = devSpell.Perks[b].Key.ToString();
+            node["perks"][b]["value"] = devSpell.Perks[b].Value.ToString();
+        }
+        node["minTime"] = devSpell.MinTime.ToString();
+        node["maxTime"] = devSpell.MaxTime.ToString();
     }
 
     private void SendMonstersInfo(JSONNode node)

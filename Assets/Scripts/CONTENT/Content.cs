@@ -188,6 +188,11 @@ public class Content : MonoBehaviour {
                     return Monsters[i].Spells[a];
                 }
             }
+
+            if (Monsters[i].DeathRattle.Key == spellKey)
+            {
+                return Monsters[i].DeathRattle;
+            }
         }
 
         return null;
@@ -274,7 +279,8 @@ public class DevMonsterInfo
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     
     public List<DevSpell> Spells = new List<DevSpell>();
-    
+
+    public DevSpell DeathRattle;
 }
 
 [System.Serializable]

@@ -21,6 +21,7 @@ public class CreateCharacterUI : MonoBehaviour
     protected ActorInfo m_ActorInfo;
 
     protected CreateCharacter m_createCharacter;
+    protected GetRandomName m_getRandomName;
 
     [SerializeField]
     protected MainMenuUI m_mainMenuUI;
@@ -38,9 +39,12 @@ public class CreateCharacterUI : MonoBehaviour
     int mouthIndex;
     int skinIndex;
 
+    private bool RandomizingName = false;
+
     void Start()
     {
         m_createCharacter = new CreateCharacter(CreateCharacterResponse);
+        m_getRandomName = new GetRandomName(GetRandomNameResponse);
     }
 
     public void Init()
@@ -272,6 +276,8 @@ public class CreateCharacterUI : MonoBehaviour
 
     public void Randomize()
     {
+        AudioControl.Instance.Play("sound_equip");
+
         m_ActorInfo.Hair = m_ActorInfo.Gender == Gender.Male ? AllowedHairMale[hairIndex = Random.Range(0, AllowedHairMale.Count)] : AllowedHairFemale[hairIndex = Random.Range(0, AllowedHairFemale.Count)];
         m_ActorInfo.Eyes = AllowedEyes[eyesIndex = Random.Range(0, AllowedEyes.Count)];
         m_ActorInfo.Nose = AllowedNose[noseIndex = Random.Range(0, AllowedNose.Count)];
@@ -322,6 +328,31 @@ public class CreateCharacterUI : MonoBehaviour
             m_mainMenuUI.LoadPlayerCharacters(LocalUserInfo.Me);
             m_mainMenuUI.SelectLastCharacter(LocalUserInfo.Me);
             AudioControl.Instance.Play("sound_positiveprogress");
+        }
+    }
+
+    public void RandomizeName()
+    {
+        if (RandomizingName)
+        {
+            return;
+        }
+        RandomizingName = true;
+        AudioControl.Instance.Play("sound_equip");
+        m_getRandomName.Get(m_ActorInfo.Gender);
+    }
+
+    public void GetRandomNameResponse(JSONNode response)
+    {
+        RandomizingName = false;
+        if (response["error"] != null)
+        {
+            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            AudioControl.Instance.Play("sound_negative");
+        }
+        else
+        {
+            m_inputName.text = response["data"];
         }
     }
 }

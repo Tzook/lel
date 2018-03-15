@@ -26,7 +26,7 @@ public class Equipment {
             {
                 partKey = ((JSONClass)node).GetKey(i);
 
-                SetItem(partKey, new ItemInfo(Content.Instance.GetItem(node[partKey]["key"].Value)));
+                SetItem(partKey, new ItemInfo(Content.Instance.GetItem(node[partKey]["key"].Value), PerkListGetter.Instance.Get(node[partKey])));
             }
         }
     }

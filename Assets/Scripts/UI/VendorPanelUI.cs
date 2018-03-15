@@ -34,7 +34,7 @@ public class VendorPanelUI : MonoBehaviour {
         transform.GetChild(0).gameObject.SetActive(true);
 
         ReferenceItem = Content.Instance.GetItem(key);
-        CurrentItem = new ItemInfo(ReferenceItem, 1);
+        CurrentItem = new ItemInfo(ReferenceItem, ReferenceItem.Perks, 1);
 
         if(LocalUserInfo.Me.ClientCharacter.Gold < ReferenceItem.GoldValue)
         {

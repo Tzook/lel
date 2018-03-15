@@ -19,6 +19,8 @@ public class ItemInfo {
 
     public ItemStats Stats;
 
+    public List<DevPerkMap> Perks;
+
     public Dictionary<string, string> Sprites = new Dictionary<string, string>();
 
     public ItemInfo(DevItemInfo storedItem, int stack = 1)
@@ -42,6 +44,7 @@ public class ItemInfo {
             this.StackCap = storedItem.StackCap;
 
             this.Stats = storedItem.Stats.Clone();
+            this.Perks = storedItem.Perks;
 
             Sprites.Clear();
             for (int i = 0; i < storedItem.ItemSprites.Count; i++)
@@ -62,6 +65,7 @@ public class ItemInfo {
             this.StackCap = 1;
 
             this.Stats = new ItemStats();
+            this.Perks = new List<DevPerkMap>();
 
             Sprites.Clear();
         }

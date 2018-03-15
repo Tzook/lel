@@ -21,7 +21,13 @@ public class PerkListGetter
             perkMap.Value = item["perks"][perkMap.Key].AsFloat;
             perkMapList.Add(perkMap);
         }
+        perkMapList.Sort(SortByPerkKey);
 
         return perkMapList;
+    }
+
+    public int SortByPerkKey(DevPerkMap perkMap1, DevPerkMap perkMap2)
+    {
+        return perkMap1.Key.CompareTo(perkMap2.Key);
     }
 }

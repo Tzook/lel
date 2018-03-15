@@ -9,7 +9,7 @@ public class Ability
     public int Exp = 0;
     public int LVL = 1;
 
-    public List<PAPerk> Perks = new List<PAPerk>();
+    public SortedList<string, PAPerk> Perks = new SortedList<string, PAPerk>();
     public List<string> PerkPool = new List<string>();
 
     public Ability(string key) 
@@ -44,23 +44,12 @@ public class Ability
             tempPerk.Key = perkRef.Key;
             tempPerk.Points = 1;
 
-            Perks.Add(tempPerk);
+            Perks.Add(tempPerk.Key, tempPerk);
         }
     }
 
     public PAPerk GetPerk(string perkKey)
     {
-        Debug.Log(perkKey);
-        for(int i=0; i < Perks.Count; i++)
-        {
-            Debug.Log("-" + Perks[i].Key);
-            if (Perks[i].Key == perkKey)
-            {
-                return Perks[i];
-            }
-        }
-
-        return null;
+        return Perks[perkKey];
     }
-
 }

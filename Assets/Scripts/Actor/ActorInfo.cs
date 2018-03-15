@@ -215,7 +215,7 @@ public class ActorInfo
             tempPerk.Points = currentPair.Value.AsInt;
 
 
-            ability.Perks.Add(tempPerk);
+            ability.Perks.Add(tempPerk.Key, tempPerk);
         }
 
         for (int p = 0; p < AbilityNode["pool"].Count; p++)

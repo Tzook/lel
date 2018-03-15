@@ -103,11 +103,11 @@ public class PAWindowUI : MonoBehaviour {
         PAIcon.GetComponent<Outline>().effectColor = CurrentDevPA.PAColor;
         m_FrameImage.color = CurrentDevPA.PAColor;
 
-        for(int i=0; i < CurrentPA.Perks.Count; i++)
+        foreach (KeyValuePair<string, PAPerk> keyValuePair in CurrentPA.Perks)
         {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("UpgradeInfoPanel");
             tempObj.transform.SetParent(UpgradeContainer, false);
-            tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentDevPA, CurrentPA.Perks[i]);
+            tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentDevPA, keyValuePair.Value);
         }
     }
 

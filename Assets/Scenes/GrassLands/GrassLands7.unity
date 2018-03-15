@@ -3852,7 +3852,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1780669385
   m_SortingLayer: 3
-  m_SortingOrder: 8
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300016, guid: 88f72c388c8c5c04b942b12ffcd83364, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5591,7 +5591,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584969007}
   m_LocalRotation: {x: -0, y: -0, z: 0.010940083, w: 0.99994016}
-  m_LocalPosition: {x: 31.03, y: -22.78, z: -5}
+  m_LocalPosition: {x: 30.89, y: -22.81, z: -5}
   m_LocalScale: {x: 1.5705668, y: 1.5705667, z: 1.5705667}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6344,7 +6344,11 @@ MonoBehaviour:
   - {fileID: 330300545}
   - {fileID: 1870786026}
   Spawners: []
-  Npcs: []
+  Npcs:
+  - {fileID: 1577324652}
+  - {fileID: 2027526843}
+  - {fileID: 1071089652}
+  - {fileID: 2025284310}
   miniMapInfo:
     left: -90.1009
     right: 73.145195
@@ -13551,7 +13555,7 @@ MonoBehaviour:
   OriginalEyes: {fileID: 21300012, guid: 62192d435b0981e439ee7d52f15dfd3b, type: 3}
   m_Renderer: {fileID: 1382831963}
   BlinkEyes: {fileID: 21300004, guid: 62192d435b0981e439ee7d52f15dfd3b, type: 3}
-  Delay: 3
+  Delay: 2.3
   BlinkTime: 0.05
 --- !u!212 &1382831963
 SpriteRenderer:
@@ -13714,7 +13718,7 @@ MonoBehaviour:
   OriginalEyes: {fileID: 21300012, guid: 62192d435b0981e439ee7d52f15dfd3b, type: 3}
   m_Renderer: {fileID: 1397658486}
   BlinkEyes: {fileID: 21300004, guid: 62192d435b0981e439ee7d52f15dfd3b, type: 3}
-  Delay: 3
+  Delay: 4
   BlinkTime: 0.05
 --- !u!212 &1397658486
 SpriteRenderer:
@@ -14451,7 +14455,7 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: Greetings
+  - DialogKey: WhosInCharge
     Pieces:
     - Content: What charge?
       LetterDelay: 0.03
@@ -16463,8 +16467,8 @@ MonoBehaviour:
   OriginalEyes: {fileID: 21300022, guid: 9300ab246d774de4f8fc104e853c5ab3, type: 3}
   m_Renderer: {fileID: 1831406354}
   BlinkEyes: {fileID: 21300020, guid: 9300ab246d774de4f8fc104e853c5ab3, type: 3}
-  Delay: 3
-  BlinkTime: 0.05
+  Delay: 6
+  BlinkTime: 1
 --- !u!212 &1831406354
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19150,24 +19154,42 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
+    - Title: I took care of the worms...
+      Event: StartDialog
+      Value: TookCareWorms
+      Condition: QuestComplete
+      ConditionValue: thisIsNecessary1
+      CLR: {r: 0.972549, g: 1, b: 0.49411765, a: 1}
+    - Title: It doesn't look like you do anything really.
+      Event: StartDialog
+      Value: DoAnything
+      Condition: QuestAvailable
+      ConditionValue: thisIsNecessary1
+      CLR: {r: 0.9720081, g: 1, b: 0.49264705, a: 1}
+    - Title: More jobs?
+      Event: StartDialog
+      Value: TakeCareOfSquirrels
+      Condition: QuestAvailable
+      ConditionValue: thisIsNecessary2
+      CLR: {r: 0.972549, g: 1, b: 0.49411765, a: 1}
+    - Title: I took care of the squirrels...
+      Event: StartDialog
+      Value: TookCareOfSquirrels
+      Condition: QuestComplete
+      ConditionValue: thisIsNecessary2
+      CLR: {r: 0.972549, g: 1, b: 0.49411765, a: 1}
     - Title: What are you doing here?
       Event: StartDialog
       Value: WhatDo
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: It doesn't look like you do anything really.
-      Event: StartDialog
-      Value: DoAnything
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 0.9720081, g: 1, b: 0.49264705, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 0}
     - Title: OK
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 0}
   - DialogKey: WhatDo
     Pieces:
     - Content: This is necessary!
@@ -19500,8 +19522,305 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: CleaningTreeQuest
+    Pieces:
+    - Content: Good...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Good!
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So, listen, I've got a job for you!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Not volunteering, you'll be fully paid!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: There are worms dwelling in this tree, you see...
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They climb on walls, creep around my workers and basically a big annoyance.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Getting rid of ALL OF THEM ..
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Is quite impossible...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But diluting their population would do good no doubt...
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Slay... Lets say...
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: 10
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Of those worms...
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And come back to me...
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Accept
+      Event: StartDialog
+      Value: AcceptWormsQuset
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9728195, g: 1, b: 0.50735295, a: 1}
+    - Title: Decline
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: AcceptWormsQuset
+    Pieces:
+    - Content: Godspeed
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: thisIsNecessary1
+    Options: []
+  - DialogKey: TookCareWorms
+    Pieces:
+    - Content: Nice!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Talk to me if you want more jobs... I've got something for ya.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: thisIsNecessary1
+    Options: []
+  - DialogKey: TakeCareOfSquirrels
+    Pieces:
+    - Content: Yea!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I've got something for you!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: My boys aren't doing a great job with those squirrels up on the tree...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Nobody does, to be honest.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We might stop harvesting here if the problem grows bigger...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: My buisness will go bankrupt!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: This is no joke.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And VERY NECESSARY!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Do me a favor.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: SLAY THOSE SQUIRRELS!!!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: THIN THEIR POPULATION!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: TEACH THEM A LESSON.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: NOBODY CAN STOP KRISTLE!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: AND DON'T FORGET!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: THIS
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: IS
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: NECESSARY!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: thisIsNecessary2
+    Options: []
+  - DialogKey: TookCareOfSquirrels
+    Pieces:
+    - Content: I know you did!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I've already heard less of them get close to our works...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: As for you tho'
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They will hunt you for eternity...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: My buisness owe's you big time on this job...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: thisIsNecessary2
+    Options: []
+  GivingQuests:
+  - thisIsNecessary1
+  - thisIsNecessary2
+  EndingQuests:
+  - thisIsNecessary1
+  - thisIsNecessary2
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
@@ -19662,7 +19981,7 @@ MonoBehaviour:
   IntroAnimation: 
   EndAnimation: 
   Name: Lisertle
-  Key: femaleTurtle
+  Key: lisertleTurtle
   Body: {fileID: 310233407}
   Anim: {fileID: 310233406}
   NameTag: {fileID: 1972382533}

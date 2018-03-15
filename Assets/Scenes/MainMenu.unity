@@ -49165,6 +49165,46 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 10
+  - Name: This Is Necessary - Worms
+    Key: thisIsNecessary1
+    InProgressDescription: Kristle asked me to clear some of the worms dwelling in
+      the tree, so his harvest of sap would be smoother...
+    QuestCompleteDescription: Cleansed the tree off some unwanted worms...
+    FacePrefab: KristleQuest
+    Conditions:
+    - Condition: hunt
+      Type: Worm
+      CurrentProgress: 0
+      TargetProgress: 10
+      ExtraDescription: 
+    QuestsStates: []
+    MinimumLevel: 8
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 10
+  - Name: This Is Necessary - Squirrels
+    Key: thisIsNecessary2
+    InProgressDescription: Kristle asked me to clear some of the squirrels dwelling
+      in the tree, so his harvest of sap would be smoother...
+    QuestCompleteDescription: Cleansed the tree off some unwanted squirrels...
+    FacePrefab: KristleQuest
+    Conditions:
+    - Condition: hunt
+      Type: Squirrel
+      CurrentProgress: 0
+      TargetProgress: 10
+      ExtraDescription: 
+    QuestsStates:
+    - QuestKey: thisIsNecessary1
+      EnumState: 1
+    MinimumLevel: 8
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 10
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88303,82 +88343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_equipmentPanel: {fileID: 2354}
   ComparedItem: {fileID: 1326573698}
---- !u!1 &948541107
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1427767516128330, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 948541108}
-  - component: {fileID: 948541109}
-  m_Layer: 11
-  m_Name: Tail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &948541108
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4791031871992756, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 948541107}
-  m_LocalRotation: {x: -0, y: -0, z: 0.23911874, w: 0.9709904}
-  m_LocalPosition: {x: -1.57, y: 0.92, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
-  m_Children: []
-  m_Father: {fileID: 327601911}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.669}
---- !u!212 &948541109
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 212433948480232966, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 948541107}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1853626281
-  m_SortingLayer: 4
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2128b522c48f6f2439596a9fd873e9b3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &949726717
 GameObject:
   m_ObjectHideFlags: 0
@@ -88556,163 +88520,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954500361}
---- !u!1 &957004699
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1315883932283862, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 957004704}
-  - component: {fileID: 957004703}
-  - component: {fileID: 957004702}
-  - component: {fileID: 957004701}
-  - component: {fileID: 957004700}
-  m_Layer: 8
-  m_Name: Squirrel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &957004700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114566565615794606, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 957004699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2b698bf83f3f74185cbf567cf46983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Info:
-    ID: 
-    Name: 
-    Type: 0
-    CurrentHealth: 0
-    MaxHealth: 0
-  Rigid: {fileID: 957004702}
-  Body: {fileID: 327601911}
-  Anim: {fileID: 0}
-  m_HitBox: {fileID: 1393599040}
-  m_AlphaGroup: {fileID: 327601909}
-  HurtTypes: 3
-  DeathTypes: 2
-  Sprites:
-  - {fileID: 327601908}
-  - {fileID: 1841771426}
-  - {fileID: 1033635660}
-  - {fileID: 1410500758}
-  - {fileID: 1300657974}
-  - {fileID: 0}
-  - {fileID: 352886898}
-  - {fileID: 2041715392}
-  - {fileID: 685124459}
-  - {fileID: 290010087}
-  WoundSounds:
-  - sound_punch
-  DeathSounds:
-  - brap
-  IdleVarriations: 0
-  VarriationChance: 3
-  m_HealthBar: {fileID: 0}
-  SpellSource: {fileID: 0}
-  SpellInCast:
-    Key: 
-    Level: 0
-    Mana: 0
-    ColliderPrefab: 
-    Perks: []
-    Icon: {fileID: 0}
-    HitSound: 
-    MinTime: 0
-    MaxTime: 0
-  CurrentTarget: {fileID: 0}
-  Dead: 0
-  CurrentAction: 0
-  MovementSpeed: 4
-  MaxChaseDistance: 200
-  Collider: {fileID: 957004703}
-  Stunnable: 1
-  JumpForce: 500
-  GroundedThreshold: 0.3
---- !u!210 &957004701
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 210822771782602164, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 957004699}
-  m_Enabled: 1
-  m_SortingLayerID: 1853626281
-  m_SortingLayer: 4
-  m_SortingOrder: 0
---- !u!50 &957004702
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 50353317300357766, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 957004699}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &957004703
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 61024475268396016, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 957004699}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.06078911, y: 0.068077564}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.9270515, y: 1.601603}
-  m_EdgeRadius: 0
---- !u!4 &957004704
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4646313145600812, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 957004699}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -48.68981, y: 11.100199, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
-  m_Children:
-  - {fileID: 327601911}
-  - {fileID: 1393599043}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &973772590
 GameObject:
   m_ObjectHideFlags: 0
@@ -89431,82 +89238,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5803922, g: 1, b: 0.7058824, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!1 &1033635659
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1427767516128330, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1033635661}
-  - component: {fileID: 1033635660}
-  m_Layer: 11
-  m_Name: LeftEar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1033635660
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 212433948480232966, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1033635659}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1853626281
-  m_SortingLayer: 4
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300016, guid: 2128b522c48f6f2439596a9fd873e9b3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
---- !u!4 &1033635661
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4791031871992756, guid: 547cfe528a8cca640bdce87e609242b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1033635659}
-  m_LocalRotation: {x: -0, y: -0, z: 0.0342656, w: 0.9994128}
-  m_LocalPosition: {x: 0.1210022, y: 1.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 327601911}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.9270003}
 --- !u!1 &1038693545
 GameObject:
   m_ObjectHideFlags: 0

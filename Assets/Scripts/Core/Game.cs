@@ -520,32 +520,6 @@ public class Game : MonoBehaviour {
         SocketClient.Instance.SendQuestOK(okKey);
     }
 
-    #region Debug
-
-    //[SerializeField]
-    //bool Test;
-    //void Update()
-    //{
-    //    if(Test)
-    //    {
-    //        Test = false;
-
-    //        List<ItemInfo> infos = new List<ItemInfo>();
-    //        List<string> ids = new List<string>();
-
-    //        for(int i=0;i<6;i++)
-    //        {
-    //            infos.Add(new ItemInfo(JSON.Parse("{\"sprites\":{\"hip\":\"testingclothing_greenPants_male_hip\", \"knee\":\"testingclothing_greenPants_male_knee\"}, \"name\":\"Green Pants\", \"icon\":\"testingclothing_greenPants_male_hip\", \"type\":\"legs\"}")));
-    //            ids.Add(i.ToString());
-    //        }
-
-    //        SpawnItems(infos, ids, ClientCharacter.transform.position.x, ClientCharacter.transform.position.y);
-
-    //    }
-    //}
-
-    #endregion
-
 }
 
 class OkRoutineInstance

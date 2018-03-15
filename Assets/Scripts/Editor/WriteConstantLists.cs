@@ -2,27 +2,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class WriteConstantLists
-{
-        
+{       
     private const string FILE_NAME_CONTENT = "Assets/Scripts/CONTENT/Content.cs";
     private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
     private const string FILE_NAME_NPC = "Assets/Scripts/NPC/NPC.cs";
     private const string FILE_NAME_SCENE = "Assets/Scripts/Misc/SceneInfo.cs";
     private static WriteConstantLists _instance; 
     public static WriteConstantLists Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new WriteConstantLists();
-            }
-            return _instance;
-        }
-    }
-
+    { get { return _instance == null ? _instance = new WriteConstantLists() : _instance; } }
+    
     public void WritePerksPopupList(List<DevPAPerk> perks)
     {
         string text = File.ReadAllText(FILE_NAME_CONTENT);
@@ -33,6 +24,7 @@ public class WriteConstantLists
 
         string result = rgx.Replace(text, "/* AUTO_GENERATED_PERKS_START */ " + listString + " /* AUTO_GENERATED_PERKS_END */");
         File.WriteAllText(FILE_NAME_CONTENT, result);
+        AssetDatabase.Refresh();
     }
 
     public void WriteLootPopupList(List<DevItemInfo> items)
@@ -50,6 +42,7 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_NPC);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_NPC, result);
+        AssetDatabase.Refresh();
     }
 
     public void WriteQuestsPopupList(List<Quest> quests)
@@ -66,6 +59,7 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_NPC);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_NPC, result);
+        AssetDatabase.Refresh();
     }
 
     public void WriteMobsPopupList(List<DevMonsterInfo> mobs)
@@ -77,6 +71,7 @@ public class WriteConstantLists
 
         string result = rgx.Replace(text, "/* AUTO_GENERATED_MOBS_START */ " + listString + " /* AUTO_GENERATED_MOBS_END */");
         File.WriteAllText(FILE_NAME_MONSTERS, result);
+        AssetDatabase.Refresh();
     }
 
     public void WriteAbilitiesPopupList(List<DevAbility> abilities)
@@ -93,6 +88,7 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_SCENE);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_SCENE, result);
+        AssetDatabase.Refresh();
     }
 
     private string GetListString(List<string> items)

@@ -72,7 +72,7 @@ public class CreateCharacterUI : MonoBehaviour
         for(int i=0;i<Content.Instance.StartingGear.Count;i++)
         {
             DevItemInfo item = Content.Instance.GetItem(Content.Instance.StartingGear[i]);
-            m_ActorInfo.Equipment.SetItem(item.Type, new ItemInfo(item, 1));
+            m_ActorInfo.Equipment.SetItem(item.Type, new ItemInfo(item, item.Perks, 1));
         }
 
         ToggleGender();

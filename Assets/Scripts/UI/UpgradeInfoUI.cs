@@ -40,17 +40,7 @@ public class UpgradeInfoUI : MonoBehaviour {
 
         float percentValue = GetPerkValue(currentPerk, perk);
         
-        string suffix = "";
-        if (currentPerk.PerkType == DevPAPerk.PerkTypeEnum.Percent) {
-            percentValue *= 100f;
-            suffix = "%";
-        } else if (currentPerk.PerkType == DevPAPerk.PerkTypeEnum.Time) {
-            suffix = "s";
-        }
-
-        bool hasFloatingPoint = percentValue % 1 == 0;
-        string showValue = (hasFloatingPoint ? Mathf.FloorToInt(percentValue) : percentValue).ToString();
-        txtPrecent.text = showValue + suffix;
+        txtPrecent.text = PerkValueFormatter.Instance.GetFormattedValue(currentPerk, percentValue, false);
 
         txtPrecent.color = isInitialValue ? initialPerkColor : originalTextColor;
     }

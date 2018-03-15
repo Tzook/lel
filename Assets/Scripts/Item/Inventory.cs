@@ -29,7 +29,7 @@ public class Inventory
         {
             if (!string.IsNullOrEmpty(inventoryNode[i]["key"].Value))
             {
-                ContentArray[i] = new ItemInfo(Content.Instance.GetItem(inventoryNode[i]["key"].Value), inventoryNode[i]["stack"].AsInt);
+                ContentArray[i] = new ItemInfo(Content.Instance.GetItem(inventoryNode[i]["key"].Value), PerkListGetter.Instance.Get(inventoryNode[i]), inventoryNode[i]["stack"].AsInt);
             }
         }
     }

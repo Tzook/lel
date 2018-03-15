@@ -327,7 +327,7 @@ public class SocketClient : MonoBehaviour
         {
             JSONNode item = data[i]["item"];
            // Debug.Log("ITEM - " + item["key"].Value);
-            infoList.Add(new ItemInfo(Content.Instance.GetItem(item["key"].Value), item["stack"].AsInt));
+            infoList.Add(new ItemInfo(Content.Instance.GetItem(item["key"].Value), PerkListGetter.Instance.Get(item), item["stack"].AsInt));
             idsList.Add(data[i]["item_id"].Value);
             ownersList.Add(data[i]["owner"].Value);
         }
@@ -356,7 +356,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Item Added");
         JSONNode data = (JSONNode)args[0];
 
-        ItemInfo tempItem = new ItemInfo(Content.Instance.GetItem(data["item"]["key"].Value), data["item"]["stack"].AsInt);
+        ItemInfo tempItem = new ItemInfo(Content.Instance.GetItem(data["item"]["key"].Value), PerkListGetter.Instance.Get(data["item"]), data["item"]["stack"].AsInt);
 
         LocalUserInfo.Me.ClientCharacter.Instance.AddItem(data["slot"].AsInt, tempItem);
     }
@@ -395,7 +395,7 @@ public class SocketClient : MonoBehaviour
 
         if (!string.IsNullOrEmpty(data["equipped_item"]["key"]))
         {
-            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"]));
+            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"]), PerkListGetter.Instance.Get(data["equipped_item"]));
         }
 
         BroadcastEvent(data["id"].Value+" Equipped Item ");
@@ -412,7 +412,7 @@ public class SocketClient : MonoBehaviour
 
         if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
         {
-            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"].Value));
+            swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"].Value), PerkListGetter.Instance.Get(data["equipped_item"]));
         }
 
         BroadcastEvent(data["id"].Value + " Unequipped Item ");

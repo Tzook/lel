@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ItemInfoUI : MonoBehaviour {
 
@@ -67,7 +68,7 @@ public class ItemInfoUI : MonoBehaviour {
             StopCoroutine(FollowMouseRoutine);
         }
 
-        SetStats(info.Stats);
+        SetStats(info.Stats, info.Perks);
 
         if (isFollowingMouse)
         {
@@ -87,35 +88,48 @@ public class ItemInfoUI : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
-    public void SetStats(ItemStats stats)
+    public void SetStats(ItemStats stats, List<DevPerkMap> Perks)
     {
-        GameObject tempObj;
+        ItemStatUI statsInfoObject;
 
         if (stats.JumpBonus > 0)
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.JumpBonus + " Jumping Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+            statsInfoObject = GetStatsInfoObject();
+            statsInfoObject.SetInfo("+" + stats.JumpBonus + " Jumping Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
         }
 
         if (stats.SpeedBonus > 0)
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.GetComponent<ItemStatUI>().SetInfo("+" + stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+            statsInfoObject = GetStatsInfoObject();
+            statsInfoObject.SetInfo("+" + stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
         }
 
         if (stats.RequiresLVL > 0)
         {
-            tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
-            tempObj.transform.SetParent(transform, false);
-            tempObj.transform.SetAsLastSibling();
-            tempObj.transform.localScale = Vector3.one;
+            statsInfoObject = GetStatsInfoObject();
+            statsInfoObject.transform.localScale = Vector3.one;
             Color minLevelColor = stats.RequiresLVL > LocalUserInfo.Me.ClientCharacter.LVL ? requiredColor : bonusColor;
-            tempObj.GetComponent<ItemStatUI>().SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), minLevelColor);
+            statsInfoObject.SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), minLevelColor);
         }
+
+        foreach (DevPerkMap perkMap in Perks)
+        {
+            statsInfoObject = GetStatsInfoObject();
+            DevPAPerk perkRef = Content.Instance.GetPerk(perkMap.Key);
+
+            string perkText = PerkValueFormatter.Instance.GetFormattedValue(perkRef, perkMap.Value, true) + " " + perkRef.Name;
+            bool isGoodPerk = perkRef.PrecentPerUpgrade > 0 ? perkMap.Value > 0 : perkMap.Value < 0;
+            Color color = isGoodPerk ? bonusColor : requiredColor;
+            statsInfoObject.SetInfo(perkText, perkRef.Icon, color);
+        }
+    }
+
+    private ItemStatUI GetStatsInfoObject()
+    {
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
+        tempObj.transform.SetParent(transform, false);
+        tempObj.transform.SetAsLastSibling();
+        return tempObj.GetComponent<ItemStatUI>();
     }
 
     public void ClearStats()

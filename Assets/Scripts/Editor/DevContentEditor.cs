@@ -42,8 +42,6 @@ public class DevContentEditor : Editor
         {
             JSONNode node = new JSONClass();
 
-            node["pass"] = "b0ss123";
-
             FillMonstersInfo(currentInfo, node);
 
             SendMonstersInfo(node);
@@ -53,8 +51,6 @@ public class DevContentEditor : Editor
         if (GUILayout.Button("Update Items"))
         {
             JSONNode node = new JSONClass();
-
-            node["pass"] = "b0ss123";
 
             for (int i = 0; i < currentInfo.Items.Count; i++)
             {
@@ -191,6 +187,7 @@ public class DevContentEditor : Editor
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/mob/generate", rawdata, headers);
 
@@ -211,6 +208,7 @@ public class DevContentEditor : Editor
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/items/generate", rawdata, headers);
 
@@ -226,15 +224,13 @@ public class DevContentEditor : Editor
     {
         JSONNode node = new JSONClass();
 
-        node["pass"] = "b0ss123";
-
         Debug.Log("Restarting Server...");
 
         byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
-
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/restart", rawdata, headers);
 
@@ -249,8 +245,6 @@ public class DevContentEditor : Editor
     {
         JSONNode node = new JSONClass();
 
-        node["pass"] = "b0ss123";
-
         for (int i = 0; i < GearList.Count; i++)
         {
             node["equips"][i]["key"] = GearList[i];
@@ -262,7 +256,7 @@ public class DevContentEditor : Editor
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
-
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/equips/begin", rawdata, headers);
 
@@ -276,8 +270,6 @@ public class DevContentEditor : Editor
     private void SendAbilities(List<DevAbility> abilities, List<DevPAPerk> perks)
     {
         JSONNode node = new JSONClass();
-
-        node["pass"] = "b0ss123";
 
         for (int i = 0; i < abilities.Count; i++)
         {
@@ -333,7 +325,7 @@ public class DevContentEditor : Editor
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
-
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/talents/generate", rawdata, headers);
 
@@ -347,8 +339,6 @@ public class DevContentEditor : Editor
     private void SendQuestsInfo(List<Quest> Quests)
     {
         JSONNode node = new JSONClass();
-
-        node["pass"] = "b0ss123";
 
         for (int i = 0; i < Quests.Count; i++)
         {
@@ -390,7 +380,7 @@ public class DevContentEditor : Editor
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
-
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/quests/generate", rawdata, headers);
 

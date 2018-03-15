@@ -21,7 +21,6 @@ public class SceneInfoEditor : Editor {
         {
             JSONNode node = new JSONClass();
 
-            node["pass"] = "b0ss123";
             node["scene"]["name"] = currentInfo.Name;
             node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
 
@@ -140,6 +139,7 @@ public class SceneInfoEditor : Editor {
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
+        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
         WWW req = new WWW(Config.BASE_URL + "/room/generate" ,rawdata ,headers);
 

@@ -26,12 +26,21 @@ public class ItemInfoUI : MonoBehaviour {
     [SerializeField]
     bool isFollowingMouse = true;
 
+    [SerializeField]
+    bool alignToLeft = false;
+
+    public string currentItemKey;
+
+    Vector3 objectWorldWidth;
+
     public void Show(ItemInfo info)
     {
         if(info==null)
         {
             return;
         }
+
+        currentItemKey = info.Key;
 
         ClearStats();
 
@@ -54,7 +63,7 @@ public class ItemInfoUI : MonoBehaviour {
 
         if (isFollowingMouse)
         {
-            transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z);
+            transform.position = new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z) - GetSizeToPushLeft();
         }
 
         txtTitle.text = info.Name;
@@ -146,8 +155,23 @@ public class ItemInfoUI : MonoBehaviour {
     {
         while (true)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z), Time.deltaTime * 5f);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(GameCamera.MousePosition.x, GameCamera.MousePosition.y, transform.position.z) - GetSizeToPushLeft(), Time.deltaTime * 5f);
             yield return 0;
         }
+    }
+
+    protected Vector3 GetSizeToPushLeft()
+    {
+        if (!alignToLeft)
+        {
+            return Vector3.zero;
+        }
+        if (objectWorldWidth == null || objectWorldWidth.Equals(Vector3.zero))
+        {
+            Vector3[] corners = new Vector3[4];
+            ((RectTransform)transform).GetWorldCorners(corners);
+            objectWorldWidth = corners[2] - corners[1];
+        }
+        return objectWorldWidth;
     }
 }

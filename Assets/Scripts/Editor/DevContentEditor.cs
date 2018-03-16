@@ -316,6 +316,13 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["value"] = perks[i].PrecentPerUpgrade.ToString();
             node["perkCollection"][i]["max"] = perks[i].UpgradeCap.ToString();
             node["perkCollection"][i]["default"] = perks[i].StartingValue.ToString();
+            
+            for (int a = 0; a < perks[i].BonusPerks.Count; a++)
+            {
+                node["perkCollection"][i]["bonusPerks"][a]["key"] = perks[i].BonusPerks[a].Key.ToString();
+                node["perkCollection"][i]["bonusPerks"][a]["value"] = perks[i].BonusPerks[a].Value.ToString();
+            }
+            
             node["perkCollection"][i]["acc"] = "0";//perks[i].PrecentAccelerationPerUpgrade.ToString();
         }
 

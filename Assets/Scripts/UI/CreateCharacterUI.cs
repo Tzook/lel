@@ -77,6 +77,7 @@ public class CreateCharacterUI : MonoBehaviour
 
         ToggleGender();
         Randomize();
+        RandomizeName();
     }
 
     public void ToggleGender()

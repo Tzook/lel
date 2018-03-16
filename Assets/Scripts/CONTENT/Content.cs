@@ -463,7 +463,7 @@ public class PerkStage
 {
     public int MinLevel;
     public int PerksOffered;
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "minDamageModifier", "damageBonus", "meleeDamageBonus", "rangeDamageBonus", "magicDamageBonus", "attackSpeedModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "defenceBonus", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "minDamageModifier", "damageBonus", "meleeDamageBonus", "rangeDamageBonus", "magicDamageBonus", "attackSpeedModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "defenceBonus", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance", "bullseyeChance", "bullseyeDuration" /* AUTO_GENERATED_PERKS_END */)]
     public List<string> AddToPool = new List<string>();
 }
 
@@ -483,7 +483,7 @@ public class DevSpell
 [System.Serializable]
 public class DevPerkMap
 {
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "minDamageModifier", "damageBonus", "meleeDamageBonus", "rangeDamageBonus", "magicDamageBonus", "attackSpeedModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "defenceBonus", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "", "bleedChance", "bleedDuration", "bleedResistance", "stunChance", "stunDuration", "stunResistance", "crippleChance", "crippleDuration", "crippleResistance", "threatModifier", "fullyChargeModifier", "aoeChance", "aoeCap", "damageModifier", "minDamageModifier", "damageBonus", "meleeDamageBonus", "rangeDamageBonus", "magicDamageBonus", "attackSpeedModifier", "critChance", "critDamageModifier", "blockChance", "damageReduction", "defenceBonus", "hpRegenModifier", "hpRegenInterval", "hpSteal", "hpBonus", "mpRegenModifier", "mpRegenInterval", "mpSteal", "mpBonus", "freezeChance", "freezeDuration", "frozenTargetModifier", "freezeResistance", "burnChance", "burnDuration", "burntTargetModifier", "burnResistance", "bullseyeChance", "bullseyeDuration" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
 }
@@ -497,6 +497,8 @@ public class DevPAPerk
     public float PrecentPerUpgrade;
     public float UpgradeCap;
     public float StartingValue;
+    public List<DevPerkMap> BonusPerks = new List<DevPerkMap>();
+    
     // acceleration - if value is 10 and acceleration is 5, the value at lvl 1 is 10, at lvl 2 the value is 10+15=25 and so on
     // currently disabled. will be re-used if we need it
     // public float PrecentAccelerationPerUpgrade;

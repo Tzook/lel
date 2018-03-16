@@ -50,6 +50,6 @@ public class Ability
 
     public PAPerk GetPerk(string perkKey)
     {
-        return Perks[perkKey];
+        return Perks.ContainsKey(perkKey) ? Perks[perkKey] : null;
     }
 }

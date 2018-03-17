@@ -86,6 +86,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
         CurrentSocket.On("update_actor_max_stats", OnUpdateActorMaxStats);
         CurrentSocket.On("update_actor_attack_speed", OnUpdateActorAttackSpeed);
+        CurrentSocket.On("update_actor_mana_cost", OnUpdateActorManaCost);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
@@ -476,7 +477,6 @@ public class SocketClient : MonoBehaviour
         LocalUserInfo.Me.ClientCharacter.CurrentMana = data["now"].AsInt;
 
         InGameMainMenuUI.Instance.RefreshMP();
-        InGameMainMenuUI.Instance.RefreshSpellAreaMana();
     }
 
     protected void OnActorGainXP(Socket socket, Packet packet, object[] args)
@@ -564,6 +564,18 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor update attack speed | " + data.ToString());
 
         LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["speed"].AsFloat);
+    }
+
+    protected void OnUpdateActorManaCost(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+        BroadcastEvent("Actor update attack speed | " + data.ToString());
+
+        LocalUserInfo.Me.ClientCharacter.SetManaCost(data["mpCost"].AsFloat);
+        if (!Game.Instance.isLoadingScene)
+        {
+            InGameMainMenuUI.Instance.RefreshMP();
+        }
     }
 
     protected void OnActorLevelUp(Socket socket, Packet packet, object[] args)

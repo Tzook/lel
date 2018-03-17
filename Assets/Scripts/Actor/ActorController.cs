@@ -523,12 +523,12 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 
-        if (spell.Mana <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        int manaCost = (int)(spell.Mana * LocalUserInfo.Me.ClientCharacter.ManaCost);
+        if (manaCost <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
         {
-            LocalUserInfo.Me.ClientCharacter.CurrentMana -= spell.Mana;
+            LocalUserInfo.Me.ClientCharacter.CurrentMana -= manaCost;
 
             InGameMainMenuUI.Instance.RefreshMP();
-            InGameMainMenuUI.Instance.RefreshSpellAreaMana();
 
             CurrentSpellInCast = spell;
 

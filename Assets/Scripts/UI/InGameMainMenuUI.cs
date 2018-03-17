@@ -584,7 +584,8 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
-        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
+        statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter); 
+        RefreshSpellAreaMana();       
     }
 
     public void RefreshLevel()

@@ -38,6 +38,8 @@ public class ActorInfo
     public int SpeedBonus;
 
     public float? AttackSpeed;
+    
+    public float ManaCost = 1f;
 
     public int MaxHealth;
     public int CurrentHealth;
@@ -315,6 +317,11 @@ public class ActorInfo
         {
             Instance.InputController.SetAttackSpeed(attackSpeed);
         }
+    }
+
+    public void SetManaCost(float manaCost)
+    {
+        ManaCost = manaCost;
     }
 
     public void SwitchPrimaryAbility(string key)

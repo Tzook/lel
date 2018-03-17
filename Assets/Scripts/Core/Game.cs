@@ -41,7 +41,10 @@ public class Game : MonoBehaviour {
     {
         Instance = this;
         Application.runInBackground = true;
+        #if UNITY_WEBGL
+        #else
         Application.targetFrameRate = 60;
+        #endif
     }
 
     public void EnterGameWorld()

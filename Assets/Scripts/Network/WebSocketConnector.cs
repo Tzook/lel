@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BestHTTP.Cookies;
 using BestHTTP.SocketIO;
 
 public class WebSocketConnector

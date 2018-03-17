@@ -40,8 +40,13 @@ abstract public class HttpProvider
 		JSONNode parsedResponse;
 		if (response != null) {
 			parsedResponse = JSON.Parse(response.DataAsText);
+			#if UNITY_WEBGL
+			if (response.Headers.ContainsKey("Set-Cookie"))
+			{
+				CookiesManager.Instance.UpdateCookie(response.Headers["Set-Cookie"]);
+			}
+			#endif
 			if (debug) {
-				Debug.Log(response.Cookies);
 				Debug.Log(response.DataAsText);
 			}
 		} else {

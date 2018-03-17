@@ -750,7 +750,7 @@ public class QuestCondition
 [System.Serializable]
 public class QuestState
 {
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "", "turtleProblem", "turtleSoup", "TurtleQuizz", "rabbitRaids", "FatAlbert", "carrotSupply", "becomingWarrior", "helpMaya", "mayaSpikedTurtles", "findAlex", "helpAlex", "findKaren", "petRansom", "examineLostSupplies", "helpJaxTheDog", "helpJaxTheDog2", "ruinedPainting", "findCosmo", "findCosmo2", "findCosmo3", "petRansom2", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "CleaningUp", "ABeanyRequest", "OldFriends", "RangerTest", "FrostTest", "hairPotion", "untieNurtle", "breakIntoSpa", "thisIsNecessary1", "thisIsNecessary2" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "", "turtleProblem", "turtleSoup", "TurtleQuizz", "rabbitRaids", "FatAlbert", "carrotSupply", "becomingWarrior", "helpMaya", "mayaSpikedTurtles", "findAlex", "helpAlex", "findKaren", "petRansom", "examineLostSupplies", "helpJaxTheDog", "helpJaxTheDog2", "ruinedPainting", "findCosmo", "findCosmo2", "findCosmo3", "petRansom2", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "CleaningUp", "ABeanyRequest", "OldFriends", "RangerTest", "FrostTest", "hairPotion", "untieNurtle", "breakIntoSpa", "thisIsNecessary1", "thisIsNecessary2", "bustNuts" /* AUTO_GENERATED_QUESTS_END */)]
     public string QuestKey;
 
     public string State

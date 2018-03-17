@@ -49264,6 +49264,28 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 10
+  - Name: Busting Nuts
+    Key: bustNuts
+    InProgressDescription: Kristle's minions want me to help them teach the squirrels
+      which dwell in the huge tree a lesson by busting all of the acorns in their
+      vault.
+    QuestCompleteDescription: I've busted all of the nuts in the vault, Kristle's
+      minions didn't keep their part of the deal, they didn't guard the door as they
+      said they would.
+    FacePrefab: KristleQuest
+    Conditions:
+    - Condition: ok
+      Type: bustedNutsOK
+      CurrentProgress: 0
+      TargetProgress: 20
+      ExtraDescription: Nuts Busted
+    QuestsStates: []
+    MinimumLevel: 8
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 10
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour {
 
-    [Popup(/* AUTO_GENERATED_MOBS_START */ "", "Turtle", "OldTurtle", "SpikedTurtle", "Spike", "Rabbit", "Bat", "FatRabbit", "RabbitBoss", "BossTurtle", "Plant", "BlueMushroom", "Thorns", "Sack", "FlowerManBoss", "FrostWizardBoss", "PirateSailor1", "PirateSailor2", "PirateSailor3", "Worm", "Squirrel", "BuffedSquirrel" /* AUTO_GENERATED_MOBS_END */)]
+    [Popup(/* AUTO_GENERATED_MOBS_START */ "", "Bat", "BlueMushroom", "BossTurtle", "BuffedSquirrel", "FatRabbit", "FlowerManBoss", "FrostWizardBoss", "OldTurtle", "PirateSailor1", "PirateSailor2", "PirateSailor3", "Plant", "Rabbit", "RabbitBoss", "Sack", "Spike", "SpikedTurtle", "Squirrel", "Thorns", "Turtle", "Worm" /* AUTO_GENERATED_MOBS_END */)]
     public string MonsterKey;
 
     public int SpawnCap;

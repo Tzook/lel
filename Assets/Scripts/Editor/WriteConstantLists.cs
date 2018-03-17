@@ -94,6 +94,7 @@ public class WriteConstantLists
     private string GetListString(List<string> items)
     {
         string itemsString = "\"\", ";
+        items.Sort();
         for (int i = 0; i < items.Count; i++)
         {
             itemsString += '"' + items[i] + '"';

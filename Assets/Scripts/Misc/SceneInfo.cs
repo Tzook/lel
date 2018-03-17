@@ -10,7 +10,7 @@ public class SceneInfo : MonoBehaviour {
 
     public string BGMusic;
 
-    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "", "melee", "range", "heal", "frost", "charTalent" /* AUTO_GENERATED_ABILITIES_END */)]    
+    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "", "charTalent", "frost", "heal", "melee", "range" /* AUTO_GENERATED_ABILITIES_END */)]    
     public List<string> RoomAbilities = new List<string>();
 
     public List<GatePortal> ScenePortals = new List<GatePortal>();

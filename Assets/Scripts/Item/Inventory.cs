@@ -51,18 +51,18 @@ public class Inventory
         return dick;   
     }
     
-    public bool canPickItem(ItemInstance item)
+    public string canPickItem(ItemInstance item)
     {
-        bool canPick = false;
+        string cannotPickErrorMessage = "Inventory is full!";
         if (!canPickItemByOwner(item)) 
         {
             // item has an owner and it is not you
-            canPick = false;
+            cannotPickErrorMessage = "Item belongs to someone else!";
         }
         else if (item.Info.Key == "gold") 
         {
             // gold can always be picked up
-            canPick = true;
+            cannotPickErrorMessage = "";
         } 
         else
         {
@@ -72,7 +72,7 @@ public class Inventory
                 if (ContentArray[i] == null)
                 {
                     // empty slot - pick it up
-                    canPick = true;
+                    cannotPickErrorMessage = "";
                     break;
                 }
                 else if (item.Info.Key == ContentArray[i].Key // same key
@@ -82,13 +82,13 @@ public class Inventory
                     // sum the stack added so far. if it reached the item's stack amount, it's pickable
                     stackNeeded -= (ContentArray[i].StackCap - ContentArray[i].Stack);
                     if (stackNeeded <= 0) {
-                        canPick = true;
+                        cannotPickErrorMessage = "";
                         break;
                     }
                 }
             }
         }
-        return canPick;
+        return cannotPickErrorMessage;
     }
 
     protected bool canPickItemByOwner(ItemInstance item)

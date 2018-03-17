@@ -605,8 +605,10 @@ public class ActorInstance : MonoBehaviour
 
             if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.5f)
             {
-                if (!Info.Inventory.canPickItem(item)) 
+                string errorMessage = Info.Inventory.canPickItem(item);
+                if (errorMessage != "") 
                 {
+                    InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(errorMessage);
                     continue;
                 }
                 SocketClient.Instance.SendPickedItem(itemKey);

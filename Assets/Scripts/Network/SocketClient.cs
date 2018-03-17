@@ -572,6 +572,7 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor Leveled Up | "+data.ToString());
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        ActorInfo info = actor;
 
         if (actor == LocalUserInfo.Me.ClientCharacter)
         {
@@ -586,13 +587,17 @@ public class SocketClient : MonoBehaviour
             KnownCharacter known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
             if (known != null) 
             {
-                known.Info.LVL = data["stats"]["lvl"].AsInt;
+                info = known.Info;
             }
         }
 
         if (actor != null)
         {
             actor.Instance.LevelUp();
+        }
+        if (info != null)
+        {
+            info.LVL++;
         }
     }
 

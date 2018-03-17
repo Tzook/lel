@@ -937,7 +937,14 @@ public class SocketClient : MonoBehaviour
 
         InGameMainMenuUI.Instance.RefreshParty();
 
-        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " is the new party leader.", Color.black, false);
+        if (LocalUserInfo.Me.ClientCharacter.Name == data["char_name"].Value)
+        {
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("You are the new party leader.", Color.black, false);
+        }
+        else 
+        {
+            InGameMainMenuUI.Instance.ShockMessageTop.CallMessage(data["char_name"].Value + " is the new party leader.", Color.black, false);
+        }
     }
 
     private void OnActorKickedFromParty(Socket socket, Packet packet, object[] args)
@@ -988,7 +995,14 @@ public class SocketClient : MonoBehaviour
         
         InGameMainMenuUI.Instance.RefreshParty();
 
-        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has left the party.", Color.red, true);
+        if (LocalUserInfo.Me.ClientCharacter.Name == data["char_name"].Value)
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("You have left the party.", Color.red, true);
+        }
+        else
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has left the party.", Color.red, true);
+        }
     }
     
     private void OnActorJoinParty(Socket socket, Packet packet, object[] args)
@@ -1027,7 +1041,15 @@ public class SocketClient : MonoBehaviour
 
         InGameMainMenuUI.Instance.RefreshParty();
 
-        InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has joined the party!", Color.green, true);
+        
+        if (LocalUserInfo.Me.ClientCharacter.Name == data["char_name"].Value)
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("You have joined the party!", Color.green, true);
+        }
+        else
+        {
+            InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(data["char_name"].Value + " has joined the party!", Color.green, true);
+        }
     }
 
     private void OnPartyInvitation(Socket socket, Packet packet, object[] args)

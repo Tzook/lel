@@ -122,8 +122,6 @@ public class PartyWindowUI : MonoBehaviour {
     {
         SocketClient.Instance.SendLeaveParty();
 
-        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Left The Party", Color.black, false);
-
         this.gameObject.SetActive(false);
     }
 }

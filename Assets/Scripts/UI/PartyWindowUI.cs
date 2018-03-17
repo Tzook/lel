@@ -14,7 +14,21 @@ public class PartyWindowUI : MonoBehaviour {
     [SerializeField]
     Outline LockOutline;
 
-    public bool Locked = false;
+    [SerializeField]
+    bool Locked;
+
+    void Start()
+    {
+        LockOutline.enabled = Locked;
+    }
+
+    void OnEnable()
+    {
+        if (Locked) 
+        {
+            Open();
+        }
+    }
 
 	public void Open()
     {

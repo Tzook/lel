@@ -46748,6 +46748,89 @@ MonoBehaviour:
       HitSound: 
       MinTime: 0
       MaxTime: 0
+  - MonsterKey: BuffedSquirrel
+    MonsterName: Buffed Squirrel
+    MonsterHP: 1600
+    MonsterLevel: 9
+    DMG: 40
+    RewardEXP: 780
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -47895,6 +47978,26 @@ MonoBehaviour:
   - Key: magicCarrotSeeds
     Name: Magic Carrot Seeds
     Description: This sack contains magical carrot seeds
+    IconPlaceable: {fileID: 21300000, guid: 27bc6016d51f0a24c8ac163c67d34c06, type: 3}
+    Icon: icon_crown
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 0
+    StackCap: 1
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+  - Key: nutVaultKey
+    Name: Squirrel Vault Key
+    Description: This key opens the door to the Squirrel Vault
     IconPlaceable: {fileID: 21300000, guid: 27bc6016d51f0a24c8ac163c67d34c06, type: 3}
     Icon: icon_crown
     UseSound: 
@@ -49277,8 +49380,8 @@ MonoBehaviour:
     - Condition: ok
       Type: bustedNutsOK
       CurrentProgress: 0
-      TargetProgress: 20
-      ExtraDescription: Nuts Busted
+      TargetProgress: 30
+      ExtraDescription: Acorns Destroyed
     QuestsStates: []
     MinimumLevel: 8
     RewardItems: []

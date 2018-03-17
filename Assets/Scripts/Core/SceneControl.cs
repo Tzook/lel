@@ -171,6 +171,14 @@ public class SceneControl
         {
             tempNPC.RefreshQuestState();
         }
+
+        foreach (QuestVisibility qvObj in QVObjects)
+        {
+            if (qvObj.HideQuestKey == questKey)
+            {
+                qvObj.Refresh();
+            }
+        }
     }
 
     public void UpdateAllQuestProgress()
@@ -183,7 +191,6 @@ public class SceneControl
             }
         }
 
-        Debug.Log(QVObjects.Count);
         foreach(QuestVisibility qvObj in QVObjects)
         {
             qvObj.Refresh();

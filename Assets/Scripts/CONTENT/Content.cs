@@ -286,7 +286,7 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
-    [Popup(/* AUTO_GENERATED_LOOT_START */ "", "leatherVest", "adventurerShirt", "blackGloves", "clothPants", "greenPants", "leatherShoes", "strapShoes", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "gold", "blackPants", "leatherGloves", "apprenticeRobeWhite", "apprenticeRobeBlack", "shortSword", "shortClub", "shortAxe", "shortScimitar", "shortBow", "rabbitEar", "shortDagger", "batWing", "rabbitFurVest", "oldTurtleShell", "Fishing Rod", "carrotSack", "smallFish", "bigFish", "blackShoes", "whiteJellyBean", "blackJellyBean", "yellowJellyBean", "redJellyBean", "pinkJellyBean", "blueJellyBean", "orangeJellyBean", "greenJellyBean", "plantFlower", "blueMushroomCap", "strawHat", "peasantHat", "rabbitCostume", "whiteGloves", "greenGloves", "redGloves", "cosmoTunnelKey", "rabbitLandEntrancePremission", "magicCarrotSeeds" /* AUTO_GENERATED_LOOT_END */)]
+    [Popup(/* AUTO_GENERATED_LOOT_START */ "", "leatherVest", "adventurerShirt", "blackGloves", "clothPants", "greenPants", "leatherShoes", "strapShoes", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "gold", "blackPants", "leatherGloves", "apprenticeRobeWhite", "apprenticeRobeBlack", "shortSword", "shortClub", "shortAxe", "shortScimitar", "shortBow", "rabbitEar", "shortDagger", "batWing", "rabbitFurVest", "oldTurtleShell", "Fishing Rod", "carrotSack", "smallFish", "bigFish", "blackShoes", "whiteJellyBean", "blackJellyBean", "yellowJellyBean", "redJellyBean", "pinkJellyBean", "blueJellyBean", "orangeJellyBean", "greenJellyBean", "plantFlower", "blueMushroomCap", "strawHat", "peasantHat", "rabbitCostume", "whiteGloves", "greenGloves", "redGloves", "cosmoTunnelKey", "rabbitLandEntrancePremission", "magicCarrotSeeds", "nutVaultKey" /* AUTO_GENERATED_LOOT_END */)]
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -655,7 +655,8 @@ public class Quest
         {
             for (int i=0;i<Conditions.Count;i++)
             {
-                if(Conditions[i].CurrentProgress < Conditions[i].TargetProgress)
+                Debug.Log(Conditions[i].Condition + " | " + Conditions[i].CurrentProgress + " | " + Conditions[i].TargetProgress);
+                if (Conditions[i].CurrentProgress < Conditions[i].TargetProgress)
                 {
                     return false;
                 }
@@ -698,13 +699,13 @@ public class Quest
         tempQuest.QuestCompleteDescription = this.QuestCompleteDescription;
         tempQuest.FacePrefab = this.FacePrefab;
 
-        for(int i=0;i<this.Conditions.Count;i++)
+        for (int i = 0; i < this.Conditions.Count; i++)
         {
             tempQuest.Conditions.Add(this.Conditions[i].Clone());
         }
 
         tempQuest.QuestsStates.AddRange(this.QuestsStates);
-        tempQuest.MinimumLevel  = this.MinimumLevel;
+        tempQuest.MinimumLevel = this.MinimumLevel;
 
         for (int i = 0; i < this.RewardItems.Count; i++)
         {
@@ -719,6 +720,19 @@ public class Quest
         tempQuest.RewardExp = this.RewardExp;
 
         return tempQuest;
+    }
+
+    public QuestCondition GetConditionByType(string type)
+    {
+        for(int i=0;i<Conditions.Count;i++)
+        {
+            if(Conditions[i].Type == type)
+            {
+                return Conditions[i];
+            }
+        }
+
+        return null;
     }
 }
 

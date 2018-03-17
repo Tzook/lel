@@ -48,12 +48,15 @@ public class QuestVisibility : MonoBehaviour {
             case QuestState.QuestEnumState.InProgress:
                 {
                     Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey);
+                    Debug.Log(this.gameObject.name + "REACHED" + tempQuest + " | " + tempQuest.CanBeCompleted);
                     if (tempQuest != null && !tempQuest.CanBeCompleted)
                     {
+                        Debug.Log(this.gameObject.name + "HIDE");
                         Hide();
                     }
                     else
                     {
+                        Debug.Log(this.gameObject.name + "SHOW");
                         Show();
                     }
 
@@ -87,7 +90,7 @@ public class QuestVisibility : MonoBehaviour {
                 }
             case QuestState.QuestEnumState.CanBeCompleted:
                 {
-                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey).CanBeCompleted)
+                    if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey) != null && LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey).CanBeCompleted)
                     {
                         Hide();
                     }

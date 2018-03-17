@@ -13799,6 +13799,7 @@ MonoBehaviour:
   RoomAbilities: []
   ScenePortals:
   - {fileID: 235110720}
+  - {fileID: 1068195684}
   Spawners: []
   Npcs:
   - {fileID: 1848271894}
@@ -16915,6 +16916,66 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1068195683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1259513383543036, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1068195686}
+  - component: {fileID: 1068195685}
+  - component: {fileID: 1068195684}
+  m_Layer: 2
+  m_Name: Portal (3)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1068195684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068195683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: NutVaultGate
+  TargetPortal: Entrance
+  TargetLevel: NutVault
+  StartShut: 0
+  RequiresItems: []
+--- !u!210 &1068195685
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 210953425027317772, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068195683}
+  m_Enabled: 1
+  m_SortingLayerID: -1262447697
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+--- !u!4 &1068195686
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068195683}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -67.4, y: 10.12, z: 0.08113527}
+  m_LocalScale: {x: 1, y: 1, z: 0.73522997}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 125
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072186192
 GameObject:
   m_ObjectHideFlags: 0
@@ -18989,6 +19050,7 @@ GameObject:
   - component: {fileID: 1313724213}
   - component: {fileID: 1313724212}
   - component: {fileID: 1313724215}
+  - component: {fileID: 1313724216}
   m_Layer: 14
   m_Name: NPC (1)
   m_TagString: NPC
@@ -19052,14 +19114,14 @@ MonoBehaviour:
     - Title: How can I help?
       Event: StartDialog
       Value: HowHelp
-      Condition: AvailableQuest
+      Condition: QuestAvailable
       ConditionValue: bustNuts
       CLR: {r: 1, g: 0.98194724, b: 0.3455882, a: 1}
-    - Title: No.
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
+    - Title: I'm ready!
+      Event: TeleportToInstance
+      Value: NutVault
+      Condition: QuestInProgress
+      ConditionValue: bustNuts
       CLR: {r: 0, g: 0, b: 0, a: 0}
     - Title: I don't think I can be of any use...
       Event: EndDialog
@@ -19067,7 +19129,13 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 0, g: 0, b: 0, a: 0}
-  - DialogKey: bustNuts
+    - Title: No.
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0, b: 0, a: 0}
+  - DialogKey: HowHelp
     Pieces:
     - Content: Listen, you will get in and smash all of the acorns you see inside!
       LetterDelay: 0.03
@@ -19100,8 +19168,8 @@ MonoBehaviour:
       PostPieceEventValue: 
     Options:
     - Title: Alright
-      Event: StartQuest
-      Value: bustNuts
+      Event: StartDialog
+      Value: bustNuts2
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.98194724, b: 0.3455882, a: 1}
@@ -19111,10 +19179,22 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 0, g: 0, b: 0, a: 0}
+  - DialogKey: bustNuts2
+    Pieces:
+    - Content: Tell me when you are ready!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: bustNuts
+    Options: []
   GivingQuests:
   - bustNuts
   EndingQuests: []
-  TeleportableScenes: []
+  TeleportableScenes:
+  - sceneKey: NutVault
+    portalKey: Entrance
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -19181,7 +19261,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HideQuestKey: bustNuts
-  HideState: 0
+  HideState: 4
+--- !u!114 &1313724216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1313724211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: bustNuts
+  HideState: 1
 --- !u!1 &1319495246
 GameObject:
   m_ObjectHideFlags: 0
@@ -24001,6 +24094,7 @@ GameObject:
   - component: {fileID: 1848271895}
   - component: {fileID: 1848271894}
   - component: {fileID: 1848271897}
+  - component: {fileID: 1848271898}
   m_Layer: 14
   m_Name: NPC
   m_TagString: NPC
@@ -24167,7 +24261,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HideQuestKey: bustNuts
-  HideState: 0
+  HideState: 4
+--- !u!114 &1848271898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848271893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: bustNuts
+  HideState: 1
 --- !u!1 &1873693736
 GameObject:
   m_ObjectHideFlags: 0

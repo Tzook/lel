@@ -17,10 +17,21 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
     [SerializeField]
     List<GameObject> UpgradeBubbles = new List<GameObject>();
 
+    protected float speedModifier;
+
     public Ability CurrentAbility = null;
+
+    void Update()
+    {
+        if (isActiveAndEnabled && Input.GetMouseButton(0))
+        {
+            speedModifier = 6f;
+        }
+    }
 
     public void ShowLatest(List<Ability> abilities)
     {
+        speedModifier = 1f;
         this.gameObject.SetActive(true);
 
         for(int i = 0; i < abilities.Count; i++)
@@ -51,7 +62,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
 
         while (m_CG.alpha < 1f)
         {
-            m_CG.alpha += 1f * Time.deltaTime;
+            m_CG.alpha += 1f * Time.deltaTime * speedModifier;
             yield return 0;
         }
 
@@ -61,6 +72,8 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
             tempObj = ResourcesLoader.Instance.GetRecycledObject("TargetPoint");
             tempObj.transform.SetParent(Container, false);
         }
+
+        yield return 0;
 
         for(int i=0;i<ability.PerkPool.Count;i++)
         {
@@ -78,7 +91,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         {
             UpgradeBubbles[i].GetComponent<CrateUI>().Unpack();
 
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.4f / speedModifier);
         }
     }
 
@@ -93,7 +106,7 @@ public class MasteryUpgradeWindowUI : MonoBehaviour {
         float t = 0f;
         while(t<1f)
         {
-            t += 1.75f * Time.deltaTime;
+            t += 1.75f * Time.deltaTime * speedModifier;
 
             crateObj.transform.position = Game.SplineLerp(RandomStartingPoint, targetTransfrom.position, 3f, t);
 

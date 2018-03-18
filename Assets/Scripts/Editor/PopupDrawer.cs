@@ -56,7 +56,7 @@ public class PopupDrawer : PropertyDrawer
             index = EditorGUI.Popup(position, label.text, index, popupAttribute.list);
             if (EditorGUI.EndChangeCheck())
             {
-                property.stringValue = popupAttribute.list[index];
+                property.stringValue = popupAttribute.list[index] == PopupAttribute.NO_VALUE_OPTION ? "" : popupAttribute.list[index];
             }
         }
         else

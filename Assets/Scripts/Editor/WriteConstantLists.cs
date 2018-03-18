@@ -93,7 +93,7 @@ public class WriteConstantLists
 
     private string GetListString(List<string> items)
     {
-        string itemsString = "\"\", ";
+        string itemsString = "\"" + PopupAttribute.NO_VALUE_OPTION + "\", ";
         items.Sort();
         for (int i = 0; i < items.Count; i++)
         {

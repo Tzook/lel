@@ -14,6 +14,8 @@ public class PopupAttribute : PropertyAttribute
 {
     public string[] list;
     public object variableType;
+
+    public const string NO_VALUE_OPTION = "NO VALUE";
  
     #region PopupAttribute()
  

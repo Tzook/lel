@@ -10,6 +10,8 @@ public class CookiesManager
     public static CookiesManager Instance
     { get { return _instance == null ? _instance = new CookiesManager() : _instance; } }
 
+    public const string UNICORN = "unicorn";
+
     public ObservableDictionary<string, string> GetCookies()
     {
         ObservableDictionary<string, string> CookiesDictionary = new ObservableDictionary<string, string>();
@@ -33,6 +35,12 @@ public class CookiesManager
             result += cookie.Key + "=" + cookie.Value + ";";
         }
         return result;
+    }
+
+    public bool HasCookie(string cookieName)
+    {
+        ObservableDictionary<string, string> CookiesDictionary = GetCookies();
+        return CookiesDictionary.ContainsKey(cookieName);
     }
 
     #if UNITY_WEBGL
@@ -84,9 +92,9 @@ public class CookiesManager
     {
         foreach (BestHTTP.Cookies.Cookie cookie in BestHTTP.Cookies.CookieJar.GetAll())
         {
-            if (cookie.Name == "unicorn" && cookie.Domain == Config.DOMAIN)
+            if (cookie.Name == UNICORN && cookie.Domain == Config.DOMAIN && !String.IsNullOrEmpty(cookie.Value))
             {
-                CookiesDictionary.Add("unicorn", cookie.Value);
+                CookiesDictionary.Add(UNICORN, cookie.Value);
                 break;
             }
         }

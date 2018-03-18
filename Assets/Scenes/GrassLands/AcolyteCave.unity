@@ -10591,6 +10591,12 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: frostPractice
       CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+    - Title: Take me to the practice chamber.
+      Event: Teleport
+      Value: FrostPracticeChamber
+      Condition: QuestInProgress
+      ConditionValue: frostPractice
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
   - DialogKey: NotAfraid
     Pieces:
     - Content: Really?
@@ -10808,7 +10814,7 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: PracticeFrostmplete
+  - DialogKey: PracticeFrost
     Pieces:
     - Content: Mastering the skill takes practice...
       LetterDelay: 0.03
@@ -10829,7 +10835,9 @@ MonoBehaviour:
   - frostPractice
   EndingQuests:
   - OldFriends
-  TeleportableScenes: []
+  TeleportableScenes:
+  - sceneKey: FrostPracticeChamber
+    portalKey: Entrance
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 

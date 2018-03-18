@@ -46149,8 +46149,8 @@ MonoBehaviour:
         Value: 10
       Icon: {fileID: 0}
       HitSound: sound_hit_4
-      MinTime: 4
-      MaxTime: 10
+      MinTime: 2
+      MaxTime: 5
     DeathRattle:
       Key: 
       Level: 0
@@ -46243,8 +46243,8 @@ MonoBehaviour:
         Value: 12
       Icon: {fileID: 0}
       HitSound: sound_impactCold
-      MinTime: 4
-      MaxTime: 10
+      MinTime: 2
+      MaxTime: 5
     DeathRattle:
       Key: 
       Level: 0
@@ -49342,7 +49342,7 @@ MonoBehaviour:
       MaxStack: 1
     RewardHP: 0
     RewardMP: 0
-    RewardPrimaryAbility: range
+    RewardPrimaryAbility: 
     RewardExp: 100
   - Name: Frost Test
     Key: FrostTest
@@ -49361,7 +49361,7 @@ MonoBehaviour:
     RewardItems: []
     RewardHP: 0
     RewardMP: 0
-    RewardPrimaryAbility: frost
+    RewardPrimaryAbility: 
     RewardExp: 100
   - Name: Hair Potion
     Key: hairPotion
@@ -49514,7 +49514,12 @@ MonoBehaviour:
       with the Master Acolyte.
     QuestCompleteDescription: I've mastered the basic form of frost magic.
     FacePrefab: FaceOfFrostQuest
-    Conditions: []
+    Conditions:
+    - Condition: ok
+      Type: PassedTest
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Passed Test
     QuestsStates:
     - QuestKey: FrostTest
       EnumState: 1

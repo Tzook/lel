@@ -763,11 +763,7 @@ public class QuestCondition
 [System.Serializable]
 public class QuestState
 {
-<<<<<<< HEAD
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
-=======
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
->>>>>>> origin/master
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
     public string QuestKey;
 
     public string State

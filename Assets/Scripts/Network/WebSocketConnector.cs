@@ -4,7 +4,7 @@ using BestHTTP.SocketIO;
 
 public class WebSocketConnector
 {
-	private const string URL = Config.SOCKET_URL;
+	private static string URL = Config.SOCKET_URL;
 
 	public Socket connect(string charId)
     {

@@ -655,7 +655,6 @@ public class Quest
         {
             for (int i=0;i<Conditions.Count;i++)
             {
-                Debug.Log(Conditions[i].Condition + " | " + Conditions[i].CurrentProgress + " | " + Conditions[i].TargetProgress);
                 if (Conditions[i].CurrentProgress < Conditions[i].TargetProgress)
                 {
                     return false;

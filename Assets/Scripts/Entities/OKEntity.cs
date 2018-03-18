@@ -12,7 +12,7 @@ public class OKEntity : MonoBehaviour {
 
     public void Add(int Value)
     {
-        Set(LocalUserInfo.Me.ClientCharacter.GetQuest(QuestKey).GetConditionByType(OKKey).CurrentProgress + Value);
+        Set((LocalUserInfo.Me.ClientCharacter.GetQuest(QuestKey).GetConditionByType(OKKey).CurrentProgress + Value));
     }
 
     public void Set(int Value)

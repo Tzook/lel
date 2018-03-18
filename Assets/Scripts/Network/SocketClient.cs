@@ -1708,8 +1708,8 @@ public class SocketClient : MonoBehaviour
         node["ok"] = okKey;
         node["value"] = okValue.ToString();
 
-
         CurrentSocket.Emit("quest_ok_progress", node);
+        Debug.Log(node);
     }
 
 

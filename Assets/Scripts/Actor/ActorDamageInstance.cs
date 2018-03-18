@@ -72,7 +72,7 @@ public class ActorDamageInstance : MonoBehaviour {
             }
             else if(TargetCollider.tag == "HitEntity")
             {
-                TargetCollider.GetComponent<HittableEntity>().Hurt();
+                TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
 
                 Hit = true;
                 this.gameObject.SetActive(false);

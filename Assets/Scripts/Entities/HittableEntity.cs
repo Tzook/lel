@@ -11,6 +11,8 @@ public class HittableEntity : MonoBehaviour {
 
     BoxCollider2D m_Collider;
 
+    public string RequiredAction;
+
     private void Awake()
     {
         this.gameObject.tag = "HitEntity";
@@ -18,8 +20,16 @@ public class HittableEntity : MonoBehaviour {
         m_Collider = GetComponent<BoxCollider2D>();
     }
 
-    public void Hurt()
+    public void Hurt(string givenAction = "")
     {
+        if(!string.IsNullOrEmpty(this.RequiredAction) && !string.IsNullOrEmpty(givenAction))
+        {
+            if(this.RequiredAction != givenAction)
+            {
+                return;
+            }
+        }
+
         HitCallbacks.Invoke();
     }
 

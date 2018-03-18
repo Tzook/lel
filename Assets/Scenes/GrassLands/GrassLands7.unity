@@ -19184,6 +19184,12 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: I've broken into the acorn vault.
+      Event: StartDialog
+      Value: BrokenIntoVault
+      Condition: QuestComplete
+      ConditionValue: bustNuts
+      CLR: {r: 0.97132355, g: 1, b: 0.42647058, a: 1}
     - Title: OK
       Event: EndDialog
       Value: 
@@ -19815,12 +19821,45 @@ MonoBehaviour:
       PostPieceEvent: CompleteQuest
       PostPieceEventValue: thisIsNecessary2
     Options: []
+  - DialogKey: BrokenIntoVault
+    Pieces:
+    - Content: Yea, my boys told me they sent you in and bailed when that huge squirrel
+        came around...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I'm glad there are still some people like you around us...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: With courage! Unlike my unworthy workers...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Here, that I owe you, and as a compensation.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: Greet
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: bustNuts
+    Options: []
   GivingQuests:
   - thisIsNecessary1
   - thisIsNecessary2
   EndingQuests:
   - thisIsNecessary1
   - thisIsNecessary2
+  - bustNuts
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings

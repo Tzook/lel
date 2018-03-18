@@ -49335,8 +49335,11 @@ MonoBehaviour:
       TargetProgress: 1
       ExtraDescription: 
     QuestsStates: []
-    MinimumLevel: 8
-    RewardItems: []
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: range
@@ -49483,6 +49486,43 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
+    RewardExp: 10
+  - Name: Ranger Practice
+    Key: rangerPractice
+    InProgressDescription: In order to become a ranger and know how to shoot arrows
+      I must pass the Tower Rangers bow and arrow course.
+    QuestCompleteDescription: The course was quite easy.
+    FacePrefab: MasterRangerQuest
+    Conditions:
+    - Condition: ok
+      Type: scoreAbove20
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Score Above 20
+    QuestsStates:
+    - QuestKey: RangerTest
+      EnumState: 1
+    MinimumLevel: 6
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: range
+    RewardExp: 10
+  - Name: Frost Magic Practice
+    Key: frostPractice
+    InProgressDescription: In order to use frost magic whenever I wish I must  practice
+      with the Master Acolyte.
+    QuestCompleteDescription: I've mastered the basic form of frost magic.
+    FacePrefab: FaceOfFrostQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: FrostTest
+      EnumState: 1
+    MinimumLevel: 6
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: frost
     RewardExp: 10
 --- !u!114 &2254
 MonoBehaviour:

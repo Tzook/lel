@@ -1310,11 +1310,15 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: And he is not you...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -1755,6 +1759,7 @@ MonoBehaviour:
   Name: AcolyteCave
   NearestTownScene: AcolyteCave
   BGMusic: 
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 137314084}
   Spawners: []
@@ -1893,7 +1898,7 @@ MonoBehaviour:
       - {x: -26.46436, y: -0.62277985}
       - {x: -15.706888, y: -0.8234196}
       - {x: -5.112241, y: -1.0215454}
-  SceneState: []
+  NetStateEntities: []
 --- !u!4 &426347158
 Transform:
   m_ObjectHideFlags: 0
@@ -4214,6 +4219,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &937195020
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4473,16 +4479,22 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Please...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Okay.. okay...
       Event: EndDialog
@@ -4503,11 +4515,15 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Please...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Okay.. Okay...
       Event: EndDialog
@@ -5379,6 +5395,8 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -5932,11 +5950,15 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -9556,6 +9578,8 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I wish to join.
       Event: StartDialog
@@ -9594,41 +9618,57 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_4
       AnimationTrigger: angry
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Am...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: The...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Face...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_1
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Of...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: The...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_4
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Frost...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: God...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: StartDialog
@@ -9643,31 +9683,43 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: sound_coldgod_2
       AnimationTrigger: happy
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You...!
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: sound_coldgod_4
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Have
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: My..
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: My...
       LetterDelay: 0.02
       Pitch: 0.1
       SoundKey: sound_coldgod_4
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Permission...
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I will do as you bid.
       Event: StartDialog
@@ -9688,36 +9740,50 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_4
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: So
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: FAST
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Must
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Prove
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_1
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Strength
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: angry
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I will do as I am told.
       Event: StartDialog
@@ -9738,36 +9804,50 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Have
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: My...
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Permission
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: happy
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: To
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Be
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_1
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Tested
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: angry
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I am yours to test.
       Event: StartQuest
@@ -9788,31 +9868,43 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Impress...
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: happy
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Me...
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: happy
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: See
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_2
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Potential
       LetterDelay: 0.035
       Pitch: 0.1
       SoundKey: sound_coldgod_1
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: InteractWithNPC
@@ -9827,21 +9919,29 @@ MonoBehaviour:
       Pitch: 0.1
       SoundKey: sound_coldgod_3
       AnimationTrigger: talk
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Not
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: angry
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Disappoint
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Us
       LetterDelay: 0.01
       Pitch: 0.05
       SoundKey: sound_coldgod_3
       AnimationTrigger: happy
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -10450,16 +10550,22 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Be warned...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: He feeds on those without...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -10479,6 +10585,12 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: OldFriends
       CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+    - Title: I wish to practice more frost magic.
+      Event: StartDialog
+      Value: PracticeFrost
+      Condition: QuestAvailable
+      ConditionValue: frostPractice
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
   - DialogKey: NotAfraid
     Pieces:
     - Content: Really?
@@ -10486,32 +10598,44 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You are in a strange ice covered room, filled with spikes and shady
         hooded cultists...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You seem to not really care for your own health...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: As if someone outside which we can't see is controlling you...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Like a puppet...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: For his own intentions...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Strange...
       Event: EndDialog
@@ -10526,11 +10650,15 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: What does he want now?
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: He said you'll know how to solve his problem...
       Event: StartDialog
@@ -10551,6 +10679,8 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: That you may have the right "Tools"...
       Event: StartDialog
@@ -10565,6 +10695,8 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: He has a shroom infestation in his basement...
       Event: StartDialog
@@ -10579,26 +10711,36 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Tell him it's too late...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: There are too many of them underground...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: And we don't know how they came or why they are here...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: We can do nothing about it...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I see...
       Event: CompleteQuest
@@ -10613,32 +10755,52 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You passed his test of strength
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Even though I merely used a quarter of my full power.
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: So, you are permitted to worship the god of frost and use his powers
         for your own will...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Without serving him for years like the rest of us did...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I will teach you the basics of frost magic...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But you'll only be able to use it as you wish after you master the
+        skill, after practicing.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'm eager to learn...
       Event: InteractWithNPC
@@ -10646,7 +10808,25 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
+  - DialogKey: PracticeFrostmplete
+    Pieces:
+    - Content: Mastering the skill takes practice...
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Tell me when you are ready and I'll take you to the practice chamber.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: frostPractice
+    Options: []
+  GivingQuests:
+  - frostPractice
   EndingQuests:
   - OldFriends
   TeleportableScenes: []
@@ -10950,21 +11130,29 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Don't listen to him...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: The god of frost doesn't like me aswell...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: He... does not express his fondness a lot.
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -12394,16 +12582,22 @@ MonoBehaviour:
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Please...
       LetterDelay: 0.03
       Pitch: 0.2
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog

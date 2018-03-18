@@ -35,6 +35,8 @@ public class ProjectileArrow : MonoBehaviour {
 
     public void Launch(ActorInstance parent,string primaryAbilitySourceKey ,bool triggerHit = false ,float speed = 15f)
     {
+        transform.parent = null;
+
         this.ParentActor = parent;
 
         CurrentDecay = DecayTime;
@@ -87,6 +89,10 @@ public class ProjectileArrow : MonoBehaviour {
                     SocketClient.Instance.SendUsedPrimaryAbility(tempList);
                 }
             }
+            else if (TargetCollider.tag == "HitEntity")
+            {
+                TargetCollider.GetComponent<HittableEntity>().Hurt(PrimaryAbilitySourceKey);
+            }
             else
             {
                 AudioControl.Instance.PlayInPosition(dPA.ProjectileWallSound, transform.position);
@@ -108,7 +114,10 @@ public class ProjectileArrow : MonoBehaviour {
 
             if (dPA.ProjectileStayAfterHit)
             {
-                transform.SetParent(TargetCollider.transform, true);
+                if (TargetCollider.gameObject.activeInHierarchy)
+                {
+                    transform.SetParent(TargetCollider.transform, true);
+                }
 
                 StartCoroutine(DeathRoutine());
             }

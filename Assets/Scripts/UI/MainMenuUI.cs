@@ -219,7 +219,7 @@ public class MainMenuUI : MonoBehaviour
 
         if (response["error"] != null)
         {
-            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].Value);
             AudioControl.Instance.Play("sound_negative");
         }
         else
@@ -237,7 +237,7 @@ public class MainMenuUI : MonoBehaviour
 
         if (response["error"] != null)
         {
-            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].Value);
             AudioControl.Instance.Play("sound_negative");
         }
         else
@@ -256,7 +256,6 @@ public class MainMenuUI : MonoBehaviour
 
         if (response["error"] != null)
         {
-            //SM.WarningMessage.ShowMessage(response["error"].ToString());
             Debug.Log("Session could not be done: " + response["error"].Value);
             AudioControl.Instance.Play("sound_negative");
         }
@@ -285,7 +284,6 @@ public class MainMenuUI : MonoBehaviour
 
         if (response["error"] != null)
         {
-            //SM.WarningMessage.ShowMessage(response["error"].ToString());
             Debug.Log("Session could not be done: " + response["error"].Value);
         }
         else

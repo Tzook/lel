@@ -319,7 +319,7 @@ public class CreateCharacterUI : MonoBehaviour
 
         if (response["error"] != null)
         {
-            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].Value);
             AudioControl.Instance.Play("sound_negative");
         }
         else
@@ -348,7 +348,7 @@ public class CreateCharacterUI : MonoBehaviour
         RandomizingName = false;
         if (response["error"] != null)
         {
-            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].Value);
             AudioControl.Instance.Play("sound_negative");
         }
         else

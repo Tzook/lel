@@ -76,7 +76,7 @@ public class CharacterInfoPageUI : MonoBehaviour {
 
         if (response["error"] != null)
         {
-            WarningMessageUI.Instance.ShowMessage(response["error"].ToString());
+            WarningMessageUI.Instance.ShowMessage(response["error"].Value);
         }
         else
         {

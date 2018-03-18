@@ -41,13 +41,13 @@ public class SpellBoxUI : MonoBehaviour {
 
     public void RefreshMana()
     {
-        if((int)(CurrentSpell.Mana * LocalUserInfo.Me.ClientCharacter.ManaCost) > LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        if(ManaUsage.Instance.CanUseMana(CurrentSpell.Mana))
         {
-            m_Icon.color = new Color(Color.white.r, Color.white.g, Color.white.b, 0.3f);
+            m_Icon.color = Color.white;
         }
         else
         {
-            m_Icon.color = Color.white;
+            m_Icon.color = new Color(Color.white.r, Color.white.g, Color.white.b, 0.3f);
         }
     }
 

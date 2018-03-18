@@ -274,7 +274,7 @@ public class ActorController : MonoBehaviour
             Instance.SetAttackAnimation();
         }
 
-        Anim.SetBool("Charging", Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI);
+        Anim.SetBool("Charging", Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA());
     }
 
     void FixedUpdate()
@@ -523,13 +523,9 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 
-        int manaCost = (int)(spell.Mana * LocalUserInfo.Me.ClientCharacter.ManaCost);
-        if (manaCost <= LocalUserInfo.Me.ClientCharacter.CurrentMana)
+        bool usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
+        if (usedSpell)
         {
-            LocalUserInfo.Me.ClientCharacter.CurrentMana -= manaCost;
-
-            InGameMainMenuUI.Instance.RefreshMP();
-
             CurrentSpellInCast = spell;
 
             SocketClient.Instance.SendUsedSpell(spell.Key);
@@ -790,21 +786,13 @@ public class ActorController : MonoBehaviour
 
     public void ActivatePrimaryAbility()
     {
-        //switch (Instance.Info.CurrentPrimaryAbility.Key)
-        //{
-        //    case "melee":
-        //        {
-        //            AttackMelee();
-        //            break;
-        //        }
-        //    case "range":
-        //        {
-        //            FireProjectile();
-        //            break;
-        //        }
-        //}
+        DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
+        if (devAbility.ManaCost > 0) 
+        {
+            ManaUsage.Instance.UseMana(devAbility.ManaCost);
+        }
 
-        if(string.IsNullOrEmpty(Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key).ProjectilePrefab))
+        if (string.IsNullOrEmpty(devAbility.ProjectilePrefab))
         {
             AttackMelee();
         }
@@ -812,6 +800,21 @@ public class ActorController : MonoBehaviour
         {
             FireProjectile();
         }
+    }
+
+    public bool CanUsePA()
+    {
+        DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
+        bool canUse = true;
+        if (devAbility.ManaCost > 0) 
+        {
+            if (!ManaUsage.Instance.CanUseMana(devAbility.ManaCost))
+            {
+                ManaUsage.Instance.WarnAboutMana();
+                canUse = false;
+            }
+        }
+        return canUse;
     }
 
     public void InturruptAttack()

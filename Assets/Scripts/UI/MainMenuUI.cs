@@ -58,8 +58,11 @@ public class MainMenuUI : MonoBehaviour
         m_SessionHandler = new SessionHandler(SessionResponse);
         m_LogoutHandler = new LogoutHandler(LogoutResponse);
 
-        LoadingWindowUI.Instance.Register(this);
-        m_SessionHandler.Session();
+        if (CookiesManager.Instance.HasCookie(CookiesManager.UNICORN))
+        {
+            LoadingWindowUI.Instance.Register(this);
+            m_SessionHandler.Session();
+        }
     }
 
     void Update()
@@ -222,7 +225,6 @@ public class MainMenuUI : MonoBehaviour
         else
         {
             LocalUserInfo.Me.UpdateData(response["data"]);
-            WarningMessageUI.Instance.ShowMessage(response["data"].ToString());
             MoveToMenu(1);
             LoadPlayerCharacters(LocalUserInfo.Me);
             AudioControl.Instance.Play("sound_positive");

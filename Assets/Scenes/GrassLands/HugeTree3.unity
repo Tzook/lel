@@ -4075,6 +4075,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &108536045
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9232,6 +9233,146 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -156.072}
+--- !u!1 &276233474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 276233475}
+  - component: {fileID: 276233477}
+  - component: {fileID: 276233476}
+  m_Layer: 0
+  m_Name: AudioLoop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &276233475
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276233474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1420081627}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276233476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276233474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8f81a201cf0504da437fec02f28a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeTag: Default
+--- !u!82 &276233477
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276233474}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d7367920361b39c468b79f36addee54b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1.02
+  MaxDistance: 200
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1.0206566
+      inSlope: -9.807842
+      outSlope: -9.807842
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.1305747
+      value: 0.5
+      inSlope: -2.4519606
+      outSlope: -2.4519606
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.40450573
+      value: 0.16737366
+      inSlope: -0.61299014
+      outSlope: -0.61299014
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.81249046
+      value: 0.047531128
+      inSlope: -0.45860395
+      outSlope: -0.45860395
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.0038707256
+      inSlope: -0.10204073
+      outSlope: -0.10204073
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &281869410
 GameObject:
   m_ObjectHideFlags: 0
@@ -9499,6 +9640,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &322789684
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11019,6 +11161,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &476252685
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12314,7 +12457,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: -6
   m_Sprite: {fileID: 21300000, guid: fcbce985c3d99b64a8431b09bc172a29, type: 3}
-  m_Color: {r: 0.71258795, g: 0.52854675, b: 0.7647059, a: 1}
+  m_Color: {r: 0.625, g: 0.625, b: 0.625, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 2
@@ -14079,6 +14222,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &789211893
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14831,6 +14975,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &889945007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15840,6 +15985,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &964579815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16634,6 +16780,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1027568989
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16774,6 +16921,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1028206368
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18360,6 +18508,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1240647734
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18420,7 +18569,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300004, guid: d7e8c43b9a6c40f4c86c20104e1ccfa5, type: 3}
-  m_Color: {r: 0.7614994, g: 0.3941393, b: 0.99264705, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -20444,6 +20593,7 @@ Transform:
   - {fileID: 1322912906}
   - {fileID: 638484359}
   - {fileID: 559372378}
+  - {fileID: 276233475}
   m_Father: {fileID: 1175831456}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20838,6 +20988,7 @@ MonoBehaviour:
   toLocation: {fileID: 159707271}
   Speed: 0.0005
   rigid: {fileID: 1420081629}
+  LoopSource: {fileID: 276233477}
 --- !u!61 &1420081631
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21763,6 +21914,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1485304774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23722,6 +23874,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1801871414
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24986,6 +25139,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  RequiredAction: 
 --- !u!61 &1927006697
 BoxCollider2D:
   m_ObjectHideFlags: 0

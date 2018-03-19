@@ -36273,7 +36273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41761798, y: 0.93843925}
   m_AnchorMax: {x: 0.574, y: 1}
-  m_AnchoredPosition: {x: 3.600998, y: 4.8178406}
+  m_AnchoredPosition: {x: 3.600998, y: 4.81781}
   m_SizeDelta: {x: 4.6542664, y: 7.363777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1725
@@ -46991,6 +46991,81 @@ MonoBehaviour:
       HitSound: 
       MinTime: 0
       MaxTime: 0
+  - MonsterKey: BlueBerriesBush
+    MonsterName: BlueBerriesBush
+    MonsterHP: 25
+    MonsterLevel: 1
+    DMG: 0
+    RewardEXP: 0
+    Type: 0
+    PossibleLoot:
+    - ItemKey: blueBerries
+      MinStack: 3
+      MaxStack: 15
+    Perks:
+    - Key: crippleChance
+      Value: 0.3
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
+  - MonsterKey: BerriesBush
+    MonsterName: BerriesBush
+    MonsterHP: 15
+    MonsterLevel: 1
+    DMG: 0
+    RewardEXP: 0
+    Type: 0
+    PossibleLoot:
+    - ItemKey: redBerries
+      MinStack: 3
+      MaxStack: 15
+    Perks:
+    - Key: crippleChance
+      Value: 0.3
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
+  - MonsterKey: TomatoesBush
+    MonsterName: TomatoesBush
+    MonsterHP: 15
+    MonsterLevel: 1
+    DMG: 0
+    RewardEXP: 0
+    Type: 0
+    PossibleLoot:
+    - ItemKey: tomato
+      MinStack: 2
+      MaxStack: 5
+    Perks:
+    - Key: crippleChance
+      Value: 0.3
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -48166,6 +48241,66 @@ MonoBehaviour:
     DropChance: 1
     GoldValue: 0
     StackCap: 1
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+  - Key: redBerries
+    Name: Red Berries
+    Description: Berries which are red.
+    IconPlaceable: {fileID: 21300000, guid: b2a01caf9b202ef458faa5003d4e838b, type: 3}
+    Icon: icon_redBerries
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 0
+    StackCap: 50
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+  - Key: blueBerries
+    Name: Blue Berries
+    Description: Berries which are blue.
+    IconPlaceable: {fileID: 21300000, guid: c15c76035a4b19a4cb4eb5fa6dfb28db, type: 3}
+    Icon: icon_blueBerries
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 0
+    StackCap: 50
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+  - Key: tomato
+    Name: Tomato
+    Description: Key ingredient in every meal.
+    IconPlaceable: {fileID: 21300000, guid: e492e86840d674e4ca871f0648b8e6c5, type: 3}
+    Icon: icon_tomato
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 0
+    StackCap: 20
     Stats:
       RequiresLVL: 0
       JumpBonus: 0
@@ -49603,6 +49738,30 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: frost
+    RewardExp: 10
+  - Name: Join The Shrine
+    Key: joinShrine
+    InProgressDescription: Turtolent asked me to collect blue berries and red berries
+      for the shrine in Shellhill.
+    QuestCompleteDescription: I did my duty to the shrine.
+    FacePrefab: TurtolentQuest
+    Conditions:
+    - Condition: loot
+      Type: redBerries
+      CurrentProgress: 0
+      TargetProgress: 50
+      ExtraDescription: 
+    - Condition: loot
+      Type: blueBerries
+      CurrentProgress: 0
+      TargetProgress: 50
+      ExtraDescription: 
+    QuestsStates: []
+    MinimumLevel: 6
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
     RewardExp: 10
 --- !u!114 &2254
 MonoBehaviour:

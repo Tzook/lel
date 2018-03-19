@@ -4317,7 +4317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ShellHillHousehold_A
   NearestTownScene: ShellHill
-  BGMusic: 
+  BGMusic: music_shellhill
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 1964734553}
   Spawners: []
@@ -4331,6 +4332,7 @@ MonoBehaviour:
     top: 0
     bottom: 0
     coliders: []
+  NetStateEntities: []
 --- !u!4 &205720643
 Transform:
   m_ObjectHideFlags: 0
@@ -6358,6 +6360,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: OK
       Event: EndDialog
@@ -6402,16 +6406,22 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Oh no!!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: What am I gonna do!?
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Don't panic, what happened?
       Event: StartDialog
@@ -6426,16 +6436,22 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: He's gonna be mad when he comes back from work!...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: What am I gonna do!?
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Replace the painting...
       Event: StartDialog
@@ -6468,16 +6484,22 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: The painting...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: How?
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Find out who made it...
       Event: StartDialog
@@ -6492,31 +6514,43 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I'll a-
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Wait no...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can't ask mom...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: She will tell dad...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can't...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'll find out who made it for you.
       Event: StartQuest
@@ -6531,11 +6565,15 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: She's in this room!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Ok! Ok!
       Event: EndDialog
@@ -6550,16 +6588,22 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: In a cave?
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I can't go down there, I'm a-
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'll go, I'll go, don't worry.
       Event: StartDialog
@@ -6580,31 +6624,43 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I've managed to steal the key to her tunnel!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Take it, don't lose it!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Thanks!
       LetterDelay: 0.025
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You are awsome!
       LetterDelay: 0.025
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Who are you, by the way?
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: StartQuest
@@ -6619,36 +6675,50 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Yes!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: And papa didn't notice!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: Panic
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Hmm... I don't have any property of my own...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Except for this rabbit costume I used last year... '
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Yea...
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Take it.
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -6662,6 +6732,7 @@ MonoBehaviour:
   EndingQuests:
   - ruinedPainting
   - findCosmo3
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -16616,6 +16687,8 @@ MonoBehaviour:
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: OK
       Event: EndDialog
@@ -16625,6 +16698,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -16986,6 +17060,7 @@ MonoBehaviour:
   Key: Entrance
   TargetPortal: ShellHillHousehold_AEntrance
   TargetLevel: ShellHill
+  StartShut: 0
   RequiresItems: []
 --- !u!1 &1965432318
 GameObject:
@@ -17536,6 +17611,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: OK
       Event: EndDialog
@@ -17556,11 +17633,15 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Stranger.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: 'Yes yes, especially the paintings! '
       Event: StartDialog
@@ -17581,6 +17662,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Indeed, who is the painter behind these works?
       Event: StartDialog
@@ -17595,46 +17678,64 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 0.8
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Can't remember her name...
       LetterDelay: 0.03
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 0.8
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Ou!
       LetterDelay: 0.03
       Pitch: 1.5
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Her name is Cosmo!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: She live's underground, far away from society.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: If I remember correctly...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You need to go down a shaft near rabbit land... or something...
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Can't it be, just one time, a few meters away?
       Event: QuestOK
@@ -17644,6 +17745,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 0.97565925, b: 0.64705884, a: 1}
   GivingQuests: []
   EndingQuests: []
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 

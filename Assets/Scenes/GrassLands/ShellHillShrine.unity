@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -735,12 +736,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ShellHillShrine
   NearestTownScene: ShellHill
-  BGMusic: 
+  BGMusic: music_shellhill
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 1964734553}
   Spawners: []
   Npcs:
   - {fileID: 770776409}
+  miniMapInfo:
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    coliders: []
+  NetStateEntities: []
 --- !u!4 &205720643
 Transform:
   m_ObjectHideFlags: 0
@@ -1246,6 +1255,8 @@ MonoBehaviour:
   Key: RoomsEntrance
   TargetPortal: Entrance
   TargetLevel: ShellHillInnRooms
+  StartShut: 0
+  RequiresItems: []
 --- !u!210 &276826865
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -4932,32 +4943,94 @@ MonoBehaviour:
       Pitch: 0.9
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: My child
       LetterDelay: 0.03
       Pitch: 0.9
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
+    - Title: I wish to join the shrine...
+      Event: StartDialog
+      Value: JoinShrine
+      Condition: QuestAvailable
+      ConditionValue: joinShrine
+      CLR: {r: 1, g: 0.95943207, b: 0.63235295, a: 1}
+    - Title: I've collected berries for the shrine.
+      Event: StartDialog
+      Value: JoinShrineComplete
+      Condition: QuestComplete
+      ConditionValue: joinShrine
+      CLR: {r: 1, g: 0.9607844, b: 0.6313726, a: 1}
     - Title: Bye...
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: Trade
-      Event: Trade
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 0, g: 0.2965517, b: 1, a: 1}
-    - Title: Bye...
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+  - DialogKey: JoinShrine
+    Pieces:
+    - Content: Join the shrine huh...
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Very well
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Serving the shrine is a behavior which shows high moral standards.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Go my child, and fetch me blue and red berries...
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We use them to aid our wounded, we also serve them to the hungry.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Do as you were told and you may earn the privilege to learn more.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: joinShrine
+    Options: []
+  - DialogKey: JoinShrineComplete
+    Pieces:
+    - Content: It gives me pleasure to see you have a value for your word.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: joinShrine
+    Options: []
+  GivingQuests:
+  - joinShrine
+  EndingQuests:
+  - joinShrine
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -7984,7 +8057,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1263272004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.000022888184, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1861410729}
@@ -11819,7 +11892,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1861410728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.1899986, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 1263272008}
@@ -12513,6 +12586,8 @@ MonoBehaviour:
   Key: Entrance
   TargetPortal: ShellHillShrineEntrance
   TargetLevel: ShellHill
+  StartShut: 0
+  RequiresItems: []
 --- !u!1 &1979646974
 GameObject:
   m_ObjectHideFlags: 0

@@ -285,13 +285,12 @@ public class InGameMainMenuUI : MonoBehaviour {
                     HidePrimaryAbilitiesWindow();
                 }
             }
-        }
 
-        if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
-        {
-            TogglePrimaryAbilities();
+            if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
+            {
+                TogglePrimaryAbilities();
+            }
         }
-
     }
 
     public void Resume()

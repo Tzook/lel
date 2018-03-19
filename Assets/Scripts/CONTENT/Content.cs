@@ -291,7 +291,7 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
-    [Popup(/* AUTO_GENERATED_LOOT_START */ "NO VALUE", "adventurerShirt", "apprenticeRobeBlack", "apprenticeRobeWhite", "batWing", "bigFish", "blackGloves", "blackJellyBean", "blackPants", "blackShoes", "blueJellyBean", "blueMushroomCap", "carrotSack", "clothPants", "cosmoTunnelKey", "Fishing Rod", "gold", "greenGloves", "greenJellyBean", "greenPants", "leatherGloves", "leatherShoes", "leatherVest", "magicCarrotSeeds", "nutVaultKey", "oldTurtleShell", "orangeJellyBean", "peasantHat", "pinkJellyBean", "plantFlower", "rabbitCostume", "rabbitEar", "rabbitFurVest", "rabbitLandEntrancePremission", "redGloves", "redJellyBean", "shortAxe", "shortBow", "shortClub", "shortDagger", "shortScimitar", "shortSword", "smallFish", "strapShoes", "strawHat", "swordOfElad", "turtleShell", "turtleShellOld", "turtleShellSpiked", "whiteGloves", "whiteJellyBean", "yellowJellyBean" /* AUTO_GENERATED_LOOT_END */)]
+    [Popup(/* AUTO_GENERATED_LOOT_START */ "NO VALUE", "adventurerShirt", "apprenticeRobeBlack", "apprenticeRobeWhite", "batWing", "bigFish", "blackGloves", "blackJellyBean", "blackPants", "blackShoes", "blueBerries", "blueJellyBean", "blueMushroomCap", "carrotSack", "clothPants", "cosmoTunnelKey", "Fishing Rod", "gold", "greenGloves", "greenJellyBean", "greenPants", "leatherGloves", "leatherShoes", "leatherVest", "magicCarrotSeeds", "nutVaultKey", "oldTurtleShell", "orangeJellyBean", "peasantHat", "pinkJellyBean", "plantFlower", "rabbitCostume", "rabbitEar", "rabbitFurVest", "rabbitLandEntrancePremission", "redBerries", "redGloves", "redJellyBean", "shortAxe", "shortBow", "shortClub", "shortDagger", "shortScimitar", "shortSword", "smallFish", "strapShoes", "strawHat", "swordOfElad", "tomato", "turtleShell", "turtleShellOld", "turtleShellSpiked", "whiteGloves", "whiteJellyBean", "yellowJellyBean" /* AUTO_GENERATED_LOOT_END */)]
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -768,7 +768,7 @@ public class QuestCondition
 [System.Serializable]
 public class QuestState
 {
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
     public string QuestKey;
 
     public string State

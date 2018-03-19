@@ -608,7 +608,7 @@ public class ActorInstance : MonoBehaviour
                 string errorMessage = Info.Inventory.canPickItem(item);
                 if (errorMessage != "") 
                 {
-                    InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(errorMessage);
+                    InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(errorMessage, Color.red, false);
                     continue;
                 }
                 SocketClient.Instance.SendPickedItem(itemKey);

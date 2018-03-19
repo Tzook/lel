@@ -34,6 +34,6 @@ public class ManaUsage
 
     public void WarnAboutMana()
     {
-        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Not enough mana.", Color.red, true);
+        InGameMainMenuUI.Instance.ShockMessageTop.CallMessage("Not enough mana.", Color.red, false);
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 //VERSION 1.3
 
@@ -347,7 +348,29 @@ public class ResourcesLoader : MonoBehaviour {
 
         LoadingWindowUI.Instance.Leave(this);
 
+        RunResourcesLoadedCallbacks();
+    }
 
+    protected List<Action> m_resourcesLoadedCallbacks = new List<Action>();
+    public void RunWhenResourcesLoaded(Action callback)
+    {
+        if (m_bLoading)
+        {
+            m_resourcesLoadedCallbacks.Add(callback);
+        }
+        else 
+        {
+            callback();
+        }
+    }
+
+    protected void RunResourcesLoadedCallbacks()
+    {  
+        foreach (Action callback in m_resourcesLoadedCallbacks)
+        {
+            callback();
+        }
+        m_resourcesLoadedCallbacks.Clear();
     }
 
     protected IEnumerator LoadSceneObjectsRoutine()

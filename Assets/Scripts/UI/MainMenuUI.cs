@@ -257,23 +257,27 @@ public class MainMenuUI : MonoBehaviour
         if (response["error"] != null)
         {
             Debug.Log("Session could not be done: " + response["error"].Value);
-            AudioControl.Instance.Play("sound_negative");
+            ResourcesLoader.Instance.RunWhenResourcesLoaded(delegate {
+                AudioControl.Instance.Play("sound_negative");
+            });
         }
         else
         {
             Debug.Log(response["data"]);
             LocalUserInfo.Me.UpdateData(response["data"]);
-            MoveToMenu(1);
-            LoadPlayerCharacters(LocalUserInfo.Me);
-            for (int i = 0; i < LocalUserInfo.Me.Characters.Count; i++)
-            {
-                if (LocalUserInfo.Me.Characters[i].ID == LastLoggedInCharId)
+            ResourcesLoader.Instance.RunWhenResourcesLoaded(delegate {
+                MoveToMenu(1);
+                LoadPlayerCharacters(LocalUserInfo.Me);
+                for (int i = 0; i < LocalUserInfo.Me.Characters.Count; i++)
                 {
-                    StartCoroutine(ShowCharacterInfoRoutine(LocalUserInfo.Me.Characters[i]));
+                    if (LocalUserInfo.Me.Characters[i].ID == LastLoggedInCharId)
+                    {
+                        StartCoroutine(ShowCharacterInfoRoutine(LocalUserInfo.Me.Characters[i]));
+                    }
                 }
-            }
-            LastLoggedInCharId = null;
-            AudioControl.Instance.Play("sound_positive");
+                LastLoggedInCharId = null;
+                AudioControl.Instance.Play("sound_positive");
+            });
         }
     }
 

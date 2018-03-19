@@ -281,6 +281,11 @@ public class DevMonsterInfo
     public List<DevSpell> Spells = new List<DevSpell>();
 
     public DevSpell DeathRattle;
+
+    public DevMonsterInfo Clone()
+    {
+        return (DevMonsterInfo)this.MemberwiseClone();
+    }
 }
 
 [System.Serializable]

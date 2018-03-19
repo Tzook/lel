@@ -36273,7 +36273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41761798, y: 0.93843925}
   m_AnchorMax: {x: 0.574, y: 1}
-  m_AnchoredPosition: {x: 3.600998, y: 4.81781}
+  m_AnchoredPosition: {x: 3.600998, y: 4.8178406}
   m_SizeDelta: {x: 4.6542664, y: 7.363777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1725
@@ -46917,6 +46917,80 @@ MonoBehaviour:
       HitSound: 
       MinTime: 0
       MaxTime: 0
+  - MonsterKey: GiantBat
+    MonsterName: GiantBat
+    MonsterHP: 80
+    MonsterLevel: 5
+    DMG: 8
+    RewardEXP: 40
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 2
+      MaxStack: 4
+    - ItemKey: batWing
+      MinStack: 1
+      MaxStack: 2
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -49511,15 +49585,16 @@ MonoBehaviour:
   - Name: Frost Magic Practice
     Key: frostPractice
     InProgressDescription: In order to use frost magic whenever I wish I must  practice
-      with the Master Acolyte.
+      with the Master Acolyte, the given task is to slay the Giant Bat dwelling in
+      their shrine.
     QuestCompleteDescription: I've mastered the basic form of frost magic.
     FacePrefab: FaceOfFrostQuest
     Conditions:
-    - Condition: ok
-      Type: PassedTest
+    - Condition: hunt
+      Type: GiantBat
       CurrentProgress: 0
       TargetProgress: 1
-      ExtraDescription: Passed Test
+      ExtraDescription: 
     QuestsStates:
     - QuestKey: FrostTest
       EnumState: 1

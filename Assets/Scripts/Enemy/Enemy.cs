@@ -287,7 +287,7 @@ public class Enemy : MonoBehaviour {
         for (int i = 0; i < SceneInfo.Instance.Spawners.Count; i++)
         {
             tempSpawner = SceneInfo.Instance.Spawners[i];
-
+             
             if (tempSpawner.MonsterKey == Info.Name)
             {
                 tempDistance = Vector2.Distance(transform.position, tempSpawner.transform.position);

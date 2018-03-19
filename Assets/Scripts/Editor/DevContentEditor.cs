@@ -3,6 +3,7 @@
  * item delete 'ItemKey / index'
  * 
  * Monsters:
+ * monster clone 'MonsterKey'
  * monster delete 'MonserKey / Index'
  * monster addLoot 'MonserKey' 'ItemKey'
  * monster deleteLoot 'MonsterKey' 'ItemKey'
@@ -435,6 +436,12 @@ public class DevContentEditor : Editor
         }
         else if (WordNumber(0) == "monster")
         {
+            if(WordNumber(1) == "clone")
+            {
+                Undo.RecordObject(target, "Clone Monster");
+                currentInfo.Monsters.Add(currentInfo.GetMonster(WordNumber(2)).Clone());
+                return;
+            }
             if (WordNumber(1) == "delete")
             {
                 int tempIndex;

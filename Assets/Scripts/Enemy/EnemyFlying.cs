@@ -175,6 +175,8 @@ public class EnemyFlying : Enemy {
             {
                 yield return CurrentActionRoutine;
             }
+
+            yield return 0;
         }
     }
 

@@ -64,7 +64,6 @@ public class ui_pageMenu : MonoBehaviour {
 
         if (m_ParallaxBackground != null)
         {
-            Debug.Log(m_iLastIndex - m_iIndex);
             m_ParallaxBackground.Step(new Vector2(m_iIndex - m_iLastIndex, 0));
         }
 

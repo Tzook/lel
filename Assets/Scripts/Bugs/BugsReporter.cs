@@ -9,12 +9,11 @@ public class BugsReporter
     public static BugsReporter Instance
     { get { return _instance == null ? _instance = new BugsReporter() : _instance; } }
 
-    public void ReportBug(string title, string body)
+    public void ReportBug(string body)
     {
         JSONNode node = new JSONClass();
         Debug.Log("Sending issue...");
 
-        node["title"] = title;
         node["body"] = body;
         node["name"] = LocalUserInfo.Me.ClientCharacter.Name;
 

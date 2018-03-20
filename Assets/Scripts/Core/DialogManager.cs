@@ -22,6 +22,8 @@ public class DialogManager : MonoBehaviour {
 
     bool isVendorMode = false;
 
+    BoxCollider2D PreservedRope;
+
     void Awake()
     {
         Instance = this;
@@ -51,11 +53,13 @@ public class DialogManager : MonoBehaviour {
 
         inDialog = true;
 
+        // we are changing layers, so it will trigger an exit with the rope collider - so remember it and put it back when done
+        PreservedRope = Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentRope;
+
         SetBlur(true);
 
         Game.Instance.ClientCharacter.GetComponent<ActorController>().InteractWithNpc();
-        Game.Instance.CanUseUI = false;
-
+        
         CurrentNPCBubble = ResourcesLoader.Instance.GetRecycledObject("NPCBubble");
         CurrentNPCBubble.transform.position = npc.ChatBubbleSpot.position;
         CurrentNPCBubble.gameObject.SetActive(false);
@@ -105,8 +109,8 @@ public class DialogManager : MonoBehaviour {
         SetBlur(false);
         currentNPC = null;
 
-        Game.Instance.ClientCharacter.GetComponent<ActorController>().CanInput = true;
-        Game.Instance.CanUseUI = true;
+        Game.Instance.ClientCharacter.GetComponent<ActorController>().CurrentRope = PreservedRope;
+        Game.Instance.IsChattingWithNpc = false;
 
         HideNPCBubble();
 
@@ -360,17 +364,17 @@ public class DialogManager : MonoBehaviour {
 
     public void SetBlur(bool state)
     {
+        ActorInstance actorInstance = Game.Instance.ClientCharacter.GetComponent<ActorInstance>();
         GameCamera.Instance.SetBlurMode(state);
-
         if (state)
         {
             currentNPC.SetLayerInChildren(13);
-            Game.Instance.ClientCharacter.GetComponent<ActorInstance>().SetRenderingLayer(13);
+            actorInstance.SetRenderingLayer(13);
         }
         else
         {
             currentNPC.SetLayerInChildren(0);
-            Game.Instance.ClientCharacter.GetComponent<ActorInstance>().SetRenderingLayer(8);
+            actorInstance.SetRenderingLayer(8);
         }
     }
 

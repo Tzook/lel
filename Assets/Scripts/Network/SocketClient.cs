@@ -701,7 +701,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Has Been Resurrected");
 
-        Game.Instance.CanUseUI = true;
+        Game.Instance.IsAlive = true;
     }
 
     protected void OnActorLoadAttack(Socket socket, Packet packet, object[] args)

@@ -34,7 +34,6 @@ public class ActorController : MonoBehaviour
     public bool OnRope = false;
     public bool LeftSlope = false;
     public bool RightSlope = false;
-    public bool CanInput = true;
     public bool isAiming;
 
     [SerializeField]
@@ -222,7 +221,7 @@ public class ActorController : MonoBehaviour
 
     private bool CanDoAction()
     {
-        return CanInput && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal && CurrentSpellInCast == null && !Stunned;
+        return Game.Instance.CanUseUI && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal && CurrentSpellInCast == null && !Stunned;
     }
 
     void LateUpdate()
@@ -851,14 +850,13 @@ public class ActorController : MonoBehaviour
         Instance.PlayEyesEmote("cry");
         Instance.PlayMouthEmote("angry");
 
-        CanInput = false;
-        Game.Instance.CanUseUI = false;
+        Game.Instance.IsAlive = false;
     }
 
     public void InteractWithNpc()
     {
+        Game.Instance.IsChattingWithNpc = true;
         InturruptAttack();
-        CanInput = false;
         Anim.SetBool("ClimbingUp", false);
         Anim.SetBool("ClimbingDown", false);
     }

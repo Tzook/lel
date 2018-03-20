@@ -10,7 +10,16 @@ public class Game : MonoBehaviour {
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
     public bool InChat = false;
-    public bool CanUseUI = true;
+    public bool IsAlive = true;
+    public bool IsChattingWithNpc = false;
+    
+    public bool CanUseUI
+    {
+        get 
+        {
+            return IsAlive && !IsChattingWithNpc;
+        }
+    }
     public bool isDraggingWindow = false;
     public bool isClickingOnUI = false;
     public bool isInteractingWithUI

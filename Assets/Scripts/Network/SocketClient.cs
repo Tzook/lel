@@ -411,7 +411,7 @@ public class SocketClient : MonoBehaviour
 
         ItemInfo swappedItem = null;
 
-        if (!string.IsNullOrEmpty(data["equipped_item"]["name"]))
+        if (!string.IsNullOrEmpty(data["equipped_item"]["key"]))
         {
             swappedItem = new ItemInfo(Content.Instance.GetItem(data["equipped_item"]["key"].Value), PerkListGetter.Instance.Get(data["equipped_item"]));
         }

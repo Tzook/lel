@@ -9,7 +9,8 @@ public class DialogManager : MonoBehaviour {
 
     public static DialogManager Instance;
 
-    NPC currentNPC;
+    public NPC currentNPC;
+
     Dialog CurrentDialog;
     GameObject CurrentNPCBubble;
     GameObject CurrentOptionsFrame;
@@ -49,7 +50,7 @@ public class DialogManager : MonoBehaviour {
     {
         currentNPC = npc;
 
-        currentNPC.ShowName();
+        currentNPC.ShowName(true);
 
         inDialog = true;
 
@@ -92,7 +93,7 @@ public class DialogManager : MonoBehaviour {
             currentNPC.TriggerAnimation(currentNPC.EndAnimation);
         }
 
-        currentNPC.HideName();
+        currentNPC.HideName(true);
 
         StopAllCoroutines();
 

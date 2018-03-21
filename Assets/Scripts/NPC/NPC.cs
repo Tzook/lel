@@ -36,6 +36,8 @@ public class NPC : MonoBehaviour {
     [SerializeField]
     Text NameTag;
 
+    private FadeText NameTagFader;
+
     public Transform ChatBubbleSpot;
 
     public Transform QuestSpot;
@@ -45,6 +47,8 @@ public class NPC : MonoBehaviour {
     void Start()
     {
         Initialize();
+        NameTagFader = gameObject.AddComponent<FadeText>();
+        NameTagFader.text = NameTag;
     }
 
     private void Initialize()
@@ -62,7 +66,7 @@ public class NPC : MonoBehaviour {
         Game.Instance.CurrentScene.AddNPC(this);
 
         NameTag.text = Name;
-        NameTag.gameObject.SetActive(false);
+        HideName(true);
 
         RefreshQuestState();
     }
@@ -226,14 +230,14 @@ public class NPC : MonoBehaviour {
         }
     }
 
-    public void ShowName()
+    public void ShowName(bool instant)
     {
-        NameTag.gameObject.SetActive(true);
+        NameTagFader.FadeIn(instant ? 0 : 0.1f);
     }
 
-    public void HideName()
+    public void HideName(bool instant)
     {
-        NameTag.gameObject.SetActive(false);
+        NameTagFader.FadeOut(instant ? 0 : 0.1f);
     }
 
 
@@ -290,6 +294,19 @@ public class NPC : MonoBehaviour {
         }
 
         return -1;
+    }
+
+    void OnMouseOver()
+    {
+        ShowName(false);
+    }
+
+    void OnMouseExit()
+    {
+        if (!DialogManager.Instance.inDialog || DialogManager.Instance.currentNPC != this)
+        {
+            HideName(false);
+        }
     }
 }
 

@@ -190,17 +190,29 @@ public class DialogManager : MonoBehaviour {
                     AudioControl.Instance.PlayWithPitch("talksound", CurrentDialog.Pieces[i].Pitch);
                 }
 
-                if(ContinueChat())
+                if (ContinueChat())
                 {
-                    break;
+                    // skipping - make the letters come twice a frame
+                    if (BubbleText.text.Length % 2 == 0)
+                    {
+                        yield return 0;
+                    }
                 }
-
-                yield return new WaitForSeconds(CurrentDialog.Pieces[i].LetterDelay);
+                else
+                {
+                    yield return new WaitForSeconds(CurrentDialog.Pieces[i].LetterDelay);
+                }
             }
 
-            BubbleText.text = CurrentDialog.Pieces[i].Content;
-
-            yield return 0;
+            if (ContinueChat())
+            {
+                // skipping - delay it a bit, to finish reading briefly
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+                yield return 0;
+            }
 
             CurrentOptionsFrame.GetComponent<DialogOptionsFrameUI>().StartWavingInstruction("Press 'Space' to continue...");
 
@@ -284,7 +296,7 @@ public class DialogManager : MonoBehaviour {
 
     private static bool ContinueChat()
     {
-        return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
+        return Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0);
     }
 
     public bool CanShowOption(DialogOption option)

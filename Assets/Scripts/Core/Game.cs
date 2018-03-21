@@ -29,7 +29,8 @@ public class Game : MonoBehaviour {
             return isDraggingWindow
                     || isClickingOnUI
                     || InGameMainMenuUI.Instance.isDraggingItem
-                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen;
+                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen
+                    || !CanUseUI;
         }
     }
     public bool MovingTroughPortal = false;

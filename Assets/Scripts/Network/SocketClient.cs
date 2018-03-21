@@ -1514,14 +1514,18 @@ public class SocketClient : MonoBehaviour
 
     public void SendUsedEquip(string fromSlot)
     {
+        ItemInfo itemInfo = LocalUserInfo.Me.ClientCharacter.Equipment.GetItem(fromSlot);
+        if (itemInfo == null)
+        {
+            return;
+        }
         JSONNode node = new JSONClass();
 
         node["slot"] = fromSlot;
 
-        string useSound = LocalUserInfo.Me.ClientCharacter.Equipment.GetItem(fromSlot).UseSound;
-        if (!string.IsNullOrEmpty(useSound))
+        if (!string.IsNullOrEmpty(itemInfo.UseSound))
         {
-            AudioControl.Instance.Play(useSound);
+            AudioControl.Instance.Play(itemInfo.UseSound);
         }
 
         CurrentSocket.Emit("used_equip", node);

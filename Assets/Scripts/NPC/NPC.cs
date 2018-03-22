@@ -36,19 +36,23 @@ public class NPC : MonoBehaviour {
     [SerializeField]
     Text NameTag;
 
-    private FadeText NameTagFader;
+    FadeText NameTagFader;
 
     public Transform ChatBubbleSpot;
 
     public Transform QuestSpot;
 
     public GameObject CurrentQuestBubble;
-    
+
+    private void OnEnable()
+    {
+        NameTagFader = gameObject.AddComponent<FadeText>();
+        NameTagFader.text = NameTag;
+    }
+
     void Start()
     {
         Initialize();
-        NameTagFader = gameObject.AddComponent<FadeText>();
-        NameTagFader.text = NameTag;
     }
 
     private void Initialize()

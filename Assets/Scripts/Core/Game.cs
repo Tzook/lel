@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
 
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
+    public bool Online = true;
     public bool InChat = false;
     public bool IsAlive = true;
     public bool IsChattingWithNpc = false;
@@ -17,7 +18,7 @@ public class Game : MonoBehaviour {
     {
         get 
         {
-            return IsAlive && !IsChattingWithNpc;
+            return IsAlive && !IsChattingWithNpc && Online;
         }
     }
     public bool isDraggingWindow = false;

@@ -181,11 +181,13 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("On disconnect");
 
         LocalUserInfo.Me.DisposeCurrentCharacter();
+        Game.Instance.Online = false;
     }
 
     protected void OnConnect(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("On connect");
+        Game.Instance.Online = true;
     }
 
     protected void OnActorJoinRoom(Socket socket, Packet packet, params object[] args)

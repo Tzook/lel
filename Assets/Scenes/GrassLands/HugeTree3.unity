@@ -13944,6 +13944,7 @@ MonoBehaviour:
   - {fileID: 235110720}
   - {fileID: 1068195684}
   - {fileID: 988317055}
+  - {fileID: 1487406162}
   Spawners: []
   Npcs:
   - {fileID: 1848271894}
@@ -22560,6 +22561,93 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1487406160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1259513383543036, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1487406164}
+  - component: {fileID: 1487406163}
+  - component: {fileID: 1487406162}
+  - component: {fileID: 1487406161}
+  m_Layer: 2
+  m_Name: Portal (5)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1487406161
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 61002359517793564, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487406160}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3197689, y: -0.19352102}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.97, y: 1.97}
+    newSize: {x: 1.97, y: 1.97}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6745186, y: 1.5163698}
+  m_EdgeRadius: 0
+--- !u!114 &1487406162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487406160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: HeavenGate
+  TargetPortal: Entrance
+  TargetLevel: HugeTreeBranch_Heaven
+  StartShut: 0
+  RequiresItems: []
+--- !u!210 &1487406163
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 210953425027317772, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487406160}
+  m_Enabled: 1
+  m_SortingLayerID: -1262447697
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+--- !u!4 &1487406164
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487406160}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -67.37, y: 57.5, z: 0.08113527}
+  m_LocalScale: {x: 1, y: 1, z: 0.73522997}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 127
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1500664993
 GameObject:
   m_ObjectHideFlags: 0

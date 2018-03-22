@@ -46180,7 +46180,7 @@ MonoBehaviour:
       MaxTime: 0
   - MonsterKey: FrostWizardBoss
     MonsterName: Frost Wizard
-    MonsterHP: 700
+    MonsterHP: 600
     MonsterLevel: 1
     DMG: 8
     RewardEXP: 300
@@ -46257,7 +46257,7 @@ MonoBehaviour:
       ColliderPrefab: FrostBall
       Perks:
       - Key: damageModifier
-        Value: 12
+        Value: 4
       Icon: {fileID: 0}
       HitSound: sound_impactCold
       MinTime: 2
@@ -49764,6 +49764,40 @@ MonoBehaviour:
       TargetProgress: 50
       ExtraDescription: 
     QuestsStates: []
+    MinimumLevel: 6
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 10
+  - Name: Divine Place
+    Key: divinePlace
+    InProgressDescription: In order to learn the healing ability I must speak with
+      the priest on the highest branch of huge tree, which is east to Shellhill...
+    QuestCompleteDescription: I met the priest on the tree branch.
+    FacePrefab: TurtolentQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: joinShrine
+      EnumState: 1
+    MinimumLevel: 6
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 10
+  - Name: Summon An Angel
+    Key: summonAnAngel
+    InProgressDescription: Virtule says that only people who are touched with light
+      by an angel can use the practice of healing. I must therefor summon an angel,
+      that could only be done by playing the golden gong while three players  stand
+      on each of the altars.
+    QuestCompleteDescription: I successfully summoned the angel.
+    FacePrefab: TurtolentQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: divinePlace
+      EnumState: 1
     MinimumLevel: 6
     RewardItems: []
     RewardHP: 0
@@ -92073,7 +92107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.74916315}
   m_AnchorMax: {x: 0.052500006, y: 0.83400005}
-  m_AnchoredPosition: {x: -1, y: -0.3203125}
+  m_AnchoredPosition: {x: -1, y: -0.32043457}
   m_SizeDelta: {x: -2, y: -0.63899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146034896
@@ -110365,7 +110399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9512501, y: 0.74916315}
   m_AnchorMax: {x: 1, y: 0.8174894}
-  m_AnchoredPosition: {x: -0.29003906, y: 3.6723633}
+  m_AnchoredPosition: {x: -0.29016113, y: 3.6723633}
   m_SizeDelta: {x: 0.47, y: 7.3447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2123855879

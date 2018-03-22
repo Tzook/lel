@@ -1681,7 +1681,7 @@ public class SocketClient : MonoBehaviour
         JSONNode node = new JSONClass();
 
         Game.Instance.MovingTroughPortal = true;
-        CurrentSocket.Emit("move_to_town", node);
+        CurrentSocket.Emit("stuck", node);
     }
 
     public void SendQuestStarted(string questID, string npcKey)

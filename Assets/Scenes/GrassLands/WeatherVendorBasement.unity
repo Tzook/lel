@@ -3907,17 +3907,39 @@ MonoBehaviour:
   Name: WeatherVendorBasement
   NearestTownScene: ShellHill
   BGMusic: 
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 1964734553}
   Spawners: []
   Npcs:
   - {fileID: 2087524684}
   miniMapInfo:
-    left: 9999
-    right: -9999
-    top: -9999
-    bottom: 9999
-    coliders: []
+    left: -8.540287
+    right: 0.24583817
+    top: 3.235
+    bottom: -1.24
+    coliders:
+    - coliders:
+      - {x: -8.384999, y: -0.8071221}
+      - {x: 0.07487583, y: -0.8071221}
+      - {x: -8.384999, y: -1.24}
+      - {x: 0.07487583, y: -1.24}
+    - coliders:
+      - {x: -8.540287, y: 3.235}
+      - {x: 0.24583817, y: 3.235}
+      - {x: -8.540287, y: 2.6076238}
+      - {x: 0.24583817, y: 2.6076238}
+    - coliders:
+      - {x: -0.56638956, y: 3.174481}
+      - {x: 0.09901574, y: 3.174481}
+      - {x: -0.56638956, y: -1.1402041}
+      - {x: 0.09901574, y: -1.1402041}
+    - coliders:
+      - {x: -8.44439, y: 2.9141514}
+      - {x: -7.7789845, y: 2.9141514}
+      - {x: -8.44439, y: -1.1197627}
+      - {x: -7.7789845, y: -1.1197627}
+  NetStateEntities: []
 --- !u!4 &205720643
 Transform:
   m_ObjectHideFlags: 0
@@ -11641,11 +11663,15 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: Greet
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: I've got what you need!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Trade
       Event: Trade

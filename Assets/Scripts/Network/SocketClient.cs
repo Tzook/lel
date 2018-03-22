@@ -1674,7 +1674,14 @@ public class SocketClient : MonoBehaviour
         Game.Instance.RemoveAllSceneEntityInstances();
 
         CurrentSocket.Emit("release_death", node);
+    }
 
+    public void SendStuck()
+    {
+        JSONNode node = new JSONClass();
+
+        Game.Instance.MovingTroughPortal = true;
+        CurrentSocket.Emit("move_to_town", node);
     }
 
     public void SendQuestStarted(string questID, string npcKey)

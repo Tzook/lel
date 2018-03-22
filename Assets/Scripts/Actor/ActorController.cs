@@ -423,8 +423,17 @@ public class ActorController : MonoBehaviour
                 SocketClient.Instance.EmitMovement(transform.position, rotDegrees);
                 lastSentPosition = transform.position;
                 lastSentAngle = rotDegrees;
+                if (OutOfSceneBounds())
+                {
+                    SocketClient.Instance.SendStuck();
+                }
             }
         }
+    }
+
+    private bool OutOfSceneBounds()
+    {
+        return SceneInfo.Instance.miniMapInfo != null && SceneInfo.Instance.miniMapInfo.bottom != 0 && (transform.position.y < SceneInfo.Instance.miniMapInfo.bottom || transform.position.x > SceneInfo.Instance.miniMapInfo.right || transform.position.x < SceneInfo.Instance.miniMapInfo.left);
     }
 
     private bool IsCharAboveRope()

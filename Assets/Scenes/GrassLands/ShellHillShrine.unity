@@ -4990,6 +4990,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: joinShrine
       CLR: {r: 1, g: 0.9607844, b: 0.6313726, a: 1}
+    - Title: I wish to learn more...
+      Event: StartDialog
+      Value: DivinePlace
+      Condition: QuestAvailable
+      ConditionValue: divinePlace
+      CLR: {r: 1, g: 0.9607844, b: 0.6313726, a: 1}
     - Title: Bye...
       Event: EndDialog
       Value: 
@@ -5051,8 +5057,141 @@ MonoBehaviour:
       PostPieceEvent: CompleteQuest
       PostPieceEventValue: joinShrine
     Options: []
+  - DialogKey: DivinePlace
+    Pieces:
+    - Content: So quickly?
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So be it.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I will not dare to upset your eagerness!
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It seems to me that something pushes you towards the holy practice
+        of healing.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And after seeing through you I can see that it will be the most fitting
+        role for you in our shrine.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But I am not allowed to speak with the angels, nor ask them for a touch
+        of light.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: For that you must meet Virtule.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Who is Virtule?
+      Event: StartDialog
+      Value: DivinePlace2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0, b: 0, a: 0}
+  - DialogKey: DivinePlace2
+    Pieces:
+    - Content: Virtule is the keeper of the divine branch, the place we use to communicate
+        with the angels.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: To get there you must walk east, untill you find a huge tree.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: In that tree you must climb as high as you can, to the highest branch,
+        there you'll find Virtule.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Be warned, the tree is guarded by it's dwellers and will be hostile
+        to you.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You must understand...
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: All they wish to do is protect their home, so, try to avoid them, if
+        you can.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: divinePlace
+    - Content: You also must know!-
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: divinePlace
+    - Content: That the summoning could be done only with three people!
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: This will also test your social influence, so don't forget to bring
+        those two people with you.
+      LetterDelay: 0.03
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: divinePlace
+    Options: []
   GivingQuests:
   - joinShrine
+  - divinePlace
   EndingQuests:
   - joinShrine
   TeleportableScenes: []

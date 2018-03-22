@@ -272,6 +272,16 @@ public class GameCamera : MonoBehaviour {
         StartCoroutine(FocusDefaultRoutine());
     }
 
+    public void Shake(float Duration)
+    {
+        if (ShakeInstance != null)
+        {
+            StopCoroutine(ShakeInstance);
+        }
+
+        ShakeInstance = StartCoroutine(ShakeRoutine(Duration, 10f));
+    }
+
     public void Shake(float Duration, float Power)
     {
         if(ShakeInstance != null)

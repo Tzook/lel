@@ -162,8 +162,7 @@ public class SocketClient : MonoBehaviour
     private void OnError(Socket socket, Packet packet, object[] args)
     {
         Error error = args[0] as Error;
-        BroadcastEvent("On error");
-        WarningMessageUI.Instance.ShowMessage("An error occurred: " + error);
+        BroadcastEvent("On error: " + error);
     }
     
     private void OnEventError(Socket socket, Packet packet, object[] args)

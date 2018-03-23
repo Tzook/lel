@@ -726,8 +726,9 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(actor.Name + " Preforms Attack");
 
-        actor.Instance.PreformAttack((1f*data["load"].AsInt)/100f);
-        actor.Instance.MovementController.ActivatePrimaryAbility();
+        float load = (1f * data["load"].AsInt) / 100f;
+        actor.Instance.PreformAttack(load);
+        actor.Instance.MovementController.ActivatePrimaryAbility(load);
 
     }
 

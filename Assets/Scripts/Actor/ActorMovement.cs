@@ -174,6 +174,11 @@ public class ActorMovement : MonoBehaviour
 
         if (Instance.Info.Climbing)
         {
+
+            Collider.isTrigger = true;
+            Rigid.isKinematic = true;
+            Rigid.velocity = Vector2.zero;
+
             if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
             {
                 Anim.SetBool("ClimbingUp", true);
@@ -192,6 +197,9 @@ public class ActorMovement : MonoBehaviour
         }
         else
         {
+            Collider.isTrigger = false;
+            Rigid.isKinematic = false;
+
             if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
             {
                 //Anim.SetBool("InAir", true);

@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -912,6 +913,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -996,7 +998,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 149418352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -68.599, y: -83.684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.017989999, y: 0.01793, z: 0.017989999}
   m_Children:
   - {fileID: 1316115569}
@@ -1874,7 +1876,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 409691564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.000022888184, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 496028404}
@@ -2480,7 +2482,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 496028403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.4799995, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 409691568}
@@ -3678,6 +3680,8 @@ MonoBehaviour:
   Key: RightGate
   TargetPortal: CosmoExit
   TargetLevel: GrassLands5_1
+  StartShut: 0
+  RequiresItems: []
 --- !u!61 &820583180
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5094,6 +5098,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -5436,6 +5441,8 @@ MonoBehaviour:
   Key: LeftGate
   TargetPortal: RightGate
   TargetLevel: GrassLands5_1_2
+  StartShut: 0
+  RequiresItems: []
 --- !u!61 &1289401538
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5762,7 +5769,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1316115568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.000034332275, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 149418355}
@@ -6677,6 +6684,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Cosmo?...
       Event: StartDialog
@@ -6721,26 +6730,36 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: Conversation
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: A visitor!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: A fan!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: You came to see my work!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: My latest work of art!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: sound_positive2
       AnimationTrigger: ShowPainting
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: What the hell is that?
       Event: StartDialog
@@ -6773,6 +6792,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: What a beautiful work of art!
       Event: StartDialog
@@ -6787,6 +6808,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: An impressive painting!
       Event: StartDialog
@@ -6801,6 +6824,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: It fills me with inspiration!
       Event: StartDialog
@@ -6815,6 +6840,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I love it!
       Event: StartDialog
@@ -6829,6 +6856,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '*Blushing*'
       Event: EndDialog
@@ -6843,6 +6872,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I just don't see the point.
       Event: StartDialog
@@ -6869,17 +6900,23 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: That's why I paint paintings instead of  fighting monsters in my spare
         time.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Could you say the same about yourself?
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Not really...
       Event: EndDialog
@@ -6900,11 +6937,15 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: It's a comission.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Made by who?
       Event: StartDialog
@@ -6925,16 +6966,22 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Tert, Shellhill's Inkeeper.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: He aims to keep the war between turtles and rabbits going on and on...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Why?
       Event: StartDialog
@@ -6949,16 +6996,22 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: That these conflicts attracts adventurers like you...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: And adventurers like you are his inn's primary customer.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: A Conspiratorial thing to say.
       Event: StartDialog
@@ -6979,6 +7032,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: True...
       Event: EndDialog
@@ -6999,21 +7054,29 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Due to high risk of vandalism.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: So... In other words...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: No.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: WHAT?
       Event: StartDialog
@@ -7040,6 +7103,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I DIDN'T CLIMB ALL THE WAY HERE TO BE REJECTED
       Event: StartDialog
@@ -7060,6 +7125,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: CAN'T YOU SEE HOW ANGRY I AM?
       Event: StartDialog
@@ -7080,11 +7147,15 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Being mad is basically your fault.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'LL TAKE IT BY FORCE!~
       Event: StartDialog
@@ -7111,11 +7182,15 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Technically.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: '...'
       Event: EndDialog
@@ -7130,6 +7205,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: This is for a friend of mine...
       Event: StartDialog
@@ -7144,6 +7221,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: He is a turtle child from Shellhill.
       Event: StartDialog
@@ -7158,6 +7237,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: He accidently ruined his father's painting...
       Event: StartDialog
@@ -7172,6 +7253,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: The poor child was in panic...
       Event: StartDialog
@@ -7186,6 +7269,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I had to help him...
       Event: StartDialog
@@ -7200,6 +7285,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: And I climbed a lot to get here...
       Event: StartDialog
@@ -7214,6 +7301,8 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Could you please help me out?
       Event: StartDialog
@@ -7228,21 +7317,29 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: '...'
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Okay...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: For the child turtle...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -7257,26 +7354,36 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: It's a mess...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Alright, it'll take me a minute to fix it.
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: So you'll have to wait a full minute, not knowing what to do...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Are you ready for this challenge?
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: I'm Ready.
       Event: StartQuest
@@ -7297,16 +7404,22 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: NO!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: Can't you wait a full minute without bothering me?
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Okay... Okay..
       Event: EndDialog
@@ -7321,21 +7434,29 @@ MonoBehaviour:
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: NO!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: 'Kidding!, Kidding! '
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     - Content: There you go...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
     Options:
     - Title: Complete Quest
       Event: CompleteQuest
@@ -7349,6 +7470,7 @@ MonoBehaviour:
   EndingQuests:
   - findCosmo
   - findCosmo2
+  TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -9663,6 +9785,7 @@ MonoBehaviour:
   Name: GrassLands5_1_3
   NearestTownScene: GrassLands5_1_3
   BGMusic: 
+  RoomAbilities: []
   ScenePortals:
   - {fileID: 1289401537}
   - {fileID: 820583179}
@@ -9670,11 +9793,37 @@ MonoBehaviour:
   Npcs:
   - {fileID: 1466581649}
   miniMapInfo:
-    left: 0
-    right: 0
-    top: 0
-    bottom: 0
-    coliders: []
+    left: -88.147
+    right: -58.744633
+    top: -73.2737
+    bottom: -86.100006
+    coliders:
+    - coliders:
+      - {x: -88.147, y: -73.2737}
+      - {x: -80.20108, y: -75.402794}
+      - {x: -90.99892, y: -83.91721}
+      - {x: -83.05299, y: -86.04631}
+    - coliders:
+      - {x: -67.94892, y: -75.34279}
+      - {x: -60.003, y: -73.213684}
+      - {x: -65.097, y: -85.98631}
+      - {x: -57.151077, y: -83.85721}
+    - coliders:
+      - {x: -80.7365, y: -75.341}
+      - {x: -58.744633, y: -75.341}
+      - {x: -80.7365, y: -75.914604}
+      - {x: -58.744633, y: -75.914604}
+    - coliders:
+      - {x: -84.625114, y: -85.48583}
+      - {x: -64.466415, y: -85.48583}
+      - {x: -84.625114, y: -86.100006}
+      - {x: -64.466415, y: -86.100006}
+    - coliders:
+      - {x: -68.30279, y: -75.5578}
+      - {x: -67.66006, y: -75.38558}
+      - {x: -66.390785, y: -82.69352}
+      - {x: -65.74805, y: -82.52129}
+  NetStateEntities: []
 --- !u!4 &2098596821
 Transform:
   m_ObjectHideFlags: 0

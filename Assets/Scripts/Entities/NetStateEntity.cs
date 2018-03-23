@@ -14,11 +14,6 @@ public class NetStateEntity : MonoBehaviour {
     [SerializeField]
     List<NetStateCondition> States = new List<NetStateCondition>();
 
-    private void Awake()
-    {
-        Game.Instance.CurrentScene.AddNetStateEntity(this);
-    }
-
     public void OnNetStateChange(string givenState)
     {
         CurrentState = givenState;

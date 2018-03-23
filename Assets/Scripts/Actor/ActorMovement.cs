@@ -11,6 +11,7 @@ public class ActorMovement : MonoBehaviour
     protected float relocateSpeed = 15f;
 
     protected Vector3 lastPosition;
+    protected Vector3 lastUpdatedPosition;
     protected Vector3 initScale;
     protected Animator Anim;
 
@@ -22,6 +23,17 @@ public class ActorMovement : MonoBehaviour
     GameObject m_HealthBar;
 
     BoxCollider2D HitBox;
+
+    [SerializeField]
+    Rigidbody2D Rigid;
+
+    [SerializeField]
+    float GroundedThreshold;
+    public bool Grounded = false;
+    LayerMask GroundLayerMask = 0 << 0 | 1 | 16;
+    RaycastHit2D GroundRayRight;
+    RaycastHit2D GroundRayLeft;
+    BoxCollider2D Collider;
 
     void Start()
     {
@@ -45,9 +57,12 @@ public class ActorMovement : MonoBehaviour
                 ShowHealth();
             }
         }
+
+        Collider = GetComponent<BoxCollider2D>();
+        Collider.enabled = true;
     }
 
-    public void UpdateMovement(Vector3 TargetPos, float angle)
+    public void UpdateMovement(Vector3 TargetPos, float angle, float givenVelocity)
     {
         if (TargetPos.x > lastPosition.x)
         {
@@ -68,6 +83,8 @@ public class ActorMovement : MonoBehaviour
         }
 
         lastPosition = TargetPos;
+        Rigid.isKinematic = true;
+        Rigid.velocity = new Vector2(0f, givenVelocity);
     }
 
     private void Aim(float angle)
@@ -134,17 +151,34 @@ public class ActorMovement : MonoBehaviour
         {
             m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y - ((HitBox.bounds.max.y- HitBox.bounds.min.y)/2f) - 0.25f), Time.deltaTime * 8f);
         }
+
+        Rigid.isKinematic = false;
+    }
+
+    private void FixedUpdate()
+    {
+        GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+        GroundRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
+
+        Grounded = (GroundRayRight || GroundRayLeft);
+
+        Anim.SetBool("InAir", !Grounded);
     }
 
     protected void LerpToPosition()
     {
-        Anim.SetBool("InAir", false);
+        //Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
         MovingHorizontal = false;
         MovingVertical = false;
 
         if (Instance.Info.Climbing)
         {
+
+            Collider.isTrigger = true;
+            Rigid.isKinematic = true;
+            Rigid.velocity = Vector2.zero;
+
             if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
             {
                 Anim.SetBool("ClimbingUp", true);
@@ -163,9 +197,12 @@ public class ActorMovement : MonoBehaviour
         }
         else
         {
+            Collider.isTrigger = false;
+            Rigid.isKinematic = false;
+
             if (Mathf.Abs(transform.position.y - lastPosition.y) > 0.05f)
             {
-                Anim.SetBool("InAir", true);
+                //Anim.SetBool("InAir", true);
                 MovingVertical = true;
             }
 
@@ -176,8 +213,9 @@ public class ActorMovement : MonoBehaviour
             }
         }
 
+        Rigid.position = new Vector2(Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed).x, Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * 10f).y);
 
-        transform.position = Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed);
+        lastUpdatedPosition = lastPosition;
     }
 
     public void StartClimbing()

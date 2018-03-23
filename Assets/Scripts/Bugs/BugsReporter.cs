@@ -25,10 +25,13 @@ public class BugsReporter
 
         WWW req = new WWW(Config.BASE_URL + "/issues/create", rawdata, headers);
 
+        // show the logs only in the editor
+        #if UNITY_EDITOR
         ContinuationManager.Add(() => req.isDone, () =>
         {
             if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
             Debug.Log("WWW result : " + req.text);
         });
+        #endif
     }
 }

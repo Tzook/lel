@@ -162,8 +162,7 @@ public class SocketClient : MonoBehaviour
     private void OnError(Socket socket, Packet packet, object[] args)
     {
         Error error = args[0] as Error;
-        BroadcastEvent("On error");
-        WarningMessageUI.Instance.ShowMessage("An error occurred: " + error);
+        BroadcastEvent("On error: " + error);
     }
     
     private void OnEventError(Socket socket, Packet packet, object[] args)
@@ -182,11 +181,13 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("On disconnect");
 
         LocalUserInfo.Me.DisposeCurrentCharacter();
+        Game.Instance.Online = false;
     }
 
     protected void OnConnect(Socket socket, Packet packet, params object[] args)
     {
         BroadcastEvent("On connect");
+        Game.Instance.Online = true;
     }
 
     protected void OnActorJoinRoom(Socket socket, Packet packet, params object[] args)
@@ -211,7 +212,7 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat);
+        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat, data["velocity"].AsFloat);
     }
 
     protected void OnActorStartClimbing(Socket socket, Packet packet, object[] args)
@@ -1378,7 +1379,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("entered_portal", node);
     }
 
-    public void EmitMovement(Vector3 pos, float rotDegrees)
+    public void EmitMovement(Vector3 pos, float rotDegrees, float velocity)
     {
         JSONNode node = new JSONClass();
 
@@ -1386,6 +1387,7 @@ public class SocketClient : MonoBehaviour
         node["y"] = pos.y.ToString();
         node["z"] = pos.z.ToString();
         node["angle"].AsFloat = rotDegrees;
+        node["velocity"].AsFloat = velocity;
 
         CurrentSocket.Emit("movement", node);
     }
@@ -1514,14 +1516,18 @@ public class SocketClient : MonoBehaviour
 
     public void SendUsedEquip(string fromSlot)
     {
+        ItemInfo itemInfo = LocalUserInfo.Me.ClientCharacter.Equipment.GetItem(fromSlot);
+        if (itemInfo == null)
+        {
+            return;
+        }
         JSONNode node = new JSONClass();
 
         node["slot"] = fromSlot;
 
-        string useSound = LocalUserInfo.Me.ClientCharacter.Equipment.GetItem(fromSlot).UseSound;
-        if (!string.IsNullOrEmpty(useSound))
+        if (!string.IsNullOrEmpty(itemInfo.UseSound))
         {
-            AudioControl.Instance.Play(useSound);
+            AudioControl.Instance.Play(itemInfo.UseSound);
         }
 
         CurrentSocket.Emit("used_equip", node);
@@ -1669,7 +1675,14 @@ public class SocketClient : MonoBehaviour
         Game.Instance.RemoveAllSceneEntityInstances();
 
         CurrentSocket.Emit("release_death", node);
+    }
 
+    public void SendStuck()
+    {
+        JSONNode node = new JSONClass();
+
+        Game.Instance.MovingTroughPortal = true;
+        CurrentSocket.Emit("stuck", node);
     }
 
     public void SendQuestStarted(string questID, string npcKey)

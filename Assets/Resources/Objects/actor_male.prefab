@@ -854,7 +854,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011972609366}
   m_LocalRotation: {x: 0, y: 0, z: 0.0015822117, w: 0.99999875}
-  m_LocalPosition: {x: 49.2532, y: 15.696682, z: 0}
+  m_LocalPosition: {x: 49.490555, y: 17.698551, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 224000012168640286}
@@ -1692,7 +1692,6 @@ MonoBehaviour:
   OnRope: 0
   LeftSlope: 0
   RightSlope: 0
-  CanInput: 1
   isAiming: 0
   GroundedThreshold: 0.15
   InternalSpeed: 3.5
@@ -1745,8 +1744,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Instance: {fileID: 114000011670647216}
-  relocateSpeed: 15
+  relocateSpeed: 5
   m_HealthBar: {fileID: 0}
+  Rigid: {fileID: 50000010969435266}
+  GroundedThreshold: 0.15
+  Grounded: 0
 --- !u!114 &114000013741007918
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10597,6 +10597,18 @@ MonoBehaviour:
       Condition: QuestInProgress
       ConditionValue: frostPractice
       CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+    - Title: I've beaten the giant bat!
+      Event: StartDialog
+      Value: FrostPracticeComplete
+      Condition: QuestComplete
+      ConditionValue: frostPractice
+      CLR: {r: 1, g: 0.92860043, b: 0.5294118, a: 1}
+    - Title: Can you tell me more about frost magic?
+      Event: StartDialog
+      Value: FrostMagicDescription
+      Condition: QuestCompleted
+      ConditionValue: frostPractice
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: NotAfraid
     Pieces:
     - Content: Really?
@@ -10831,10 +10843,82 @@ MonoBehaviour:
       PostPieceEvent: StartQuest
       PostPieceEventValue: frostPractice
     Options: []
+  - DialogKey: FrostPracticeComplete
+    Pieces:
+    - Content: I know, I've seen it.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Impressive.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Now, you are finally ready to use the frost magic for your own.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: frostPractice
+    Options: []
+  - DialogKey: FrostMagicDescription
+    Pieces:
+    - Content: To use the magic you must first switch to your Frost ability, that
+        is done by clicking on the ability button at the bottom right of the screen,
+        and then on the frost ability.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You can alternatively use the 'Tab' key and press on the frost ability
+        number.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Leveling the ability is done by hitting enemies with it, leveling grants
+        upgrades and also unique spells which could be casted in higher levels.
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Anything else?
+      LetterDelay: 0.03
+      Pitch: 0.2
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Repeat?
+      Event: StartDialog
+      Value: FrostMagicDescription
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0, b: 0, a: 0}
+    - Title: That's all...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0, b: 0, a: 0}
   GivingQuests:
   - frostPractice
   EndingQuests:
   - OldFriends
+  - frostPractice
   TeleportableScenes:
   - sceneKey: FrostPracticeChamber
     portalKey: Entrance

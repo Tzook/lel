@@ -5,6 +5,7 @@ using UnityEngine;
 using SimpleJSON;
 using BestHTTP;
 using System.Text;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(SceneInfo))]
 public class SceneInfoEditor : Editor {
@@ -96,39 +97,78 @@ public class SceneInfoEditor : Editor {
         float bottom = 9999;
         List<ColiderGroup> coliders = new List<ColiderGroup>();
         Ferr2DT_PathTerrain[] terrains = Resources.FindObjectsOfTypeAll<Ferr2DT_PathTerrain>();
-        foreach (Ferr2DT_PathTerrain terrain in terrains) 
+        if (terrains.Length > 0)
         {
-            List<List<Vector2>> currentColliders = terrain.GetColliderVerts();
-            foreach (List<Vector2> collidersGroup in currentColliders) 
+            foreach (Ferr2DT_PathTerrain terrain in terrains) 
             {
-                ColiderGroup worldColliders = new ColiderGroup();
-
-                // find the top/bottom/right/left so we can draw things relatively
-                foreach (Vector2 vector in collidersGroup) 
+                List<List<Vector2>> currentColliders = terrain.GetColliderVerts();
+                foreach (List<Vector2> collidersGroup in currentColliders) 
                 {
-                    // convert the vector to be relative to the world
-                    Vector2 worldVector = terrain.transform.TransformPoint(vector);
-                    worldColliders.coliders.Add(worldVector);
+                    ColiderGroup worldColliders = new ColiderGroup();
 
-                    if (worldVector.x < left)   left = worldVector.x;
-                    if (right < worldVector.x)  right = worldVector.x;
-                    if (top < worldVector.y)    top = worldVector.y;
-                    if (worldVector.y < bottom) bottom = worldVector.y;
-                }
+                    // find the top/bottom/right/left so we can draw things relatively
+                    foreach (Vector2 vector in collidersGroup) 
+                    {
+                        // convert the vector to be relative to the world
+                        Vector2 worldVector = terrain.transform.TransformPoint(vector);
+                        worldColliders.coliders.Add(worldVector);
 
-                if (worldColliders.coliders.Count > 0) 
-                {
-                    coliders.Add(worldColliders);
+                        if (worldVector.x < left)   left = worldVector.x;
+                        if (right < worldVector.x)  right = worldVector.x;
+                        if (top < worldVector.y)    top = worldVector.y;
+                        if (worldVector.y < bottom) bottom = worldVector.y;
+                    }
+
+                    if (worldColliders.coliders.Count > 0) 
+                    {
+                        coliders.Add(worldColliders);
+                    }
+                    
                 }
-                
             }
         }
+        else
+        {
+            BoxCollider2D[] boxColliders = Resources.FindObjectsOfTypeAll<BoxCollider2D>();
+            foreach (var collider in boxColliders)
+            {
+                if (collider.isTrigger)
+                {
+                    continue;
+                }
+                ColiderGroup collidersGroup = new ColiderGroup();
+
+                float colliderTop = collider.offset.y + (collider.size.y / 2f);
+                float colliderBottom = collider.offset.y - (collider.size.y / 2f);
+                float colliderLeft = collider.offset.x - (collider.size.x / 2f);
+                float colliderRight = collider.offset.x + (collider.size.x /2f);
+                
+                Vector3 topLeft = collider.transform.TransformPoint(new Vector3( colliderLeft, colliderTop, 0f));
+                Vector3 topRight = collider.transform.TransformPoint(new Vector3( colliderRight, colliderTop, 0f));
+                Vector3 bottomLeft = collider.transform.TransformPoint(new Vector3( colliderLeft, colliderBottom, 0f));
+                Vector3 bottomRight = collider.transform.TransformPoint(new Vector3( colliderRight, colliderBottom, 0f));
+
+                if (topLeft.x < left)   left = topLeft.x;
+                if (right < topRight.x)  right = topRight.x;
+                if (top < topLeft.y)    top = topLeft.y;
+                if (bottomLeft.y < bottom) bottom = bottomLeft.y;
+
+                collidersGroup.coliders.Add(topLeft);
+                collidersGroup.coliders.Add(topRight);
+                collidersGroup.coliders.Add(bottomLeft);
+                collidersGroup.coliders.Add(bottomRight);
+
+                coliders.Add(collidersGroup);
+            }
+        }
+
 
         currentInfo.miniMapInfo.left = left;
         currentInfo.miniMapInfo.right = right;
         currentInfo.miniMapInfo.top = top;
         currentInfo.miniMapInfo.bottom = bottom;
         currentInfo.miniMapInfo.coliders = coliders;
+        EditorSceneManager.SaveScene(EditorSceneManager.GetSceneByName(currentInfo.Name));
     }
 
     private void SendSceneInfo(JSONNode node)

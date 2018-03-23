@@ -8,10 +8,10 @@ public class NPC : MonoBehaviour {
 
     public List<Dialog> Dialogs = new List<Dialog>();
 
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
     public List<string> GivingQuests = new List<string>();
     
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
 
     public List<string> EndingQuests = new List<string>();
 
@@ -36,12 +36,20 @@ public class NPC : MonoBehaviour {
     [SerializeField]
     Text NameTag;
 
+    FadeText NameTagFader;
+
     public Transform ChatBubbleSpot;
 
     public Transform QuestSpot;
 
     public GameObject CurrentQuestBubble;
-    
+
+    private void OnEnable()
+    {
+        NameTagFader = gameObject.AddComponent<FadeText>();
+        NameTagFader.text = NameTag;
+    }
+
     void Start()
     {
         Initialize();
@@ -62,7 +70,7 @@ public class NPC : MonoBehaviour {
         Game.Instance.CurrentScene.AddNPC(this);
 
         NameTag.text = Name;
-        NameTag.gameObject.SetActive(false);
+        HideName(true);
 
         RefreshQuestState();
     }
@@ -226,14 +234,14 @@ public class NPC : MonoBehaviour {
         }
     }
 
-    public void ShowName()
+    public void ShowName(bool instant)
     {
-        NameTag.gameObject.SetActive(true);
+        NameTagFader.FadeIn(instant ? 0 : 0.1f);
     }
 
-    public void HideName()
+    public void HideName(bool instant)
     {
-        NameTag.gameObject.SetActive(false);
+        NameTagFader.FadeOut(instant ? 0 : 0.1f);
     }
 
 
@@ -290,6 +298,19 @@ public class NPC : MonoBehaviour {
         }
 
         return -1;
+    }
+
+    void OnMouseOver()
+    {
+        ShowName(false);
+    }
+
+    void OnMouseExit()
+    {
+        if (!DialogManager.Instance.inDialog || DialogManager.Instance.currentNPC != this)
+        {
+            HideName(false);
+        }
     }
 }
 

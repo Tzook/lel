@@ -108,7 +108,8 @@ public class GameCamera : MonoBehaviour {
 
         if (Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI)
         {
-            Cursor.SetCursor(Content.Instance.CrosshairCursor, Vector2.zero, CursorMode.Auto);
+            Vector2 cursorHotspot = new Vector2(Content.Instance.CrosshairCursor.width / 2, Content.Instance.CrosshairCursor.height / 2);
+            Cursor.SetCursor(Content.Instance.CrosshairCursor, cursorHotspot, CursorMode.Auto);
         }
         else
         {
@@ -269,6 +270,16 @@ public class GameCamera : MonoBehaviour {
         CamFollowing = true;
 
         StartCoroutine(FocusDefaultRoutine());
+    }
+
+    public void Shake(float Duration)
+    {
+        if (ShakeInstance != null)
+        {
+            StopCoroutine(ShakeInstance);
+        }
+
+        ShakeInstance = StartCoroutine(ShakeRoutine(Duration, 10f));
     }
 
     public void Shake(float Duration, float Power)

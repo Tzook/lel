@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
 
     public SceneControl CurrentScene;
     public bool InGame { protected set; get; }
+    public bool Online = true;
     public bool InChat = false;
     public bool IsAlive = true;
     public bool IsChattingWithNpc = false;
@@ -17,7 +18,7 @@ public class Game : MonoBehaviour {
     {
         get 
         {
-            return IsAlive && !IsChattingWithNpc;
+            return IsAlive && !IsChattingWithNpc && Online;
         }
     }
     public bool isDraggingWindow = false;
@@ -29,7 +30,8 @@ public class Game : MonoBehaviour {
             return isDraggingWindow
                     || isClickingOnUI
                     || InGameMainMenuUI.Instance.isDraggingItem
-                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen;
+                    || InGameMainMenuUI.Instance.isFullScreenWindowOpen
+                    || !CanUseUI;
         }
     }
     public bool MovingTroughPortal = false;
@@ -260,7 +262,7 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<ActorMovement>().enabled = true;
         tempObj.GetComponent<ActorController>().enabled = false;
         tempObj.GetComponent<PlayerShortcuts>().isMe = false;
-        tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
+        tempObj.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     public void RemovePlayerCharacter()

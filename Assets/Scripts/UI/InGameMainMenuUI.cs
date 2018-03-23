@@ -320,9 +320,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         RefreshLevel();
 
         RefreshCurrentPrimaryAbility();
-        RefreshSpellArea(true);
-        
-        RefreshParty();        
+        RefreshSpellArea(true);   
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
         UpdateCharUpgradeCounter(info.UnspentCharPerkPoints);
@@ -574,6 +572,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         }
 
         HPBar.SetValue(info.CurrentHealth / (info.MaxHealth * 1f));
+        RefreshParty();
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
 

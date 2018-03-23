@@ -64,26 +64,13 @@ public class PartyWindowUI : MonoBehaviour {
 
     public void Refresh()
     {
-        if(RefreshInstance != null)
-        {
-            StopCoroutine(RefreshInstance);
-        }
-
-        RefreshInstance = StartCoroutine(RefreshRoutine());
-    }
-
-    Coroutine RefreshInstance;
-    IEnumerator RefreshRoutine()
-    {
         ClearContainer();
-
-        yield return 0;
 
         //Party still exists?
         if (LocalUserInfo.Me.CurrentParty == null || LocalUserInfo.Me.CurrentParty.Members.Count == 0)
         {
             this.gameObject.SetActive(false);
-            yield break;
+            return;
         }
 
         KnownCharacter knownActor;
@@ -114,8 +101,6 @@ public class PartyWindowUI : MonoBehaviour {
                 tempObj.GetComponent<PartyMemberUI>().SetInfo(partyMembers[i], (partyMembers[i] == LocalUserInfo.Me.CurrentParty.Leader));
             }
         }
-
-        RefreshInstance = null;
     }
 
     public void LeaveParty()

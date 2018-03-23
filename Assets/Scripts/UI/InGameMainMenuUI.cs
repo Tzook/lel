@@ -321,6 +321,8 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         RefreshCurrentPrimaryAbility();
         RefreshSpellArea(true);
+        
+        RefreshParty();        
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
         UpdateCharUpgradeCounter(info.UnspentCharPerkPoints);

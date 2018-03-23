@@ -420,7 +420,7 @@ public class ActorController : MonoBehaviour
         {
             if (lastSentPosition != transform.position || lastSentAngle != rotDegrees)
             {
-                SocketClient.Instance.EmitMovement(transform.position, rotDegrees);
+                SocketClient.Instance.EmitMovement(transform.position, rotDegrees, Rigid.velocity.y);
                 lastSentPosition = transform.position;
                 lastSentAngle = rotDegrees;
                 if (OutOfSceneBounds())

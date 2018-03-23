@@ -262,7 +262,7 @@ public class Game : MonoBehaviour {
         tempObj.GetComponent<ActorMovement>().enabled = true;
         tempObj.GetComponent<ActorController>().enabled = false;
         tempObj.GetComponent<PlayerShortcuts>().isMe = false;
-        tempObj.GetComponent<Rigidbody2D>().isKinematic = true;
+        tempObj.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     public void RemovePlayerCharacter()

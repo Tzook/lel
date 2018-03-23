@@ -212,7 +212,7 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat);
+        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat, data["velocity"].AsFloat);
     }
 
     protected void OnActorStartClimbing(Socket socket, Packet packet, object[] args)
@@ -1379,7 +1379,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("entered_portal", node);
     }
 
-    public void EmitMovement(Vector3 pos, float rotDegrees)
+    public void EmitMovement(Vector3 pos, float rotDegrees, float velocity)
     {
         JSONNode node = new JSONClass();
 
@@ -1387,6 +1387,7 @@ public class SocketClient : MonoBehaviour
         node["y"] = pos.y.ToString();
         node["z"] = pos.z.ToString();
         node["angle"].AsFloat = rotDegrees;
+        node["velocity"].AsFloat = velocity;
 
         CurrentSocket.Emit("movement", node);
     }

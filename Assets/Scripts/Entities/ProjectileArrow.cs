@@ -25,6 +25,9 @@ public class ProjectileArrow : MonoBehaviour {
     [SerializeField]
     string ImpactEffect;
 
+    [SerializeField]
+    TrailRenderer Trail;
+
     public bool InFlight = false;
 
     public bool TriggerHit;
@@ -49,6 +52,11 @@ public class ProjectileArrow : MonoBehaviour {
         m_Particles.Play();
 
         PrimaryAbilitySourceKey = primaryAbilitySourceKey;
+
+        if(Trail != null)
+        {
+            Trail.Clear();
+        }
     }
 
     void FixedUpdate()

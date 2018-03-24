@@ -753,9 +753,10 @@ public class SocketClient : MonoBehaviour
 
         //BroadcastEvent("Mob Moved " + data["mob_id"].Value);
         
+        //TODO Just update each mob in the array instead...
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat);
+        monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat, data["velocity"].AsFloat);
 
     }
     
@@ -1622,17 +1623,18 @@ public class SocketClient : MonoBehaviour
 
 
 
-    public void SendMobsMove(Dictionary<string, Vector3> mobsToUpdate)
+    public void SendMobsMove(Dictionary<string, MobMovementData> mobsToUpdate)
     {
         JSONNode node = new JSONClass();
         node["mobs"] = new JSONArray();
 
         int i = 0;
-        foreach (KeyValuePair<string, Vector3> pair in mobsToUpdate) 
+        foreach (KeyValuePair<string, MobMovementData> pair in mobsToUpdate) 
         {
             node["mobs"][i]["mob_id"] = pair.Key;
-            node["mobs"][i]["x"] = pair.Value.x.ToString();
-            node["mobs"][i]["y"] = pair.Value.y.ToString();
+            node["mobs"][i]["x"] = pair.Value.position.x.ToString();
+            node["mobs"][i]["y"] = pair.Value.position.y.ToString();
+            node["mobs"][i]["velocity"] = pair.Value.velocity.ToString();
             i++;
         }
 

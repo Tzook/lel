@@ -36,10 +36,18 @@ public class EnemyJumping : EnemyMoving
             if (!Dead && LastSentPosition != transform.position)
             {
                 LastSentPosition = transform.position;
-                EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
+                EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
             }
 
             Anim.SetBool("inAir", !isGrounded);
+        }
+    }
+
+    private void Update()
+    {
+        if (!Game.Instance.isBitch)
+        {
+            Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
         }
     }
 
@@ -49,6 +57,8 @@ public class EnemyJumping : EnemyMoving
         {
             m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, m_HitBox.bounds.max.y), Time.deltaTime * 3f);
         }
+
+        Rigid.isKinematic = false;
     }
 
     #region AI
@@ -246,9 +256,9 @@ public class EnemyJumping : EnemyMoving
 
     #region UnderControl
 
-    public override void UpdateMovement(float x, float y)
+    public override void UpdateMovement(float x, float y ,float velocity)
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 6f);
+        LastGivenPosition = new Vector2(x, y);
 
         if (transform.position.x != x)
         {
@@ -269,6 +279,9 @@ public class EnemyJumping : EnemyMoving
         }
 
         Anim.SetBool("inAir", !isGrounded);
+
+        Rigid.isKinematic = true;
+        Rigid.velocity = new Vector2(0f, velocity);
     }
 
     #endregion

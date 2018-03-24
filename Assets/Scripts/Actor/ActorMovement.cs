@@ -11,7 +11,6 @@ public class ActorMovement : MonoBehaviour
     protected float relocateSpeed = 15f;
 
     protected Vector3 lastPosition;
-    protected Vector3 lastUpdatedPosition;
     protected Vector3 initScale;
     protected Animator Anim;
 
@@ -225,8 +224,6 @@ public class ActorMovement : MonoBehaviour
         }
 
         Rigid.position = new Vector2(Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed).x, Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * 10f).y);
-
-        lastUpdatedPosition = lastPosition;
     }
 
     public void StartClimbing()

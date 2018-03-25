@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EnemyUpdater: MonoBehaviour
 {
     public static EnemyUpdater Instance;
-    private Dictionary<string, Vector3> mobsToUpdate = new Dictionary<string, Vector3>();
+    private Dictionary<string, MobMovementData> mobsToUpdate = new Dictionary<string, MobMovementData>();
     private Coroutine updateMobsInstance;
 
     void Awake()
@@ -13,9 +13,14 @@ public class EnemyUpdater: MonoBehaviour
         Instance = this;
     }
 
-    public void UpdateMob(string mobId, Vector3 position)
+    public void UpdateMob(string mobId, Vector3 position ,float velocity)
     {
-        mobsToUpdate[mobId] = position;
+        if(!mobsToUpdate.ContainsKey(mobId))
+        {
+            mobsToUpdate.Add(mobId, new MobMovementData());
+        }
+
+        mobsToUpdate[mobId].UpdateData(position, velocity);
         if (updateMobsInstance == null) 
         {
             updateMobsInstance = StartCoroutine(UpdateMobsCoroutine());
@@ -30,4 +35,19 @@ public class EnemyUpdater: MonoBehaviour
         mobsToUpdate.Clear();
         updateMobsInstance = null;
     }
+}
+
+
+public class MobMovementData
+{
+    public Vector3 position;
+    public float velocity;
+
+    public void UpdateData(Vector3 position, float velocity)
+    {
+        this.position = position;
+        this.velocity = velocity;
+    }
+
+
 }

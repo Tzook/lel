@@ -750,7 +750,7 @@ public class ActorController : MonoBehaviour
         //    Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f,0f,180f);
         //}
 
-        rotDegrees = 0f;
+        //rotDegrees = 0f;
     }
 
 

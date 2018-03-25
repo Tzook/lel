@@ -87,12 +87,21 @@ public class EnemyFlying : Enemy {
     }
 
     protected Vector3 LastSentPosition;
+    protected Vector3 LastGivenPosition;
     void FixedUpdate()
     {
         if (Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
-            EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
+            EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
+        }
+    }
+
+    private void Update()
+    {
+        if (!Game.Instance.isBitch)
+        {
+            Rigid.position = Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f);
         }
     }
 
@@ -364,9 +373,10 @@ public class EnemyFlying : Enemy {
 
     #region UnderControl
 
-    public override void UpdateMovement(float x, float y)
+    public override void UpdateMovement(float x, float y, float velocity)
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 6f);
+        LastGivenPosition = new Vector2(x, y);
+
 
         if (transform.position.x != x)
         {

@@ -11,6 +11,9 @@ public class ProjectileArrow : MonoBehaviour {
     float DecayTime;
 
     [SerializeField]
+    float MaxFlightTime;
+
+    [SerializeField]
     Rigidbody2D m_Rigid;
 
     [SerializeField]
@@ -22,6 +25,9 @@ public class ProjectileArrow : MonoBehaviour {
     [SerializeField]
     string ImpactEffect;
 
+    [SerializeField]
+    TrailRenderer Trail;
+
     public bool InFlight = false;
 
     public bool TriggerHit;
@@ -31,7 +37,7 @@ public class ProjectileArrow : MonoBehaviour {
     public string PrimaryAbilitySourceKey;
 
     private HitBox CurrentHitbox;
-    private float CurrentDecay;
+    private float CurrentMaxFlightTime;
 
     public void Launch(ActorInstance parent,string primaryAbilitySourceKey ,bool triggerHit = false ,float speed = 15f)
     {
@@ -39,23 +45,27 @@ public class ProjectileArrow : MonoBehaviour {
 
         this.ParentActor = parent;
 
-        CurrentDecay = DecayTime;
-        //MovementSpeed = speed;
+        CurrentMaxFlightTime = MaxFlightTime;
         TriggerHit = triggerHit;
 
         InFlight = true;
         m_Particles.Play();
 
         PrimaryAbilitySourceKey = primaryAbilitySourceKey;
+
+        if(Trail != null)
+        {
+            Trail.Clear();
+        }
     }
 
     void FixedUpdate()
     {
         if (InFlight)
         {
-            if(CurrentDecay > 0)
+            if(CurrentMaxFlightTime > 0)
             {
-                CurrentDecay -= 1f * Time.deltaTime;
+                CurrentMaxFlightTime -= 1f * Time.deltaTime;
             }
             else
             {

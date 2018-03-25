@@ -11,7 +11,6 @@ public class ActorMovement : MonoBehaviour
     protected float relocateSpeed = 15f;
 
     protected Vector3 lastPosition;
-    protected Vector3 lastUpdatedPosition;
     protected Vector3 initScale;
     protected Animator Anim;
 
@@ -82,6 +81,15 @@ public class ActorMovement : MonoBehaviour
             Aim(angle);
         }
 
+        if (aimRight)
+        {
+            Instance.LastFireRot = Quaternion.Euler(0, 0, angle - 4f);
+        }
+        else
+        {
+            Instance.LastFireRot = Quaternion.Euler(0, 0, angle + 4f);
+        }
+
         lastPosition = TargetPos;
         Rigid.isKinematic = true;
         Rigid.velocity = new Vector2(0f, givenVelocity);
@@ -138,6 +146,8 @@ public class ActorMovement : MonoBehaviour
         Anim.SetBool("Aim", false);
         Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
         Instance.TorsoBone.transform.localScale = Vector3.one;
+
+
     }
 
     void Update()
@@ -149,7 +159,7 @@ public class ActorMovement : MonoBehaviour
     {
         if(m_HealthBar != null)
         {
-            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y - ((HitBox.bounds.max.y- HitBox.bounds.min.y)/2f) - 0.25f), Time.deltaTime * 8f);
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y + ((HitBox.bounds.max.y- HitBox.bounds.min.y)/2f) + 0.25f), Time.deltaTime * 8f);
         }
 
         Rigid.isKinematic = false;
@@ -214,8 +224,6 @@ public class ActorMovement : MonoBehaviour
         }
 
         Rigid.position = new Vector2(Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * relocateSpeed).x, Vector3.Lerp(transform.position, lastPosition, Time.deltaTime * 10f).y);
-
-        lastUpdatedPosition = lastPosition;
     }
 
     public void StartClimbing()
@@ -234,21 +242,18 @@ public class ActorMovement : MonoBehaviour
         Instance.Info.Climbing = false;
     }
 
-    public void ActivatePrimaryAbility()
+    public void ActivatePrimaryAbility(float load)
     {
-        //switch (Instance.Info.CurrentPrimaryAbility.Key)
-        //{
-        //    case "melee":
-        //        {
-        //            Instance.PreformAttack(0.5f);
-        //            break;
-        //        }
-        //    case "range":
-        //        {
-        //            Instance.ShootArrow(false);
-        //            break;
-        //        }
-        //}
+        DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
+
+        if (string.IsNullOrEmpty(devAbility.ProjectilePrefab))
+        {
+            //AttackMelee();
+        }
+        else
+        {
+            Instance.FireProjectile(false, load);
+        }
     }
 
     public void RefreshHealth()

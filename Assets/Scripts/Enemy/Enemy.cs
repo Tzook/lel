@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    public virtual void UpdateMovement(float x, float y)
+    public virtual void UpdateMovement(float x, float y, float velocity)
     {
         transform.position = new Vector3(x, y, transform.position.z);
     }

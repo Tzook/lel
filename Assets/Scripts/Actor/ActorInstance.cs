@@ -525,6 +525,7 @@ public class ActorInstance : MonoBehaviour
 
         projectile.transform.rotation = LastFireRot;
         projectile.GetComponent<ProjectileArrow>().Launch(this,Info.CurrentPrimaryAbility.Key , isPlayer);
+        
     }
 
     public void CastSpell(DevSpell spell)
@@ -819,6 +820,8 @@ public class ActorInstance : MonoBehaviour
         }
 
         StartCombatMode();
+
+        
     }
 
     public void InturruptAttack()

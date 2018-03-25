@@ -58,7 +58,7 @@ public class EnemyMoving : Enemy
     public override void SetAION()
     {
         base.SetAION();
-        Rigid.bodyType = RigidbodyType2D.Dynamic;
+        //Rigid.bodyType = RigidbodyType2D.Dynamic;
 
         AIRoutineInstance = StartCoroutine(AIRoutine());
     }
@@ -67,7 +67,7 @@ public class EnemyMoving : Enemy
     {
         base.SetAIOFF();
 
-        Rigid.bodyType = RigidbodyType2D.Kinematic;
+        //Rigid.bodyType = RigidbodyType2D.Kinematic;
         Rigid.velocity = Vector2.zero;
 
         StopCurrentActionRoutine();
@@ -110,12 +110,22 @@ public class EnemyMoving : Enemy
     }
 
     protected Vector3 LastSentPosition;
+    protected Vector3 LastGivenPosition;
+
     void FixedUpdate()
     {
         if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
-            EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position);
+            EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
+        }
+    }
+
+    private void Update()
+    {
+        if(!Game.Instance.isBitch)
+        {
+            Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
         }
     }
 
@@ -125,6 +135,8 @@ public class EnemyMoving : Enemy
         {
             m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 3f);
         }
+
+        Rigid.isKinematic = false;
     }
 
     #region AI
@@ -410,15 +422,15 @@ public class EnemyMoving : Enemy
 
     #region UnderControl
 
-    public override void UpdateMovement(float x, float y)
+    public override void UpdateMovement(float x, float y, float velocity)
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, transform.position.z), Time.deltaTime * 6f);
+        LastGivenPosition = new Vector2(x, y);
 
-        if(transform.position.x != x)
+        if(Mathf.Abs(Rigid.position.x - x) > 0.05f)
         {
             Anim.SetBool("Walk", true);
 
-            if (transform.position.x < x)
+            if (Rigid.position.x < x)
             {
                 Body.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
             }
@@ -431,6 +443,9 @@ public class EnemyMoving : Enemy
         {
             Anim.SetBool("Walk", false);
         }
+
+        Rigid.isKinematic = true;
+        Rigid.velocity = new Vector2(0f, velocity);
     }
 
     #endregion

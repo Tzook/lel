@@ -1857,18 +1857,30 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: practiceHealing
       CLR: {r: 1, g: 0.9453347, b: 0.6397059, a: 1}
+    - Title: I've completed the practice tour!
+      Event: StartDialog
+      Value: CompletePracticeTour
+      Condition: QuestComplete
+      ConditionValue: practiceHealing
+      CLR: {r: 1, g: 0.9450981, b: 0.6392157, a: 1}
+    - Title: I'm ready to practice healing!
+      Event: TeleportToInstance
+      Value: HealingPracticeChamber
+      Condition: QuestInProgress
+      ConditionValue: practiceHealing
+      CLR: {r: 1, g: 0.9450981, b: 0.6392157, a: 1}
     - Title: Can you tell me more about the healing ability
       Event: StartDialog
       Value: HealingAbilityDescription
       Condition: QuestCompleted
       ConditionValue: summonAnAngel
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 0}
     - Title: Bye...
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 0}
   - DialogKey: TurtolentSent
     Pieces:
     - Content: I trust Turtolent.
@@ -2092,12 +2104,47 @@ MonoBehaviour:
       PostPieceEvent: StartQuest
       PostPieceEventValue: practiceHealing
     Options: []
+  - DialogKey: CompletePracticeTour
+    Pieces:
+    - Content: I know, I've been there with you...
+      LetterDelay: 0.04
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Well, that's it, you are ready to use the healing ability for your
+        own will...
+      LetterDelay: 0.04
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Talk to me again if you are having trouble.
+      LetterDelay: 0.04
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: My Child...
+      LetterDelay: 0.01
+      Pitch: 0.9
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: practiceHealing
+    Options: []
   GivingQuests:
   - summonAnAngel
   - practiceHealing
   EndingQuests:
   - divinePlace
-  TeleportableScenes: []
+  - practiceHealing
+  TeleportableScenes:
+  - sceneKey: HealingPracticeChamber
+    portalKey: Entrance
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -53730,8 +53777,8 @@ MonoBehaviour:
   - DialogKey: Greetings
     Pieces:
     - Content: Sup
-      LetterDelay: 0
-      Pitch: 0
+      LetterDelay: 0.03
+      Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
@@ -53758,14 +53805,14 @@ MonoBehaviour:
   - DialogKey: LightTouch
     Pieces:
     - Content: What you talkin' bout' boy?
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
     - Content: Cut the bull
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
@@ -53787,14 +53834,14 @@ MonoBehaviour:
   - DialogKey: LightTouch2
     Pieces:
     - Content: So say you want the healz boy
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: cast
       PostPieceEvent: 
       PostPieceEventValue: 
     - Content: Have fun
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
@@ -53811,14 +53858,14 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     - Content: Have to pay this parking ticket here in my hand
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
     - Content: Talk to that turtle guy you have there
-      LetterDelay: 0.2
+      LetterDelay: 0.02
       Pitch: 0.5
       SoundKey: 
       AnimationTrigger: 

@@ -6,7 +6,11 @@ using UnityEngine;
 public class ActorDamageInstance : MonoBehaviour {
 
     public ActorInstance ParentActor;
+
+    [SerializeField]
     string ActionKey;
+
+    [SerializeField]
     string ActionValue;
 
     float TimeAlive = 0.1f;
@@ -15,12 +19,16 @@ public class ActorDamageInstance : MonoBehaviour {
     [SerializeField]
     BoxCollider2D m_Collider;
 
+    DevAbility CurrentAbility;
+
     public void Open(ActorInstance instance, string actionKey, string actionValue = "")
     {
         this.ParentActor = instance;
         this.ActionKey = actionKey;
         this.ActionValue = actionValue;
         this.gameObject.SetActive(true);
+
+        CurrentAbility = Content.Instance.GetAbility(actionKey);
     }
 
     void OnEnable()
@@ -47,35 +55,91 @@ public class ActorDamageInstance : MonoBehaviour {
     {
         if (!Hit)
         {
-
-            if (TargetCollider.tag == "Enemy")
+            if (CurrentAbility != null && TargetCollider.tag == CurrentAbility.hitTargetEnumState.ToString())
             {
-                List<Enemy> sentTargets = new List<Enemy>();
-
-                collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size*2f, 0f);
-
-                for (int i = 0; i < collectedColliders.Length; i++)
+                if (TargetCollider.tag == "Enemy")
                 {
-                    if(collectedColliders[i].tag == "Enemy")
+                    List<Enemy> sentTargets = new List<Enemy>();
+
+                    collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size * 2f, 0f);
+
+                    for (int i = 0; i < collectedColliders.Length; i++)
                     {
-                        sentTargets.Add(collectedColliders[i].GetComponent<HitBox>().EnemyReference);
+                        if (collectedColliders[i].tag == "Enemy")
+                        {
+                            sentTargets.Add(collectedColliders[i].GetComponent<HitBox>().EnemyReference);
+                        }
                     }
+
+                    sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
+                    sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
+
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+
+                    Hit = true;
+                    this.gameObject.SetActive(false);
                 }
+                else if(TargetCollider.tag == "Actor")
+                {
+                    List<ActorInstance> sentTargets = new List<ActorInstance>();
 
-                sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
-                sentTargets.Insert(0 ,TargetCollider.GetComponent<HitBox>().EnemyReference);
+                    collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size * 2f, 0f);
 
-                LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+                    for (int i = 0; i < collectedColliders.Length; i++)
+                    {
+                        if (collectedColliders[i].tag == "Actor")
+                        {
+                            sentTargets.Add(collectedColliders[i].GetComponent<ActorInstance>());
+                        }
+                    }
 
-                Hit = true;
-                this.gameObject.SetActive(false);
+                    sentTargets.Remove(TargetCollider.GetComponent<ActorInstance>());
+                    sentTargets.Insert(0, TargetCollider.GetComponent<ActorInstance>());
+
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitPlayers(sentTargets, ActionKey, ActionValue);
+
+                    Hit = true;
+                    this.gameObject.SetActive(false);
+                }
+                else if (TargetCollider.tag == "HitEntity")
+                {
+                    TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
+
+                    Hit = true;
+                    this.gameObject.SetActive(false);
+                }
             }
-            else if(TargetCollider.tag == "HitEntity")
+            else
             {
-                TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
+                if (TargetCollider.tag == "Enemy")
+                {
+                    List<Enemy> sentTargets = new List<Enemy>();
 
-                Hit = true;
-                this.gameObject.SetActive(false);
+                    collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size * 2f, 0f);
+
+                    for (int i = 0; i < collectedColliders.Length; i++)
+                    {
+                        if (collectedColliders[i].tag == "Enemy")
+                        {
+                            sentTargets.Add(collectedColliders[i].GetComponent<HitBox>().EnemyReference);
+                        }
+                    }
+
+                    sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
+                    sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
+
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+
+                    Hit = true;
+                    this.gameObject.SetActive(false);
+                }
+                else if (TargetCollider.tag == "HitEntity")
+                {
+                    TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
+
+                    Hit = true;
+                    this.gameObject.SetActive(false);
+                }
             }
 
         }

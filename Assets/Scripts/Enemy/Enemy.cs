@@ -120,11 +120,11 @@ public class Enemy : MonoBehaviour {
         transform.position = new Vector3(x, y, transform.position.z);
     }
 
-    public void PopHint(string text, Color clr, Color outlineClr = new Color())
+    public void PopHint(string text, Color clr, Color outlineClr = new Color(), string icon = "hitIcon_dmg")
     {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
         pop.transform.position = transform.position + new Vector3(0f, 1f, 0f);
-        pop.GetComponent<PopText>().Pop(text, clr, outlineClr);
+        pop.GetComponent<PopText>().Pop(text, clr, outlineClr, icon);
     }
 
     public virtual void SetTarget(ActorInstance target)
@@ -188,11 +188,11 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=" + TextSize +"> " + dmgMessage + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size=" + TextSize +"> " + dmgMessage + "</size></color>", Color.green, new Color(), "");
                     }
                     else
                     {
-                        PopHint("<size=25>" + dmgMessage + "</size>", Color.blue);
+                        PopHint("<size=25>" + dmgMessage + "</size>", Color.blue, new Color(), "");
                     }
 
                     break;
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size="+TextSize+">" + dmgMessage + "</size></color>", Color.green);
+                        PopHint("<color=#ffff00ff><size="+TextSize+">" + dmgMessage + "</size></color>", Color.green, new Color(), "");
                     }
 
                     break;
@@ -233,11 +233,11 @@ public class Enemy : MonoBehaviour {
 
         if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
-            PopHint("MISS", Color.green);
+            PopHint("MISS", Color.green, new Color(), "");
         }
         else
         {
-            PopHint("MISS", Color.blue);
+            PopHint("MISS", Color.blue, new Color(), "");
         }
     }
 

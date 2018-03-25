@@ -663,7 +663,7 @@ public class SocketClient : MonoBehaviour
         if (actor != null) 
         {
             // TODO style 'block' better
-            actor.Instance.PopHint(String.Format("{0:n0}", "BLOCKED") , new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+            actor.Instance.PopHint(String.Format("{0:n0}", "BLOCKED") , new Color(231f/255f, 103f/255f, 103f/255f ,1f), "");
         }
     }
 
@@ -1311,14 +1311,14 @@ public class SocketClient : MonoBehaviour
         Color clr = Color.red;
         if (tempEnemy != null) //IS MOB
         {
-            tempEnemy.PopHint(text, clr);
+            tempEnemy.PopHint(text, clr, new Color(), "");
         }
         else
         {
             ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
             if (actor != null)
             {
-                actor.Instance.PopHint(text, clr);
+                actor.Instance.PopHint(text, clr, "");
             }
         }
     }
@@ -1649,7 +1649,8 @@ public class SocketClient : MonoBehaviour
         {
             node["target_ids"][i] = targetIDs[i];
         }
-        
+
+
         CurrentSocket.Emit("used_ability", node);
     }
 

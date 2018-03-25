@@ -686,11 +686,11 @@ public class ActorInstance : MonoBehaviour
         temObj.GetComponent<LevelUpEffect>().Play();
     }
 
-    public void PopHint(string text, Color clr)
+    public void PopHint(string text, Color clr, string icon = "hitIcon_dmg")
     {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
         pop.transform.position = transform.position + new Vector3(0f,1f,0f);
-        pop.GetComponent<PopText>().Pop(text, clr);
+        pop.GetComponent<PopText>().Pop(text, clr, new Color(), icon);
     }
 
     private IEnumerator PickingUpItemRoutine(string instanceID)

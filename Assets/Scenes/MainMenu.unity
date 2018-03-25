@@ -39785,7 +39785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.22625001, y: 0.6444445}
   m_AnchorMax: {x: 0.47250003, y: 0.74666667}
-  m_AnchoredPosition: {x: -1.3000183, y: 0}
+  m_AnchoredPosition: {x: -1.3000488, y: 0}
   m_SizeDelta: {x: 3.199997, y: -2.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1951
@@ -48412,6 +48412,7 @@ MonoBehaviour:
     - Key: blockChance
       Value: 1
     hitTypeEnumState: 0
+    hitTargetEnumState: 0
     powerTypeEnumState: 0
     ManaCost: 0
     AttackTypeMin: 0
@@ -48457,6 +48458,7 @@ MonoBehaviour:
     - Key: crippleChance
       Value: 1
     hitTypeEnumState: 0
+    hitTargetEnumState: 0
     powerTypeEnumState: 1
     ManaCost: 0
     AttackTypeMin: 3
@@ -48474,6 +48476,7 @@ MonoBehaviour:
     Spells: []
     InitialPerks: []
     hitTypeEnumState: 1
+    hitTargetEnumState: 1
     powerTypeEnumState: 2
     ManaCost: 5
     AttackTypeMin: 0
@@ -48521,6 +48524,7 @@ MonoBehaviour:
     - Key: blockChance
       Value: 1
     hitTypeEnumState: 0
+    hitTargetEnumState: 0
     powerTypeEnumState: 2
     ManaCost: 5
     AttackTypeMin: 4
@@ -48564,6 +48568,7 @@ MonoBehaviour:
     Spells: []
     InitialPerks: []
     hitTypeEnumState: 0
+    hitTargetEnumState: 0
     powerTypeEnumState: 0
     ManaCost: 0
     AttackTypeMin: 0
@@ -49810,7 +49815,12 @@ MonoBehaviour:
       healing practice course, so I must ask Virtule to be  tested first.
     QuestCompleteDescription: I've successfully learned how to heal other people.
     FacePrefab: TurtolentQuest
-    Conditions: []
+    Conditions:
+    - Condition: ok
+      Type: tourCompleteOK
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Tour Complete
     QuestsStates:
     - QuestKey: summonAnAngel
       EnumState: 1

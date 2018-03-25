@@ -505,7 +505,7 @@ public class ActorController : MonoBehaviour
         damageZone.transform.position = Instance.transform.position;
         damageZone.transform.rotation = Instance.LastFireRot;
 
-        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "melee");
+        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
     }
 
     public void FireProjectile()
@@ -620,42 +620,80 @@ public class ActorController : MonoBehaviour
             targetIDs.Add(sentTargets[i].Info.ID);
         }
 
-        switch(actionKey)
+        if (actionKey == "spell")
         {
-            case "melee":
-                {
-                    SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
+            SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
 
-                    int rnd = Random.Range(0, 3);
-                    AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+            int rnd = Random.Range(0, 3);
 
-                    GameObject tempHit;
-                    tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
-                    tempHit.transform.position = Instance.Weapon.transform.position;
-                    tempHit.GetComponent<HitEffect>().Play();
+            GameObject tempHit;
+            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit.transform.position = Instance.Weapon.transform.position;
+            tempHit.GetComponent<HitEffect>().Play();
 
-                    break;
-                }
-            case "spell":
-                {
-                    SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
-
-                    int rnd = Random.Range(0, 3);
-
-                    GameObject tempHit;
-                    tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
-                    tempHit.transform.position = Instance.Weapon.transform.position;
-                    tempHit.GetComponent<HitEffect>().Play();
-
-                    DevSpell tempSpell = Content.Instance.GetPlayerSpell(actionValue);
-                    if (!string.IsNullOrEmpty(tempSpell.HitSound))
-                    {
-                        AudioControl.Instance.PlayInPosition(tempSpell.HitSound, tempHit.transform.position);
-                    }
-
-                    break;
-                }
+            DevSpell tempSpell = Content.Instance.GetPlayerSpell(actionValue);
+            if (!string.IsNullOrEmpty(tempSpell.HitSound))
+            {
+                AudioControl.Instance.PlayInPosition(tempSpell.HitSound, tempHit.transform.position);
+            }
         }
+        else
+        {
+            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
+
+            int rnd = Random.Range(0, 3);
+            AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+
+            GameObject tempHit;
+            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit.transform.position = Instance.Weapon.transform.position;
+            tempHit.GetComponent<HitEffect>().Play();
+        }
+    }
+
+
+    internal void ColliderHitPlayers(List<ActorInstance> sentTargets, string actionKey, string actionValue = "")
+    {
+        List<string> targetIDs = new List<string>();
+
+        for (int i = 0; i < sentTargets.Count; i++)
+        {
+            if (sentTargets[i].Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
+            {
+                targetIDs.Add(sentTargets[i].Info.Name);
+            }
+        }
+
+        if (actionKey == "spell")
+        {
+            SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
+
+            int rnd = Random.Range(0, 3);
+
+            GameObject tempHit;
+            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit.transform.position = Instance.Weapon.transform.position;
+            tempHit.GetComponent<HitEffect>().Play();
+
+            DevSpell tempSpell = Content.Instance.GetPlayerSpell(actionValue);
+            if (!string.IsNullOrEmpty(tempSpell.HitSound))
+            {
+                AudioControl.Instance.PlayInPosition(tempSpell.HitSound, tempHit.transform.position);
+            }
+        }
+        else
+        {
+            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
+
+            int rnd = Random.Range(0, 3);
+            AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+
+            GameObject tempHit;
+            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit.transform.position = Instance.Weapon.transform.position;
+            tempHit.GetComponent<HitEffect>().Play();
+        }
+
     }
 
     protected IEnumerator JumpRoutine()

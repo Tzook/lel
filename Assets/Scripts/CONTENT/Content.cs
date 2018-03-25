@@ -410,6 +410,13 @@ public class DevAbility
         Attack,Heal
     }
 
+    [SerializeField]
+    public HitTargetEnumState hitTargetEnumState;
+    public enum HitTargetEnumState
+    {
+        Enemy, Actor
+    }
+
     public string PowerType
     {
         get

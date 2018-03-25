@@ -89,7 +89,10 @@ public class AnimationAssist : MonoBehaviour {
 
     public void TryVarriation()
     {
-        Enemy.TryIdleVarriation();
+        if (Enemy != null)
+        {
+            Enemy.TryIdleVarriation();
+        }
     }
 
     public void CastSpellComplete()

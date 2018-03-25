@@ -11,10 +11,13 @@ public class PopText : MonoBehaviour {
     Text TextContentBG;
 
     [SerializeField]
+    Image img;
+
+    [SerializeField]
     CanvasGroup CG;
 
     float TimeAlive = 0f;
-    public void Pop(string Content, Color clr, Color outlineClr = new Color())
+    public void Pop(string Content, Color clr, Color outlineClr = new Color(), string icon = "")
     {
         TextContent.text = Content;
         TextContentBG.text = Content;
@@ -33,6 +36,16 @@ public class PopText : MonoBehaviour {
         CG.alpha = 1f;
 
         StartCoroutine(MovementRoutine());
+
+        if(!string.IsNullOrEmpty(icon))
+        {
+            img.enabled = true;
+            img.sprite = ResourcesLoader.Instance.GetSprite(icon);
+        }
+        else
+        {
+            img.enabled = false;
+        }
     }
 
     private IEnumerator MovementRoutine()

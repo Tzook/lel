@@ -48417,6 +48417,12 @@ MonoBehaviour:
     ManaCost: 0
     AttackTypeMin: 0
     AttackTypeMax: 3
+    HitEffect: HitEffect
+    HitSounds:
+    - sound_hit_1
+    - sound_hit_2
+    - sound_hit_3
+    - sound_hit_4
     GrowingEffect: 
     ProjectilePrefab: 
     ProjectileHitSound: 
@@ -48463,6 +48469,12 @@ MonoBehaviour:
     ManaCost: 0
     AttackTypeMin: 3
     AttackTypeMax: 3
+    HitEffect: HitEffect
+    HitSounds:
+    - sound_hit_1
+    - sound_hit_2
+    - sound_hit_3
+    - sound_hit_4
     GrowingEffect: 
     ProjectilePrefab: Projectile_Arrow
     ProjectileHitSound: sound_arrow_hit
@@ -48479,11 +48491,14 @@ MonoBehaviour:
     hitTargetEnumState: 1
     powerTypeEnumState: 2
     ManaCost: 5
-    AttackTypeMin: 0
-    AttackTypeMax: 0
-    GrowingEffect: 
+    AttackTypeMin: 4
+    AttackTypeMax: 5
+    HitEffect: HitEffect
+    HitSounds:
+    - sound_heal
+    GrowingEffect: HealBallGrowing
     ProjectilePrefab: 
-    ProjectileHitSound: 
+    ProjectileHitSound: sound_heal
     ProjectileWallSound: 
     ProjectileStayAfterHit: 0
   - Key: frost
@@ -48527,8 +48542,14 @@ MonoBehaviour:
     hitTargetEnumState: 0
     powerTypeEnumState: 2
     ManaCost: 5
-    AttackTypeMin: 4
+    AttackTypeMin: 5
     AttackTypeMax: 7
+    HitEffect: HitEffect
+    HitSounds:
+    - sound_hit_1
+    - sound_hit_2
+    - sound_hit_3
+    - sound_hit_4
     GrowingEffect: FrostBallGrowing
     ProjectilePrefab: Projectile_FrostBall
     ProjectileHitSound: sound_impactCold
@@ -48573,6 +48594,8 @@ MonoBehaviour:
     ManaCost: 0
     AttackTypeMin: 0
     AttackTypeMax: 0
+    HitEffect: HitEffect
+    HitSounds: []
     GrowingEffect: 
     ProjectilePrefab: 
     ProjectileHitSound: 

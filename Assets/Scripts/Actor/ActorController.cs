@@ -619,7 +619,9 @@ public class ActorController : MonoBehaviour
     {
         List<string> targetIDs = new List<string>();
 
-        for(int i=0;i<sentTargets.Count;i++)
+        DevAbility tempAbility = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
+
+        for (int i=0;i<sentTargets.Count;i++)
         {
             targetIDs.Add(sentTargets[i].Info.ID);
         }
@@ -631,7 +633,7 @@ public class ActorController : MonoBehaviour
             int rnd = Random.Range(0, 3);
 
             GameObject tempHit;
-            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
             tempHit.GetComponent<HitEffect>().Play();
 
@@ -645,11 +647,12 @@ public class ActorController : MonoBehaviour
         {
             SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
 
-            int rnd = Random.Range(0, 3);
-            AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+            string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
+            AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
 
             GameObject tempHit;
-            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            
+            tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
             tempHit.GetComponent<HitEffect>().Play();
         }
@@ -659,6 +662,8 @@ public class ActorController : MonoBehaviour
     internal void ColliderHitPlayers(List<ActorInstance> sentTargets, string actionKey, string actionValue = "")
     {
         List<string> targetIDs = new List<string>();
+
+        DevAbility tempAbility = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
 
         for (int i = 0; i < sentTargets.Count; i++)
         {
@@ -675,7 +680,7 @@ public class ActorController : MonoBehaviour
             int rnd = Random.Range(0, 3);
 
             GameObject tempHit;
-            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
             tempHit.GetComponent<HitEffect>().Play();
 
@@ -689,11 +694,11 @@ public class ActorController : MonoBehaviour
         {
             SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
 
-            int rnd = Random.Range(0, 3);
-            AudioControl.Instance.PlayInPosition("sound_hit_" + (rnd + 1), transform.position);
+            string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
+            AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
 
             GameObject tempHit;
-            tempHit = ResourcesLoader.Instance.GetRecycledObject("HitEffect");
+            tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
             tempHit.GetComponent<HitEffect>().Play();
         }

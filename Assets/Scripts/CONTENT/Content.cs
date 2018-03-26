@@ -455,6 +455,12 @@ public class DevAbility
     public int AttackTypeMax;
 
     [SerializeField]
+    public string HitEffect = "HitEffect";
+
+    [SerializeField]
+    public List<string> HitSounds = new List<string>();
+
+    [SerializeField]
     public string GrowingEffect;
 
     [SerializeField]

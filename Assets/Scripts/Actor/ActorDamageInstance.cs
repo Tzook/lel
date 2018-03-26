@@ -79,7 +79,7 @@ public class ActorDamageInstance : MonoBehaviour {
                     Hit = true;
                     this.gameObject.SetActive(false);
                 }
-                else if(TargetCollider.tag == "Actor")
+                else if(TargetCollider.tag == "Actor" && TargetCollider.GetComponent<ActorInstance>().Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
                 {
                     List<ActorInstance> sentTargets = new List<ActorInstance>();
 

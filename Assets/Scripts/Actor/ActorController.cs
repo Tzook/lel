@@ -559,6 +559,8 @@ public class ActorController : MonoBehaviour
         {
             Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+
+            rotDegrees = Instance.TorsoBone.transform.rotation.eulerAngles.z;
         }
     }
 
@@ -574,6 +576,8 @@ public class ActorController : MonoBehaviour
         {
             Instance.TorsoBone.transform.localScale = Vector3.one;
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+            rotDegrees = Instance.TorsoBone.transform.rotation.eulerAngles.z;
         }
     }
 

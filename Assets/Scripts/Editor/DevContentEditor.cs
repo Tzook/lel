@@ -436,7 +436,7 @@ public class DevContentEditor : Editor
         }
         else if (WordNumber(0) == "monster")
         {
-            if(WordNumber(1) == "clone")
+            if (WordNumber(1) == "clone")
             {
                 Undo.RecordObject(target, "Clone Monster");
                 currentInfo.Monsters.Add(currentInfo.GetMonster(WordNumber(2)).Clone());
@@ -490,7 +490,7 @@ public class DevContentEditor : Editor
                         Undo.RecordObject(target, "Delete Monster Loot");
                         for (int l = 0; l < currentInfo.Monsters[i].PossibleLoot.Count; l++)
                         {
-                            if(currentInfo.Monsters[i].PossibleLoot[l].ItemKey == item)
+                            if (currentInfo.Monsters[i].PossibleLoot[l].ItemKey == item)
                             {
                                 currentInfo.Monsters[i].PossibleLoot.RemoveAt(l);
                                 return;
@@ -628,14 +628,14 @@ public class DevContentEditor : Editor
                     }
                 }
             }
-            else if(WordNumber(1) == "cloneLoot")
+            else if (WordNumber(1) == "cloneLoot")
             {
                 Undo.RecordObject(target, "Clone loot from monster to monster");
 
                 DevMonsterInfo monsterFrom = currentInfo.GetMonster(WordNumber(2));
                 DevMonsterInfo monsterTo = currentInfo.GetMonster(WordNumber(3));
 
-                foreach(LootInstance loot in monsterFrom.PossibleLoot)
+                foreach (LootInstance loot in monsterFrom.PossibleLoot)
                 {
                     monsterTo.PossibleLoot.Add(loot);
                 }

@@ -21,6 +21,11 @@ public class QuestPanelUI : MonoBehaviour {
 
     public void SetInfo(Quest quest)
     {
+        StartCoroutine(SetInfoRoutine(quest));
+    }
+
+    IEnumerator SetInfoRoutine(Quest quest)
+    {
         Info = quest;
 
         txtTitle.text = quest.Name;
@@ -40,6 +45,9 @@ public class QuestPanelUI : MonoBehaviour {
         }
 
         tempObject.transform.SetParent(AvatarSpot, false);
+
+        yield return 0;
+
         tempObject.transform.position = AvatarSpot.position;
 
         string conContent = "";
@@ -48,12 +56,12 @@ public class QuestPanelUI : MonoBehaviour {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("QuestTask");
             tempObject.transform.SetParent(ConditionContainer, false);
 
-            switch(quest.Conditions[i].Condition)
+            switch (quest.Conditions[i].Condition)
             {
                 case "hunt":
                     {
                         conContent = Content.Instance.GetMonster(quest.Conditions[i].Type).MonsterName + " Slain ";
-                       
+
                         break;
                     }
                 case "loot":

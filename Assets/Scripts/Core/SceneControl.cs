@@ -189,6 +189,11 @@ public class SceneControl
             {
                 UpdateQuestProgress(Npcs[i].GivingQuests[q]);
             }
+
+            for (int q = 0; q < Npcs[i].EndingQuests.Count; q++)
+            {
+                UpdateQuestProgress(Npcs[i].EndingQuests[q]);
+            }
         }
 
         foreach(QuestVisibility qvObj in QVObjects)
@@ -220,6 +225,11 @@ public class SceneControl
         for(int i=0 ; i < Npcs.Count ; i++)
         {
             if(Npcs[i].GivingQuests.Contains(questKey))
+            {
+                return Npcs[i];
+            }
+
+            if (Npcs[i].EndingQuests.Contains(questKey))
             {
                 return Npcs[i];
             }

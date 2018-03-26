@@ -2095,10 +2095,15 @@ MonoBehaviour:
   - {fileID: 543962035}
   miniMapInfo:
     left: -8.74465
-    right: 3.892284
+    right: 64.789764
     top: 14.825684
     bottom: -1.8133597
     coliders:
+    - coliders:
+      - {x: 64.149765, y: 10.746012}
+      - {x: 64.789764, y: 10.746012}
+      - {x: 64.149765, y: 10.106012}
+      - {x: 64.789764, y: 10.106012}
     - coliders:
       - {x: -8.384998, y: -0.8071221}
       - {x: 3.892284, y: -0.8071221}
@@ -16410,9 +16415,114 @@ MonoBehaviour:
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: You seem bothered...
+      Event: StartDialog
+      Value: BlockingViewQuest
+      Condition: QuestAvailable
+      ConditionValue: blockingTheView
+      CLR: {r: 1, g: 0.98904663, b: 0.60294116, a: 1}
+    - Title: I've took care of some of them.
+      Event: StartDialog
+      Value: BlockingViewQuestComplete
+      Condition: QuestComplete
+      ConditionValue: blockingTheView
+      CLR: {r: 1, g: 0.98904663, b: 0.60294116, a: 1}
+  - DialogKey: BlockingViewQuest
+    Pieces:
+    - Content: You  are absolutely right!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You are currently in the Tower Of Power!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: My dad had built this structure two years ago...
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: For some reason recently these living flower plants began infesting
+        the courtyard!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They shame and block the view to my fathers magnificent work!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And they keep coming!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Please, do Shelly a favor, get rid of some of them, be kind.
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: blockingTheView
+    Options: []
+  - DialogKey: BlockingViewQuestComplete
+    Pieces:
+    - Content: Yep yep!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I saw!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Some visitors told me the tower looks much better now!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I'll send the news to my father!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Thank you, fellow adventurer.
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: blockingTheView
+    Options: []
+  GivingQuests:
+  - blockingTheView
+  EndingQuests:
+  - blockingTheView
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings

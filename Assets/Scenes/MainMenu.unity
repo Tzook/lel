@@ -49460,7 +49460,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 40
+    RewardExp: 75
   - Name: A Beany Request
     Key: ABeanyRequest
     InProgressDescription: This strange bean enthusiast convinced me to go get him
@@ -49824,6 +49824,25 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: heal
     RewardExp: 10
+  - Name: Blocking the view
+    Key: blockingTheView
+    InProgressDescription: Shelly has asked me to get rid of the living plant's surrounding
+      the Tower Of Power, she claims they block the view to this magnificent structure.
+    QuestCompleteDescription: I've made the view clearer.
+    FacePrefab: KarenQuest
+    Conditions:
+    - Condition: hunt
+      Type: Plant
+      CurrentProgress: 0
+      TargetProgress: 15
+      ExtraDescription: 
+    QuestsStates: []
+    MinimumLevel: 5
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 100
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

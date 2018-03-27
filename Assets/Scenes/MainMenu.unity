@@ -41537,7 +41537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.5}
+  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -46531,7 +46531,7 @@ MonoBehaviour:
       MinTime: 0
       MaxTime: 0
   - MonsterKey: Worm
-    MonsterName: Green Worm
+    MonsterName: Worm
     MonsterHP: 120
     MonsterLevel: 7
     DMG: 22
@@ -46604,11 +46604,13 @@ MonoBehaviour:
     Perks: []
     Spells: []
     DeathRattle:
-      Key: 
-      Level: 0
+      Key: GreenWormGass
+      Level: 7
       Mana: 0
-      ColliderPrefab: 
-      Perks: []
+      ColliderPrefab: GreenWormGass
+      Perks:
+      - Key: crippleChance
+        Value: 1
       Icon: {fileID: 0}
       HitSound: 
       MinTime: 0
@@ -47010,6 +47012,180 @@ MonoBehaviour:
       Mana: 0
       ColliderPrefab: 
       Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
+  - MonsterKey: GreenWorm
+    MonsterName: Green Worm
+    MonsterHP: 120
+    MonsterLevel: 7
+    DMG: 18
+    RewardEXP: 30
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells: []
+    DeathRattle:
+      Key: GreenWormGass
+      Level: 7
+      Mana: 0
+      ColliderPrefab: GreenWormGass
+      Perks:
+      - Key: crippleChance
+        Value: 1
+      - Key: crippleDuration
+        Value: 1
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
+  - MonsterKey: RedWorm
+    MonsterName: Red Worm
+    MonsterHP: 100
+    MonsterLevel: 7
+    DMG: 25
+    RewardEXP: 30
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells: []
+    DeathRattle:
+      Key: RedWormGass
+      Level: 7
+      Mana: 0
+      ColliderPrefab: RedWormGass
+      Perks:
+      - Key: bleedChance
+        Value: 1
+      - Key: bleedDuration
+        Value: 1
       Icon: {fileID: 0}
       HitSound: 
       MinTime: 0

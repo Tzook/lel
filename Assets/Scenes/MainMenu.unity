@@ -41537,7 +41537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
+  m_AnchoredPosition: {x: 9.599609, y: 10.5}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -47190,6 +47190,89 @@ MonoBehaviour:
       HitSound: 
       MinTime: 0
       MaxTime: 0
+  - MonsterKey: SmallSquirrel
+    MonsterName: SmallSquirrel
+    MonsterHP: 75
+    MonsterLevel: 6
+    DMG: 12
+    RewardEXP: 25
+    Type: 1
+    PossibleLoot:
+    - ItemKey: leatherVest
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: adventurerShirt
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: clothPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherShoes
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: shortClub
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortAxe
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortDagger
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortBow
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: leatherGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackPants
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortSword
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortScimitar
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: peasantHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: whiteGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: greenGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: redGloves
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: strawHat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: blackShoes
+      MinStack: 1
+      MaxStack: 1
+    Perks: []
+    Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -49780,7 +49863,17 @@ MonoBehaviour:
     - Condition: hunt
       Type: Worm
       CurrentProgress: 0
-      TargetProgress: 10
+      TargetProgress: 15
+      ExtraDescription: 
+    - Condition: hunt
+      Type: GreenWorm
+      CurrentProgress: 0
+      TargetProgress: 5
+      ExtraDescription: 
+    - Condition: hunt
+      Type: GreenWorm
+      CurrentProgress: 0
+      TargetProgress: 5
       ExtraDescription: 
     QuestsStates: []
     MinimumLevel: 6
@@ -49788,7 +49881,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 150
+    RewardExp: 200
   - Name: This Is Necessary - Squirrels
     Key: thisIsNecessary2
     InProgressDescription: Kristle asked me to clear some of the squirrels dwelling
@@ -49798,6 +49891,11 @@ MonoBehaviour:
     Conditions:
     - Condition: hunt
       Type: Squirrel
+      CurrentProgress: 0
+      TargetProgress: 12
+      ExtraDescription: 
+    - Condition: hunt
+      Type: SmallSquirrel
       CurrentProgress: 0
       TargetProgress: 10
       ExtraDescription: 
@@ -49809,7 +49907,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 240
+    RewardExp: 300
   - Name: Busting Nuts
     Key: bustNuts
     InProgressDescription: Kristle's minions want me to help them teach the squirrels
@@ -95820,7 +95918,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8425001, y: 0.13926288}
   m_AnchorMax: {x: 0.9925, y: 0.20400001}
-  m_AnchoredPosition: {x: 1.8251953, y: -3.6999512}
+  m_AnchoredPosition: {x: 1.8251953, y: -3.6998901}
   m_SizeDelta: {x: 8.349976, y: 4.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298705609

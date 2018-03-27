@@ -6,7 +6,16 @@ public class SpriteAlphaGroup : MonoBehaviour {
 
     public float Alpha;
 
-    Color OriginalColor;
+    [SerializeField]
+    Color OriginalColor = Color.clear;
+
+    private void Awake()
+    {
+        if (OriginalColor == Color.clear)
+        {
+            OriginalColor = Color.white;
+        }
+    }
 
     public void SetAlpha(float fValue)
     {
@@ -95,7 +104,7 @@ public class SpriteAlphaGroup : MonoBehaviour {
 
         yield return new WaitForSeconds(0.05f);
 
-        SetChildrenColor(transform, Color.white);
+        SetChildrenColor(transform, OriginalColor);
 
         BlinkDamageInstance = null;
     }

@@ -24,7 +24,10 @@ public class AudioControl : MonoBehaviour {
         m_res = GetComponent<ResourcesLoader>();
         Instance = this;
 
-        m_dicVolumeGroup.Add("Default", 1f);
+        m_dicVolumeGroup.Add("Untagged", PlayerPrefs.GetFloat("Untagged", 1f));
+        m_dicVolumeGroup.Add("Music", PlayerPrefs.GetFloat("Music", 0.6f));
+
+        SetMasterVolume(PlayerPrefs.GetFloat("MasterVolume", 1f));
     }
 
     #endregion
@@ -172,6 +175,14 @@ public class AudioControl : MonoBehaviour {
 
     public void SetVolume(string gTag, float gVolume)
     {
+        PlayerPrefs.SetFloat(gTag, gVolume);
+        PlayerPrefs.Save();
+
+        if (gTag == "Music")
+        {
+            MusicSource.volume = gVolume;
+        }
+        
         if(!m_dicVolumeGroup.ContainsKey(gTag))
         {
             m_dicVolumeGroup.Add(gTag, gVolume);
@@ -188,6 +199,13 @@ public class AudioControl : MonoBehaviour {
                 m_listInstances[i].GetComponent<AudioSource>().volume = gVolume;
             }
         }
+    }
+
+    public void SetMasterVolume(float gVolume)
+    {
+        AudioListener.volume = gVolume;
+        PlayerPrefs.SetFloat("MasterVolume", gVolume);
+        PlayerPrefs.Save();
     }
 
     public void PlayWithPitch(string gClip,float fPitch)
@@ -223,7 +241,9 @@ public class AudioControl : MonoBehaviour {
 
     public void SetMusic(string gClip, float fPitch = 1f)
     {
-        if(string.IsNullOrEmpty(gClip))
+        MusicSource.volume = m_dicVolumeGroup["Music"];
+
+        if (string.IsNullOrEmpty(gClip))
         {
             MusicSource.Stop();
             MusicSource.clip = null;

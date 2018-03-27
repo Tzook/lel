@@ -1593,6 +1593,23 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("took_dmg", node);
     }
 
+    public void SendWorldDMG(int damage, List<DevPerkMap> perks = null)
+    {
+        JSONNode node = new JSONClass();
+
+        node["dmg"] = damage.ToString();
+
+        if (perks != null)
+        {
+            for (int i = 0; i < perks.Count; i++)
+            {
+                node["perks"][i]["key"] = perks[i].Key;
+                node["perks"][i]["value"] = perks[i].Value.ToString();
+            }
+        }
+
+        CurrentSocket.Emit("take_world_damage", node);
+    }
 
     public void SendLoadedAttack()
     {

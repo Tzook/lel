@@ -19879,6 +19879,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: bustNuts
       CLR: {r: 0.97132355, g: 1, b: 0.42647058, a: 1}
+    - Title: What now?
+      Event: StartDialog
+      Value: TakeCareOfBigSquirrels
+      Condition: QuestAvailable
+      ConditionValue: thisIsNecessary3
+      CLR: {r: 1, g: 0.98400396, b: 0.5147059, a: 1}
     - Title: OK
       Event: EndDialog
       Value: 
@@ -20289,14 +20295,14 @@ MonoBehaviour:
       AnimationTrigger: Greet
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: 10
+    - Content: 15 brownies, 5 of those greenies and 5 red worms...
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Of those worms...
+    - Content: The red ones I hate the most.
       LetterDelay: 0.02
       Pitch: 1.1
       SoundKey: 
@@ -20542,13 +20548,83 @@ MonoBehaviour:
       PostPieceEvent: CompleteQuest
       PostPieceEventValue: bustNuts
     Options: []
+  - DialogKey: TakeCareOfBigSquirrels
+    Pieces:
+    - Content: You are already helping me too much.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Well, that task is more like a bonus for me...
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Mostly because I don't believe you can beat em'.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But who knows, you've surprised me more than once!
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Some of the squirrels started lifting and ate too many acorns, and
+        now they are super buffed, you've met one of them already.
+      LetterDelay: 0.03
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I don't like em'.
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Remove em'
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Or move em'
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: thisIsNecessary3
+    - Content: You can find the majority in the squirrels tunnel, the one you broke
+        into before.
+      LetterDelay: 0.02
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: thisIsNecessary3
+    Options: []
   GivingQuests:
   - thisIsNecessary1
   - thisIsNecessary2
+  - thisIsNecessary3
   EndingQuests:
   - thisIsNecessary1
   - thisIsNecessary2
   - bustNuts
+  - thisIsNecessary3
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings

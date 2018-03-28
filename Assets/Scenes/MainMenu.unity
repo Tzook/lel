@@ -50092,6 +50092,29 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 100
+  - Name: This Is Necessary - Big Squirrels
+    Key: thisIsNecessary3
+    InProgressDescription: Kristle asked me to clear some of the big squirrels dwelling
+      in the tree, so his harvest of sap would be smoother...
+    QuestCompleteDescription: Cleansed the tree off some unwanted squirrels...
+    FacePrefab: KristleQuest
+    Conditions:
+    - Condition: hunt
+      Type: BuffedSquirrel
+      CurrentProgress: 0
+      TargetProgress: 10
+      ExtraDescription: 
+    QuestsStates:
+    - QuestKey: thisIsNecessary2
+      EnumState: 1
+    - QuestKey: bustNuts
+      EnumState: 1
+    MinimumLevel: 8
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 350
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

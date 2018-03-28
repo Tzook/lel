@@ -58,7 +58,7 @@ public class EnemyMoving : Enemy
     public override void SetAION()
     {
         base.SetAION();
-        //Rigid.bodyType = RigidbodyType2D.Dynamic;
+        Rigid.bodyType = RigidbodyType2D.Dynamic;
 
         AIRoutineInstance = StartCoroutine(AIRoutine());
     }
@@ -67,7 +67,7 @@ public class EnemyMoving : Enemy
     {
         base.SetAIOFF();
 
-        //Rigid.bodyType = RigidbodyType2D.Kinematic;
+        Rigid.bodyType = RigidbodyType2D.Kinematic;
         Rigid.velocity = Vector2.zero;
 
         StopCurrentActionRoutine();
@@ -135,8 +135,6 @@ public class EnemyMoving : Enemy
         {
             m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 3f);
         }
-
-        Rigid.isKinematic = false;
     }
 
     #region AI
@@ -444,7 +442,6 @@ public class EnemyMoving : Enemy
             Anim.SetBool("Walk", false);
         }
 
-        Rigid.isKinematic = true;
         Rigid.velocity = new Vector2(0f, velocity);
     }
 

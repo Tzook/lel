@@ -412,6 +412,11 @@ public class Enemy : MonoBehaviour {
 
     public void CastSpellComplete()
     {
+        if(SpellInCast == null || string.IsNullOrEmpty(SpellInCast.ColliderPrefab))
+        {
+            return;
+        }
+
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(SpellInCast.ColliderPrefab);
 
         if(SpellSource != null)

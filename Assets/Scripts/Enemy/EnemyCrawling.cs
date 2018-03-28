@@ -64,8 +64,6 @@ public class EnemyCrawling : EnemyMoving {
         {
             m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, m_HitBox.bounds.max.y), Time.deltaTime * 3f);
         }
-
-        Rigid.isKinematic = false;
     }
 
     public override void Hurt(ActorInstance actor, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)
@@ -319,7 +317,6 @@ public class EnemyCrawling : EnemyMoving {
         }
 
 
-        Rigid.isKinematic = true;
         Rigid.velocity = new Vector2(0f, velocity);
 
     }

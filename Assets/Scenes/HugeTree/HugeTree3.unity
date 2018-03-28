@@ -13945,6 +13945,7 @@ MonoBehaviour:
   - {fileID: 1068195684}
   - {fileID: 988317055}
   - {fileID: 1487406162}
+  - {fileID: 1366330680}
   Spawners: []
   Npcs:
   - {fileID: 1848271894}
@@ -15231,6 +15232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 865528547}
   - component: {fileID: 865528548}
+  - component: {fileID: 865528550}
+  - component: {fileID: 865528549}
   m_Layer: 0
   m_Name: GrassLandsAssets_02_0 (308)
   m_TagString: Untagged
@@ -15295,6 +15298,32 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &865528549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 865528546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: bustNuts
+  HideState: 1
+--- !u!114 &865528550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 865528546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: bustNuts
+  HideState: 4
 --- !u!1 &874383833
 GameObject:
   m_ObjectHideFlags: 0
@@ -20753,6 +20782,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1072186199}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1366330676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1259513383543036, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1366330682}
+  - component: {fileID: 1366330681}
+  - component: {fileID: 1366330680}
+  - component: {fileID: 1366330679}
+  - component: {fileID: 1366330678}
+  m_Layer: 2
+  m_Name: Portal (6)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1366330678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366330676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d9de7550bb1b94db92bfe156d819ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HideQuestKey: bustNuts
+  HideState: 3
+--- !u!61 &1366330679
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 61002359517793564, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366330676}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3197689, y: -0.66492605}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.97, y: 1.97}
+    newSize: {x: 1.97, y: 1.97}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6745186, y: 2.4591799}
+  m_EdgeRadius: 0
+--- !u!114 &1366330680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114569885717764242, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366330676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: SquirrelTunnelEntrance
+  TargetPortal: LeftGate
+  TargetLevel: SquirrelTunnel
+  StartShut: 0
+  RequiresItems: []
+--- !u!210 &1366330681
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 210953425027317772, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366330676}
+  m_Enabled: 1
+  m_SortingLayerID: -1262447697
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+--- !u!4 &1366330682
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4378583339985238, guid: 0d3b515392740ee4384964be9225cac5,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366330676}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -67.44, y: 9.97, z: 0.08113527}
+  m_LocalScale: {x: 1, y: 1, z: 0.73522997}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 128
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376834504
 GameObject:

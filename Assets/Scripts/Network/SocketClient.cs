@@ -195,6 +195,8 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent("Actor has joined the room");
 
         JSONNode data = (JSONNode)args[0];
+
+
         Game.Instance.LoadOtherPlayerCharacter(new ActorInfo(data["character"]));
     }
 
@@ -758,6 +760,8 @@ public class SocketClient : MonoBehaviour
 
         monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat, data["velocity"].AsFloat);
 
+        Debug.Log(data.ToString());
+
     }
     
     protected void OnMobBlocked(Socket socket, Packet packet, object[] args)
@@ -830,6 +834,7 @@ public class SocketClient : MonoBehaviour
     private void OnMobSpawn(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
+
 
         BroadcastEvent(data["key"].Value + " Spawned");
 

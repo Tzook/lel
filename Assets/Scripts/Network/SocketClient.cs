@@ -84,7 +84,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_mp", OnActorGainMP);
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
-        CurrentSocket.On("update_actor_max_stats", OnUpdateActorMaxStats);
         CurrentSocket.On("update_client_perks", OnUpdateClientPerks);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
@@ -508,13 +507,12 @@ public class SocketClient : MonoBehaviour
         Game.Instance.CurrentScene.UpdateAllQuestProgress();
     }
 
-    protected void OnUpdateActorMaxStats(Socket socket, Packet packet, object[] args)
+    protected void OnUpdateClientPerks(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Update actor max stats | " + data.ToString());
+        BroadcastEvent("Actor update client perks | " + data.ToString());
 
         ActorInfo actor = null;
-        KnownCharacter known = null;
         string id = data["id"].Value;
         if (Game.Instance.CurrentScene == null)
         {
@@ -526,56 +524,38 @@ public class SocketClient : MonoBehaviour
         else 
         {
             actor = Game.Instance.CurrentScene.GetActor(id);
-
-            if (actor == null)
-            {
-                known = LocalUserInfo.Me.GetKnownCharacter(data["name"].Value);
-                if (known != null) 
-                {
-                    actor = known.Info;
-                }
-            }
         }
 
         if (actor != null)
         {
-            if (data["hp"] != null) {
-                actor.MaxHealth = data["hp"].AsInt;
-            }
-            if (data["mp"] != null) {
-                actor.MaxMana = data["mp"].AsInt;
-            }
-
-            if (!Game.Instance.isLoadingScene)
+            bool refreshStats = false;
+            
+            if (data["hpBonus"] != null) 
             {
-                if (actor == LocalUserInfo.Me.ClientCharacter)
-                {
-                    InGameMainMenuUI.Instance.RefreshStats();
-                }
-                else if (known != null) 
-                {
-                    InGameMainMenuUI.Instance.RefreshParty();
-                }
+                actor.MaxHealth = data["hpBonus"].AsInt;
+                refreshStats = true;
             }
-        }
-    }
 
-    protected void OnUpdateClientPerks(Socket socket, Packet packet, object[] args)
-    {
-        JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor update client perks | " + data.ToString());
-
-        if (data["attackSpeedModifier"] != null) 
-        {
-            LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
-        }
-
-        if (data["mpCost"] != null) 
-        {
-            LocalUserInfo.Me.ClientCharacter.SetManaCost(data["mpCost"].AsFloat);
-            if (!Game.Instance.isLoadingScene)
+            if (data["mpBonus"] != null) 
             {
-                InGameMainMenuUI.Instance.RefreshMP();
+                actor.MaxMana = data["mpBonus"].AsInt;
+                refreshStats = true;
+            }
+            
+            if (data["attackSpeedModifier"] != null) 
+            {
+                actor.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
+            }
+
+            if (data["mpCost"] != null) 
+            {
+                actor.SetManaCost(data["mpCost"].AsFloat);
+                refreshStats = true;
+            }
+            
+            if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)
+            {
+                InGameMainMenuUI.Instance.RefreshStats();
             }
         }
     }

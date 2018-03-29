@@ -99,7 +99,7 @@ public class EnemyFlying : Enemy {
 
     private void Update()
     {
-        if (!Game.Instance.isBitch)
+        if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
             Rigid.position = Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f);
         }

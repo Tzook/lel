@@ -45,7 +45,7 @@ public class EnemyJumping : EnemyMoving
 
     private void Update()
     {
-        if (!Game.Instance.isBitch)
+        if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
             Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
         }

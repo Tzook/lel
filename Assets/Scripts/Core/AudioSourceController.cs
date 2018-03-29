@@ -8,7 +8,7 @@ public class AudioSourceController : MonoBehaviour
     AudioSource Source;
 
     [SerializeField]
-    string VolumeTag = "Default";
+    string VolumeTag = "Untagged";
 
     private void OnEnable()
     {

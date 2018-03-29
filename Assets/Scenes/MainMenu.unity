@@ -45967,10 +45967,44 @@ MonoBehaviour:
     RewardEXP: 10
     Type: 0
     PossibleLoot: []
-    Perks:
-    - Key: crippleChance
-      Value: 0.3
-    Spells: []
+    Perks: []
+    Spells:
+    - Key: AttackRight
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackRight
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 3
+      MaxTime: 7
+    - Key: AttackLeft
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackLeft
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 3
+      MaxTime: 7
+    - Key: AttackUpperRight
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackUpperRight
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 3
+      MaxTime: 7
+    - Key: AttackUpperLeft
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackUpperLeft
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 3
+      MaxTime: 7
     DeathRattle:
       Key: 
       Level: 0
@@ -47265,6 +47299,74 @@ MonoBehaviour:
       MaxStack: 1
     Perks: []
     Spells: []
+    DeathRattle:
+      Key: 
+      Level: 0
+      Mana: 0
+      ColliderPrefab: 
+      Perks: []
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 0
+      MaxTime: 0
+  - MonsterKey: WormBoss
+    MonsterName: WormBoss
+    MonsterHP: 1920
+    MonsterLevel: 10
+    DMG: 20
+    RewardEXP: 800
+    Type: 0
+    PossibleLoot: []
+    Perks:
+    - Key: crippleResistance
+      Value: 1
+    - Key: stunResistance
+      Value: 1
+    Spells:
+    - Key: AttackRight
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackRight
+      Perks:
+      - Key: damageModifier
+        Value: 2
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 6
+      MaxTime: 12
+    - Key: AttackLeft
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackLeft
+      Perks:
+      - Key: damageModifier
+        Value: 2
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 6
+      MaxTime: 12
+    - Key: AttackUpperRight
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackUpperRight
+      Perks:
+      - Key: damageModifier
+        Value: 2
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 6
+      MaxTime: 12
+    - Key: AttackUpperLeft
+      Level: 0
+      Mana: 0
+      ColliderPrefab: WormAttackUpperLeft
+      Perks:
+      - Key: damageModifier
+        Value: 2
+      Icon: {fileID: 0}
+      HitSound: 
+      MinTime: 6
+      MaxTime: 12
     DeathRattle:
       Key: 
       Level: 0
@@ -48618,7 +48720,6 @@ MonoBehaviour:
     - sound_hit_1
     - sound_hit_2
     - sound_hit_3
-    - sound_hit_4
     GrowingEffect: 
     ProjectilePrefab: 
     ProjectileHitSound: 

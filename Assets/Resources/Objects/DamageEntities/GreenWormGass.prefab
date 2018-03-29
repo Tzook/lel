@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61715811386607120}
   - component: {fileID: 198127961752656170}
   - component: {fileID: 199809641768127902}
-  - component: {fileID: 114158411054405262}
+  - component: {fileID: 114585208547452846}
   m_Layer: 2
   m_Name: GreenWormGass
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1571120551729754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.06, y: 20.05, z: -0.044333402}
+  m_LocalPosition: {x: -5.0982256, y: -21.013624, z: -0.044333402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,7 +68,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4788246, y: 2.6020012}
   m_EdgeRadius: 0
---- !u!114 &114158411054405262
+--- !u!114 &114585208547452846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1571120551729754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c576ab80e226d4399be74b140c05ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 32e39ada53ba23240bd920e26a4aab4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PopSound: sound_poof
@@ -85,7 +85,7 @@ MonoBehaviour:
   ActionValue: 
   m_Collider: {fileID: 61715811386607120}
   InitTimeAlive: 5
-  InitHitTime: 0.1
+  HitInterval: 1
   Shake: 0
 --- !u!198 &198127961752656170
 ParticleSystem:
@@ -147,7 +147,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1436301939
+  randomSeed: -1913705819
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -516,6 +516,7 @@ public class DevPAPerk
     public float UpgradeCap;
     public float StartingValue;
     public List<DevPerkMap> BonusPerks = new List<DevPerkMap>();
+    public bool IsClient = false;
     
     // acceleration - if value is 10 and acceleration is 5, the value at lvl 1 is 10, at lvl 2 the value is 10+15=25 and so on
     // currently disabled. will be re-used if we need it

@@ -85,8 +85,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_gain_exp", OnActorGainXP);
         CurrentSocket.On("actor_gain_stats", OnActorGainStats);
         CurrentSocket.On("update_actor_max_stats", OnUpdateActorMaxStats);
-        CurrentSocket.On("update_actor_attack_speed", OnUpdateActorAttackSpeed);
-        CurrentSocket.On("update_actor_mana_cost", OnUpdateActorManaCost);
+        CurrentSocket.On("update_client_perks", OnUpdateClientPerks);
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
@@ -561,23 +560,23 @@ public class SocketClient : MonoBehaviour
         }
     }
 
-    protected void OnUpdateActorAttackSpeed(Socket socket, Packet packet, object[] args)
+    protected void OnUpdateClientPerks(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor update attack speed | " + data.ToString());
+        BroadcastEvent("Actor update client perks | " + data.ToString());
 
-        LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["speed"].AsFloat);
-    }
-
-    protected void OnUpdateActorManaCost(Socket socket, Packet packet, object[] args)
-    {
-        JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor update attack speed | " + data.ToString());
-
-        LocalUserInfo.Me.ClientCharacter.SetManaCost(data["mpCost"].AsFloat);
-        if (!Game.Instance.isLoadingScene)
+        if (data["attackSpeedModifier"] != null) 
         {
-            InGameMainMenuUI.Instance.RefreshMP();
+            LocalUserInfo.Me.ClientCharacter.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
+        }
+
+        if (data["mpCost"] != null) 
+        {
+            LocalUserInfo.Me.ClientCharacter.SetManaCost(data["mpCost"].AsFloat);
+            if (!Game.Instance.isLoadingScene)
+            {
+                InGameMainMenuUI.Instance.RefreshMP();
+            }
         }
     }
 
@@ -592,9 +591,6 @@ public class SocketClient : MonoBehaviour
         if (actor == LocalUserInfo.Me.ClientCharacter)
         {
             AudioControl.Instance.Play("sound_positive2");
-
-            
-
             InGameMainMenuUI.Instance.MinilogMessage("Leveled Up!");
         }
         else

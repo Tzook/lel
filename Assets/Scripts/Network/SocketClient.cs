@@ -546,6 +546,11 @@ public class SocketClient : MonoBehaviour
             {
                 actor.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
             }
+            
+            if (data["knockbackModifier"] != null) 
+            {
+                actor.SetKnockback(data["knockbackModifier"].AsFloat);
+            }
 
             if (data["mpCost"] != null) 
             {

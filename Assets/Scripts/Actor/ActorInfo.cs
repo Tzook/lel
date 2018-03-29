@@ -41,6 +41,8 @@ public class ActorInfo
     
     public float ManaCost = 1f;
 
+    public float KnockbackModifier = 1f;
+
     public int MaxHealth;
     public int CurrentHealth;
 
@@ -322,6 +324,11 @@ public class ActorInfo
     public void SetManaCost(float manaCost)
     {
         ManaCost = manaCost;
+    }
+
+    public void SetKnockback(float knockbackModifier)
+    {
+        KnockbackModifier = knockbackModifier;
     }
 
     public void SwitchPrimaryAbility(string key)

@@ -77,13 +77,13 @@ public class EnemyCrawling : EnemyMoving {
             {
                 Rigid.gravityScale = 1f;
 
-                Rigid.AddForce((damage / Info.MaxHealth) * 3f * transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * transform.right, ForceMode2D.Impulse);
             }
             else
             {
                 Rigid.gravityScale = 1f;
 
-                Rigid.AddForce((damage / Info.MaxHealth) * 3f * -transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * -transform.right, ForceMode2D.Impulse);
             }
         }
     }

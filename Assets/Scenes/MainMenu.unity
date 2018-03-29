@@ -34907,7 +34907,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15625001, y: 0}
   m_AnchorMax: {x: 0.26625, y: 0.1674894}
-  m_AnchoredPosition: {x: -0.20019531, y: -1.5998383}
+  m_AnchoredPosition: {x: -0.20019531, y: -1.5997925}
   m_SizeDelta: {x: -2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1646
@@ -45131,17 +45131,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: OldTurtle
     MonsterName: Old Turtle
     MonsterHP: 30
@@ -45217,17 +45219,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: SpikedTurtle
     MonsterName: Spiked Turtle
     MonsterHP: 30
@@ -45307,17 +45311,19 @@ MonoBehaviour:
       Value: 3
     - Key: bleedChance
       Value: 0.1
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Spike
     MonsterName: Spike
     MonsterHP: 1
@@ -45333,17 +45339,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Rabbit
     MonsterName: Rabbit
     MonsterHP: 40
@@ -45411,17 +45419,19 @@ MonoBehaviour:
       Value: 0.2
     - Key: crippleChance
       Value: 0.2
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Bat
     MonsterName: Bat
     MonsterHP: 20
@@ -45485,17 +45495,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: FatRabbit
     MonsterName: Fat Rabbit
     MonsterHP: 90
@@ -45568,17 +45580,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: RabbitBoss
     MonsterName: Rabbit King
     MonsterHP: 1500
@@ -45668,27 +45682,28 @@ MonoBehaviour:
     - Key: stunResistance
       Value: 1
     Spells:
-    - Key: CarrotThrow
-      Level: 5
-      Mana: 5
-      ColliderPrefab: CarrotExplosion
-      Perks:
-      - Key: stunChance
-        Value: 1
-      Icon: {fileID: 21300006, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
-      HitSound: sound_punch
+      SpellsList:
+      - Key: CarrotThrow
+        Level: 5
+        Mana: 5
+        ColliderPrefab: CarrotExplosion
+        Perks:
+        - Key: stunChance
+          Value: 1
+        Icon: {fileID: 21300006, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
+        HitSound: sound_punch
+        Chance: 1
       MinTime: 4
       MaxTime: 10
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
     MonsterHP: 2000
@@ -45765,29 +45780,30 @@ MonoBehaviour:
       MaxStack: 1
     Perks: []
     Spells:
-    - Key: TurtleBossSmash
-      Level: 5
-      Mana: 0
-      ColliderPrefab: TurtleBossSmash
-      Perks:
-      - Key: damageModifier
-        Value: 0.1
-      - Key: stunChance
-        Value: 1
-      Icon: {fileID: 21300036, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
-      HitSound: sound_stun
+      SpellsList:
+      - Key: TurtleBossSmash
+        Level: 5
+        Mana: 0
+        ColliderPrefab: TurtleBossSmash
+        Perks:
+        - Key: damageModifier
+          Value: 0.1
+        - Key: stunChance
+          Value: 1
+        Icon: {fileID: 21300036, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
+        HitSound: sound_stun
+        Chance: 1
       MinTime: 4
       MaxTime: 10
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Plant
     MonsterName: Moving Plant
     MonsterHP: 60
@@ -45860,17 +45876,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BlueMushroom
     MonsterName: Blue Mushroom
     MonsterHP: 100
@@ -45948,17 +45966,19 @@ MonoBehaviour:
     Perks:
     - Key: mpSteal
       Value: 0.5
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Thorns
     MonsterName: Thorns
     MonsterHP: 100
@@ -45969,52 +45989,50 @@ MonoBehaviour:
     PossibleLoot: []
     Perks: []
     Spells:
-    - Key: AttackRight
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackRight
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+      SpellsList:
+      - Key: AttackRight
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackRight
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackLeft
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackLeft
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackUpperRight
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackUpperRight
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackUpperLeft
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackUpperLeft
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
       MinTime: 3
       MaxTime: 7
-    - Key: AttackLeft
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackLeft
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 3
-      MaxTime: 7
-    - Key: AttackUpperRight
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackUpperRight
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 3
-      MaxTime: 7
-    - Key: AttackUpperLeft
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackUpperLeft
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 3
-      MaxTime: 7
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Sack
     MonsterName: Sack
     MonsterHP: 100
@@ -46035,17 +46053,19 @@ MonoBehaviour:
     Perks:
     - Key: crippleChance
       Value: 0.3
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: FlowerManBoss
     MonsterName: Sir Flaw Ware
     MonsterHP: 700
@@ -46122,27 +46142,28 @@ MonoBehaviour:
       MaxStack: 1
     Perks: []
     Spells:
-    - Key: FlowerBomb
-      Level: 1
-      Mana: 0
-      ColliderPrefab: FlowerBomb
-      Perks:
-      - Key: damageModifier
-        Value: 10
-      Icon: {fileID: 0}
-      HitSound: sound_hit_4
+      SpellsList:
+      - Key: FlowerBomb
+        Level: 1
+        Mana: 0
+        ColliderPrefab: FlowerBomb
+        Perks:
+        - Key: damageModifier
+          Value: 10
+        Icon: {fileID: 0}
+        HitSound: sound_hit_4
+        Chance: 1
       MinTime: 2
       MaxTime: 5
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: FrostWizardBoss
     MonsterName: Frost Wizard
     MonsterHP: 600
@@ -46216,27 +46237,28 @@ MonoBehaviour:
       MaxStack: 1
     Perks: []
     Spells:
-    - Key: FrostBall
-      Level: 1
-      Mana: 0
-      ColliderPrefab: FrostBall
-      Perks:
-      - Key: damageModifier
-        Value: 4
-      Icon: {fileID: 0}
-      HitSound: sound_impactCold
+      SpellsList:
+      - Key: FrostBall
+        Level: 1
+        Mana: 0
+        ColliderPrefab: FrostBall
+        Perks:
+        - Key: damageModifier
+          Value: 4
+        Icon: {fileID: 0}
+        HitSound: sound_impactCold
+        Chance: 1
       MinTime: 2
       MaxTime: 5
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: PirateSailor1
     MonsterName: Pirate Sailor
     MonsterHP: 200
@@ -46314,38 +46336,38 @@ MonoBehaviour:
     - Key: bleedDuration
       Value: 3
     Spells:
-    - Key: Stab
-      Level: 1
-      Mana: 0
-      ColliderPrefab: PirateSailorStabCollider
-      Perks:
-      - Key: damageModifier
-        Value: 1.5
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
+      SpellsList:
+      - Key: Stab
+        Level: 1
+        Mana: 0
+        ColliderPrefab: PirateSailorStabCollider
+        Perks:
+        - Key: damageModifier
+          Value: 1.5
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
+      - Key: Throw
+        Level: 1
+        Mana: 0
+        ColliderPrefab: KnifeProjectile
+        Perks:
+        - Key: damageModifier
+          Value: 1.25
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
       MinTime: 4
       MaxTime: 10
-    - Key: Throw
-      Level: 1
-      Mana: 0
-      ColliderPrefab: KnifeProjectile
-      Perks:
-      - Key: damageModifier
-        Value: 1.25
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
-      MinTime: 4
-      MaxTime: 10
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: PirateSailor2
     MonsterName: Pirate Sailor
     MonsterHP: 200
@@ -46423,38 +46445,38 @@ MonoBehaviour:
     - Key: bleedDuration
       Value: 3
     Spells:
-    - Key: Stab
-      Level: 1
-      Mana: 0
-      ColliderPrefab: PirateSailorStabCollider
-      Perks:
-      - Key: damageModifier
-        Value: 1.5
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
+      SpellsList:
+      - Key: Stab
+        Level: 1
+        Mana: 0
+        ColliderPrefab: PirateSailorStabCollider
+        Perks:
+        - Key: damageModifier
+          Value: 1.5
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
+      - Key: Throw
+        Level: 1
+        Mana: 0
+        ColliderPrefab: KnifeProjectile
+        Perks:
+        - Key: damageModifier
+          Value: 1.25
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
       MinTime: 4
       MaxTime: 10
-    - Key: Throw
-      Level: 1
-      Mana: 0
-      ColliderPrefab: KnifeProjectile
-      Perks:
-      - Key: damageModifier
-        Value: 1.25
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
-      MinTime: 4
-      MaxTime: 10
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: PirateSailor3
     MonsterName: Pirate Sailor
     MonsterHP: 200
@@ -46532,38 +46554,38 @@ MonoBehaviour:
     - Key: bleedDuration
       Value: 3
     Spells:
-    - Key: Stab
-      Level: 1
-      Mana: 0
-      ColliderPrefab: PirateSailorStabCollider
-      Perks:
-      - Key: damageModifier
-        Value: 1.5
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
+      SpellsList:
+      - Key: Stab
+        Level: 1
+        Mana: 0
+        ColliderPrefab: PirateSailorStabCollider
+        Perks:
+        - Key: damageModifier
+          Value: 1.5
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
+      - Key: Throw
+        Level: 1
+        Mana: 0
+        ColliderPrefab: KnifeProjectile
+        Perks:
+        - Key: damageModifier
+          Value: 1.25
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        Chance: 0.5
       MinTime: 4
       MaxTime: 10
-    - Key: Throw
-      Level: 1
-      Mana: 0
-      ColliderPrefab: KnifeProjectile
-      Perks:
-      - Key: damageModifier
-        Value: 1.25
-      Icon: {fileID: 0}
-      HitSound: sound_hit_1
-      MinTime: 4
-      MaxTime: 10
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Worm
     MonsterName: Worm
     MonsterHP: 100
@@ -46636,17 +46658,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: Squirrel
     MonsterName: Squirrel
     MonsterHP: 120
@@ -46719,17 +46743,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BuffedSquirrel
     MonsterName: Buffed Squirrel
     MonsterHP: 480
@@ -46802,17 +46828,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BuffedSquirrel_VaultKeeper
     MonsterName: Vault Keeper
     MonsterHP: 500
@@ -46888,17 +46916,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: GiantBat
     MonsterName: GiantBat
     MonsterHP: 80
@@ -46962,17 +46992,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BlueBerriesBush
     MonsterName: BlueBerriesBush
     MonsterHP: 25
@@ -46987,17 +47019,19 @@ MonoBehaviour:
     Perks:
     - Key: crippleChance
       Value: 0.3
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: BerriesBush
     MonsterName: BerriesBush
     MonsterHP: 15
@@ -47012,17 +47046,19 @@ MonoBehaviour:
     Perks:
     - Key: crippleChance
       Value: 0.3
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: TomatoesBush
     MonsterName: TomatoesBush
     MonsterHP: 15
@@ -47037,17 +47073,19 @@ MonoBehaviour:
     Perks:
     - Key: crippleChance
       Value: 0.3
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: GreenWorm
     MonsterName: Green Worm
     MonsterHP: 120
@@ -47120,23 +47158,25 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: GreenWormGass
-      Level: 7
-      Mana: 0
-      ColliderPrefab: GreenWormGass
-      Perks:
-      - Key: crippleChance
-        Value: 1
-      - Key: crippleDuration
-        Value: 1
-      - Key: damageModifier
-        Value: 0.1
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: GreenWormGass
+        Level: 7
+        Mana: 0
+        ColliderPrefab: GreenWormGass
+        Perks:
+        - Key: crippleChance
+          Value: 1
+        - Key: crippleDuration
+          Value: 1
+        - Key: damageModifier
+          Value: 0.1
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: RedWorm
     MonsterName: Red Worm
     MonsterHP: 100
@@ -47209,23 +47249,25 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: RedWormGass
-      Level: 7
-      Mana: 0
-      ColliderPrefab: RedWormGass
-      Perks:
-      - Key: bleedChance
-        Value: 1
-      - Key: bleedDuration
-        Value: 1
-      - Key: damageModifier
-        Value: 0.1
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: RedWormGass
+        Level: 7
+        Mana: 0
+        ColliderPrefab: RedWormGass
+        Perks:
+        - Key: bleedChance
+          Value: 1
+        - Key: bleedDuration
+          Value: 1
+        - Key: damageModifier
+          Value: 0.1
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: SmallSquirrel
     MonsterName: SmallSquirrel
     MonsterHP: 75
@@ -47298,17 +47340,19 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
     Perks: []
-    Spells: []
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
+    Spells:
+      SpellsList: []
       MinTime: 0
       MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   - MonsterKey: WormBoss
     MonsterName: WormBoss
     MonsterHP: 1920
@@ -47323,60 +47367,58 @@ MonoBehaviour:
     - Key: stunResistance
       Value: 1
     Spells:
-    - Key: AttackRight
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackRight
-      Perks:
-      - Key: damageModifier
-        Value: 2
-      Icon: {fileID: 0}
-      HitSound: 
+      SpellsList:
+      - Key: AttackRight
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackRight
+        Perks:
+        - Key: damageModifier
+          Value: 2
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackLeft
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackLeft
+        Perks:
+        - Key: damageModifier
+          Value: 2
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackUpperRight
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackUpperRight
+        Perks:
+        - Key: damageModifier
+          Value: 2
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
+      - Key: AttackUpperLeft
+        Level: 0
+        Mana: 0
+        ColliderPrefab: WormAttackUpperLeft
+        Perks:
+        - Key: damageModifier
+          Value: 2
+        Icon: {fileID: 0}
+        HitSound: 
+        Chance: 0.25
       MinTime: 6
       MaxTime: 12
-    - Key: AttackLeft
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackLeft
-      Perks:
-      - Key: damageModifier
-        Value: 2
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 6
-      MaxTime: 12
-    - Key: AttackUpperRight
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackUpperRight
-      Perks:
-      - Key: damageModifier
-        Value: 2
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 6
-      MaxTime: 12
-    - Key: AttackUpperLeft
-      Level: 0
-      Mana: 0
-      ColliderPrefab: WormAttackUpperLeft
-      Perks:
-      - Key: damageModifier
-        Value: 2
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 6
-      MaxTime: 12
-    DeathRattle:
-      Key: 
-      Level: 0
-      Mana: 0
-      ColliderPrefab: 
-      Perks: []
-      Icon: {fileID: 0}
-      HitSound: 
-      MinTime: 0
-      MaxTime: 0
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        Duration: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -48681,8 +48723,6 @@ MonoBehaviour:
         Value: 0.9
       Icon: {fileID: 21300000, guid: da86da8b3f28d1141b8d967444203626, type: 3}
       HitSound: sound_hit_4
-      MinTime: 0
-      MaxTime: 0
     - Key: Whirlewind
       Level: 12
       Mana: 10
@@ -48694,8 +48734,6 @@ MonoBehaviour:
         Value: 6
       Icon: {fileID: 21300000, guid: 6f2904d8198c2fd4989496c8153b8b2f, type: 3}
       HitSound: sound_hitSpray
-      MinTime: 0
-      MaxTime: 0
     InitialPerks:
     - Key: bleedChance
       Value: 1

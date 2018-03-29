@@ -155,16 +155,19 @@ public class DevContentEditor : Editor
                 node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
             }
 
-            for (int a = 0; a < currentInfo.Monsters[i].Spells.Count; a++)
+            for (int a = 0; a < currentInfo.Monsters[i].Spells.SpellsList.Count; a++)
             {
-                node["mobs"][i]["spells"][a]["key"] = ""; // initialize before passing as arg
-                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells[a], node["mobs"][i]["spells"][a]);
+                node["mobs"][i]["spells"][a]["chance"] = currentInfo.Monsters[i].Spells.SpellsList[a].Chance.ToString();
+                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells.SpellsList[a], node["mobs"][i]["spells"][a]);
             }
-            if (!String.IsNullOrEmpty(currentInfo.Monsters[i].DeathRattle.Key))
+            if (!String.IsNullOrEmpty(currentInfo.Monsters[i].Spells.DeathRattle.Key))
             {
-                node["mobs"][i]["deathRattle"]["key"] = ""; // initialize before passing as arg
-                FillMonsterSpellInfo(currentInfo.Monsters[i].DeathRattle, node["mobs"][i]["deathRattle"]);
+                node["mobs"][i]["deathRattle"]["duration"] = currentInfo.Monsters[i].Spells.DeathRattle.Duration.ToString();
+                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells.DeathRattle, node["mobs"][i]["deathRattle"]);
             }
+
+            node["mobs"][i]["spellsMinTime"] = currentInfo.Monsters[i].Spells.MinTime.ToString();
+            node["mobs"][i]["spellsMaxTime"] = currentInfo.Monsters[i].Spells.MaxTime.ToString();
         }
     }
 
@@ -177,8 +180,6 @@ public class DevContentEditor : Editor
             node["perks"][b]["key"] = devSpell.Perks[b].Key.ToString();
             node["perks"][b]["value"] = devSpell.Perks[b].Value.ToString();
         }
-        node["minTime"] = devSpell.MinTime.ToString();
-        node["maxTime"] = devSpell.MaxTime.ToString();
     }
 
     private void SendMonstersInfo(JSONNode node)

@@ -181,17 +181,17 @@ public class Content : MonoBehaviour {
     {
         for (int i = 0; i < Monsters.Count; i++)
         {
-            for (int a = 0; a < Monsters[i].Spells.Count; a++)
+            for (int a = 0; a < Monsters[i].Spells.SpellsList.Count; a++)
             {
-                if (Monsters[i].Spells[a].Key == spellKey)
+                if (Monsters[i].Spells.SpellsList[a].Key == spellKey)
                 {
-                    return Monsters[i].Spells[a];
+                    return Monsters[i].Spells.SpellsList[a];
                 }
             }
 
-            if (Monsters[i].DeathRattle.Key == spellKey)
+            if (Monsters[i].Spells.DeathRattle.Key == spellKey)
             {
-                return Monsters[i].DeathRattle;
+                return Monsters[i].Spells.DeathRattle;
             }
         }
 
@@ -278,9 +278,7 @@ public class DevMonsterInfo
 
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     
-    public List<DevSpell> Spells = new List<DevSpell>();
-
-    public DevSpell DeathRattle;
+    public DevMobSpells Spells;
 
     public DevMonsterInfo Clone()
     {
@@ -486,6 +484,18 @@ public class PerkStage
 }
 
 [System.Serializable]
+public class DevMobSpells
+{
+    public List<DevMobSpell> SpellsList = new List<DevMobSpell>();
+
+    public float MinTime;
+
+    public float MaxTime;
+
+    public DevDeathrattleSpell DeathRattle;
+}
+
+[System.Serializable]
 public class DevSpell
 {
     public string Key;
@@ -495,9 +505,20 @@ public class DevSpell
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     public Sprite Icon;
     public string HitSound;
-    public float MinTime;
-    public float MaxTime;
 }
+
+[System.Serializable]
+public class DevMobSpell : DevSpell
+{
+    public float Chance;
+}
+
+[System.Serializable]
+public class DevDeathrattleSpell : DevSpell
+{
+    public int Duration;
+}
+
 [System.Serializable]
 public class DevPerkMap
 {

@@ -364,6 +364,10 @@ public class DevAppearsAt
     public int MinLvlMobs;
     
     public int MaxLvlMobs;
+
+    public int MinStack = 1;
+    
+    public int MaxStack = 1;
 }
 
 [System.Serializable]

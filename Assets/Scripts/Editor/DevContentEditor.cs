@@ -91,6 +91,8 @@ public class DevContentEditor : Editor
 
                 node["items"][i]["minLvlMobs"] = currentInfo.Items[i].AppearsAt.MinLvlMobs.ToString();
                 node["items"][i]["maxLvlMobs"] = currentInfo.Items[i].AppearsAt.MaxLvlMobs.ToString();
+                node["items"][i]["maxMobsStack"] = currentInfo.Items[i].AppearsAt.MaxStack.ToString();
+                node["items"][i]["minMobsStack"] = currentInfo.Items[i].AppearsAt.MinStack.ToString();
             }
 
             SendItemsInfo(node);

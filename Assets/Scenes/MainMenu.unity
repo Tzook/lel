@@ -47408,8 +47408,8 @@ MonoBehaviour:
         Icon: {fileID: 0}
         HitSound: 
         Chance: 0.25
-      MinTime: 6
-      MaxTime: 12
+      MinTime: 5
+      MaxTime: 7
       DeathRattle:
         Key: 
         Level: 0
@@ -49089,9 +49089,17 @@ MonoBehaviour:
     Name: Heal
     Icon: {fileID: 21300010, guid: c5f9099fa2b10f249a892c86cf10dcc7, type: 3}
     PAColor: {r: 1, g: 0.9274848, b: 0.52205884, a: 1}
-    Perks: []
+    Perks:
+    - MinLevel: 2
+      PerksOffered: 2
+      AddToPool:
+      - hpStealChance
+      - hpStealModifier
+      - critChance
     Spells: []
-    InitialPerks: []
+    InitialPerks:
+    - Key: hpStealChance
+      Value: 1
     hitTypeEnumState: 1
     hitTargetEnumState: 1
     powerTypeEnumState: 2
@@ -96421,7 +96429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8425001, y: 0.13926288}
   m_AnchorMax: {x: 0.9925, y: 0.20400001}
-  m_AnchoredPosition: {x: 1.8251953, y: -3.6998749}
+  m_AnchoredPosition: {x: 1.8251953, y: -3.6998901}
   m_SizeDelta: {x: 8.349976, y: 4.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298705609

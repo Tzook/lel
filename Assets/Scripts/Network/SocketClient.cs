@@ -741,7 +741,7 @@ public class SocketClient : MonoBehaviour
 
         monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat, data["velocity"].AsFloat);
 
-        Debug.Log(data.ToString());
+        // Debug.Log(data.ToString());
 
     }
     

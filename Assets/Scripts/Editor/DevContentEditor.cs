@@ -89,6 +89,8 @@ public class DevContentEditor : Editor
 
                 }
 
+                node["items"][i]["minLvlMobs"] = currentInfo.Items[i].AppearsAt.MinLvlMobs.ToString();
+                node["items"][i]["maxLvlMobs"] = currentInfo.Items[i].AppearsAt.MaxLvlMobs.ToString();
             }
 
             SendItemsInfo(node);

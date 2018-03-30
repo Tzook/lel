@@ -343,6 +343,8 @@ public class DevItemInfo
     public UseItemInfo UseInfo;
 
     public List<DevItemSprite> ItemSprites = new List<DevItemSprite>();
+    
+    public DevAppearsAt AppearsAt;
 }
 
 [System.Serializable]
@@ -354,6 +356,14 @@ public class DevItemSprite
     public Sprite SpritePlaceable = null;
 
     public string Sprite;
+}
+
+[System.Serializable]
+public class DevAppearsAt
+{
+    public int MinLvlMobs;
+    
+    public int MaxLvlMobs;
 }
 
 [System.Serializable]

@@ -48981,7 +48981,8 @@ MonoBehaviour:
       PerksOffered: 5
       AddToPool:
       - attackSpeedModifier
-      - hpSteal
+      - hpStealChance
+      - hpStealModifier
       - threatModifier
     Spells:
     - Key: Jab
@@ -49056,7 +49057,8 @@ MonoBehaviour:
       PerksOffered: 5
       AddToPool:
       - attackSpeedModifier
-      - hpSteal
+      - hpStealChance
+      - hpStealModifier
       - critDamageModifier
     Spells: []
     InitialPerks:
@@ -49127,19 +49129,14 @@ MonoBehaviour:
       PerksOffered: 5
       AddToPool:
       - damageModifier
-      - hpSteal
-      - threatModifier
+      - mpStealChance
+      - mpStealModifier
+      - mpStealModifier
     Spells: []
     InitialPerks:
     - Key: bleedChance
       Value: 1
     - Key: stunChance
-      Value: 1
-    - Key: crippleChance
-      Value: 1
-    - Key: threatModifier
-      Value: 2
-    - Key: blockChance
       Value: 1
     hitTypeEnumState: 0
     hitTargetEnumState: 0
@@ -49440,7 +49437,7 @@ MonoBehaviour:
     IsClient: 0
     PerkType: 2
   - Key: hpRegenModifier
-    Name: Health Regen
+    Name: HP Regen
     Icon: {fileID: 21300000, guid: 154cf234c48db2f4d8773041042d31bf, type: 3}
     PrecentPerUpgrade: 0.04
     UpgradeCap: 0.3
@@ -49449,7 +49446,7 @@ MonoBehaviour:
     IsClient: 0
     PerkType: 0
   - Key: hpRegenInterval
-    Name: Health Regen
+    Name: HP Regen
     Icon: {fileID: 21300000, guid: d7afd03aa70db1148a2248e8ae6d13fd, type: 3}
     PrecentPerUpgrade: -0.4
     UpgradeCap: 3
@@ -49457,17 +49454,26 @@ MonoBehaviour:
     BonusPerks: []
     IsClient: 0
     PerkType: 1
-  - Key: hpSteal
-    Name: Health Steal
-    Icon: {fileID: 21300000, guid: 78085b182f84de44a9219f980bb681c5, type: 3}
+  - Key: hpStealChance
+    Name: HP Steal Chance
+    Icon: {fileID: 21300000, guid: a73339a440217d14fad096ec00c067f0, type: 3}
     PrecentPerUpgrade: 0.05
-    UpgradeCap: 0.8
+    UpgradeCap: 1
     StartingValue: 0
     BonusPerks: []
     IsClient: 0
     PerkType: 0
+  - Key: hpStealModifier
+    Name: HP Steal Value
+    Icon: {fileID: 21300000, guid: 78085b182f84de44a9219f980bb681c5, type: 3}
+    PrecentPerUpgrade: 0.05
+    UpgradeCap: 0.8
+    StartingValue: 0.05
+    BonusPerks: []
+    IsClient: 0
+    PerkType: 0
   - Key: hpBonus
-    Name: Health Bonus
+    Name: HP Bonus
     Icon: {fileID: 21300000, guid: 0a14e5aa8388a6a4a83810ffc3dbbbb0, type: 3}
     PrecentPerUpgrade: 10
     UpgradeCap: 0
@@ -49476,7 +49482,7 @@ MonoBehaviour:
     IsClient: 1
     PerkType: 2
   - Key: mpRegenModifier
-    Name: Mana Regen
+    Name: MP Regen
     Icon: {fileID: 21300000, guid: ec324547bb253c04baf81caad631a6a8, type: 3}
     PrecentPerUpgrade: 0.04
     UpgradeCap: 0.3
@@ -49485,7 +49491,7 @@ MonoBehaviour:
     IsClient: 0
     PerkType: 0
   - Key: mpRegenInterval
-    Name: Mana Regen
+    Name: MP Regen
     Icon: {fileID: 21300000, guid: 2898718dfb7468e40b965e8fd0c2e29a, type: 3}
     PrecentPerUpgrade: -0.4
     UpgradeCap: 3
@@ -49493,17 +49499,26 @@ MonoBehaviour:
     BonusPerks: []
     IsClient: 0
     PerkType: 1
-  - Key: mpSteal
-    Name: Mana Steal
-    Icon: {fileID: 21300000, guid: ee8d087283b66954fb336f41b9c14d76, type: 3}
+  - Key: mpStealChance
+    Name: MP Steal Chance
+    Icon: {fileID: 21300000, guid: c3224a5a1f509fe4db9eb490e4e7746c, type: 3}
     PrecentPerUpgrade: 0.05
-    UpgradeCap: 0.8
+    UpgradeCap: 1
     StartingValue: 0
     BonusPerks: []
     IsClient: 0
     PerkType: 0
+  - Key: mpStealModifier
+    Name: MP Steal Value
+    Icon: {fileID: 21300000, guid: ee8d087283b66954fb336f41b9c14d76, type: 3}
+    PrecentPerUpgrade: 0.05
+    UpgradeCap: 0.8
+    StartingValue: 0.05
+    BonusPerks: []
+    IsClient: 0
+    PerkType: 0
   - Key: mpBonus
-    Name: Mana Bonus
+    Name: MP Bonus
     Icon: {fileID: 21300000, guid: cfd3f3ce0f58c0c40bf5427d42a8ce96, type: 3}
     PrecentPerUpgrade: 10
     UpgradeCap: 0
@@ -49512,7 +49527,7 @@ MonoBehaviour:
     IsClient: 1
     PerkType: 2
   - Key: mpCost
-    Name: Mana Cost
+    Name: MP Cost
     Icon: {fileID: 21300000, guid: b94c7b5005beb23449090d2e2a35b057, type: 3}
     PrecentPerUpgrade: -0.05
     UpgradeCap: 0.2
@@ -96406,7 +96421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8425001, y: 0.13926288}
   m_AnchorMax: {x: 0.9925, y: 0.20400001}
-  m_AnchoredPosition: {x: 1.8251953, y: -3.6998901}
+  m_AnchoredPosition: {x: 1.8251953, y: -3.6998749}
   m_SizeDelta: {x: 8.349976, y: 4.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298705609

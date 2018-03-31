@@ -21,11 +21,14 @@ public class ActorDamageInstance : MonoBehaviour {
 
     DevAbility CurrentAbility;
 
-    public void Open(ActorInstance instance, string actionKey, string actionValue = "")
+    private uint AttackIdCounter;
+
+    public void Open(ActorInstance instance, string actionKey, string actionValue, uint attackIdCounter)
     {
         this.ParentActor = instance;
         this.ActionKey = actionKey;
         this.ActionValue = actionValue;
+        this.AttackIdCounter = attackIdCounter;
         this.gameObject.SetActive(true);
 
         CurrentAbility = Content.Instance.GetAbility(actionKey);
@@ -74,7 +77,7 @@ public class ActorDamageInstance : MonoBehaviour {
                     sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
                     sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
 
-                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue, AttackIdCounter);
 
                     Hit = true;
                     this.gameObject.SetActive(false);
@@ -96,7 +99,7 @@ public class ActorDamageInstance : MonoBehaviour {
                     sentTargets.Remove(TargetCollider.GetComponent<ActorInstance>());
                     sentTargets.Insert(0, TargetCollider.GetComponent<ActorInstance>());
 
-                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitPlayers(sentTargets, ActionKey, ActionValue);
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitPlayers(sentTargets, ActionKey, ActionValue, AttackIdCounter);
 
                     Hit = true;
                     this.gameObject.SetActive(false);
@@ -128,7 +131,7 @@ public class ActorDamageInstance : MonoBehaviour {
                     sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
                     sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
 
-                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue);
+                    LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue, AttackIdCounter);
 
                     Hit = true;
                     this.gameObject.SetActive(false);

@@ -1603,7 +1603,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("loaded_attack", node);
     }
 
-    public void SendPreformedAttack(float attackValue)
+    public void SendPreformedAttack(float attackValue, uint attackId)
     {
         JSONNode node = new JSONClass();
 
@@ -1611,6 +1611,7 @@ public class SocketClient : MonoBehaviour
         attackValue = Mathf.Min(1f, attackValue); 
 
         node["load"] = Mathf.FloorToInt(attackValue * 100f).ToString();
+        node["attack_id"] = attackId.ToString();
 
         CurrentSocket.Emit("performed_attack", node);
     }
@@ -1644,7 +1645,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("mobs_moved", node);
     }
 
-    public void SendUsedPrimaryAbility(List<string> targetIDs)
+    public void SendUsedPrimaryAbility(List<string> targetIDs, uint attackId)
     {
         JSONNode node = new JSONClass();
 
@@ -1653,6 +1654,7 @@ public class SocketClient : MonoBehaviour
             node["target_ids"][i] = targetIDs[i];
         }
 
+        node["attack_id"] = attackId.ToString();
 
         CurrentSocket.Emit("used_ability", node);
     }
@@ -1818,20 +1820,21 @@ public class SocketClient : MonoBehaviour
         InGameMainMenuUI.Instance.DisableUpgradeCounter();
     }
 
-    public void SendUsedSpell(string spellKey)
+    public void SendUsedSpell(string spellKey, uint attackId)
     {
         JSONNode node = new JSONClass();
 
         node["spell_key"] = spellKey;
+        node["attack_id"] = attackId.ToString();
 
         CurrentSocket.Emit("used_spell", node);
     }
 
-    public void SendHitSpell(string spellKey, List<string> targetIDs)
+    public void SendHitSpell(List<string> targetIDs, uint attackId)
     {
         JSONNode node = new JSONClass();
 
-        node["spell_key"] = spellKey;
+        node["attack_id"] = attackId.ToString();
 
         for (int i = 0; i < targetIDs.Count; i++)
         {

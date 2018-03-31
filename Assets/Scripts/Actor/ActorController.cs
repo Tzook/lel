@@ -85,6 +85,9 @@ public class ActorController : MonoBehaviour
 
     DevSpell CurrentSpellInCast = null;
 
+    uint CurrentSpellAttackId;
+    uint AttackIdCounter = 0;
+
     #endregion
 
     #region Mono
@@ -505,12 +508,12 @@ public class ActorController : MonoBehaviour
         damageZone.transform.position = Instance.transform.position;
         damageZone.transform.rotation = Instance.LastFireRot;
 
-        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
+        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key, "", AttackIdCounter);
     }
 
     public void FireProjectile()
     {
-        Instance.FireProjectile(true, LoadAttackValue);
+        Instance.FireProjectile(true, LoadAttackValue, AttackIdCounter);
     }
 
     private void CastSpell(int spellIndex)
@@ -534,9 +537,11 @@ public class ActorController : MonoBehaviour
         bool usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
         if (usedSpell)
         {
+            AttackIdCounter++;
+            CurrentSpellAttackId = AttackIdCounter;
             CurrentSpellInCast = spell;
 
-            SocketClient.Instance.SendUsedSpell(spell.Key);
+            SocketClient.Instance.SendUsedSpell(spell.Key, CurrentSpellAttackId);
 
             Instance.CastSpell(spell);
         }
@@ -615,7 +620,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
-    internal void ColliderHitMobs(List<Enemy> sentTargets, string actionKey, string actionValue = "")
+    internal void ColliderHitMobs(List<Enemy> sentTargets, string actionKey, string actionValue, uint attackIdCounter)
     {
         List<string> targetIDs = new List<string>();
 
@@ -628,7 +633,7 @@ public class ActorController : MonoBehaviour
 
         if (actionKey == "spell")
         {
-            SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
+            SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
 
             int rnd = Random.Range(0, 3);
 
@@ -645,7 +650,7 @@ public class ActorController : MonoBehaviour
         }
         else
         {
-            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
+            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
 
             string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
             AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
@@ -659,7 +664,7 @@ public class ActorController : MonoBehaviour
     }
 
 
-    internal void ColliderHitPlayers(List<ActorInstance> sentTargets, string actionKey, string actionValue = "")
+    internal void ColliderHitPlayers(List<ActorInstance> sentTargets, string actionKey, string actionValue, uint attackIdCounter)
     {
         List<string> targetIDs = new List<string>();
 
@@ -675,7 +680,7 @@ public class ActorController : MonoBehaviour
 
         if (actionKey == "spell")
         {
-            SocketClient.Instance.SendHitSpell(actionValue, targetIDs);
+            SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
 
             int rnd = Random.Range(0, 3);
 
@@ -692,7 +697,7 @@ public class ActorController : MonoBehaviour
         }
         else
         {
-            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs);
+            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
 
             string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
             AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
@@ -832,7 +837,8 @@ public class ActorController : MonoBehaviour
         }
 
         InGameMainMenuUI.Instance.StopChargingAttack();
-        SocketClient.Instance.SendPreformedAttack(LoadAttackValue);
+        AttackIdCounter++;
+        SocketClient.Instance.SendPreformedAttack(LoadAttackValue, AttackIdCounter);
 
         ActivatePrimaryAbility();
 
@@ -926,7 +932,7 @@ public class ActorController : MonoBehaviour
             damageZone.transform.position = Instance.transform.position;
             damageZone.transform.rotation = Instance.LastFireRot;
 
-            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key);
+            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
 
             CurrentSpellInCast = null;
         }

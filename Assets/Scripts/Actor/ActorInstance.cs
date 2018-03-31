@@ -507,7 +507,7 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(SubWeapon, layer, minLevel, matType);
     }
 
-    public void FireProjectile(bool isPlayer, float ChargeValue)
+    public void FireProjectile(bool isPlayer, float ChargeValue, uint? attackIdCounter = null)
     {
         DevAbility dPA = Content.Instance.GetAbility(Info.CurrentPrimaryAbility.Key);
 
@@ -524,8 +524,7 @@ public class ActorInstance : MonoBehaviour
         }
 
         projectile.transform.rotation = LastFireRot;
-        projectile.GetComponent<ProjectileArrow>().Launch(this,Info.CurrentPrimaryAbility.Key , isPlayer);
-        
+        projectile.GetComponent<ProjectileArrow>().Launch(this, Info.CurrentPrimaryAbility.Key, isPlayer, attackIdCounter);
     }
 
     public void CastSpell(DevSpell spell)

@@ -37,15 +37,13 @@ public class PartyMemberUI : MonoBehaviour {
         {
             if (character.Info.CurrentRoom == LocalUserInfo.Me.ClientCharacter.CurrentRoom)
             {
-                HealthBar.transform.parent.gameObject.SetActive(true);
-
-                LocationText.gameObject.SetActive(false);
-
-
                 SetHealth((character.Info.CurrentHealth*1f) / (character.Info.MaxHealth*1f));
+                HealthBar.transform.parent.gameObject.SetActive(true);
+                LocationText.gameObject.SetActive(false);
             }
             else
             {
+                SetDed(false);
                 HealthBar.transform.parent.gameObject.SetActive(false);
                 LocationText.gameObject.SetActive(true);
                 LocationText.text = "In " + character.Info.CurrentRoom;
@@ -53,10 +51,9 @@ public class PartyMemberUI : MonoBehaviour {
         }
         else
         {
+            SetDed(false);
             HealthBar.transform.parent.gameObject.SetActive(false);
-
             LocationText.gameObject.SetActive(true);
-
             LocationText.text = "OFFLINE";
         }
 

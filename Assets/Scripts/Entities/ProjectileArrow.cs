@@ -39,7 +39,9 @@ public class ProjectileArrow : MonoBehaviour {
     private HitBox CurrentHitbox;
     private float CurrentMaxFlightTime;
 
-    public void Launch(ActorInstance parent,string primaryAbilitySourceKey ,bool triggerHit = false ,float speed = 15f)
+    private uint? AttackIdCounter;
+
+    public void Launch(ActorInstance parent, string primaryAbilitySourceKey, bool triggerHit, uint? attackIdCounter, float speed = 15f)
     {
         transform.parent = null;
 
@@ -47,6 +49,7 @@ public class ProjectileArrow : MonoBehaviour {
 
         CurrentMaxFlightTime = MaxFlightTime;
         TriggerHit = triggerHit;
+        AttackIdCounter = attackIdCounter;
 
         InFlight = true;
         m_Particles.Play();
@@ -96,7 +99,7 @@ public class ProjectileArrow : MonoBehaviour {
                     //TODO Fix me
                     List<string> tempList = new List<string>();
                     tempList.Add(TargetCollider.GetComponent<HitBox>().EnemyReference.Info.ID);
-                    SocketClient.Instance.SendUsedPrimaryAbility(tempList);
+                    SocketClient.Instance.SendUsedPrimaryAbility(tempList, (uint)AttackIdCounter);
                 }
             }
             else if (TargetCollider.tag == "HitEntity")

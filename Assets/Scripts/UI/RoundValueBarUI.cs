@@ -14,6 +14,9 @@ public class RoundValueBarUI : MonoBehaviour {
     [SerializeField]
     Text ValueText;
 
+    [SerializeField]
+    bool ShowAsPrecent = false;
+
     Color icChangeBar;
     Color icBar;
     Color icText;
@@ -45,14 +48,14 @@ public class RoundValueBarUI : MonoBehaviour {
         LowValueInstance = null;
     }
 
-    public void SetValue(float valuePrecent)
+    public void SetValue(float valueMin, float valueMax)
     {
         HaltCurrentRoutine();
-        ChangeValueInstance = StartCoroutine(ChangeValueRoutine(CurrentValue, valuePrecent));
+        ChangeValueInstance = StartCoroutine(ChangeValueRoutine(CurrentValue, valueMin, valueMax));
 
-        CurrentValue = valuePrecent;
+        CurrentValue = valueMin / valueMax;
 
-        if(valuePrecent < LowValue)
+        if(valueMin < LowValue)
         {
             if (LowValueInstance == null)
             {
@@ -98,9 +101,9 @@ public class RoundValueBarUI : MonoBehaviour {
         }
     }
 
-    private IEnumerator ChangeValueRoutine(float currentValue, float valuePrecent)
+    private IEnumerator ChangeValueRoutine(float currentValue, float minValue, float maxValue)
     {
-        if(currentValue < valuePrecent)
+        if(currentValue < minValue)
         {
             if (AddParticles != null)
             {
@@ -125,20 +128,39 @@ public class RoundValueBarUI : MonoBehaviour {
             yield return 0;
         }
 
-
-        t = 0f;
-        while(t<1f)
+        if (ShowAsPrecent)
         {
-            t += 2f * Time.deltaTime;
+            t = 0f;
+            while (t < 1f)
+            {
+                t += 2f * Time.deltaTime;
 
-            BarPanel.fillAmount = Mathf.Lerp(currentValue, valuePrecent, t);
-            ChangeBarPanel.fillAmount = BarPanel.fillAmount;
+                BarPanel.fillAmount = Mathf.Lerp(currentValue, (minValue / maxValue), t);
+                ChangeBarPanel.fillAmount = BarPanel.fillAmount;
 
-            ValueText.text = Mathf.FloorToInt(BarPanel.fillAmount * 100f) + "%";
+                ValueText.text = Mathf.FloorToInt(BarPanel.fillAmount * 100f) + "%";
 
-            
 
-            yield return 0;
+
+                yield return 0;
+            }
+        }
+        else
+        {
+            t = 0f;
+            while (t < 1f)
+            {
+                t += 2f * Time.deltaTime;
+
+                BarPanel.fillAmount = Mathf.Lerp(currentValue, (minValue / maxValue), t);
+                ChangeBarPanel.fillAmount = BarPanel.fillAmount;
+
+                ValueText.text = Mathf.FloorToInt(Mathf.Lerp(currentValue, minValue, t)).ToString();
+
+
+
+                yield return 0;
+            }
         }
 
         t = 0f;

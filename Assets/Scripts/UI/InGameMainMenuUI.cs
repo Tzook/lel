@@ -560,7 +560,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = LocalUserInfo.Me.ClientCharacter;
         }
 
-        XPBar.SetValue(info.EXP / (info.NextLevelXP * 1f));
+        XPBar.SetValue(info.EXP , (info.NextLevelXP * 1f));
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
 
@@ -571,7 +571,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = LocalUserInfo.Me.ClientCharacter;
         }
 
-        HPBar.SetValue(info.CurrentHealth / (info.MaxHealth * 1f));
+        HPBar.SetValue(info.CurrentHealth , (info.MaxHealth * 1f));
         RefreshParty();
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
@@ -583,7 +583,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = LocalUserInfo.Me.ClientCharacter;
         }
 
-        MPBar.SetValue(info.CurrentMana / (info.MaxMana * 1f));
+        MPBar.SetValue(info.CurrentMana , (info.MaxMana * 1f));
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter); 
         RefreshSpellAreaMana();       
     }

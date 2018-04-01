@@ -36,6 +36,7 @@ public class EnemyJumping : EnemyMoving
             if (!Dead && LastSentPosition != transform.position)
             {
                 LastSentPosition = transform.position;
+                LastGivenPosition = LastSentPosition;
                 EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
             }
 

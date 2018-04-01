@@ -117,13 +117,14 @@ public class EnemyMoving : Enemy
         if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
+            LastGivenPosition = LastSentPosition;
             EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
         }
     }
 
     private void Update()
     {
-        if(!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
+        if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
             Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
         }

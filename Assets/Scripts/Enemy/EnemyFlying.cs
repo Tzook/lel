@@ -93,6 +93,7 @@ public class EnemyFlying : Enemy {
         if (Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
+            LastGivenPosition = LastSentPosition;
             EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);
         }
     }

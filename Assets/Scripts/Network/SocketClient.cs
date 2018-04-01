@@ -453,15 +453,34 @@ public class SocketClient : MonoBehaviour
 
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
         int hp = data["now"].AsInt;
+        Debug.Log(data.ToString());
         if (actor != null)
         {
             actor.CurrentHealth = hp;
             if (actor == LocalUserInfo.Me.ClientCharacter) 
             {
+                string text = String.Format("{0:n0}", data["hp"].AsInt);
+                if (data["crit"].AsBool)
+                {
+                    // TODO make this beautiful, lel
+                    text += " (CRIT)";
+                }
+                actor.Instance.PopHint(text, Color.white, "hitIcon_heal");
                 InGameMainMenuUI.Instance.RefreshHP();
             }
             else 
             {
+
+                if (data["cause"].Value == "heal")
+                {
+                    string text = String.Format("{0:n0}", data["hp"].AsInt);
+                    if (data["crit"].AsBool)
+                    {
+                        // TODO make this beautiful, lel
+                        text += " (CRIT)";
+                    }
+                    actor.Instance.PopHint(text, new Color(176f / 255f, 196f / 255f, 255f / 255f, 1f), "hitIcon_heal");
+                }
                 actor.Instance.MovementController.RefreshHealth();
             }
         }

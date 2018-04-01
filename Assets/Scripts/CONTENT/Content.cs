@@ -284,6 +284,19 @@ public class DevMonsterInfo
     {
         return (DevMonsterInfo)this.MemberwiseClone();
     }
+    
+    public DevPerkMap GetPerk(string perkKey)
+    {
+        for(int i=0;i<Perks.Count;i++)
+        {
+            if(Perks[i].Key == perkKey)
+            {
+                return Perks[i];
+            }
+        }
+
+        return null;
+    }
 }
 
 [System.Serializable]

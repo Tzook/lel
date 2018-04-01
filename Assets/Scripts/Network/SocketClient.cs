@@ -610,6 +610,7 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Got Wounded");
 
+
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
         int hp = data["hp"].AsInt;

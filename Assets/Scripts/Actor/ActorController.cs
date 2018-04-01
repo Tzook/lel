@@ -1050,13 +1050,16 @@ public class ActorController : MonoBehaviour
 
             StartCoroutine(DisableSpeedUntilGrounded());
 
+            DevPerkMap knockbackPerk = Content.Instance.GetMonster(enemy.Info.Name).GetPerk("knockbackModifier");
+            float Modifier = (knockbackPerk != null) ? knockbackPerk.Value : 1f;
+
             if (enemy.transform.position.x < transform.position.x)
             {
-                Rigid.AddForce(2.5f * transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce(2.5f * Modifier * transform.right, ForceMode2D.Impulse);
             }
             else
             {
-                Rigid.AddForce(2.5f * -transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce(2.5f * Modifier * -transform.right, ForceMode2D.Impulse);
             }
         }
     }

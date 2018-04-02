@@ -47963,13 +47963,19 @@ MonoBehaviour:
     Type: weapon
     SubType: 
     DropChance: 0.005
-    GoldValue: 20
+    GoldValue: 50
     StackCap: 1
     Stats:
-      RequiresLVL: 8
+      RequiresLVL: 5
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: meleeDamageBonus
+      Value: 4
+    - Key: bleedChance
+      Value: 5
+    - Key: blockChance
+      Value: 10
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -47999,7 +48005,13 @@ MonoBehaviour:
       RequiresLVL: 0
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: meleeDamageBonus
+      Value: 1
+    - Key: crippleChance
+      Value: 5
+    - Key: stunChance
+      Value: 5
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -48022,13 +48034,17 @@ MonoBehaviour:
     Type: weapon
     SubType: 
     DropChance: 0.005
-    GoldValue: 10
+    GoldValue: 40
     StackCap: 1
     Stats:
-      RequiresLVL: 5
+      RequiresLVL: 4
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: meleeDamageBonus
+      Value: 4
+    - Key: fullyChargeModifier
+      Value: 2
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -48052,13 +48068,17 @@ MonoBehaviour:
     Type: weapon
     SubType: 
     DropChance: 0.005
-    GoldValue: 25
+    GoldValue: 40
     StackCap: 1
     Stats:
-      RequiresLVL: 10
+      RequiresLVL: 4
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: damageBonus
+      Value: 4
+    - Key: bleedChance
+      Value: 10
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -48082,14 +48102,18 @@ MonoBehaviour:
     UseSound: 
     Type: weapon
     SubType: range
-    DropChance: 0.005
-    GoldValue: 20
+    DropChance: 0
+    GoldValue: 10
     StackCap: 1
     Stats:
       RequiresLVL: 6
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: bleedChance
+      Value: 5
+    - Key: rangeDamageBonus
+      Value: 3
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -48129,7 +48153,7 @@ MonoBehaviour:
       MinStack: 1
       MaxStack: 1
   - Key: shortDagger
-    Name: Short Dagger
+    Name: Dagger
     Description: A short, handy and sharp dagger. "You can never have too many knives!"
     IconPlaceable: {fileID: 21300010, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
     Icon: weapon_short_dagger
@@ -48143,7 +48167,11 @@ MonoBehaviour:
       RequiresLVL: 2
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: meleeDamageBonus
+      Value: 3
+    - Key: attackSpeedModifier
+      Value: 2
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -48261,13 +48289,19 @@ MonoBehaviour:
     Type: weapon
     SubType: 
     DropChance: 0
-    GoldValue: 0
+    GoldValue: 100
     StackCap: 1
     Stats:
-      RequiresLVL: 5
+      RequiresLVL: 6
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: meleeDamageBonus
+      Value: 5
+    - Key: crippleChance
+      Value: 10
+    - Key: crippleDuration
+      Value: 10
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -49239,6 +49273,109 @@ MonoBehaviour:
     ItemSprites:
     - PartKey: chest
       SpritePlaceable: {fileID: 21300070, guid: ebcb940941159e54fb42d2b174b0cd9a,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 1
+      MaxLvlMobs: 8
+      MinStack: 1
+      MaxStack: 1
+  - Key: improvedshortbow
+    Name: Improved Short Bow
+    Description: "\t"
+    IconPlaceable: {fileID: 21300022, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: range
+    DropChance: 0
+    GoldValue: 50
+    StackCap: 1
+    Stats:
+      RequiresLVL: 6
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: rangeDamageBonus
+      Value: 4
+    - Key: bleedChance
+      Value: 10
+    - Key: bleedDuration
+      Value: 1
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: subWeapon
+      SpritePlaceable: {fileID: 21300022, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 1
+      MaxLvlMobs: 8
+      MinStack: 1
+      MaxStack: 1
+  - Key: metalbow
+    Name: Metal Bow
+    Description: "\t"
+    IconPlaceable: {fileID: 21300022, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: range
+    DropChance: 0.005
+    GoldValue: 50
+    StackCap: 1
+    Stats:
+      RequiresLVL: 6
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: rangeDamageBonus
+      Value: 2
+    - Key: fullyChargeModifier
+      Value: 8
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: subWeapon
+      SpritePlaceable: {fileID: 21300030, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 1
+      MaxLvlMobs: 8
+      MinStack: 1
+      MaxStack: 1
+  - Key: warbow
+    Name: War Bow
+    Description: "\t"
+    IconPlaceable: {fileID: 21300026, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: range
+    DropChance: 0.005
+    GoldValue: 50
+    StackCap: 1
+    Stats:
+      RequiresLVL: 8
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: rangeDamageBonus
+      Value: 6
+    - Key: bleedChance
+      Value: 15
+    - Key: bleedDuration
+      Value: 2
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: subWeapon
+      SpritePlaceable: {fileID: 21300026, guid: 216a614752628ef4882e2ee77ade8019,
         type: 3}
       Sprite: 
     AppearsAt:

@@ -457,7 +457,16 @@ public class ActorInstance : MonoBehaviour
                 }
             case "hair":
                 {
-                    m_Hair.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    if (string.IsNullOrEmpty(spriteKey))
+                    {
+                        m_Hair.sprite = null;
+                        m_Hair.enabled = false;
+                    }
+                    else
+                    {
+                        m_Hair.enabled = true;
+                        m_Hair.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    }
                     break;
                 }
             case "hairBack":

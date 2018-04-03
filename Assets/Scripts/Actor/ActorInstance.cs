@@ -62,6 +62,9 @@ public class ActorInstance : MonoBehaviour
     protected SpriteRenderer m_Hat;
 
     [SerializeField]
+    protected SpriteRenderer m_Dress;
+
+    [SerializeField]
     public SpriteRenderer Weapon;
 
     [SerializeField]
@@ -361,6 +364,7 @@ public class ActorInstance : MonoBehaviour
         m_Hat.sprite = null;
         Weapon.sprite = null;
         SubWeapon.sprite = null;
+        m_Dress.sprite = null;
 
         UpdateItem(Info.Equipment.Head);
         UpdateItem(Info.Equipment.Chest);
@@ -474,6 +478,11 @@ public class ActorInstance : MonoBehaviour
                     m_HairBack.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
                     break;
                 }
+            case "dress":
+                {
+                    m_Dress.sprite = ResourcesLoader.Instance.GetSprite(spriteKey);
+                    break;
+                }
         }
     }
 
@@ -514,6 +523,7 @@ public class ActorInstance : MonoBehaviour
         SetElementLayer(m_LeftFoot, layer, minLevel, matType);
         SetElementLayer(Weapon, layer, minLevel, matType);
         SetElementLayer(SubWeapon, layer, minLevel, matType);
+        SetElementLayer(m_Dress, layer, minLevel, matType);
     }
 
     public void FireProjectile(bool isPlayer, float ChargeValue, uint? attackIdCounter = null)

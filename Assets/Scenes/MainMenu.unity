@@ -47958,7 +47958,7 @@ MonoBehaviour:
     Name: Short Sword
     Description: A short, cheap, iron sword. Excellent for stabbing, could also cut
       quite well.
-    IconPlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    IconPlaceable: {fileID: 21300000, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
     Icon: weapon_short_sword
     UseSound: 
     Type: weapon
@@ -47982,7 +47982,7 @@ MonoBehaviour:
       BonusMP: 0
     ItemSprites:
     - PartKey: weapon
-      SpritePlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019,
+      SpritePlaceable: {fileID: 21300000, guid: 6db8f140c6c515e4ca69a757fc08a620,
         type: 3}
       Sprite: weapon_short_sword
     AppearsAt:
@@ -48063,7 +48063,7 @@ MonoBehaviour:
     Name: Short Scimitar
     Description: A short blade with a bent edge, made for cutting and slicing. Quite
       useful in combat.
-    IconPlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    IconPlaceable: {fileID: 21300004, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
     Icon: weapon_scimitar
     UseSound: 
     Type: weapon
@@ -48085,7 +48085,7 @@ MonoBehaviour:
       BonusMP: 0
     ItemSprites:
     - PartKey: weapon
-      SpritePlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019,
+      SpritePlaceable: {fileID: 21300004, guid: 6db8f140c6c515e4ca69a757fc08a620,
         type: 3}
       Sprite: weapon_scimitar
     AppearsAt:
@@ -51476,6 +51476,547 @@ MonoBehaviour:
       Sprite: 
     AppearsAt:
       MinLvlMobs: 1
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: longdagger
+    Name: Long Dagger
+    Description: "\t"
+    IconPlaceable: {fileID: 21300006, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: attackSpeedModifier
+      Value: 0.04
+    - Key: meleeDamageBonus
+      Value: 6
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300006, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: commonaxe
+    Name: Common Axe
+    Description: "\t"
+    IconPlaceable: {fileID: 21300002, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: fullyChargeModifier
+      Value: 0.04
+    - Key: meleeDamageBonus
+      Value: 8
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300002, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: commonschimitar
+    Name: Common Schimitar
+    Description: "\t"
+    IconPlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.2
+    - Key: meleeDamageBonus
+      Value: 8
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: commonsword
+    Name: Common Sword
+    Description: "\t"
+    IconPlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
+    - Key: meleeDamageBonus
+      Value: 9
+    - Key: blockChance
+      Value: 0.1
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300000, guid: 216a614752628ef4882e2ee77ade8019,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: longhammer
+    Name: Wooden Long Hammer
+    Description: "\t"
+    IconPlaceable: {fileID: 21300016, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: stunChance
+      Value: 0.15
+    - Key: meleeDamageBonus
+      Value: 4
+    - Key: aoeCap
+      Value: 2
+    - Key: aoeChance
+      Value: 0.1
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300016, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: twohandedaxe
+    Name: Two Handed Axe
+    Description: "\t"
+    IconPlaceable: {fileID: 21300014, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: fullyChargeModifier
+      Value: 0.06
+    - Key: meleeDamageBonus
+      Value: 10
+    - Key: aoeCap
+      Value: 2
+    - Key: aoeChance
+      Value: 0.05
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300014, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: twohandedsword
+    Name: Two Handed Sword
+    Description: "\t"
+    IconPlaceable: {fileID: 21300018, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.15
+    - Key: meleeDamageBonus
+      Value: 8
+    - Key: aoeCap
+      Value: 2
+    - Key: aoeChance
+      Value: 0.05
+    - Key: blockChance
+      Value: 0.15
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300018, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: twohandedschimitar
+    Name: Two Handed Schimitar
+    Description: "\t"
+    IconPlaceable: {fileID: 21300022, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.3
+    - Key: meleeDamageBonus
+      Value: 8
+    - Key: aoeCap
+      Value: 2
+    - Key: aoeChance
+      Value: 0.05
+    - Key: bleedDuration
+      Value: 1
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300022, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: shortcutlass
+    Name: Short Cutlass
+    Description: "\t"
+    IconPlaceable: {fileID: 21300008, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.001
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 5
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
+    - Key: meleeDamageBonus
+      Value: 4
+    - Key: crippleChance
+      Value: 0.1
+    - Key: fullyChargeModifier
+      Value: 0.02
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300008, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
+  - Key: cutlass
+    Name: Cutlass
+    Description: "\t"
+    IconPlaceable: {fileID: 21300010, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.001
+    GoldValue: 250
+    StackCap: 1
+    Stats:
+      RequiresLVL: 7
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.15
+    - Key: meleeDamageBonus
+      Value: 6
+    - Key: crippleChance
+      Value: 0.15
+    - Key: fullyChargeModifier
+      Value: 0.03
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300010, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
+  - Key: meltingrod
+    Name: Melting Rod
+    Description: "\t"
+    IconPlaceable: {fileID: 21300024, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: burntTargetModifier
+      Value: 0.02
+    - Key: magicDamageBonus
+      Value: 10
+    - Key: burnChance
+      Value: 0.1
+    - Key: burnDuration
+      Value: 2
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300024, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: icystaff
+    Name: Icy Staff
+    Description: "\t"
+    IconPlaceable: {fileID: 21300026, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 200
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: frozenTargetModifier
+      Value: 0.02
+    - Key: magicDamageBonus
+      Value: 8
+    - Key: freezeChance
+      Value: 0.1
+    - Key: freezeDuration
+      Value: 2
+    - Key: mpRegenModifier
+      Value: 0.04
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300026, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: drainingstaff
+    Name: Draining Staff
+    Description: "\t"
+    IconPlaceable: {fileID: 21300020, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.001
+    GoldValue: 300
+    StackCap: 1
+    Stats:
+      RequiresLVL: 8
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: mpRegenModifier
+      Value: 0.04
+    - Key: magicDamageBonus
+      Value: 7
+    - Key: mpStealChance
+      Value: 0.15
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300020, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: forbiddendirk
+    Name: Forbidden Dirk
+    Description: "\t"
+    IconPlaceable: {fileID: 21300012, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.001
+    GoldValue: 250
+    StackCap: 1
+    Stats:
+      RequiresLVL: 6
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: attackSpeedModifier
+      Value: 0.02
+    - Key: meleeDamageBonus
+      Value: 2
+    - Key: hpStealChance
+      Value: 0.15
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300012, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
+      MaxLvlMobs: 10
+      MinStack: 1
+      MaxStack: 1
+  - Key: divinebook
+    Name: Divine Book
+    Description: "\t"
+    IconPlaceable: {fileID: 21300028, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
+    Icon: 
+    UseSound: sound_equip
+    Type: weapon
+    SubType: 
+    DropChance: 0.005
+    GoldValue: 150
+    StackCap: 1
+    Stats:
+      RequiresLVL: 10
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks:
+    - Key: mpBonus
+      Value: 40
+    - Key: magicDamageBonus
+      Value: 4
+    - Key: mpRegenModifier
+      Value: 0.04
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites:
+    - PartKey: weapon
+      SpritePlaceable: {fileID: 21300028, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+      Sprite: 
+    AppearsAt:
+      MinLvlMobs: 7
       MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
@@ -104216,6 +104757,27 @@ Prefab:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212529901446604180, guid: a517cca850296594f906c19dbc6215da,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300018, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+    - target: {fileID: 212529901446604180, guid: a517cca850296594f906c19dbc6215da,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212529901446604180, guid: a517cca850296594f906c19dbc6215da,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 212529901446604180, guid: a517cca850296594f906c19dbc6215da,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a517cca850296594f906c19dbc6215da, type: 2}
   m_IsPrefabParent: 0
@@ -113034,6 +113596,27 @@ Prefab:
       value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 212000010597469890, guid: 489423c93b04c2a43924495f708e13e2,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000014243127740, guid: 489423c93b04c2a43924495f708e13e2,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300026, guid: 6db8f140c6c515e4ca69a757fc08a620,
+        type: 3}
+    - target: {fileID: 212000014243127740, guid: 489423c93b04c2a43924495f708e13e2,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.556
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000014243127740, guid: 489423c93b04c2a43924495f708e13e2,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000014243127740, guid: 489423c93b04c2a43924495f708e13e2,
         type: 2}
       propertyPath: m_WasSpriteAssigned
       value: 1

@@ -443,12 +443,10 @@ public class DevContentEditor : Editor
             }
             else if (WordNumber(1) == "modifyDrop")
             {
-                
+                Undo.RecordObject(target, "Times modifyDrop");
                 for (int i = 0; i < currentInfo.Items.Count; i++)
-                {
-                    Undo.RecordObject(target, "Times modifyDrop");
+                {   
                     currentInfo.Items[i].DropChance *= float.Parse(WordNumber(2));
-                    return;
                 }
                 
             }

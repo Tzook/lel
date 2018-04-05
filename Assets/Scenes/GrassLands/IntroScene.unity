@@ -8427,13 +8427,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 321934107}
-  m_LocalRotation: {x: 0.00017533114, y: 0.0014633577, z: -0.4274529, w: 0.90403646}
-  m_LocalPosition: {x: 1.21, y: -0.97, z: -0}
-  m_LocalScale: {x: 0.77585787, y: 0.77585787, z: 0.77585787}
+  m_LocalRotation: {x: 0.00023012047, y: 0.0019206377, z: -0.5610264, w: 0.8277957}
+  m_LocalPosition: {x: 0.1, y: -0.71, z: 0}
+  m_LocalScale: {x: 5.0153522, y: 5.015352, z: 5.015352}
   m_Children: []
   m_Father: {fileID: 46385228}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0.09, y: 0.143, z: -50.612003}
+  m_LocalEulerAnglesHint: {x: 0.14500001, y: 0.16700001, z: -68.254005}
 --- !u!212 &321934109
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8468,7 +8468,7 @@ SpriteRenderer:
   m_SortingLayerID: -1262447697
   m_SortingLayer: 5
   m_SortingOrder: 7
-  m_Sprite: {fileID: 21300006, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+  m_Sprite: {fileID: 21300010, guid: 6db8f140c6c515e4ca69a757fc08a620, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17776,71 +17776,50 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: TurtleChallenge
     Pieces:
-    - Content: Hey you...
+    - Content: Hey hey!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: I figure you have already encountered...
+    - Content: Look at you!
       LetterDelay: 0.03
       Pitch: 1.4
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Turtles...
+    - Content: Didn't the captain bring you some shoes!?
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: '... on this island...'
+    - Content: Walking around like that is dangerous to your feet!
       LetterDelay: 0.03
       Pitch: 1.4
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Well they arn't as friendly as they seem.
+    - Content: Well this is your lucky day!
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: 'Now the captain asked me to  test them out... '
+    - Content: I've got a spare pair of shoes!
       LetterDelay: 0.02
       Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: I'm not sure I have enough...
-      LetterDelay: 0.02
-      Pitch: 1.4
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: Strength
-      LetterDelay: 0.02
-      Pitch: 1.5
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: To face those turtles on my own...
-      LetterDelay: 0.01
-      Pitch: 1.6
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: '''Courage'', you mean.'
+    - Title: Thanks!
       Event: StartDialog
       Value: TurtleChallenge2
       Condition: 
@@ -17848,21 +17827,42 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: TurtleChallenge2
     Pieces:
-    - Content: Yea, yea...
+    - Content: Not so fast!
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: What do you say?
+    - Content: You really think everything comes that easy around here?
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Will you slay some turtles for me?
+    - Content: You'll do me a favor in exchange!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The captain want's me to get rid of the hostile creatures in the area...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: All I can really see here is that group of pathethic turtles down there.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Not so challenging but hostile creatures nonetheless...
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
@@ -17876,7 +17876,13 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: Not interested.
+    - Title: I'll do that for the shoes.
+      Event: StartDialog
+      Value: TurtleChallenge3
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I don't need your shoes that badly.
       Event: EndDialog
       Value: 
       Condition: 
@@ -17956,7 +17962,7 @@ MonoBehaviour:
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Here, I owe you that;
+    - Content: Here, what I owe ya;
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 

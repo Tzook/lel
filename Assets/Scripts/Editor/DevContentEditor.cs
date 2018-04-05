@@ -445,8 +445,11 @@ public class DevContentEditor : Editor
             {
                 Undo.RecordObject(target, "Times modifyDrop");
                 for (int i = 0; i < currentInfo.Items.Count; i++)
-                {   
-                    currentInfo.Items[i].DropChance *= float.Parse(WordNumber(2));
+                {
+                    if (currentInfo.Items[i].DropChance < 0.5f)
+                    {
+                        currentInfo.Items[i].DropChance *= float.Parse(WordNumber(2));
+                    }
                 }
                 
             }

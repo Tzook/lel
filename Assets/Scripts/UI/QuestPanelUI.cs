@@ -21,7 +21,10 @@ public class QuestPanelUI : MonoBehaviour {
 
     public void SetInfo(Quest quest)
     {
-        StartCoroutine(SetInfoRoutine(quest));
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(SetInfoRoutine(quest));
+        }
     }
 
     IEnumerator SetInfoRoutine(Quest quest)

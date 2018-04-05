@@ -1036,7 +1036,8 @@ public class ActorController : MonoBehaviour
 
     private void Hurt(Enemy enemy)
     {
-        if (!Invincible && Content.Instance.GetMonsterByName(enemy.Info.Name).DMG != 0)
+        DevMonsterInfo monsterInfo = Content.Instance.GetMonsterByName(enemy.Info.Name);
+        if (!Invincible && monsterInfo.DMG != 0)
         {
             EndAttack();
 
@@ -1050,7 +1051,7 @@ public class ActorController : MonoBehaviour
 
             StartCoroutine(DisableSpeedUntilGrounded());
 
-            DevPerkMap knockbackPerk = Content.Instance.GetMonster(enemy.Info.Name).GetPerk("knockbackModifier");
+            DevPerkMap knockbackPerk = monsterInfo.GetPerk("knockbackModifier");
             float Modifier = (knockbackPerk != null) ? knockbackPerk.Value : 1f;
 
             if (enemy.transform.position.x < transform.position.x)

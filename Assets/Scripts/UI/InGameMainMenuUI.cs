@@ -79,6 +79,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     ChargeAttackBarUI ChargeAttackBar;
 
     [SerializeField]
+    ChargeAttackBarUI ConsumeItemBar;
+
+    [SerializeField]
     MinilogUI m_Minilog;
 
     [SerializeField]
@@ -600,7 +603,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void StartChargingAttack()
     {
-        ChargeAttackBar.StartCharging(Game.Instance.ClientCharacter.transform); 
+        ChargeAttackBar.StartCharging(LocalUserInfo.Me.ClientCharacter.Instance.transform); 
     }
 
     public void SetChargeAttackValue(float val)
@@ -611,6 +614,21 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void StopChargingAttack()
     {
         ChargeAttackBar.StopCharging();
+    }
+
+    public void StartConsumingItem(ItemInfo item = null)
+    {
+        ConsumeItemBar.StartCharging(LocalUserInfo.Me.ClientCharacter.Instance.transform, ResourcesLoader.Instance.GetSprite(item.IconKey));
+    }
+
+    public void SetConsumeItemValue(float val)
+    {
+        ConsumeItemBar.SetValue(val);
+    }
+
+    public void StopConsumingItem()
+    {
+        ConsumeItemBar.StopCharging();
     }
 
     public void SetCurrentCamera(Camera cam)

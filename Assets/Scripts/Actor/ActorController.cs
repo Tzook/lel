@@ -1121,24 +1121,31 @@ public class ActorController : MonoBehaviour
 
     private IEnumerator UseConsumableRoutine(int inventoryIndex, ItemInfo item)
     {
+        InGameMainMenuUI.Instance.StartConsumingItem(item);
         Anim.SetTrigger("UseConsumable");
 
         yield return 0;
 
         float t = 0f;
-        while(t < 3f)
+        while(t < 1f)
         {
             if(!Grounded || isMoving || OnRope || InGameMainMenuUI.Instance.isDraggingItem)
             {
+                InGameMainMenuUI.Instance.StopConsumingItem();
+                Anim.SetTrigger("StopUsingConsumable");
                 yield break;
             }
 
-            t += Time.deltaTime;
+            t += Time.deltaTime / 3f;
+
+            InGameMainMenuUI.Instance.SetConsumeItemValue(t);
 
             yield return 0;
         }
 
         SocketClient.Instance.SendUsedItem(inventoryIndex);
+
+        InGameMainMenuUI.Instance.StopConsumingItem();
 
     }
 

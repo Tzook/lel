@@ -2,6 +2,7 @@
  * Items:
  * item delete 'ItemKey / index'
  * item modifyDrop 'Times'
+ * item balanceDropTargets
  * 
  * Monsters:
  * monster clone 'MonsterKey'
@@ -452,6 +453,18 @@ public class DevContentEditor : Editor
                     }
                 }
                 
+            }
+            else if(WordNumber(1) == "balanceDropTargets")
+            {
+                Undo.RecordObject(target, "Times modifyDrop");
+                for (int i = 0; i < currentInfo.Items.Count; i++)
+                {
+                    if (currentInfo.Items[i].DropChance < 0.5f && currentInfo.Items[i].AppearsAt.MinLvlMobs > 0 && currentInfo.Items[i].AppearsAt.MaxLvlMobs > 0)
+                    {
+                        currentInfo.Items[i].AppearsAt.MaxLvlMobs = currentInfo.Items[i].Stats.RequiresLVL + 2;
+                        currentInfo.Items[i].AppearsAt.MinLvlMobs = currentInfo.Items[i].Stats.RequiresLVL - 2;
+                    }
+                }
             }
         }
         else if (WordNumber(0) == "monster")

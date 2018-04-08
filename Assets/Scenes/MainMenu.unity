@@ -45598,7 +45598,7 @@ MonoBehaviour:
   - MonsterKey: RabbitBoss
     MonsterName: Rabbit King
     MonsterHP: 1500
-    MonsterLevel: 5
+    MonsterLevel: 8
     DMG: 30
     RewardEXP: 600
     Type: 1
@@ -45709,7 +45709,7 @@ MonoBehaviour:
   - MonsterKey: BossTurtle
     MonsterName: Ancient Turtle
     MonsterHP: 2000
-    MonsterLevel: 5
+    MonsterLevel: 7
     DMG: 20
     RewardEXP: 650
     Type: 1
@@ -45809,7 +45809,7 @@ MonoBehaviour:
   - MonsterKey: Plant
     MonsterName: Moving Plant
     MonsterHP: 60
-    MonsterLevel: 4
+    MonsterLevel: 5
     DMG: 12
     RewardEXP: 20
     Type: 1
@@ -45894,7 +45894,7 @@ MonoBehaviour:
   - MonsterKey: BlueMushroom
     MonsterName: Blue Mushroom
     MonsterHP: 100
-    MonsterLevel: 6
+    MonsterLevel: 5
     DMG: 16
     RewardEXP: 30
     Type: 1
@@ -45984,7 +45984,7 @@ MonoBehaviour:
   - MonsterKey: Thorns
     MonsterName: Thorns
     MonsterHP: 100
-    MonsterLevel: 1
+    MonsterLevel: 0
     DMG: 5
     RewardEXP: 0
     Type: 0
@@ -46038,7 +46038,7 @@ MonoBehaviour:
   - MonsterKey: Sack
     MonsterName: Sack
     MonsterHP: 100
-    MonsterLevel: 1
+    MonsterLevel: 0
     DMG: 0
     RewardEXP: 0
     Type: 0
@@ -46071,7 +46071,7 @@ MonoBehaviour:
   - MonsterKey: FlowerManBoss
     MonsterName: Sir Flaw Ware
     MonsterHP: 700
-    MonsterLevel: 1
+    MonsterLevel: 5
     DMG: 6
     RewardEXP: 100
     Type: 1
@@ -46169,7 +46169,7 @@ MonoBehaviour:
   - MonsterKey: FrostWizardBoss
     MonsterName: Frost Wizard
     MonsterHP: 600
-    MonsterLevel: 1
+    MonsterLevel: 5
     DMG: 8
     RewardEXP: 100
     Type: 1
@@ -46264,7 +46264,7 @@ MonoBehaviour:
   - MonsterKey: PirateSailor1
     MonsterName: Pirate Sailor
     MonsterHP: 200
-    MonsterLevel: 8
+    MonsterLevel: 7
     DMG: 10
     RewardEXP: 100
     Type: 1
@@ -46373,7 +46373,7 @@ MonoBehaviour:
   - MonsterKey: PirateSailor2
     MonsterName: Pirate Sailor
     MonsterHP: 200
-    MonsterLevel: 8
+    MonsterLevel: 7
     DMG: 10
     RewardEXP: 100
     Type: 1
@@ -46482,7 +46482,7 @@ MonoBehaviour:
   - MonsterKey: PirateSailor3
     MonsterName: Pirate Sailor
     MonsterHP: 200
-    MonsterLevel: 8
+    MonsterLevel: 7
     DMG: 10
     RewardEXP: 100
     Type: 1
@@ -47010,7 +47010,7 @@ MonoBehaviour:
   - MonsterKey: BlueBerriesBush
     MonsterName: BlueBerriesBush
     MonsterHP: 25
-    MonsterLevel: 1
+    MonsterLevel: 0
     DMG: 0
     RewardEXP: 0
     Type: 0
@@ -47037,7 +47037,7 @@ MonoBehaviour:
   - MonsterKey: BerriesBush
     MonsterName: BerriesBush
     MonsterHP: 15
-    MonsterLevel: 1
+    MonsterLevel: 0
     DMG: 0
     RewardEXP: 0
     Type: 0
@@ -47064,7 +47064,7 @@ MonoBehaviour:
   - MonsterKey: TomatoesBush
     MonsterName: TomatoesBush
     MonsterHP: 15
-    MonsterLevel: 1
+    MonsterLevel: 0
     DMG: 0
     RewardEXP: 0
     Type: 0
@@ -47091,7 +47091,7 @@ MonoBehaviour:
   - MonsterKey: GreenWorm
     MonsterName: Green Worm
     MonsterHP: 120
-    MonsterLevel: 7
+    MonsterLevel: 8
     DMG: 30
     RewardEXP: 55
     Type: 1
@@ -47184,7 +47184,7 @@ MonoBehaviour:
   - MonsterKey: RedWorm
     MonsterName: Red Worm
     MonsterHP: 100
-    MonsterLevel: 7
+    MonsterLevel: 8
     DMG: 35
     RewardEXP: 55
     Type: 1
@@ -47511,7 +47511,7 @@ MonoBehaviour:
       Sprite: testingclothing_adventurerShirt_male_elbow
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 7
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: blackGloves
@@ -47541,7 +47541,7 @@ MonoBehaviour:
       Sprite: testingclothing_blackGloves_male_hand
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 7
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: clothPants
@@ -47580,7 +47580,7 @@ MonoBehaviour:
       Sprite: testingclothing_clothPants_male_knee
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 7
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: greenPants
@@ -47617,7 +47617,7 @@ MonoBehaviour:
       Sprite: testingclothing_greenPants_male_knee
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 7
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: leatherShoes
@@ -47635,7 +47635,9 @@ MonoBehaviour:
       RequiresLVL: 0
       JumpBonus: 0
       SpeedBonus: 0
-    Perks: []
+    Perks:
+    - Key: crippleResistance
+      Value: 0.03
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -47645,8 +47647,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_leatherShoes_male_foot
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 5
+      MinLvlMobs: -2
+      MaxLvlMobs: 2
       MinStack: 1
       MaxStack: 1
   - Key: strapShoes
@@ -47678,8 +47680,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_strapShoes_male_foot
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: swordOfElad
@@ -47849,7 +47851,7 @@ MonoBehaviour:
       Sprite: testingclothing_blackPants_male_knee
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 8
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: leatherGloves
@@ -47877,8 +47879,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_leatherGloves_male_hand
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 14
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: apprenticeRobeWhite
@@ -47914,8 +47916,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_apperentice_male_elbow
     AppearsAt:
-      MinLvlMobs: 4
-      MaxLvlMobs: 11
+      MinLvlMobs: 5
+      MaxLvlMobs: 9
       MinStack: 1
       MaxStack: 1
   - Key: apprenticeRobeBlack
@@ -47951,8 +47953,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_apperenticeBlack_male_elbow
     AppearsAt:
-      MinLvlMobs: 4
-      MaxLvlMobs: 11
+      MinLvlMobs: 5
+      MaxLvlMobs: 9
       MinStack: 1
       MaxStack: 1
   - Key: shortSword
@@ -47988,7 +47990,7 @@ MonoBehaviour:
       Sprite: weapon_commonsword
     AppearsAt:
       MinLvlMobs: 3
-      MaxLvlMobs: 9
+      MaxLvlMobs: 7
       MinStack: 1
       MaxStack: 1
   - Key: shortClub
@@ -48057,7 +48059,7 @@ MonoBehaviour:
       Sprite: weapon_short_axe
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: shortScimitar
@@ -48091,7 +48093,7 @@ MonoBehaviour:
       Sprite: weapon_shortschimitar
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: shortBow
@@ -48183,8 +48185,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapon_short_dagger
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: batWing
@@ -48422,8 +48424,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_blackShoes_male_foot
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 8
+      MinLvlMobs: 2
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: whiteJellyBean
@@ -48719,8 +48721,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_strawHat
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: peasantHat
@@ -48752,8 +48754,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_hatPeasant_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 9
+      MinLvlMobs: 2
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: rabbitCostume
@@ -48822,7 +48824,7 @@ MonoBehaviour:
       Sprite: clothing_whiteGloves_male_foot
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 9
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: greenGloves
@@ -48853,7 +48855,7 @@ MonoBehaviour:
       Sprite: clothing_greenGloves_male_foot
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: redGloves
@@ -48884,7 +48886,7 @@ MonoBehaviour:
       Sprite: clothing_redGloves_male_foot
     AppearsAt:
       MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MaxLvlMobs: 5
       MinStack: 1
       MaxStack: 1
   - Key: cosmoTunnelKey
@@ -49093,8 +49095,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_yellowShoes_male_foot
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: lightgambesson
@@ -49136,8 +49138,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_01_4_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: mailsabatons
@@ -49169,8 +49171,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_plateGloves_male_foot
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: mailshoes
@@ -49202,8 +49204,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_plateShoes_male_foot
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: archershat
@@ -49239,8 +49241,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_hatArcherHat_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: captianscoat
@@ -49278,8 +49280,8 @@ MonoBehaviour:
         type: 3}
       Sprite: testingclothing_captainRobe_male_torso
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: improvedshortbow
@@ -49320,8 +49322,8 @@ MonoBehaviour:
   - Key: metalbow
     Name: Metal Bow
     Description: "\t"
-    IconPlaceable: {fileID: 21300022, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
-    Icon: bow_improved
+    IconPlaceable: {fileID: 21300030, guid: 216a614752628ef4882e2ee77ade8019, type: 3}
+    Icon: bow_metal
     UseSound: sound_equip
     Type: weapon
     SubType: range
@@ -49346,8 +49348,8 @@ MonoBehaviour:
         type: 3}
       Sprite: bow_metal
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: warbow
@@ -49381,8 +49383,8 @@ MonoBehaviour:
         type: 3}
       Sprite: bow_oak
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: greenpeasentshirt
@@ -49424,8 +49426,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_9_green_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: brownpeasentshirt
@@ -49465,8 +49467,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_20_brown_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: redpeasentshirt
@@ -49506,8 +49508,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_26_red_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: bluepeasentshirt
@@ -49547,8 +49549,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_38_blue_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: blackpeasentshirt
@@ -49588,8 +49590,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_52_black_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: whiteclothshirt
@@ -49625,8 +49627,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_6_shirt_white_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: orangeclothshirt
@@ -49660,8 +49662,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_11_shirt_orange_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: pinkclothshirt
@@ -49695,8 +49697,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_17_shirt_pink_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: blackclothshirt
@@ -49734,8 +49736,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_22_shirt_black_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: snailhat
@@ -49770,8 +49772,8 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 0}
       Sprite: 
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 8
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: tatteredwhitepants
@@ -49801,8 +49803,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_white_pants_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: -1
+      MaxLvlMobs: 3
       MinStack: 1
       MaxStack: 1
   - Key: tatteredbrownpants
@@ -49834,8 +49836,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_brown_pants_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: tatteredgreenpants
@@ -49867,8 +49869,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_green_pants_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: tatteredblackpants
@@ -49902,8 +49904,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_black_pants_male
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 6
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: dirk
@@ -49935,8 +49937,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapon_dirk
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 7
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: woodenhammer
@@ -49969,7 +49971,7 @@ MonoBehaviour:
       Sprite: weapons_woodenhammer
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: woodenpole
@@ -49979,7 +49981,7 @@ MonoBehaviour:
     Icon: weapons_woodenhammer
     UseSound: sound_equip
     Type: weapon
-    SubType: 
+    SubType: twohanded
     DropChance: 0.00025
     GoldValue: 30
     StackCap: 1
@@ -50006,7 +50008,7 @@ MonoBehaviour:
       Sprite: weapons_1
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: spear
@@ -50039,7 +50041,7 @@ MonoBehaviour:
       Sprite: weapons_2
     AppearsAt:
       MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MaxLvlMobs: 6
       MinStack: 1
       MaxStack: 1
   - Key: wand
@@ -50073,8 +50075,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons_5
     AppearsAt:
-      MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: wandoffrost
@@ -50110,8 +50112,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons_6
     AppearsAt:
-      MinLvlMobs: 2
-      MaxLvlMobs: 10
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: torch
@@ -50207,8 +50209,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons_3
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: threateningfork
@@ -50242,8 +50244,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons_9
     AppearsAt:
-      MinLvlMobs: 1
-      MaxLvlMobs: 8
+      MinLvlMobs: 0
+      MaxLvlMobs: 4
       MinStack: 1
       MaxStack: 1
   - Key: tauntingfork
@@ -50281,7 +50283,7 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons_0
     AppearsAt:
-      MinLvlMobs: 2
+      MinLvlMobs: 6
       MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
@@ -50312,8 +50314,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_bandana_black_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: redbandna
@@ -50343,8 +50345,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_bandana_red_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: yellowbandana
@@ -50374,8 +50376,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_bandana_yellow_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: blackkercheif
@@ -50405,8 +50407,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_kercheif_black_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: bluekercheif
@@ -50438,8 +50440,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_kercheif_blue_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: yellowkercheif
@@ -50471,8 +50473,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_02_kercheif_yellow_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: leatherarmor
@@ -50516,8 +50518,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_01_10_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: mailarmor
@@ -50559,8 +50561,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_03_elbow_chainmail_male
     AppearsAt:
-      MinLvlMobs: 9
-      MaxLvlMobs: 17
+      MinLvlMobs: 10
+      MaxLvlMobs: 14
       MinStack: 1
       MaxStack: 1
   - Key: greenponcho
@@ -50604,8 +50606,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_03_poncho_green_elbow_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: blueponcho
@@ -50651,8 +50653,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_03_poncho_blue_elbow_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: brownponcho
@@ -50696,8 +50698,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_03_poncho_brown_elbow_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: chainlinkhelmet
@@ -50732,8 +50734,8 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 0}
       Sprite: 
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: leatherpants
@@ -50769,8 +50771,8 @@ MonoBehaviour:
         type: 3}
       Sprite: leatherpants_leg_male
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: turtleshellarmor
@@ -50808,8 +50810,8 @@ MonoBehaviour:
         type: 3}
       Sprite: turtleshell_hand_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: mailpants
@@ -50845,8 +50847,8 @@ MonoBehaviour:
         type: 3}
       Sprite: chainpants_leg_male
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: rabbitfurshoes
@@ -50880,8 +50882,8 @@ MonoBehaviour:
         type: 3}
       Sprite: rabbitshoe_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: slipers
@@ -50915,8 +50917,8 @@ MonoBehaviour:
         type: 3}
       Sprite: slippers_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: cozyslippers
@@ -50950,8 +50952,8 @@ MonoBehaviour:
         type: 3}
       Sprite: cozyslippers_male
     AppearsAt:
-      MinLvlMobs: 3
-      MaxLvlMobs: 11
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: priestrobe
@@ -50997,8 +50999,8 @@ MonoBehaviour:
         type: 3}
       Sprite: priestrobe_elbow_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: metalhelmet
@@ -51030,15 +51032,15 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_hatBronzeHelmet_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: leatherarmor
     Name: Leather Armor
     Description: "\t"
-    IconPlaceable: {fileID: 21300012, guid: 193db39ae25b146468eb51f0e92a839e, type: 3}
-    Icon: clothing_01_6_male
+    IconPlaceable: {fileID: 21300026, guid: bfc2ba7e43068114a8968df9199f488e, type: 3}
+    Icon: miscAssets_02_19
     UseSound: sound_equip
     Type: chest
     SubType: 
@@ -51075,8 +51077,8 @@ MonoBehaviour:
         type: 3}
       Sprite: clothing_01_10_male
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: acolyterobe
@@ -51124,8 +51126,8 @@ MonoBehaviour:
         type: 3}
       Sprite: robe_acolyte
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: wizardrobe
@@ -51173,8 +51175,8 @@ MonoBehaviour:
         type: 3}
       Sprite: robe_wizard
     AppearsAt:
-      MinLvlMobs: 9
-      MaxLvlMobs: 17
+      MinLvlMobs: 10
+      MaxLvlMobs: 14
       MinStack: 1
       MaxStack: 1
   - Key: charredrobe
@@ -51220,8 +51222,8 @@ MonoBehaviour:
         type: 3}
       Sprite: robe_charred
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: pyromancerrobe
@@ -51267,8 +51269,8 @@ MonoBehaviour:
         type: 3}
       Sprite: robe_pyromancer
     AppearsAt:
-      MinLvlMobs: 9
-      MaxLvlMobs: 17
+      MinLvlMobs: 10
+      MaxLvlMobs: 14
       MinStack: 1
       MaxStack: 1
   - Key: warlockrobe
@@ -51317,7 +51319,7 @@ MonoBehaviour:
       Sprite: robe_warlock
     AppearsAt:
       MinLvlMobs: 8
-      MaxLvlMobs: 16
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: acolytehood
@@ -51355,8 +51357,8 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 0}
       Sprite: 
     AppearsAt:
-      MinLvlMobs: 5
-      MaxLvlMobs: 13
+      MinLvlMobs: 6
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: wizardhood
@@ -51394,8 +51396,8 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 0}
       Sprite: 
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: captainhat
@@ -51472,8 +51474,8 @@ MonoBehaviour:
       SpritePlaceable: {fileID: 0}
       Sprite: 
     AppearsAt:
-      MinLvlMobs: 9
-      MaxLvlMobs: 17
+      MinLvlMobs: 10
+      MaxLvlMobs: 14
       MinStack: 1
       MaxStack: 1
   - Key: longdagger
@@ -51505,8 +51507,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_shortdagger
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: commonaxe
@@ -51538,8 +51540,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapon_commonaxe
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: commonschimitar
@@ -51571,8 +51573,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapon_scimitar
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: commonsword
@@ -51606,8 +51608,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapon_short_sword
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: longhammer
@@ -51643,8 +51645,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedmace
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: twohandedaxe
@@ -51680,8 +51682,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedaxe
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: twohandedsword
@@ -51719,8 +51721,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedsword
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: twohandedschimitar
@@ -51758,8 +51760,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedschimitar
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: shortcutlass
@@ -51869,8 +51871,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedmeltingrod
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: icystaff
@@ -51908,8 +51910,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandedicystaff
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
       MinStack: 1
       MaxStack: 1
   - Key: drainingstaff
@@ -51944,7 +51946,7 @@ MonoBehaviour:
       Sprite: weapons2_twohandeddrainingstaff
     AppearsAt:
       MinLvlMobs: 6
-      MaxLvlMobs: 15
+      MaxLvlMobs: 10
       MinStack: 1
       MaxStack: 1
   - Key: forbiddendirk
@@ -51978,8 +51980,8 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_dirkforbidden
     AppearsAt:
-      MinLvlMobs: 6
-      MaxLvlMobs: 15
+      MinLvlMobs: 4
+      MaxLvlMobs: 8
       MinStack: 1
       MaxStack: 1
   - Key: divinebook
@@ -52013,8 +52015,33 @@ MonoBehaviour:
         type: 3}
       Sprite: weapons2_twohandeddivinebook
     AppearsAt:
-      MinLvlMobs: 7
-      MaxLvlMobs: 15
+      MinLvlMobs: 8
+      MaxLvlMobs: 12
+      MinStack: 1
+      MaxStack: 1
+  - Key: turtleSoup
+    Name: TurtleSoup
+    Description: "\t"
+    IconPlaceable: {fileID: 21300000, guid: fb666c7f078cb79408a0e4b1757cc6cc, type: 3}
+    Icon: icon_soup
+    UseSound: 
+    Type: misc
+    SubType: consumable
+    DropChance: 0
+    GoldValue: 10
+    StackCap: 5
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 30
+      BonusMP: 10
+    ItemSprites: []
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
       MinStack: 1
       MaxStack: 1
   InfoBank:
@@ -52782,8 +52809,8 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 30
       MaxStack: 0
-    - ItemKey: blackPants
-      MinStack: 1
+    - ItemKey: turtleSoup
+      MinStack: 5
       MaxStack: 0
     RewardHP: 0
     RewardMP: 0

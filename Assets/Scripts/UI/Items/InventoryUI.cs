@@ -20,17 +20,32 @@ public class InventoryUI : ItemSlotsContainerUI
         {
             InGameMainMenuUI.Instance.isDraggingItem = false;
 
-            if (InGameMainMenuUI.Instance.HoveredSlot!=null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
+            if (InGameMainMenuUI.Instance.HoveredSlot != null && InGameMainMenuUI.Instance.HoveredSlot.ParentContainer == this)
             {
                 if (Game.Instance.CanUseUI)
                 {
-                    SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
-                    InGameMainMenuUI.Instance.ForceHideItemInfo();
+                    UseItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+
                 }
             }
         }
     }
 
+    void UseItem(int gIndex)
+    {
+        ItemInfo item = CurrentCharacter.Inventory.ContentArray[gIndex];
+
+        if (item.SubType == "consumable" || item.SubType == "food" || item.SubType == "drink")
+        {
+            LocalUserInfo.Me.ClientCharacter.Instance.InputController.UseConsumable(gIndex, item);
+        }
+        else
+        {
+            SocketClient.Instance.SendUsedItem(InGameMainMenuUI.Instance.HoveredSlot.transform.GetSiblingIndex());
+        }
+
+        InGameMainMenuUI.Instance.ForceHideItemInfo();
+    }
 
     public void ShowInventory(ActorInfo Character)
     {

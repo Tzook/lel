@@ -68,8 +68,8 @@ public class PAWindowUI : MonoBehaviour {
 
             tempObj.GetComponent<Image>().color = tempDevPA.PAColor;
 
-            tempObj.transform.GetChild(0).GetComponent<Image>().sprite = tempDevPA.Icon;
-            tempObj.transform.GetChild(0).GetComponent<Outline>().effectColor = tempDevPA.PAColor;
+            tempObj.transform.GetChild(tempObj.transform.childCount-1).GetComponent<Image>().sprite = tempDevPA.Icon;
+            tempObj.transform.GetChild(tempObj.transform.childCount - 1).GetComponent<Outline>().effectColor = tempDevPA.PAColor;
 
             if(SelectedPA == i)
             {

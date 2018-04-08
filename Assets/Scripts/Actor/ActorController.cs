@@ -34,7 +34,8 @@ public class ActorController : MonoBehaviour
     public bool OnRope = false;
     public bool LeftSlope = false;
     public bool RightSlope = false;
-    public bool isAiming;
+    public bool isAiming = false;
+    public bool isMoving = false;
 
     [SerializeField]
     float GroundedThreshold;
@@ -554,6 +555,8 @@ public class ActorController : MonoBehaviour
 
     public void MoveLeft()
     {
+        isMoving = true;
+
         Rigid.position += GetNextMovementPosition(Vector2.left);
 
         Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
@@ -571,6 +574,8 @@ public class ActorController : MonoBehaviour
 
     public void MoveRight()
     {
+        isMoving = true;
+
         Rigid.position += GetNextMovementPosition(Vector2.right);
 
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
@@ -610,6 +615,7 @@ public class ActorController : MonoBehaviour
 
     public void StandStill()
     {
+        isMoving = false;
     }
 
     public void Jump()
@@ -982,6 +988,16 @@ public class ActorController : MonoBehaviour
         SocketClient.Instance.SendTookSpellDamage(instance.ActionKey, instance.ParentEnemy.Info.ID);
     }
 
+
+    public void UseConsumable(int inventoryIndex, ItemInfo item = null)
+    {
+        if(item == null)
+        {
+            item = LocalUserInfo.Me.ClientCharacter.Inventory.ContentArray[inventoryIndex];
+        }
+
+        StartCoroutine(UseConsumableRoutine(inventoryIndex, item));
+    }
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -1101,6 +1117,29 @@ public class ActorController : MonoBehaviour
             yield return null;
         }
         TakingDamageInAir = false;
+    }
+
+    private IEnumerator UseConsumableRoutine(int inventoryIndex, ItemInfo item)
+    {
+        Anim.SetTrigger("UseConsumable");
+
+        yield return 0;
+
+        float t = 0f;
+        while(t < 3f)
+        {
+            if(!Grounded || isMoving || OnRope || InGameMainMenuUI.Instance.isDraggingItem)
+            {
+                yield break;
+            }
+
+            t += Time.deltaTime;
+
+            yield return 0;
+        }
+
+        SocketClient.Instance.SendUsedItem(inventoryIndex);
+
     }
 
     public void SetAttackSpeed(float attackSpeed)

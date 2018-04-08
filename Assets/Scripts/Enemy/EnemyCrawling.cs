@@ -24,7 +24,7 @@ public class EnemyCrawling : EnemyMoving {
     {
         if (Game.Instance.isBitch)
         {
-            if (!Dead && LastSentPosition != transform.position)
+            if (!Dead && LastSentPosition != transform.position && transform.position != Vector3.zero)
             {
                 LastSentPosition = transform.position;
                 EnemyUpdater.Instance.UpdateMob(Info.ID, transform.position, Rigid.velocity.y);

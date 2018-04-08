@@ -155,7 +155,7 @@ public class RoundValueBarUI : MonoBehaviour {
                 BarPanel.fillAmount = Mathf.Lerp(currentValue, (minValue / maxValue), t);
                 ChangeBarPanel.fillAmount = BarPanel.fillAmount;
 
-                ValueText.text = Mathf.FloorToInt(Mathf.Lerp(currentValue, minValue, t)).ToString();
+                ValueText.text = Mathf.FloorToInt(Mathf.Lerp(currentValue * maxValue, minValue, t)).ToString();
 
 
 

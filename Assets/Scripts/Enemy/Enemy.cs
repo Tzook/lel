@@ -429,6 +429,8 @@ public class Enemy : MonoBehaviour {
         }
 
         tempObj.GetComponent<EnemyDamageInstance>().SetInfo(this, SpellInCast.Key);
+
+        Anim.SetBool("CastingSpell", false);
     }
 
 }

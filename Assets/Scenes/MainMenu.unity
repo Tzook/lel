@@ -41537,7 +41537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.5}
+  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -45682,7 +45682,7 @@ MonoBehaviour:
     - Key: crippleChance
       Value: 0.25
     - Key: stunResistance
-      Value: 1
+      Value: 100
     Spells:
       SpellsList:
       - Key: CarrotThrow
@@ -45780,7 +45780,9 @@ MonoBehaviour:
     - ItemKey: blackShoes
       MinStack: 1
       MaxStack: 1
-    Perks: []
+    Perks:
+    - Key: stunResistance
+      Value: 100
     Spells:
       SpellsList:
       - Key: TurtleBossSmash
@@ -47434,6 +47436,10 @@ MonoBehaviour:
     Perks:
     - Key: knockbackModifier
       Value: 4
+    - Key: stunResistance
+      Value: 100
+    - Key: crippleResistance
+      Value: 100
     Spells:
       SpellsList: []
       MinTime: 7

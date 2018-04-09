@@ -137,6 +137,7 @@ public class ItemInfoUI : MonoBehaviour {
     {
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject("StatInfo");
         tempObj.transform.SetParent(transform, false);
+        tempObj.transform.localScale = Vector3.one;
         tempObj.transform.SetAsLastSibling();
         return tempObj.GetComponent<ItemStatUI>();
     }

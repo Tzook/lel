@@ -1135,6 +1135,8 @@ public class ActorController : MonoBehaviour
 
         yield return 0;
 
+        AudioControl.Instance.Play("sound_item");
+
         float t = 0f;
         while(t < 1f)
         {
@@ -1155,6 +1157,9 @@ public class ActorController : MonoBehaviour
         SocketClient.Instance.SendUsedItem(inventoryIndex);
 
         InGameMainMenuUI.Instance.StopConsumingItem();
+
+        ResourcesLoader.Instance.GetRecycledObject("UseItemEffect").transform.position = transform.position;
+
 
     }
 

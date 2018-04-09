@@ -3956,7 +3956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &282
 GameObject:
   m_ObjectHideFlags: 0
@@ -35056,8 +35056,8 @@ RectTransform:
   - {fileID: 1821}
   - {fileID: 1623}
   - {fileID: 1910}
-  - {fileID: 1326573699}
   - {fileID: 1830}
+  - {fileID: 1326573699}
   - {fileID: 1564}
   - {fileID: 1602}
   - {fileID: 1574321730}
@@ -37755,7 +37755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.162, y: 0}
   m_AnchorMax: {x: 0.8245263, y: 0.086592436}
-  m_AnchoredPosition: {x: 1, y: -2.9999924}
+  m_AnchoredPosition: {x: 1, y: -3}
   m_SizeDelta: {x: -91, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1820
@@ -37904,7 +37904,7 @@ RectTransform:
   m_Children:
   - {fileID: 1655}
   m_Father: {fileID: 1654}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14625001, y: 0.79136527}
   m_AnchorMax: {x: 0.86875004, y: 0.9567566}
@@ -49000,9 +49000,9 @@ MonoBehaviour:
     Description: Berries which are red.
     IconPlaceable: {fileID: 21300000, guid: b2a01caf9b202ef458faa5003d4e838b, type: 3}
     Icon: icon_redBerries
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
-    SubType: 
+    SubType: consumable
     DropChance: 1
     GoldValue: 2
     StackCap: 50
@@ -49012,7 +49012,7 @@ MonoBehaviour:
       SpeedBonus: 0
     Perks: []
     UseInfo:
-      BonusHP: 0
+      BonusHP: 5
       BonusMP: 0
     ItemSprites: []
     AppearsAt:
@@ -49025,9 +49025,9 @@ MonoBehaviour:
     Description: Berries which are blue.
     IconPlaceable: {fileID: 21300000, guid: c15c76035a4b19a4cb4eb5fa6dfb28db, type: 3}
     Icon: icon_blueBerries
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
-    SubType: 
+    SubType: consumable
     DropChance: 1
     GoldValue: 2
     StackCap: 50
@@ -49038,7 +49038,7 @@ MonoBehaviour:
     Perks: []
     UseInfo:
       BonusHP: 0
-      BonusMP: 0
+      BonusMP: 5
     ItemSprites: []
     AppearsAt:
       MinLvlMobs: -1
@@ -49050,7 +49050,7 @@ MonoBehaviour:
     Description: Key ingredient in every meal.
     IconPlaceable: {fileID: 21300000, guid: e492e86840d674e4ca871f0648b8e6c5, type: 3}
     Icon: icon_tomato
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
     SubType: 
     DropChance: 1
@@ -49062,8 +49062,8 @@ MonoBehaviour:
       SpeedBonus: 0
     Perks: []
     UseInfo:
-      BonusHP: 0
-      BonusMP: 0
+      BonusHP: 8
+      BonusMP: 8
     ItemSprites: []
     AppearsAt:
       MinLvlMobs: -1
@@ -52027,7 +52027,7 @@ MonoBehaviour:
     Description: "\t"
     IconPlaceable: {fileID: 21300000, guid: fb666c7f078cb79408a0e4b1757cc6cc, type: 3}
     Icon: icon_soup
-    UseSound: 
+    UseSound: sound_gulp
     Type: misc
     SubType: consumable
     DropChance: 0
@@ -52052,7 +52052,7 @@ MonoBehaviour:
     Description: 
     IconPlaceable: {fileID: 21300002, guid: 99f0880463298594385fa724ede4ae3d, type: 3}
     Icon: icon_food_1
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
     SubType: consumable
     DropChance: 0
@@ -52077,7 +52077,7 @@ MonoBehaviour:
     Description: "\t"
     IconPlaceable: {fileID: 21300004, guid: 99f0880463298594385fa724ede4ae3d, type: 3}
     Icon: icon_food_2
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
     SubType: consumable
     DropChance: 0
@@ -52102,7 +52102,7 @@ MonoBehaviour:
     Description: "\t"
     IconPlaceable: {fileID: 21300000, guid: 99f0880463298594385fa724ede4ae3d, type: 3}
     Icon: icon_food_0
-    UseSound: 
+    UseSound: sound_nom
     Type: misc
     SubType: consumable
     DropChance: 0.1
@@ -82738,7 +82738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590075048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101298,7 +101298,7 @@ Prefab:
     - target: {fileID: 224127292071131848, guid: 965217f503acf42fab56f96b6d766ed7,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224127292071131848, guid: 965217f503acf42fab56f96b6d766ed7,
         type: 2}
@@ -101358,6 +101358,30 @@ Prefab:
         type: 2}
       propertyPath: alignToLeft
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311171848259888, guid: 965217f503acf42fab56f96b6d766ed7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224145854998239636, guid: 965217f503acf42fab56f96b6d766ed7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 224145854998239636, guid: 965217f503acf42fab56f96b6d766ed7,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224145854998239636, guid: 965217f503acf42fab56f96b6d766ed7,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224145854998239636, guid: 965217f503acf42fab56f96b6d766ed7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 73.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 965217f503acf42fab56f96b6d766ed7, type: 2}

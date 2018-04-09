@@ -121,4 +121,14 @@ public class AnimationAssist : MonoBehaviour {
     {
         m_Anim.SetBool(boolKey, false);
     }
+
+    public void ForwardLeftHand()
+    {
+        Controller.Instance.ForwardLeftHand();
+    }
+
+    public void BackwardLeftHand()
+    {
+        Controller.Instance.BackwardLeftHand();
+    }
 }

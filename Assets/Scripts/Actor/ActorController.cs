@@ -504,7 +504,16 @@ public class ActorController : MonoBehaviour
 
     public void AttackMelee()
     {
-        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_OneHand");
+        GameObject damageZone;
+
+        if(Instance.Info.Equipment.Weapon.SubType == "twohanded")
+        {
+            damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_TwoHand");
+        }
+        else
+        {
+            damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_OneHand");
+        }
 
         damageZone.transform.position = Instance.transform.position;
         damageZone.transform.rotation = Instance.LastFireRot;

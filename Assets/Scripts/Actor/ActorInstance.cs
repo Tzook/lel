@@ -583,6 +583,20 @@ public class ActorInstance : MonoBehaviour
         m_Renderer.material = ResourcesLoader.Instance.LitSprite;
     }
 
+    public void ForwardLeftHand()
+    {
+        m_LeftArm.sortingLayerName = "OverSprites";
+        m_LeftElbow.sortingLayerName = "OverSprites";
+        m_LeftFist.sortingLayerName = "OverSprites";
+    }
+
+    public void BackwardLeftHand()
+    {
+        m_LeftArm.sortingLayerName = "Sprites";
+        m_LeftElbow.sortingLayerName = "Sprites";
+        m_LeftFist.sortingLayerName = "Sprites";
+    }
+
     public void SetRenderingLayer(int iLayer, Transform body = null)
     {
         if(body == null)
@@ -823,8 +837,14 @@ public class ActorInstance : MonoBehaviour
             CurrentGrowEffect.transform.localScale = Vector3.one * 2f;
         }
 
-        Anim.SetInteger("AttackType", Random.Range(dPA.AttackTypeMin, dPA.AttackTypeMax));
-
+        if (Info.Equipment.Weapon.SubType == "twohanded")
+        {
+            Anim.SetInteger("AttackType", dPA.TwoHandAttackAnimations[Random.Range(0, dPA.TwoHandAttackAnimations.Count)]);
+        }
+        else
+        {
+            Anim.SetInteger("AttackType", dPA.OneHandAttackAnimations[Random.Range(0, dPA.OneHandAttackAnimations.Count)]);
+        }
     }
 
     public void PreformAttack(float chargeValue)

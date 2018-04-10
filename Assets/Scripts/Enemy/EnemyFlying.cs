@@ -103,6 +103,7 @@ public class EnemyFlying : Enemy {
         if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
             Rigid.position = Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f);
+            LastSentPosition = LastGivenPosition;
         }
     }
 

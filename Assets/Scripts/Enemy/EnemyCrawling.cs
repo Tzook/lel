@@ -55,6 +55,7 @@ public class EnemyCrawling : EnemyMoving {
         if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
             Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
+            LastSentPosition = LastGivenPosition;
         }
     }
 
@@ -72,7 +73,6 @@ public class EnemyCrawling : EnemyMoving {
 
         if (Game.Instance.isBitch)
         {
-
             if (actor.transform.position.x < transform.position.x)
             {
                 Rigid.gravityScale = 1f;

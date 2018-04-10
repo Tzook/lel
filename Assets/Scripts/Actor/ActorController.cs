@@ -125,11 +125,11 @@ public class ActorController : MonoBehaviour
     {
         if (CanDoAction())
         {
-            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !Game.Instance.isInteractingWithUI && !OnRope)
+            if ((Input.GetMouseButton(0)) && !Game.Instance.isInteractingWithUI && !OnRope)
             {
                 Aim();
             }
-            else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
+            else if (Input.GetMouseButtonUp(0))
             {
                 StopAim();
             }
@@ -907,6 +907,7 @@ public class ActorController : MonoBehaviour
     public void EndAttack()
     {
         Instance.StartCombatMode();
+        Instance.BackwardLeftHand();
 
         if (LoadAttackValueInstance != null)
         {

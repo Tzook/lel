@@ -24,6 +24,12 @@ public class GameCamera : MonoBehaviour {
     [SerializeField]
     Blur m_BlurEffect;
 
+    [SerializeField]
+    LayerMask EssentialsInteractableMask = 1 << 14;
+
+    [SerializeField]
+    LayerMask InteractableMask = ~0;
+
     public Camera Cam;
     public Camera BlurCam;
 
@@ -103,8 +109,12 @@ public class GameCamera : MonoBehaviour {
 
         MousePosition = (Vector2)Cam.ScreenToWorldPoint(Input.mousePosition);
 
-        CurrentMouseHit = Physics2D.Raycast(MousePosition, transform.forward, Mathf.Infinity);
+        CurrentMouseHit = Physics2D.Raycast(MousePosition, transform.forward, Mathf.Infinity, EssentialsInteractableMask);
 
+        if(!CurrentMouseHit)
+        {
+            CurrentMouseHit = Physics2D.Raycast(MousePosition, transform.forward, Mathf.Infinity, InteractableMask);
+        }
 
         if (Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI)
         {
@@ -130,12 +140,18 @@ public class GameCamera : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && HoveringOnInteractable)
+        //if (Input.GetMouseButtonDown(0) && HoveringOnInteractable)
+        //{
+        //    if (DoubleClickInstance == null)
+        //    {
+        //        DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
+        //    }
+        //}
+
+        //TODO Temporary change?
+        if(Input.GetMouseButtonUp(1) && HoveringOnInteractable)
         {
-            if (DoubleClickInstance == null)
-            {
-                DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
-            }
+            DoubleClick();
         }
        
     }
@@ -166,13 +182,13 @@ public class GameCamera : MonoBehaviour {
     {
         if(Game.Instance.CanUseUI && !DialogManager.Instance.inDialog && !LocalUserInfo.Me.ClientCharacter.Instance.isDead && CurrentMouseHit.collider != null)
         {
-            if(CurrentMouseHit.collider.GetComponent<ActorInstance>() != null)
-            {
-                InGameMainMenuUI.Instance.ShowCharacterInfo(CurrentMouseHit.collider.GetComponent<ActorInstance>().Info);
-            }
-            else if (CurrentMouseHit.collider.GetComponent<NPC>() != null)
+            if (CurrentMouseHit.collider.GetComponent<NPC>() != null)
             {
                 CurrentMouseHit.collider.GetComponent<NPC>().Interact();
+            }
+            else if (CurrentMouseHit.collider.GetComponent<ActorInstance>() != null)
+            {
+                InGameMainMenuUI.Instance.ShowCharacterInfo(CurrentMouseHit.collider.GetComponent<ActorInstance>().Info);
             }
             else if (CurrentMouseHit.collider.GetComponent<QuestBubbleCollider>() != null)
             {

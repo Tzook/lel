@@ -28,12 +28,15 @@ public class AudioControl : MonoBehaviour {
         m_dicVolumeGroup.Add("Music", PlayerPrefs.GetFloat("Music", 0.6f));
 
         SetMasterVolume(PlayerPrefs.GetFloat("MasterVolume", 1f));
+
+        MusicSource.volume = m_dicVolumeGroup["Music"];
+
     }
 
     #endregion
 
     #region Methods
-    
+
     public float GetVolumeByTag(string tag)
     {
         return m_dicVolumeGroup[tag];

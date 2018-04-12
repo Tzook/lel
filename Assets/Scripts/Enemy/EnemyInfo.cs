@@ -11,6 +11,8 @@ public class EnemyInfo {
     public float CurrentHealth;
     public float MaxHealth;
 
+    public bool isBoss;
+
     public EnemyInfo(DevMonsterInfo info, string id = "noID")
     {
         this.ID = id;
@@ -19,6 +21,8 @@ public class EnemyInfo {
 
         this.CurrentHealth = info.MonsterHP;
         this.MaxHealth = info.MonsterHP;
+
+        this.isBoss = info.isBoss;
     }
 }
 

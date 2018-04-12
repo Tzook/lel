@@ -13,6 +13,8 @@ public class EnemyJumping : EnemyMoving
     protected RaycastHit2D GroundRayRight;
     protected RaycastHit2D GroundRayLeft;
 
+    float minJumpTime;
+
     public bool isGrounded
     {
         get
@@ -50,6 +52,11 @@ public class EnemyJumping : EnemyMoving
         {
             Rigid.position = new Vector2(Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 5f).x, Vector2.Lerp(Rigid.position, LastGivenPosition, Time.deltaTime * 10f).y);
             LastSentPosition = LastGivenPosition;
+        }
+
+        if(minJumpTime > 0f)
+        {
+            minJumpTime -= 1f * Time.deltaTime;
         }
     }
 
@@ -231,6 +238,7 @@ public class EnemyJumping : EnemyMoving
         {
             lastY = transform.position.y;
             WalkLeft();
+
             yield return 0;
         }
 
@@ -246,9 +254,10 @@ public class EnemyJumping : EnemyMoving
 
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && minJumpTime <= 0f)
         {
             Rigid.AddForce(Vector2.up * JumpForce);
+            minJumpTime = 1f;
         }
     }
 

@@ -124,10 +124,14 @@ public class InGameMainMenuUI : MonoBehaviour {
     public MasteryUpgradeWindowUI MasteryUpgradePanel;
 
     [SerializeField]
-    public Image PAExpBar;
+    public RoundValueBarUI PAExpBar;
 
     [SerializeField]
     SpellAreaUI SpellAreaPanel;
+
+    [SerializeField]
+    HealthBar BossHealthbar;
+
 
     public static InGameMainMenuUI Instance;
 
@@ -258,6 +262,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                 if (!questsPanel.gameObject.activeInHierarchy)
                 {
                     questsPanel.Show();
+                    completedQuestsPanel.Hide();
                 }
                 else
                 {
@@ -270,6 +275,7 @@ public class InGameMainMenuUI : MonoBehaviour {
                 if (!completedQuestsPanel.gameObject.activeInHierarchy)
                 {
                     completedQuestsPanel.Show();
+                    questsPanel.Hide();
                 }
                 else
                 {
@@ -327,6 +333,8 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         UpdateUpgradeCounter(info.UnspentPerkPoints);
         UpdateCharUpgradeCounter(info.UnspentCharPerkPoints);
+
+        HideBossHealthbar();
     }
 
     public void HideGameUI()
@@ -795,7 +803,7 @@ public class InGameMainMenuUI : MonoBehaviour {
 
     public void RefreshPAExpBar()
     {
-        PAExpBar.fillAmount = (LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Exp*1f) / LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.NextLevelXP;
+        PAExpBar.SetValue(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Exp*1f , LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.NextLevelXP * 1f);
     }
 
     public void RefreshSpellArea(bool AbilitySwitch = false)
@@ -811,5 +819,20 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void ActivatedSpell(string spellKey)
     {
         SpellAreaPanel.ActivatedSpell(spellKey);
+    }
+
+    public void ShowBossHealthbar()
+    {
+        BossHealthbar.gameObject.SetActive(true);
+    }
+
+    public void HideBossHealthbar()
+    {
+        BossHealthbar.gameObject.SetActive(false);
+    }
+
+    public void SetBossHealthbar(float fromValue, float toValue, float maxValue, float Speed = 1f)
+    {
+        BossHealthbar.SetHealthbar(fromValue, toValue, maxValue, Speed);
     }
 }

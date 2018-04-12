@@ -9,6 +9,9 @@ public class DamageEntity : MonoBehaviour {
 
 	public void Hurt(int Damage)
     {
-        SocketClient.Instance.SendWorldDMG(Damage, Perks);
+        if (!LocalUserInfo.Me.ClientCharacter.Instance.InputController.Invincible)
+        {
+            SocketClient.Instance.SendWorldDMG(Damage, Perks);
+        }
     }
 }

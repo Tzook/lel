@@ -138,8 +138,10 @@ public class RoundValueBarUI : MonoBehaviour {
                 BarPanel.fillAmount = Mathf.Lerp(currentValue, (minValue / maxValue), t);
                 ChangeBarPanel.fillAmount = BarPanel.fillAmount;
 
-                ValueText.text = Mathf.FloorToInt(BarPanel.fillAmount * 100f) + "%";
-
+                if (ValueText != null)
+                {
+                    ValueText.text = Mathf.FloorToInt(BarPanel.fillAmount * 100f) + "%";
+                }
 
 
                 yield return 0;
@@ -155,8 +157,10 @@ public class RoundValueBarUI : MonoBehaviour {
                 BarPanel.fillAmount = Mathf.Lerp(currentValue, (minValue / maxValue), t);
                 ChangeBarPanel.fillAmount = BarPanel.fillAmount;
 
-                ValueText.text = Mathf.FloorToInt(Mathf.Lerp(currentValue * maxValue, minValue, t)).ToString();
-
+                if (ValueText != null)
+                {
+                    ValueText.text = Mathf.FloorToInt(Mathf.Lerp(currentValue * maxValue, minValue, t)).ToString();
+                }
 
 
                 yield return 0;

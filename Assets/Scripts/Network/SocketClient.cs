@@ -636,6 +636,7 @@ public class SocketClient : MonoBehaviour
         if (actor != null) 
         {
             actor.CurrentHealth = hp;
+            actor.Instance.Hurt();
             if (actor == LocalUserInfo.Me.ClientCharacter)
             {
                 string text = String.Format("{0:n0}", data["dmg"].AsInt);
@@ -648,7 +649,6 @@ public class SocketClient : MonoBehaviour
             }
             else
             {
-                actor.Instance.Hurt();
                 actor.Instance.MovementController.RefreshHealth();
             }
         }

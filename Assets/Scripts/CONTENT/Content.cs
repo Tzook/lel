@@ -276,6 +276,9 @@ public class DevMonsterInfo
     [SerializeField]
     public List<LootInstance> PossibleLoot = new List<LootInstance>();
 
+    [SerializeField]
+    public bool isBoss;
+
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     
     public DevMobSpells Spells;

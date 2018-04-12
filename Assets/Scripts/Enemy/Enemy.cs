@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour {
 
         string dmgMessage = damage > 0 ? damage.ToString("N0") : "BLOCKED";
 
-        int TextSize = 40; 
+        int TextSize = 40;
 
         if (crit)
         {
@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size=" + TextSize +"> " + dmgMessage + "</size></color>", Color.green, new Color(), "");
+                        PopHint("<color=#ffff00ff><size=" + TextSize + "> " + dmgMessage + "</size></color>", Color.green, new Color(), "");
                     }
                     else
                     {
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour {
 
                     if (attackSource.Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
                     {
-                        PopHint("<color=#ffff00ff><size="+TextSize+">" + dmgMessage + "</size></color>", Color.green, new Color(), "");
+                        PopHint("<color=#ffff00ff><size=" + TextSize + ">" + dmgMessage + "</size></color>", Color.green, new Color(), "");
                     }
 
                     break;
@@ -216,14 +216,22 @@ public class Enemy : MonoBehaviour {
 
 
 
-
-        if(m_HealthBar == null)
+        if (!Info.isBoss)
         {
-            m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
-            m_HealthBar.transform.position = transform.position;
+            if (m_HealthBar == null)
+            {
+                m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
+                m_HealthBar.transform.position = transform.position;
+            }
+
+            m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
         }
-			
-        m_HealthBar.SetHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
+        else
+        {
+            InGameMainMenuUI.Instance.ShowBossHealthbar();
+            InGameMainMenuUI.Instance.SetBossHealthbar(Info.CurrentHealth, currentHP, Info.MaxHealth, 2f);
+        }
+
         Info.CurrentHealth = currentHP;
     }
 
@@ -249,8 +257,15 @@ public class Enemy : MonoBehaviour {
 
             m_HitBox.enabled = false;
 
-            m_HealthBar.gameObject.SetActive(false);
-            m_HealthBar = null;
+            if (!Info.isBoss)
+            {
+                m_HealthBar.gameObject.SetActive(false);
+                m_HealthBar = null;
+            }
+            else
+            {
+                InGameMainMenuUI.Instance.HideBossHealthbar();
+            }
 
             CurrentTarget = null;
 

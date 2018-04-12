@@ -687,6 +687,11 @@ public class ActorInstance : MonoBehaviour
     {
         Anim.SetInteger("HurtType", Random.Range(0, 3));
         Anim.SetTrigger("Hurt");
+
+        if(LocalUserInfo.Me.ClientCharacter.ID == Info.ID)
+        {
+            InputController.StartInvincivility();
+        }
     }
 
     public void Death()

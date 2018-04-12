@@ -70,7 +70,7 @@ public class ActorController : MonoBehaviour
     float rotDegrees;
     bool aimRight;
 
-    bool Invincible;
+    public bool Invincible;
     bool TakingDamageInAir;
     bool Stunned;
     bool Slowed;
@@ -81,6 +81,7 @@ public class ActorController : MonoBehaviour
 
     float LoadAttackValue = 0f;
     Coroutine LoadAttackValueInstance;
+    Coroutine InvincibilityRoutineInstance;
 
     float SpellCooldown;
 
@@ -230,7 +231,7 @@ public class ActorController : MonoBehaviour
 
     void LateUpdate()
     {
-        CollidingEnemy = null;
+        //CollidingEnemy = null;
 
         if (CanDoAction() && !OnRope)
         {
@@ -1008,6 +1009,14 @@ public class ActorController : MonoBehaviour
 
         StartCoroutine(UseConsumableRoutine(inventoryIndex, item));
     }
+
+    public void StartInvincivility()
+    {
+        if(InvincibilityRoutineInstance == null)
+        {
+            InvincibilityRoutineInstance = StartCoroutine(InvincibilityRoutine());
+        }
+    }
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -1073,8 +1082,6 @@ public class ActorController : MonoBehaviour
             Instance.PlayEyesEmote("angry");
             Instance.PlayMouthEmote("sad");
 
-            StartCoroutine(InvincibilityRoutine());
-
             StartCoroutine(DisableSpeedUntilGrounded());
 
             DevPerkMap knockbackPerk = monsterInfo.GetPerk("knockbackModifier");
@@ -1104,6 +1111,8 @@ public class ActorController : MonoBehaviour
         Instance.SetOpacity(1f);
 
         Invincible = false;
+
+        InvincibilityRoutineInstance = null;
     }
 
     private IEnumerator StrobeRoutine()

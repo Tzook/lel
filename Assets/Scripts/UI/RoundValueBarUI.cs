@@ -87,7 +87,11 @@ public class RoundValueBarUI : MonoBehaviour {
                 t += 3f * Time.deltaTime;
 
                 BarPanel.color = Color.Lerp(new Color(icBar.r, icBar.g, icBar.b, 1f), new Color(icBar.r, icBar.g, icBar.b, 0.55f), t);
-                ValueText.color = Color.Lerp(new Color(icText.r, icText.g, icText.b, 1f), new Color(icText.r, icText.g, icText.b, 0.75f), t);
+
+                if (ValueText != null)
+                {
+                    ValueText.color = Color.Lerp(new Color(icText.r, icText.g, icText.b, 1f), new Color(icText.r, icText.g, icText.b, 0.75f), t);
+                }
 
                 yield return 0;
             }
@@ -98,7 +102,11 @@ public class RoundValueBarUI : MonoBehaviour {
                 t += 3f * Time.deltaTime;
 
                 BarPanel.color = Color.Lerp(new Color(icBar.r, icBar.g, icBar.b, 0.55f), new Color(icBar.r, icBar.g, icBar.b, 1f), t);
-                ValueText.color = Color.Lerp(new Color(icText.r, icText.g, icText.b, 0.75f), new Color(icText.r, icText.g, icText.b, 1f), t);
+
+                if (ValueText != null)
+                {
+                    ValueText.color = Color.Lerp(new Color(icText.r, icText.g, icText.b, 0.75f), new Color(icText.r, icText.g, icText.b, 1f), t);
+                }
 
                 yield return 0;
             }

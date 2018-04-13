@@ -52515,7 +52515,29 @@ MonoBehaviour:
       - hpStealChance
       - hpStealModifier
       - critChance
-    Spells: []
+    Spells:
+    - Key: Healblast
+      Level: 5
+      Mana: 20
+      ColliderPrefab: Projectile_Heal
+      Perks: []
+      Icon: {fileID: 21300000, guid: 615acd920682ccc4c841706ec332c0af, type: 3}
+      HitSound: 
+      hitTypeEnumState: 1
+      hitTargetEnumState: 1
+      attackTypeEnumState: 1
+    - Key: HealExplosion
+      Level: 12
+      Mana: 20
+      ColliderPrefab: DI_HealExplosion
+      Perks:
+      - Key: damageModifier
+        Value: 0.5
+      Icon: {fileID: 21300000, guid: 4974302d608684645bc4c4a13c9893cd, type: 3}
+      HitSound: 
+      hitTypeEnumState: 1
+      hitTargetEnumState: 1
+      attackTypeEnumState: 0
     InitialPerks:
     - Key: hpStealChance
       Value: 1
@@ -103668,6 +103690,14 @@ Prefab:
     - target: {fileID: 4000010416145490, guid: 489423c93b04c2a43924495f708e13e2, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 314.4601
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014174353802, guid: 489423c93b04c2a43924495f708e13e2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014174353802, guid: 489423c93b04c2a43924495f708e13e2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 489423c93b04c2a43924495f708e13e2, type: 2}

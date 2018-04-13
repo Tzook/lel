@@ -246,13 +246,18 @@ public class ActorMovement : MonoBehaviour
     {
         DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
 
-        if (string.IsNullOrEmpty(devAbility.ProjectilePrefab))
+        switch(devAbility.attackTypeEnumState)
         {
-            //AttackMelee();
-        }
-        else
-        {
-            Instance.FireProjectile(false, load);
+            case AttackTypeEnumState.normal :
+                {
+                    break;
+                }
+            case AttackTypeEnumState.projectile :
+                {
+                    Instance.FireProjectile(false, load, 0);
+                    break;
+                }
+
         }
     }
 

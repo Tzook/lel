@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileArrow : MonoBehaviour {
+public class ProjectileArrow : ActorDamageInstance {
 
     [SerializeField]
     float MovementSpeed = 15f;
-
-    [SerializeField]
-    float DecayTime;
 
     [SerializeField]
     float MaxFlightTime;
@@ -28,41 +25,35 @@ public class ProjectileArrow : MonoBehaviour {
     [SerializeField]
     TrailRenderer Trail;
 
+    [SerializeField]
+    bool ProjectileStayAfterHit;
+
     public bool InFlight = false;
 
     public bool TriggerHit;
 
-    public ActorInstance ParentActor;
-
-    public string PrimaryAbilitySourceKey;
-
     private HitBox CurrentHitbox;
     private float CurrentMaxFlightTime;
 
-    private uint? AttackIdCounter;
-
-    public void Launch(ActorInstance parent, string primaryAbilitySourceKey, bool triggerHit, uint? attackIdCounter, float speed = 15f)
+    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit, uint attackIdCounter, float speed = 15f)
     {
-        transform.parent = null;
+        base.SetInfo(parent ,actionKey ,actionValue , attackIdCounter);
 
-        this.ParentActor = parent;
+        transform.parent = null;
 
         CurrentMaxFlightTime = MaxFlightTime;
         TriggerHit = triggerHit;
-        AttackIdCounter = attackIdCounter;
 
         InFlight = true;
         m_Particles.Play();
 
-        PrimaryAbilitySourceKey = primaryAbilitySourceKey;
-
-        if(Trail != null)
+        if (Trail != null)
         {
             Trail.Clear();
         }
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (InFlight)
         {
@@ -79,12 +70,10 @@ public class ProjectileArrow : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D TargetCollider)
+    protected virtual void OnTriggerEnter2D(Collider2D TargetCollider)
     {
         if (InFlight)
         {
-            DevAbility dPA = Content.Instance.GetAbility(PrimaryAbilitySourceKey);
-
             m_Particles.Stop();
             InFlight = false;
 
@@ -92,24 +81,20 @@ public class ProjectileArrow : MonoBehaviour {
             {
                 CurrentHitbox = TargetCollider.GetComponent<HitBox>();
 
-                AudioControl.Instance.PlayInPosition(dPA.ProjectileHitSound, transform.position);
-
                 if (TriggerHit)
                 {
-                    //TODO Fix me
-                    List<string> tempList = new List<string>();
-                    tempList.Add(TargetCollider.GetComponent<HitBox>().EnemyReference.Info.ID);
-                    SocketClient.Instance.SendUsedPrimaryAbility(tempList, (uint)AttackIdCounter);
+                    HandleCollision(TargetCollider);
+                    //List<string> tempList = new List<string>();
+                    //tempList.Add(TargetCollider.GetComponent<HitBox>().EnemyReference.Info.ID);
+                    //SocketClient.Instance.SendUsedPrimaryAbility(tempList, (uint)AttackIdCounter);
                 }
             }
             else if (TargetCollider.tag == "HitEntity")
             {
-                TargetCollider.GetComponent<HittableEntity>().Hurt(PrimaryAbilitySourceKey);
+                TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
             }
             else
             {
-                AudioControl.Instance.PlayInPosition(dPA.ProjectileWallSound, transform.position);
-
                 if (m_Anim != null)
                 {
                     m_Anim.SetTrigger("Bounce");
@@ -125,20 +110,35 @@ public class ProjectileArrow : MonoBehaviour {
                 impactEffect.transform.localScale = Vector3.one;
             }
 
-            if (dPA.ProjectileStayAfterHit)
+            if (ProjectileStayAfterHit)
             {
                 if (TargetCollider.gameObject.activeInHierarchy)
                 {
                     transform.SetParent(TargetCollider.transform, true);
                 }
 
-                StartCoroutine(DeathRoutine());
+                if (this.gameObject.activeInHierarchy)
+                {
+                    StartCoroutine(DeathRoutine());
+                }
             }
             else
             {
                 Shut();
             }
         }
+    }
+
+    protected override void OnEnable()
+    {
+    }
+
+    protected override void Update()
+    {
+    }
+
+    protected override void OnTriggerStay2D(Collider2D TargetCollider)
+    {
     }
 
     private IEnumerator DeathRoutine()

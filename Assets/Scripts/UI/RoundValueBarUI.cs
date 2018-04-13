@@ -40,7 +40,11 @@ public class RoundValueBarUI : MonoBehaviour {
         icChangeBar = ChangeBarPanel.color;
 
         icBar = BarPanel.color;
-        icText = ValueText.color;
+
+        if (ValueText != null)
+        {
+            icText = ValueText.color;
+        }
     }
 
     void OnDisable()

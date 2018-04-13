@@ -519,7 +519,7 @@ public class ActorController : MonoBehaviour
         damageZone.transform.position = Instance.transform.position;
         damageZone.transform.rotation = Instance.LastFireRot;
 
-        damageZone.GetComponent<ActorDamageInstance>().Open(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key, "", AttackIdCounter);
+        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key, "", AttackIdCounter);
     }
 
     public void FireProjectile()
@@ -869,13 +869,19 @@ public class ActorController : MonoBehaviour
             ManaUsage.Instance.UseMana(devAbility.ManaCost);
         }
 
-        if (string.IsNullOrEmpty(devAbility.ProjectilePrefab))
+        switch (devAbility.attackTypeEnumState)
         {
-            AttackMelee();
-        }
-        else
-        {
-            FireProjectile();
+            case AttackTypeEnumState.normal:
+                {
+                    AttackMelee();
+                    break;
+                }
+            case AttackTypeEnumState.projectile:
+                {
+                    FireProjectile();
+                    break;
+                }
+
         }
     }
 
@@ -944,13 +950,29 @@ public class ActorController : MonoBehaviour
     {
         if (CurrentSpellInCast != null)
         {
-            GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
+            switch (CurrentSpellInCast.attackTypeEnumState)
+            {
+                case AttackTypeEnumState.normal:
+                    {
+                        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
-            damageZone.transform.position = Instance.transform.position;
-            damageZone.transform.rotation = Instance.LastFireRot;
+                        damageZone.transform.position = Instance.transform.position;
+                        damageZone.transform.rotation = Instance.LastFireRot;
 
-            damageZone.GetComponent<ActorDamageInstance>().Open(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
+                        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
+                        break;
+                    }
+                case AttackTypeEnumState.projectile:
+                    {
+                        GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
+                        damageZone.transform.position = Instance.transform.position;
+                        damageZone.transform.rotation = Instance.LastFireRot;
+
+                        damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell" , CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId);
+                        break;
+                    }
+            }
             CurrentSpellInCast = null;
         }
     }

@@ -8,43 +8,55 @@ public class ActorDamageInstance : MonoBehaviour {
     public ActorInstance ParentActor;
 
     [SerializeField]
-    string ActionKey;
+    protected string ActionKey;
 
     [SerializeField]
-    string ActionValue;
-
-    float TimeAlive = 0.1f;
-    bool Hit = false;
+    protected string ActionValue;
 
     [SerializeField]
-    BoxCollider2D m_Collider;
+    protected float DecayTime = 0.1f;
 
-    DevAbility CurrentAbility;
+    protected bool Hit = false;
 
-    private uint AttackIdCounter;
+    [SerializeField]
+    protected BoxCollider2D m_Collider;
 
-    public void Open(ActorInstance instance, string actionKey, string actionValue, uint attackIdCounter)
+    protected DevAbility CurrentAbility;
+
+    protected uint AttackIdCounter;
+
+    protected Collider2D[] collectedColliders;
+
+
+    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue)
     {
         this.ParentActor = instance;
         this.ActionKey = actionKey;
         this.ActionValue = actionValue;
-        this.AttackIdCounter = attackIdCounter;
+
         this.gameObject.SetActive(true);
 
         CurrentAbility = Content.Instance.GetAbility(actionKey);
-    }
 
-    void OnEnable()
-    {
-        TimeAlive = 0.1f;
         Hit = false;
     }
 
-    void Update()
+    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue, uint attackIdCounter)
     {
-        if(TimeAlive > 0f)
+        SetInfo(instance, actionKey, actionValue);
+        this.AttackIdCounter = attackIdCounter;
+    }
+
+    protected virtual void OnEnable()
+    {
+        DecayTime = 0.1f;
+    }
+
+    protected virtual void Update()
+    {
+        if(DecayTime > 0f)
         {
-            TimeAlive -= 1f * Time.deltaTime;
+            DecayTime -= 1f * Time.deltaTime;
         }
         else
         {
@@ -52,9 +64,12 @@ public class ActorDamageInstance : MonoBehaviour {
         }
     }
 
-    Collider2D[] collectedColliders;
+    protected virtual void OnTriggerStay2D(Collider2D TargetCollider)
+    {
+        HandleCollision(TargetCollider);
+    }
 
-    void OnTriggerStay2D(Collider2D TargetCollider)
+    public virtual void HandleCollision(Collider2D TargetCollider)
     {
         if (!Hit)
         {
@@ -82,7 +97,7 @@ public class ActorDamageInstance : MonoBehaviour {
                     Hit = true;
                     this.gameObject.SetActive(false);
                 }
-                else if(TargetCollider.tag == "Actor" && TargetCollider.GetComponent<ActorInstance>().Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
+                else if (TargetCollider.tag == "Actor" && TargetCollider.GetComponent<ActorInstance>().Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
                 {
                     List<ActorInstance> sentTargets = new List<ActorInstance>();
 

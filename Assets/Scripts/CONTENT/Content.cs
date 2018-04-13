@@ -227,13 +227,14 @@ public class Content : MonoBehaviour {
     }
 
 
+
     public int GetSpellIndex(DevSpell spell)
     {
         for (int i = 0; i < Abilities.Count; i++)
         {
             for (int a = 0; a < Abilities[i].Spells.Count; a++)
             {
-                if (Abilities[i].Spells[a]== spell)
+                if (Abilities[i].Spells[a] == spell)
                 {
                     return a;
                 }
@@ -474,6 +475,9 @@ public class DevAbility
         Melee,Range,Magic
     }
 
+    [SerializeField]
+    public AttackTypeEnumState attackTypeEnumState;
+
     public int ManaCost;
 
     [SerializeField]
@@ -535,6 +539,42 @@ public class DevSpell
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     public Sprite Icon;
     public string HitSound;
+
+    public string HitType
+    {
+        get
+        {
+            switch (hitTypeEnumState)
+            {
+                default:
+                case HitTypeEnumState.Attack:
+                    {
+                        return "atk";
+                    }
+                case HitTypeEnumState.Heal:
+                    {
+                        return "heal";
+                    }
+            }
+        }
+    }
+    [SerializeField]
+    HitTypeEnumState hitTypeEnumState;
+    public enum HitTypeEnumState
+    {
+        Attack, Heal
+    }
+
+    [SerializeField]
+    public HitTargetEnumState hitTargetEnumState;
+    public enum HitTargetEnumState
+    {
+        Enemy, Actor
+    }
+
+    [SerializeField]
+    public AttackTypeEnumState attackTypeEnumState;
+
 }
 
 [System.Serializable]
@@ -877,4 +917,9 @@ public class QuestState
     {
         InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted, NeverStarted
     }
+}
+
+public enum AttackTypeEnumState
+{
+    normal, projectile, explosion, channeling
 }

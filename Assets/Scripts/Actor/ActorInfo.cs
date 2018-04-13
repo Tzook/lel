@@ -182,6 +182,8 @@ public class ActorInfo
             PrimaryAbilities.Add(ability);
         }
         FillAbility(ability, AbilityNode);
+
+        SortPrimaryAbilities();
     }
 
     public void AddRoomPrimaryAbility(string key)
@@ -191,6 +193,8 @@ public class ActorInfo
         {
             PrimaryAbilities.Add(ability);
         }
+
+        SortPrimaryAbilities();
     }
 
     public void AddCharAbility(string key, JSONNode AbilityNode)
@@ -356,6 +360,24 @@ public class ActorInfo
         {
             CurrentPrimaryAbility = new Ability(key);
         }
+    }
+
+    public void SortPrimaryAbilities()
+    {
+        List<Ability> tempList = new List<Ability>();
+
+        Ability tempAbility;
+        for(int i=0;i<Content.Instance.Abilities.Count;i++)
+        {
+            tempAbility = GetPrimaryAbility(Content.Instance.Abilities[i].Key);
+            if (tempAbility != null)
+            {
+                tempList.Add(tempAbility);
+            }
+        }
+
+        PrimaryAbilities.Clear();
+        PrimaryAbilities.InsertRange(0, tempList);
     }
 
     public bool CanUsePrimaryAbility(string key)

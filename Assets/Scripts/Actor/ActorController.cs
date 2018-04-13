@@ -969,6 +969,7 @@ public class ActorController : MonoBehaviour
                         damageZone.transform.position = Instance.transform.position;
                         damageZone.transform.rotation = Instance.LastFireRot;
 
+
                         damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell" , CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId);
                         break;
                     }

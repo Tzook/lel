@@ -1954,7 +1954,14 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: '...'
+    - Content: Come to an island they said...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It will be fun they said.....
       LetterDelay: 0.03
       Pitch: 1.3
       SoundKey: 
@@ -1968,12 +1975,12 @@ MonoBehaviour:
       Condition: QuestComplete
       ConditionValue: helpMaya
       CLR: {r: 1, g: 0.9586207, b: 0.625, a: 1}
-    - Title: What would make you come back?
+    - Title: What?
       Event: StartDialog
       Value: MikeTold5
       Condition: QuestAvailable
       ConditionValue: mayaSpikedTurtles
-      CLR: {r: 1, g: 0.9568628, b: 0.62352943, a: 1}
+      CLR: {r: 0.4117647, g: 0.4627451, b: 0.9764706, a: 1}
     - Title: Done.
       Event: StartDialog
       Value: FinishedQuest
@@ -1986,6 +1993,12 @@ MonoBehaviour:
       Condition: QuestAvailable
       ConditionValue: findAlex
       CLR: {r: 1, g: 0.9568628, b: 0.62352943, a: 1}
+    - Title: What will make you come back?
+      Event: StartDialog
+      Value: What1
+      Condition: QuestAvailable
+      ConditionValue: mayaSpikedTurtles
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
     - Title: Bye
       Event: EndDialog
       Value: 
@@ -1994,7 +2007,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: MikeTold
     Pieces:
-    - Content: He did? What did he say?
+    - Content: She did? What did she say?
       LetterDelay: 0.03
       Pitch: 1.1
       SoundKey: 
@@ -2048,7 +2061,7 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: Okay, he asked me to call you back...
+    - Title: Okay, she asked me to call you back...
       Event: StartDialog
       Value: MikeTold4
       Condition: 
@@ -2056,7 +2069,7 @@ MonoBehaviour:
       CLR: {r: 1, g: 0.9586207, b: 0.625, a: 1}
   - DialogKey: MikeTold4
     Pieces:
-    - Content: HOW DARE HE ORDER ME AROUND?
+    - Content: HOW DARE SHE ORDER ME AROUND?
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
@@ -2113,43 +2126,14 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: MikeTold5
     Pieces:
-    - Content: What would...
+    - Content: They sent you to make me come back
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: See those spiked turtles? Their spikes are bad for the "Fung Shui"
-        of this place.
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: Tell them to round their spikes...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: Or just kill some of them...
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: It'll make this place much more pretty!
-      LetterDelay: 0.02
-      Pitch: 1.3
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: Only then I'll be able to leave this place satisfied...
+    - Content: Didn't they?
       LetterDelay: 0.02
       Pitch: 1.3
       SoundKey: 
@@ -2157,13 +2141,13 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: It's "Feng Shui"...
-      Event: StartQuest
-      Value: mayaSpikedTurtles
+    - Title: Who?
+      Event: StartDialog
+      Value: Who
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 0.9586207, b: 0.625, a: 1}
-    - Title: Not gonna do this.
+      CLR: {r: 0.4117647, g: 0.4627451, b: 0.9764706, a: 1}
+    - Title: Nope
       Event: EndDialog
       Value: 
       Condition: 
@@ -2243,6 +2227,332 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 0.9586207, b: 0.625, a: 1}
+  - DialogKey: Who
+    Pieces:
+    - Content: The Captain and the rest of the crew!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They must be worried sick about me!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So they sent you to make me come back.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Right?
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: I have no idea
+      Event: StartDialog
+      Value: Idea
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Nope
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Idea
+    Pieces:
+    - Content: '....'
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They're playing hard to get huh?
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: '....'
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Well tell them it's not working
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Okay
+      Event: StartDialog
+      Value: Okay
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: Nope
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Okay
+    Pieces:
+    - Content: Wait!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I'll come back!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Under one condition!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Will I get gold from this?
+      Event: StartDialog
+      Value: Gold
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Gold
+    Pieces:
+    - Content: Yes!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: You will get gold if you help me out!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I just want to show them I am not a third wheel of the crew!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And that my skills matter!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: What are you skills?
+      Event: StartDialog
+      Value: Skills
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Skills
+    Pieces:
+    - Content: I'm an exterior....
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: '.....
+
+'
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Designer!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And also a certified warrior girl!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: So what do you want me to do?
+      Event: StartDialog
+      Value: Do
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Do
+    Pieces:
+    - Content: I want you to take care of this..
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Exterior problem we're having here!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: "The spiked turtles poison the space\t"
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: With their spikes
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They have to go.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: I see...
+      Event: StartDialog
+      Value: See
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: See
+    Pieces:
+    - Content: Good!
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: So I want you to kill like....
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: 10 of them.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: 10 is a good number for Feng Shui...
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: You got it
+      Event: StartQuest
+      Value: mayaSpikedTurtles
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: What1
+    Pieces:
+    - Content: I'm not coming back untill the rest of the crew will appreciate my
+        skills.
+      LetterDelay: 0.02
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: What are your skills?
+      Event: StartDialog
+      Value: Skills
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: This is too much
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
   GivingQuests:
   - mayaSpikedTurtles
   - findAlex
@@ -4659,6 +4969,12 @@ MonoBehaviour:
   CamType: 0
   BlurCamera: {fileID: 921949567}
   m_BlurEffect: {fileID: 482230887}
+  EssentialsInteractableMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  InteractableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   Cam: {fileID: 482230892}
   BlurCam: {fileID: 0}
   CamFollowing: 1

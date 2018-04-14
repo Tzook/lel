@@ -690,9 +690,11 @@ public class ActorController : MonoBehaviour
         {
             if (sentTargets[i].Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
             {
-                targetIDs.Add(sentTargets[i].Info.ID);
+                targetIDs.Add(sentTargets[i].Info.Name);
             }
         }
+
+
 
         if (actionKey == "spell")
         {

@@ -54,7 +54,13 @@ public class RoundValueBarUI : MonoBehaviour {
 
     public void SetValue(float valueMin, float valueMax)
     {
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         HaltCurrentRoutine();
+
         ChangeValueInstance = StartCoroutine(ChangeValueRoutine(CurrentValue, valueMin, valueMax));
 
         CurrentValue = valueMin / valueMax;

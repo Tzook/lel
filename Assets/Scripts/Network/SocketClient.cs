@@ -1202,35 +1202,47 @@ public class SocketClient : MonoBehaviour
 
         BroadcastEvent(data.ToString());
 
-        bool isCharAbility = false;
-        Ability tempPA = LocalUserInfo.Me.ClientCharacter.GetPrimaryAbility(data["ability"].Value);
-        if (tempPA == null)
+        bool isCharTalent = data["ability"].Value == "charTalent";
+        
+        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        if (actor == LocalUserInfo.Me.ClientCharacter) 
         {
-            isCharAbility = true;
-            tempPA = LocalUserInfo.Me.ClientCharacter.GetCharAbility(data["ability"].Value);
+            bool isCharAbility = false;
+            Ability tempPA = actor.GetPrimaryAbility(data["ability"].Value);
+            if (tempPA == null)
+            {
+                isCharAbility = true;
+                tempPA = actor.GetCharAbility(data["ability"].Value);
+            }
+
+            tempPA.LVL = data["lvl"].AsInt;
+            tempPA.Points = data["points"].AsInt;
+
+            if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
+            {
+                InGameMainMenuUI.Instance.RefreshSpellArea();
+            }
+
+            if (isCharAbility)
+            {
+                InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(actor.UnspentCharPerkPoints);
+            } 
+            else 
+            {
+                InGameMainMenuUI.Instance.UpdateUpgradeCounter(actor.UnspentPerkPoints);
+            }
+
+            InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+            InGameMainMenuUI.Instance.RefreshPALevel(false);
+        }
+        else
+        {
+            AudioControl.Instance.Play("sound_reward2");
         }
 
-        tempPA.LVL = data["lvl"].AsInt;
-        tempPA.Points = data["points"].AsInt;
-
-
-        if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
-        {
-            InGameMainMenuUI.Instance.RefreshSpellArea();
+        if (!isCharTalent) {
+            actor.Instance.MasteryUp();
         }
-
-        if (isCharAbility)
-        {
-            InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentCharPerkPoints);
-        } 
-        else 
-        {
-            LocalUserInfo.Me.ClientCharacter.Instance.MasteryUp();
-            InGameMainMenuUI.Instance.UpdateUpgradeCounter(LocalUserInfo.Me.ClientCharacter.UnspentPerkPoints);
-        }
-
-        InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
-        InGameMainMenuUI.Instance.RefreshPALevel(false);
     }
 
     private void OnAbilityChoosePerk(Socket socket, Packet packet, object[] args)

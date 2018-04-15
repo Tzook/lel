@@ -775,6 +775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alpha: 0
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114349626810444796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -877,6 +878,7 @@ MonoBehaviour:
     Type: 0
     CurrentHealth: 0
     MaxHealth: 0
+    isBoss: 0
   Rigid: {fileID: 50709917905652878}
   Body: {fileID: 4243034284523108}
   Anim: {fileID: 95111160372522502}
@@ -905,6 +907,7 @@ MonoBehaviour:
   IdleVarriations: 0
   VarriationChance: 3
   m_HealthBar: {fileID: 0}
+  SpellSource: {fileID: 0}
   SpellInCast:
     Key: 
     Level: 0
@@ -913,12 +916,16 @@ MonoBehaviour:
     Perks: []
     Icon: {fileID: 0}
     HitSound: 
+    hitTypeEnumState: 0
+    hitTargetEnumState: 0
+    attackTypeEnumState: 0
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 3
   MaxChaseDistance: 200
   Collider: {fileID: 61328571468209710}
+  Stunnable: 1
   JumpForce: 500
   GroundedThreshold: 0.3
 --- !u!114 &114816472784047672

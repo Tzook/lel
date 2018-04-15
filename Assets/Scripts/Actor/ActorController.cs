@@ -695,7 +695,6 @@ public class ActorController : MonoBehaviour
         }
 
 
-
         if (actionKey == "spell")
         {
             SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);

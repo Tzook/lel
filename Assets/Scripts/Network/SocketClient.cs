@@ -1873,6 +1873,8 @@ public class SocketClient : MonoBehaviour
             node["target_ids"][i] = targetIDs[i];
         }
 
+        Debug.Log(node);
+
         CurrentSocket.Emit("hit_spell", node);
     }
 

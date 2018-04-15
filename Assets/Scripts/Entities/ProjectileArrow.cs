@@ -32,7 +32,7 @@ public class ProjectileArrow : ActorDamageInstance {
 
     public bool TriggerHit;
 
-    private HitBox CurrentHitbox;
+    private GameObject CurrentObject;
     private float CurrentMaxFlightTime;
 
     public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit, uint attackIdCounter, float speed = 15f)
@@ -74,58 +74,104 @@ public class ProjectileArrow : ActorDamageInstance {
     {
         if (InFlight)
         {
-            m_Particles.Stop();
-            InFlight = false;
+            bool TargetHit = false;
+            string TargetTag = "Enemy";
+
+            if (ActionKey == "spell")
+            {
+                TargetTag = Content.Instance.GetPlayerSpell(ActionValue).hitTargetEnumState.ToString();
+            }
+            else
+            {
+                TargetTag = CurrentAbility.hitTargetEnumState.ToString();
+            }
+
+
+            
+
 
             if (TargetCollider.tag == "Enemy")
             {
-                CurrentHitbox = TargetCollider.GetComponent<HitBox>();
-
-                if (TriggerHit)
+                if (TargetTag == TargetCollider.tag)
                 {
-                    HandleCollision(TargetCollider);
-                    //List<string> tempList = new List<string>();
-                    //tempList.Add(TargetCollider.GetComponent<HitBox>().EnemyReference.Info.ID);
-                    //SocketClient.Instance.SendUsedPrimaryAbility(tempList, (uint)AttackIdCounter);
+                    TargetHit = true;
+                    CurrentObject = TargetCollider.gameObject;
+
+                    if (TriggerHit)
+                    {
+
+                        HandleCollision(TargetCollider);
+                    }
                 }
+            }
+            else if (TargetCollider.tag == "Actor")
+            {
+                if (TargetTag == TargetCollider.tag && TargetCollider.GetComponent<ActorInstance>() != ParentActor)
+                {
+                    TargetHit = true;
+                    if (TriggerHit)
+                    {
+
+                        HandleCollision(TargetCollider);
+                    }
+                }
+
             }
             else if (TargetCollider.tag == "HitEntity")
             {
                 TargetCollider.GetComponent<HittableEntity>().Hurt(ActionKey);
+                TargetHit = true;
             }
             else
             {
+                TargetHit = true;
                 if (m_Anim != null)
                 {
                     m_Anim.SetTrigger("Bounce");
                 }
             }
 
-            if(!string.IsNullOrEmpty(ImpactEffect))
+            if(TargetHit)
             {
-                GameObject impactEffect = ResourcesLoader.Instance.GetRecycledObject(ImpactEffect);
-                impactEffect.transform.position = transform.position;
-                impactEffect.transform.right = ParentActor.transform.position - transform.position;
-                impactEffect.transform.SetParent(TargetCollider.transform, true);
-                impactEffect.transform.localScale = Vector3.one;
+                HitObject(TargetCollider);
+            }
+        }
+    }
+
+    void HitObject(Collider2D TargetCollider)
+    {
+
+        m_Particles.Stop();
+        InFlight = false;
+
+        if (!string.IsNullOrEmpty(ImpactEffect))
+        {
+            GameObject impactEffect = ResourcesLoader.Instance.GetRecycledObject(ImpactEffect);
+            impactEffect.transform.position = transform.position;
+            impactEffect.transform.right = ParentActor.transform.position - transform.position;
+            impactEffect.transform.SetParent(TargetCollider.transform, true);
+            impactEffect.transform.localScale = Vector3.one;
+        }
+
+        if (ProjectileStayAfterHit)
+        {
+            if (TargetCollider.gameObject.activeInHierarchy)
+            {
+                transform.SetParent(TargetCollider.transform, true);
             }
 
-            if (ProjectileStayAfterHit)
+            if (this.gameObject.activeInHierarchy)
             {
-                if (TargetCollider.gameObject.activeInHierarchy)
-                {
-                    transform.SetParent(TargetCollider.transform, true);
-                }
-
-                if (this.gameObject.activeInHierarchy)
-                {
-                    StartCoroutine(DeathRoutine());
-                }
+                StartCoroutine(DeathRoutine());
             }
             else
             {
                 Shut();
             }
+        }
+        else
+        {
+            Shut();
         }
     }
 
@@ -149,7 +195,7 @@ public class ProjectileArrow : ActorDamageInstance {
         {
             tempTime -= 1f * Time.deltaTime;
 
-            if (transform.parent == null || !transform.parent.gameObject.activeInHierarchy || (CurrentHitbox != null && CurrentHitbox.EnemyReference.Dead))
+            if (transform.parent == null || !transform.parent.gameObject.activeInHierarchy || (CurrentObject.GetComponent<Enemy>() != null && CurrentObject.GetComponent<Enemy>().Dead))
             {
                 
                 break;

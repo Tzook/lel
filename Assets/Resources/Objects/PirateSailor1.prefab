@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alpha: 0
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114290986883505912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,6 +561,7 @@ MonoBehaviour:
     Type: 0
     CurrentHealth: 0
     MaxHealth: 0
+    isBoss: 0
   Rigid: {fileID: 50968865174185854}
   Body: {fileID: 4971326877124464}
   Anim: {fileID: 95901119767834662}
@@ -591,8 +593,9 @@ MonoBehaviour:
     Perks: []
     Icon: {fileID: 0}
     HitSound: 
-    MinTime: 0
-    MaxTime: 0
+    hitTypeEnumState: 0
+    hitTargetEnumState: 0
+    attackTypeEnumState: 0
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0

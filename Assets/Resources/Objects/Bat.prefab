@@ -350,6 +350,7 @@ MonoBehaviour:
     Type: 0
     CurrentHealth: 0
     MaxHealth: 0
+    isBoss: 0
   Rigid: {fileID: 50648170035685400}
   Body: {fileID: 4801578033039884}
   Anim: {fileID: 95015140318171722}
@@ -366,14 +367,28 @@ MonoBehaviour:
   - sound_punch
   DeathSounds:
   - brap
+  IdleVarriations: 0
+  VarriationChance: 3
   m_HealthBar: {fileID: 0}
+  SpellSource: {fileID: 0}
+  SpellInCast:
+    Key: 
+    Level: 0
+    Mana: 0
+    ColliderPrefab: 
+    Perks: []
+    Icon: {fileID: 0}
+    HitSound: 
+    hitTypeEnumState: 0
+    hitTargetEnumState: 0
+    attackTypeEnumState: 0
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0
   MovementSpeed: 2
   MaxChaseDistance: 100
   Collider: {fileID: 61354798262038202}
-  PatrolPointRadius: 5
+  SpawnerPatrolRadius: 5
 --- !u!114 &114585449759379878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alpha: 0
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!210 &210265353196517862
 SortingGroup:
   m_ObjectHideFlags: 1
@@ -418,6 +434,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -433,6 +450,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -449,6 +467,8 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212598516155066950
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -458,6 +478,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -473,6 +494,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -489,6 +511,8 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212796524779689646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -498,6 +522,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -513,6 +538,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -529,6 +555,8 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212972607408065304
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -538,6 +566,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -553,6 +582,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -569,3 +599,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

@@ -71,9 +71,22 @@ public class ActorDamageInstance : MonoBehaviour {
 
     public virtual void HandleCollision(Collider2D TargetCollider)
     {
+        
         if (!Hit)
         {
-            if (CurrentAbility != null && TargetCollider.tag == CurrentAbility.hitTargetEnumState.ToString())
+            string TargetTag = "Enemy";
+
+            if (ActionKey == "spell")
+            {
+                TargetTag = Content.Instance.GetPlayerSpell(ActionValue).hitTargetEnumState.ToString();
+            }
+            else
+            {
+                TargetTag = CurrentAbility.hitTargetEnumState.ToString();
+            }
+
+
+            if (TargetTag == TargetCollider.tag.ToString())
             {
                 if (TargetCollider.tag == "Enemy")
                 {
@@ -99,6 +112,7 @@ public class ActorDamageInstance : MonoBehaviour {
                 }
                 else if (TargetCollider.tag == "Actor" && TargetCollider.GetComponent<ActorInstance>().Info.ID != LocalUserInfo.Me.ClientCharacter.ID)
                 {
+                    
                     List<ActorInstance> sentTargets = new List<ActorInstance>();
 
                     collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size * 2f, 0f);

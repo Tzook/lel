@@ -276,7 +276,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244727519613822}
-  m_LocalRotation: {x: -0, y: -0, z: -0.5925306, w: 0.8055479}
+  m_LocalRotation: {x: -0, y: -0, z: -0.59253067, w: 0.80554795}
   m_LocalPosition: {x: 0.62, y: -1.23, z: 0}
   m_LocalScale: {x: 1.8917614, y: 1.891761, z: 1.891761}
   m_Children: []
@@ -535,6 +535,7 @@ MonoBehaviour:
     Type: 0
     CurrentHealth: 0
     MaxHealth: 0
+    isBoss: 0
   Rigid: {fileID: 50871213572302104}
   Body: {fileID: 4317562404245962}
   Anim: {fileID: 95902546746323550}
@@ -566,8 +567,9 @@ MonoBehaviour:
     Perks: []
     Icon: {fileID: 0}
     HitSound: 
-    MinTime: 0
-    MaxTime: 0
+    hitTypeEnumState: 0
+    hitTargetEnumState: 0
+    attackTypeEnumState: 0
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0
@@ -589,6 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alpha: 0
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114916487195764928
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 114000013165719932}
   - component: {fileID: 210363410653082890}
   - component: {fileID: 114160969213725488}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: actor_male
   m_TagString: Actor
   m_Icon: {fileID: 0}
@@ -1724,11 +1724,13 @@ MonoBehaviour:
   LeftSlope: 0
   RightSlope: 0
   isAiming: 0
+  isMoving: 0
   GroundedThreshold: 0.15
   InternalSpeed: 3.5
   InternalClimbSpeed: 1.5
   InternalJumpForce: 5
   JumpDelay: 0.05
+  Invincible: 0
   CollidingEnemy: {fileID: 0}
 --- !u!114 &114000012593538560
 MonoBehaviour:
@@ -1876,6 +1878,7 @@ MonoBehaviour:
   ParentActor: {fileID: 114000011670647216}
   ActionKey: 
   ActionValue: 
+  DecayTime: 0.1
   m_Collider: {fileID: 0}
 --- !u!198 &198488466002155018
 ParticleSystem:

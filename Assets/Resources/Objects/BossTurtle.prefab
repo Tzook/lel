@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alpha: 0
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114698040101727452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -513,6 +514,7 @@ MonoBehaviour:
     Type: 1
     CurrentHealth: 0
     MaxHealth: 0
+    isBoss: 0
   Rigid: {fileID: 50979908924853736}
   Body: {fileID: 4877376725912452}
   Anim: {fileID: 95217017247389096}
@@ -537,6 +539,7 @@ MonoBehaviour:
   IdleVarriations: 0
   VarriationChance: 3
   m_HealthBar: {fileID: 0}
+  SpellSource: {fileID: 0}
   SpellInCast:
     Key: 
     Level: 0
@@ -545,6 +548,9 @@ MonoBehaviour:
     Perks: []
     Icon: {fileID: 0}
     HitSound: 
+    hitTypeEnumState: 0
+    hitTargetEnumState: 0
+    attackTypeEnumState: 0
   CurrentTarget: {fileID: 0}
   Dead: 0
   CurrentAction: 0

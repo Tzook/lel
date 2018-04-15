@@ -28,6 +28,9 @@ public class ProjectileArrow : ActorDamageInstance {
     [SerializeField]
     bool ProjectileStayAfterHit;
 
+    [SerializeField]
+    bool Physics = false;
+
     public bool InFlight = false;
 
     public bool TriggerHit;
@@ -35,7 +38,9 @@ public class ProjectileArrow : ActorDamageInstance {
     private GameObject CurrentObject;
     private float CurrentMaxFlightTime;
 
-    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit, uint attackIdCounter, float speed = 15f)
+    float ChargeValue = 1f;
+
+    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit ,uint attackIdCounter, float chargeValue = 1f, float speed = 15f)
     {
         base.SetInfo(parent ,actionKey ,actionValue , attackIdCounter);
 
@@ -46,6 +51,8 @@ public class ProjectileArrow : ActorDamageInstance {
 
         InFlight = true;
         m_Particles.Play();
+
+        ChargeValue = chargeValue;
 
         if (Trail != null)
         {
@@ -95,7 +102,6 @@ public class ProjectileArrow : ActorDamageInstance {
                 if (TargetTag == TargetCollider.tag)
                 {
                     TargetHit = true;
-                    CurrentObject = TargetCollider.gameObject;
 
                     if (TriggerHit)
                     {
@@ -109,6 +115,7 @@ public class ProjectileArrow : ActorDamageInstance {
                 if (TargetTag == TargetCollider.tag && TargetCollider.GetComponent<ActorInstance>() != ParentActor)
                 {
                     TargetHit = true;
+
                     if (TriggerHit)
                     {
 
@@ -143,6 +150,7 @@ public class ProjectileArrow : ActorDamageInstance {
 
         m_Particles.Stop();
         InFlight = false;
+        CurrentObject = TargetCollider.gameObject;
 
         if (!string.IsNullOrEmpty(ImpactEffect))
         {
@@ -181,6 +189,22 @@ public class ProjectileArrow : ActorDamageInstance {
 
     protected override void Update()
     {
+        if (Physics && InFlight)
+        {
+            //if (ChargeValue < 1f)
+            //{
+                if (ChargeValue > 0f)
+                {
+                    ChargeValue -= 1f * Time.deltaTime;
+
+
+                }
+                else
+                {
+                    transform.Rotate(ParentActor.TorsoBone.localScale.x * transform.forward * -50f * Time.deltaTime);
+                }
+            //}
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D TargetCollider)
@@ -195,7 +219,7 @@ public class ProjectileArrow : ActorDamageInstance {
         {
             tempTime -= 1f * Time.deltaTime;
 
-            if (transform.parent == null || !transform.parent.gameObject.activeInHierarchy || (CurrentObject.GetComponent<Enemy>() != null && CurrentObject.GetComponent<Enemy>().Dead))
+            if (transform.parent == null || !transform.parent.gameObject.activeInHierarchy || !CurrentObject.activeInHierarchy ||  (CurrentObject.GetComponent<Enemy>() != null && CurrentObject.GetComponent<Enemy>().Dead))
             {
                 
                 break;

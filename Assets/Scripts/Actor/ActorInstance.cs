@@ -543,7 +543,7 @@ public class ActorInstance : MonoBehaviour
         }
 
         projectile.transform.rotation = LastFireRot;
-        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer, attackIdCounter );
+        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer ,attackIdCounter ,ChargeValue);
     }
 
     public void CastSpell(DevSpell spell)

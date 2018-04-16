@@ -131,4 +131,39 @@ public class AnimationAssist : MonoBehaviour {
     {
         Controller.Instance.BackwardLeftHand();
     }
+
+    public void ResetTriggers()
+    {
+        for (int i = 0; i < m_Anim.parameterCount; i++)
+        {
+            if(m_Anim.parameters[i].type == AnimatorControllerParameterType.Trigger)
+            {
+                m_Anim.ResetTrigger(m_Anim.parameters[i].name);
+            }
+        }
+    }
+
+    public void ResetBools()
+    {
+        for (int i = 0; i < m_Anim.parameterCount; i++)
+        {
+            if (m_Anim.parameters[i].type == AnimatorControllerParameterType.Bool)
+            {
+                m_Anim.SetBool(m_Anim.parameters[i].name, false);
+            }
+        }
+    }
+
+    public void ResetParameters()
+    {
+        ResetTriggers();
+        ResetBools();
+    }
+
+    public void ResetSpellParameters()
+    {
+        ResetTriggers();
+
+        m_Anim.SetBool("CastingSpell", false);
+    }
 }

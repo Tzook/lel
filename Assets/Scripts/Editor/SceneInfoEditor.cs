@@ -77,6 +77,7 @@ public class SceneInfoEditor : Editor {
                 {
                     node["scene"]["NPC"][i]["teleportRooms"][d]["room"] = currentInfo.Npcs[i].TeleportableScenes[d].sceneKey;
                     node["scene"]["NPC"][i]["teleportRooms"][d]["portal"] = currentInfo.Npcs[i].TeleportableScenes[d].portalKey;
+                    node["scene"]["NPC"][i]["teleportRooms"][d]["party"].AsBool = currentInfo.Npcs[i].TeleportableScenes[d].allowParty;
                 }
             }
 

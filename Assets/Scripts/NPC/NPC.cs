@@ -327,4 +327,5 @@ public class TeleportableScene
 {
     public string sceneKey;
     public string portalKey;
+    public bool allowParty;
 }

@@ -13,9 +13,9 @@ public class SplineFloatEffect : MonoBehaviour {
     [SerializeField]
     string EndSoundKey;
 
-    public void Launch(Transform from, Transform to, float speed = 1f, float height = 3f)
+    public Coroutine Launch(Transform from, Transform to, float speed = 1f, float height = 3f)
     {
-        StartCoroutine(LaunchRoutine(from, to, speed, height));
+        return StartCoroutine(LaunchRoutine(from, to, speed, height));
     }
 
     public IEnumerator LaunchRoutine(Transform from, Transform to, float speed = 1f, float height = 3f)

@@ -105,7 +105,7 @@ public class SpellAreaUI : MonoBehaviour
     {
         GameObject tempBlob = ResourcesLoader.Instance.GetRecycledObject("PowerBlobEffect");
 
-        yield return tempBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, targetTransform, 1f, Random.Range(-3f, 3f));
+        yield return tempBlob.GetComponent<SplineFloatEffect>().Launch(LocalUserInfo.Me.ClientCharacter.Instance.transform, targetTransform, 1f, Random.Range(-3f, 3f));
     }
 
     public SpellBoxUI GetSpellBox(DevSpell withSpell)

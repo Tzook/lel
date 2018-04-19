@@ -15,7 +15,7 @@ class ResolutionEnforcer : UIBehaviour
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
-    void Destroy()
+    override protected void OnDestroy()
     {
         // cleanup
         SceneManager.activeSceneChanged -= OnSceneChanged;
@@ -25,7 +25,7 @@ class ResolutionEnforcer : UIBehaviour
     override protected void OnRectTransformDimensionsChange()
     {
         // limit the resize event since it gets called many times
-        if (ThrottledEnforceCoroutine == null)
+        if (ThrottledEnforceCoroutine == null && gameObject.activeInHierarchy)
         {
             ThrottledEnforceCoroutine = StartCoroutine(ThrottledEnforce());
         }

@@ -825,9 +825,12 @@ public class ActorController : MonoBehaviour
 
     public void BeginLoadAttack()
     {
-        LoadAttackValueInstance = StartCoroutine(LoadAttackValueRoutine());
-        SocketClient.Instance.SendLoadedAttack();
-        InGameMainMenuUI.Instance.StartChargingAttack();
+        if (CanDoAction())
+        {
+            LoadAttackValueInstance = StartCoroutine(LoadAttackValueRoutine());
+            SocketClient.Instance.SendLoadedAttack();
+            InGameMainMenuUI.Instance.StartChargingAttack();
+        }
     }
 
     private IEnumerator LoadAttackValueRoutine()

@@ -212,7 +212,11 @@ public class SocketClient : MonoBehaviour
 
         JSONNode data = (JSONNode)args[0];
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat, data["velocity"].AsFloat);
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
+        if (actorInfo != null)
+        {
+            actorInfo.Instance.GetComponent<ActorMovement>().UpdateMovement(new Vector3(data["x"].AsFloat, data["y"].AsFloat, data["z"].AsFloat), data["angle"].AsFloat, data["velocity"].AsFloat);
+        }
     }
 
     protected void OnActorStartClimbing(Socket socket, Packet packet, object[] args)
@@ -221,7 +225,11 @@ public class SocketClient : MonoBehaviour
 
         //BroadcastEvent(data["id"].Value + " started climbing");
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().StartClimbing();
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
+        if (actorInfo != null)
+        {
+            actorInfo.Instance.GetComponent<ActorMovement>().StartClimbing();
+        }
 
     }
 
@@ -231,7 +239,11 @@ public class SocketClient : MonoBehaviour
 
         //BroadcastEvent(data["id"].Value + " started climbing");
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.GetComponent<ActorMovement>().StopClimbing();
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
+        if (actorInfo != null)
+        {
+            actorInfo.Instance.GetComponent<ActorMovement>().StopClimbing();
+        }
 
     }
 
@@ -342,7 +354,11 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent(data["id"].Value + " picked the item "+ data["item_id"].Value);
 
-        Game.Instance.CurrentScene.GetActor(data["id"]).Instance.PickUpItem(data["item_id"]);
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"]);
+        if (actorInfo != null)
+        {
+            actorInfo.Instance.PickUpItem(data["item_id"]);
+        }
     }
 
     protected void OnActorMoveItem(Socket socket, Packet packet, object[] args)
@@ -686,17 +702,18 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Has Died");
 
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-
-
-        if (actor == LocalUserInfo.Me.ClientCharacter)
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        if (actorInfo != null)
         {
-            actor.Instance.GetComponent<ActorController>().Death();
-            InGameMainMenuUI.Instance.ShowDeathWindow();
-        }
-        else
-        {
-            actor.Instance.Death();
+            if (actorInfo == LocalUserInfo.Me.ClientCharacter)
+            {
+                actorInfo.Instance.GetComponent<ActorController>().Death();
+                InGameMainMenuUI.Instance.ShowDeathWindow();
+            }
+            else
+            {
+                actorInfo.Instance.Death();
+            }
         }
     }
 
@@ -712,42 +729,42 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode data = (JSONNode)args[0];
 
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-
-        BroadcastEvent(actor.Name + " Loads Attack");
-
-        actor.Instance.LoadAttack();
+        if (actorInfo != null)
+        {
+            BroadcastEvent(actorInfo.Name + " Loads Attack");
+            actorInfo.Instance.LoadAttack();
+        }
     }
 
     protected void OnActorPreformAttack(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        if (actorInfo != null)
+        {
+            BroadcastEvent(actorInfo.Name + " Preforms Attack");
 
-        BroadcastEvent(actor.Name + " Preforms Attack");
-
-        float load = (1f * data["load"].AsInt) / 100f;
-        actor.Instance.PreformAttack(load);
-        actor.Instance.MovementController.ActivatePrimaryAbility(load);
-
+            float load = (1f * data["load"].AsInt) / 100f;
+            actorInfo.Instance.PreformAttack(load);
+            actorInfo.Instance.MovementController.ActivatePrimaryAbility(load);
+        }
     }
 
     protected void OnActorChangeAbility(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
 
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
 
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-
-        BroadcastEvent(actor.Name + " Changed ability Attack");
-
-        actor.SetPrimaryAbility(data["ability"].Value);
-
-        
-
+        if (actorInfo != null)
+        {
+            BroadcastEvent(actorInfo.Name + " Changed ability Attack");
+            actorInfo.SetPrimaryAbility(data["ability"].Value);
+        }
     }
 
     private void OnMobMovement(Socket socket, Packet packet, object[] args)
@@ -759,7 +776,10 @@ public class SocketClient : MonoBehaviour
         //TODO Just update each mob in the array instead...
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat, data["velocity"].AsFloat);
+        if (monster != null)
+        {
+            monster.UpdateMovement(data["x"].AsFloat, data["y"].AsFloat, data["velocity"].AsFloat);
+        }
 
         // Debug.Log(data.ToString());
 
@@ -772,9 +792,12 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["mob_id"].Value + " Blocked DMG from " + data["id"].Value);
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
         
-        monster.Hurt(attackingPlayer, 0, data["hp"].AsInt);
+        if (actorInfo != null && monster != null)
+        {
+            monster.Hurt(actorInfo.Instance, 0, data["hp"].AsInt);
+        }
     }
 
     private void OnAggro(Socket socket, Packet packet, object[] args)
@@ -785,15 +808,20 @@ public class SocketClient : MonoBehaviour
         
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        if (String.IsNullOrEmpty(data["id"].Value))
+        if (monster != null)
         {
-            monster.SetTarget(null);
-        }
-        else
-        {
-            ActorInstance actor = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
-            monster.SetTarget(actor);
-
+            if (String.IsNullOrEmpty(data["id"].Value))
+            {
+                monster.SetTarget(null);
+            }
+            else
+            {
+                ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+                if (actorInfo != null)
+                {
+                    monster.SetTarget(actorInfo.Instance);
+                }
+            }
         }
     }
 
@@ -804,9 +832,11 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["mob_id"].Value + " Took " + data["dmg"].AsInt + " DMG from " + data["id"].Value);
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
-        
-        monster.Hurt(attackingPlayer, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value, data["crit"].AsBool);
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        if (actorInfo != null && monster != null) 
+        {
+            monster.Hurt(actorInfo.Instance, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value, data["crit"].AsBool);
+        }
     }
 
     private void OnMobTakeMiss(Socket socket, Packet packet, object[] args)
@@ -816,9 +846,11 @@ public class SocketClient : MonoBehaviour
         BroadcastEvent(data["mob_id"].Value + " Took Miss from " + data["id"].Value);
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-        ActorInstance attackingPlayer = Game.Instance.CurrentScene.GetActor(data["id"].Value).Instance;
-        
-        monster.Miss(attackingPlayer, data["cause"].Value);
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        if (actorInfo != null && monster != null) 
+        {
+            monster.Miss(actorInfo.Instance, data["cause"].Value);
+        }
     }
 
     private void OnMobDeath(Socket socket, Packet packet, object[] args)
@@ -829,7 +861,10 @@ public class SocketClient : MonoBehaviour
 
         Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        monster.gameObject.GetComponent<Enemy>().Death();
+        if (monster != null)
+        {
+            monster.gameObject.GetComponent<Enemy>().Death();
+        }
     }
 
     private void OnMobSpawn(Socket socket, Packet packet, object[] args)
@@ -1047,7 +1082,7 @@ public class SocketClient : MonoBehaviour
                 for(int i=0;i<LocalUserInfo.Me.CurrentParty.Members.Count;i++)
                 {
                     otherActor = Game.Instance.CurrentScene.GetActorByName(LocalUserInfo.Me.CurrentParty.Members[i]);
-                    if (otherActor.ID != LocalUserInfo.Me.ClientCharacter.ID)
+                    if (otherActor != null && otherActor.ID != LocalUserInfo.Me.ClientCharacter.ID)
                     {
                         otherActor.Instance.MovementController.ShowHealth();
                     }
@@ -1205,43 +1240,46 @@ public class SocketClient : MonoBehaviour
         bool isCharTalent = data["ability"].Value == "charTalent";
         
         ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-        if (actor == LocalUserInfo.Me.ClientCharacter) 
+        if (actor != null)
         {
-            bool isCharAbility = false;
-            Ability tempPA = actor.GetPrimaryAbility(data["ability"].Value);
-            if (tempPA == null)
+            if (actor == LocalUserInfo.Me.ClientCharacter) 
             {
-                isCharAbility = true;
-                tempPA = actor.GetCharAbility(data["ability"].Value);
+                bool isCharAbility = false;
+                Ability tempPA = actor.GetPrimaryAbility(data["ability"].Value);
+                if (tempPA == null)
+                {
+                    isCharAbility = true;
+                    tempPA = actor.GetCharAbility(data["ability"].Value);
+                }
+
+                tempPA.LVL = data["lvl"].AsInt;
+                tempPA.Points = data["points"].AsInt;
+
+                if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
+                {
+                    InGameMainMenuUI.Instance.RefreshSpellArea();
+                }
+
+                if (isCharAbility)
+                {
+                    InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(actor.UnspentCharPerkPoints);
+                } 
+                else 
+                {
+                    InGameMainMenuUI.Instance.UpdateUpgradeCounter(actor.UnspentPerkPoints);
+                }
+
+                InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
+                InGameMainMenuUI.Instance.RefreshPALevel(false);
+            }
+            else
+            {
+                AudioControl.Instance.Play("sound_reward2");
             }
 
-            tempPA.LVL = data["lvl"].AsInt;
-            tempPA.Points = data["points"].AsInt;
-
-            if(Content.Instance.GetSpellAtLevel(tempPA.LVL) != null)
-            {
-                InGameMainMenuUI.Instance.RefreshSpellArea();
+            if (!isCharTalent) {
+                actor.Instance.MasteryUp();
             }
-
-            if (isCharAbility)
-            {
-                InGameMainMenuUI.Instance.UpdateCharUpgradeCounter(actor.UnspentCharPerkPoints);
-            } 
-            else 
-            {
-                InGameMainMenuUI.Instance.UpdateUpgradeCounter(actor.UnspentPerkPoints);
-            }
-
-            InGameMainMenuUI.Instance.RefreshPrimaryAbilitiesWindow();
-            InGameMainMenuUI.Instance.RefreshPALevel(false);
-        }
-        else
-        {
-            AudioControl.Instance.Play("sound_reward2");
-        }
-
-        if (!isCharTalent) {
-            actor.Instance.MasteryUp();
         }
     }
 

@@ -60,7 +60,7 @@ public class MiniMapUI : MonoBehaviour
         return percentPosition;
     }
 
-    public void Destroy()
+    public void OnDestroy()
     {
         // cleanup
         SceneManager.activeSceneChanged -= OnSceneChanged;

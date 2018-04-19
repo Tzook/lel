@@ -98,7 +98,7 @@ public class UpgradeCounterUI : MonoBehaviour {
 
         UpgradeBlob.GetComponent<TrailRenderer>().Clear();
 
-        yield return UpgradeBlob.GetComponent<SplineFloatEffect>().LaunchRoutine(LocalUserInfo.Me.ClientCharacter.Instance.transform, transform, 1f, Random.Range(-3f, 3f));
+        yield return UpgradeBlob.GetComponent<SplineFloatEffect>().Launch(LocalUserInfo.Me.ClientCharacter.Instance.transform, transform, 1f, Random.Range(-3f, 3f));
         UpgradeBlob = null;
 
         BurstParticles.Play();

@@ -36,7 +36,16 @@ public class VendorPanelUI : MonoBehaviour {
         ReferenceItem = Content.Instance.GetItem(key);
         CurrentItem = new ItemInfo(ReferenceItem, ReferenceItem.Perks, 1);
 
-        if(LocalUserInfo.Me.ClientCharacter.Gold < ReferenceItem.GoldValue)
+        SetPurchaseButton(LocalUserInfo.Me.ClientCharacter.Gold);
+
+        PriceText.text = ReferenceItem.GoldValue.ToString();
+
+        m_ItemInfoUI.Show(CurrentItem);
+    }
+
+    protected void SetPurchaseButton(int gold)
+    {
+        if (gold < ReferenceItem.GoldValue)
         {
             BuyImage.color = CantBuyColor;
             BuyImage.GetComponent<Button>().interactable = false;
@@ -46,10 +55,6 @@ public class VendorPanelUI : MonoBehaviour {
             BuyImage.color = DefaultColor;
             BuyImage.GetComponent<Button>().interactable = true;
         }
-
-        PriceText.text = ReferenceItem.GoldValue.ToString();
-
-        m_ItemInfoUI.Show(CurrentItem);
     }
 
     public void Hide()
@@ -62,6 +67,6 @@ public class VendorPanelUI : MonoBehaviour {
         AudioControl.Instance.Play("sound_purchase");
 
         SocketClient.Instance.SendBuyVendorItem(CurrentVendor.Key, CurrentVendor.GetItemIndex(CurrentItem.Key));
-        LocalUserInfo.Me.ClientCharacter.Gold -= ReferenceItem.GoldValue;
+        SetPurchaseButton(LocalUserInfo.Me.ClientCharacter.Gold - ReferenceItem.GoldValue);
     }
 }

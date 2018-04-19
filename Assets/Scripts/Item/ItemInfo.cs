@@ -23,6 +23,8 @@ public class ItemInfo {
 
     public Dictionary<string, string> Sprites = new Dictionary<string, string>();
 
+    public UseItemInfo UseInfo;
+
     public ItemInfo(DevItemInfo storedItem, List<DevPerkMap> perks, int stack = 1)
     {
         try
@@ -42,6 +44,7 @@ public class ItemInfo {
             this.Type = storedItem.Type;
             this.SubType = storedItem.SubType;
             this.StackCap = storedItem.StackCap;
+            this.UseInfo = storedItem.UseInfo;
 
             this.Stats = storedItem.Stats.Clone();
             this.Perks = perks;

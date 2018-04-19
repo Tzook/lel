@@ -77,7 +77,7 @@ public class ItemInfoUI : MonoBehaviour {
             StopCoroutine(FollowMouseRoutine);
         }
 
-        SetStats(info.Stats, info.Perks);
+        SetStats(info);
 
         if (isFollowingMouse)
         {
@@ -97,31 +97,31 @@ public class ItemInfoUI : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
-    public void SetStats(ItemStats stats, List<DevPerkMap> Perks)
+    public void SetStats(ItemInfo itemInfo)
     {
         ItemStatUI statsInfoObject;
 
-        if (stats.JumpBonus > 0)
+        if (itemInfo.Stats.JumpBonus > 0)
         {
             statsInfoObject = GetStatsInfoObject();
-            statsInfoObject.SetInfo("+" + stats.JumpBonus + " Jumping Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+            statsInfoObject.SetInfo("+" + itemInfo.Stats.JumpBonus + " Jumping Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
         }
 
-        if (stats.SpeedBonus > 0)
+        if (itemInfo.Stats.SpeedBonus > 0)
         {
             statsInfoObject = GetStatsInfoObject();
-            statsInfoObject.SetInfo("+" + stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
+            statsInfoObject.SetInfo("+" + itemInfo.Stats.SpeedBonus + " Speed Bonus", ResourcesLoader.Instance.GetSprite("fx_hit01"), bonusColor);
         }
 
-        if (stats.RequiresLVL > 0)
+        if (itemInfo.Stats.RequiresLVL > 0)
         {
             statsInfoObject = GetStatsInfoObject();
             statsInfoObject.transform.localScale = Vector3.one;
-            Color minLevelColor = stats.RequiresLVL > LocalUserInfo.Me.ClientCharacter.LVL ? requiredColor : bonusColor;
-            statsInfoObject.SetInfo("Minimum Level " + stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), minLevelColor);
+            Color minLevelColor = itemInfo.Stats.RequiresLVL > LocalUserInfo.Me.ClientCharacter.LVL ? requiredColor : bonusColor;
+            statsInfoObject.SetInfo("Minimum Level " + itemInfo.Stats.RequiresLVL, ResourcesLoader.Instance.GetSprite("fx_hit_small"), minLevelColor);
         }
 
-        foreach (DevPerkMap perkMap in Perks)
+        foreach (DevPerkMap perkMap in itemInfo.Perks)
         {
             statsInfoObject = GetStatsInfoObject();
             DevPAPerk perkRef = Content.Instance.GetPerk(perkMap.Key);
@@ -130,6 +130,17 @@ public class ItemInfoUI : MonoBehaviour {
             bool isGoodPerk = perkRef.PrecentPerUpgrade > 0 ? perkMap.Value > 0 : perkMap.Value < 0;
             Color color = isGoodPerk ? bonusColor : requiredColor;
             statsInfoObject.SetInfo(perkText, perkRef.Icon, color);
+        }
+
+        if (itemInfo.UseInfo.BonusHP > 0)
+        {
+            statsInfoObject = GetStatsInfoObject();
+            statsInfoObject.SetInfo("+" + itemInfo.UseInfo.BonusHP + " HP", Content.Instance.GetPerk("hpBonus").Icon, bonusColor);
+        }
+        if (itemInfo.UseInfo.BonusMP > 0)
+        {
+            statsInfoObject = GetStatsInfoObject();
+            statsInfoObject.SetInfo("+" + itemInfo.UseInfo.BonusMP + " MP", Content.Instance.GetPerk("mpBonus").Icon, bonusColor);
         }
     }
 

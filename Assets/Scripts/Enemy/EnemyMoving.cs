@@ -50,7 +50,7 @@ public class EnemyMoving : Enemy
     }
     protected bool slowed;
 
-    protected void Awake()
+    void Awake()
     {
         OriginalMovementSpeed = MovementSpeed;
     }

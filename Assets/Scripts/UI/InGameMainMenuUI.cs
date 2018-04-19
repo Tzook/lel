@@ -185,17 +185,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                for (int wc = 0; wc < WindowsContainers.Count; wc++)
-                {
-                    for (int i = 0; i < WindowsContainers[wc].childCount; i++)
-                    {
-                        WindowsContainers[wc].GetChild(i).gameObject.SetActive(false);
-                    }
-                }
-
-                chatPanel.onDeselectChat();
-                StatsInfo.Hide();
-                itemInfoPanel.Hide();
+                CloseAllWindows();
             }
         }
         else
@@ -300,6 +290,21 @@ public class InGameMainMenuUI : MonoBehaviour {
                 TogglePrimaryAbilities();
             }
         }
+    }
+
+    public void CloseAllWindows()
+    {
+        for (int wc = 0; wc < WindowsContainers.Count; wc++)
+        {
+            for (int i = 0; i < WindowsContainers[wc].childCount; i++)
+            {
+                WindowsContainers[wc].GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        chatPanel.onDeselectChat();
+        StatsInfo.Hide();
+        itemInfoPanel.Hide();
     }
 
     public void Resume()

@@ -226,7 +226,7 @@ public class ActorController : MonoBehaviour
 
     private bool CanDoAction()
     {
-        return Game.Instance.CanUseUI && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal && CurrentSpellInCast == null && !Stunned;
+        return Game.Instance.CanUseUI && !Game.Instance.InChat && CurrentSpellInCast == null && !Stunned;
     }
 
     void LateUpdate()
@@ -468,6 +468,8 @@ public class ActorController : MonoBehaviour
         }
 
         Game.Instance.MovingTroughPortal = true;
+        InturruptAttack();
+        InGameMainMenuUI.Instance.CloseAllWindows();
         SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
         
     }
@@ -507,7 +509,7 @@ public class ActorController : MonoBehaviour
     {
         GameObject damageZone;
 
-        if(Instance.Info.Equipment.Weapon.SubType == "twohanded")
+        if(Instance.Info.Equipment.Weapon != null && Instance.Info.Equipment.Weapon.SubType == "twohanded")
         {
             damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_TwoHand");
         }
@@ -651,8 +653,6 @@ public class ActorController : MonoBehaviour
         {
             SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
 
-            int rnd = Random.Range(0, 3);
-
             GameObject tempHit;
             tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
@@ -698,8 +698,6 @@ public class ActorController : MonoBehaviour
         if (actionKey == "spell")
         {
             SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
-
-            int rnd = Random.Range(0, 3);
 
             GameObject tempHit;
             tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);

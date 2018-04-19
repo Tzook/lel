@@ -16,7 +16,6 @@ public class PopText : MonoBehaviour {
     [SerializeField]
     CanvasGroup CG;
 
-    float TimeAlive = 0f;
     public void Pop(string Content, Color clr, Color outlineClr = new Color(), string icon = "")
     {
         TextContent.text = Content;

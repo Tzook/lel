@@ -11,6 +11,7 @@
  */
 namespace dotBunny.Unity
 {
+    #pragma warning disable 0618 // the number of the warning
     using System;
     using System.IO;
     using System.Text.RegularExpressions;

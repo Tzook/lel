@@ -52,8 +52,26 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
         this.gameObject.SetActive(true);
 
         CurrentCharacter = Info;
+        
+        if (CharSpot.childCount > 0)
+        {
+            Destroy(CharSpot.GetChild(0).gameObject);
+        }
 
-        StartCoroutine(OpenRoutine());
+        GameObject charObject = Instantiate(ResourcesLoader.Instance.GetObject(CurrentCharacter.Gender == Gender.Male ? "actor_male" : "actor_female"));
+        charObject.transform.SetParent(CharSpot);
+
+        charObject.transform.position = CharSpot.position;
+        charObject.transform.localScale = Vector3.one;
+        CharInstance = charObject.GetComponent<ActorInstance>();
+        CharInstance.GetComponent<PlayerShortcuts>().enabled = false;
+
+        CharInstance.Info = CurrentCharacter;
+        CharInstance.nameHidden = true;
+
+        CharInstance.SetElementsLayer("OverUI", 2);
+
+        RefreshEquipment();
     }
 
     public void Open()
@@ -64,38 +82,6 @@ public class EquipmentWindowUI : ItemSlotsContainerUI
     public void Hide()
     {
         this.gameObject.SetActive(false);
-    }
-
-    private IEnumerator OpenRoutine()
-    {
-        if (CharSpot.childCount > 0)
-        {
-            Destroy(CharSpot.GetChild(0).gameObject);
-        }
-
-        yield return 0;
-
-        if (CurrentCharacter.Gender == Gender.Male)
-        {
-            Instantiate(ResourcesLoader.Instance.GetObject("actor_male")).transform.SetParent(CharSpot);
-        }
-        else
-        {
-            Instantiate(ResourcesLoader.Instance.GetObject("actor_female")).transform.SetParent(CharSpot);
-        }
-
-        CharSpot.GetChild(0).position = CharSpot.position;
-        CharSpot.GetChild(0).transform.localScale = Vector3.one;
-        CharInstance = CharSpot.GetChild(0).GetComponent<ActorInstance>();
-        CharInstance.GetComponent<PlayerShortcuts>().enabled = false;
-
-        CharInstance.Info = CurrentCharacter;
-        CharInstance.nameHidden = true;
-
-        CharInstance.SetElementsLayer("OverUI", 2);
-
-        RefreshEquipment();
-
     }
 
     public void RefreshEquipment()

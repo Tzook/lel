@@ -18,7 +18,11 @@ public class Game : MonoBehaviour {
     {
         get 
         {
-            return IsAlive && !IsChattingWithNpc && Online;
+            return IsAlive 
+                && !IsChattingWithNpc 
+                && !Game.Instance.MovingTroughPortal
+                && !DialogManager.Instance.inDialog
+                && Online;
         }
     }
     public bool isDraggingWindow = false;

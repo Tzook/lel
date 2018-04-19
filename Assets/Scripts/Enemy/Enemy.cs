@@ -281,7 +281,10 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator DeathRoutine()
     {
-        Anim.SetInteger("DeathType", Random.Range(0, DeathTypes));
+        if (DeathTypes > 1) 
+        {
+            Anim.SetInteger("DeathType", Random.Range(0, DeathTypes));
+        }
         Anim.SetBool("Dead", true);
 
         yield return new WaitForSeconds(3f);

@@ -101,9 +101,6 @@ public class GameCamera : MonoBehaviour {
         followingObject = objToFollow;
     }
 
-
-    Coroutine DoubleClickInstance;
-
     void Update()
     {
 
@@ -140,14 +137,6 @@ public class GameCamera : MonoBehaviour {
             }
         }
 
-        //if (Input.GetMouseButtonDown(0) && HoveringOnInteractable)
-        //{
-        //    if (DoubleClickInstance == null)
-        //    {
-        //        DoubleClickInstance = StartCoroutine(DoubleClickRoutine());
-        //    }
-        //}
-
         //TODO Temporary change?
         if(Input.GetMouseButtonUp(1) && HoveringOnInteractable)
         {
@@ -168,19 +157,16 @@ public class GameCamera : MonoBehaviour {
             if(Input.GetMouseButtonDown(0))
             {
                 DoubleClick();
-                DoubleClickInstance = null;
                 yield break;
             }
 
             yield return 0;
         }
-
-        DoubleClickInstance = null;
     }
 
     private void DoubleClick()
     {
-        if(Game.Instance.CanUseUI && !DialogManager.Instance.inDialog && !LocalUserInfo.Me.ClientCharacter.Instance.isDead && CurrentMouseHit.collider != null)
+        if(Game.Instance.CanUseUI && CurrentMouseHit.collider != null)
         {
             if (CurrentMouseHit.collider.GetComponent<NPC>() != null)
             {

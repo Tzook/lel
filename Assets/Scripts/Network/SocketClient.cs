@@ -76,7 +76,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_equip_item", OnActorEquipItem);
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
         CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
-        CurrentSocket.On("actor_moved_equip", OnActorMovedEquip);
 
         CurrentSocket.On("actor_emote", OnActorEmoted);
 
@@ -446,13 +445,6 @@ public class SocketClient : MonoBehaviour
         Game.Instance.DeleteEquip(data["id"].Value, data["slot"].Value);
     }
 
-    protected void OnActorMovedEquip(Socket socket, Packet packet, object[] args)
-    {
-        BroadcastEvent("Equip Moved");
-        JSONNode data = (JSONNode)args[0];
-
-    }
-
     protected void OnActorEmoted(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("Actor Emoted");
@@ -719,7 +711,6 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorResurrect(Socket socket, Packet packet, object[] args)
     {
-        JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Has Been Resurrected");
 
         Game.Instance.IsAlive = true;
@@ -968,9 +959,6 @@ public class SocketClient : MonoBehaviour
     {
         BroadcastEvent("Create Party");
 
-
-        JSONNode data = (JSONNode)args[0];
-
         List<string> members = new List<string>();
 
         members.Add(LocalUserInfo.Me.ClientCharacter.Name);
@@ -985,7 +973,6 @@ public class SocketClient : MonoBehaviour
     private void OnActorLeadParty(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("Create Party");
-
 
         JSONNode data = (JSONNode)args[0];
 

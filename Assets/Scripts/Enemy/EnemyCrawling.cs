@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCrawling : EnemyMoving {
-
-    [SerializeField]
-    float GroundedThreshold = 0.1f;
-
     [SerializeField]
     Crawler CrawlerEntity;
 
-    protected void Awake()
+    void Awake()
     {
         OriginalMovementSpeed = MovementSpeed;
     }

@@ -19,6 +19,7 @@ public class ActorShadow : MonoBehaviour {
     void Awake()
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.enabled = false;
     }
 
     void Update()
@@ -33,6 +34,4 @@ public class ActorShadow : MonoBehaviour {
             m_SpriteRenderer.color = new Color(m_SpriteRenderer.color.r, m_SpriteRenderer.color.g, m_SpriteRenderer.color.b,   1f - (Vector3.Distance(Collider.transform.position,GroundRay.point) / MaxDistance));
         }
     }
-
-
 }

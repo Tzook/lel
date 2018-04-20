@@ -429,6 +429,10 @@ public class DevAbility
                     {
                         return "heal";
                     }
+                case HitTypeEnumState.CharTalent:
+                    {
+                        return "";
+                    }
             }
         }
     }
@@ -436,7 +440,7 @@ public class DevAbility
     HitTypeEnumState hitTypeEnumState;
     public enum HitTypeEnumState
     {
-        Attack,Heal
+        Attack,Heal,CharTalent
     }
 
     [SerializeField]
@@ -513,7 +517,7 @@ public class PerkStage
 {
     public int MinLevel;
     public int PerksOffered;
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public List<string> AddToPool = new List<string>();
 }
 
@@ -592,7 +596,7 @@ public class DevDeathrattleSpell : DevSpell
 [System.Serializable]
 public class DevPerkMap
 {
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
 }
@@ -686,7 +690,7 @@ public class Quest
     public int RewardHP;
     public int RewardMP;
 
-    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "range" /* AUTO_GENERATED_ABILITIES_END */)]
+    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "quests", "range" /* AUTO_GENERATED_ABILITIES_END */)]
     public string RewardPrimaryAbility;
     
     public int RewardExp;

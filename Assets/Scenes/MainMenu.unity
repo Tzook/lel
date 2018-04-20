@@ -51385,7 +51385,33 @@ MonoBehaviour:
       - mpCost
     Spells: []
     InitialPerks: []
-    hitTypeEnumState: 0
+    hitTypeEnumState: 2
+    hitTargetEnumState: 0
+    powerTypeEnumState: 0
+    attackTypeEnumState: 0
+    ManaCost: 0
+    OneHandAttackAnimations: 
+    TwoHandAttackAnimations: 
+    HitEffect: HitEffect
+    HitSounds: []
+    GrowingEffect: 
+    ProjectilePrefab: 
+    ProjectileHitSound: 
+    ProjectileWallSound: 
+    ProjectileStayAfterHit: 0
+  - Key: quests
+    Name: Quests
+    Icon: {fileID: 21300000, guid: f0be33a72506dc14b9eb57cd561eb1bb, type: 3}
+    PAColor: {r: 0.60294116, g: 0.93427986, b: 1, a: 1}
+    Perks:
+    - MinLevel: 2
+      PerksOffered: 2
+      AddToPool:
+      - questExpBonus
+      - questGoldBonus
+    Spells: []
+    InitialPerks: []
+    hitTypeEnumState: 2
     hitTargetEnumState: 0
     powerTypeEnumState: 0
     attackTypeEnumState: 0
@@ -51810,6 +51836,24 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 1094f16c3e3df4d8ea669f9aa178d83b, type: 3}
     PrecentPerUpgrade: 0.1
     UpgradeCap: 2
+    StartingValue: 0
+    BonusPerks: []
+    IsClient: 0
+    PerkType: 0
+  - Key: questExpBonus
+    Name: Quest Exp Bonus
+    Icon: {fileID: 21300000, guid: 289bf077a8d3bab45a5b85f40696a1ec, type: 3}
+    PrecentPerUpgrade: 0.1
+    UpgradeCap: 0
+    StartingValue: 0
+    BonusPerks: []
+    IsClient: 0
+    PerkType: 0
+  - Key: questGoldBonus
+    Name: Quest Gold Bonus
+    Icon: {fileID: 21300000, guid: 63990d08ce200064eabcc3410f563252, type: 3}
+    PrecentPerUpgrade: 0.2
+    UpgradeCap: 0
     StartingValue: 0
     BonusPerks: []
     IsClient: 0
@@ -86421,8 +86465,8 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 5bf52d827c0b36141a799e9b431c789e, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
+    m_BestFit: 1
+    m_MinSize: 8
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0

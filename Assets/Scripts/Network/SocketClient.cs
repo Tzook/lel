@@ -629,7 +629,11 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor gain ability | " + data.ToString());
 
-        LocalUserInfo.Me.ClientCharacter.AddPrimaryAbility(data["key"].Value, data["ability"]);
+        if (data["isCharAbility"].AsBool) {
+            LocalUserInfo.Me.ClientCharacter.AddCharAbility(data["key"].Value, data["ability"]);
+        } else {
+            LocalUserInfo.Me.ClientCharacter.AddPrimaryAbility(data["key"].Value, data["ability"]);
+        }
     }
 
     protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)

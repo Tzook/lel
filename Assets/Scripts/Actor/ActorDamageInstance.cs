@@ -94,16 +94,26 @@ public class ActorDamageInstance : MonoBehaviour {
 
                     collectedColliders = Physics2D.OverlapBoxAll(m_Collider.transform.position, m_Collider.size * 2f, 0f);
 
+                    //float minDistance = Mathf.Infinity;
                     for (int i = 0; i < collectedColliders.Length; i++)
                     {
                         if (collectedColliders[i].tag == "Enemy")
                         {
                             sentTargets.Add(collectedColliders[i].GetComponent<HitBox>().EnemyReference);
+
+                            //if(Mathf.Abs(sentTargets[sentTargets.Count - 1].transform.position.x - transform.position.x) < minDistance)
+                            //{
+                            //    minDistance = Mathf.Abs(sentTargets[sentTargets.Count - 1].transform.position.x - transform.position.x);
+                            //    sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
+                            //    sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
+                            //}
                         }
                     }
 
                     sentTargets.Remove(TargetCollider.GetComponent<HitBox>().EnemyReference);
                     sentTargets.Insert(0, TargetCollider.GetComponent<HitBox>().EnemyReference);
+
+
 
                     LocalUserInfo.Me.ClientCharacter.Instance.InputController.ColliderHitMobs(sentTargets, ActionKey, ActionValue, AttackIdCounter);
 

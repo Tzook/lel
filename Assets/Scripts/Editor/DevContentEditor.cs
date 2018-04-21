@@ -326,6 +326,7 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["max"] = perks[i].UpgradeCap.ToString();
             node["perkCollection"][i]["default"] = perks[i].StartingValue.ToString();
             node["perkCollection"][i]["client"].AsBool = perks[i].IsClient;
+            node["perkCollection"][i]["type"] = perks[i].Type;
             
             for (int a = 0; a < perks[i].BonusPerks.Count; a++)
             {

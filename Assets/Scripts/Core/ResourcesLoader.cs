@@ -227,7 +227,7 @@ public class ResourcesLoader : MonoBehaviour {
         m_bLoading = true;
 
 
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
 
         if (debugMode)
         {
@@ -238,7 +238,7 @@ public class ResourcesLoader : MonoBehaviour {
 
         Sprite[] loadedSprite = Resources.LoadAll<Sprite>("UI");
 
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
 
         if (debugMode)
         {
@@ -247,13 +247,18 @@ public class ResourcesLoader : MonoBehaviour {
             Debug.Log("Resource Loader - Loaded " + (loadedSprite.Length + 1) + " resources.");
         }
 
-        foreach (Sprite res in loadedSprite)
+        for(int i=0; i<loadedSprite.Length; i++)
         {
-            m_dicLoadedSprites.Add(res.name, res);
+            m_dicLoadedSprites.Add(loadedSprite[i].name, loadedSprite[i]);
 
             if (debugMode)
             {
-                Debug.Log("Resource Loader - " + res.name + " - Has been loaded.");
+                Debug.Log("Resource Loader - " + loadedSprite[i].name + " - Has been loaded.");
+            }
+
+            if(i % 10 == 0)
+            {
+                yield return 0;
             }
         }
 
@@ -265,7 +270,7 @@ public class ResourcesLoader : MonoBehaviour {
 
         GameObject[] loadedObject = Resources.LoadAll<GameObject>("Objects");
 
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
 
         if (debugMode)
         {
@@ -274,14 +279,19 @@ public class ResourcesLoader : MonoBehaviour {
             Debug.Log("Resource Loader - Loaded " + (loadedObject.Length + 1) + " resources.");
         }
 
-        foreach (GameObject res in loadedObject)
+        for (int i = 0; i < loadedObject.Length; i++)
         {
 
-            m_dicLoadedObjects.Add(res.name, res);
+            m_dicLoadedObjects.Add(loadedObject[i].name, loadedObject[i]);
 
             if (debugMode)
             {
-                Debug.Log("Resource Loader - " + res.name + " - Has been loaded.");
+                Debug.Log("Resource Loader - " + loadedObject[i].name + " - Has been loaded.");
+            }
+
+            if (i % 10 == 0)
+            {
+                yield return 0;
             }
         }
 
@@ -296,7 +306,7 @@ public class ResourcesLoader : MonoBehaviour {
 
         AudioClip[] loadedClip = Resources.LoadAll<AudioClip>("Audio");
 
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
 
         if (debugMode)
         {
@@ -310,14 +320,19 @@ public class ResourcesLoader : MonoBehaviour {
             Debug.Log("Resource Loader - Loaded " + (loadedClip.Length + 1) + " resources.");
         }
 
-        foreach (AudioClip res in loadedClip)
+        for(int i=0; i<loadedClip.Length; i++)
         {
 
-            m_dicLoadedClips.Add(res.name, res);
+            m_dicLoadedClips.Add(loadedClip[i].name, loadedClip[i]);
 
             if (debugMode)
             {
-                Debug.Log("Resource Loader - " + res.name + " - Has been loaded.");
+                Debug.Log("Resource Loader - " + loadedClip[i].name + " - Has been loaded.");
+            }
+
+            if (i % 10 == 0)
+            {
+                yield return 0;
             }
         }
 
@@ -331,7 +346,7 @@ public class ResourcesLoader : MonoBehaviour {
 
         yield return StartCoroutine(LoadSceneObjectsRoutine());
 
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
 
         if (debugMode)
         {

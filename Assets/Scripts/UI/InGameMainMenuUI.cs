@@ -58,6 +58,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CompletedQuestsWindowUI completedQuestsPanel;
 
     [SerializeField]
+    protected AvailableQuestsWindowUI availableQuestsPanel;
+
+    [SerializeField]
     protected AbandonQuestWindowUI AbandonQuestWindow;
 
     [SerializeField]
@@ -251,12 +254,11 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (!questsPanel.gameObject.activeInHierarchy)
                 {
-                    questsPanel.Show();
-                    completedQuestsPanel.Hide();
+                    ShowQuestsInProgress();
                 }
                 else
                 {
-                    questsPanel.Hide();
+                    HideQuestsInProgress();
                 }
             }
 
@@ -264,12 +266,11 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (!completedQuestsPanel.gameObject.activeInHierarchy)
                 {
-                    completedQuestsPanel.Show();
-                    questsPanel.Hide();
+                    ShowCompletedQuests();
                 }
                 else
                 {
-                    completedQuestsPanel.Hide();
+                    HideCompletedQuests();
                 }
             }
 
@@ -290,6 +291,42 @@ public class InGameMainMenuUI : MonoBehaviour {
                 TogglePrimaryAbilities();
             }
         }
+    }
+
+    public void HideCompletedQuests()
+    {
+        completedQuestsPanel.Hide();
+    }
+
+    public void ShowCompletedQuests()
+    {
+        completedQuestsPanel.Show();
+        questsPanel.Hide();
+        availableQuestsPanel.Hide();
+    }
+
+    public void HideQuestsInProgress()
+    {
+        questsPanel.Hide();
+    }
+
+    public void ShowQuestsInProgress()
+    {
+        completedQuestsPanel.Hide();
+        questsPanel.Show();
+        availableQuestsPanel.Hide();
+    }
+
+    public void ShowAvailableQuests()
+    {
+        completedQuestsPanel.Hide();
+        questsPanel.Hide();
+        availableQuestsPanel.Show();
+    }
+
+    public void HideAvailableQuests()
+    {
+        availableQuestsPanel.Hide();
     }
 
     public void CloseAllWindows()

@@ -1933,6 +1933,8 @@ MonoBehaviour:
   EndAnimation: 
   Name: Old Sign
   Key: oldSign30
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 209585795}
   Anim: {fileID: 0}
   NameTag: {fileID: 980482712}
@@ -5904,12 +5906,15 @@ MonoBehaviour:
   TeleportableScenes:
   - sceneKey: RabbitStorageRoom
     portalKey: Entrance
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
   Name: Jade De La Rabbit
   Key: jadedelarabbit
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 1814406524}
   Anim: {fileID: 1814406525}
   NameTag: {fileID: 1927296450}
@@ -18494,6 +18499,12 @@ MonoBehaviour:
   CamType: 0
   BlurCamera: {fileID: 1023961221}
   m_BlurEffect: {fileID: 1578222662}
+  EssentialsInteractableMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  InteractableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   Cam: {fileID: 1578222667}
   BlurCam: {fileID: 0}
   CamFollowing: 1
@@ -21726,7 +21737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: GrassLands5_2
   NearestTownScene: GrassLands5
-  BGMusic: 
+  BGMusic: music_bugzbani_1
   RoomAbilities: []
   ScenePortals:
   - {fileID: 804038507}

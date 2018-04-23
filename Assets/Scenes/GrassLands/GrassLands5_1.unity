@@ -3866,12 +3866,15 @@ MonoBehaviour:
   TeleportableScenes:
   - sceneKey: GrassLands5_2
     portalKey: Entrance
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
   Name: RabbitLand Guard
   Key: rabbitlandGuard1
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 2012678325}
   Anim: {fileID: 2012678324}
   NameTag: {fileID: 56239242}
@@ -4124,6 +4127,12 @@ MonoBehaviour:
   CamType: 0
   BlurCamera: {fileID: 966890753}
   m_BlurEffect: {fileID: 520685479}
+  EssentialsInteractableMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  InteractableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   Cam: {fileID: 520685484}
   BlurCam: {fileID: 0}
   CamFollowing: 1
@@ -8553,6 +8562,8 @@ MonoBehaviour:
   EndAnimation: 
   Name: RabbitLand Guard
   Key: rabbitlandGuard2
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 549440356}
   Anim: {fileID: 549440355}
   NameTag: {fileID: 1892152225}
@@ -12702,7 +12713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: GrassLands5_1
   NearestTownScene: GrassLands5
-  BGMusic: 
+  BGMusic: music_bugzbani_1
   RoomAbilities: []
   ScenePortals:
   - {fileID: 1943949293}
@@ -16872,6 +16883,8 @@ MonoBehaviour:
   EndAnimation: 
   Name: Gate Sign
   Key: rabbitLandSIgn
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 1934341421}
   Anim: {fileID: 0}
   NameTag: {fileID: 1250610266}

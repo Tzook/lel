@@ -8,10 +8,10 @@ public class NPC : MonoBehaviour {
 
     public List<Dialog> Dialogs = new List<Dialog>();
 
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "piratesAmbush", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
     public List<string> GivingQuests = new List<string>();
     
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "piratesAmbush", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
 
     public List<string> EndingQuests = new List<string>();
 
@@ -26,6 +26,9 @@ public class NPC : MonoBehaviour {
 
     public string Name;
     public string Key;
+
+    public string ExitEvent;
+    public string ExitEventValue;
 
     [SerializeField]
     Transform Body;
@@ -43,6 +46,7 @@ public class NPC : MonoBehaviour {
     public Transform QuestSpot;
 
     public GameObject CurrentQuestBubble;
+
 
     private void OnEnable()
     {
@@ -124,15 +128,12 @@ public class NPC : MonoBehaviour {
                 }
             case "StartQuest":
                 {
-                    DialogManager.Instance.StopDialogMode();
-                    SocketClient.Instance.SendQuestStarted(eventValue, Key);
-                    Game.Instance.HandleOkRoutines(eventValue);
+                    StartQuest(eventValue);
                     break;
                 }
             case "CompleteQuest":
                 {
-                    DialogManager.Instance.StopDialogMode();
-                    InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue), Key);
+                    CompleteQuest(eventValue);
                     break;
                 }
             case "QuestOK":
@@ -172,7 +173,6 @@ public class NPC : MonoBehaviour {
                             brokenValueA = eventValue.Substring(0, i);
                             brokenValueB = eventValue.Substring(i + 1, eventValue.Length - (i + 1));
 
-                            Debug.Log(brokenValueA + " | " + brokenValueB);
 
                             break;
                         }
@@ -300,6 +300,16 @@ public class NPC : MonoBehaviour {
         return -1;
     }
 
+    public void ExecuteExitEvent()
+    {
+        if(string.IsNullOrEmpty(ExitEvent))
+        {
+            return;
+        }
+
+        ExecuteEvent(ExitEvent, ExitEventValue);
+    }
+
     void OnMouseOver()
     {
         ShowName(false);
@@ -311,6 +321,19 @@ public class NPC : MonoBehaviour {
         {
             HideName(false);
         }
+    }
+
+    public void StartQuest(string eventValue)
+    {
+        DialogManager.Instance.StopDialogMode();
+        SocketClient.Instance.SendQuestStarted(eventValue, Key);
+        Game.Instance.HandleOkRoutines(eventValue);
+    }
+
+    public void CompleteQuest(string eventValue)
+    {
+        DialogManager.Instance.StopDialogMode();
+        InGameMainMenuUI.Instance.RecieveQuestReward(Content.Instance.GetQuest(eventValue), Key);
     }
 }
 

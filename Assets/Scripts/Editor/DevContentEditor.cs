@@ -17,6 +17,9 @@
  * monster cloneLoot 'FromMonsterKey' 'ToMonsterKey' 
  * pa clonePerks 'FromPA' 'ToPa'
  * 
+ * Quests:
+ * quest delete 'QuestKey'
+ * 
  */
 
 using System.Collections;
@@ -453,9 +456,9 @@ public class DevContentEditor : Editor
                         currentInfo.Items[i].DropChance *= float.Parse(WordNumber(2));
                     }
                 }
-                
+
             }
-            else if(WordNumber(1) == "balanceDropTargets")
+            else if (WordNumber(1) == "balanceDropTargets")
             {
                 Undo.RecordObject(target, "Times modifyDrop");
                 for (int i = 0; i < currentInfo.Items.Count; i++)
@@ -694,7 +697,34 @@ public class DevContentEditor : Editor
                 return;
             }
         }
+        else if (WordNumber(0) == "quest")
+        {
+            if (WordNumber(1) == "delete")
+            {
+                int tempIndex;
+                if (int.TryParse(WordNumber(2), out tempIndex))
+                {
+                    Undo.RecordObject(target, "Remove Quest");
+                    currentInfo.Quests.RemoveAt(tempIndex);
+                    return;
+                }
+                else
+                {
+                    string tempWord = WordNumber(2);
+                    for (int i = 0; i < currentInfo.Quests.Count; i++)
+                    {
+                        if (currentInfo.Quests[i].Key == tempWord)
+                        {
+                            Undo.RecordObject(target, "Remove Quest");
+                            currentInfo.Quests.RemoveAt(i);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     private string WordNumber(int number)
     {

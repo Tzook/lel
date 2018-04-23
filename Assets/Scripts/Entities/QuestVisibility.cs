@@ -48,7 +48,6 @@ public class QuestVisibility : MonoBehaviour {
             case QuestState.QuestEnumState.InProgress:
                 {
                     Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey);
-                    Debug.Log(this.gameObject.name + "REACHED" + tempQuest + " | " + tempQuest.CanBeCompleted);
                     if (tempQuest != null && !tempQuest.CanBeCompleted)
                     {
                         Debug.Log(this.gameObject.name + "HIDE");
@@ -104,6 +103,34 @@ public class QuestVisibility : MonoBehaviour {
             case QuestState.QuestEnumState.NeverStarted:
                 {
                     if (LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey) == null && !LocalUserInfo.Me.ClientCharacter.CompletedQuests.Contains(HideQuestKey))
+                    {
+                        Hide();
+                    }
+                    else
+                    {
+                        Show();
+                    }
+
+                    break;
+                }
+            case QuestState.QuestEnumState.IsAvailable:
+                {
+                    Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey);
+                    if (tempQuest.IsAvailable(LocalUserInfo.Me.ClientCharacter))
+                    {
+                        Hide();
+                    }
+                    else
+                    {
+                        Show();
+                    }
+
+                    break;
+                }
+            case QuestState.QuestEnumState.IsUnavailable:
+                {
+                    Quest tempQuest = LocalUserInfo.Me.ClientCharacter.GetQuest(HideQuestKey);
+                    if (!tempQuest.IsAvailable(LocalUserInfo.Me.ClientCharacter))
                     {
                         Hide();
                     }

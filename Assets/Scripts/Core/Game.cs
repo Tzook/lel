@@ -482,6 +482,11 @@ public class Game : MonoBehaviour {
 
     public void HandleOkRoutines(Quest quest)
     {
+        if (quest == null)
+        {
+            return;
+        }
+
         OkRoutineInstance tempInstance;
 
         for (int i = 0; i < quest.Conditions.Count; i++)

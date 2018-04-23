@@ -46371,6 +46371,148 @@ MonoBehaviour:
         hitTargetEnumState: 0
         attackTypeEnumState: 0
         Duration: 0
+  - MonsterKey: PirateSailor4
+    MonsterName: Pirate Sailor
+    MonsterHP: 300
+    MonsterLevel: 7
+    DMG: 15
+    RewardEXP: 150
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: captainhat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: captianscoat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: cutlass
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortcutlass
+      MinStack: 1
+      MaxStack: 1
+    isBoss: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
+    - Key: bleedDuration
+      Value: 3
+    Spells:
+      SpellsList:
+      - Key: Stab
+        Level: 1
+        Mana: 0
+        ColliderPrefab: PirateSailorStabCollider
+        Perks:
+        - Key: damageModifier
+          Value: 1.5
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Chance: 0.5
+      - Key: Throw
+        Level: 1
+        Mana: 0
+        ColliderPrefab: KnifeProjectile
+        Perks:
+        - Key: damageModifier
+          Value: 1.25
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Chance: 0.5
+      MinTime: 4
+      MaxTime: 10
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Duration: 0
+  - MonsterKey: PirateSailor5
+    MonsterName: Pirate Sailor
+    MonsterHP: 300
+    MonsterLevel: 7
+    DMG: 15
+    RewardEXP: 150
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 5
+      MaxStack: 15
+    - ItemKey: captainhat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: captianscoat
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: cutlass
+      MinStack: 1
+      MaxStack: 1
+    - ItemKey: shortcutlass
+      MinStack: 1
+      MaxStack: 1
+    isBoss: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
+    - Key: bleedDuration
+      Value: 3
+    Spells:
+      SpellsList:
+      - Key: Stab
+        Level: 1
+        Mana: 0
+        ColliderPrefab: PirateSailorStabCollider
+        Perks:
+        - Key: damageModifier
+          Value: 1.5
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Chance: 0.5
+      - Key: Throw
+        Level: 1
+        Mana: 0
+        ColliderPrefab: KnifeProjectile
+        Perks:
+        - Key: damageModifier
+          Value: 1.25
+        Icon: {fileID: 0}
+        HitSound: sound_hit_1
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Chance: 0.5
+      MinTime: 4
+      MaxTime: 10
+      DeathRattle:
+        Key: 
+        Level: 0
+        Mana: 0
+        ColliderPrefab: 
+        Perks: []
+        Icon: {fileID: 0}
+        HitSound: 
+        hitTypeEnumState: 0
+        hitTargetEnumState: 0
+        attackTypeEnumState: 0
+        Duration: 0
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -52035,19 +52177,6 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 40
-  - Name: Become a Warrior
-    Key: becomingWarrior
-    InProgressDescription: Complete this quest to become a warrior...
-    QuestCompleteDescription: I've had to complete this task to become a warrior.
-    FacePrefab: WarriorQuest
-    Conditions: []
-    QuestsStates: []
-    MinimumLevel: 0
-    RewardItems: []
-    RewardHP: 0
-    RewardMP: 0
-    RewardPrimaryAbility: 
-    RewardExp: 50
   - Name: Meet Maya.
     Key: helpMaya
     InProgressDescription: I was asked to find Maya, which should be sitting by alittle
@@ -52829,6 +52958,45 @@ MonoBehaviour:
       EnumState: 1
     - QuestKey: bustNuts
       EnumState: 1
+    MinimumLevel: 8
+    RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 350
+  - Name: Pirates Ambush
+    Key: piratesAmbush
+    InProgressDescription: Beat the pirates ambushing you.
+    QuestCompleteDescription: I've successfuly beaten the pirates which tried to ambush
+      me.
+    FacePrefab: FemalePirateQuest
+    Conditions:
+    - Condition: hunt
+      Type: PirateSailor1
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor2
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor3
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor4
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: hunt
+      Type: PirateSailor5
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    QuestsStates: []
     MinimumLevel: 8
     RewardItems: []
     RewardHP: 0

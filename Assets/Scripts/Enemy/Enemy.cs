@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour {
     //[SerializeField]
     protected Vector3 initScale;
 
-    public DevSpell SpellInCast;
+    public DevMobSpellBase SpellInCast;
 
     public ActorInstance CurrentTarget;
 
@@ -422,7 +422,7 @@ public class Enemy : MonoBehaviour {
         RemoveBuff(buff);
     }
 
-    public void ActivateSpell(DevSpell spellRef)
+    public void ActivateSpell(DevMobSpellBase spellRef)
     {
         Anim.SetTrigger(spellRef.Key);
         SpellInCast = spellRef;

@@ -177,7 +177,7 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public DevSpell GetMobSpell(string spellKey)
+    public DevMobSpellBase GetMobSpell(string spellKey)
     {
         for (int i = 0; i < Monsters.Count; i++)
         {
@@ -533,41 +533,20 @@ public class DevMobSpells
     public DevDeathrattleSpell DeathRattle;
 }
 
-[System.Serializable]
-public class DevSpell
+public class DevSpellBase 
 {
     public string Key;
-    public int Level;
-    public int Mana;
     public string ColliderPrefab;
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
+}
+
+[System.Serializable]
+public class DevSpell: DevSpellBase
+{
+    public int Level;
+    public int Mana;
     public Sprite Icon;
     public string HitSound;
-
-    public string HitType
-    {
-        get
-        {
-            switch (hitTypeEnumState)
-            {
-                default:
-                case HitTypeEnumState.Attack:
-                    {
-                        return "atk";
-                    }
-                case HitTypeEnumState.Heal:
-                    {
-                        return "heal";
-                    }
-            }
-        }
-    }
-    [SerializeField]
-    HitTypeEnumState hitTypeEnumState;
-    public enum HitTypeEnumState
-    {
-        Attack, Heal
-    }
 
     [SerializeField]
     public HitTargetEnumState hitTargetEnumState;
@@ -582,7 +561,7 @@ public class DevSpell
 }
 
 [System.Serializable]
-public class DevMobSpellBase : DevSpell
+public class DevMobSpellBase : DevSpellBase
 {
     [Popup(/* AUTO_GENERATED_MOBS_START */ "NO VALUE", "Bat", "BerriesBush", "BlueBerriesBush", "BlueMushroom", "BossTurtle", "BuffedSquirrel", "BuffedSquirrel_VaultKeeper", "FatRabbit", "FlowerManBoss", "FrostWizardBoss", "GiantBat", "GreenWorm", "OldTurtle", "PirateSailor1", "PirateSailor2", "PirateSailor3", "PirateSailor4", "PirateSailor5", "Plant", "Rabbit", "RabbitBoss", "RedWorm", "Sack", "SmallSquirrel", "Spike", "SpikedTurtle", "Squirrel", "SquirrelBoss", "Thorns", "TomatoesBush", "Turtle", "VilePlant", "Worm", "WormBoss" /* AUTO_GENERATED_MOBS_END */)]
     public string[] SpawnMobs;

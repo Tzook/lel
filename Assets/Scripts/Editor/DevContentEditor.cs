@@ -180,7 +180,7 @@ public class DevContentEditor : Editor
         }
     }
 
-    private static void FillMonsterSpellInfo(DevSpell devSpell, JSONNode node)
+    private static void FillMonsterSpellInfo(DevMobSpellBase devSpell, JSONNode node)
     {
         node["key"] = devSpell.Key.ToString();
 
@@ -188,6 +188,11 @@ public class DevContentEditor : Editor
         {
             node["perks"][b]["key"] = devSpell.Perks[b].Key.ToString();
             node["perks"][b]["value"] = devSpell.Perks[b].Value.ToString();
+        }
+
+        for (int b = 0; b < devSpell.SpawnMobs.Length; b++)
+        {
+            node["spawnMobs"][b] = devSpell.SpawnMobs[b];
         }
     }
 

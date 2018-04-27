@@ -582,13 +582,20 @@ public class DevSpell
 }
 
 [System.Serializable]
-public class DevMobSpell : DevSpell
+public class DevMobSpellBase : DevSpell
+{
+    [Popup(/* AUTO_GENERATED_MOBS_START */ "NO VALUE", "Bat", "BerriesBush", "BlueBerriesBush", "BlueMushroom", "BossTurtle", "BuffedSquirrel", "BuffedSquirrel_VaultKeeper", "FatRabbit", "FlowerManBoss", "FrostWizardBoss", "GiantBat", "GreenWorm", "OldTurtle", "PirateSailor1", "PirateSailor2", "PirateSailor3", "PirateSailor4", "PirateSailor5", "Plant", "Rabbit", "RabbitBoss", "RedWorm", "Sack", "SmallSquirrel", "Spike", "SpikedTurtle", "Squirrel", "SquirrelBoss", "Thorns", "TomatoesBush", "Turtle", "VilePlant", "Worm", "WormBoss" /* AUTO_GENERATED_MOBS_END */)]
+    public string[] SpawnMobs;
+}
+
+[System.Serializable]
+public class DevMobSpell : DevMobSpellBase
 {
     public float Chance;
 }
 
 [System.Serializable]
-public class DevDeathrattleSpell : DevSpell
+public class DevDeathrattleSpell : DevMobSpellBase
 {
     public int Duration;
 }

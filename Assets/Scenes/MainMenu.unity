@@ -52530,7 +52530,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 10
+    RewardExp: 50
   - Name: Divine Place
     Key: divinePlace
     InProgressDescription: In order to learn the healing ability I must speak with
@@ -52546,7 +52546,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 10
+    RewardExp: 50
   - Name: Summon An Angel
     Key: summonAnAngel
     InProgressDescription: Virtule says that only people who are touched with light
@@ -52564,7 +52564,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 
-    RewardExp: 10
+    RewardExp: 100
   - Name: Practice Healing
     Key: practiceHealing
     InProgressDescription: To finally gain the healing ability I first must pass the
@@ -52585,7 +52585,7 @@ MonoBehaviour:
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: heal
-    RewardExp: 10
+    RewardExp: 50
   - Name: Blocking the view
     Key: blockingTheView
     InProgressDescription: Shelly has asked me to get rid of the living plant's surrounding
@@ -52649,7 +52649,8 @@ MonoBehaviour:
     RewardExp: 350
   - Name: Pirates Ambush
     Key: piratesAmbush
-    InProgressDescription: Beat the pirates ambushing you.
+    InProgressDescription: I must take care of those pirates and report to the Tower
+      Rangers. They must know about this.
     QuestCompleteDescription: I've successfuly beaten the pirates which tried to ambush
       me.
     FacePrefab: FemalePirateQuest
@@ -52682,6 +52683,55 @@ MonoBehaviour:
     QuestsStates: []
     MinimumLevel: 8
     RewardItems: []
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 350
+  - Name: Aiding the community.
+    Key: aidingTheCommunity
+    InProgressDescription: 'Turtolent asked me to heal the wounded, give my share
+      to the community. '
+    QuestCompleteDescription: I helped the community with my healing ability.
+    FacePrefab: TurtolentQuest
+    Conditions:
+    - Condition: heal
+      Type: 
+      CurrentProgress: 0
+      TargetProgress: 500
+      ExtraDescription: 
+    QuestsStates:
+    - QuestKey: practiceHealing
+      EnumState: 1
+    MinimumLevel: 8
+    RewardItems:
+    - ItemKey: idoloftrust
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 350
+  - Name: Sacrifice For The Frost God
+    Key: sacrificeFrostGod
+    InProgressDescription: The frost wizard has asked me to bring a sacrifice (a player)
+      to the acolytes sacrifice chamber, the player must stand on the altar while
+      I pull the lever.
+    QuestCompleteDescription: I've made a sacrifice to the god of frost.
+    FacePrefab: FaceOfFrostQuest
+    Conditions:
+    - Condition: ok
+      Type: SacrificeOK
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: Sacrifice a player
+    QuestsStates:
+    - QuestKey: frostPractice
+      EnumState: 1
+    MinimumLevel: 8
+    RewardItems:
+    - ItemKey: wandoffrost
+      MinStack: 1
+      MaxStack: 1
     RewardHP: 0
     RewardMP: 0
     RewardPrimaryAbility: 

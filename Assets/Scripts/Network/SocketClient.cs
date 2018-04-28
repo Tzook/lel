@@ -87,7 +87,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
-        CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+        CurrentSocket.On("take_damage", OnTakeDamage);
         CurrentSocket.On("actor_blocked", OnActorBlocked);
         CurrentSocket.On("actor_ded", OnActorDed);
         CurrentSocket.On("actor_resurrect", OnActorResurrect);
@@ -98,7 +98,6 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("mob_spawn", OnMobSpawn);
         CurrentSocket.On("mob_die", OnMobDeath);
-        CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_take_miss", OnMobTakeMiss);
         CurrentSocket.On("mob_move", OnMobMovement);
         CurrentSocket.On("mob_blocked", OnMobBlocked);
@@ -636,34 +635,48 @@ public class SocketClient : MonoBehaviour
         }
     }
 
-    protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
+    protected void OnTakeDamage(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor Got Wounded");
-
-
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        BroadcastEvent("Damage taken | " + data.ToString());
 
         int hp = data["hp"].AsInt;
-        if (actor != null) 
+
+        ActorInfo targetActor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
+
+        // TODO use same hurt method for actor and mob
+
+        if (targetActor != null) 
         {
-            actor.CurrentHealth = hp;
-            actor.Instance.Hurt();
-            if (actor == LocalUserInfo.Me.ClientCharacter)
+            // actor takes the damage
+            targetActor.CurrentHealth = hp;
+            targetActor.Instance.Hurt();
+            if (targetActor == LocalUserInfo.Me.ClientCharacter)
             {
                 string text = String.Format("{0:n0}", data["dmg"].AsInt);
                 if (data["crit"].AsBool) {
                     // TODO make this beautiful, lel
                     text += " (CRIT)";
                 }
-                actor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+                targetActor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
                 InGameMainMenuUI.Instance.RefreshHP();
             }
             else
             {
-                actor.Instance.MovementController.RefreshHealth();
+                targetActor.Instance.MovementController.RefreshHealth();
+            }
+        } else {
+            // mob takes damage    
+            Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
+            ActorInfo attackingActor = Game.Instance.CurrentScene.GetActor(data["attacker_id"].Value);
+            // mob attacking mob still not supported ;P
+            if (attackingActor != null && monster != null) 
+            {
+                monster.Hurt(attackingActor.Instance, data["dmg"].AsInt, hp, data["cause"].Value, data["crit"].AsBool);
             }
         }
+
+        // updated knowns' health
         string name = data["name"].Value;
         UpdateKnownHealth(name, hp);
     }
@@ -817,20 +830,6 @@ public class SocketClient : MonoBehaviour
                     monster.SetTarget(actorInfo.Instance);
                 }
             }
-        }
-    }
-
-    private void OnMobTakeDamage(Socket socket, Packet packet, object[] args)
-    {
-        JSONNode data = (JSONNode)args[0];
-
-        BroadcastEvent(data["mob_id"].Value + " Took " + data["dmg"].AsInt + " DMG from " + data["id"].Value);
-
-        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-        if (actorInfo != null && monster != null) 
-        {
-            monster.Hurt(actorInfo.Instance, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value, data["crit"].AsBool);
         }
     }
 

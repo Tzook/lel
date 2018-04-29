@@ -363,11 +363,11 @@ public class EnemyMoving : Enemy
 
             if (actor.transform.position.x < transform.position.x)
             {
-                Rigid.AddForce((damage/Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage/Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * transform.right, ForceMode2D.Impulse);
             }
             else
             {
-                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * -transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * -transform.right, ForceMode2D.Impulse);
             }
         }
     }

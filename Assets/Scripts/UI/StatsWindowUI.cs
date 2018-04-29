@@ -28,8 +28,8 @@ public class StatsWindowUI : MonoBehaviour
     public void Refresh(ActorInfo info)
     {
         this.EXPText.text = FormatStat(info.EXP, info.NextLevelXP);
-        this.MaxHealthText.text = FormatStat(info.CurrentHealth, info.MaxHealth);
-        this.MaxManaText.text = FormatStat(info.CurrentMana, info.MaxMana);
+        this.MaxHealthText.text = FormatStat(info.CurrentHealth, info.ClientPerks.MaxHealth);
+        this.MaxManaText.text = FormatStat(info.CurrentMana, info.ClientPerks.MaxMana);
     }
 
     protected string FormatStat(int Current, int Max)

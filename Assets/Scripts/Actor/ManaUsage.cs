@@ -29,7 +29,7 @@ public class ManaUsage
 
     protected int GetManaCost(int mana)
     {
-        return (int)(mana * LocalUserInfo.Me.ClientCharacter.ManaCost);
+        return (int)(mana * LocalUserInfo.Me.ClientCharacter.ClientPerks.ManaCost);
     }
 
     public void WarnAboutMana()

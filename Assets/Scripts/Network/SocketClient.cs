@@ -558,30 +558,43 @@ public class SocketClient : MonoBehaviour
             
             if (data["hpBonus"] != null) 
             {
-                actor.MaxHealth = data["hpBonus"].AsInt;
+                actor.ClientPerks.MaxHealth = data["hpBonus"].AsInt;
                 refreshStats = true;
-            }
-
-            if (data["mpBonus"] != null) 
-            {
-                actor.MaxMana = data["mpBonus"].AsInt;
-                refreshStats = true;
-            }
-            
-            if (data["attackSpeedModifier"] != null) 
-            {
-                actor.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
             }
             
             if (data["knockbackModifier"] != null) 
             {
-                actor.SetKnockback(data["knockbackModifier"].AsFloat);
+                actor.ClientPerks.KnockbackModifier = data["knockbackModifier"].AsFloat;
             }
 
-            if (data["mpCost"] != null) 
+            if (actor == LocalUserInfo.Me.ClientCharacter) 
             {
-                actor.SetManaCost(data["mpCost"].AsFloat);
-                refreshStats = true;
+                if (data["mpBonus"] != null) 
+                {
+                    actor.ClientPerks.MaxMana = data["mpBonus"].AsInt;
+                    refreshStats = true;
+                }
+
+                if (data["attackSpeedModifier"] != null) 
+                {
+                    actor.ClientPerks.AttackSpeed = data["attackSpeedModifier"].AsFloat;
+                }
+
+                if (data["mpCost"] != null) 
+                {
+                    actor.ClientPerks.ManaCost = data["mpCost"].AsFloat;
+                    refreshStats = true;
+                }
+
+                if (data["questExpBonus"] != null) 
+                {
+                    actor.ClientPerks.QuestExpBonus = data["questExpBonus"].AsFloat;
+                }
+
+                if (data["questGoldBonus"] != null) 
+                {
+                    actor.ClientPerks.QuestGoldBonus = data["questGoldBonus"].AsFloat;
+                }
             }
             
             if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)

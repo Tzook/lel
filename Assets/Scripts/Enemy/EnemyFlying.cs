@@ -318,7 +318,7 @@ public class EnemyFlying : Enemy {
 
         if (Game.Instance.isBitch)
         {
-            Rigid.AddForce(2f * actor.Info.KnockbackModifier * transform.position-actor.transform.position, ForceMode2D.Impulse);
+            Rigid.AddForce(2f * actor.Info.ClientPerks.KnockbackModifier * transform.position-actor.transform.position, ForceMode2D.Impulse);
         }
     }
 

@@ -37,7 +37,7 @@ public class PartyMemberUI : MonoBehaviour {
         {
             if (character.Info.CurrentRoom == LocalUserInfo.Me.ClientCharacter.CurrentRoom)
             {
-                SetHealth((character.Info.CurrentHealth*1f) / (character.Info.MaxHealth*1f));
+                SetHealth((character.Info.CurrentHealth*1f) / (character.Info.ClientPerks.MaxHealth*1f));
                 HealthBar.transform.parent.gameObject.SetActive(true);
                 LocationText.gameObject.SetActive(false);
             }

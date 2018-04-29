@@ -34,19 +34,10 @@ public class ActorInfo
         private set { }
     }
 
-    public int JumpBonus;
-    public int SpeedBonus;
-
-    public float? AttackSpeed;
+    public ClientPerks ClientPerks = new ClientPerks();
     
-    public float ManaCost = 1f;
-
-    public float KnockbackModifier = 1f;
-
-    public int MaxHealth;
     public int CurrentHealth;
 
-    public int MaxMana;
     public int CurrentMana;
 
     public List<Ability> PrimaryAbilities = new List<Ability>();
@@ -108,7 +99,6 @@ public class ActorInfo
         this.Climbing = node["position"]["climbing"].AsBool;
         this.Gold = node["gold"].AsInt;
         
-
         if (node["looks"]["g"].AsBool)
         {
             this.Gender = Gender.Male;
@@ -304,35 +294,15 @@ public class ActorInfo
 
         this.CurrentHealth = node["hp"]["now"].AsInt;
         if (node["maxHp"] != null) {
-            this.MaxHealth = node["maxHp"].AsInt;
+            this.ClientPerks.MaxHealth = node["maxHp"].AsInt;
         }
 
         this.CurrentMana = node["mp"]["now"].AsInt;
         if (node["maxMp"] != null) {
-            this.MaxMana = node["maxMp"].AsInt;
+            this.ClientPerks.MaxMana = node["maxMp"].AsInt;
         }
 
         SetPrimaryAbility(node["primaryAbility"].Value);
-    }
-
-    public void SetAttackSpeed(float attackSpeed)
-    {
-        AttackSpeed = attackSpeed;
-        // if it is null, the actorcontroller will set its speed when it initializes
-        if (Instance != null)
-        {
-            Instance.InputController.SetAttackSpeed(attackSpeed);
-        }
-    }
-
-    public void SetManaCost(float manaCost)
-    {
-        ManaCost = manaCost;
-    }
-
-    public void SetKnockback(float knockbackModifier)
-    {
-        KnockbackModifier = knockbackModifier;
     }
 
     public void SwitchPrimaryAbility(string key)
@@ -416,8 +386,8 @@ public class ActorInfo
 
     public void RefreshBonuses()
     {
-        JumpBonus = 0;
-        SpeedBonus = 0;
+        ClientPerks.JumpBonus = 0;
+        ClientPerks.SpeedBonus = 0;
 
         AddItemBonus(Equipment.Chest);
         AddItemBonus(Equipment.Gloves);
@@ -429,8 +399,8 @@ public class ActorInfo
 
     public void RefreshBonuses(Equipment equips)
     {
-        JumpBonus = 0;
-        SpeedBonus = 0;
+        ClientPerks.JumpBonus = 0;
+        ClientPerks.SpeedBonus = 0;
 
         AddItemBonus(equips.Chest);
         AddItemBonus(equips.Gloves);
@@ -447,8 +417,8 @@ public class ActorInfo
             return;
         }
 
-        JumpBonus += item.Stats.JumpBonus;
-        SpeedBonus+= item.Stats.SpeedBonus;
+        ClientPerks.JumpBonus += item.Stats.JumpBonus;
+        ClientPerks.SpeedBonus+= item.Stats.SpeedBonus;
     }
 
     public Quest AddQuest(string questKey)

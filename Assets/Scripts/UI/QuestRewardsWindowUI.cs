@@ -34,7 +34,12 @@ public class QuestRewardsWindowUI : MonoBehaviour {
             tempObject.transform.SetParent(RewardsContainer, false);
 
             tempItem = Content.Instance.GetItem(quest.RewardItems[i].ItemKey);
-            tempObject.GetComponent<RewardPanelUI>().SetInfo(tempItem.Name, ResourcesLoader.Instance.GetSprite(tempItem.Icon), quest.RewardItems[i].MinStack);
+            int stack = quest.RewardItems[i].MinStack;
+            if (tempItem.Key == "gold") 
+            {
+                stack = Mathf.RoundToInt(stack * (LocalUserInfo.Me.ClientCharacter.ClientPerks.QuestGoldBonus + 1f));
+            }
+            tempObject.GetComponent<RewardPanelUI>().SetInfo(tempItem.Name, ResourcesLoader.Instance.GetSprite(tempItem.Icon), stack);
         }
 
         if (quest.RewardExp > 0)
@@ -42,7 +47,8 @@ public class QuestRewardsWindowUI : MonoBehaviour {
             tempObject = ResourcesLoader.Instance.GetRecycledObject("RewardPanel");
             tempObject.transform.SetParent(RewardsContainer, false);
 
-            tempObject.GetComponent<RewardPanelUI>().SetInfo("+EXP ", ResourcesLoader.Instance.GetSprite("fx_hit_small"), quest.RewardExp);
+            int rewardExp = Mathf.RoundToInt(quest.RewardExp * (LocalUserInfo.Me.ClientCharacter.ClientPerks.QuestExpBonus + 1f));
+            tempObject.GetComponent<RewardPanelUI>().SetInfo("+EXP ", ResourcesLoader.Instance.GetSprite("fx_hit_small"), rewardExp);
         }
     }
 

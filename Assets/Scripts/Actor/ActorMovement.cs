@@ -265,7 +265,7 @@ public class ActorMovement : MonoBehaviour
     {
         if (m_HealthBar != null)
         {
-            m_HealthBar.GetComponent<HealthBar>().SetHealthbar(Instance.Info.CurrentHealth, Instance.Info.MaxHealth);
+            m_HealthBar.GetComponent<HealthBar>().SetHealthbar(Instance.Info.CurrentHealth, Instance.Info.ClientPerks.MaxHealth);
         }
     }
 

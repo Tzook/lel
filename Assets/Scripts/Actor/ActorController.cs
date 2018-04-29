@@ -113,13 +113,8 @@ public class ActorController : MonoBehaviour
 
     void Start()
     {
-        if (Instance.Info.AttackSpeed != null)
-        {
-            SetAttackSpeed((float)Instance.Info.AttackSpeed);
-        }
         initScale = Anim.transform.localScale;
         EndAttack();
-
     }
 
     void Update()
@@ -617,7 +612,7 @@ public class ActorController : MonoBehaviour
         }
         else 
         {
-            speed = InternalSpeed + Instance.Info.SpeedBonus;
+            speed = InternalSpeed + Instance.Info.ClientPerks.SpeedBonus;
             if (Slowed) {
                 speed /= 2f;
             }
@@ -730,7 +725,7 @@ public class ActorController : MonoBehaviour
 
         if (Rigid.velocity.y <= 1.5f)
         {
-            Rigid.AddForce((InternalJumpForce + Instance.Info.JumpBonus) * transform.up, ForceMode2D.Impulse);
+            Rigid.AddForce((InternalJumpForce + Instance.Info.ClientPerks.JumpBonus) * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
         }
 

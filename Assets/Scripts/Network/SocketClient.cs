@@ -595,6 +595,11 @@ public class SocketClient : MonoBehaviour
                 {
                     actor.ClientPerks.QuestGoldBonus = data["questGoldBonus"].AsFloat;
                 }
+
+                if (data["shopsDiscount"] != null) 
+                {
+                    actor.ClientPerks.ShopsDiscount = data["shopsDiscount"].AsFloat;
+                }
             }
             
             if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)

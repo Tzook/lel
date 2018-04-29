@@ -28,6 +28,8 @@ public class ClientPerks
     public float QuestExpBonus = 0f;
 
     public float QuestGoldBonus = 0f;
+    
+    public float ShopsDiscount = 0f;
 
     public int JumpBonus = 0;
 

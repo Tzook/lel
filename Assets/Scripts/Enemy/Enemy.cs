@@ -149,6 +149,8 @@ public class Enemy : MonoBehaviour {
         switch (cause)
         {
             case "attack":
+            case "world":
+            case "spell":
                 {
                     if (crit)
                     {

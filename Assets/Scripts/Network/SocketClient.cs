@@ -600,6 +600,11 @@ public class SocketClient : MonoBehaviour
                 {
                     actor.ClientPerks.ShopsDiscount = data["shopsDiscount"].AsFloat;
                 }
+
+                if (data["saleModifier"] != null) 
+                {
+                    actor.ClientPerks.SaleModifier = data["saleModifier"].AsFloat;
+                }
             }
             
             if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)

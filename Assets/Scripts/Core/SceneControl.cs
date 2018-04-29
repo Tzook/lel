@@ -251,11 +251,17 @@ public class SceneControl
 
                 tempSign = ResourcesLoader.Instance.GetRecycledObject("SellHereIcon");
                 tempSign.transform.position = Npcs[i].QuestSpot.position;
-                tempSign.transform.GetChild(tempSign.transform.childCount - 1).GetComponent<Text>().text = ((Content.Instance.GetItem(item.Key).GoldValue * item.Stack) / 2).ToString();
+                tempSign.transform.GetChild(tempSign.transform.childCount - 1).GetComponent<Text>().text = GetItemSellingValue(item).ToString();
 
                 sellingSigns.Add(tempSign);
             }
         }
+    }
+
+    protected int GetItemSellingValue(ItemInfo item)
+    {
+        float itemsCost = Content.Instance.GetItem(item.Key).GoldValue * item.Stack;
+        return Mathf.RoundToInt(itemsCost * LocalUserInfo.Me.ClientCharacter.ClientPerks.SaleModifier);
     }
 
     public void StopSellMode()

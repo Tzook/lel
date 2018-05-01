@@ -45315,7 +45315,7 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 8
       MaxStack: 12
-    - ItemKey: rabbitEar
+    - ItemKey: rabbitBossEars
       MinStack: 1
       MaxStack: 1
     - ItemKey: magicCarrotSeeds
@@ -45743,8 +45743,11 @@ MonoBehaviour:
     Type: 1
     PossibleLoot:
     - ItemKey: gold
-      MinStack: 5
-      MaxStack: 15
+      MinStack: 4
+      MaxStack: 5
+    - ItemKey: acorn
+      MinStack: 1
+      MaxStack: 2
     isBoss: 0
     Perks: []
     Spells:
@@ -45765,9 +45768,12 @@ MonoBehaviour:
     RewardEXP: 200
     Type: 1
     PossibleLoot:
+    - ItemKey: acorn
+      MinStack: 2
+      MaxStack: 4
     - ItemKey: gold
-      MinStack: 10
-      MaxStack: 20
+      MinStack: 4
+      MaxStack: 6
     isBoss: 0
     Perks: []
     Spells:
@@ -45788,9 +45794,12 @@ MonoBehaviour:
     RewardEXP: 250
     Type: 1
     PossibleLoot:
-    - ItemKey: leatherVest
-      MinStack: 10
-      MaxStack: 20
+    - ItemKey: acorn
+      MinStack: 2
+      MaxStack: 4
+    - ItemKey: gold
+      MinStack: 4
+      MaxStack: 6
     isBoss: 0
     Perks: []
     Spells:
@@ -45973,8 +45982,11 @@ MonoBehaviour:
     Type: 1
     PossibleLoot:
     - ItemKey: gold
-      MinStack: 6
-      MaxStack: 12
+      MinStack: 3
+      MaxStack: 5
+    - ItemKey: acorn
+      MinStack: 1
+      MaxStack: 1
     isBoss: 0
     Perks: []
     Spells:
@@ -45994,7 +46006,10 @@ MonoBehaviour:
     DMG: 20
     RewardEXP: 800
     Type: 0
-    PossibleLoot: []
+    PossibleLoot:
+    - ItemKey: wormBossAntenna
+      MinStack: 1
+      MaxStack: 1
     isBoss: 1
     Perks:
     - Key: crippleResistance
@@ -46046,7 +46061,10 @@ MonoBehaviour:
     DMG: 10
     RewardEXP: 800
     Type: 0
-    PossibleLoot: []
+    PossibleLoot:
+    - ItemKey: squirrelBossMustache
+      MinStack: 1
+      MaxStack: 1
     isBoss: 1
     Perks:
     - Key: knockbackModifier
@@ -50909,6 +50927,106 @@ MonoBehaviour:
       MaxLvlMobs: -1
       MinStack: 1
       MaxStack: 1
+  - Key: acorn
+    Name: Acorn
+    Description: 
+    IconPlaceable: {fileID: 21300006, guid: 99f0880463298594385fa724ede4ae3d, type: 3}
+    Icon: icon_food_3
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 0.8
+    GoldValue: 1
+    StackCap: 20
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
+  - Key: rabbitBossEars
+    Name: Rabbit King Ears
+    Description: 
+    IconPlaceable: {fileID: 21300000, guid: c9264393d2024fc47867c463a8e31cfd, type: 3}
+    Icon: icon_ancientRabbitEars
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 2
+    StackCap: 20
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
+  - Key: wormBossAntenna
+    Name: Worm Boss Antenna
+    Description: 
+    IconPlaceable: {fileID: 21300000, guid: 58495bdcfebb902409853bb84c76fd48, type: 3}
+    Icon: icon_wormBossAntenna
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 2
+    StackCap: 20
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
+  - Key: squirrelBossMustache
+    Name: Squirrel Boss Mustache
+    Description: 
+    IconPlaceable: {fileID: 21300000, guid: c2bb65382727dbd4a9c2f1f6deeaca39, type: 3}
+    Icon: icon_squirrelBossMustache
+    UseSound: 
+    Type: misc
+    SubType: 
+    DropChance: 1
+    GoldValue: 2
+    StackCap: 20
+    Stats:
+      RequiresLVL: 0
+      JumpBonus: 0
+      SpeedBonus: 0
+    Perks: []
+    UseInfo:
+      BonusHP: 0
+      BonusMP: 0
+    ItemSprites: []
+    AppearsAt:
+      MinLvlMobs: -1
+      MaxLvlMobs: -1
+      MinStack: 1
+      MaxStack: 1
   InfoBank:
   - Title: Experience
     Description: Experience is gained by killing enemies and completing quests, with
@@ -52761,6 +52879,171 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 350
+  - Name: Big Ones
+    Key: bigOnes
+    InProgressDescription: The commander of the Crimson Company asked me to get a
+      trophy off of each and every boss  monster on this island.
+    QuestCompleteDescription: I've killed each and every boss on the island of turtles.
+    FacePrefab: WarriorQuest
+    Conditions:
+    - Condition: loot
+      Type: oldTurtleShell
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: loot
+      Type: rabbitBossEars
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: loot
+      Type: wormBossAntenna
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    - Condition: loot
+      Type: squirrelBossMustache
+      CurrentProgress: 0
+      TargetProgress: 1
+      ExtraDescription: 
+    QuestsStates: []
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: gold
+      MinStack: 100
+      MaxStack: 100
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 1000
+  - Name: Big Ones - Icy Staff
+    Key: bigOnesIce
+    InProgressDescription: I've asked for an icy staff as a reward for the help to
+      the Crimson Company.
+    QuestCompleteDescription: I've asked for an icy staff as a reward for the help
+      to the Crimson Company.
+    FacePrefab: WarriorQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: bigOnes
+      EnumState: 1
+    - QuestKey: bigOnesDivine
+      EnumState: 3
+    - QuestKey: bigOnesMelting
+      EnumState: 3
+    - QuestKey: bigOnesScimitar
+      EnumState: 3
+    - QuestKey: bigOnesMelting
+      EnumState: 2
+    - QuestKey: bigOnesDivine
+      EnumState: 2
+    - QuestKey: bigOnesScimitar
+      EnumState: 2
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: icystaff
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 0
+  - Name: Big Ones - Scimitar
+    Key: bigOnesScimitar
+    InProgressDescription: I've asked for a two handed scimitar as a reward for the
+      help to the Crimson Company.
+    QuestCompleteDescription: I've asked for a two handed scimitar as a reward for
+      the help to the Crimson Company.
+    FacePrefab: WarriorQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: bigOnes
+      EnumState: 1
+    - QuestKey: bigOnesIce
+      EnumState: 3
+    - QuestKey: bigOnesMelting
+      EnumState: 3
+    - QuestKey: bigOnesDivine
+      EnumState: 3
+    - QuestKey: bigOnesIce
+      EnumState: 2
+    - QuestKey: bigOnesDivine
+      EnumState: 2
+    - QuestKey: bigOnesMelting
+      EnumState: 2
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: twohandedschimitar
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 0
+  - Name: Big Ones - Metling Rod
+    Key: bigOnesMelting
+    InProgressDescription: I've asked for a Melting Rod as a reward for the help to
+      the Crimson Company.
+    QuestCompleteDescription: I've asked for a Melting Rod as a reward for the help
+      to the Crimson Company.
+    FacePrefab: WarriorQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: bigOnes
+      EnumState: 1
+    - QuestKey: bigOnesDivine
+      EnumState: 3
+    - QuestKey: bigOnesScimitar
+      EnumState: 3
+    - QuestKey: bigOnesIce
+      EnumState: 3
+    - QuestKey: bigOnesIce
+      EnumState: 2
+    - QuestKey: bigOnesScimitar
+      EnumState: 2
+    - QuestKey: bigOnesDivine
+      EnumState: 2
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: meltingrod
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 0
+  - Name: Big Ones - Divine Book
+    Key: bigOnesDivine
+    InProgressDescription: I've ask humbly for a book of the divine as a reward for
+      the help to the Crimson Company.
+    QuestCompleteDescription: I've ask humbly for a book of the divine as a reward
+      for the help to the Crimson Company.
+    FacePrefab: WarriorQuest
+    Conditions: []
+    QuestsStates:
+    - QuestKey: bigOnes
+      EnumState: 1
+    - QuestKey: bigOnesMelting
+      EnumState: 3
+    - QuestKey: bigOnesIce
+      EnumState: 3
+    - QuestKey: bigOnesScimitar
+      EnumState: 3
+    - QuestKey: bigOnesScimitar
+      EnumState: 2
+    - QuestKey: bigOnesMelting
+      EnumState: 2
+    - QuestKey: bigOnesIce
+      EnumState: 2
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: divinebook
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 0
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

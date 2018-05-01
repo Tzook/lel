@@ -11,17 +11,37 @@ public class PlayerAreaEntity : MonoBehaviour {
     [SerializeField]
     UnityEvent OnExit;
 
-    ActorInstance CurrentPlayer;
+    public ActorInstance CurrentPlayer;
+
+    public bool onlyPlayer = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (CurrentPlayer == null)
         {
-            CurrentPlayer = collision.gameObject.GetComponent<ActorInstance>();
-
-            if(CurrentPlayer != null)
+            if (collision.GetComponent<ActorInstance>() != null)
             {
-                OnEnter.Invoke();
+                if (onlyPlayer)
+                {
+                    if(collision.GetComponent<ActorInstance>().Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
+                    {
+                        CurrentPlayer = collision.gameObject.GetComponent<ActorInstance>();
+                        if (CurrentPlayer != null)
+                        {
+                            OnEnter.Invoke();
+                        }
+                    }
+                }
+                else
+                {
+                    CurrentPlayer = collision.gameObject.GetComponent<ActorInstance>();
+                    if (CurrentPlayer != null)
+                    {
+                        OnEnter.Invoke();
+                    }
+                }
+
+                
             }
         }
     }
@@ -30,11 +50,14 @@ public class PlayerAreaEntity : MonoBehaviour {
     {
         if (CurrentPlayer != null)
         {
-            if (CurrentPlayer == collision.gameObject.GetComponent<ActorInstance>())
+            if (collision.GetComponent<ActorInstance>() != null)
             {
-                OnExit.Invoke();
+                if (CurrentPlayer == collision.gameObject.GetComponent<ActorInstance>())
+                {
+                    OnExit.Invoke();
 
-                CurrentPlayer = null;
+                    CurrentPlayer = null;
+                }
             }
         }
     }

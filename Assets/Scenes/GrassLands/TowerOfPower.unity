@@ -21034,15 +21034,127 @@ MonoBehaviour:
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
-  GivingQuests: []
-  EndingQuests: []
-  TeleportableScenes: []
+    - Title: GO GO TOWER RANGERS!!!
+      Event: StartDialog
+      Value: Ranger
+      Condition: QuestAvailable
+      ConditionValue: RangerPractice2
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
+    - Title: Take me to the course
+      Event: Teleport
+      Value: RangerTrainingGround2
+      Condition: QuestInProgress
+      ConditionValue: RangerPractice2
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
+    - Title: Take me to the course again
+      Event: Teleport
+      Value: RangerTrainingGround2
+      Condition: QuestCompleted
+      ConditionValue: RangerPractice2
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Ranger
+    Pieces:
+    - Content: YOU SOUND LIKE A TRUE RANGER!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Have you been practicing?
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: YES!
+      Event: StartDialog
+      Value: Challenge
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
+    - Title: Not really
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: Challenge
+    Pieces:
+    - Content: WELL I HAVE A CHALLENGE FOR YOU!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: TO TEST YOUR TRUE RANGER SKILLS!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I'll give you a good bow if you succeed!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: I'm in!
+      Event: StartDialog
+      Value: In
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
+    - Title: I'm not ready....
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 1}
+  - DialogKey: In
+    Pieces:
+    - Content: GOOD!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The challenge is to beat the ranger's training course under 70 seconds
+      LetterDelay: 0.05
+      Pitch: 0.6
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Talk to me when you are ready to go there
+      LetterDelay: 0.04
+      Pitch: 0.6
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: RangerPractice2
+    Options: []
+  GivingQuests:
+  - RangerPractice2
+  EndingQuests:
+  - RangerPractice2
+  TeleportableScenes:
+  - sceneKey: RangerTrainingGround2
+    portalKey: Entrance
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
   Name: Tower Ranger
-  Key: shellHillArcher
+  Key: RangerBoi
   ExitEvent: 
   ExitEventValue: 
   Body: {fileID: 2109460457}
@@ -21050,7 +21162,7 @@ MonoBehaviour:
   NameTag: {fileID: 1080432728}
   ChatBubbleSpot: {fileID: 2112386127}
   QuestSpot: {fileID: 2068783052}
-  CurrentQuestBubble: {fileID: 0}
+  CurrentQuestBubble: {fileID: 2112386126}
 --- !u!61 &1953060632
 BoxCollider2D:
   m_ObjectHideFlags: 0

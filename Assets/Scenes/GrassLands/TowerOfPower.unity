@@ -21052,6 +21052,12 @@ MonoBehaviour:
       Condition: QuestCompleted
       ConditionValue: RangerPractice2
       CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Title: I've beaten your challenge
+      Event: StartDialog
+      Value: Beaten
+      Condition: QuestComplete
+      ConditionValue: RangerPractice2
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
   - DialogKey: Ranger
     Pieces:
     - Content: YOU SOUND LIKE A TRUE RANGER!
@@ -21141,6 +21147,36 @@ MonoBehaviour:
       PostPieceEvent: StartQuest
       PostPieceEventValue: RangerPractice2
     Options: []
+  - DialogKey: Beaten
+    Pieces:
+    - Content: GREAT!
+      LetterDelay: 0.03
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: YOU ARE A TRUE RANGER NOW!
+      LetterDelay: 0.05
+      Pitch: 0.6
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: HERE'S YOUR BOW!
+      LetterDelay: 0.04
+      Pitch: 0.6
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: CompleteQuest
+      Event: CompleteQuest
+      Value: RangerPractice2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 0.98039216, b: 0.36078432, a: 1}
   GivingQuests:
   - RangerPractice2
   EndingQuests:

@@ -1395,12 +1395,15 @@ MonoBehaviour:
   TeleportableScenes:
   - sceneKey: RabbitStorageRoom
     portalKey: Entrance
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
   Name: Jade De La Rabbit
   Key: jadedelarabbit2
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 117810251}
   Anim: {fileID: 117810252}
   NameTag: {fileID: 477960086}
@@ -4717,6 +4720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dbf16c965a3964cb60225e2012ec70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayName: Rabbitland - Storage Room
   Name: RabbitStorageRoom
   NearestTownScene: GrassLands5_2
   BGMusic: 
@@ -4980,6 +4984,12 @@ MonoBehaviour:
   CamType: 3
   BlurCamera: {fileID: 1475192144}
   m_BlurEffect: {fileID: 1444666124}
+  EssentialsInteractableMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  InteractableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   Cam: {fileID: 1444666129}
   BlurCam: {fileID: 0}
   CamFollowing: 1

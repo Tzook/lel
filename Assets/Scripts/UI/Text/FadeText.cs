@@ -8,6 +8,30 @@ public class FadeText: MonoBehaviour
     public Text text;
     private Coroutine fadeInCoroutine;
     private Coroutine fadeOutCoroutine;
+    private Coroutine fadeSequence;
+
+    public void FadeSequence(float fFadeTime, float fTime)
+    {
+        if(fadeSequence != null)
+        {
+            StopCoroutine(fadeSequence);
+        }
+
+        text.gameObject.SetActive(true);
+
+        fadeSequence = StartCoroutine(FadeSequenceRoutine(fFadeTime, fTime));
+    }
+
+    IEnumerator FadeSequenceRoutine(float fFadeTime, float fTime)
+    {
+        FadeIn(fFadeTime);
+
+        yield return new WaitForSeconds(fTime);
+
+        FadeOut(fFadeTime);
+
+        fadeSequence = null;
+    }
 
     // pass 0 for instant
     public void FadeIn(float time)

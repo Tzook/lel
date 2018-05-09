@@ -135,6 +135,8 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     HealthBar BossHealthbar;
 
+    [SerializeField]
+    FadeText m_LocationLabel;
 
     public static InGameMainMenuUI Instance;
 
@@ -876,5 +878,17 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void SetBossHealthbar(float fromValue, float toValue, float maxValue, float Speed = 1f)
     {
         BossHealthbar.SetHealthbar(fromValue, toValue, maxValue, Speed);
+    }
+
+    public void SetLocationLabel(string LabelText)
+    {
+        if(LabelText == m_LocationLabel.text.text)
+        {
+            return;
+        }
+
+        m_LocationLabel.text.text = LabelText;
+
+        m_LocationLabel.FadeSequence(0.3f, 2f);
     }
 }

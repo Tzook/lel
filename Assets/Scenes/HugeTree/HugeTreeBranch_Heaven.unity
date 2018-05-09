@@ -2145,12 +2145,15 @@ MonoBehaviour:
   TeleportableScenes:
   - sceneKey: HealingPracticeChamber
     portalKey: Entrance
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
   Name: Virtule
   Key: priestVirtule
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 1549802105}
   Anim: {fileID: 1549802104}
   NameTag: {fileID: 1306890966}
@@ -6065,6 +6068,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  CurrentPlayer: {fileID: 0}
+  onlyPlayer: 0
 --- !u!61 &345317993
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11887,6 +11892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dbf16c965a3964cb60225e2012ec70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayName: Huge Tree - Divine Branch
   Name: HugeTreeBranch_Heaven
   NearestTownScene: GrassLands7
   BGMusic: music_heaven
@@ -24173,6 +24179,8 @@ MonoBehaviour:
   EndAnimation: 
   Name: Virtule
   Key: priestVirtuleAngry
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 397079122}
   Anim: {fileID: 397079121}
   NameTag: {fileID: 143219589}
@@ -38007,6 +38015,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  CurrentPlayer: {fileID: 0}
+  onlyPlayer: 0
 --- !u!1 &1642916847
 GameObject:
   m_ObjectHideFlags: 0
@@ -53882,6 +53892,8 @@ MonoBehaviour:
   EndAnimation: 
   Name: Angel
   Key: branchAngel
+  ExitEvent: 
+  ExitEventValue: 
   Body: {fileID: 542073660}
   Anim: {fileID: 542073661}
   NameTag: {fileID: 123733346}
@@ -54135,6 +54147,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  CurrentPlayer: {fileID: 0}
+  onlyPlayer: 0
 --- !u!61 &2045418384
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -58287,6 +58301,12 @@ MonoBehaviour:
   CamType: 3
   BlurCamera: {fileID: 1706701832}
   m_BlurEffect: {fileID: 2090100965}
+  EssentialsInteractableMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  InteractableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   Cam: {fileID: 2090100970}
   BlurCam: {fileID: 0}
   CamFollowing: 1

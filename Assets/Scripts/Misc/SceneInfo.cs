@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneInfo : MonoBehaviour {
 
+    public string DisplayName;
+
     public string Name;
 
     public string NearestTownScene;

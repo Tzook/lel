@@ -380,6 +380,8 @@ public class Game : MonoBehaviour {
         InGame = true;
         yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
 
+        InGameMainMenuUI.Instance.SetLocationLabel(SceneInfo.Instance.DisplayName);
+
         isLoadingScene = false;
     }
 

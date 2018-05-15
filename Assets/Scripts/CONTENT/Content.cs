@@ -545,6 +545,7 @@ public class DevSpell: DevSpellBase
 {
     public int Level;
     public int Mana;
+    public int Cooldown;
     public Sprite Icon;
     public string HitSound;
 

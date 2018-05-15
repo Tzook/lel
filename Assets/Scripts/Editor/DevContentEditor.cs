@@ -308,6 +308,7 @@ public class DevContentEditor : Editor
                 node["talents"][i]["spells"][a]["key"] = abilities[i].Spells[a].Key.ToString();
                 node["talents"][i]["spells"][a]["level"] = abilities[i].Spells[a].Level.ToString();
                 node["talents"][i]["spells"][a]["mana"] = abilities[i].Spells[a].Mana.ToString();
+                node["talents"][i]["spells"][a]["cooldown"] = abilities[i].Spells[a].Cooldown.ToString();
                 
                 for (int b = 0; b < abilities[i].Spells[a].Perks.Count; b++)
                 {

@@ -85,6 +85,8 @@ public class ActorInfo
 
     public int Gold;
 
+    public SpellsCooldowns SpellsCooldowns = new SpellsCooldowns();
+
     public ActorInfo()
     {
         Equipment = new Equipment(new JSONClass(), this);

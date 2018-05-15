@@ -265,6 +265,8 @@ public class ActorController : MonoBehaviour
         {
             SpellCooldown -= 1f * Time.deltaTime;
         }
+
+        LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.TickSpellsCooldowns();
     }
 
     private void AttackCharge()
@@ -545,14 +547,18 @@ public class ActorController : MonoBehaviour
             return;
         }
 
-        if(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL < spell.Level)
+        if (LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL < spell.Level)
         {
             return;
         }
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 
-        bool usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
+        bool usedSpell = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.UseSpell(spell);
+        if (usedSpell)
+        {
+            usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
+        }
         if (usedSpell)
         {
             if(spell.spellTypeEnumState == SpellTypeEnumState.movement)
@@ -564,6 +570,7 @@ public class ActorController : MonoBehaviour
             CurrentSpellAttackId = AttackIdCounter;
             CurrentSpellInCast = spell;
 
+            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.SetSpellInCooldown(spell.Key, spell.Cooldown);
             SocketClient.Instance.SendUsedSpell(spell.Key, CurrentSpellAttackId);
 
             Instance.CastSpell(spell);

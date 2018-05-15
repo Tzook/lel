@@ -46487,8 +46487,8 @@ MonoBehaviour:
       JumpBonus: 0
       SpeedBonus: 0
     Perks:
-    - Key: knockbackModifier
-      Value: 3
+    - Key: cooldownModifier
+      Value: -0.5
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -51245,6 +51245,10 @@ MonoBehaviour:
       - hpStealChance
       - hpStealModifier
       - critChance
+    - MinLevel: 8
+      PerksOffered: 3
+      AddToPool:
+      - cooldownModifier
     Spells:
     - Key: Healblast
       ColliderPrefab: Projectile_Heal
@@ -51868,6 +51872,15 @@ MonoBehaviour:
     PrecentPerUpgrade: 0.02
     UpgradeCap: 0.7
     StartingValue: 0.5
+    BonusPerks: []
+    IsClient: 1
+    PerkType: 0
+  - Key: cooldownModifier
+    Name: Spells Cooldown
+    Icon: {fileID: 21300000, guid: f8659334da4a1f943a71c5d7e68dad38, type: 3}
+    PrecentPerUpgrade: -0.04
+    UpgradeCap: 0.2
+    StartingValue: 1
     BonusPerks: []
     IsClient: 1
     PerkType: 0

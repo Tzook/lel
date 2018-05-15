@@ -32,6 +32,8 @@ public class ClientPerks
     public float ShopsDiscount = 0f;
     
     public float SaleModifier = 0.5f;
+    
+    public float CooldownModifier = 1f;
 
     public int JumpBonus = 0;
 

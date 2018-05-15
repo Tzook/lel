@@ -606,6 +606,11 @@ public class SocketClient : MonoBehaviour
                 {
                     actor.ClientPerks.SaleModifier = data["saleModifier"].AsFloat;
                 }
+
+                if (data["cooldownModifier"] != null) 
+                {
+                    actor.ClientPerks.CooldownModifier = data["cooldownModifier"].AsFloat;
+                }
             }
             
             if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)

@@ -5,7 +5,7 @@ public class SpellsCooldowns
 {
     private Dictionary<string, float> Cooldowns = new Dictionary<string, float>();
 
-    public bool UseSpell(DevSpell spell)
+    public bool AttemptUseSpell(DevSpell spell)
     {
         bool canUseSpell = CanUseSpell(spell);
         if (!canUseSpell)
@@ -43,6 +43,12 @@ public class SpellsCooldowns
                 SetSpellInCooldown(spellCooldownKeyValue.Key, spellCooldownKeyValue.Value - time);
             }
         }
+    }
+
+    public void UseSpell(DevSpell spell)
+    {
+        float cooldown = spell.Cooldown * LocalUserInfo.Me.ClientCharacter.ClientPerks.CooldownModifier;
+        SetSpellInCooldown(spell.Key, cooldown);
     }
 
     public void SetSpellInCooldown(string key, float cooldown)

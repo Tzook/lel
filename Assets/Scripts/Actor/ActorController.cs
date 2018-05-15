@@ -557,7 +557,7 @@ public class ActorController : MonoBehaviour
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 
-        bool usedSpell = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.UseSpell(spell);
+        bool usedSpell = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.AttemptUseSpell(spell);
         if (usedSpell)
         {
             usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
@@ -573,7 +573,7 @@ public class ActorController : MonoBehaviour
             CurrentSpellAttackId = AttackIdCounter;
             CurrentSpellInCast = spell;
 
-            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.SetSpellInCooldown(spell.Key, spell.Cooldown);
+            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.UseSpell(spell);
             SocketClient.Instance.SendUsedSpell(spell.Key, CurrentSpellAttackId);
 
             Instance.CastSpell(spell);

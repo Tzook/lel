@@ -480,7 +480,7 @@ public class DevAbility
     }
 
     [SerializeField]
-    public AttackTypeEnumState attackTypeEnumState;
+    public SpellTypeEnumState attackTypeEnumState;
 
     public int ManaCost;
 
@@ -556,7 +556,7 @@ public class DevSpell: DevSpellBase
     }
 
     [SerializeField]
-    public AttackTypeEnumState attackTypeEnumState;
+    public SpellTypeEnumState spellTypeEnumState;
 
 }
 
@@ -917,7 +917,7 @@ public class QuestState
     }
 }
 
-public enum AttackTypeEnumState
+public enum SpellTypeEnumState
 {
-    normal, projectile, explosion, channeling
+    normal, projectile, explosion, channeling, movement
 }

@@ -55,6 +55,7 @@ public class ActorController : MonoBehaviour
 
 
     public Coroutine JumpRoutineInstance;
+    public Coroutine MovementSpellRoutineInstance;
 
     LayerMask GroundLayerMask = 0 << 0 | 1 | 16;
 
@@ -282,17 +283,16 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
+        SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 16f, 0), transform.right, GroundedThreshold, GroundLayerMask);
+        SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 16f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
+
+        LeftSlope = (SideRayLeft.normal.x < -0.7 || SideRayLeft.normal.x > 0.7);
+        RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
+
         if (CanDoAction())
         {
             if (!OnRope)
             {
-
-                SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 16f, 0), transform.right, GroundedThreshold, GroundLayerMask);
-                SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 16f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
-
-                LeftSlope = (SideRayLeft.normal.x < -0.7 || SideRayLeft.normal.x > 0.7);
-                RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
-
                 if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope)
                 {
                     MoveLeft();
@@ -524,6 +524,16 @@ public class ActorController : MonoBehaviour
         Instance.FireProjectile(true, LoadAttackValue, AttackIdCounter);
     }
 
+    public void ExecuteMovementSpell(DevSpell spell)
+    {
+        if(MovementSpellRoutineInstance != null)
+        {
+            StopCoroutine(MovementSpellRoutineInstance);
+        }
+
+        MovementSpellRoutineInstance = StartCoroutine("MovementRoutine_"+spell.Key);
+    }
+
     private void CastSpell(int spellIndex)
     {
         Aim();
@@ -545,6 +555,11 @@ public class ActorController : MonoBehaviour
         bool usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
         if (usedSpell)
         {
+            if(spell.spellTypeEnumState == SpellTypeEnumState.movement)
+            {
+                ExecuteMovementSpell(spell);
+            }
+
             AttackIdCounter++;
             CurrentSpellAttackId = AttackIdCounter;
             CurrentSpellInCast = spell;
@@ -868,12 +883,12 @@ public class ActorController : MonoBehaviour
 
         switch (devAbility.attackTypeEnumState)
         {
-            case AttackTypeEnumState.normal:
+            case SpellTypeEnumState.normal:
                 {
                     AttackMelee();
                     break;
                 }
-            case AttackTypeEnumState.projectile:
+            case SpellTypeEnumState.projectile:
                 {
                     FireProjectile();
                     break;
@@ -947,9 +962,9 @@ public class ActorController : MonoBehaviour
     {
         if (CurrentSpellInCast != null)
         {
-            switch (CurrentSpellInCast.attackTypeEnumState)
+            switch (CurrentSpellInCast.spellTypeEnumState)
             {
-                case AttackTypeEnumState.normal:
+                case SpellTypeEnumState.normal:
                     {
                         GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
@@ -959,7 +974,7 @@ public class ActorController : MonoBehaviour
                         damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
                         break;
                     }
-                case AttackTypeEnumState.projectile:
+                case SpellTypeEnumState.projectile:
                     {
                         GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
@@ -1037,6 +1052,44 @@ public class ActorController : MonoBehaviour
             InvincibilityRoutineInstance = StartCoroutine(InvincibilityRoutine());
         }
     }
+    #endregion
+
+    #region MovementRoutines
+
+    IEnumerator MovementRoutine_Dodge()
+    {
+        Vector2 initPos = Rigid.position;
+        bool right = aimRight;
+        Vector2 targetPoint = (right ? new Vector2(Rigid.position.x - 5f, Rigid.position.y) : new Vector2(Rigid.position.x + 5f, Rigid.position.y));
+        
+
+        float t = 0f;
+        while(t<1f)
+        {
+            if (!right && SideRayRight)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t-2f*Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+            else if (right && SideRayLeft)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 2f * Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+
+            t += 2f * Time.deltaTime;
+
+            Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t);
+
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        MovementSpellRoutineInstance = null;
+    }
+
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)

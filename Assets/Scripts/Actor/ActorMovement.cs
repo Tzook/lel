@@ -248,11 +248,11 @@ public class ActorMovement : MonoBehaviour
 
         switch(devAbility.attackTypeEnumState)
         {
-            case AttackTypeEnumState.normal :
+            case SpellTypeEnumState.normal :
                 {
                     break;
                 }
-            case AttackTypeEnumState.projectile :
+            case SpellTypeEnumState.projectile :
                 {
                     Instance.FireProjectile(false, load, 0);
                     break;

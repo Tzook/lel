@@ -132,6 +132,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("buff_activated", OnBuffActivated);
         CurrentSocket.On("buff_resisted", OnBuffResisted);
         CurrentSocket.On("spell_activated", OnSpellActivated);
+        CurrentSocket.On("spell_cooldown", OnSpellCooldown);
         CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
 
         LoadingWindowUI.Instance.Register(this);
@@ -1405,6 +1406,15 @@ public class SocketClient : MonoBehaviour
         {
             actorInfo.Instance.CastSpell(spell);
         }
+    }
+
+    private void OnSpellCooldown(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.SetSpellInCooldown(data["spell_key"].Value, data["cooldown"].AsFloat);
     }
 
     private void OnMobSpellActivated(Socket socket, Packet packet, object[] args)

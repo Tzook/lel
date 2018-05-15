@@ -266,7 +266,10 @@ public class ActorController : MonoBehaviour
             SpellCooldown -= 1f * Time.deltaTime;
         }
 
-        LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.TickSpellsCooldowns();
+        if (LocalUserInfo.Me.ClientCharacter != null)
+        {
+            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.TickSpellsCooldowns();
+        }
     }
 
     private void AttackCharge()

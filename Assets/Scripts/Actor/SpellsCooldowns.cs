@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpellsCooldowns
 {
-    public Dictionary<string, float> Cooldowns = new Dictionary<string, float>();
+    private Dictionary<string, float> Cooldowns = new Dictionary<string, float>();
 
     public bool UseSpell(DevSpell spell)
     {
@@ -30,27 +30,31 @@ public class SpellsCooldowns
         if (Cooldowns.Count > 0)
         {
             float time = Time.deltaTime;
-            List<string> CooldownsToRemove = new List<string>();
+            List<KeyValuePair<string, float>> CooldownsUpdates = new List<KeyValuePair<string, float>>();
             
+            // you cannot modify the dic while iterating it, so we basically clone it
             foreach (var spellCooldownKeyValue in Cooldowns)
             {
-                SetSpellInCooldown(spellCooldownKeyValue.Key, spellCooldownKeyValue.Value - time);
-                if (Cooldowns[spellCooldownKeyValue.Key] <= 0) 
-                {
-                    CooldownsToRemove.Add(spellCooldownKeyValue.Key);
-                }
+                CooldownsUpdates.Add(spellCooldownKeyValue);
             }
 
-            foreach (var spellKey in CooldownsToRemove)
+            foreach (var spellCooldownKeyValue in CooldownsUpdates)
             {
-                Cooldowns.Remove(spellKey);
+                SetSpellInCooldown(spellCooldownKeyValue.Key, spellCooldownKeyValue.Value - time);
             }
         }
     }
 
     public void SetSpellInCooldown(string key, float cooldown)
     {
-        Cooldowns[key] = cooldown;
+        if (cooldown <= 0) 
+        {
+            Cooldowns.Remove(key);
+        }
+        else
+        {
+            Cooldowns[key] = cooldown;
+        }
     }
 
     public void WarnAboutCooldown()

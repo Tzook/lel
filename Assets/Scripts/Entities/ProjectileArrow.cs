@@ -99,20 +99,17 @@ public class ProjectileArrow : ActorDamageInstance {
 
             if (TargetCollider.tag == "Enemy")
             {
-                if (TargetTag == TargetCollider.tag)
+                TargetHit = true;
+
+                if (TriggerHit)
                 {
-                    TargetHit = true;
 
-                    if (TriggerHit)
-                    {
-
-                        HandleCollision(TargetCollider);
-                    }
+                    HandleCollision(TargetCollider);
                 }
             }
             else if (TargetCollider.tag == "Actor")
             {
-                if (TargetTag == TargetCollider.tag && TargetCollider.GetComponent<ActorInstance>() != ParentActor)
+                if (TargetCollider.GetComponent<ActorInstance>() != ParentActor)
                 {
                     TargetHit = true;
 

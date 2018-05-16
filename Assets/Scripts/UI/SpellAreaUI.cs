@@ -52,6 +52,7 @@ public class SpellAreaUI : MonoBehaviour
             {
                 tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                 tempObj.transform.SetParent(SpellContainer, false);
+                tempObj.transform.position = tempObj.transform.parent.position;
                 tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[i]);
 
                 yield return 0.1f;
@@ -61,6 +62,7 @@ public class SpellAreaUI : MonoBehaviour
             {
                 tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                 tempObj.transform.SetParent(SpellContainer, false);
+                tempObj.transform.position = tempObj.transform.parent.position;
                 tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1]);
             }
             else
@@ -69,6 +71,7 @@ public class SpellAreaUI : MonoBehaviour
                 {
                     tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                     tempObj.transform.SetParent(SpellContainer, false);
+                    tempObj.transform.position = tempObj.transform.parent.position;
                     tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1]);
                     tempObj.GetComponent<SpellBoxUI>().Hide();
 

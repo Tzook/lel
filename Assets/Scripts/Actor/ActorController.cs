@@ -555,8 +555,6 @@ public class ActorController : MonoBehaviour
             return;
         }
 
-        InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
-
         bool usedSpell = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.AttemptUseSpell(spell);
         if (usedSpell)
         {
@@ -564,7 +562,10 @@ public class ActorController : MonoBehaviour
         }
         if (usedSpell)
         {
-            if(spell.spellTypeEnumState == SpellTypeEnumState.movement)
+
+            InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
+
+            if (spell.spellTypeEnumState == SpellTypeEnumState.movement)
             {
                 ExecuteMovementSpell(spell);
             }
@@ -1092,6 +1093,40 @@ public class ActorController : MonoBehaviour
             t += 2f * Time.deltaTime;
 
             Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t);
+
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        MovementSpellRoutineInstance = null;
+    }
+
+    IEnumerator MovementRoutine_Hop()
+    {
+        Vector2 initPos = Rigid.position;
+        bool right = aimRight;
+        Vector2 targetPoint = (right ? new Vector2(Rigid.position.x + 3f, Rigid.position.y) : new Vector2(Rigid.position.x - 3f, Rigid.position.y));
+
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            if (!right && SideRayRight)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t - 1f * Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+            else if (right && SideRayLeft)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t - 1f * Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+
+            t += 1f * Time.deltaTime;
+
+            Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t);
 
 
             yield return new WaitForFixedUpdate();

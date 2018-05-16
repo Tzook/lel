@@ -20,7 +20,7 @@ public class SpellsCooldowns
         return GetCurrentSpellCooldown(spell.Key) <= 0;
     }
 
-    protected float GetCurrentSpellCooldown(string spellKey)
+    public float GetCurrentSpellCooldown(string spellKey)
     {
         return Cooldowns.ContainsKey(spellKey) ? Cooldowns[spellKey] : 0;
     }

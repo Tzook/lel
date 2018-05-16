@@ -14,6 +14,12 @@ public class SpellBoxUI : MonoBehaviour {
     [SerializeField]
     Image m_MarkerIcon;
 
+    [SerializeField]
+    Image m_CooldownImage;
+
+    [SerializeField]
+    Text m_txtCooldown;
+
     DevSpell CurrentSpell;
 
     public void Set(DevSpell spell)
@@ -55,17 +61,32 @@ public class SpellBoxUI : MonoBehaviour {
     {
         m_BindText.enabled = true;
         m_Icon.enabled = true;
+        m_txtCooldown.enabled = true;
+        m_CooldownImage.enabled = true;
     }
     
     public void Hide()
     {
         m_BindText.enabled = false;
         m_Icon.enabled = false;
+        m_txtCooldown.enabled = false;
+        m_CooldownImage.enabled = false;
     }
 
-    public void Activate()
+    public void Update()
     {
+        float cd = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.GetCurrentSpellCooldown(CurrentSpell.Key);
 
+        if (cd > 0f)
+        {
+            m_CooldownImage.fillAmount = cd / CurrentSpell.Cooldown;
+            m_txtCooldown.text = Mathf.FloorToInt(cd).ToString();
+        }
+        else
+        {
+            m_CooldownImage.fillAmount = 0f;
+            m_txtCooldown.text = "";
+        }
     }
 
     public void Activated()
@@ -92,6 +113,23 @@ public class SpellBoxUI : MonoBehaviour {
             m_MarkerIcon.color = Color.Lerp(m_MarkerIcon.color, new Color(Color.white.r, Color.white.g, Color.white.b, 0f), t);
             yield return 0;
         }
+    }
+
+    IEnumerator CooldownRoutine(float cd)
+    {
+        float t = cd;
+
+        while(t>0f)
+        {
+            t -= Time.deltaTime;
+
+            
+
+            yield return 0;
+        }
+
+        m_txtCooldown.text = "";
+        m_CooldownImage.fillAmount = 0f;
     }
 
 

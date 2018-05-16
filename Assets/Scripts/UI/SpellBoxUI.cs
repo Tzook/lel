@@ -42,6 +42,7 @@ public class SpellBoxUI : MonoBehaviour {
 
         m_BindText.text = "(" + BindingName + ")";
 
+        UpdateCooldownUI();
         RefreshMana();
     }
 
@@ -75,7 +76,12 @@ public class SpellBoxUI : MonoBehaviour {
 
     public void Update()
     {
-        float cd = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.GetCurrentSpellCooldown(CurrentSpell.Key);
+        UpdateCooldownUI();
+    }
+
+    private void UpdateCooldownUI()
+    {
+        float cd = LocalUserInfo.Me.ClientCharacter != null ? LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.GetCurrentSpellCooldown(CurrentSpell.Key) : 0;
 
         if (cd > 0f)
         {

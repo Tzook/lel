@@ -54,8 +54,6 @@ public class SpellAreaUI : MonoBehaviour
                 tempObj.transform.SetParent(SpellContainer, false);
                 tempObj.transform.position = tempObj.transform.parent.position;
                 tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[i]);
-
-                yield return 0.1f;
             }
 
             if (AbilitySwitch)

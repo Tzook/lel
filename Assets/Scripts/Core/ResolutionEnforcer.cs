@@ -51,7 +51,7 @@ class ResolutionEnforcer : UIBehaviour
         float currentAspect = (float)Screen.width / (float)Screen.height;
 
         float scaleHeight = currentAspect / EnforcedAspect;
-        List<Camera> cameras = GetCameras();
+        Camera[] cameras = Camera.allCameras;
 
         foreach (var camera in cameras)
         {
@@ -82,21 +82,5 @@ class ResolutionEnforcer : UIBehaviour
                 camera.rect = rect;
             }
         }
-    }
-
-    protected List<Camera> GetCameras()
-    {
-        List<Camera> cameras = new List<Camera>();
-        if (GameCamera.Instance == null)
-        {
-            cameras.Add(Camera.main);
-        }
-        else
-        {
-            cameras.Add(GameCamera.Instance.Cam);
-            cameras.Add(GameCamera.Instance.BlurCam);
-        }
-
-        return cameras;
     }
 }

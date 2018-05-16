@@ -1249,7 +1249,7 @@ public class ActorController : MonoBehaviour
         TakingDamageInAir = true;
         // first take extra time for the addforce to kick in
         yield return new WaitForSeconds(0.2f);
-        while (!Grounded)
+        while (!Grounded && !OnRope)
         {
             yield return null;
         }

@@ -313,10 +313,9 @@ public class ActorController : MonoBehaviour
                     StandStill();
                 }
 
-                if (Input.GetKey(InputMap.Map["Jump"]))
+                if (Input.GetKey(InputMap.Map["Jump"]) && Grounded)
                 {
                     Jump();
-                    //Anim.SetBool("Walking", true);
                 }
 
                 GroundRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 13f, 0), -transform.up, GroundedThreshold, GroundLayerMask);
@@ -410,6 +409,7 @@ public class ActorController : MonoBehaviour
                         if ((Input.GetKey(InputMap.Map["Jump"])))
                         {
                             UnclimbRope();
+                            Jump(1f);
                         }
                     }
                 }
@@ -651,11 +651,11 @@ public class ActorController : MonoBehaviour
         isMoving = false;
     }
 
-    public void Jump()
+    public void Jump(float? jumpPower = null)
     {
-        if(JumpRoutineInstance==null && Grounded)
+        if(JumpRoutineInstance==null)
         {
-            JumpRoutineInstance = StartCoroutine(JumpRoutine());
+            JumpRoutineInstance = StartCoroutine(JumpRoutine(jumpPower));
         }
     }
 
@@ -746,12 +746,15 @@ public class ActorController : MonoBehaviour
 
     }
 
-    protected IEnumerator JumpRoutine()
+    protected IEnumerator JumpRoutine(float? jumpPower = null)
     {
-
         if (Rigid.velocity.y <= 1.5f)
         {
-            Rigid.AddForce((InternalJumpForce + Instance.Info.ClientPerks.JumpBonus) * transform.up, ForceMode2D.Impulse);
+            if (jumpPower == null)
+            {
+                jumpPower = InternalJumpForce + Instance.Info.ClientPerks.JumpBonus;
+            }
+            Rigid.AddForce((float)jumpPower * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
         }
 

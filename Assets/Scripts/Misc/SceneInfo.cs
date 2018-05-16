@@ -26,6 +26,8 @@ public class SceneInfo : MonoBehaviour {
     public static SceneInfo Instance;
 
     public List<NetStateEntity> NetStateEntities = new List<NetStateEntity>();
+    
+    public bool SupportsPVP;
 
     public void UpdateStateChange(string entityKey, string stateValue)
     {

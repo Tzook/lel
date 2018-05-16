@@ -680,7 +680,7 @@ public class SocketClient : MonoBehaviour
             // actor takes the damage
             targetActor.CurrentHealth = hp;
             targetActor.Instance.Hurt();
-            if (targetActor == LocalUserInfo.Me.ClientCharacter)
+            if (targetActor == LocalUserInfo.Me.ClientCharacter || !LocalUserInfo.Me.CurrentParty.Members.Contains(targetActor.Name))
             {
                 string text = String.Format("{0:n0}", data["dmg"].AsInt);
                 if (data["crit"].AsBool) {

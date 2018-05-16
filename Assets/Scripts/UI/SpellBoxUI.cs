@@ -80,7 +80,7 @@ public class SpellBoxUI : MonoBehaviour {
         if (cd > 0f)
         {
             m_CooldownImage.fillAmount = cd / CurrentSpell.Cooldown;
-            m_txtCooldown.text = Mathf.FloorToInt(cd).ToString();
+            m_txtCooldown.text = Mathf.CeilToInt(cd).ToString();
         }
         else
         {

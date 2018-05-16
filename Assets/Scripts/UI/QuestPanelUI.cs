@@ -79,6 +79,12 @@ public class QuestPanelUI : MonoBehaviour {
 
                         break;
                     }
+                case "heal":
+                    {
+                        conContent = " HP Healed ";
+
+                        break;
+                    }
             }
 
             tempObject.transform.GetChild(0).GetComponent<Text>().text = conContent;

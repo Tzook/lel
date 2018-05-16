@@ -36,6 +36,8 @@ public class DialogManager : MonoBehaviour {
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                currentNPC.ExecuteExitEvent();
+
                 StopDialogMode();
 
                 if (isVendorMode)
@@ -88,12 +90,15 @@ public class DialogManager : MonoBehaviour {
 
     public void StopDialogMode()
     {
-        if (!string.IsNullOrEmpty(currentNPC.EndAnimation))
+        if (currentNPC != null)
         {
-            currentNPC.TriggerAnimation(currentNPC.EndAnimation);
-        }
+            if (!string.IsNullOrEmpty(currentNPC.EndAnimation))
+            {
+                currentNPC.TriggerAnimation(currentNPC.EndAnimation);
+            }
 
-        currentNPC.HideName(true);
+            currentNPC.HideName(true);
+        }
 
         StopAllCoroutines();
 

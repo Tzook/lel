@@ -55,6 +55,7 @@ public class ActorController : MonoBehaviour
 
 
     public Coroutine JumpRoutineInstance;
+    public Coroutine MovementSpellRoutineInstance;
 
     LayerMask GroundLayerMask = 0 << 0 | 1 | 16;
 
@@ -113,13 +114,8 @@ public class ActorController : MonoBehaviour
 
     void Start()
     {
-        if (Instance.Info.AttackSpeed != null)
-        {
-            SetAttackSpeed((float)Instance.Info.AttackSpeed);
-        }
         initScale = Anim.transform.localScale;
         EndAttack();
-
     }
 
     void Update()
@@ -226,7 +222,7 @@ public class ActorController : MonoBehaviour
 
     private bool CanDoAction()
     {
-        return Game.Instance.CanUseUI && !Game.Instance.InChat && !Game.Instance.MovingTroughPortal && CurrentSpellInCast == null && !Stunned;
+        return Game.Instance.CanUseUI && !Game.Instance.InChat && CurrentSpellInCast == null && !Stunned;
     }
 
     void LateUpdate()
@@ -269,6 +265,11 @@ public class ActorController : MonoBehaviour
         {
             SpellCooldown -= 1f * Time.deltaTime;
         }
+
+        if (LocalUserInfo.Me.ClientCharacter != null)
+        {
+            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.TickSpellsCooldowns();
+        }
     }
 
     private void AttackCharge()
@@ -287,17 +288,16 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("InAir", false);
         Anim.SetBool("Walking", false);
 
+        SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 16f, 0), transform.right, GroundedThreshold, GroundLayerMask);
+        SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 16f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
+
+        LeftSlope = (SideRayLeft.normal.x < -0.7 || SideRayLeft.normal.x > 0.7);
+        RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
+
         if (CanDoAction())
         {
             if (!OnRope)
             {
-
-                SideRayRight = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(Collider.size.x / 16f, -Collider.size.y / 16f, 0), transform.right, GroundedThreshold, GroundLayerMask);
-                SideRayLeft = Physics2D.Raycast(transform.position + transform.transform.TransformDirection(-Collider.size.x / 16f, -Collider.size.y / 16f, 0), -transform.right, GroundedThreshold, GroundLayerMask);
-
-                LeftSlope = (SideRayLeft.normal.x < -0.7 || SideRayLeft.normal.x > 0.7);
-                RightSlope = (SideRayRight.normal.x < -0.7 || SideRayRight.normal.x > 0.7);
-
                 if (Input.GetKey(InputMap.Map["Move Left"]) && !LeftSlope)
                 {
                     MoveLeft();
@@ -468,6 +468,8 @@ public class ActorController : MonoBehaviour
         }
 
         Game.Instance.MovingTroughPortal = true;
+        InturruptAttack();
+        InGameMainMenuUI.Instance.CloseAllWindows();
         SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
         
     }
@@ -507,7 +509,7 @@ public class ActorController : MonoBehaviour
     {
         GameObject damageZone;
 
-        if(Instance.Info.Equipment.Weapon.SubType == "twohanded")
+        if(Instance.Info.Equipment.Weapon != null && Instance.Info.Equipment.Weapon.SubType == "twohanded")
         {
             damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_TwoHand");
         }
@@ -527,6 +529,16 @@ public class ActorController : MonoBehaviour
         Instance.FireProjectile(true, LoadAttackValue, AttackIdCounter);
     }
 
+    public void ExecuteMovementSpell(DevSpell spell)
+    {
+        if(MovementSpellRoutineInstance != null)
+        {
+            StopCoroutine(MovementSpellRoutineInstance);
+        }
+
+        MovementSpellRoutineInstance = StartCoroutine("MovementRoutine_"+spell.Key);
+    }
+
     private void CastSpell(int spellIndex)
     {
         Aim();
@@ -538,20 +550,30 @@ public class ActorController : MonoBehaviour
             return;
         }
 
-        if(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL < spell.Level)
+        if (LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL < spell.Level)
         {
             return;
         }
 
         InGameMainMenuUI.Instance.ActivatedSpell(spell.Key);
 
-        bool usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
+        bool usedSpell = LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.AttemptUseSpell(spell);
         if (usedSpell)
         {
+            usedSpell = ManaUsage.Instance.UseMana(spell.Mana);
+        }
+        if (usedSpell)
+        {
+            if(spell.spellTypeEnumState == SpellTypeEnumState.movement)
+            {
+                ExecuteMovementSpell(spell);
+            }
+
             AttackIdCounter++;
             CurrentSpellAttackId = AttackIdCounter;
             CurrentSpellInCast = spell;
 
+            LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.UseSpell(spell);
             SocketClient.Instance.SendUsedSpell(spell.Key, CurrentSpellAttackId);
 
             Instance.CastSpell(spell);
@@ -615,7 +637,7 @@ public class ActorController : MonoBehaviour
         }
         else 
         {
-            speed = InternalSpeed + Instance.Info.SpeedBonus;
+            speed = InternalSpeed + Instance.Info.ClientPerks.SpeedBonus;
             if (Slowed) {
                 speed /= 2f;
             }
@@ -650,8 +672,6 @@ public class ActorController : MonoBehaviour
         if (actionKey == "spell")
         {
             SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
-
-            int rnd = Random.Range(0, 3);
 
             GameObject tempHit;
             tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
@@ -699,8 +719,6 @@ public class ActorController : MonoBehaviour
         {
             SocketClient.Instance.SendHitSpell(targetIDs, attackIdCounter);
 
-            int rnd = Random.Range(0, 3);
-
             GameObject tempHit;
             tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
@@ -732,7 +750,7 @@ public class ActorController : MonoBehaviour
 
         if (Rigid.velocity.y <= 1.5f)
         {
-            Rigid.AddForce((InternalJumpForce + Instance.Info.JumpBonus) * transform.up, ForceMode2D.Impulse);
+            Rigid.AddForce((InternalJumpForce + Instance.Info.ClientPerks.JumpBonus) * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
         }
 
@@ -875,12 +893,12 @@ public class ActorController : MonoBehaviour
 
         switch (devAbility.attackTypeEnumState)
         {
-            case AttackTypeEnumState.normal:
+            case SpellTypeEnumState.normal:
                 {
                     AttackMelee();
                     break;
                 }
-            case AttackTypeEnumState.projectile:
+            case SpellTypeEnumState.projectile:
                 {
                     FireProjectile();
                     break;
@@ -954,9 +972,9 @@ public class ActorController : MonoBehaviour
     {
         if (CurrentSpellInCast != null)
         {
-            switch (CurrentSpellInCast.attackTypeEnumState)
+            switch (CurrentSpellInCast.spellTypeEnumState)
             {
-                case AttackTypeEnumState.normal:
+                case SpellTypeEnumState.normal:
                     {
                         GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
@@ -966,7 +984,7 @@ public class ActorController : MonoBehaviour
                         damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
                         break;
                     }
-                case AttackTypeEnumState.projectile:
+                case SpellTypeEnumState.projectile:
                     {
                         GameObject damageZone = ResourcesLoader.Instance.GetRecycledObject(CurrentSpellInCast.ColliderPrefab);
 
@@ -1044,6 +1062,44 @@ public class ActorController : MonoBehaviour
             InvincibilityRoutineInstance = StartCoroutine(InvincibilityRoutine());
         }
     }
+    #endregion
+
+    #region MovementRoutines
+
+    IEnumerator MovementRoutine_Dodge()
+    {
+        Vector2 initPos = Rigid.position;
+        bool right = aimRight;
+        Vector2 targetPoint = (right ? new Vector2(Rigid.position.x - 5f, Rigid.position.y) : new Vector2(Rigid.position.x + 5f, Rigid.position.y));
+        
+
+        float t = 0f;
+        while(t<1f)
+        {
+            if (!right && SideRayRight)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t-2f*Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+            else if (right && SideRayLeft)
+            {
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 2f * Time.deltaTime);
+                Rigid.velocity = Vector2.zero;
+                break;
+            }
+
+            t += 2f * Time.deltaTime;
+
+            Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t);
+
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        MovementSpellRoutineInstance = null;
+    }
+
     #endregion
 
     void OnTriggerEnter2D(Collider2D obj)

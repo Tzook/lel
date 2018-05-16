@@ -64,12 +64,17 @@ public class WriteConstantLists
 
     public void WriteMobsPopupList(List<DevMonsterInfo> mobs)
     {
-        string text = File.ReadAllText(FILE_NAME_MONSTERS);
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
         
         Regex rgx = new Regex("/\\* AUTO_GENERATED_MOBS_START \\*/ .* /\\* AUTO_GENERATED_MOBS_END \\*/");
         string listString = GetListString(mobs.Select(mob => mob.MonsterKey).ToList());
 
-        string result = rgx.Replace(text, "/* AUTO_GENERATED_MOBS_START */ " + listString + " /* AUTO_GENERATED_MOBS_END */");
+        string replacement = "/* AUTO_GENERATED_MOBS_START */ " + listString + " /* AUTO_GENERATED_MOBS_END */";
+        string result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
+        
+        text = File.ReadAllText(FILE_NAME_MONSTERS);
+        result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_MONSTERS, result);
         AssetDatabase.Refresh();
     }

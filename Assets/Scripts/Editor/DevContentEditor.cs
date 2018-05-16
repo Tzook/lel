@@ -17,6 +17,9 @@
  * monster cloneLoot 'FromMonsterKey' 'ToMonsterKey' 
  * pa clonePerks 'FromPA' 'ToPa'
  * 
+ * Quests:
+ * quest delete 'QuestKey'
+ * 
  */
 
 using System.Collections;
@@ -177,7 +180,7 @@ public class DevContentEditor : Editor
         }
     }
 
-    private static void FillMonsterSpellInfo(DevSpell devSpell, JSONNode node)
+    private static void FillMonsterSpellInfo(DevMobSpellBase devSpell, JSONNode node)
     {
         node["key"] = devSpell.Key.ToString();
 
@@ -185,6 +188,11 @@ public class DevContentEditor : Editor
         {
             node["perks"][b]["key"] = devSpell.Perks[b].Key.ToString();
             node["perks"][b]["value"] = devSpell.Perks[b].Value.ToString();
+        }
+
+        for (int b = 0; b < devSpell.SpawnMobs.Length; b++)
+        {
+            node["spawnMobs"][b] = devSpell.SpawnMobs[b];
         }
     }
 
@@ -300,6 +308,7 @@ public class DevContentEditor : Editor
                 node["talents"][i]["spells"][a]["key"] = abilities[i].Spells[a].Key.ToString();
                 node["talents"][i]["spells"][a]["level"] = abilities[i].Spells[a].Level.ToString();
                 node["talents"][i]["spells"][a]["mana"] = abilities[i].Spells[a].Mana.ToString();
+                node["talents"][i]["spells"][a]["cooldown"] = abilities[i].Spells[a].Cooldown.ToString();
                 
                 for (int b = 0; b < abilities[i].Spells[a].Perks.Count; b++)
                 {
@@ -326,6 +335,7 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["max"] = perks[i].UpgradeCap.ToString();
             node["perkCollection"][i]["default"] = perks[i].StartingValue.ToString();
             node["perkCollection"][i]["client"].AsBool = perks[i].IsClient;
+            node["perkCollection"][i]["type"] = perks[i].Type;
             
             for (int a = 0; a < perks[i].BonusPerks.Count; a++)
             {
@@ -452,9 +462,9 @@ public class DevContentEditor : Editor
                         currentInfo.Items[i].DropChance *= float.Parse(WordNumber(2));
                     }
                 }
-                
+
             }
-            else if(WordNumber(1) == "balanceDropTargets")
+            else if (WordNumber(1) == "balanceDropTargets")
             {
                 Undo.RecordObject(target, "Times modifyDrop");
                 for (int i = 0; i < currentInfo.Items.Count; i++)
@@ -693,7 +703,34 @@ public class DevContentEditor : Editor
                 return;
             }
         }
+        else if (WordNumber(0) == "quest")
+        {
+            if (WordNumber(1) == "delete")
+            {
+                int tempIndex;
+                if (int.TryParse(WordNumber(2), out tempIndex))
+                {
+                    Undo.RecordObject(target, "Remove Quest");
+                    currentInfo.Quests.RemoveAt(tempIndex);
+                    return;
+                }
+                else
+                {
+                    string tempWord = WordNumber(2);
+                    for (int i = 0; i < currentInfo.Quests.Count; i++)
+                    {
+                        if (currentInfo.Quests[i].Key == tempWord)
+                        {
+                            Undo.RecordObject(target, "Remove Quest");
+                            currentInfo.Quests.RemoveAt(i);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     private string WordNumber(int number)
     {

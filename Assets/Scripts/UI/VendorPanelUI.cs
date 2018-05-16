@@ -38,14 +38,14 @@ public class VendorPanelUI : MonoBehaviour {
 
         SetPurchaseButton(LocalUserInfo.Me.ClientCharacter.Gold);
 
-        PriceText.text = ReferenceItem.GoldValue.ToString();
+        PriceText.text = GetCost().ToString();
 
         m_ItemInfoUI.Show(CurrentItem);
     }
 
     protected void SetPurchaseButton(int gold)
     {
-        if (gold < ReferenceItem.GoldValue)
+        if (gold < GetCost())
         {
             BuyImage.color = CantBuyColor;
             BuyImage.GetComponent<Button>().interactable = false;
@@ -67,6 +67,11 @@ public class VendorPanelUI : MonoBehaviour {
         AudioControl.Instance.Play("sound_purchase");
 
         SocketClient.Instance.SendBuyVendorItem(CurrentVendor.Key, CurrentVendor.GetItemIndex(CurrentItem.Key));
-        SetPurchaseButton(LocalUserInfo.Me.ClientCharacter.Gold - ReferenceItem.GoldValue);
+        SetPurchaseButton(LocalUserInfo.Me.ClientCharacter.Gold - GetCost());
+    }
+
+    protected int GetCost()
+    {
+        return Mathf.RoundToInt(ReferenceItem.GoldValue * (1f - LocalUserInfo.Me.ClientCharacter.ClientPerks.ShopsDiscount));
     }
 }

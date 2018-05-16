@@ -177,7 +177,7 @@ public class Content : MonoBehaviour {
         return null;
     }
 
-    public DevSpell GetMobSpell(string spellKey)
+    public DevMobSpellBase GetMobSpell(string spellKey)
     {
         for (int i = 0; i < Monsters.Count; i++)
         {
@@ -306,7 +306,7 @@ public class DevMonsterInfo
 [System.Serializable]
 public class LootInstance
 {
-    [Popup(/* AUTO_GENERATED_LOOT_START */ "NO VALUE", "acolytehood", "acolyterobe", "adventurerShirt", "apprenticeRobeBlack", "apprenticeRobeWhite", "archershat", "batWing", "bigFish", "blackbandana", "blackclothshirt", "blackGloves", "blackJellyBean", "blackkercheif", "blackPants", "blackpeasentshirt", "blackShoes", "blueBerries", "blueJellyBean", "bluekercheif", "blueMushroomCap", "bluepeasentshirt", "blueponcho", "brownpeasentshirt", "brownponcho", "cabbage", "captainhat", "captianscoat", "carrot", "carrotSack", "chainlinkhelmet", "charredrobe", "clothPants", "commonaxe", "commonschimitar", "commonsword", "cosmoTunnelKey", "cozyslippers", "cutlass", "dirk", "divinebook", "drainingstaff", "executionerbandana", "Fishing Rod", "forbiddendirk", "gold", "greenGloves", "greenJellyBean", "greenPants", "greenpeasentshirt", "greenponcho", "icystaff", "idoloftrust", "improvedshortbow", "leatherarmor", "leatherarmor", "leatherGloves", "leatherpants", "leatherShoes", "leatherVest", "lightgambesson", "longdagger", "longhammer", "magicCarrotSeeds", "mailarmor", "mailpants", "mailsabatons", "mailshoes", "meltingrod", "metalbow", "metalhelmet", "nutVaultKey", "oldTurtleShell", "orangeclothshirt", "orangeJellyBean", "orbofenergy", "peasantHat", "pinkclothshirt", "pinkJellyBean", "plantFlower", "priestrobe", "pyromancerrobe", "rabbitCostume", "rabbitEar", "rabbitfurshoes", "rabbitFurVest", "rabbitLandEntrancePremission", "redApple", "redbandna", "redBerries", "redGloves", "redJellyBean", "redpeasentshirt", "shortAxe", "shortBow", "shortClub", "shortcutlass", "shortDagger", "shortScimitar", "shortSword", "slipers", "smallFish", "snailhat", "spear", "strapShoes", "strawHat", "swordOfElad", "tatteredblackpants", "tatteredbrownpants", "tatteredgreenpants", "tatteredwhitepants", "tauntingfork", "threateningfork", "tomato", "torch", "turtleShell", "turtleshellarmor", "turtleShellOld", "turtleShellSpiked", "turtleSoup", "twohandedaxe", "twohandedschimitar", "twohandedsword", "VilePetal", "wand", "wandoffrost", "warbow", "warlockrobe", "whiteclothshirt", "whiteGloves", "whiteJellyBean", "wizardhood", "wizardrobe", "woodenhammer", "woodenpole", "yellowbandana", "yellowJellyBean", "yellowkercheif", "yellowshoes" /* AUTO_GENERATED_LOOT_END */)]
+    [Popup(/* AUTO_GENERATED_LOOT_START */ "NO VALUE", "acolytehood", "acolyterobe", "acorn", "adventurerShirt", "apprenticeRobeBlack", "apprenticeRobeWhite", "archershat", "batWing", "bigFish", "blackbandana", "blackclothshirt", "blackGloves", "blackJellyBean", "blackkercheif", "blackPants", "blackpeasentshirt", "blackShoes", "blueBerries", "blueJellyBean", "bluekercheif", "blueMushroomCap", "bluepeasentshirt", "blueponcho", "brownpeasentshirt", "brownponcho", "cabbage", "captainhat", "captianscoat", "carrot", "carrotSack", "chainlinkhelmet", "charredrobe", "clothPants", "commonaxe", "commonschimitar", "commonsword", "cosmoTunnelKey", "cozyslippers", "cutlass", "dirk", "divinebook", "drainingstaff", "executionerbandana", "Fishing Rod", "forbiddendirk", "gold", "greenGloves", "greenJellyBean", "greenPants", "greenpeasentshirt", "greenponcho", "icystaff", "idoloftrust", "improvedshortbow", "leatherarmor", "leatherarmor", "leatherGloves", "leatherpants", "leatherShoes", "leatherVest", "lightgambesson", "longdagger", "longhammer", "magicCarrotSeeds", "mailarmor", "mailpants", "mailsabatons", "mailshoes", "meltingrod", "metalbow", "metalhelmet", "nutVaultKey", "oldTurtleShell", "orangeclothshirt", "orangeJellyBean", "orbofenergy", "peasantHat", "pinkclothshirt", "pinkJellyBean", "plantFlower", "priestrobe", "pyromancerrobe", "rabbitBossEars", "rabbitCostume", "rabbitEar", "rabbitfurshoes", "rabbitFurVest", "rabbitLandEntrancePremission", "redApple", "redbandna", "redBerries", "redGloves", "redJellyBean", "redpeasentshirt", "shortAxe", "shortBow", "shortClub", "shortcutlass", "shortDagger", "shortScimitar", "shortSword", "slipers", "smallFish", "snailhat", "spear", "squirrelBossMustache", "strapShoes", "strawHat", "swordOfElad", "tatteredblackpants", "tatteredbrownpants", "tatteredgreenpants", "tatteredwhitepants", "tauntingfork", "threateningfork", "tomato", "torch", "turtleShell", "turtleshellarmor", "turtleShellOld", "turtleShellSpiked", "turtleSoup", "twohandedaxe", "twohandedschimitar", "twohandedsword", "VilePetal", "wand", "wandoffrost", "warbow", "warlockrobe", "whiteclothshirt", "whiteGloves", "whiteJellyBean", "wizardhood", "wizardrobe", "woodenhammer", "woodenpole", "wormBossAntenna", "yellowbandana", "yellowJellyBean", "yellowkercheif", "yellowshoes" /* AUTO_GENERATED_LOOT_END */)]
     public string ItemKey;
     public int MinStack = 1;
     public int MaxStack = 1;
@@ -429,6 +429,10 @@ public class DevAbility
                     {
                         return "heal";
                     }
+                case HitTypeEnumState.CharTalent:
+                    {
+                        return "";
+                    }
             }
         }
     }
@@ -436,7 +440,7 @@ public class DevAbility
     HitTypeEnumState hitTypeEnumState;
     public enum HitTypeEnumState
     {
-        Attack,Heal
+        Attack,Heal,CharTalent
     }
 
     [SerializeField]
@@ -476,7 +480,7 @@ public class DevAbility
     }
 
     [SerializeField]
-    public AttackTypeEnumState attackTypeEnumState;
+    public SpellTypeEnumState attackTypeEnumState;
 
     public int ManaCost;
 
@@ -513,7 +517,7 @@ public class PerkStage
 {
     public int MinLevel;
     public int PerksOffered;
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "cooldownModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "saleModifier", "shopsDiscount", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public List<string> AddToPool = new List<string>();
 }
 
@@ -529,41 +533,21 @@ public class DevMobSpells
     public DevDeathrattleSpell DeathRattle;
 }
 
-[System.Serializable]
-public class DevSpell
+public class DevSpellBase 
 {
     public string Key;
-    public int Level;
-    public int Mana;
     public string ColliderPrefab;
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
+}
+
+[System.Serializable]
+public class DevSpell: DevSpellBase
+{
+    public int Level;
+    public int Mana;
+    public int Cooldown;
     public Sprite Icon;
     public string HitSound;
-
-    public string HitType
-    {
-        get
-        {
-            switch (hitTypeEnumState)
-            {
-                default:
-                case HitTypeEnumState.Attack:
-                    {
-                        return "atk";
-                    }
-                case HitTypeEnumState.Heal:
-                    {
-                        return "heal";
-                    }
-            }
-        }
-    }
-    [SerializeField]
-    HitTypeEnumState hitTypeEnumState;
-    public enum HitTypeEnumState
-    {
-        Attack, Heal
-    }
 
     [SerializeField]
     public HitTargetEnumState hitTargetEnumState;
@@ -573,18 +557,25 @@ public class DevSpell
     }
 
     [SerializeField]
-    public AttackTypeEnumState attackTypeEnumState;
+    public SpellTypeEnumState spellTypeEnumState;
 
 }
 
 [System.Serializable]
-public class DevMobSpell : DevSpell
+public class DevMobSpellBase : DevSpellBase
+{
+    [Popup(/* AUTO_GENERATED_MOBS_START */ "NO VALUE", "Bat", "BerriesBush", "BlueBerriesBush", "BlueMushroom", "BossTurtle", "BuffedSquirrel", "BuffedSquirrel_VaultKeeper", "FatRabbit", "FlowerManBoss", "FrostWizardBoss", "GiantBat", "GreenWorm", "OldTurtle", "PirateSailor1", "PirateSailor2", "PirateSailor3", "PirateSailor4", "PirateSailor5", "Plant", "Rabbit", "RabbitBoss", "RedWorm", "Sack", "SmallSquirrel", "Spike", "SpikedTurtle", "Squirrel", "SquirrelBoss", "Thorns", "TomatoesBush", "Turtle", "VilePlant", "Worm", "WormBoss" /* AUTO_GENERATED_MOBS_END */)]
+    public string[] SpawnMobs;
+}
+
+[System.Serializable]
+public class DevMobSpell : DevMobSpellBase
 {
     public float Chance;
 }
 
 [System.Serializable]
-public class DevDeathrattleSpell : DevSpell
+public class DevDeathrattleSpell : DevMobSpellBase
 {
     public int Duration;
 }
@@ -592,7 +583,7 @@ public class DevDeathrattleSpell : DevSpell
 [System.Serializable]
 public class DevPerkMap
 {
-    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "rangeDamageBonus", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "cooldownModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "saleModifier", "shopsDiscount", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
 }
@@ -686,7 +677,7 @@ public class Quest
     public int RewardHP;
     public int RewardMP;
 
-    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "range" /* AUTO_GENERATED_ABILITIES_END */)]
+    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "quests", "range" /* AUTO_GENERATED_ABILITIES_END */)]
     public string RewardPrimaryAbility;
     
     public int RewardExp;
@@ -873,7 +864,7 @@ public class QuestCondition
 [System.Serializable]
 public class QuestState
 {
-    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "becomingWarrior", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerTest", "ruinedPainting", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
+    [Popup(/* AUTO_GENERATED_QUESTS_START */ "NO VALUE", "ABeanyRequest", "aidingTheCommunity", "bigOnes", "bigOnesDivine", "bigOnesIce", "bigOnesMelting", "bigOnesScimitar", "blockingTheView", "breakIntoSpa", "bustNuts", "carrotSupply", "CleaningUp", "divinePlace", "examineLostSupplies", "FatAlbert", "findAlex", "findCosmo", "findCosmo2", "findCosmo3", "findKaren", "frostPractice", "FrostTest", "hairPotion", "helpAlex", "helpJaxTheDog", "helpJaxTheDog2", "helpMaya", "jacksVengeance", "jacksVengeance2", "jacksVengeance3", "joinShrine", "mayaSpikedTurtles", "OldFriends", "petRansom", "petRansom2", "picnicSupplies", "piratesAmbush", "practiceHealing", "rabbitRaids", "rangerPractice", "RangerPractice2", "RangerTest", "ruinedPainting", "sacrificeFrostGod", "summonAnAngel", "thisIsNecessary1", "thisIsNecessary2", "thisIsNecessary3", "turtleProblem", "TurtleQuizz", "turtleSoup", "untieNurtle" /* AUTO_GENERATED_QUESTS_END */)]
     public string QuestKey;
 
     public string State
@@ -902,6 +893,14 @@ public class QuestState
                     {
                         return "CanBeCompleted";
                     }
+                case QuestEnumState.IsAvailable:
+                    {
+                        return "IsAvailable";
+                    }
+                case QuestEnumState.IsUnavailable:
+                    {
+                        return "IsUnavailable";
+                    }
             }
 
             return "NOSTATE";
@@ -915,11 +914,11 @@ public class QuestState
 
     public enum QuestEnumState
     {
-        InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted, NeverStarted
+        InProgress,Completed,NotInProgress,NotCompleted,CanBeCompleted, NeverStarted, IsAvailable, IsUnavailable
     }
 }
 
-public enum AttackTypeEnumState
+public enum SpellTypeEnumState
 {
-    normal, projectile, explosion, channeling
+    normal, projectile, explosion, channeling, movement
 }

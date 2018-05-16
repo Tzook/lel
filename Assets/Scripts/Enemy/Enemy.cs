@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour {
     //[SerializeField]
     protected Vector3 initScale;
 
-    public DevSpell SpellInCast;
+    public DevMobSpellBase SpellInCast;
 
     public ActorInstance CurrentTarget;
 
@@ -149,6 +149,8 @@ public class Enemy : MonoBehaviour {
         switch (cause)
         {
             case "attack":
+            case "world":
+            case "spell":
                 {
                     if (crit)
                     {
@@ -281,7 +283,10 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator DeathRoutine()
     {
-        Anim.SetInteger("DeathType", Random.Range(0, DeathTypes));
+        if (DeathTypes > 1) 
+        {
+            Anim.SetInteger("DeathType", Random.Range(0, DeathTypes));
+        }
         Anim.SetBool("Dead", true);
 
         yield return new WaitForSeconds(3f);
@@ -419,7 +424,7 @@ public class Enemy : MonoBehaviour {
         RemoveBuff(buff);
     }
 
-    public void ActivateSpell(DevSpell spellRef)
+    public void ActivateSpell(DevMobSpellBase spellRef)
     {
         Anim.SetTrigger(spellRef.Key);
         SpellInCast = spellRef;

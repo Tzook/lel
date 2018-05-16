@@ -8,6 +8,8 @@ public class EnterAreaEntity : MonoBehaviour {
     [SerializeField]
     UnityEvent OnEnter;
 
+    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<ActorInstance>() != null)

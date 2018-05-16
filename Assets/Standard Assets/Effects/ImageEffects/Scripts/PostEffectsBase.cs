@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
+    #pragma warning disable 0618 // the number of the warning    
     [ExecuteInEditMode]
     [RequireComponent (typeof(Camera))]
     public class PostEffectsBase : MonoBehaviour

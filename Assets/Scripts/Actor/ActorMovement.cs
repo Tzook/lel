@@ -248,11 +248,11 @@ public class ActorMovement : MonoBehaviour
 
         switch(devAbility.attackTypeEnumState)
         {
-            case AttackTypeEnumState.normal :
+            case SpellTypeEnumState.normal :
                 {
                     break;
                 }
-            case AttackTypeEnumState.projectile :
+            case SpellTypeEnumState.projectile :
                 {
                     Instance.FireProjectile(false, load, 0);
                     break;
@@ -265,7 +265,7 @@ public class ActorMovement : MonoBehaviour
     {
         if (m_HealthBar != null)
         {
-            m_HealthBar.GetComponent<HealthBar>().SetHealthbar(Instance.Info.CurrentHealth, Instance.Info.MaxHealth);
+            m_HealthBar.GetComponent<HealthBar>().SetHealthbar(Instance.Info.CurrentHealth, Instance.Info.ClientPerks.MaxHealth);
         }
     }
 

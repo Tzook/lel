@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCrawling : EnemyMoving {
-
-    [SerializeField]
-    float GroundedThreshold = 0.1f;
-
     [SerializeField]
     Crawler CrawlerEntity;
 
-    protected void Awake()
+    void Awake()
     {
         OriginalMovementSpeed = MovementSpeed;
     }
@@ -77,13 +73,13 @@ public class EnemyCrawling : EnemyMoving {
             {
                 Rigid.gravityScale = 1f;
 
-                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * transform.right, ForceMode2D.Impulse);
             }
             else
             {
                 Rigid.gravityScale = 1f;
 
-                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.KnockbackModifier * -transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * -transform.right, ForceMode2D.Impulse);
             }
         }
     }

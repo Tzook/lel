@@ -31,7 +31,7 @@ public class ItemInfoUI : MonoBehaviour {
 
     public string currentItemKey;
 
-    Vector3 objectWorldWidth;
+    Vector3? objectWorldWidth;
 
     public void Show(ItemInfo info)
     {
@@ -184,6 +184,6 @@ public class ItemInfoUI : MonoBehaviour {
             ((RectTransform)transform).GetWorldCorners(corners);
             objectWorldWidth = corners[2] - corners[1];
         }
-        return objectWorldWidth;
+        return (Vector3)objectWorldWidth;
     }
 }

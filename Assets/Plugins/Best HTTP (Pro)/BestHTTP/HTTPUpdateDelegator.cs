@@ -6,6 +6,7 @@
 
 namespace BestHTTP
 {
+    #pragma warning disable 0618 // the number of the warning
     /// <summary>
     /// Will route some U3D calls to the HTTPManager.
     /// </summary>

@@ -76,7 +76,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_equip_item", OnActorEquipItem);
         CurrentSocket.On("actor_unequip_item", OnActorUnequipItem);
         CurrentSocket.On("actor_delete_equip", OnActorDeleteEquip);
-        CurrentSocket.On("actor_moved_equip", OnActorMovedEquip);
 
         CurrentSocket.On("actor_emote", OnActorEmoted);
 
@@ -88,7 +87,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_lvl_up", OnActorLevelUp);
         CurrentSocket.On("actor_gain_ability", OnActorGainAbility);
 
-        CurrentSocket.On("actor_take_dmg", OnActorTakeDMG);
+        CurrentSocket.On("take_damage", OnTakeDamage);
         CurrentSocket.On("actor_blocked", OnActorBlocked);
         CurrentSocket.On("actor_ded", OnActorDed);
         CurrentSocket.On("actor_resurrect", OnActorResurrect);
@@ -99,7 +98,6 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("mob_spawn", OnMobSpawn);
         CurrentSocket.On("mob_die", OnMobDeath);
-        CurrentSocket.On("mob_take_dmg", OnMobTakeDamage);
         CurrentSocket.On("mob_take_miss", OnMobTakeMiss);
         CurrentSocket.On("mob_move", OnMobMovement);
         CurrentSocket.On("mob_blocked", OnMobBlocked);
@@ -134,6 +132,7 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("buff_activated", OnBuffActivated);
         CurrentSocket.On("buff_resisted", OnBuffResisted);
         CurrentSocket.On("spell_activated", OnSpellActivated);
+        CurrentSocket.On("spell_cooldown", OnSpellCooldown);
         CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
 
         LoadingWindowUI.Instance.Register(this);
@@ -446,13 +445,6 @@ public class SocketClient : MonoBehaviour
         Game.Instance.DeleteEquip(data["id"].Value, data["slot"].Value);
     }
 
-    protected void OnActorMovedEquip(Socket socket, Packet packet, object[] args)
-    {
-        BroadcastEvent("Equip Moved");
-        JSONNode data = (JSONNode)args[0];
-
-    }
-
     protected void OnActorEmoted(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("Actor Emoted");
@@ -567,30 +559,58 @@ public class SocketClient : MonoBehaviour
             
             if (data["hpBonus"] != null) 
             {
-                actor.MaxHealth = data["hpBonus"].AsInt;
+                actor.ClientPerks.MaxHealth = data["hpBonus"].AsInt;
                 refreshStats = true;
-            }
-
-            if (data["mpBonus"] != null) 
-            {
-                actor.MaxMana = data["mpBonus"].AsInt;
-                refreshStats = true;
-            }
-            
-            if (data["attackSpeedModifier"] != null) 
-            {
-                actor.SetAttackSpeed(data["attackSpeedModifier"].AsFloat);
             }
             
             if (data["knockbackModifier"] != null) 
             {
-                actor.SetKnockback(data["knockbackModifier"].AsFloat);
+                actor.ClientPerks.KnockbackModifier = data["knockbackModifier"].AsFloat;
             }
 
-            if (data["mpCost"] != null) 
+            if (actor == LocalUserInfo.Me.ClientCharacter) 
             {
-                actor.SetManaCost(data["mpCost"].AsFloat);
-                refreshStats = true;
+                if (data["mpBonus"] != null) 
+                {
+                    actor.ClientPerks.MaxMana = data["mpBonus"].AsInt;
+                    refreshStats = true;
+                }
+
+                if (data["attackSpeedModifier"] != null) 
+                {
+                    actor.ClientPerks.AttackSpeed = data["attackSpeedModifier"].AsFloat;
+                }
+
+                if (data["mpCost"] != null) 
+                {
+                    actor.ClientPerks.ManaCost = data["mpCost"].AsFloat;
+                    refreshStats = true;
+                }
+
+                if (data["questExpBonus"] != null) 
+                {
+                    actor.ClientPerks.QuestExpBonus = data["questExpBonus"].AsFloat;
+                }
+
+                if (data["questGoldBonus"] != null) 
+                {
+                    actor.ClientPerks.QuestGoldBonus = data["questGoldBonus"].AsFloat;
+                }
+
+                if (data["shopsDiscount"] != null) 
+                {
+                    actor.ClientPerks.ShopsDiscount = data["shopsDiscount"].AsFloat;
+                }
+
+                if (data["saleModifier"] != null) 
+                {
+                    actor.ClientPerks.SaleModifier = data["saleModifier"].AsFloat;
+                }
+
+                if (data["cooldownModifier"] != null) 
+                {
+                    actor.ClientPerks.CooldownModifier = data["cooldownModifier"].AsFloat;
+                }
             }
             
             if (refreshStats && !Game.Instance.isLoadingScene && actor == LocalUserInfo.Me.ClientCharacter)
@@ -637,37 +657,55 @@ public class SocketClient : MonoBehaviour
         JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor gain ability | " + data.ToString());
 
-        LocalUserInfo.Me.ClientCharacter.AddPrimaryAbility(data["key"].Value, data["ability"]);
+        if (data["isCharAbility"].AsBool) {
+            LocalUserInfo.Me.ClientCharacter.AddCharAbility(data["key"].Value, data["ability"]);
+        } else {
+            LocalUserInfo.Me.ClientCharacter.AddPrimaryAbility(data["key"].Value, data["ability"]);
+        }
     }
 
-    protected void OnActorTakeDMG(Socket socket, Packet packet, object[] args)
+    protected void OnTakeDamage(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
-        BroadcastEvent("Actor Got Wounded");
-
-
-        ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+        BroadcastEvent("Damage taken | " + data.ToString());
 
         int hp = data["hp"].AsInt;
-        if (actor != null) 
+
+        ActorInfo targetActor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
+
+        // TODO use same hurt method for actor and mob
+
+        if (targetActor != null) 
         {
-            actor.CurrentHealth = hp;
-            actor.Instance.Hurt();
-            if (actor == LocalUserInfo.Me.ClientCharacter)
+            // actor takes the damage
+            targetActor.CurrentHealth = hp;
+            targetActor.Instance.Hurt();
+            if (targetActor == LocalUserInfo.Me.ClientCharacter)
             {
                 string text = String.Format("{0:n0}", data["dmg"].AsInt);
                 if (data["crit"].AsBool) {
                     // TODO make this beautiful, lel
                     text += " (CRIT)";
                 }
-                actor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+                targetActor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
                 InGameMainMenuUI.Instance.RefreshHP();
             }
             else
             {
-                actor.Instance.MovementController.RefreshHealth();
+                targetActor.Instance.MovementController.RefreshHealth();
+            }
+        } else {
+            // mob takes damage    
+            Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
+            ActorInfo attackingActor = Game.Instance.CurrentScene.GetActor(data["attacker_id"].Value);
+            // mob attacking mob still not supported ;P
+            if (attackingActor != null && monster != null) 
+            {
+                monster.Hurt(attackingActor.Instance, data["dmg"].AsInt, hp, data["cause"].Value, data["crit"].AsBool);
             }
         }
+
+        // updated knowns' health
         string name = data["name"].Value;
         UpdateKnownHealth(name, hp);
     }
@@ -719,7 +757,6 @@ public class SocketClient : MonoBehaviour
 
     protected void OnActorResurrect(Socket socket, Packet packet, object[] args)
     {
-        JSONNode data = (JSONNode)args[0];
         BroadcastEvent("Actor Has Been Resurrected");
 
         Game.Instance.IsAlive = true;
@@ -822,20 +859,6 @@ public class SocketClient : MonoBehaviour
                     monster.SetTarget(actorInfo.Instance);
                 }
             }
-        }
-    }
-
-    private void OnMobTakeDamage(Socket socket, Packet packet, object[] args)
-    {
-        JSONNode data = (JSONNode)args[0];
-
-        BroadcastEvent(data["mob_id"].Value + " Took " + data["dmg"].AsInt + " DMG from " + data["id"].Value);
-
-        Enemy monster = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
-        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
-        if (actorInfo != null && monster != null) 
-        {
-            monster.Hurt(actorInfo.Instance, data["dmg"].AsInt, data["hp"].AsInt, data["cause"].Value, data["crit"].AsBool);
         }
     }
 
@@ -968,9 +991,6 @@ public class SocketClient : MonoBehaviour
     {
         BroadcastEvent("Create Party");
 
-
-        JSONNode data = (JSONNode)args[0];
-
         List<string> members = new List<string>();
 
         members.Add(LocalUserInfo.Me.ClientCharacter.Name);
@@ -985,7 +1005,6 @@ public class SocketClient : MonoBehaviour
     private void OnActorLeadParty(Socket socket, Packet packet, object[] args)
     {
         BroadcastEvent("Create Party");
-
 
         JSONNode data = (JSONNode)args[0];
 
@@ -1394,6 +1413,15 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    private void OnSpellCooldown(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        LocalUserInfo.Me.ClientCharacter.SpellsCooldowns.SetSpellInCooldown(data["spell_key"].Value, data["cooldown"].AsFloat);
+    }
+
     private void OnMobSpellActivated(Socket socket, Packet packet, object[] args)
     {
         JSONNode data = (JSONNode)args[0];
@@ -1402,7 +1430,7 @@ public class SocketClient : MonoBehaviour
 
         Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["mob_id"].Value);
 
-        DevSpell spell = Content.Instance.GetMobSpell(data["spell_key"].Value);
+        DevMobSpellBase spell = Content.Instance.GetMobSpell(data["spell_key"].Value);
 
         if (tempEnemy != null)
         {

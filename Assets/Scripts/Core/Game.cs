@@ -18,7 +18,11 @@ public class Game : MonoBehaviour {
     {
         get 
         {
-            return IsAlive && !IsChattingWithNpc && Online;
+            return IsAlive 
+                && !IsChattingWithNpc 
+                && !Game.Instance.MovingTroughPortal
+                && !DialogManager.Instance.inDialog
+                && Online;
         }
     }
     public bool isDraggingWindow = false;
@@ -376,6 +380,8 @@ public class Game : MonoBehaviour {
         InGame = true;
         yield return InGameMainMenuUI.Instance.StartFadeCoroutine(InGameMainMenuUI.Instance.FadeOutRoutine());
 
+        InGameMainMenuUI.Instance.SetLocationLabel(SceneInfo.Instance.DisplayName);
+
         isLoadingScene = false;
     }
 
@@ -478,6 +484,11 @@ public class Game : MonoBehaviour {
 
     public void HandleOkRoutines(Quest quest)
     {
+        if (quest == null)
+        {
+            return;
+        }
+
         OkRoutineInstance tempInstance;
 
         for (int i = 0; i < quest.Conditions.Count; i++)

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SceneInfo : MonoBehaviour {
 
+    public string DisplayName;
+
     public string Name;
 
     public string NearestTownScene;
 
     public string BGMusic;
 
-    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "range" /* AUTO_GENERATED_ABILITIES_END */)]    
+    [Popup(/* AUTO_GENERATED_ABILITIES_START */ "NO VALUE", "charTalent", "frost", "heal", "melee", "quests", "range" /* AUTO_GENERATED_ABILITIES_END */)]    
     public List<string> RoomAbilities = new List<string>();
 
     public List<GatePortal> ScenePortals = new List<GatePortal>();

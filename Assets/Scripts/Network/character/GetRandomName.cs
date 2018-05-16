@@ -9,7 +9,6 @@ public class GetRandomName : HttpProvider
 
 	public void Get(Gender gender)
 	{
-		JSONNode parameters = new JSONClass();
 		string urlSuffix = GET_RANDOM_NAME_URL + "?g=" + (gender == Gender.Male ? "1" : "0");
 
         performRequest(urlSuffix, new JSONClass(), false);

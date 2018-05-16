@@ -12,7 +12,7 @@ public class BugReportWindowUI: MonoBehaviour
     [SerializeField]
     GameObject ThanksWindow;
 
-    private bool enabled = false;
+    private bool submitEnabled = false;
 
     void Awake()
     {
@@ -34,13 +34,13 @@ public class BugReportWindowUI: MonoBehaviour
 
     public void OnInputValueChanged(string newValue = "")
     {
-        enabled = inputBody.text.Length > 5;
-        btnSubmit.GetComponent<CanvasGroup>().alpha = enabled ? 1f : 0.4f;
+        submitEnabled = inputBody.text.Length > 5;
+        btnSubmit.GetComponent<CanvasGroup>().alpha = submitEnabled ? 1f : 0.4f;
     }
 
     public void OnSubmit()
     {
-        if (!enabled)
+        if (!submitEnabled)
         {
             return;
         }

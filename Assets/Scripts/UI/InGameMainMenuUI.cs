@@ -58,6 +58,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     protected CompletedQuestsWindowUI completedQuestsPanel;
 
     [SerializeField]
+    protected AvailableQuestsWindowUI availableQuestsPanel;
+
+    [SerializeField]
     protected AbandonQuestWindowUI AbandonQuestWindow;
 
     [SerializeField]
@@ -132,6 +135,8 @@ public class InGameMainMenuUI : MonoBehaviour {
     [SerializeField]
     HealthBar BossHealthbar;
 
+    [SerializeField]
+    FadeText m_LocationLabel;
 
     public static InGameMainMenuUI Instance;
 
@@ -185,17 +190,7 @@ public class InGameMainMenuUI : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                for (int wc = 0; wc < WindowsContainers.Count; wc++)
-                {
-                    for (int i = 0; i < WindowsContainers[wc].childCount; i++)
-                    {
-                        WindowsContainers[wc].GetChild(i).gameObject.SetActive(false);
-                    }
-                }
-
-                chatPanel.onDeselectChat();
-                StatsInfo.Hide();
-                itemInfoPanel.Hide();
+                CloseAllWindows();
             }
         }
         else
@@ -261,12 +256,11 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (!questsPanel.gameObject.activeInHierarchy)
                 {
-                    questsPanel.Show();
-                    completedQuestsPanel.Hide();
+                    ShowQuestsInProgress();
                 }
                 else
                 {
-                    questsPanel.Hide();
+                    HideQuestsInProgress();
                 }
             }
 
@@ -274,12 +268,11 @@ public class InGameMainMenuUI : MonoBehaviour {
             {
                 if (!completedQuestsPanel.gameObject.activeInHierarchy)
                 {
-                    completedQuestsPanel.Show();
-                    questsPanel.Hide();
+                    ShowCompletedQuests();
                 }
                 else
                 {
-                    completedQuestsPanel.Hide();
+                    HideCompletedQuests();
                 }
             }
 
@@ -300,6 +293,57 @@ public class InGameMainMenuUI : MonoBehaviour {
                 TogglePrimaryAbilities();
             }
         }
+    }
+
+    public void HideCompletedQuests()
+    {
+        completedQuestsPanel.Hide();
+    }
+
+    public void ShowCompletedQuests()
+    {
+        completedQuestsPanel.Show();
+        questsPanel.Hide();
+        availableQuestsPanel.Hide();
+    }
+
+    public void HideQuestsInProgress()
+    {
+        questsPanel.Hide();
+    }
+
+    public void ShowQuestsInProgress()
+    {
+        completedQuestsPanel.Hide();
+        questsPanel.Show();
+        availableQuestsPanel.Hide();
+    }
+
+    public void ShowAvailableQuests()
+    {
+        completedQuestsPanel.Hide();
+        questsPanel.Hide();
+        availableQuestsPanel.Show();
+    }
+
+    public void HideAvailableQuests()
+    {
+        availableQuestsPanel.Hide();
+    }
+
+    public void CloseAllWindows()
+    {
+        for (int wc = 0; wc < WindowsContainers.Count; wc++)
+        {
+            for (int i = 0; i < WindowsContainers[wc].childCount; i++)
+            {
+                WindowsContainers[wc].GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        chatPanel.onDeselectChat();
+        StatsInfo.Hide();
+        itemInfoPanel.Hide();
     }
 
     public void Resume()
@@ -582,7 +626,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = LocalUserInfo.Me.ClientCharacter;
         }
 
-        HPBar.SetValue(info.CurrentHealth * 1f , (info.MaxHealth * 1f));
+        HPBar.SetValue(info.CurrentHealth * 1f , (info.ClientPerks.MaxHealth * 1f));
         RefreshParty();
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter);        
     }
@@ -594,7 +638,7 @@ public class InGameMainMenuUI : MonoBehaviour {
             info = LocalUserInfo.Me.ClientCharacter;
         }
 
-        MPBar.SetValue(info.CurrentMana , (info.MaxMana * 1f));
+        MPBar.SetValue(info.CurrentMana , (info.ClientPerks.MaxMana * 1f));
         statsPanel.Refresh(LocalUserInfo.Me.ClientCharacter); 
         RefreshSpellAreaMana();       
     }
@@ -834,5 +878,17 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void SetBossHealthbar(float fromValue, float toValue, float maxValue, float Speed = 1f)
     {
         BossHealthbar.SetHealthbar(fromValue, toValue, maxValue, Speed);
+    }
+
+    public void SetLocationLabel(string LabelText)
+    {
+        if(LabelText == m_LocationLabel.text.text)
+        {
+            return;
+        }
+
+        m_LocationLabel.text.text = LabelText;
+
+        m_LocationLabel.FadeSequence(0.3f, 2f);
     }
 }

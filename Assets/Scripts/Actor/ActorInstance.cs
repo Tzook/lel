@@ -85,7 +85,7 @@ public class ActorInstance : MonoBehaviour
 
     [SerializeField]
     public SortingGroup SortingGroup;
-
+    
     #endregion
 
     #region Parameters
@@ -842,7 +842,7 @@ public class ActorInstance : MonoBehaviour
             CurrentGrowEffect.transform.localScale = Vector3.one * 2f;
         }
 
-        if (Info.Equipment.Weapon.SubType == "twohanded")
+        if (Info.Equipment.Weapon != null && Info.Equipment.Weapon.SubType == "twohanded")
         {
             Anim.SetInteger("AttackType", dPA.TwoHandAttackAnimations[Random.Range(0, dPA.TwoHandAttackAnimations.Count)]);
         }

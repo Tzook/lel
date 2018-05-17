@@ -1108,7 +1108,7 @@ public class ActorController : MonoBehaviour
     {
         Vector2 initPos = Rigid.position;
         bool right = aimRight;
-        Vector2 targetPoint = (right ? new Vector2(Rigid.position.x + 3f, Rigid.position.y) : new Vector2(Rigid.position.x - 3f, Rigid.position.y));
+        Vector2 targetPoint = (right ? new Vector2(Rigid.position.x + 6f, Rigid.position.y) : new Vector2(Rigid.position.x - 6f, Rigid.position.y));
 
 
         float t = 0f;
@@ -1116,20 +1116,20 @@ public class ActorController : MonoBehaviour
         {
             if (!right && SideRayRight)
             {
-                Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t - 1f * Time.deltaTime);
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 1f * Time.deltaTime);
                 Rigid.velocity = Vector2.zero;
                 break;
             }
             else if (right && SideRayLeft)
             {
-                Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t - 1f * Time.deltaTime);
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 1f * Time.deltaTime);
                 Rigid.velocity = Vector2.zero;
                 break;
             }
 
             t += 1f * Time.deltaTime;
 
-            Rigid.position = Game.SplineLerp(initPos, targetPoint, 4f, t);
+            Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t);
 
 
             yield return new WaitForFixedUpdate();

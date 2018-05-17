@@ -674,20 +674,23 @@ public class SocketClient : MonoBehaviour
         ActorInfo targetActor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
 
         // TODO use same hurt method for actor and mob
-
+        
         if (targetActor != null) 
         {
             // actor takes the damage
             targetActor.CurrentHealth = hp;
             targetActor.Instance.Hurt();
-            if (targetActor == LocalUserInfo.Me.ClientCharacter || !LocalUserInfo.Me.CurrentParty.Members.Contains(targetActor.Name))
+
+            string text = String.Format("{0:n0}", data["dmg"].AsInt);
+            if (data["crit"].AsBool)
             {
-                string text = String.Format("{0:n0}", data["dmg"].AsInt);
-                if (data["crit"].AsBool) {
-                    // TODO make this beautiful, lel
-                    text += " (CRIT)";
-                }
-                targetActor.Instance.PopHint(text, new Color(231f/255f, 103f/255f, 103f/255f ,1f));
+                // TODO make this beautiful, lel
+                text += " (CRIT)";
+            }
+            targetActor.Instance.PopHint(text, new Color(231f / 255f, 103f / 255f, 103f / 255f, 1f));
+
+            if (targetActor == LocalUserInfo.Me.ClientCharacter)
+            {
                 InGameMainMenuUI.Instance.RefreshHP();
             }
             else

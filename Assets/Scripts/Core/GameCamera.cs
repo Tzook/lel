@@ -13,6 +13,12 @@ public class GameCamera : MonoBehaviour {
     float AddedY = 1f;
 
     [SerializeField]
+    float MaxFarAim = 3f;
+
+    float farAimX;
+    float farAimY;
+
+    [SerializeField]
     protected GameObject followingObject;
 
     [SerializeField]
@@ -48,6 +54,8 @@ public class GameCamera : MonoBehaviour {
 
     public static GameCamera Instance;
     public static Vector3 MousePosition;
+
+    public bool FarAimMode = false;
 
     float InitCamSize;
 
@@ -142,6 +150,8 @@ public class GameCamera : MonoBehaviour {
         {
             DoubleClick();
         }
+
+        FarAimMode = Input.GetMouseButton(1);
        
     }
 
@@ -189,13 +199,25 @@ public class GameCamera : MonoBehaviour {
         {
             if (followingObject != null)
             {
+
+                if(FarAimMode)
+                {
+                    farAimX = Mathf.Clamp((MousePosition - followingObject.transform.position).x, -MaxFarAim, MaxFarAim);
+                    farAimY = Mathf.Clamp((MousePosition - followingObject.transform.position).y, -MaxFarAim, MaxFarAim);
+                }
+                else
+                {
+                    farAimX = 0f;
+                    farAimY = 0f;
+                }
+                
                 if (this.CamType == CameraType.Horizontal)
                 {
-                    targetPos = new Vector3(followingObject.transform.position.x, transform.position.y + AddedY, initPos.z);
+                    targetPos = new Vector3(followingObject.transform.position.x + farAimX, transform.position.y + AddedY + farAimY, initPos.z);
                 }
                 else if (this.CamType == CameraType.Vertical)
                 {
-                    targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
+                    targetPos = new Vector3(transform.position.x + farAimX, followingObject.transform.position.y + AddedY + farAimY, initPos.z);
                 }
                 else if (this.CamType == CameraType.Static)
                 {
@@ -203,10 +225,12 @@ public class GameCamera : MonoBehaviour {
                 }
                 else
                 {
-                    targetPos = new Vector3(followingObject.transform.position.x, followingObject.transform.position.y + AddedY, initPos.z);
+                    targetPos = new Vector3(followingObject.transform.position.x + farAimX, followingObject.transform.position.y + AddedY + farAimY, initPos.z);
                 }
 
                 transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref dampRef, FollowSpeed);
+
+                
             }
         }
     }

@@ -85,7 +85,11 @@ public class ActorInstance : MonoBehaviour
 
     [SerializeField]
     public SortingGroup SortingGroup;
-    
+
+
+    [SerializeField]
+    public HealthBar m_HealthBar;
+
     #endregion
 
     #region Parameters
@@ -106,7 +110,7 @@ public class ActorInstance : MonoBehaviour
     GameObject CurrentGrowEffect;
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     public void RegisterInfo(ActorInfo info)
     {
@@ -153,8 +157,6 @@ public class ActorInstance : MonoBehaviour
 
         SubWeapon.color = targetCLR;
     }
-
-    #region Update Looks
 
     public void UpdateVisual(ActorInfo info)
     {
@@ -486,8 +488,6 @@ public class ActorInstance : MonoBehaviour
         }
     }
 
-    #endregion
-
     public void ChatBubble(string Message, Color color)
     {
         if (Message.Length >= 65)
@@ -692,6 +692,16 @@ public class ActorInstance : MonoBehaviour
         {
             InputController.StartInvincivility();
         }
+        else
+        {
+            if (m_HealthBar == null)
+            {
+                m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
+                m_HealthBar.transform.position = transform.position;
+            }
+
+            m_HealthBar.SetHealthbar(Info.CurrentHealth, this.Info.CurrentHealth, this.Info.ClientPerks.MaxHealth, 2f);
+        }
     }
 
     public void Death()
@@ -701,6 +711,12 @@ public class ActorInstance : MonoBehaviour
 
         PlayEyesEmote("cry");
         PlayMouthEmote("angry");
+
+        if (m_HealthBar != null)
+        {
+            m_HealthBar.gameObject.SetActive(false);
+            m_HealthBar = null;
+        }
 
         isDead = true;
     }
@@ -989,6 +1005,14 @@ public class ActorInstance : MonoBehaviour
 
         buff.RunningRoutine = null;
         RemoveBuff(buff);
+    }
+
+    void LateUpdate()
+    {
+        if (m_HealthBar != null)
+        {
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y + 0.5f), Time.deltaTime * 3f);
+        }
     }
 
     #endregion

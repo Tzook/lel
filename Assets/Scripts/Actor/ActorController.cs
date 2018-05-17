@@ -1116,18 +1116,18 @@ public class ActorController : MonoBehaviour
         {
             if (!right && SideRayRight)
             {
-                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 1f * Time.deltaTime);
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1.5f, t - 2f * Time.deltaTime);
                 Rigid.velocity = Vector2.zero;
                 break;
             }
             else if (right && SideRayLeft)
             {
-                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 1f * Time.deltaTime);
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1.5f, t - 2f * Time.deltaTime);
                 Rigid.velocity = Vector2.zero;
                 break;
             }
 
-            t += 1f * Time.deltaTime;
+            t += 2f * Time.deltaTime;
 
             Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t);
 

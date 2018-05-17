@@ -42973,6 +42973,122 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -544.596}
+--- !u!1 &814495095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 814495099}
+  - component: {fileID: 814495098}
+  - component: {fileID: 814495097}
+  - component: {fileID: 814495096}
+  m_Layer: 2
+  m_Name: Portal (6)
+  m_TagString: GatePortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &814495096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814495095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6869044382d0d4385d6504ea849198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: Cave
+  TargetPortal: Bay
+  TargetLevel: WaterCave_Pirates
+  StartShut: 0
+  RequiresItems: []
+--- !u!61 &814495097
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814495095}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.33, y: 1.73}
+    newSize: {x: 1.33, y: 1.73}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.13, y: 1.71}
+  m_EdgeRadius: 0
+--- !u!212 &814495098
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814495095}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: db3660a964d89b249922f19ffdb01c1e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1406657985
+  m_SortingLayer: 2
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0.68948215, g: 0.48870027, b: 0.9632353, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.33, y: 1.73}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+--- !u!4 &814495099
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814495095}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.44, y: -15.23, z: -0.11211023}
+  m_LocalScale: {x: 1.2854435, y: 0.8788836, z: 1.0485644}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 91
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &819406656
 Mesh:
   m_ObjectHideFlags: 0
@@ -56492,7 +56608,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1258061388}
-  m_LocalRotation: {x: -0, y: -0, z: 0.8820153, w: 0.47122073}
+  m_LocalRotation: {x: -0, y: -0, z: 0.88201535, w: 0.47122076}
   m_LocalPosition: {x: -1.69, y: 14.07, z: 0}
   m_LocalScale: {x: 1.0287088, y: 0.9723639, z: 1}
   m_Children: []
@@ -76332,7 +76448,7 @@ MonoBehaviour:
   Dialogs:
   - DialogKey: Greetings
     Pieces:
-    - Content: You came for the supplies, I suppose...
+    - Content: Hey human!
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
@@ -76340,11 +76456,23 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: What supplies?
+    - Title: What?
       Event: StartDialog
       Value: WhatSupplies
-      Condition: 
-      ConditionValue: 
+      Condition: QuestAvailable
+      ConditionValue: PirateBay
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: I'm ready to go to the Under Bay
+      Event: Teleport
+      Value: WaterCave_Pirates
+      Condition: QuestInProgress
+      ConditionValue: PirateBay
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
+    - Title: Take me to the Under Bay
+      Event: Teleport
+      Value: WaterCave_Pirates
+      Condition: QuestCompleted
+      ConditionValue: PirateBay
       CLR: {r: 1, g: 1, b: 1, a: 0}
     - Title: No...
       Event: EndDialog
@@ -76354,14 +76482,14 @@ MonoBehaviour:
       CLR: {r: 1, g: 1, b: 1, a: 0}
   - DialogKey: WhatSupplies
     Pieces:
-    - Content: Oh...
+    - Content: I've got an offer for you.
       LetterDelay: 0.03
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    - Content: Nevermind then...
+    - Content: Care to hear?
       LetterDelay: 0.02
       Pitch: 1
       SoundKey: 
@@ -76369,15 +76497,113 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: Okay...
+    - Title: What is it?
+      Event: StartDialog
+      Value: What?
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: Nope
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
-  GivingQuests: []
+  - DialogKey: What
+    Pieces:
+    - Content: There's a secret bay in this cave
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: A pirate's bay....
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They call it "The Under Bay"
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They store all their loot there
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And I was thinking about....
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Taking some of that loot back to our hands
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: What do you say?
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: I'm intrested
+      Event: StartDialog
+      Value: Intrested
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: Nope
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: Intrested
+    Pieces:
+    - Content: Great!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It will be easy as taking stolen goods from a pirate!
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Talk to me when you are ready to go there.
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartQuest
+      PostPieceEventValue: PirateBay
+    Options: []
+  GivingQuests:
+  - 
   EndingQuests: []
-  TeleportableScenes: []
+  TeleportableScenes:
+  - sceneKey: WaterCave_Pirates
+    portalKey: Cave
+    allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
@@ -81893,6 +82119,7 @@ MonoBehaviour:
   - {fileID: 1698846904}
   - {fileID: 962918356}
   - {fileID: 1562356635}
+  - {fileID: 814495096}
   Spawners:
   - {fileID: 6987853}
   - {fileID: 734974086}

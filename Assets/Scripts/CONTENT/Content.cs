@@ -14,6 +14,9 @@ public class Content : MonoBehaviour {
 
     public List<DevMonsterInfo> Monsters = new List<DevMonsterInfo>();
 
+    public ContentMultiplyers Multiplyers = new ContentMultiplyers();
+
+
     public List<DevItemInfo> Items = new List<DevItemInfo>();
 
     public List<ContentPiece> InfoBank = new List<ContentPiece>();
@@ -921,4 +924,12 @@ public class QuestState
 public enum SpellTypeEnumState
 {
     normal, projectile, explosion, channeling, movement
+}
+
+[System.Serializable]
+public class ContentMultiplyers
+{
+    public float mobsHp = 1f;
+    public float mobsExp = 1f;
+    public float mobsDmg = 1f;
 }

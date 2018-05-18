@@ -47,60 +47,13 @@ public class DevContentEditor : Editor
 
         if (GUILayout.Button("Update Monsters"))
         {
-            JSONNode node = new JSONClass();
-
-            FillMonstersInfo(currentInfo, node);
-
-            SendMonstersInfo(node);
+            SendMonstersInfo(currentInfo.Monsters, currentInfo.Multiplyers);
             WriteConstantLists.Instance.WriteMobsPopupList(currentInfo.Monsters);
         }
 
         if (GUILayout.Button("Update Items"))
         {
-            JSONNode node = new JSONClass();
-
-            for (int i = 0; i < currentInfo.Items.Count; i++)
-            {
-                node["items"][i]["key"] = currentInfo.Items[i].Key;
-
-                if (currentInfo.Items[i].IconPlaceable != null)
-                {
-                    currentInfo.Items[i].Icon = currentInfo.Items[i].IconPlaceable.name.ToString();
-                }
-
-                node["items"][i]["type"] = currentInfo.Items[i].Type;
-                node["items"][i]["subType"] = currentInfo.Items[i].SubType;
-                node["items"][i]["dropChance"] = currentInfo.Items[i].DropChance.ToString();
-                node["items"][i]["goldValue"] = currentInfo.Items[i].GoldValue.ToString();
-                node["items"][i]["stackCap"] = currentInfo.Items[i].StackCap.ToString();
-
-                node["items"][i]["req"]["lvl"] = currentInfo.Items[i].Stats.RequiresLVL.ToString();
-
-                node["items"][i]["use"]["hp"] = currentInfo.Items[i].UseInfo.BonusHP.ToString();
-                node["items"][i]["use"]["mp"] = currentInfo.Items[i].UseInfo.BonusMP.ToString();
-
-                for (int a = 0; a < currentInfo.Items[i].Perks.Count; a++)
-                {
-                    node["items"][i]["perks"][a]["key"] = currentInfo.Items[i].Perks[a].Key.ToString();
-                    node["items"][i]["perks"][a]["value"] = currentInfo.Items[i].Perks[a].Value.ToString();
-                }
-
-                for (int a = 0; a < currentInfo.Items[i].ItemSprites.Count; a++)
-                {
-                    if (currentInfo.Items[i].ItemSprites[a].SpritePlaceable != null)
-                    {
-                        currentInfo.Items[i].ItemSprites[a].Sprite = currentInfo.Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
-                    }
-
-                }
-
-                node["items"][i]["minLvlMobs"] = currentInfo.Items[i].AppearsAt.MinLvlMobs.ToString();
-                node["items"][i]["maxLvlMobs"] = currentInfo.Items[i].AppearsAt.MaxLvlMobs.ToString();
-                node["items"][i]["maxMobsStack"] = currentInfo.Items[i].AppearsAt.MaxStack.ToString();
-                node["items"][i]["minMobsStack"] = currentInfo.Items[i].AppearsAt.MinStack.ToString();
-            }
-
-            SendItemsInfo(node);
+            SendItemsInfo(currentInfo.Items);
             WriteConstantLists.Instance.WriteLootPopupList(currentInfo.Items);
         }
 
@@ -140,44 +93,48 @@ public class DevContentEditor : Editor
         GUILayout.EndVertical();
     }
 
-    private void FillMonstersInfo(Content currentInfo, JSONNode node)
+    private void SendMonstersInfo(List<DevMonsterInfo> Monsters, ContentMultiplyers Multiplyers)
     {
-        for (int i = 0; i < currentInfo.Monsters.Count; i++)
+        JSONNode node = new JSONClass();        
+        
+        for (int i = 0; i < Monsters.Count; i++)
         {
-            node["mobs"][i]["key"] = currentInfo.Monsters[i].MonsterKey;
-            node["mobs"][i]["name"] = currentInfo.Monsters[i].MonsterName;
-            node["mobs"][i]["hp"] = currentInfo.Monsters[i].MonsterHP.ToString();
-            node["mobs"][i]["level"] = currentInfo.Monsters[i].MonsterLevel.ToString();
-            node["mobs"][i]["dmg"] = currentInfo.Monsters[i].DMG.ToString();
-            node["mobs"][i]["exp"] = currentInfo.Monsters[i].RewardEXP.ToString();
+            node["mobs"][i]["key"] = Monsters[i].MonsterKey;
+            node["mobs"][i]["name"] = Monsters[i].MonsterName;
+            node["mobs"][i]["hp"] = Mathf.FloorToInt(Monsters[i].MonsterHP * Multiplyers.mobsHp).ToString();
+            node["mobs"][i]["level"] = Monsters[i].MonsterLevel.ToString();
+            node["mobs"][i]["dmg"] = Mathf.FloorToInt(Monsters[i].DMG * Multiplyers.mobsDmg).ToString();
+            node["mobs"][i]["exp"] = Mathf.FloorToInt(Monsters[i].RewardEXP * Multiplyers.mobsExp).ToString();
 
-            for (int a = 0; a < currentInfo.Monsters[i].PossibleLoot.Count; a++)
+            for (int a = 0; a < Monsters[i].PossibleLoot.Count; a++)
             {
-                node["mobs"][i]["drops"][a]["key"] = currentInfo.Monsters[i].PossibleLoot[a].ItemKey;
-                node["mobs"][i]["drops"][a]["minStack"] = currentInfo.Monsters[i].PossibleLoot[a].MinStack.ToString();
-                node["mobs"][i]["drops"][a]["maxStack"] = currentInfo.Monsters[i].PossibleLoot[a].MaxStack.ToString();
+                node["mobs"][i]["drops"][a]["key"] = Monsters[i].PossibleLoot[a].ItemKey;
+                node["mobs"][i]["drops"][a]["minStack"] = Monsters[i].PossibleLoot[a].MinStack.ToString();
+                node["mobs"][i]["drops"][a]["maxStack"] = Monsters[i].PossibleLoot[a].MaxStack.ToString();
             }
 
-            for (int a = 0; a < currentInfo.Monsters[i].Perks.Count; a++)
+            for (int a = 0; a < Monsters[i].Perks.Count; a++)
             {
-                node["mobs"][i]["perks"][a]["key"] = currentInfo.Monsters[i].Perks[a].Key.ToString();
-                node["mobs"][i]["perks"][a]["value"] = currentInfo.Monsters[i].Perks[a].Value.ToString();
+                node["mobs"][i]["perks"][a]["key"] = Monsters[i].Perks[a].Key.ToString();
+                node["mobs"][i]["perks"][a]["value"] = Monsters[i].Perks[a].Value.ToString();
             }
 
-            for (int a = 0; a < currentInfo.Monsters[i].Spells.SpellsList.Count; a++)
+            for (int a = 0; a < Monsters[i].Spells.SpellsList.Count; a++)
             {
-                node["mobs"][i]["spells"][a]["chance"] = currentInfo.Monsters[i].Spells.SpellsList[a].Chance.ToString();
-                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells.SpellsList[a], node["mobs"][i]["spells"][a]);
+                node["mobs"][i]["spells"][a]["chance"] = Monsters[i].Spells.SpellsList[a].Chance.ToString();
+                FillMonsterSpellInfo(Monsters[i].Spells.SpellsList[a], node["mobs"][i]["spells"][a]);
             }
-            if (!String.IsNullOrEmpty(currentInfo.Monsters[i].Spells.DeathRattle.Key))
+            if (!String.IsNullOrEmpty(Monsters[i].Spells.DeathRattle.Key))
             {
-                node["mobs"][i]["deathRattle"]["duration"] = currentInfo.Monsters[i].Spells.DeathRattle.Duration.ToString();
-                FillMonsterSpellInfo(currentInfo.Monsters[i].Spells.DeathRattle, node["mobs"][i]["deathRattle"]);
+                node["mobs"][i]["deathRattle"]["duration"] = Monsters[i].Spells.DeathRattle.Duration.ToString();
+                FillMonsterSpellInfo(Monsters[i].Spells.DeathRattle, node["mobs"][i]["deathRattle"]);
             }
 
-            node["mobs"][i]["spellsMinTime"] = currentInfo.Monsters[i].Spells.MinTime.ToString();
-            node["mobs"][i]["spellsMaxTime"] = currentInfo.Monsters[i].Spells.MaxTime.ToString();
+            node["mobs"][i]["spellsMinTime"] = Monsters[i].Spells.MinTime.ToString();
+            node["mobs"][i]["spellsMaxTime"] = Monsters[i].Spells.MaxTime.ToString();
         }
+
+        UpdateContent(node, "/mob/generate");
     }
 
     private static void FillMonsterSpellInfo(DevMobSpellBase devSpell, JSONNode node)
@@ -196,66 +153,59 @@ public class DevContentEditor : Editor
         }
     }
 
-    private void SendMonstersInfo(JSONNode node)
+    private void SendItemsInfo(List<DevItemInfo> Items)
     {
-        Debug.Log("Sending monsters info " + node.ToString());
+        JSONNode node = new JSONClass();
 
-        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
-
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
-
-        WWW req = new WWW(Config.BASE_URL + "/mob/generate", rawdata, headers);
-
-
-        ContinuationManager.Add(() => req.isDone, () =>
+        for (int i = 0; i < Items.Count; i++)
         {
-            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
-            Debug.Log("WWW result : " + req.text);
-        });
-    }
+            node["items"][i]["key"] = Items[i].Key;
 
+            if (Items[i].IconPlaceable != null)
+            {
+                Items[i].Icon = Items[i].IconPlaceable.name.ToString();
+            }
 
-    private void SendItemsInfo(JSONNode node)
-    {
-        Debug.Log("Sending items info " + node.ToString());
+            node["items"][i]["type"] = Items[i].Type;
+            node["items"][i]["subType"] = Items[i].SubType;
+            node["items"][i]["dropChance"] = Items[i].DropChance.ToString();
+            node["items"][i]["goldValue"] = Items[i].GoldValue.ToString();
+            node["items"][i]["stackCap"] = Items[i].StackCap.ToString();
 
-        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
+            node["items"][i]["req"]["lvl"] = Items[i].Stats.RequiresLVL.ToString();
 
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
+            node["items"][i]["use"]["hp"] = Items[i].UseInfo.BonusHP.ToString();
+            node["items"][i]["use"]["mp"] = Items[i].UseInfo.BonusMP.ToString();
 
-        WWW req = new WWW(Config.BASE_URL + "/items/generate", rawdata, headers);
+            for (int a = 0; a < Items[i].Perks.Count; a++)
+            {
+                node["items"][i]["perks"][a]["key"] = Items[i].Perks[a].Key.ToString();
+                node["items"][i]["perks"][a]["value"] = Items[i].Perks[a].Value.ToString();
+            }
 
+            for (int a = 0; a < Items[i].ItemSprites.Count; a++)
+            {
+                if (Items[i].ItemSprites[a].SpritePlaceable != null)
+                {
+                    Items[i].ItemSprites[a].Sprite = Items[i].ItemSprites[a].SpritePlaceable.name.ToString();
+                }
 
-        ContinuationManager.Add(() => req.isDone, () =>
-        {
-            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
-            Debug.Log("WWW result : " + req.text);
-        });
+            }
+
+            node["items"][i]["minLvlMobs"] = Items[i].AppearsAt.MinLvlMobs.ToString();
+            node["items"][i]["maxLvlMobs"] = Items[i].AppearsAt.MaxLvlMobs.ToString();
+            node["items"][i]["maxMobsStack"] = Items[i].AppearsAt.MaxStack.ToString();
+            node["items"][i]["minMobsStack"] = Items[i].AppearsAt.MinStack.ToString();
+        }
+
+        UpdateContent(node, "/items/generate");
     }
 
     private void RestartServer()
     {
         JSONNode node = new JSONClass();
 
-        Debug.Log("Restarting Server...");
-
-        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
-
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
-
-        WWW req = new WWW(Config.BASE_URL + "/restart", rawdata, headers);
-
-        ContinuationManager.Add(() => req.isDone, () =>
-        {
-            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
-            Debug.Log("WWW result : " + req.text);
-        });
+        UpdateContent(node, "/restart");
     }
 
     private void SendStartingGear(List<string> GearList)
@@ -267,21 +217,7 @@ public class DevContentEditor : Editor
             node["equips"][i]["key"] = GearList[i];
         }
 
-        Debug.Log("Sending Starting Gear...");
-
-        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
-
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
-
-        WWW req = new WWW(Config.BASE_URL + "/equips/begin", rawdata, headers);
-
-        ContinuationManager.Add(() => req.isDone, () =>
-        {
-            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
-            Debug.Log("WWW result : " + req.text);
-        });
+        UpdateContent(node, "/equips/begin");
     }
 
     private void SendAbilities(List<DevAbility> abilities, List<DevPAPerk> perks)
@@ -346,21 +282,7 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["acc"] = "0";//perks[i].PrecentAccelerationPerUpgrade.ToString();
         }
 
-        Debug.Log("Sending Primary Abilities...");
-
-        byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
-
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
-
-        WWW req = new WWW(Config.BASE_URL + "/talents/generate", rawdata, headers);
-
-        ContinuationManager.Add(() => req.isDone, () =>
-        {
-            if (!string.IsNullOrEmpty(req.error)) Debug.Log("WWW failed: " + req.error);
-            Debug.Log("WWW result : " + req.text);
-        });
+        UpdateContent(node, "/talents/generate");
     }
 
     private void SendQuestsInfo(List<Quest> Quests)
@@ -371,7 +293,7 @@ public class DevContentEditor : Editor
         {
             node["quests"][i]["key"] = Quests[i].Key;
 
-            for( int c=0 ; c < Quests[i].Conditions.Count ; c++ )
+            for (int c = 0; c < Quests[i].Conditions.Count; c++)
             {
                 node["quests"][i]["conditions"][c]["condition"] = Quests[i].Conditions[c].Condition;
                 node["quests"][i]["conditions"][c]["conditionType"] = Quests[i].Conditions[c].Type;
@@ -401,15 +323,19 @@ public class DevContentEditor : Editor
 
         }
 
-        Debug.Log("Sending Quests Info...");
+        UpdateContent(node, "/quests/generate");
+    }
 
+    private void UpdateContent(JSONNode node, string path)
+    {
+        Debug.Log("Updating: " + path);
         byte[] rawdata = Encoding.UTF8.GetBytes(node.ToString());
 
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
         headers.Add("Cookie", CookiesManager.Instance.GetCookiesString());
 
-        WWW req = new WWW(Config.BASE_URL + "/quests/generate", rawdata, headers);
+        WWW req = new WWW(Config.BASE_URL + path, rawdata, headers);
 
         ContinuationManager.Add(() => req.isDone, () =>
         {

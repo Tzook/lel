@@ -20,7 +20,7 @@ public class SpellBoxUI : MonoBehaviour {
     [SerializeField]
     Text m_txtCooldown;
 
-    DevSpell CurrentSpell;
+    public DevSpell CurrentSpell;
 
     public void Set(DevSpell spell)
     {

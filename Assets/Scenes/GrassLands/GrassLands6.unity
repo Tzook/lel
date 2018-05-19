@@ -1447,6 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.6, y: 0}
 --- !u!23 &102704232
 MeshRenderer:
@@ -4200,6 +4201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.5, y: 0}
 --- !u!23 &261478447
 MeshRenderer:
@@ -6251,6 +6253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.4, y: 0}
 --- !u!23 &383519929
 MeshRenderer:
@@ -7835,6 +7838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.7, y: 0}
 --- !u!23 &486133871
 MeshRenderer:
@@ -14363,6 +14367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0, y: 0}
 --- !u!23 &993524809
 MeshRenderer:
@@ -15049,6 +15054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0.3
   AddedY: 3
+  MaxFarAim: 3
   followingObject: {fileID: 0}
   CamType: 0
   BlurCamera: {fileID: 1866258421}
@@ -15062,6 +15068,7 @@ MonoBehaviour:
   Cam: {fileID: 1038414611}
   BlurCam: {fileID: 0}
   CamFollowing: 1
+  FarAimMode: 0
 --- !u!81 &1038414608
 AudioListener:
   m_ObjectHideFlags: 0
@@ -15237,6 +15244,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 137
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1062879898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1062879900}
+  - component: {fileID: 1062879899}
+  m_Layer: 0
+  m_Name: DayNightCycler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1062879899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1062879898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72faf79e5f29ff41b7cc46b26369cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Day: 0
+  NightColor: {r: 0.21496539, g: 0.22456534, b: 0.41176468, a: 1}
+  SetOnInit: 1
+  DEBUGToggle: 0
+--- !u!4 &1062879900
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1062879898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 48.92601, y: 18.261011, z: 1.0575054}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 196
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1065366428
 GameObject:
@@ -16303,6 +16354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.3, y: 0}
 --- !u!23 &1156891828
 MeshRenderer:
@@ -22693,6 +22745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.8, y: 0}
 --- !u!23 &1715465712
 MeshRenderer:
@@ -27071,6 +27124,7 @@ MonoBehaviour:
       - {x: -94.76092, y: -30.495607}
       - {x: -91.45717, y: -25.872295}
   NetStateEntities: []
+  SupportsPVP: 0
 --- !u!4 &2005480949
 Transform:
   m_ObjectHideFlags: 0

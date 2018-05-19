@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class ParallaxBackground : MonoBehaviour {
 
-    MeshRenderer mRenderer;
+    public MeshRenderer mRenderer;
 
     [SerializeField]
     Vector2 Speed;

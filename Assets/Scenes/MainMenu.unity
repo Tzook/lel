@@ -46514,6 +46514,10 @@ MonoBehaviour:
         Perks: []
         SpawnMobs: []
         Duration: 0
+  Multiplyers:
+    mobsHp: 1
+    mobsExp: 1
+    mobsDmg: 1
   Items:
   - Key: leatherVest
     Name: Leather Vest
@@ -51619,10 +51623,11 @@ MonoBehaviour:
     - MinLevel: 3
       PerksOffered: 2
       AddToPool:
-      - crippleChance
+      - freezeChance
       - stunChance
       - stunDuration
-      - crippleDuration
+      - freezeDuration
+      - frozenTargetModifier
     - MinLevel: 10
       PerksOffered: 3
       AddToPool:
@@ -51635,7 +51640,6 @@ MonoBehaviour:
       AddToPool:
       - damageModifier
       - mpStealChance
-      - mpStealModifier
       - mpStealModifier
     Spells: []
     InitialPerks:
@@ -52215,6 +52219,11 @@ MonoBehaviour:
     Icon: {fileID: 21300002, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     EffectPrefab: BuffEffect_Stun
     AudioKey: sound_stun
+  - Key: freezeChance
+    Name: Freeze
+    Icon: {fileID: 21300004, guid: 57927da7e17eba643b24036921e75d70, type: 3}
+    EffectPrefab: BuffEffect_Freeze
+    AudioKey: sound_coldgod_4
   DefaultCursor: {fileID: 2800000, guid: 99dc0ecd9afda874d840d402608f3fa1, type: 3}
   ClickableCursor: {fileID: 2800000, guid: b1f5172ede3e12b42acdd990c597bd57, type: 3}
   CrosshairCursor: {fileID: 2800000, guid: 5a85afe90e73307479243df3e909b1a4, type: 3}
@@ -53440,10 +53449,6 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 0
-  Multiplyers:
-    mobsHp: 1
-    mobsExp: 1
-    mobsDmg: 1
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

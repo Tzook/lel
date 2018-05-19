@@ -27,6 +27,37 @@ public class WriteConstantLists
         AssetDatabase.Refresh();
     }
 
+    public void WriteBuffsPopupList(List<DevBuff> buffs)
+    {
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_BUFFS_START \\*/ .* /\\* AUTO_GENERATED_BUFFS_END \\*/");
+        string listString = GetListString(buffs.Select(buff => buff.Key).ToList());
+
+        string replacement = "/* AUTO_GENERATED_BUFFS_START */ " + listString + " /* AUTO_GENERATED_BUFFS_END */";
+        string result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
+        
+        AssetDatabase.Refresh();
+    }
+
+    public void WriteAbilitiesPopupList(List<DevAbility> abilities)
+    {
+        string text = File.ReadAllText(FILE_NAME_CONTENT);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_ABILITIES_START \\*/ .* /\\* AUTO_GENERATED_ABILITIES_END \\*/");
+        string listString = GetListString(abilities.Select(ability => ability.Key).ToList());
+
+        string replacement = "/* AUTO_GENERATED_ABILITIES_START */ " + listString + " /* AUTO_GENERATED_ABILITIES_END */";
+        string result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_CONTENT, result);
+
+        text = File.ReadAllText(FILE_NAME_SCENE);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_SCENE, result);
+        AssetDatabase.Refresh();
+    }
+
     public void WriteLootPopupList(List<DevItemInfo> items)
     {
         string text = File.ReadAllText(FILE_NAME_CONTENT);
@@ -76,23 +107,6 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_MONSTERS);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_MONSTERS, result);
-        AssetDatabase.Refresh();
-    }
-
-    public void WriteAbilitiesPopupList(List<DevAbility> abilities)
-    {
-        string text = File.ReadAllText(FILE_NAME_CONTENT);
-        
-        Regex rgx = new Regex("/\\* AUTO_GENERATED_ABILITIES_START \\*/ .* /\\* AUTO_GENERATED_ABILITIES_END \\*/");
-        string listString = GetListString(abilities.Select(ability => ability.Key).ToList());
-
-        string replacement = "/* AUTO_GENERATED_ABILITIES_START */ " + listString + " /* AUTO_GENERATED_ABILITIES_END */";
-        string result = rgx.Replace(text, replacement);
-        File.WriteAllText(FILE_NAME_CONTENT, result);
-
-        text = File.ReadAllText(FILE_NAME_SCENE);
-        result = rgx.Replace(text, replacement);
-        File.WriteAllText(FILE_NAME_SCENE, result);
         AssetDatabase.Refresh();
     }
 

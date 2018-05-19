@@ -72,6 +72,7 @@ public class DevContentEditor : Editor
         {
             SendAbilities(currentInfo.Abilities, currentInfo.Perks);
             WriteConstantLists.Instance.WritePerksPopupList(currentInfo.Perks);
+            WriteConstantLists.Instance.WriteBuffsPopupList(currentInfo.Buffs);
             WriteConstantLists.Instance.WriteAbilitiesPopupList(currentInfo.Abilities);
         }
 
@@ -150,6 +151,16 @@ public class DevContentEditor : Editor
         for (int b = 0; b < devSpell.SpawnMobs.Length; b++)
         {
             node["spawnMobs"][b] = devSpell.SpawnMobs[b];
+        }
+
+        for (int b = 0; b < devSpell.HitIfTargetHasBuff.Count; b++)
+        {
+            node["hitIfTargetHasBuff"][b] = devSpell.HitIfTargetHasBuff[b];
+        }
+
+        for (int b = 0; b < devSpell.ClearTargetBuffs.Count; b++)
+        {
+            node["clearTargetBuffs"][b] = devSpell.ClearTargetBuffs[b];
         }
     }
 
@@ -250,6 +261,16 @@ public class DevContentEditor : Editor
                 {
                     node["talents"][i]["spells"][a]["perks"][b]["key"] = abilities[i].Spells[a].Perks[b].Key.ToString();
                     node["talents"][i]["spells"][a]["perks"][b]["value"] = abilities[i].Spells[a].Perks[b].Value.ToString();
+                }
+                
+                for (int b = 0; b < abilities[i].Spells[a].HitIfTargetHasBuff.Count; b++)
+                {
+                    node["talents"][i]["spells"][a]["hitIfTargetHasBuff"][b] = abilities[i].Spells[a].HitIfTargetHasBuff[b].ToString();
+                }
+                
+                for (int b = 0; b < abilities[i].Spells[a].ClearTargetBuffs.Count; b++)
+                {
+                    node["talents"][i]["spells"][a]["clearTargetBuffs"][b] = abilities[i].Spells[a].ClearTargetBuffs[b].ToString();
                 }
             }
 

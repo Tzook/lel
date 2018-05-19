@@ -541,6 +541,10 @@ public class DevSpellBase
     public string Key;
     public string ColliderPrefab;
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
+    [Popup(/* AUTO_GENERATED_BUFFS_START */ "NO VALUE", "bleedChance", "crippleChance", "freezeChance", "stunChance" /* AUTO_GENERATED_BUFFS_END */)]
+    public List<string> HitIfTargetHasBuff = new List<string>();
+    [Popup(/* AUTO_GENERATED_BUFFS_START */ "NO VALUE", "bleedChance", "crippleChance", "freezeChance", "stunChance" /* AUTO_GENERATED_BUFFS_END */)]
+    public List<string> ClearTargetBuffs = new List<string>();
 }
 
 [System.Serializable]
@@ -643,6 +647,7 @@ public class DevPAPerk
 [System.Serializable]
 public class DevBuff
 {
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "cooldownModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "saleModifier", "shopsDiscount", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
 
     public string Name;

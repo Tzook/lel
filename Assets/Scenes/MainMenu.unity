@@ -41574,7 +41574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
+  m_AnchoredPosition: {x: 9.599609, y: 10.5}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -51742,7 +51742,7 @@ MonoBehaviour:
       ClearTargetBuffs: []
       Level: 12
       Mana: 20
-      Cooldown: 0
+      Cooldown: 5
       Icon: {fileID: 21300000, guid: 4974302d608684645bc4c4a13c9893cd, type: 3}
       HitSound: 
       hitTargetEnumState: 1
@@ -51791,11 +51791,27 @@ MonoBehaviour:
       - damageModifier
       - mpStealChance
       - mpStealModifier
-    Spells: []
+    Spells:
+    - Key: Shatter
+      ColliderPrefab: DI_HealExplosion
+      Perks:
+      - Key: damageModifier
+        Value: 1
+      HitIfTargetHasBuff:
+      - freezeChance
+      ClearTargetBuffs:
+      - freezeChance
+      Level: 5
+      Mana: 20
+      Cooldown: 5
+      Icon: {fileID: 21300000, guid: 6d9fbe06dc11ebc4cbfc4cea60421865, type: 3}
+      HitSound: HitEffect
+      hitTargetEnumState: 0
+      spellTypeEnumState: 0
     InitialPerks:
     - Key: bleedChance
       Value: 1
-    - Key: stunChance
+    - Key: freezeChance
       Value: 1
     hitTypeEnumState: 0
     hitTargetEnumState: 0
@@ -127911,7 +127927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.3163605, y: 5.3986273}
+  m_AnchoredPosition: {x: 3.3163452, y: 5.3986273}
   m_SizeDelta: {x: 19.38, y: 20.47}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2003580568

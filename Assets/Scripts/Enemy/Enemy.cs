@@ -380,6 +380,12 @@ public class Enemy : MonoBehaviour {
 
         CurrentBuffs.Remove(buff);
 
+        string debuffSound = Content.Instance.GetBuff(buff.Key).DebuffKey;
+        if (!string.IsNullOrEmpty(debuffSound))
+        {
+            AudioControl.Instance.Play(debuffSound);
+        }
+
         if (Game.Instance.isBitch)
         {
             StopBuffEffect(buff.Key);

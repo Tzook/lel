@@ -51796,15 +51796,19 @@ MonoBehaviour:
       ColliderPrefab: DI_HealExplosion
       Perks:
       - Key: damageModifier
+        Value: 2
+      - Key: aoeChance
         Value: 1
+      - Key: aoeCap
+        Value: 6
       HitIfTargetHasBuff:
       - freezeChance
       ClearTargetBuffs:
       - freezeChance
       Level: 5
-      Mana: 20
+      Mana: 0
       Cooldown: 5
-      Icon: {fileID: 21300000, guid: 6d9fbe06dc11ebc4cbfc4cea60421865, type: 3}
+      Icon: {fileID: 21300000, guid: b8577e0c5f0f7ac469f936c0075752ef, type: 3}
       HitSound: HitEffect
       hitTargetEnumState: 0
       spellTypeEnumState: 0
@@ -51812,12 +51816,14 @@ MonoBehaviour:
     - Key: bleedChance
       Value: 1
     - Key: freezeChance
-      Value: 1
+      Value: 5
+    - Key: damageModifier
+      Value: 0.7
     hitTypeEnumState: 0
     hitTargetEnumState: 0
     powerTypeEnumState: 2
     attackTypeEnumState: 1
-    ManaCost: 5
+    ManaCost: 2
     OneHandAttackAnimations: 0500000006000000
     TwoHandAttackAnimations: 0500000006000000
     HitEffect: HitEffect
@@ -52375,21 +52381,25 @@ MonoBehaviour:
     Icon: {fileID: 21300040, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     EffectPrefab: BuffEffect_Bleed
     AudioKey: sound_hitplant
+    DebuffKey: 
   - Key: crippleChance
     Name: Cripple
     Icon: {fileID: 21300018, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     EffectPrefab: BuffEffect_Cripple
     AudioKey: sound_slow
+    DebuffKey: 
   - Key: stunChance
     Name: Stun
     Icon: {fileID: 21300002, guid: 64a35d2d16c89184792c01636e644b22, type: 3}
     EffectPrefab: BuffEffect_Stun
     AudioKey: sound_stun
+    DebuffKey: 
   - Key: freezeChance
     Name: Freeze
     Icon: {fileID: 21300004, guid: 57927da7e17eba643b24036921e75d70, type: 3}
     EffectPrefab: BuffEffect_Freeze
     AudioKey: sound_coldgod_4
+    DebuffKey: sound_impactCold
   DefaultCursor: {fileID: 2800000, guid: 99dc0ecd9afda874d840d402608f3fa1, type: 3}
   ClickableCursor: {fileID: 2800000, guid: b1f5172ede3e12b42acdd990c597bd57, type: 3}
   CrosshairCursor: {fileID: 2800000, guid: 5a85afe90e73307479243df3e909b1a4, type: 3}

@@ -1019,6 +1019,11 @@ public class ActorController : MonoBehaviour
                     this.Slowed = true;
                     break;
                 }
+            case "freezeChance":
+                {
+                    this.Slowed = true;
+                    break;
+                }
         }
     }
 

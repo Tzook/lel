@@ -965,6 +965,13 @@ public class ActorInstance : MonoBehaviour
 
         CurrentBuffs.Remove(buff);
 
+        string debuffSound = Content.Instance.GetBuff(buff.Key).DebuffKey;
+
+        if (!string.IsNullOrEmpty(debuffSound))
+        {
+            AudioControl.Instance.Play(debuffSound);
+        }
+
         if (Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
             InputController.StopBuffEffect(buff.Key);

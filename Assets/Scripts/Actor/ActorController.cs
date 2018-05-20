@@ -941,6 +941,7 @@ public class ActorController : MonoBehaviour
     {
         Instance.StartCombatMode();
         Instance.BackwardLeftHand();
+        CurrentSpellInCast = null;
 
         if (LoadAttackValueInstance != null)
         {

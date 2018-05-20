@@ -380,10 +380,16 @@ public class Enemy : MonoBehaviour {
 
         CurrentBuffs.Remove(buff);
 
-        string debuffSound = Content.Instance.GetBuff(buff.Key).DebuffKey;
-        if (!string.IsNullOrEmpty(debuffSound))
+        DevBuff buffReference = Content.Instance.GetBuff(buff.Key);
+
+        if (!string.IsNullOrEmpty(buffReference.DebuffSoundKey))
         {
-            AudioControl.Instance.Play(debuffSound);
+            AudioControl.Instance.Play(buffReference.DebuffSoundKey);
+        }
+
+        if (!string.IsNullOrEmpty(buffReference.DebuffPrefabKey))
+        {
+            ResourcesLoader.Instance.GetRecycledObject(buffReference.DebuffPrefabKey).transform.position = transform.position;
         }
 
         if (Game.Instance.isBitch)

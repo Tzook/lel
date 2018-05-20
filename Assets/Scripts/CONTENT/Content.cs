@@ -658,7 +658,9 @@ public class DevBuff
 
     public string AudioKey;
 
-    public string DebuffKey;
+    public string DebuffSoundKey;
+
+    public string DebuffPrefabKey;
 }
 
 [System.Serializable]

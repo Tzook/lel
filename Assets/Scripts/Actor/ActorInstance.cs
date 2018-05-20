@@ -965,11 +965,16 @@ public class ActorInstance : MonoBehaviour
 
         CurrentBuffs.Remove(buff);
 
-        string debuffSound = Content.Instance.GetBuff(buff.Key).DebuffKey;
+        DevBuff buffReference = Content.Instance.GetBuff(buff.Key);
 
-        if (!string.IsNullOrEmpty(debuffSound))
+        if (!string.IsNullOrEmpty(buffReference.DebuffSoundKey))
         {
-            AudioControl.Instance.Play(debuffSound);
+            AudioControl.Instance.Play(buffReference.DebuffSoundKey);
+        }
+
+        if (!string.IsNullOrEmpty(buffReference.DebuffPrefabKey))
+        {
+            ResourcesLoader.Instance.GetRecycledObject(buffReference.DebuffPrefabKey).transform.position = transform.position;
         }
 
         if (Info.ID == LocalUserInfo.Me.ClientCharacter.ID)

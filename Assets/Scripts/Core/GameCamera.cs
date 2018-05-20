@@ -202,8 +202,8 @@ public class GameCamera : MonoBehaviour {
 
                 if(FarAimMode)
                 {
-                    farAimX = Mathf.Clamp((MousePosition - followingObject.transform.position).x, -MaxFarAim, MaxFarAim);
-                    farAimY = Mathf.Clamp((MousePosition - followingObject.transform.position).y, -MaxFarAim, MaxFarAim);
+                    farAimX = Mathf.Clamp((MousePosition - followingObject.transform.position).x/2f, -MaxFarAim, MaxFarAim);
+                    farAimY = Mathf.Clamp((MousePosition - followingObject.transform.position).y/2f, -MaxFarAim, MaxFarAim);
                 }
                 else
                 {
@@ -213,11 +213,11 @@ public class GameCamera : MonoBehaviour {
                 
                 if (this.CamType == CameraType.Horizontal)
                 {
-                    targetPos = new Vector3(followingObject.transform.position.x + farAimX, transform.position.y + AddedY + farAimY, initPos.z);
+                    targetPos = new Vector3(followingObject.transform.position.x + farAimX, transform.position.y + AddedY, initPos.z);
                 }
                 else if (this.CamType == CameraType.Vertical)
                 {
-                    targetPos = new Vector3(transform.position.x + farAimX, followingObject.transform.position.y + AddedY + farAimY, initPos.z);
+                    targetPos = new Vector3(transform.position.x, followingObject.transform.position.y + AddedY + farAimY, initPos.z);
                 }
                 else if (this.CamType == CameraType.Static)
                 {

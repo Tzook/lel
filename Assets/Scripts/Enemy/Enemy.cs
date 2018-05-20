@@ -339,15 +339,19 @@ public class Enemy : MonoBehaviour {
 
     public void ClearBuffs()
     {
-        for(int i=0;i<CurrentBuffs.Count;i++)
+        ClearBuffs(null);
+    }
+
+    public void ClearBuffs(List<string> buffNames)
+    {
+        for (int i = 0; i < CurrentBuffs.Count; i++)
         {
-            StopCoroutine(CurrentBuffs[i].RunningRoutine);
-
-            CurrentBuffs[i].EffectPrefab.transform.SetParent(null);
-            CurrentBuffs[i].EffectPrefab.gameObject.SetActive(false);
+            // if we asked to remove a specific buff, make sure it matches
+            if (buffNames == null || buffNames.Contains(CurrentBuffs[i].Key))
+            {
+                RemoveBuff(CurrentBuffs[i]);
+            }
         }
-
-        CurrentBuffs.Clear();
     }
 
     public void AddBuff(string buffKey, float buffDuration)

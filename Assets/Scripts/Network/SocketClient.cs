@@ -131,6 +131,7 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.On("buff_activated", OnBuffActivated);
         CurrentSocket.On("buff_resisted", OnBuffResisted);
+        CurrentSocket.On("buff_cleared", OnBuffCleared);
         CurrentSocket.On("spell_activated", OnSpellActivated);
         CurrentSocket.On("spell_cooldown", OnSpellCooldown);
         CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
@@ -1397,6 +1398,39 @@ public class SocketClient : MonoBehaviour
             if (actor != null)
             {
                 actor.Instance.PopHint(text, clr, "");
+            }
+        }
+    }
+
+    private void OnBuffCleared(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
+
+        List<string> buffNames = null;
+        if (data["buff_names"] != null)
+        {
+            buffNames = new List<string>();
+            for (int i = 0; i < data["buff_names"].Count; i++)
+            {
+                buffNames.Add(data["buff_names"][i]);
+            }
+        }
+
+        
+        if (tempEnemy != null) //IS MOB
+        {
+            tempEnemy.ClearBuffs(buffNames);
+        }
+        else
+        {
+            ActorInfo actor = Game.Instance.CurrentScene.GetActor(data["target_id"].Value);
+            if (actor != null)
+            {
+                actor.Instance.ClearBuffs(buffNames);
             }
         }
     }

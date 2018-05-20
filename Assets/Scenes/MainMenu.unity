@@ -33735,7 +33735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.69000006, y: 0}
   m_AnchorMax: {x: 0.79749995, y: 0.1674894}
-  m_AnchoredPosition: {x: 0.5, y: -0.5997925}
+  m_AnchoredPosition: {x: 0.5, y: -0.59973145}
   m_SizeDelta: {x: 0, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1572
@@ -33772,7 +33772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.74749994, y: 0}
   m_AnchorMax: {x: 0.855, y: 0.1674894}
-  m_AnchoredPosition: {x: 1.5, y: -0.5997925}
+  m_AnchoredPosition: {x: 1.5, y: -0.59973145}
   m_SizeDelta: {x: 0, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1575
@@ -35763,7 +35763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21000001, y: 0}
   m_AnchorMax: {x: 0.32000002, y: 0.1674894}
-  m_AnchoredPosition: {x: 1.5, y: -0.5997925}
+  m_AnchoredPosition: {x: 1.5, y: -0.59973145}
   m_SizeDelta: {x: -2, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1695
@@ -51809,7 +51809,25 @@ MonoBehaviour:
       Mana: 0
       Cooldown: 5
       Icon: {fileID: 21300000, guid: b8577e0c5f0f7ac469f936c0075752ef, type: 3}
-      HitSound: HitEffect
+      HitSound: sound_clickFast
+      hitTargetEnumState: 0
+      spellTypeEnumState: 0
+    - Key: FrostSpikes
+      ColliderPrefab: DI_FrostSpikes
+      Perks:
+      - Key: freezeChance
+        Value: 1
+      - Key: aoeChance
+        Value: 1
+      - Key: aoeCap
+        Value: 6
+      HitIfTargetHasBuff: []
+      ClearTargetBuffs: []
+      Level: 10
+      Mana: 20
+      Cooldown: 5
+      Icon: {fileID: 21300000, guid: 5ea8bcb1589bea440ababab6f788ffe1, type: 3}
+      HitSound: sound_clickFast
       hitTargetEnumState: 0
       spellTypeEnumState: 0
     InitialPerks:
@@ -52401,7 +52419,7 @@ MonoBehaviour:
     Name: Freeze
     Icon: {fileID: 21300004, guid: 57927da7e17eba643b24036921e75d70, type: 3}
     EffectPrefab: BuffEffect_Freeze
-    AudioKey: sound_coldgod_4
+    AudioKey: sound_freeze
     DebuffSoundKey: sound_shatter
     DebuffPrefabKey: FreezeDebuff
   DefaultCursor: {fileID: 2800000, guid: 99dc0ecd9afda874d840d402608f3fa1, type: 3}
@@ -76836,6 +76854,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4000013513561254, guid: a517cca850296594f906c19dbc6215da, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a517cca850296594f906c19dbc6215da, type: 2}
   m_IsPrefabParent: 0
@@ -99341,7 +99363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 53.18994, y: -51.590027}
+  m_AnchoredPosition: {x: 53.18994, y: -51.590088}
   m_SizeDelta: {x: 106.380005, y: 34.390015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &877938288
@@ -130528,7 +130550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9512501, y: 0.74916315}
   m_AnchorMax: {x: 1, y: 0.8174894}
-  m_AnchoredPosition: {x: -0.29016113, y: 3.6723633}
+  m_AnchoredPosition: {x: -0.2902832, y: 3.6723633}
   m_SizeDelta: {x: 0.47, y: 7.3447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2123855879

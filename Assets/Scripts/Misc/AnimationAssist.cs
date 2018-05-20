@@ -77,6 +77,25 @@ public class AnimationAssist : MonoBehaviour {
         tempObj.GetComponent<ParticleSystem>().Play();
     }
 
+    public void SpawnEffectAtDirection(string EffectKey)
+    {
+        GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(EffectKey);
+
+        tempObj.transform.position = transform.position;
+        
+        tempObj.transform.localScale = new Vector2(1f, Controller.Instance.TorsoBone.localScale.x > 0 ? 1f : -1f);
+
+        tempObj.transform.rotation = Controller.Instance.LastFireRot;
+
+        if (tempObj.GetComponent<PosFollower>() != null)
+        {
+            tempObj.GetComponent<PosFollower>().SetTransform(transform);
+        }
+
+        tempObj.GetComponent<ParticleSystem>().Play();
+    }
+
+
     public void UnbendBow()
     {
         Controller.GetComponent<ActorInstance>().UnbendBow();

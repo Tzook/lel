@@ -3569,6 +3569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 302652156}
   - component: {fileID: 302652158}
+  - component: {fileID: 302652157}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -3596,7 +3597,32 @@ Transform:
   - {fileID: 1131558189}
   m_Father: {fileID: 1560773204}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.277161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.448448}
+--- !u!61 &302652157
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302652155}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.6837263, y: -0.037040383}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 19.53, y: 5.36}
+    newSize: {x: 19.53, y: 5.36}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15.656576, y: 0.61869806}
+  m_EdgeRadius: 0
 --- !u!212 &302652158
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3628,8 +3654,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1406657985
-  m_SortingLayer: 2
+  m_SortingLayerID: -1262447697
+  m_SortingLayer: 5
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 3b8e302cce3fd19469f50e3d223fe844, type: 3}
   m_Color: {r: 0.89946586, g: 0.6759299, b: 0.97794116, a: 1}
@@ -17751,7 +17777,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.7264667, y: -1.2673839}
+  - {x: -3.4301715, y: -1.5147318}
   - {x: -2.6710677, y: -1.2535343}
   - {x: 2.3116484, y: 0.3845427}
 --- !u!1 &1274975043
@@ -24224,7 +24250,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1560773204}
   - component: {fileID: 1560773203}
-  - component: {fileID: 1560773206}
   m_Layer: 0
   m_Name: BigShip (1)
   m_TagString: Untagged
@@ -24263,31 +24288,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1560773206
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1560773202}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.5760484, y: 0.04705941}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 15.919913, y: 0.5696614}
-  m_EdgeRadius: 0
 --- !u!1 &1571572105
 GameObject:
   m_ObjectHideFlags: 0
@@ -37378,6 +37378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0.3
   AddedY: 1
+  MaxFarAim: 3
   followingObject: {fileID: 0}
   CamType: 0
   BlurCamera: {fileID: 1551245157}
@@ -37391,6 +37392,7 @@ MonoBehaviour:
   Cam: {fileID: 1904439069}
   BlurCam: {fileID: 0}
   CamFollowing: 1
+  FarAimMode: 0
 --- !u!81 &1904439066
 AudioListener:
   m_ObjectHideFlags: 0

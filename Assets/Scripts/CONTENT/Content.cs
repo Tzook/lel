@@ -539,6 +539,11 @@ public class DevMobSpells
 public class DevSpellBase 
 {
     public string Key;
+    public string DisplayName;
+
+    [TextArea(6, 9)]
+    public string Description;
+
     public string ColliderPrefab;
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     [Popup(/* AUTO_GENERATED_BUFFS_START */ "NO VALUE", "bleedChance", "crippleChance", "freezeChance", "stunChance" /* AUTO_GENERATED_BUFFS_END */)]

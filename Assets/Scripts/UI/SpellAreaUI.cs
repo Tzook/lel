@@ -37,40 +37,48 @@ public class SpellAreaUI : MonoBehaviour
 
         for (int i = 0; i < ability.Spells.Count; i++)
         {
-            if (ability.Spells[i].Level <= LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL)
-            {
-                AvailableSpells.Add(ability.Spells[i]);
-            }
+            //if (ability.Spells[i].Level <= LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL)
+            //{
+            AvailableSpells.Add(ability.Spells[i]);
+            //}
         }
 
         if (AvailableSpells.Count > 0)
         {
 
             GameObject tempObj;
+            bool locked = false;
 
             for (int i = 0; i < AvailableSpells.Count - 1; i++)
             {
+                locked = AvailableSpells[i].Level > LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL;
+
                 tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                 tempObj.transform.SetParent(SpellContainer, false);
                 tempObj.transform.position = tempObj.transform.parent.position;
-                tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[i]);
+                tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[i], locked);
             }
 
             if (AbilitySwitch)
             {
+                locked = AvailableSpells[AvailableSpells.Count - 1].Level > LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL;
+
+
                 tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                 tempObj.transform.SetParent(SpellContainer, false);
                 tempObj.transform.position = tempObj.transform.parent.position;
-                tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1]);
+                tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1], locked);
             }
             else
             {
                 if (LastAmountOfSpells < AvailableSpells.Count)
                 {
+                    locked = AvailableSpells[AvailableSpells.Count - 1].Level > LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.LVL;
+
                     tempObj = ResourcesLoader.Instance.GetRecycledObject("SpellBox");
                     tempObj.transform.SetParent(SpellContainer, false);
                     tempObj.transform.position = tempObj.transform.parent.position;
-                    tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1]);
+                    tempObj.GetComponent<SpellBoxUI>().Set(AvailableSpells[AvailableSpells.Count - 1], locked);
                     tempObj.GetComponent<SpellBoxUI>().Hide();
 
                     StartCoroutine(GainEffectRoutine(tempObj.transform));

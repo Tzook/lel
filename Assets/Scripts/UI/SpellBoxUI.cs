@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SpellBoxUI : MonoBehaviour {
+public class SpellBoxUI : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler {
 
     [SerializeField]
     Text m_BindText;
@@ -20,10 +21,22 @@ public class SpellBoxUI : MonoBehaviour {
     [SerializeField]
     Text m_txtCooldown;
 
+    [SerializeField]
+    GameObject LockObject;
+
     public DevSpell CurrentSpell;
 
-    public void Set(DevSpell spell)
+    public void Set(DevSpell spell, bool locked)
     {
+        if (locked)
+        {
+            Lock();
+        }
+        else
+        {
+            Unlock();
+        }
+
         CurrentSpell = spell;
         Refresh();
     }
@@ -62,6 +75,7 @@ public class SpellBoxUI : MonoBehaviour {
     {
         m_BindText.enabled = true;
         m_Icon.enabled = true;
+        //LockObject.SetActive(false);
         m_txtCooldown.enabled = true;
         m_CooldownImage.enabled = true;
     }
@@ -70,8 +84,19 @@ public class SpellBoxUI : MonoBehaviour {
     {
         m_BindText.enabled = false;
         m_Icon.enabled = false;
+        //LockObject.SetActive(true);
         m_txtCooldown.enabled = false;
         m_CooldownImage.enabled = false;
+    }
+
+    public void Lock()
+    {
+        LockObject.SetActive(true);
+    }
+    
+    public void Unlock()
+    {
+        LockObject.SetActive(false);
     }
 
     public void Update()
@@ -138,6 +163,13 @@ public class SpellBoxUI : MonoBehaviour {
         m_CooldownImage.fillAmount = 0f;
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        InGameMainMenuUI.Instance.StatsInfo.Show(CurrentSpell.DisplayName, CurrentSpell.Description, CurrentSpell.Icon);
+    }
 
-
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        InGameMainMenuUI.Instance.StatsInfo.Hide();
+    }
 }

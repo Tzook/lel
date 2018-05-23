@@ -76,6 +76,11 @@ public class DevContentEditor : Editor
             WriteConstantLists.Instance.WriteAbilitiesPopupList(currentInfo.Abilities);
         }
 
+        if (GUILayout.Button("Update Dungeons"))
+        {
+            Debug.Log("Great job! now implement actually sending the dungeons :)");
+        }
+
         GUILayout.Label("Command line");
 
         CurrentCommand = EditorGUILayout.TextField(CurrentCommand);
@@ -277,7 +282,7 @@ public class DevContentEditor : Editor
             for (int a = 0; a < abilities[i].InitialPerks.Count; a++)
             {
                 node["talents"][i]["initialPerks"][a]["key"] = abilities[i].InitialPerks[a].Key.ToString();
-                node["talents"][i]["initialPerks"][a]["value"] = abilities[i].InitialPerks[a].Value.ToString();
+                node["talents"][i]["initialPerks"][a]["value"] = abilities[i].InitialPerks[a].Level.ToString();
             }
 
             node["talents"][i]["hitType"] = abilities[i].HitType;

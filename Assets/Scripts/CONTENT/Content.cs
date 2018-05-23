@@ -145,7 +145,7 @@ public class Content : MonoBehaviour {
         {
             if(ability.InitialPerks[i].Key == perk.Key)
             {
-                return ability.InitialPerks[i].Value == perk.Points;
+                return ability.InitialPerks[i].Level == perk.Points;
             }
         }
         return false;
@@ -246,6 +246,8 @@ public class Content : MonoBehaviour {
 
         return 0;
     }
+
+    public List<DevDungeonContent> Dungeons = new List<DevDungeonContent>();
     
     //void Start()
     //{
@@ -415,7 +417,7 @@ public class DevAbility
 
     public List<DevSpell> Spells = new List<DevSpell>();
     
-    public List<DevPerkMap> InitialPerks = new List<DevPerkMap>();
+    public List<DevPerkLevelMap> InitialPerks = new List<DevPerkLevelMap>();
 
     public string HitType
     {
@@ -598,6 +600,14 @@ public class DevPerkMap
     [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "cooldownModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "saleModifier", "shopsDiscount", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
     public string Key;
     public float Value;
+}
+
+[System.Serializable]
+public class DevPerkLevelMap
+{
+    [Popup(/* AUTO_GENERATED_PERKS_START */ "NO VALUE", "aoeCap", "aoeChance", "attackSpeedModifier", "bleedChance", "bleedDuration", "bleedResistance", "blockChance", "burnChance", "burnDuration", "burnResistance", "burntTargetModifier", "cooldownModifier", "crippleChance", "crippleDuration", "crippleResistance", "critChance", "critDamageModifier", "damageBonus", "damageModifier", "damageReduction", "defenceBonus", "freezeChance", "freezeDuration", "freezeResistance", "frozenTargetModifier", "fullyChargeModifier", "hpBonus", "hpRegenInterval", "hpRegenModifier", "hpStealChance", "hpStealModifier", "knockbackModifier", "magicDamageBonus", "meleeDamageBonus", "minDamageModifier", "mpBonus", "mpCost", "mpRegenInterval", "mpRegenModifier", "mpStealChance", "mpStealModifier", "questExpBonus", "questGoldBonus", "rangeDamageBonus", "saleModifier", "shopsDiscount", "spikesModifier", "stunChance", "stunDuration", "stunResistance", "threatModifier" /* AUTO_GENERATED_PERKS_END */)]
+    public string Key;
+    public int Level;
 }
 
 [System.Serializable]

@@ -5,8 +5,10 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 
 public class WriteConstantLists
-{       
+{
+    private const string FOLDER_NAME_SCENES = "Assets/Scenes";
     private const string FILE_NAME_CONTENT = "Assets/Scripts/CONTENT/Content.cs";
+    private const string FILE_NAME_DUNGEON = "Assets/Scripts/CONTENT/DevDungeonContent.cs";
     private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
     private const string FILE_NAME_NPC = "Assets/Scripts/NPC/NPC.cs";
     private const string FILE_NAME_SCENE = "Assets/Scripts/Misc/SceneInfo.cs";
@@ -73,6 +75,10 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_NPC);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_NPC, result);
+
+        text = File.ReadAllText(FILE_NAME_DUNGEON);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_DUNGEON, result);
         AssetDatabase.Refresh();
     }
 
@@ -107,6 +113,31 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_MONSTERS);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_MONSTERS, result);
+        AssetDatabase.Refresh();
+    }
+
+    public void WriteScenesPopupList()
+    {
+        List<string> scenes = new List<string>();
+        string path = FOLDER_NAME_SCENES;
+        DirectoryInfo dir = new DirectoryInfo(path);
+        foreach (var file in dir.GetFiles("*", SearchOption.AllDirectories))
+        {
+            if (file.Name.Contains(".unity.meta"))
+            {
+                scenes.Add(Path.GetFileName(file.Name).Split('.')[0]);
+            }
+        }
+
+        string text = File.ReadAllText(FILE_NAME_DUNGEON);
+        
+        Regex rgx = new Regex("/\\* AUTO_GENERATED_SCENES_START \\*/ .* /\\* AUTO_GENERATED_SCENES_END \\*/");
+        string listString = GetListString(scenes);
+
+        string replacement = "/* AUTO_GENERATED_SCENES_START */ " + listString + " /* AUTO_GENERATED_SCENES_END */";
+        string result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_DUNGEON, result);
+        
         AssetDatabase.Refresh();
     }
 

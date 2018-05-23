@@ -82,6 +82,7 @@ public class SceneInfoEditor : Editor {
                 }
             }
 
+            WriteConstantLists.Instance.WriteScenesPopupList();
             WriteMiniMap(currentInfo);
 
             SendSceneInfo(node);

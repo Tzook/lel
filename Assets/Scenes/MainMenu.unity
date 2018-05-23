@@ -51724,9 +51724,9 @@ MonoBehaviour:
       spellTypeEnumState: 4
     InitialPerks:
     - Key: blockChance
-      Value: 1
+      Level: 1
     - Key: threatModifier
-      Value: 2
+      Level: 2
     hitTypeEnumState: 0
     hitTargetEnumState: 0
     powerTypeEnumState: 0
@@ -51827,9 +51827,9 @@ MonoBehaviour:
       spellTypeEnumState: 4
     InitialPerks:
     - Key: bleedChance
-      Value: 1
+      Level: 1
     - Key: critChance
-      Value: 1
+      Level: 1
     hitTypeEnumState: 0
     hitTargetEnumState: 0
     powerTypeEnumState: 1
@@ -51902,7 +51902,7 @@ MonoBehaviour:
       spellTypeEnumState: 0
     InitialPerks:
     - Key: hpStealChance
-      Value: 1
+      Level: 1
     hitTypeEnumState: 1
     hitTargetEnumState: 1
     powerTypeEnumState: 2
@@ -51991,11 +51991,9 @@ MonoBehaviour:
       spellTypeEnumState: 0
     InitialPerks:
     - Key: bleedChance
-      Value: 1
+      Level: 1
     - Key: freezeChance
-      Value: 5
-    - Key: damageModifier
-      Value: 0.7
+      Level: 4
     hitTypeEnumState: 0
     hitTargetEnumState: 0
     powerTypeEnumState: 2
@@ -53806,6 +53804,76 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 0
+  Dungeons:
+  - Key: exampleDungeon
+    MinLvl: 5
+    MaxLvl: 10
+    EntranceScene: ShellHillInnBasement
+    Stages:
+    - PossibleScenes:
+      - GrassLands5_1_3
+      - GrassLands5_1_2
+      PossibleRareScenes: []
+      Rewards: []
+    - PossibleScenes:
+      - GrassLands6
+      - GrassLands6_2
+      - GrassLands7
+      PossibleRareScenes:
+      - GrassLands7
+      Rewards: []
+    - PossibleScenes:
+      - HairyHouse
+      PossibleRareScenes: []
+      Rewards:
+      - ItemKey: blackShoes
+        Rarity: 0
+        Stack: 0
+      - ItemKey: tomato
+        Rarity: 0
+        Stack: 20
+      - ItemKey: captianscoat
+        Rarity: 0
+        Stack: 0
+      - ItemKey: swordOfElad
+        Rarity: 5
+        Stack: 0
+    - PossibleScenes:
+      - HugeTree1
+      - HugeTree2
+      PossibleRareScenes:
+      - FrostPracticeChamber
+      Rewards: []
+    - PossibleScenes:
+      - IntroScene
+      PossibleRareScenes: []
+      Rewards:
+      - ItemKey: cabbage
+        Rarity: 0
+        Stack: 10
+      - ItemKey: captianscoat
+        Rarity: 2
+        Stack: 0
+    PossiblePerksEmpowers:
+    - Key: attackSpeedModifier
+      Value: 0.1
+    - Key: minDamageModifier
+      Value: 0.2
+    - Key: hpStealChance
+      Value: 1
+    PossibleEmpowersCombinations:
+    - BuffsMultiplyers:
+      - 0.2
+      - -0.1
+    - BuffsMultiplyers:
+      - 0.3
+      - -0.3
+    - BuffsMultiplyers:
+      - 0.5
+      - -0.25
+      - -0.25
+    PossibleSpecialEmpowers:
+    - doubleChest
 --- !u!114 &2254
 MonoBehaviour:
   m_ObjectHideFlags: 0

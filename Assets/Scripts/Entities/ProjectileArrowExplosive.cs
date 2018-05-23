@@ -183,7 +183,12 @@ public class ProjectileArrowExplosive : MonoBehaviour {
             GameObject impactEffect = ResourcesLoader.Instance.GetRecycledObject(ImpactEffect);
             impactEffect.transform.position = transform.position;
             impactEffect.transform.right = ParentActor.transform.position - transform.position;
-            impactEffect.transform.SetParent(TargetCollider.transform, true);
+
+            if (ProjectileStayAfterHit)
+            {
+                impactEffect.transform.SetParent(TargetCollider.transform, true);
+            }
+
             impactEffect.transform.localScale = Vector3.one;
         }
 

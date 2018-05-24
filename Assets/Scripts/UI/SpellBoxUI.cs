@@ -165,7 +165,7 @@ public class SpellBoxUI : MonoBehaviour , IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        InGameMainMenuUI.Instance.StatsInfo.Show(CurrentSpell.DisplayName, CurrentSpell.Description, CurrentSpell.Icon);
+        InGameMainMenuUI.Instance.StatsInfo.Show(CurrentSpell.DisplayName+ (CurrentSpell.Level > LocalUserInfo.Me.ClientCharacter.LVL ? " - (MIN LVL: " + CurrentSpell.Level + ")" : ""), CurrentSpell.Description, CurrentSpell.Icon);
     }
 
     public void OnPointerExit(PointerEventData eventData)

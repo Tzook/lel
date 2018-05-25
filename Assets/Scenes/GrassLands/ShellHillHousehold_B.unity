@@ -807,21 +807,399 @@ MonoBehaviour:
       PostPieceEvent: 
       PostPieceEventValue: 
     Options:
-    - Title: OK
+    - Title: You called?
+      Event: StartDialog
+      Value: AncientBrief
+      Condition: QuestComplete
+      ConditionValue: ancientRabbitholes
+      CLR: {r: 0.9852941, g: 0.89955556, b: 0.42019895, a: 1}
+    - Title: Nothing...
       Event: EndDialog
       Value: 
       Condition: 
       ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: AncientBrief
+    Pieces:
+    - Content: Indeed, I've heared from Dani here that you claim you are capable of
+        gathering a party of adventurers.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Well the task is fairly simple, I'm looking for a key.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: There's one problem with this key tho'...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: daniNPCIndoor_TwoProblems
+    Options: []
+  - DialogKey: TwoProblems
+    Pieces:
+    - Content: Hm, yes! Two problems!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The first problem is that to get the key you must venture in to an
+        old underground cavern.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: This place used to be an ancient rabbit hole, but was abandoned for
+        some strange reason.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Since then other dwellers took over the place and made things difficult.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The second problem was...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: What was the second problem?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: daniNPCIndoor_WhatWas
+    Options: []
+  - DialogKey: SpreadAround
+    Pieces:
+    - Content: '... - Spread around the cave, yea!'
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: That's why we need an adventuer
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: daniNPCIndoor_AnAdventurer
+    Options: []
+  - DialogKey: Adventurers
+    Pieces:
+    - Content: '- A group of adventurers, to collect those key pieces and bring them
+        back to us.'
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartDialog
+      PostPieceEventValue: AnyQuestions
+    Options:
+    - Title: Why do you want the key?
+      Event: StartDialog
+      Value: WhyKey
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.99264705, g: 0.9306318, b: 0.58391005, a: 0}
+  - DialogKey: AnyQuestions
+    Pieces:
+    - Content: Any more questions?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Why do you want that key?
+      Event: StartDialog
+      Value: WhyKey
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: What's in it for us?
+      Event: StartDialog
+      Value: WhatsForUs
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: I accept.
+      Event: InteractWithNPC
+      Value: daniNPCIndoor_Accept
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9353299, g: 0.9558824, b: 0.5833694, a: 0}
+    - Title: I think I'll pass...
+      Event: EndDialog
+      Value: 
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: WhyKey
+    Pieces:
+    - Content: Oh, well, that's a long story really, do you really want the details?
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Go ahead...
+      Event: StartDialog
+      Value: WhyKey2
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: Nah, nevermind
+      Event: StartDialog
+      Value: AnyQuestions
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 1, g: 1, b: 1, a: 0}
+  - DialogKey: WhyKey2
+    Pieces:
+    - Content: It all began here, in Shellhill...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I was born here, you see...
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It was quite peaceful, empty, and boring, in my childhood...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Untill those rabbits got close to our region and started raiding everything
+        we grow...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: 'I wanted to do something about it, make them stop, go back... '
+      LetterDelay: 0.02
+      Pitch: 0.8
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: But I found out I'm the only one here with that idea in mind...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Most of the turtles here don't really leave their box.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: They prefer a temporary solution which is easy over actually doing
+        something about it.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Too slow, too lazy, never leaving their comfort zone.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: When I grew up I decided I had enough of that, and I must take a boat
+        and get some help...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Find someone who's good with solving problems, someone who dares, and
+        mostly get's things done.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: I sailed to the port of Silktown, there was the place where I first
+        saw...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: a human! Man, those humans, they are really good at moving things forward.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Getting things done...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: After a few days I managed to be heared in the town's council.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: The generous mayor decided we should cooperate, she will fund my expeditions!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And in return Shellhill will allow humans on the islands shores...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And act as an ally, trading and serving human expeditions.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: After a while I hired Dani here and and a few others to find out where
+        did those rabbits came from and what will make them go away...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: daniNPCIndoor_FoundOut
+    Options: []
+  - DialogKey: WhyKey3
+    Pieces:
+    - Content: Maybe speaking to their leader would shed more light over the situation...
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And it's solution!
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartDialog
+      PostPieceEventValue: AnyQuestions
+    Options: []
+  - DialogKey: WhatsForUs
+    Pieces:
+    - Content: I've heared the place is rich of valueables.
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Feel free to loot whatever you find there...
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We also are the only ones you can speak to who know the location of
+        this place.
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: And we can actually also carry you there!
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Over that I assume I can also pay you a sum of gold for the pieces
+        of the key.
+      LetterDelay: 0.04
+      Pitch: 1.1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: StartDialog
+      PostPieceEventValue: AnyQuestions
+    Options: []
+  - DialogKey: Accept
+    Pieces:
+    - Content: Great!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: CompleteQuest
+      PostPieceEventValue: ancientRabbitholes
+    Options: []
   GivingQuests: []
-  EndingQuests: []
+  EndingQuests:
+  - ancientRabbitholes
   TeleportableScenes: []
   SellingItems: []
   DefaultDialog: Greetings
   IntroAnimation: 
   EndAnimation: 
-  Name: Male Turtle
-  Key: shellHillMaleTurtle
+  Name: Statle
+  Key: statle
   ExitEvent: 
   ExitEventValue: 
   Body: {fileID: 350079935}
@@ -986,236 +1364,11 @@ MonoBehaviour:
   - {fileID: 1068204116}
   - {fileID: 1601740233}
   miniMapInfo:
-    left: -119.93518
-    right: 64.789764
-    top: 84.46002
-    bottom: -45.32163
+    left: -8.540287
+    right: 7.444684
+    top: 7.0150003
+    bottom: -1.24
     coliders:
-    - coliders:
-      - {x: 49.340034, y: 18.193077}
-      - {x: 49.65559, y: 18.194077}
-      - {x: 49.343166, y: 17.203083}
-      - {x: 49.658722, y: 17.20408}
-    - coliders:
-      - {x: 48.512215, y: 18.636171}
-      - {x: 48.82777, y: 18.637169}
-      - {x: 48.5153, y: 17.661175}
-      - {x: 48.830856, y: 17.662174}
-    - coliders:
-      - {x: 64.149765, y: 10.746012}
-      - {x: 64.789764, y: 10.746012}
-      - {x: 64.149765, y: 10.106012}
-      - {x: 64.789764, y: 10.106012}
-    - coliders:
-      - {x: 3.3897016, y: 0.04204291}
-      - {x: 3.7052584, y: 0.043041468}
-      - {x: 3.393499, y: -1.1579511}
-      - {x: 3.7090557, y: -1.1569526}
-    - coliders:
-      - {x: -24.315037, y: 3.5206497}
-      - {x: -24.700447, y: 3.5206497}
-      - {x: -24.315037, y: 3.200329}
-      - {x: -24.700447, y: 3.200329}
-    - coliders:
-      - {x: -13.976166, y: 16.866741}
-      - {x: -13.030485, y: 16.866741}
-      - {x: -13.976166, y: 16.021864}
-      - {x: -13.030485, y: 16.021864}
-    - coliders:
-      - {x: -12.063659, y: 16.860943}
-      - {x: -11.817786, y: 16.860943}
-      - {x: -12.063659, y: 15.7579775}
-      - {x: -11.817786, y: 15.7579775}
-    - coliders:
-      - {x: 2.88391, y: -21.556192}
-      - {x: 3.6668975, y: -21.556192}
-      - {x: 2.88391, y: -22.914248}
-      - {x: 3.6668975, y: -22.914248}
-    - coliders:
-      - {x: -2.635961, y: 12.244368}
-      - {x: 0.18133724, y: 12.244368}
-      - {x: -2.635961, y: 10.596436}
-      - {x: 0.18133724, y: 10.596436}
-    - coliders:
-      - {x: -64.90919, y: 8.037954}
-      - {x: -64.018074, y: 8.037954}
-      - {x: -64.90919, y: 5.01363}
-      - {x: -64.018074, y: 5.01363}
-    - coliders:
-      - {x: -64.90919, y: 8.037954}
-      - {x: -64.018074, y: 8.037954}
-      - {x: -64.90919, y: 5.01363}
-      - {x: -64.018074, y: 5.01363}
-    - coliders:
-      - {x: 6.086641, y: 11.604193}
-      - {x: 6.9777527, y: 11.604193}
-      - {x: 6.086641, y: 8.579869}
-      - {x: 6.9777527, y: 8.579869}
-    - coliders:
-      - {x: 6.9190526, y: -16.654007}
-      - {x: 7.689873, y: -16.654007}
-      - {x: 6.9190526, y: -17.469643}
-      - {x: 7.689873, y: -17.469643}
-    - coliders:
-      - {x: 51.678066, y: -14.768239}
-      - {x: 52.80499, y: -14.768239}
-      - {x: 51.678066, y: -15.427411}
-      - {x: 52.80499, y: -15.427411}
-    - coliders:
-      - {x: 4.5229497, y: 18.079119}
-      - {x: 5.844193, y: 18.079119}
-      - {x: 4.5229497, y: 16.066303}
-      - {x: 5.844193, y: 16.066303}
-    - coliders:
-      - {x: -6.1053104, y: -11.718679}
-      - {x: -5.136015, y: -11.718679}
-      - {x: -6.1053104, y: -13.362788}
-      - {x: -5.136015, y: -13.362788}
-    - coliders:
-      - {x: -5.7840424, y: 11.494481}
-      - {x: -6.9402733, y: 11.494481}
-      - {x: -5.7840424, y: 10.533519}
-      - {x: -6.9402733, y: 10.533519}
-    - coliders:
-      - {x: -4.230777, y: 9.51515}
-      - {x: -3.5901356, y: 9.51515}
-      - {x: -4.230777, y: 8.874509}
-      - {x: -3.5901356, y: 8.874509}
-    - coliders:
-      - {x: 10.374591, y: 2.4726582}
-      - {x: 10.666724, y: 2.4726582}
-      - {x: 10.374591, y: 2.2713237}
-      - {x: 10.666724, y: 2.2713237}
-    - coliders:
-      - {x: 36.661274, y: -12.162907}
-      - {x: 37.153072, y: -12.162907}
-      - {x: 36.661274, y: -13.539414}
-      - {x: 37.153072, y: -13.539414}
-    - coliders:
-      - {x: 59.120544, y: 8.5253105}
-      - {x: 59.612343, y: 8.5253105}
-      - {x: 59.120544, y: 7.1488023}
-      - {x: 59.612343, y: 7.1488023}
-    - coliders:
-      - {x: 38.04373, y: -12.294569}
-      - {x: 38.53553, y: -12.294569}
-      - {x: 38.04373, y: -13.671077}
-      - {x: 38.53553, y: -13.671077}
-    - coliders:
-      - {x: 35.180065, y: -11.998327}
-      - {x: 35.671864, y: -11.998327}
-      - {x: 35.180065, y: -13.374835}
-      - {x: 35.671864, y: -13.374835}
-    - coliders:
-      - {x: -119.93518, y: -35.233475}
-      - {x: -119.44338, y: -35.233475}
-      - {x: -119.93518, y: -36.609985}
-      - {x: -119.44338, y: -36.609985}
-    - coliders:
-      - {x: -118.912605, y: -35.233475}
-      - {x: -118.42081, y: -35.233475}
-      - {x: -118.912605, y: -36.609985}
-      - {x: -118.42081, y: -36.609985}
-    - coliders:
-      - {x: 58.55788, y: 9.499548}
-      - {x: 59.04968, y: 9.499548}
-      - {x: 58.55788, y: 8.12304}
-      - {x: 59.04968, y: 8.12304}
-    - coliders:
-      - {x: 60.17012, y: 9.579387}
-      - {x: 60.66192, y: 9.579387}
-      - {x: 60.17012, y: 8.202879}
-      - {x: 60.66192, y: 8.202879}
-    - coliders:
-      - {x: 38.04373, y: -12.294569}
-      - {x: 38.53553, y: -12.294569}
-      - {x: 38.04373, y: -13.671077}
-      - {x: 38.53553, y: -13.671077}
-    - coliders:
-      - {x: 58.548065, y: 9.128816}
-      - {x: 59.039864, y: 9.128816}
-      - {x: 58.548065, y: 7.752308}
-      - {x: 59.039864, y: 7.752308}
-    - coliders:
-      - {x: -24.545303, y: -0.38536954}
-      - {x: -23.93042, y: -0.38536954}
-      - {x: -24.545303, y: -1.1338782}
-      - {x: -23.93042, y: -1.1338782}
-    - coliders:
-      - {x: -0.36, y: 0.384}
-      - {x: 0.36, y: 0.384}
-      - {x: -0.36, y: -0.33600003}
-      - {x: 0.36, y: -0.33600003}
-    - coliders:
-      - {x: -0.32000002, y: 0.344}
-      - {x: 0.32000002, y: 0.344}
-      - {x: -0.32000002, y: -0.296}
-      - {x: 0.32000002, y: -0.296}
-    - coliders:
-      - {x: 37.33772, y: -44.680984}
-      - {x: 38.10854, y: -44.680984}
-      - {x: 37.33772, y: -45.32163}
-      - {x: 38.10854, y: -45.32163}
-    - coliders:
-      - {x: 4.522943, y: 12.231349}
-      - {x: 5.8687725, y: 12.231349}
-      - {x: 4.522943, y: 10.531349}
-      - {x: 5.8687725, y: 10.531349}
-    - coliders:
-      - {x: -1.1707615, y: 9.185788}
-      - {x: -0.53012025, y: 9.185788}
-      - {x: -1.1707615, y: 8.545147}
-      - {x: -0.53012025, y: 8.545147}
-    - coliders:
-      - {x: -75.00944, y: 24.348637}
-      - {x: -74.47718, y: 24.348637}
-      - {x: -75.00944, y: 23.905075}
-      - {x: -74.47718, y: 23.905075}
-    - coliders:
-      - {x: 8.576778, y: 1.33521}
-      - {x: 9.985428, y: 1.33521}
-      - {x: 8.576778, y: 0.511244}
-      - {x: 9.985428, y: 0.511244}
-    - coliders:
-      - {x: -1.1169021, y: -22.85537}
-      - {x: -0.34608144, y: -22.85537}
-      - {x: -1.1169021, y: -23.49601}
-      - {x: -0.34608144, y: -23.49601}
-    - coliders:
-      - {x: -76.43763, y: 3.4463081}
-      - {x: -74.94735, y: 3.4463081}
-      - {x: -76.43763, y: 2.0862043}
-      - {x: -74.94735, y: 2.0862043}
-    - coliders:
-      - {x: -56.311108, y: 0.5218035}
-      - {x: -55.01304, y: 0.5218035}
-      - {x: -56.311108, y: -0.73005766}
-      - {x: -55.01304, y: -0.73005766}
-    - coliders:
-      - {x: -10.342026, y: 17.116}
-      - {x: -10.096153, y: 17.116}
-      - {x: -10.342026, y: 16.013035}
-      - {x: -10.096153, y: 16.013035}
-    - coliders:
-      - {x: 52.525314, y: -15.026726}
-      - {x: 53.088776, y: -15.026726}
-      - {x: 52.525314, y: -15.356312}
-      - {x: 53.088776, y: -15.356312}
-    - coliders:
-      - {x: 62.36457, y: 84.46002}
-      - {x: 62.979454, y: 84.46002}
-      - {x: 62.36457, y: 83.71152}
-      - {x: 62.979454, y: 83.71152}
-    - coliders:
-      - {x: 0.37917343, y: 9.088917}
-      - {x: 1.0198146, y: 9.088917}
-      - {x: 0.37917343, y: 8.448276}
-      - {x: 1.0198146, y: 8.448276}
-    - coliders:
-      - {x: -52.8339, y: 20.572365}
-      - {x: -51.7663, y: 20.572365}
-      - {x: -52.8339, y: 12.646472}
-      - {x: -51.7663, y: 12.646472}
     - coliders:
       - {x: -8.384998, y: -0.8071221}
       - {x: 3.892284, y: -0.8071221}
@@ -8306,7 +8459,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1601740235}
-  - component: {fileID: 1601740234}
   - component: {fileID: 1601740233}
   m_Layer: 14
   m_Name: NPC (11)
@@ -8327,51 +8479,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogs:
-  - DialogKey: Greetings
+  - DialogKey: TwoProblems
     Pieces:
-    - Content: Hey! Adventurers!
+    - Content: Two problems...
       LetterDelay: 0.03
-      Pitch: 1
+      Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    - Content: Wait up!
-      LetterDelay: 0.03
-      Pitch: 1
-      SoundKey: 
-      AnimationTrigger: 
-      PostPieceEvent: 
-      PostPieceEventValue: 
-    Options:
-    - Title: Hmm...?
-      Event: StartDialog
-      Value: Greetings2
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-    - Title: Nope...
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
-  - DialogKey: Greetings2
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_TwoProblems
+    Options: []
+  - DialogKey: WhatWas
     Pieces:
-    - Content: Do you happen to be accompanied by a group of brave adventuers?
+    - Content: The second problem is that the key was broken in to 4 smaller pieces...
       LetterDelay: 0.03
-      Pitch: 1
+      Pitch: 1.3
       SoundKey: 
       AnimationTrigger: 
       PostPieceEvent: 
       PostPieceEventValue: 
-    Options:
-    - Title: Bye...
-      Event: EndDialog
-      Value: 
-      Condition: 
-      ConditionValue: 
-      CLR: {r: 1, g: 1, b: 1, a: 1}
+    - Content: And on the top of that, was also spread around the-..
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_SpreadAround
+    - Content: 'The second problem is '
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_TwoProblems
+    Options: []
+  - DialogKey: AnAdventurer
+    Pieces:
+    - Content: A group of adventurers...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_Adventurers
+    Options: []
+  - DialogKey: FoundOut
+    Pieces:
+    - Content: We found out that they came from a huge rabbit settlement underground,
+        which is located in the other side of the island.
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: We assume that it was invaders, which made the rabbits leave their
+        old homes behind and flee here.
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: A tale about a key, from someone who ventured there, told us that it
+        grant's the access to the invaders original home.
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_WhyKey3
+    Options: []
+  - DialogKey: Accept
+    Pieces:
+    - Content: Come back when you are ready with a party of 5, I'll be waiting outside...
+      LetterDelay: 0.03
+      Pitch: 1.3
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: InteractWithNPC
+      PostPieceEventValue: statle_Accept
+    Options: []
   GivingQuests: []
   EndingQuests: []
   TeleportableScenes: []
@@ -8389,31 +8577,6 @@ MonoBehaviour:
   ChatBubbleSpot: {fileID: 2032404123}
   QuestSpot: {fileID: 1513972170}
   CurrentQuestBubble: {fileID: 0}
---- !u!61 &1601740234
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1601740232}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.19488159, y: -0.1379466}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.739948, y: 7.2309237}
-  m_EdgeRadius: 0
 --- !u!4 &1601740235
 Transform:
   m_ObjectHideFlags: 0

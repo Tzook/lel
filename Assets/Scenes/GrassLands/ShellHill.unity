@@ -51305,7 +51305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Shellhill
-  Name: Shell Hill
+  Name: ShellHill
   NearestTownScene: ShellHill
   BGMusic: music_shellhill
   RoomAbilities: []
@@ -116878,9 +116878,15 @@ MonoBehaviour:
       Pitch: 1
       SoundKey: 
       AnimationTrigger: 
-      PostPieceEvent: StartQuest
-      PostPieceEventValue: ancientRabbitholes
-    Options: []
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: Start Quest
+      Event: StartQuest
+      Value: ancientRabbitholes
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0, g: 0, b: 0, a: 0}
   GivingQuests:
   - ancientRabbitholes
   EndingQuests: []

@@ -78,7 +78,7 @@ public class DevContentEditor : Editor
 
         if (GUILayout.Button("Update Dungeons"))
         {
-            Debug.Log("Great job! now implement actually sending the dungeons :)");
+            SendDungeons(currentInfo.Dungeons);
         }
 
         GUILayout.Label("Command line");
@@ -350,6 +350,62 @@ public class DevContentEditor : Editor
         }
 
         UpdateContent(node, "/quests/generate");
+    }
+
+    private void SendDungeons(List<DevDungeonContent> dungeons)
+    {
+        JSONNode node = new JSONClass();
+
+        for (int i = 0; i < dungeons.Count; i++)
+        {
+            node["dungeons"][i]["key"] = dungeons[i].Key;
+            node["dungeons"][i]["minLvl"] = dungeons[i].MinLvl.ToString();
+            node["dungeons"][i]["maxLvl"] = dungeons[i].MaxLvl.ToString();
+            node["dungeons"][i]["time"] = dungeons[i].TimeLimitInMinutes.ToString();
+            node["dungeons"][i]["beginRoom"] = dungeons[i].EntranceScene;
+
+            for (int a = 0; a < dungeons[i].Stages.Count; a++)
+            {
+                for (int b = 0; b < dungeons[i].Stages[a].PossibleScenes.Count; b++)
+                {
+                    node["dungeons"][i]["stages"][a]["rooms"][b] = dungeons[i].Stages[a].PossibleScenes[b];
+                }
+                
+                for (int b = 0; b < dungeons[i].Stages[a].PossibleRareScenes.Count; b++)
+                {
+                    node["dungeons"][i]["stages"][a]["rareRooms"][b] = dungeons[i].Stages[a].PossibleRareScenes[b];
+                }
+
+                for (int b = 0; b < dungeons[i].Stages[a].Rewards.Count; b++)
+                {
+                    node["dungeons"][i]["stages"][a]["rewards"][b]["key"] = dungeons[i].Stages[a].Rewards[b].ItemKey;
+                    node["dungeons"][i]["stages"][a]["rewards"][b]["rarity"] = dungeons[i].Stages[a].Rewards[b].Rarity.ToString();
+                    node["dungeons"][i]["stages"][a]["rewards"][b]["stack"] = dungeons[i].Stages[a].Rewards[b].Stack.ToString();
+                }
+            }
+
+            for (int a = 0; a < dungeons[i].PossiblePerksEmpowers.Count; a++)
+            {
+                node["dungeons"][i]["perksPool"][a]["key"] = dungeons[i].PossiblePerksEmpowers[a].Key;
+                node["dungeons"][i]["perksPool"][a]["value"] = dungeons[i].PossiblePerksEmpowers[a].Value.ToString();
+            }
+
+            for (int a = 0; a < dungeons[i].PossibleEmpowersCombinations.Count; a++)
+            {
+                for (int b = 0; b < dungeons[i].PossibleEmpowersCombinations[a].BuffsMultiplyers.Count; b++)
+                {
+                    float val = dungeons[i].PossibleEmpowersCombinations[a].BuffsMultiplyers[b];
+                    node["dungeons"][i]["perksCombinations"][a]["multiplyers"][b] = val.ToString();
+                }
+            }
+
+            for (int a = 0; a < dungeons[i].PossibleSpecialEmpowers.Count; a++)
+            {
+                node["dungeons"][i]["rareBonuses"][a] = dungeons[i].PossibleSpecialEmpowers[a];
+            }
+        }
+
+        UpdateContent(node, "/dungeons/generate");
     }
 
     private void UpdateContent(JSONNode node, string path)

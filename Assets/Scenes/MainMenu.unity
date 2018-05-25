@@ -41574,7 +41574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.5}
+  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -53822,6 +53822,7 @@ MonoBehaviour:
   - Key: exampleDungeon
     MinLvl: 5
     MaxLvl: 10
+    TimeLimitInMinutes: 60
     EntranceScene: ShellHillInnBasement
     Stages:
     - PossibleScenes:
@@ -53877,15 +53878,15 @@ MonoBehaviour:
       Value: 1
     PossibleEmpowersCombinations:
     - BuffsMultiplyers:
-      - 0.2
-      - -0.1
+      - 2
+      - -1
     - BuffsMultiplyers:
-      - 0.3
-      - -0.3
+      - 3
+      - -3
     - BuffsMultiplyers:
-      - 0.5
-      - -0.25
-      - -0.25
+      - 5
+      - -2.5
+      - -2.5
     PossibleSpecialEmpowers:
     - doubleChest
 --- !u!114 &2254

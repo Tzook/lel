@@ -33,26 +33,22 @@ public class SceneInfoEditor : Editor {
 
             for (int i=0;i<currentInfo.ScenePortals.Count;i++)
             {
-                //if (currentInfo.ScenePortals[i].gameObject.activeInHierarchy)
-                //{
-                    node["scene"]["Portals"][i]["key"] = currentInfo.ScenePortals[i].Key;
-                    node["scene"]["Portals"][i]["targetPortal"] = currentInfo.ScenePortals[i].TargetPortal;
-                    node["scene"]["Portals"][i]["TargetLevel"] = currentInfo.ScenePortals[i].TargetLevel;
-                    node["scene"]["Portals"][i]["PositionX"] = currentInfo.ScenePortals[i].transform.position.x.ToString();
-                    node["scene"]["Portals"][i]["PositionY"] = currentInfo.ScenePortals[i].transform.position.y.ToString();
-                //}
+                node["scene"]["Portals"][i]["key"] = currentInfo.ScenePortals[i].Key;
+                node["scene"]["Portals"][i]["targetPortal"] = currentInfo.ScenePortals[i].TargetPortal;
+                node["scene"]["Portals"][i]["TargetLevel"] = currentInfo.ScenePortals[i].TargetLevel;
+                node["scene"]["Portals"][i]["PositionX"] = currentInfo.ScenePortals[i].transform.position.x.ToString();
+                node["scene"]["Portals"][i]["PositionY"] = currentInfo.ScenePortals[i].transform.position.y.ToString();
             }
 
             for (int i = 0; i < currentInfo.Spawners.Count; i++)
             {
-                //if (currentInfo.Spawners[i].gameObject.activeInHierarchy)
-                //{
-                    node["scene"]["Spawners"][i]["MonsterKey"] = currentInfo.Spawners[i].MonsterKey;
-                    node["scene"]["Spawners"][i]["SpawnCap"] = currentInfo.Spawners[i].SpawnCap.ToString();
-                    node["scene"]["Spawners"][i]["RespawnTime"] = currentInfo.Spawners[i].RespawnTime.ToString();
-                    node["scene"]["Spawners"][i]["PositionX"] = currentInfo.Spawners[i].transform.position.x.ToString();
-                    node["scene"]["Spawners"][i]["PositionY"] = currentInfo.Spawners[i].transform.position.y.ToString();
-                //}
+                node["scene"]["Spawners"][i]["MonsterKey"] = currentInfo.Spawners[i].MonsterKey;
+                node["scene"]["Spawners"][i]["SpawnCap"] = currentInfo.Spawners[i].SpawnCap.ToString();
+                node["scene"]["Spawners"][i]["RespawnTime"] = currentInfo.Spawners[i].RespawnTime.ToString();
+                node["scene"]["Spawners"][i]["PositionX"] = currentInfo.Spawners[i].transform.position.x.ToString();
+                node["scene"]["Spawners"][i]["PositionY"] = currentInfo.Spawners[i].transform.position.y.ToString();
+                node["scene"]["Spawners"][i]["Bulk"] = currentInfo.Spawners[i].bulkEnumState.ToString();
+                node["scene"]["Spawners"][i]["SpawnTimes"] = currentInfo.Spawners[i].SpawnTimes.ToString();
             }
 
             for (int i = 0; i < currentInfo.Npcs.Count; i++)

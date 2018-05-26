@@ -10,6 +10,12 @@ public class MonsterSpawner : MonoBehaviour {
     public int SpawnCap;
 
     public float RespawnTime;
-
-
+    
+    [SerializeField]
+    public BulkEnumState bulkEnumState;
+    public enum BulkEnumState
+    {
+        None, Wave, Asap
+    }
+    public int SpawnTimes;
 }

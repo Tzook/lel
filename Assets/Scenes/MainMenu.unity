@@ -41574,7 +41574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.500015}
+  m_AnchoredPosition: {x: 9.599609, y: 10.5}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -53869,6 +53869,36 @@ MonoBehaviour:
       - ItemKey: captianscoat
         Rarity: 2
         Stack: 0
+    PossiblePerksEmpowers:
+    - Key: attackSpeedModifier
+      Value: 0.1
+    - Key: minDamageModifier
+      Value: 0.2
+    - Key: hpStealChance
+      Value: 1
+    PossibleEmpowersCombinations:
+    - BuffsMultiplyers:
+      - 2
+      - -1
+    - BuffsMultiplyers:
+      - 3
+      - -3
+    - BuffsMultiplyers:
+      - 5
+      - -2.5
+      - -2.5
+    PossibleSpecialEmpowers:
+    - doubleChest
+  - Key: ancientRabbitHoles
+    MinLvl: 10
+    MaxLvl: 20
+    TimeLimitInMinutes: 60
+    EntranceScene: ShellHill
+    Stages:
+    - PossibleScenes:
+      - GrassLands5_1_3
+      PossibleRareScenes: []
+      Rewards: []
     PossiblePerksEmpowers:
     - Key: attackSpeedModifier
       Value: 0.1

@@ -138,6 +138,10 @@ public class WriteConstantLists
         string result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_DUNGEON, result);
         
+        text = File.ReadAllText(FILE_NAME_SCENE);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_SCENE, result);
+        
         AssetDatabase.Refresh();
     }
 

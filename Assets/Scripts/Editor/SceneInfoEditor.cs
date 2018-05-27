@@ -19,12 +19,16 @@ public class SceneInfoEditor : Editor {
         GUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Update Scene Info"))
-        {
+        {   
+            WriteConstantLists.Instance.WriteScenesPopupList();
+            WriteMiniMap(currentInfo);
+
             JSONNode node = new JSONClass();
 
             node["scene"]["name"] = currentInfo.Name;
             node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
             node["scene"]["pvp"].AsBool = currentInfo.SupportsPVP;
+            node["scene"]["all"] = currentInfo.Name + "," + string.Join(",", SceneInfo.SUPPORTED_SCENES);
 
             for (int i = 0; i < currentInfo.RoomAbilities.Count; i++)
             {
@@ -77,9 +81,6 @@ public class SceneInfoEditor : Editor {
                     node["scene"]["NPC"][i]["teleportRooms"][d]["party"].AsBool = currentInfo.Npcs[i].TeleportableScenes[d].allowParty;
                 }
             }
-
-            WriteConstantLists.Instance.WriteScenesPopupList();
-            WriteMiniMap(currentInfo);
 
             SendSceneInfo(node);
         }

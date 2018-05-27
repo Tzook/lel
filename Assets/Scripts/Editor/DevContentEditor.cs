@@ -299,11 +299,12 @@ public class DevContentEditor : Editor
             node["perkCollection"][i]["client"].AsBool = perks[i].IsClient;
             node["perkCollection"][i]["type"] = perks[i].Type;
             
-            for (int a = 0; a < perks[i].BonusPerks.Count; a++)
+            for (int a = 0; a < perks[i].Buff.BonusPerks.Count; a++)
             {
-                node["perkCollection"][i]["bonusPerks"][a]["key"] = perks[i].BonusPerks[a].Key.ToString();
-                node["perkCollection"][i]["bonusPerks"][a]["value"] = perks[i].BonusPerks[a].Value.ToString();
+                node["perkCollection"][i]["bonusPerks"][a]["key"] = perks[i].Buff.BonusPerks[a].Key.ToString();
+                node["perkCollection"][i]["bonusPerks"][a]["value"] = perks[i].Buff.BonusPerks[a].Value.ToString();
             }
+            node["perkCollection"][i]["party"].AsBool = perks[i].Buff.PartyBuff;
             
             node["perkCollection"][i]["acc"] = "0";//perks[i].PrecentAccelerationPerUpgrade.ToString();
         }

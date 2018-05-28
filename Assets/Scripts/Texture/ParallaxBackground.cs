@@ -10,6 +10,12 @@ public class ParallaxBackground : MonoBehaviour {
     [SerializeField]
     Vector2 Speed;
 
+    [SerializeField]
+    bool Loop = false;
+
+    [SerializeField]
+    float LoopingSpeed;
+
     float DeltaX
     {
         get
@@ -27,7 +33,15 @@ public class ParallaxBackground : MonoBehaviour {
 
     private void Update()
     {
+        if (Loop)
+        {
+            mRenderer.material.mainTextureOffset += (LoopingSpeed * Speed * Time.deltaTime);
+
+            return;
+        }
+
         mRenderer.material.mainTextureOffset = mRenderer.material.mainTextureOffset + ((-DeltaX) * Speed * Time.deltaTime);
+
     }
 
     private void LateUpdate()

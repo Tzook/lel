@@ -12,6 +12,7 @@ public class WriteConstantLists
     private const string FILE_NAME_MONSTERS = "Assets/Scripts/Entities/MonsterSpawner.cs";
     private const string FILE_NAME_NPC = "Assets/Scripts/NPC/NPC.cs";
     private const string FILE_NAME_SCENE = "Assets/Scripts/Misc/SceneInfo.cs";
+    private const string FILE_NAME_GATE_PORTAL = "Assets/Scripts/Entities/GatePortal.cs";
     private static WriteConstantLists _instance; 
     public static WriteConstantLists Instance
     { get { return _instance == null ? _instance = new WriteConstantLists() : _instance; } }
@@ -141,6 +142,10 @@ public class WriteConstantLists
         text = File.ReadAllText(FILE_NAME_SCENE);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_SCENE, result);
+        
+        text = File.ReadAllText(FILE_NAME_GATE_PORTAL);
+        result = rgx.Replace(text, replacement);
+        File.WriteAllText(FILE_NAME_GATE_PORTAL, result);
         
         AssetDatabase.Refresh();
     }

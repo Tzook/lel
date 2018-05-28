@@ -45292,14 +45292,13 @@ MonoBehaviour:
     RewardEXP: 6
     Type: 1
     PossibleLoot:
-    - ItemKey: batWing
-      MinStack: 1
-      MaxStack: 2
     - ItemKey: gold
-      MinStack: 2
-      MaxStack: 4
+      MinStack: 4
+      MaxStack: 8
     isBoss: 0
-    Perks: []
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
     Spells:
       SpellsList: []
       MinTime: 0
@@ -46772,6 +46771,35 @@ MonoBehaviour:
         Chance: 0.5
       MinTime: 4
       MaxTime: 10
+      DeathRattle:
+        Key: 
+        DisplayName: 
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Duration: 0
+  - MonsterKey: Vulture
+    MonsterName: Vulture
+    MonsterHP: 200
+    MonsterLevel: 8
+    DMG: 20
+    RewardEXP: 80
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 4
+      MaxStack: 8
+    isBoss: 0
+    Perks:
+    - Key: bleedChance
+      Value: 0.1
+    Spells:
+      SpellsList: []
+      MinTime: 0
+      MaxTime: 0
       DeathRattle:
         Key: 
         DisplayName: 

@@ -15941,6 +15941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.3, y: 0}
 --- !u!23 &277113770
 MeshRenderer:
@@ -37567,6 +37568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.1, y: 0}
 --- !u!23 &698350092
 MeshRenderer:
@@ -44916,6 +44918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.5, y: 0}
 --- !u!23 &945380792
 MeshRenderer:
@@ -54742,6 +54745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0.3
   AddedY: 1
+  MaxFarAim: 3
   followingObject: {fileID: 0}
   CamType: 0
   BlurCamera: {fileID: 47810684}
@@ -54755,6 +54759,7 @@ MonoBehaviour:
   Cam: {fileID: 1138014054}
   BlurCam: {fileID: 0}
   CamFollowing: 1
+  FarAimMode: 0
 --- !u!81 &1138014051
 AudioListener:
   m_ObjectHideFlags: 0
@@ -64917,6 +64922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.2, y: 0}
 --- !u!23 &1532604453
 MeshRenderer:
@@ -66298,6 +66304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.4, y: 0}
 --- !u!23 &1590727276
 MeshRenderer:
@@ -75150,6 +75157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.1, y: 0}
 --- !u!23 &1929799308
 MeshRenderer:
@@ -76474,6 +76482,12 @@ MonoBehaviour:
       Condition: QuestCompleted
       ConditionValue: PirateBay
       CLR: {r: 1, g: 1, b: 1, a: 0}
+    - Title: I got the supplies
+      Event: StartDialog
+      Value: Got
+      Condition: QuestComplete
+      ConditionValue: PirateBay
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
     - Title: No...
       Event: EndDialog
       Value: 
@@ -76499,7 +76513,7 @@ MonoBehaviour:
     Options:
     - Title: What is it?
       Event: StartDialog
-      Value: What?
+      Value: What
       Condition: 
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 0}
@@ -76597,12 +76611,43 @@ MonoBehaviour:
       PostPieceEvent: StartQuest
       PostPieceEventValue: PirateBay
     Options: []
+  - DialogKey: Got
+    Pieces:
+    - Content: Amazing!
+      LetterDelay: 0.03
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: It's time to split the loot!
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    - Content: Here's your cut
+      LetterDelay: 0.02
+      Pitch: 1
+      SoundKey: 
+      AnimationTrigger: 
+      PostPieceEvent: 
+      PostPieceEventValue: 
+    Options:
+    - Title: CompleteQuest
+      Event: CompleteQuest
+      Value: PirateBay
+      Condition: 
+      ConditionValue: 
+      CLR: {r: 0.9411765, g: 0.92941177, b: 0.5803922, a: 1}
   GivingQuests:
-  - 
-  EndingQuests: []
+  - PirateBay
+  EndingQuests:
+  - PirateBay
   TeleportableScenes:
   - sceneKey: WaterCave_Pirates
-    portalKey: Cave
+    portalKey: Bay
     allowParty: 0
   SellingItems: []
   DefaultDialog: Greetings
@@ -82772,6 +82817,7 @@ MonoBehaviour:
   - {fileID: 1766917059}
   - {fileID: 318465268}
   - {fileID: 1233013057}
+  SupportsPVP: 0
 --- !u!4 &2110610937
 Transform:
   m_ObjectHideFlags: 0

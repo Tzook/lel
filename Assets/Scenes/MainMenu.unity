@@ -53920,6 +53920,28 @@ MonoBehaviour:
     RewardMP: 0
     RewardPrimaryAbility: 
     RewardExp: 10
+  - Name: The Under Bay
+    Key: PirateBay
+    InProgressDescription: Tritz has told me about a secret Pirate Bay that contains
+      the Pirate's loot, I should pay them a visit and get some loot for myself
+    QuestCompleteDescription: Tritz was right, it is like stealing loot from a pirate
+    FacePrefab: WarriorQuest
+    Conditions:
+    - Condition: loot
+      Type: PirateSupply
+      CurrentProgress: 0
+      TargetProgress: 10
+      ExtraDescription: Gather 10 supploes
+    QuestsStates: []
+    MinimumLevel: 6
+    RewardItems:
+    - ItemKey: improvedshortbow
+      MinStack: 1
+      MaxStack: 1
+    RewardHP: 0
+    RewardMP: 0
+    RewardPrimaryAbility: 
+    RewardExp: 200
   Dungeons:
   - Key: exampleDungeon
     MinLvl: 5

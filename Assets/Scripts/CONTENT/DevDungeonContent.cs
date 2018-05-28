@@ -13,6 +13,29 @@ public class DevDungeonContent
     public List<DevPerkMap> PossiblePerksEmpowers = new List<DevPerkMap>();
     public List<EmpowerCombinations> PossibleEmpowersCombinations = new List<EmpowerCombinations>();
     public List<string> PossibleSpecialEmpowers = new List<string>();
+
+    public bool isReady
+    {
+        get
+        {
+            bool Flag = true;
+
+            if(LocalUserInfo.Me.CurrentParty == null)
+            {
+                return false;
+            }
+
+            Flag = !LocalUserInfo.Me.CurrentParty.HasPlayerBelowLVL(MinLvl);
+
+            Flag = !LocalUserInfo.Me.CurrentParty.HasPlayerAboveLVL(MaxLvl);
+
+            return Flag;
+        }
+        set
+        {
+
+        }
+    }
 }
 
 [System.Serializable]

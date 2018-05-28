@@ -197,6 +197,14 @@ public class NPC : MonoBehaviour {
 
                     break;
                 }
+            case "StartDungeon":
+                {
+                    DialogManager.Instance.StopDialogMode();
+
+                    SocketClient.Instance.SendStartedDungeon(eventValue);
+
+                    break;
+                }
         }
     }
 

@@ -136,6 +136,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("spell_cooldown", OnSpellCooldown);
         CurrentSocket.On("mob_spell_activated", OnMobSpellActivated);
 
+        CurrentSocket.On("dungeon_buffs_pool", OnDungeonBuffsPool);
+
         LoadingWindowUI.Instance.Register(this);
     }
 
@@ -1476,7 +1478,13 @@ public class SocketClient : MonoBehaviour
         }
     }
 
+    private void OnDungeonBuffsPool(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
 
+        BroadcastEvent(data.ToString());
+
+    }
     #endregion
 
     #region Emittions
@@ -2003,6 +2011,39 @@ public class SocketClient : MonoBehaviour
         node["mob_id"] = mobID;
 
         CurrentSocket.Emit("took_spell_dmg", node);
+    }
+
+
+    public void SendStartedDungeon(string dungeonKey)
+    {
+        JSONNode node = new JSONClass();
+
+        node["key"] = dungeonKey;
+
+        CurrentSocket.Emit("started_dungeon", node);
+    }
+
+    public void SendContinuedDungeon()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("continued_dungeon", node);
+    }
+
+    public void SendPickedDungeonBuff(int buffIndex)
+    {
+        JSONNode node = new JSONClass();
+
+        node["buff_index"] = buffIndex.ToString();
+
+        CurrentSocket.Emit("picked_dungeon_buff", node);
+    }
+
+    public void SendUnlockedDungeonReward()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("unlocked_dungeon_reward", node);
     }
 
     #endregion

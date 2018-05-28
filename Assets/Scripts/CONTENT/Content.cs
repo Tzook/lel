@@ -249,6 +249,19 @@ public class Content : MonoBehaviour {
 
     public List<DevDungeonContent> Dungeons = new List<DevDungeonContent>();
     
+    public DevDungeonContent GetDungeon(string key)
+    {
+        for(int i=0;i<Dungeons.Count;i++)
+        {
+            if(Dungeons[i].Key == key)
+            {
+                return Dungeons[i];
+            }
+        }
+
+        return null;
+    }
+
     //void Start()
     //{
     //    Content.Instance.Monsters.InsertRange(0, Monsters);

@@ -356,6 +356,14 @@ public class DialogManager : MonoBehaviour {
                 {
                     return (LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(option.ConditionValue) != null);
                 }
+            case "DungeonUnready":
+                {
+                    return !Content.Instance.GetDungeon(option.ConditionValue).isReady;
+                }
+            case "DungeonReady":
+                {
+                    return Content.Instance.GetDungeon(option.ConditionValue).isReady;
+                }
         }
 
         return false;

@@ -369,12 +369,14 @@ public class DevContentEditor : Editor
             {
                 for (int b = 0; b < dungeons[i].Stages[a].PossibleScenes.Count; b++)
                 {
-                    node["dungeons"][i]["stages"][a]["rooms"][b] = dungeons[i].Stages[a].PossibleScenes[b];
+                    node["dungeons"][i]["stages"][a]["rooms"][b]["key"] = dungeons[i].Stages[a].PossibleScenes[b].Key;
+                    node["dungeons"][i]["stages"][a]["rooms"][b]["time"] = dungeons[i].Stages[a].PossibleScenes[b].Time.ToString();
                 }
                 
                 for (int b = 0; b < dungeons[i].Stages[a].PossibleRareScenes.Count; b++)
                 {
-                    node["dungeons"][i]["stages"][a]["rareRooms"][b] = dungeons[i].Stages[a].PossibleRareScenes[b];
+                    node["dungeons"][i]["stages"][a]["rareRooms"][b]["key"] = dungeons[i].Stages[a].PossibleRareScenes[b].Key;
+                    node["dungeons"][i]["stages"][a]["rareRooms"][b]["time"] = dungeons[i].Stages[a].PossibleRareScenes[b].Time.ToString();
                 }
 
                 for (int b = 0; b < dungeons[i].Stages[a].Rewards.Count; b++)

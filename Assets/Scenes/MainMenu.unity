@@ -53973,24 +53973,31 @@ MonoBehaviour:
   Dungeons:
   - Key: exampleDungeon
     MinLvl: 5
-    MaxLvl: 10
+    MaxLvl: 20
     TimeLimitInMinutes: 60
-    EntranceScene: ShellHillInnBasement
+    EntranceScene: ShellHill
     Stages:
     - PossibleScenes:
-      - GrassLands5_1_3
-      - GrassLands5_1_2
+      - Key: GrassLands5_1_3
+        Time: 0.5
+      - Key: GrassLands5_1_2
+        Time: 0.5
       PossibleRareScenes: []
       Rewards: []
     - PossibleScenes:
-      - GrassLands6
-      - GrassLands6_2
-      - GrassLands7
+      - Key: GrassLands6
+        Time: 0
+      - Key: GrassLands6_2
+        Time: 0
+      - Key: GrassLands7
+        Time: 0
       PossibleRareScenes:
-      - GrassLands7
+      - Key: GrassLands7
+        Time: 0
       Rewards: []
     - PossibleScenes:
-      - HairyHouse
+      - Key: HairyHouse
+        Time: 0
       PossibleRareScenes: []
       Rewards:
       - ItemKey: blackShoes
@@ -54006,13 +54013,17 @@ MonoBehaviour:
         Rarity: 5
         Stack: 0
     - PossibleScenes:
-      - HugeTree1
-      - HugeTree2
+      - Key: HugeTree1
+        Time: 0
+      - Key: HugeTree2
+        Time: 0
       PossibleRareScenes:
-      - FrostPracticeChamber
+      - Key: FrostPracticeChamber
+        Time: 0
       Rewards: []
     - PossibleScenes:
-      - IntroScene
+      - Key: IntroScene
+        Time: 0
       PossibleRareScenes: []
       Rewards:
       - ItemKey: cabbage
@@ -54048,7 +54059,8 @@ MonoBehaviour:
     EntranceScene: ShellHill
     Stages:
     - PossibleScenes:
-      - dungeon_arh_intro
+      - Key: dungeon_arh_intro
+        Time: 0
       PossibleRareScenes: []
       Rewards: []
     PossiblePerksEmpowers:

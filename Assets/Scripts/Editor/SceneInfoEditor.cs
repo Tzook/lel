@@ -25,10 +25,10 @@ public class SceneInfoEditor : Editor {
 
             JSONNode node = new JSONClass();
 
-            node["scene"]["name"] = currentInfo.Name;
+            node["scene"]["name"] = currentInfo.Key;
             node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
             node["scene"]["pvp"].AsBool = currentInfo.SupportsPVP;
-            node["scene"]["all"] = currentInfo.Name + "," + string.Join(",", SceneInfo.SUPPORTED_SCENES);
+            node["scene"]["all"] = currentInfo.Key + "," + string.Join(",", SceneInfo.SUPPORTED_SCENES);
 
             for (int i = 0; i < currentInfo.RoomAbilities.Count; i++)
             {
@@ -168,7 +168,7 @@ public class SceneInfoEditor : Editor {
         currentInfo.miniMapInfo.top = top;
         currentInfo.miniMapInfo.bottom = bottom;
         currentInfo.miniMapInfo.coliders = coliders;
-        EditorSceneManager.SaveScene(EditorSceneManager.GetSceneByName(currentInfo.Name));
+        EditorSceneManager.SaveScene(EditorSceneManager.GetSceneByName(currentInfo.Key));
     }
 
     private void SendSceneInfo(JSONNode node)

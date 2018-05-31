@@ -685,8 +685,11 @@ public class ActorInstance : MonoBehaviour
   
     internal void Hurt()
     {
-        Anim.SetInteger("HurtType", Random.Range(0, 3));
-        Anim.SetTrigger("Hurt");
+        if (!Anim.GetBool("Charging"))
+        {
+            Anim.SetInteger("HurtType", Random.Range(0, 3));
+            Anim.SetTrigger("Hurt");
+        }
 
         if(LocalUserInfo.Me.ClientCharacter.ID == Info.ID)
         {

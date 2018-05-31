@@ -43,6 +43,8 @@ public class SceneInfo : MonoBehaviour {
         }
     }
 
+    public int Timer = 0;
+
     void Awake()
     {
         Instance = this;

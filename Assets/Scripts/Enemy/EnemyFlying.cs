@@ -13,6 +13,9 @@ public class EnemyFlying : Enemy {
     protected float OriginalMovementSpeed;
 
     [SerializeField]
+    protected float MinChaseDistance = 0.4f;
+
+    [SerializeField]
     protected float MaxChaseDistance = 20f;
 
     [SerializeField]
@@ -88,7 +91,7 @@ public class EnemyFlying : Enemy {
 
     protected Vector3 LastSentPosition;
     protected Vector3 LastGivenPosition;
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
@@ -98,7 +101,7 @@ public class EnemyFlying : Enemy {
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         if (!Game.Instance.isBitch && LastGivenPosition != Vector3.zero)
         {
@@ -107,7 +110,7 @@ public class EnemyFlying : Enemy {
         }
     }
 
-    void LateUpdate()
+    protected void LateUpdate()
     {
         if (m_HealthBar != null)
         {
@@ -259,7 +262,7 @@ public class EnemyFlying : Enemy {
         {
             currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
             
-            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f || Stunned)
+            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < MinChaseDistance || Stunned)
             {
                 StandStill();
             }

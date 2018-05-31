@@ -11,6 +11,12 @@ public class ShockMessageUI : MonoBehaviour {
     [SerializeField]
     CanvasGroup m_CanvasGroup;
 
+    [SerializeField]
+    float StayAliveTime = 0.1f;
+
+    [SerializeField]
+    float FadeInSpeed = 6f;
+
 	public void CallMessage(string content)
     {
         this.gameObject.SetActive(true);
@@ -65,14 +71,19 @@ public class ShockMessageUI : MonoBehaviour {
     Coroutine ShockInstance;
     private IEnumerator ShockRoutine()
     {
-        m_CanvasGroup.alpha = 0f;
-        while(m_CanvasGroup.alpha<1f)
+        if (FadeInSpeed < 999f)
         {
-            m_CanvasGroup.alpha += 6f * Time.deltaTime;
-            yield return 0;
+            m_CanvasGroup.alpha = 0f;
+            while (m_CanvasGroup.alpha < 1f)
+            {
+                m_CanvasGroup.alpha += FadeInSpeed * Time.deltaTime;
+                yield return 0;
+            }
         }
 
-        yield return new WaitForSeconds((0.1f*m_txtContent.text.Length));
+        m_CanvasGroup.alpha = 1f;
+
+        yield return new WaitForSeconds((StayAliveTime*m_txtContent.text.Length));
 
         m_CanvasGroup.alpha = 1f;
         while (m_CanvasGroup.alpha > 0f)

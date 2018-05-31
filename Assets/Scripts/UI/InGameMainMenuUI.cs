@@ -115,6 +115,9 @@ public class InGameMainMenuUI : MonoBehaviour {
     public ShockMessageUI ShockMessageTop;
 
     [SerializeField]
+    public ShockMessageUI TimerMessageUI;
+
+    [SerializeField]
     public PAWindowUI PrimaryAbilityWindow;
 
     [SerializeField]
@@ -891,4 +894,5 @@ public class InGameMainMenuUI : MonoBehaviour {
 
         m_LocationLabel.FadeSequence(0.3f, 2f);
     }
+
 }

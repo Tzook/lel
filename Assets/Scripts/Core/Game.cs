@@ -52,6 +52,8 @@ public class Game : MonoBehaviour {
     //Custom quests routines
     List<OkRoutineInstance> OkRoutineInstances = new List<OkRoutineInstance>();
 
+    Coroutine SceneTimerInstance;
+
     void Awake()
     {
         Instance = this;
@@ -365,6 +367,17 @@ public class Game : MonoBehaviour {
             actorInfo.AddRoomPrimaryAbility(SceneInfo.Instance.RoomAbilities[i]);
         }
 
+        if(SceneTimerInstance != null)
+        {
+            StopCoroutine(SceneTimerInstance);
+            SceneTimerInstance = null;
+        }
+
+        if(SceneInfo.Instance.Timer > 0)
+        {
+            SceneTimerInstance = StartCoroutine(SceneTimerRoutine(SceneInfo.Instance.Timer));
+        }
+
         GameCamera.Instance.Register(CurrentScene.ClientCharacter.Instance.gameObject);
 
         
@@ -545,6 +558,21 @@ public class Game : MonoBehaviour {
         SocketClient.Instance.SendQuestOK(okKey);
     }
 
+    IEnumerator SceneTimerRoutine(int givenTime)
+    {
+        int timeLeft = givenTime;
+
+        while(timeLeft > 0)
+        {
+            timeLeft--;
+
+            InGameMainMenuUI.Instance.TimerMessageUI.CallMessage(timeLeft+"s");
+
+            yield return new WaitForSeconds(1);
+        }
+
+        SceneTimerInstance = null;
+    }
 }
 
 class OkRoutineInstance

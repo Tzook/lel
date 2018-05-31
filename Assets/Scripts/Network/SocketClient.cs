@@ -1413,7 +1413,7 @@ public class SocketClient : MonoBehaviour
         Enemy tempEnemy = Game.Instance.CurrentScene.GetEnemy(data["target_id"].Value);
 
         List<string> buffNames = null;
-        if (data["buff_names"] != null)
+        if (data["buff_names"] != null && data["buff_names"].Count > 0)
         {
             buffNames = new List<string>();
             for (int i = 0; i < data["buff_names"].Count; i++)

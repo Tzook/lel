@@ -796,6 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0.3
   AddedY: 1
+  MaxFarAim: 3
   followingObject: {fileID: 0}
   CamType: 0
   BlurCamera: {fileID: 178138538}
@@ -809,6 +810,7 @@ MonoBehaviour:
   Cam: {fileID: 77013913}
   BlurCam: {fileID: 0}
   CamFollowing: 1
+  FarAimMode: 0
 --- !u!81 &77013910
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1282,7 +1284,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterKey: PirateSailor4
   SpawnCap: 1
-  RespawnTime: -1
+  RespawnTime: 0
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 1
 --- !u!4 &127403299
 Transform:
   m_ObjectHideFlags: 0
@@ -1703,7 +1708,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterKey: PirateSailor5
   SpawnCap: 1
-  RespawnTime: -1
+  RespawnTime: 0
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 1
 --- !u!4 &193471773
 Transform:
   m_ObjectHideFlags: 0
@@ -2712,7 +2720,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.7, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &310544397
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3640,7 +3651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.8, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &480128135
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13181,7 +13195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.6, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &800369269
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13847,7 +13864,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &889330209
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18110,7 +18130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.4, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &959171919
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18592,7 +18615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.3, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &1064288446
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18969,7 +18995,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterKey: PirateSailor2
   SpawnCap: 1
-  RespawnTime: -1
+  RespawnTime: 0
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 1
 --- !u!4 &1126981893
 Transform:
   m_ObjectHideFlags: 0
@@ -20823,7 +20852,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterKey: PirateSailor3
   SpawnCap: 1
-  RespawnTime: -1
+  RespawnTime: 0
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 1
 --- !u!4 &1351701700
 Transform:
   m_ObjectHideFlags: 0
@@ -21210,7 +21242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.5, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &1421615446
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25201,6 +25236,8 @@ MonoBehaviour:
       - {x: -86.38134, y: -38.96837}
       - {x: -85.00074, y: -39.132816}
   NetStateEntities: []
+  SupportsPVP: 0
+  Timer: 0
 --- !u!4 &1483239870
 Transform:
   m_ObjectHideFlags: 0
@@ -30951,7 +30988,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterKey: PirateSailor1
   SpawnCap: 1
-  RespawnTime: -1
+  RespawnTime: 0
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 1
 --- !u!4 &1809685493
 Transform:
   m_ObjectHideFlags: 0

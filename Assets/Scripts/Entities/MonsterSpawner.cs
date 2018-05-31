@@ -10,6 +10,7 @@ public class MonsterSpawner : MonoBehaviour {
     public int SpawnCap;
 
     public float RespawnTime;
+    public float InitialDelay;
     
     [SerializeField]
     public BulkEnumState bulkEnumState;

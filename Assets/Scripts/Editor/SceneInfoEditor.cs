@@ -49,6 +49,7 @@ public class SceneInfoEditor : Editor {
                 node["scene"]["Spawners"][i]["MonsterKey"] = currentInfo.Spawners[i].MonsterKey;
                 node["scene"]["Spawners"][i]["SpawnCap"] = currentInfo.Spawners[i].SpawnCap.ToString();
                 node["scene"]["Spawners"][i]["RespawnTime"] = currentInfo.Spawners[i].RespawnTime.ToString();
+                node["scene"]["Spawners"][i]["InitialDelay"] = currentInfo.Spawners[i].InitialDelay.ToString();
                 node["scene"]["Spawners"][i]["PositionX"] = currentInfo.Spawners[i].transform.position.x.ToString();
                 node["scene"]["Spawners"][i]["PositionY"] = currentInfo.Spawners[i].transform.position.y.ToString();
                 node["scene"]["Spawners"][i]["Bulk"] = currentInfo.Spawners[i].bulkEnumState.ToString();

@@ -8867,7 +8867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &676
 GameObject:
   m_ObjectHideFlags: 0
@@ -45876,9 +45876,6 @@ MonoBehaviour:
     - ItemKey: gold
       MinStack: 4
       MaxStack: 5
-    - ItemKey: acorn
-      MinStack: 1
-      MaxStack: 2
     isBoss: 0
     Perks: []
     Spells:
@@ -46841,6 +46838,142 @@ MonoBehaviour:
         Chance: 1
       MinTime: 3
       MaxTime: 6
+      DeathRattle:
+        Key: LeftoverRabbit
+        DisplayName: LeftoverRabbit
+        Description: LeftoverRabbit
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs:
+        - Rabbit
+        Duration: 0
+  - MonsterKey: Mole
+    MonsterName: Mole
+    MonsterHP: 240
+    MonsterLevel: 8
+    DMG: 35
+    RewardEXP: 100
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 4
+      MaxStack: 5
+    isBoss: 0
+    Perks: []
+    Spells:
+      SpellsList: []
+      MinTime: 0
+      MaxTime: 0
+      DeathRattle:
+        Key: 
+        DisplayName: 
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Duration: 0
+  - MonsterKey: StoneGolem
+    MonsterName: StoneGolem
+    MonsterHP: 2000
+    MonsterLevel: 9
+    DMG: 60
+    RewardEXP: 500
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 4
+      MaxStack: 5
+    isBoss: 0
+    Perks:
+    - Key: bleedResistance
+      Value: 1
+    - Key: stunResistance
+      Value: 1
+    - Key: crippleResistance
+      Value: 1
+    - Key: freezeResistance
+      Value: 1
+    - Key: blockChance
+      Value: 0.5
+    Spells:
+      SpellsList: []
+      MinTime: 0
+      MaxTime: 0
+      DeathRattle:
+        Key: SpawnBlock
+        DisplayName: SpawnBlock
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs:
+        - StoneBlock
+        Duration: 0
+  - MonsterKey: StoneBlock
+    MonsterName: StoneBlock
+    MonsterHP: 200
+    MonsterLevel: 8
+    DMG: 30
+    RewardEXP: 40
+    Type: 1
+    PossibleLoot: []
+    isBoss: 0
+    Perks:
+    - Key: bleedResistance
+      Value: 1
+    - Key: stunResistance
+      Value: 1
+    - Key: crippleResistance
+      Value: 1
+    - Key: freezeResistance
+      Value: 1
+    - Key: blockChance
+      Value: 0.5
+    Spells:
+      SpellsList: []
+      MinTime: 0
+      MaxTime: 0
+      DeathRattle:
+        Key: SpawnBrick
+        DisplayName: SpawnBrick
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs:
+        - StoneBrick
+        - StoneBrick
+        Duration: 0
+  - MonsterKey: StoneBrick
+    MonsterName: StoneBrick
+    MonsterHP: 50
+    MonsterLevel: 6
+    DMG: 10
+    RewardEXP: 10
+    Type: 1
+    PossibleLoot: []
+    isBoss: 0
+    Perks:
+    - Key: bleedResistance
+      Value: 1
+    - Key: stunResistance
+      Value: 1
+    - Key: crippleResistance
+      Value: 1
+    - Key: freezeResistance
+      Value: 1
+    - Key: blockChance
+      Value: 0.5
+    Spells:
+      SpellsList: []
+      MinTime: 0
+      MaxTime: 0
       DeathRattle:
         Key: 
         DisplayName: 
@@ -71442,7 +71575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31250003, y: 0.101}
   m_AnchorMax: {x: 0.70375013, y: 0.1674894}
-  m_AnchoredPosition: {x: -0.41999817, y: -0.748291}
+  m_AnchoredPosition: {x: -0.41999817, y: -0.7483063}
   m_SizeDelta: {x: 1.3400002, y: -0.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &49360854

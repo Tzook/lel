@@ -55,6 +55,7 @@ public class GameCamera : MonoBehaviour {
     public static GameCamera Instance;
     public static Vector3 MousePosition;
 
+    protected Coroutine FarAimModeInstance;
     public bool FarAimMode = false;
 
     float InitCamSize;
@@ -116,7 +117,7 @@ public class GameCamera : MonoBehaviour {
 
         CurrentMouseHit = Physics2D.Raycast(MousePosition, transform.forward, Mathf.Infinity, EssentialsInteractableMask);
 
-        if(!CurrentMouseHit)
+        if (!CurrentMouseHit)
         {
             CurrentMouseHit = Physics2D.Raycast(MousePosition, transform.forward, Mathf.Infinity, InteractableMask);
         }
@@ -146,13 +147,38 @@ public class GameCamera : MonoBehaviour {
         }
 
         //TODO Temporary change?
-        if(Input.GetMouseButtonUp(1) && HoveringOnInteractable)
+        if (Input.GetMouseButtonUp(1) && HoveringOnInteractable)
         {
             DoubleClick();
         }
 
-        FarAimMode = Input.GetMouseButton(1);
-       
+        UpdateFarAimMode();
+    }
+
+    protected void UpdateFarAimMode()
+    {
+        if (FarAimModeInstance == null)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                FarAimModeInstance = StartCoroutine(FarAimModeRoutine());
+            }
+        }
+        else
+        {
+            if (!Input.GetMouseButton(1))
+            {
+                StopCoroutine(FarAimModeInstance);
+                FarAimModeInstance = null;
+                FarAimMode = false;
+            }
+        }
+    }
+
+    private IEnumerator FarAimModeRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        FarAimMode = true;
     }
 
     private IEnumerator DoubleClickRoutine()

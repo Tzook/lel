@@ -131,29 +131,17 @@ public class ActorController : MonoBehaviour
                 StopAim();
             }
 
-
             if (Input.GetKeyDown(InputMap.Map["Pick Up"]))
             {
                 Instance.AttemptPickUp();
             }
+        }
 
-            //for (int i = 0; i < Instance.Info.PrimaryAbilities.Count; i++)
-            //{
-            //    if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
-            //    {
-            //        Instance.Info.SwitchPrimaryAbility(Instance.Info.PrimaryAbilities[i].Key);
-                    
-                    
-            //    }
-            //}
-
-
-            if (!Invincible)
+        if (!Invincible)
+        {
+            if (CollidingEnemy != null)
             {
-                if (CollidingEnemy != null)
-                {
-                    Hurt(CollidingEnemy);
-                }
+                Hurt(CollidingEnemy);
             }
         }
 

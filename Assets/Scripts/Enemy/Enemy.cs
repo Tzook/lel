@@ -79,9 +79,25 @@ public class Enemy : MonoBehaviour {
 
         RegisterEnemy();
 
-        if(m_AlphaGroup!=null)
+        if (m_AlphaGroup != null)
         {
             m_AlphaGroup.SetAlpha(1f);
+        }
+
+        CheckMobAggro();
+    }
+
+    protected void CheckMobAggro()
+    {
+        if (CurrentTarget == null && Game.Instance.isBitch && Info.AggroType == "spawn")
+        {
+            string targetId = ClosestDistanceService.Instance.GetClosestActor(Game.Instance.CurrentScene.GetAllActors(), this);
+            if (targetId == null)
+            {
+                // fallback in case something went wrong
+                targetId = LocalUserInfo.Me.ClientCharacter.ID;
+            }
+            SocketClient.Instance.SendMobInitiateAggro(Info.ID, targetId);
         }
     }
 
@@ -130,6 +146,7 @@ public class Enemy : MonoBehaviour {
     public virtual void SetTarget(ActorInstance target)
     {
         CurrentTarget = target;
+        CheckMobAggro();
     }
 
     public virtual void Hurt(ActorInstance attackSource, int damage = 0, int currentHP = 0, string cause = "attack", bool crit = false)

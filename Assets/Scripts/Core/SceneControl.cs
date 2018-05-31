@@ -81,6 +81,11 @@ public class SceneControl
     }
 
 
+    public Dictionary<string, ActorInfo> GetAllActors()
+    {
+        return actors;
+    }
+
     public ActorInfo GetActorByName(string Name)
     {
         for(int i=0;i<actors.Keys.Count;i++)

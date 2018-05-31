@@ -12,6 +12,7 @@ public class EnemyInfo {
     public float MaxHealth;
 
     public bool isBoss;
+    public string AggroType;
 
     public EnemyInfo(DevMonsterInfo info, string id = "noID")
     {
@@ -23,6 +24,7 @@ public class EnemyInfo {
         this.MaxHealth = info.MonsterHP;
 
         this.isBoss = info.isBoss;
+        this.AggroType = info.AggroType;
     }
 }
 

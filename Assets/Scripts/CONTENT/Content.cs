@@ -301,6 +301,31 @@ public class DevMonsterInfo
     public List<DevPerkMap> Perks = new List<DevPerkMap>();
     
     public DevMobSpells Spells;
+    
+    public string AggroType
+    {
+        get
+        {
+            switch (aggroType)
+            {
+                default:
+                case AggroTypeEnumState.OnHurt:
+                    {
+                        return "hurt";
+                    }
+                case AggroTypeEnumState.OnSpawn:
+                    {
+                        return "spawn";
+                    }
+            }
+        }
+    }
+    [SerializeField]
+    AggroTypeEnumState aggroType;
+    public enum AggroTypeEnumState
+    {
+        OnHurt,OnSpawn
+    }
 
     public DevMonsterInfo Clone()
     {

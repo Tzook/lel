@@ -1768,8 +1768,6 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.Emit("changed_ability", node);
     }
 
-
-
     public void SendMobsMove(Dictionary<string, MobMovementData> mobsToUpdate)
     {
         JSONNode node = new JSONClass();
@@ -1786,6 +1784,16 @@ public class SocketClient : MonoBehaviour
         }
 
         CurrentSocket.Emit("mobs_moved", node);
+    }
+
+    public void SendMobInitiateAggro(string mobId, string charId)
+    {
+        JSONNode node = new JSONClass();
+
+        node["mob_id"] = mobId;
+        node["char_id"] = charId;
+
+        CurrentSocket.Emit("mob_init_aggro", node);
     }
 
     public void SendUsedPrimaryAbility(List<string> targetIDs, uint attackId)

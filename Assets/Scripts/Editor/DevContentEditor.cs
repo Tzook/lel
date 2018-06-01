@@ -35,7 +35,11 @@ using System;
 [CustomEditor(typeof(Content))]
 public class DevContentEditor : Editor
 {
+    bool ShowCommand;
     string CurrentCommand;
+    bool ShowBan;
+    string BanCharName;
+    string BanReason;
 
     public override void OnInspectorGUI()
     {
@@ -81,14 +85,37 @@ public class DevContentEditor : Editor
             SendDungeons(currentInfo.Dungeons);
         }
 
-        GUILayout.Label("Command line");
+        ShowCommand = EditorGUILayout.Foldout(ShowCommand, "Command line");
 
-        CurrentCommand = EditorGUILayout.TextField(CurrentCommand);
-
-        if (GUILayout.Button("Execute"))
+        if (ShowCommand)
         {
-            HandleCommand(CurrentCommand);
-            CurrentCommand = "";
+            CurrentCommand = EditorGUILayout.TextField(CurrentCommand);
+
+            if (GUILayout.Button("Execute"))
+            {
+                HandleCommand(CurrentCommand);
+                CurrentCommand = "";
+            }
+        }
+
+        ShowBan = EditorGUILayout.Foldout(ShowBan, "Bans");
+
+        if (ShowBan)
+        {
+            GUILayout.Label("Char name:");
+            BanCharName = EditorGUILayout.TextField(BanCharName);
+            GUILayout.Label("Ban Reason:");
+            BanReason = EditorGUILayout.TextField(BanReason);
+
+            if (GUILayout.Button("Ban") && BanCharName != "" && BanReason != "")
+            {
+                HandleBan(BanCharName, BanReason);
+            }
+
+            if (GUILayout.Button("Unban") && BanCharName != "")
+            {
+                HandleUnban(BanCharName);
+            }
         }
 
         if (GUILayout.Button("Restart Server"))
@@ -774,5 +801,15 @@ public class DevContentEditor : Editor
         }
 
         return "";
+    }
+
+    protected void HandleBan(string charName, string reason)
+    {
+        new BanHandler().Ban(charName, reason);
+    }
+
+    protected void HandleUnban(string charName)
+    {
+        new BanHandler().Unban(charName);
     }
 }

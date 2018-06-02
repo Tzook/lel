@@ -46955,6 +46955,7 @@ MonoBehaviour:
         ClearTargetBuffs: []
         SpawnMobs:
         - StoneBlock
+        - StoneBlock
         Duration: 0
     aggroType: 0
   - MonsterKey: StoneBlock
@@ -47029,6 +47030,45 @@ MonoBehaviour:
         SpawnMobs: []
         Duration: 0
     aggroType: 0
+  - MonsterKey: FlowerManBandit
+    MonsterName: FlowerManBandit
+    MonsterHP: 1000
+    MonsterLevel: 8
+    DMG: 6
+    RewardEXP: 100
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 10
+      MaxStack: 15
+    isBoss: 0
+    Perks: []
+    Spells:
+      SpellsList:
+      - Key: FlowerBomb
+        DisplayName: 
+        Description: 
+        ColliderPrefab: FlowerBomb
+        Perks:
+        - Key: damageModifier
+          Value: 10
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Chance: 1
+      MinTime: 2
+      MaxTime: 5
+      DeathRattle:
+        Key: 
+        DisplayName: 
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Duration: 0
+    aggroType: 1
   Multiplyers:
     mobsHp: 1
     mobsExp: 1
@@ -54279,6 +54319,13 @@ MonoBehaviour:
     Stages:
     - PossibleScenes:
       - Key: dungeon_arh_intro
+        Time: 180
+      PossibleRareScenes: []
+      Rewards: []
+    - PossibleScenes:
+      - Key: dungeon_arh_grass_1
+        Time: 180
+      - Key: dungeon_arh_grass_2
         Time: 180
       PossibleRareScenes: []
       Rewards: []

@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PAWindowUI : MonoBehaviour {
+public class PAWindowUI : MonoBehaviour 
+{
+    [SerializeField]
+    Text WindowTitle;
+    [SerializeField]
+    Text ToggleText;
 
     [SerializeField]
     Image PAIcon;
@@ -29,16 +34,26 @@ public class PAWindowUI : MonoBehaviour {
     [SerializeField]
     Image m_FrameImage;
 
+    public int LastSelection = 0;
     public int SelectedPA = 0;
 
     Ability CurrentPA;
     DevAbility CurrentDevPA;
 
+    bool ShowingCharAbilities = false;
+
     public void Show()
     {
         this.gameObject.SetActive(true);
 
-        RefreshWindow();
+        if (ShowingCharAbilities)
+        {
+            ToggleCharAbilities();
+        }
+        else 
+        {
+            RefreshWindow();
+        }
     }
 
     public void RefreshWindow(int AbilityIndex)
@@ -49,7 +64,7 @@ public class PAWindowUI : MonoBehaviour {
 
     public void RefreshWindow()
     {
-        List<Ability> Abilities = LocalUserInfo.Me.ClientCharacter.AllAbilities;
+        List<Ability> Abilities = ShowingCharAbilities ? LocalUserInfo.Me.ClientCharacter.CharAbilities : LocalUserInfo.Me.ClientCharacter.PrimaryAbilities;
         CurrentPA = Abilities[SelectedPA];
         CurrentDevPA = Content.Instance.GetAbility(CurrentPA.Key);
 
@@ -117,6 +132,16 @@ public class PAWindowUI : MonoBehaviour {
         {
             RefreshWindow(gIndex);
         });
+    }
+
+    public void ToggleCharAbilities()
+    {
+        ShowingCharAbilities = !ShowingCharAbilities;
+        WindowTitle.text = ShowingCharAbilities ? "Char Abilities" : "Primary Abilities";
+        ToggleText.text = ShowingCharAbilities ? "Primary" : "Char";
+        int temp = LastSelection;
+        LastSelection = SelectedPA;
+        RefreshWindow(temp);
     }
 
     public void ClearContainers()

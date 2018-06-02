@@ -97,9 +97,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     QuestRewardsWindowUI QuestRewardWindow;
 
     [SerializeField]
-    public PrimaryAbilitiesGridUI PrimaryAbilitiesGrid;
-
-    [SerializeField]
     Image PrimaryAbilityIcon;
 
     [SerializeField]
@@ -290,12 +287,12 @@ public class InGameMainMenuUI : MonoBehaviour {
                     HidePrimaryAbilitiesWindow();
                 }
             }
-
-            if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
-            {
-                TogglePrimaryAbilities();
-            }
         }
+    }
+
+    public void ToggleMainAbility()
+    {
+        LocalUserInfo.Me.ClientCharacter.Instance.InputController.ToggleMainAbility();
     }
 
     public void HideCompletedQuests()
@@ -720,29 +717,6 @@ public class InGameMainMenuUI : MonoBehaviour {
     public void AbandonQuest(Quest quest)
     {
         AbandonQuestWindow.Show(quest);
-    }
-
-    public void ShowPrimaryAbilities()
-    {
-        PrimaryAbilitiesGrid.Show();
-    }
-    
-    public void HidePrimaryAbilities()
-    {
-        PrimaryAbilitiesGrid.Hide();
-    }
-
-    public void TogglePrimaryAbilities()
-    {
-        if(PrimaryAbilitiesGrid.gameObject.activeInHierarchy)
-        {
-            HidePrimaryAbilities();
-        }
-        else
-        {
-            ShowPrimaryAbilities();
-        }
-        
     }
 
     public void RefreshCurrentPrimaryAbility()

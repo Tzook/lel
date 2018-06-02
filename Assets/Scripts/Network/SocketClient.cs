@@ -2025,7 +2025,15 @@ public class SocketClient : MonoBehaviour
 
         CurrentSocket.Emit("took_spell_dmg", node);
     }
+    
+    public void SendSelectMainAbility(string key)
+    {
+        JSONNode node = new JSONClass();
 
+        node["ability"] = key;
+
+        CurrentSocket.Emit("selected_main_ability", node);
+    }
 
     public void SendStartedDungeon(string dungeonKey)
     {

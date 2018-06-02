@@ -223,29 +223,19 @@ public class ActorController : MonoBehaviour
         {
             AttackCharge();
 
-            if (InGameMainMenuUI.Instance.PrimaryAbilitiesGrid.isOpen)
+            if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
             {
-                for (int i = 0; i < LocalUserInfo.Me.ClientCharacter.PrimaryAbilities.Count; i++)
-                {
-                    if (Input.GetKeyDown(InputMap.Map["PrimaryAbility" + (i + 1)]))
-                    {
-                        InGameMainMenuUI.Instance.PrimaryAbilitiesGrid.SetPrimaryAbility(LocalUserInfo.Me.ClientCharacter.PrimaryAbilities[i].Key);
-                        InturruptAttack();
-                        EndAttack();
-                    }
-                }
+                ToggleMainAbility();
             }
-            else
+
+            if (SpellCooldown <= 0)
             {
-                if (SpellCooldown <= 0)
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int i = 0; i < 5; i++)
+                    if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
                     {
-                        if (Input.GetKeyDown(InputMap.Map["Spell" + (i + 1)]))
-                        {
-                            CastSpell(i);
-                            SpellCooldown = 0.5f;
-                        }
+                        CastSpell(i);
+                        SpellCooldown = 0.5f;
                     }
                 }
             }
@@ -270,6 +260,23 @@ public class ActorController : MonoBehaviour
         }
 
         Anim.SetBool("Charging", Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA());
+    }
+
+    public void ToggleMainAbility()
+    {
+        LocalUserInfo.Me.ClientCharacter.ToggleMainAbility();
+        InturruptAttack();
+        EndAttack();
+    }
+
+    public void SetMainAbility(string key)
+    {
+        bool canUseAbility = LocalUserInfo.Me.ClientCharacter.SwitchPrimaryAbility(key);
+        if (canUseAbility)
+        {
+            LocalUserInfo.Me.ClientCharacter.AddMainAbility(key);
+            SocketClient.Instance.SendSelectMainAbility(key);
+        }
     }
 
     void FixedUpdate()

@@ -34,6 +34,12 @@ public class PAWindowUI : MonoBehaviour
     [SerializeField]
     Image m_FrameImage;
 
+    [SerializeField]
+    Text m_mainText;
+
+    [SerializeField]
+    Button m_mainButton;
+
     public int LastSelection = 0;
     public int SelectedPA = 0;
 
@@ -124,6 +130,22 @@ public class PAWindowUI : MonoBehaviour
             tempObj.transform.SetParent(UpgradeContainer, false);
             tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentDevPA, keyValuePair.Value);
         }
+
+        if (ShowingCharAbilities)
+        {
+            m_mainButton.gameObject.SetActive(false);
+            m_mainText.gameObject.SetActive(false);
+        }
+        else if (LocalUserInfo.Me.ClientCharacter.IsMainAbility(CurrentPA.Key))
+        {
+            m_mainButton.gameObject.SetActive(false);
+            m_mainText.gameObject.SetActive(true);
+        } 
+        else
+        {
+            m_mainButton.gameObject.SetActive(true);
+            m_mainText.gameObject.SetActive(false);
+        }
     }
 
     public void AddPASelectionListener(Button btn, int gIndex)
@@ -142,6 +164,12 @@ public class PAWindowUI : MonoBehaviour
         int temp = LastSelection;
         LastSelection = SelectedPA;
         RefreshWindow(temp);
+    }
+
+    public void SetMainAbility()
+    {
+        LocalUserInfo.Me.ClientCharacter.Instance.InputController.SetMainAbility(CurrentPA.Key);
+        RefreshWindow();
     }
 
     public void ClearContainers()

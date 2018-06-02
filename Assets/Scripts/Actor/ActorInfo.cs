@@ -42,6 +42,7 @@ public class ActorInfo
 
     public List<Ability> PrimaryAbilities = new List<Ability>();
     public List<Ability> CharAbilities = new List<Ability>();
+    public List<string> MainAbilities = new List<string>();
 
     public Ability CurrentPrimaryAbility;
 
@@ -157,6 +158,15 @@ public class ActorInfo
             {
                 fillInitialProgress(quest, node["quests"]);
             }
+        }
+
+        if (node["mainAbilities"] != null)
+        {
+            SetMainAbilities(node["mainAbilities"]);
+        }
+        else
+        {
+            AddMainAbility("melee");
         }
 
         RefreshBonuses();
@@ -303,7 +313,7 @@ public class ActorInfo
         SetPrimaryAbility(node["primaryAbility"].Value);
     }
 
-    public void SwitchPrimaryAbility(string key)
+    public bool SwitchPrimaryAbility(string key)
     {
         for(int i=0;i<PrimaryAbilities.Count;i++)
         {
@@ -311,8 +321,10 @@ public class ActorInfo
             {
                 SocketClient.Instance.SendChangedAbility(key);
                 SetPrimaryAbility(key);
+                return true;
             }
         }
+        return false;
     }
 
     public void SetPrimaryAbility(string key)
@@ -459,6 +471,37 @@ public class ActorInfo
                 cond.CurrentProgress = initialHunt["ok"][cond.Type][quest.Key].AsInt;
             }
 
+        }
+    }
+
+    protected void SetMainAbilities(JSONNode mainAbilities)
+    {
+        for (int i = 0; i < mainAbilities.Count; i++)
+        {
+            AddMainAbility(mainAbilities[i]);
+        }
+    }
+
+    public void AddMainAbility(string ability)
+    {
+        MainAbilities.Add(ability);
+        if (MainAbilities.Count > 2)
+        {
+            MainAbilities.RemoveAt(0);
+        }
+    }
+
+    public bool IsMainAbility(string ability)
+    {
+        return MainAbilities.Contains(ability);
+    }
+
+    public void ToggleMainAbility()
+    {
+        if (MainAbilities.Count > 1)
+        {
+            string newKey = MainAbilities[0] == CurrentPrimaryAbility.Key ? MainAbilities[1] : MainAbilities[0];
+            SwitchPrimaryAbility(newKey);
         }
     }
 

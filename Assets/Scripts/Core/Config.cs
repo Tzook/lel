@@ -14,7 +14,7 @@ public class Config
     [DllImport("__Internal")]
     private static extern string GetHostName();
     #else 
-    private static bool LOCAL = true; // Used for developing locally. This should always be falsy.
+    private static bool LOCAL = !true; // Used for developing locally. This should always be falsy.
     #endif
 
     public const string DOMAIN_LOCAL = "localhost";

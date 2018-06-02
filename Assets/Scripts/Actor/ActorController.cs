@@ -1200,7 +1200,7 @@ public class ActorController : MonoBehaviour
         DevMonsterInfo monsterInfo = Content.Instance.GetMonsterByName(enemy.Info.Name);
         if (!Invincible && monsterInfo.DMG != 0)
         {
-            EndAttack();
+            //EndAttack();
 
             SocketClient.Instance.SendTookDMG(enemy.Info);
             Instance.Hurt();

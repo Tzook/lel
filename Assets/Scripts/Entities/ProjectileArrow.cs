@@ -40,9 +40,10 @@ public class ProjectileArrow : ActorDamageInstance {
 
     float ChargeValue = 1f;
 
-    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit ,uint attackIdCounter, float chargeValue = 1f, float speed = 15f)
+
+    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit ,uint attackIdCounter, float chargeValue, float speed, bool isPlayer)
     {
-        base.SetInfo(parent ,actionKey ,actionValue , attackIdCounter);
+        base.SetInfo(parent ,actionKey ,actionValue , attackIdCounter ,isPlayer);
 
         transform.parent = null;
 

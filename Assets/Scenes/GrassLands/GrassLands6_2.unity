@@ -2150,6 +2150,9 @@ MonoBehaviour:
   MonsterKey: BlueBerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &116969424
 Transform:
   m_ObjectHideFlags: 0
@@ -3329,7 +3332,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 178980895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.21, y: -22.385, z: 4}
+  m_LocalPosition: {x: 23.21, y: -22.385, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3905,7 +3908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &206358583
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4234,6 +4240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0.3
   AddedY: 1
+  MaxFarAim: 3
   followingObject: {fileID: 0}
   CamType: 0
   BlurCamera: {fileID: 1774056789}
@@ -4247,6 +4254,7 @@ MonoBehaviour:
   Cam: {fileID: 215129942}
   BlurCam: {fileID: 0}
   CamFollowing: 1
+  FarAimMode: 0
 --- !u!81 &215129939
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4585,7 +4593,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.7, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &233769404
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5024,6 +5035,9 @@ MonoBehaviour:
   MonsterKey: Turtle
   SpawnCap: 3
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &249893237
 Transform:
   m_ObjectHideFlags: 0
@@ -6674,7 +6688,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.5, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &323909627
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7342,7 +7359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.4, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &357754845
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7645,7 +7665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.6, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &366952270
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8010,6 +8033,9 @@ MonoBehaviour:
   MonsterKey: BerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &381742495
 Transform:
   m_ObjectHideFlags: 0
@@ -11395,7 +11421,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 555595113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.5, y: -2.4, z: -4}
+  m_LocalPosition: {x: -51.5, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11942,6 +11968,9 @@ MonoBehaviour:
   MonsterKey: BerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &599510673
 Transform:
   m_ObjectHideFlags: 0
@@ -12058,6 +12087,9 @@ MonoBehaviour:
   MonsterKey: BerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &601746458
 Transform:
   m_ObjectHideFlags: 0
@@ -13173,7 +13205,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 661349297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.25, y: -26.35, z: 3.2}
+  m_LocalPosition: {x: 39.25, y: -26.35, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14693,6 +14725,9 @@ MonoBehaviour:
   MonsterKey: BerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &743381073
 Transform:
   m_ObjectHideFlags: 0
@@ -15535,7 +15570,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 798103882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.076942, y: -14.333782, z: 4}
+  m_LocalPosition: {x: -33.076942, y: -14.333782, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16997,6 +17032,9 @@ MonoBehaviour:
   MonsterKey: BlueBerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &889867155
 Transform:
   m_ObjectHideFlags: 0
@@ -18818,7 +18856,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1001543691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.929, y: -29.67, z: 4}
+  m_LocalPosition: {x: 46.929, y: -29.67, z: 5}
   m_LocalScale: {x: 1.0010455, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19656,6 +19694,9 @@ MonoBehaviour:
   MonsterKey: BlueBerriesBush
   SpawnCap: 2
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1061782191
 Transform:
   m_ObjectHideFlags: 0
@@ -20166,6 +20207,9 @@ MonoBehaviour:
   MonsterKey: Plant
   SpawnCap: 4
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1090043194
 Transform:
   m_ObjectHideFlags: 0
@@ -20555,6 +20599,9 @@ MonoBehaviour:
   MonsterKey: BlueBerriesBush
   SpawnCap: 2
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1109813881
 Transform:
   m_ObjectHideFlags: 0
@@ -22020,7 +22067,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1177448929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.79, y: -25.3, z: 0}
+  m_LocalPosition: {x: -33.79, y: -25.3, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23172,6 +23219,9 @@ MonoBehaviour:
   MonsterKey: Plant
   SpawnCap: 3
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1239656178
 Transform:
   m_ObjectHideFlags: 0
@@ -25219,6 +25269,9 @@ MonoBehaviour:
   MonsterKey: OldTurtle
   SpawnCap: 2
   RespawnTime: 12
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1377418356
 Transform:
   m_ObjectHideFlags: 0
@@ -28530,6 +28583,9 @@ MonoBehaviour:
   MonsterKey: BerriesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1573443052
 Transform:
   m_ObjectHideFlags: 0
@@ -29583,7 +29639,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.3, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &1619367435
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29791,7 +29850,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1625753208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.97, y: -5.62, z: -5.9296875}
+  m_LocalPosition: {x: 23.97, y: -5.62, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -30895,6 +30954,9 @@ MonoBehaviour:
   MonsterKey: Rabbit
   SpawnCap: 5
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1686236769
 Transform:
   m_ObjectHideFlags: 0
@@ -31174,6 +31236,9 @@ MonoBehaviour:
   MonsterKey: FatRabbit
   SpawnCap: 2
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1695433504
 Transform:
   m_ObjectHideFlags: 0
@@ -31464,7 +31529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c707a5f4fcd2f341884979569d68a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRenderer: {fileID: 0}
   Speed: {x: 0.8, y: 0}
+  Loop: 0
+  LoopingSpeed: 0
 --- !u!23 &1713111254
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33010,6 +33078,8 @@ MonoBehaviour:
       - {x: -35.383953, y: -23.332579}
       - {x: -32.21315, y: -23.376266}
   NetStateEntities: []
+  SupportsPVP: 0
+  Timer: 0
 --- !u!4 &1818071028
 Transform:
   m_ObjectHideFlags: 0
@@ -33380,6 +33450,9 @@ MonoBehaviour:
   MonsterKey: TomatoesBush
   SpawnCap: 1
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1841577469
 Transform:
   m_ObjectHideFlags: 0
@@ -33581,6 +33654,9 @@ MonoBehaviour:
   MonsterKey: Plant
   SpawnCap: 3
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1855639652
 Transform:
   m_ObjectHideFlags: 0
@@ -33916,6 +33992,9 @@ MonoBehaviour:
   MonsterKey: BlueBerriesBush
   SpawnCap: 2
   RespawnTime: 900
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1860465441
 Transform:
   m_ObjectHideFlags: 0
@@ -34801,6 +34880,9 @@ MonoBehaviour:
   MonsterKey: Plant
   SpawnCap: 3
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &1904151537
 Transform:
   m_ObjectHideFlags: 0
@@ -39151,6 +39233,9 @@ MonoBehaviour:
   MonsterKey: Turtle
   SpawnCap: 3
   RespawnTime: 10
+  InitialDelay: 0
+  bulkEnumState: 0
+  SpawnTimes: 0
 --- !u!4 &2115706132
 Transform:
   m_ObjectHideFlags: 0

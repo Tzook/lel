@@ -27,12 +27,14 @@ public class ActorDamageInstance : MonoBehaviour {
 
     protected Collider2D[] collectedColliders;
 
+    bool IsPlayer;
 
-    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue)
+    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue, bool isPlayer)
     {
         this.ParentActor = instance;
         this.ActionKey = actionKey;
         this.ActionValue = actionValue;
+        this.IsPlayer = isPlayer;
 
         this.gameObject.SetActive(true);
 
@@ -41,9 +43,9 @@ public class ActorDamageInstance : MonoBehaviour {
         Hit = false;
     }
 
-    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue, uint attackIdCounter)
+    public virtual void SetInfo(ActorInstance instance, string actionKey, string actionValue, uint attackIdCounter, bool isPlayer)
     {
-        SetInfo(instance, actionKey, actionValue);
+        SetInfo(instance, actionKey, actionValue, isPlayer);
         this.AttackIdCounter = attackIdCounter;
     }
 
@@ -70,8 +72,13 @@ public class ActorDamageInstance : MonoBehaviour {
     }
 
     public virtual void HandleCollision(Collider2D TargetCollider)
-    {
-        
+    {   
+        if(!IsPlayer)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
         if (!Hit)
         {
             string TargetTag = "Enemy";

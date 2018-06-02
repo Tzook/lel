@@ -120,8 +120,10 @@ public class ActorController : MonoBehaviour
 
     void Update()
     {
+
         if (CanDoAction())
         {
+
             if ((Input.GetMouseButton(0)) && !Game.Instance.isInteractingWithUI && !OnRope)
             {
                 Aim();
@@ -509,7 +511,7 @@ public class ActorController : MonoBehaviour
         damageZone.transform.position = Instance.transform.position;
         damageZone.transform.rotation = Instance.LastFireRot;
 
-        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key, "", AttackIdCounter);
+        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key, "", AttackIdCounter, true);
     }
 
     public void FireProjectile()
@@ -961,7 +963,7 @@ public class ActorController : MonoBehaviour
         Anim.SetBool("ClimbingDown", false);
     }
 
-    public void CastSpellComplete()
+    public void CastSpellComplete(bool isPlayer)
     {
         if (CurrentSpellInCast != null)
         {
@@ -974,7 +976,7 @@ public class ActorController : MonoBehaviour
                         damageZone.transform.position = Instance.transform.position;
                         damageZone.transform.rotation = Instance.LastFireRot;
 
-                        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId);
+                        damageZone.GetComponent<ActorDamageInstance>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, CurrentSpellAttackId, isPlayer);
                         break;
                     }
                 case SpellTypeEnumState.projectile:
@@ -985,7 +987,7 @@ public class ActorController : MonoBehaviour
                         damageZone.transform.rotation = Instance.LastFireRot;
 
 
-                        damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell" , CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId);
+                        damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell" , CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId,1f,15f, isPlayer);
                         break;
                     }
                 case SpellTypeEnumState.explosion:
@@ -996,7 +998,7 @@ public class ActorController : MonoBehaviour
                         damageZone.transform.rotation = Instance.LastFireRot;
 
 
-                        damageZone.GetComponent<ProjectileArrowExplosive>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId);
+                        damageZone.GetComponent<ProjectileArrowExplosive>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId, 1f, 15f, isPlayer);
                         break;
                     }
             }
@@ -1203,6 +1205,7 @@ public class ActorController : MonoBehaviour
             //EndAttack();
 
             SocketClient.Instance.SendTookDMG(enemy.Info);
+
             Instance.Hurt();
 
             Instance.PlayEyesEmote("angry");

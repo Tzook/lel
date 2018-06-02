@@ -46337,7 +46337,7 @@ MonoBehaviour:
     - Title: Forge Documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: Familiare
@@ -49999,7 +49999,7 @@ MonoBehaviour:
     - Title: I've got some questions...
       Event: StartDialog
       Value: Questions
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 0}
     - Title: I have bad news...
@@ -51521,6 +51521,7 @@ MonoBehaviour:
       - {x: -41.425667, y: -19.498007}
   NetStateEntities: []
   SupportsPVP: 0
+  Timer: 0
 --- !u!4 &883066250
 Transform:
   m_ObjectHideFlags: 0
@@ -96480,7 +96481,7 @@ MonoBehaviour:
     - Title: Forge Documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Trade
@@ -105030,7 +105031,7 @@ MonoBehaviour:
     - Title: Forge Documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
   - DialogKey: ForgeDocs
@@ -116976,7 +116977,7 @@ MonoBehaviour:
       ConditionValue: 
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Yeah!
-      Event: EndDialog
+      Event: StartDialog
       Value: Greetings3
       Condition: 
       ConditionValue: 

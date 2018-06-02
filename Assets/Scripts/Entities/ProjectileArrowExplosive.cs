@@ -55,13 +55,17 @@ public class ProjectileArrowExplosive : MonoBehaviour {
 
     DevAbility CurrentAbility;
 
-    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit, uint attackIdCounter, float chargeValue = 1f, float speed = 15f)
+    bool IsPlayer;
+
+    public void SetInfo(ActorInstance parent, string actionKey, string actionValue, bool triggerHit, uint attackIdCounter, float chargeValue, float speed, bool isPlayer)
     {
         ActionKey = actionKey;
         ActionValue = actionValue;
         AttackIDCounter = attackIdCounter;
         CurrentAbility = Content.Instance.GetAbility(actionKey);
         ParentActor = parent;
+
+        this.IsPlayer = isPlayer;
 
         transform.parent = null;
 
@@ -168,7 +172,7 @@ public class ProjectileArrowExplosive : MonoBehaviour {
     {
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(ColliderPrefab);
         tempObj.transform.position = transform.position;
-        tempObj.GetComponent<ActorDamageInstance>().SetInfo(ParentActor, ActionKey, ActionValue, AttackIDCounter);
+        tempObj.GetComponent<ActorDamageInstance>().SetInfo(ParentActor, ActionKey, ActionValue, AttackIDCounter, IsPlayer);
     }
 
     void HitObject(Collider2D TargetCollider)

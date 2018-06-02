@@ -5226,7 +5226,7 @@ MonoBehaviour:
     - Title: Do you know how to forge documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: Do you know where I can buy some beans?
@@ -6097,6 +6097,8 @@ MonoBehaviour:
       - {x: 10.937058, y: -4.674502}
       - {x: 12.159344, y: -4.674502}
   NetStateEntities: []
+  SupportsPVP: 0
+  Timer: 0
 --- !u!4 &205720643
 Transform:
   m_ObjectHideFlags: 0
@@ -38458,7 +38460,7 @@ MonoBehaviour:
     - Title: Forge Documents?
       Event: StartDialog
       Value: ForgeDocs
-      Condition: QuestInProgress
+      Condition: QuestComplete
       ConditionValue: jacksVengeance
       CLR: {r: 1, g: 1, b: 1, a: 1}
     - Title: I heard you got some strong beans!

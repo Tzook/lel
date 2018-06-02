@@ -682,7 +682,6 @@ public class SocketClient : MonoBehaviour
         {
             // actor takes the damage
             targetActor.CurrentHealth = hp;
-            targetActor.Instance.Hurt();
 
             string text = String.Format("{0:n0}", data["dmg"].AsInt);
             if (data["crit"].AsBool)
@@ -695,10 +694,16 @@ public class SocketClient : MonoBehaviour
             if (targetActor == LocalUserInfo.Me.ClientCharacter)
             {
                 InGameMainMenuUI.Instance.RefreshHP();
+
+                if(!targetActor.Instance.InputController.Invincible)
+                {
+                    targetActor.Instance.Hurt();
+                }
             }
             else
             {
                 targetActor.Instance.MovementController.RefreshHealth();
+                targetActor.Instance.Hurt();
             }
         } else {
             // mob takes damage    

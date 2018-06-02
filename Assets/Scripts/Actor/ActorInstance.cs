@@ -87,8 +87,8 @@ public class ActorInstance : MonoBehaviour
     public SortingGroup SortingGroup;
 
 
-    [SerializeField]
-    public HealthBar m_HealthBar;
+    //[SerializeField]
+    //public HealthBar m_HealthBar;
 
     #endregion
 
@@ -543,7 +543,7 @@ public class ActorInstance : MonoBehaviour
         }
 
         projectile.transform.rotation = LastFireRot;
-        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer ,attackIdCounter ,ChargeValue);
+        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer ,attackIdCounter ,ChargeValue, 15f, isPlayer);
     }
 
     public void CastSpell(DevSpell spell)
@@ -551,14 +551,14 @@ public class ActorInstance : MonoBehaviour
         Anim.SetInteger("PrimaryAbility", Content.Instance.GetAbilityIndex(Info.CurrentPrimaryAbility.Key));
         Anim.SetInteger("SpellNumber", Content.Instance.GetSpellIndex(spell));
         Anim.SetTrigger("CastSpell");
+        Anim.SetBool("Busy", true);
     }
 
     public void CastSpellComplete()
     {
-        if(LocalUserInfo.Me.ClientCharacter == this.Info)
-        {
-            InputController.CastSpellComplete();
-        }
+        Anim.SetBool("Busy", false);
+
+        InputController.CastSpellComplete(LocalUserInfo.Me.ClientCharacter == this.Info);
     }
 
     void SetElementLayer(SpriteRenderer m_Renderer, string layer = "Default", int layerPositionAddition = 0, Material matType = null)
@@ -685,7 +685,7 @@ public class ActorInstance : MonoBehaviour
   
     internal void Hurt()
     {
-        if (!Anim.GetBool("Charging"))
+        if (!Anim.GetBool("Charging") && !Anim.GetBool("Busy"))
         {
             Anim.SetInteger("HurtType", Random.Range(0, 3));
             Anim.SetTrigger("Hurt");
@@ -697,13 +697,13 @@ public class ActorInstance : MonoBehaviour
         }
         else
         {
-            if (m_HealthBar == null)
-            {
-                m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
-                m_HealthBar.transform.position = transform.position;
-            }
+            //if (m_HealthBar == null)
+            //{
+            //    m_HealthBar = ResourcesLoader.Instance.GetRecycledObject("HealthBar").GetComponent<HealthBar>();
+            //    m_HealthBar.transform.position = transform.position;
+            //}
 
-            m_HealthBar.SetHealthbar(Info.CurrentHealth, this.Info.CurrentHealth, this.Info.ClientPerks.MaxHealth, 2f);
+            //m_HealthBar.SetHealthbar(Info.CurrentHealth, this.Info.CurrentHealth, this.Info.ClientPerks.MaxHealth, 2f);
         }
     }
 
@@ -715,11 +715,7 @@ public class ActorInstance : MonoBehaviour
         PlayEyesEmote("cry");
         PlayMouthEmote("angry");
 
-        if (m_HealthBar != null)
-        {
-            m_HealthBar.gameObject.SetActive(false);
-            m_HealthBar = null;
-        }
+
 
         isDead = true;
     }
@@ -1020,13 +1016,13 @@ public class ActorInstance : MonoBehaviour
         RemoveBuff(buff);
     }
 
-    void LateUpdate()
-    {
-        if (m_HealthBar != null)
-        {
-            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y + 0.5f), Time.deltaTime * 3f);
-        }
-    }
+    //void LateUpdate()
+    //{
+    //    if (m_HealthBar != null)
+    //    {
+    //        m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, transform.position.y + 0.5f), Time.deltaTime * 3f);
+    //    }
+    //}
 
     #endregion
 

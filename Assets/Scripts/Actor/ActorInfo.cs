@@ -160,10 +160,7 @@ public class ActorInfo
             }
         }
 
-        if (node["mainAbilities"] != null)
-        {
-            SetMainAbilities(node["mainAbilities"]);
-        }
+        SetMainAbilities(node["mainAbilities"]);
 
         RefreshBonuses();
     }
@@ -471,13 +468,16 @@ public class ActorInfo
 
     protected void SetMainAbilities(JSONNode mainAbilities)
     {
-        if (mainAbilities.Count == 0)
+        if (mainAbilities == null || mainAbilities.Count == 0)
         {
             AddMainAbility("melee");
         }
-        for (int i = 0; i < mainAbilities.Count; i++)
+        else
         {
-            AddMainAbility(mainAbilities[i]);
+            for (int i = 0; i < mainAbilities.Count; i++)
+            {
+                AddMainAbility(mainAbilities[i]);
+            }
         }
     }
 

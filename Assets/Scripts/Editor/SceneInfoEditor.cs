@@ -28,6 +28,7 @@ public class SceneInfoEditor : Editor {
             node["scene"]["name"] = currentInfo.Key;
             node["scene"]["nearestTownScene"] = currentInfo.NearestTownScene;
             node["scene"]["pvp"].AsBool = currentInfo.SupportsPVP;
+            node["scene"]["canSetMainAbility"].AsBool = currentInfo.CanSetMainAbility;
             node["scene"]["all"] = currentInfo.Key + "," + string.Join(",", SceneInfo.SUPPORTED_SCENES);
 
             for (int i = 0; i < currentInfo.RoomAbilities.Count; i++)

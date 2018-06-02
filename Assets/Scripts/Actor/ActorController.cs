@@ -271,11 +271,11 @@ public class ActorController : MonoBehaviour
 
     public void SetMainAbility(string key)
     {
-        bool canUseAbility = LocalUserInfo.Me.ClientCharacter.SwitchPrimaryAbility(key);
-        if (canUseAbility)
+        if (LocalUserInfo.Me.ClientCharacter.CanUsePrimaryAbility(key))
         {
             LocalUserInfo.Me.ClientCharacter.AddMainAbility(key);
             SocketClient.Instance.SendSelectMainAbility(key);
+            LocalUserInfo.Me.ClientCharacter.SwitchPrimaryAbility(key);
         }
     }
 

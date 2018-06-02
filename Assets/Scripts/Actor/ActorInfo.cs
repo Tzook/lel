@@ -310,7 +310,7 @@ public class ActorInfo
         SetPrimaryAbility(node["primaryAbility"].Value);
     }
 
-    public bool SwitchPrimaryAbility(string key)
+    public void SwitchPrimaryAbility(string key)
     {
         for(int i=0;i<PrimaryAbilities.Count;i++)
         {
@@ -318,10 +318,8 @@ public class ActorInfo
             {
                 SocketClient.Instance.SendChangedAbility(key);
                 SetPrimaryAbility(key);
-                return true;
             }
         }
-        return false;
     }
 
     public void SetPrimaryAbility(string key)

@@ -131,16 +131,15 @@ public class PAWindowUI : MonoBehaviour
             tempObj.GetComponent<UpgradeInfoUI>().SetInfo(CurrentDevPA, keyValuePair.Value);
         }
 
-        if (ShowingCharAbilities)
+        if (LocalUserInfo.Me.ClientCharacter.IsMainAbility(CurrentPA.Key))
+        {
+            m_mainButton.gameObject.SetActive(false);
+            m_mainText.gameObject.SetActive(true);
+        } else if (ShowingCharAbilities || !SceneInfo.Instance.CanSetMainAbility)
         {
             m_mainButton.gameObject.SetActive(false);
             m_mainText.gameObject.SetActive(false);
         }
-        else if (LocalUserInfo.Me.ClientCharacter.IsMainAbility(CurrentPA.Key))
-        {
-            m_mainButton.gameObject.SetActive(false);
-            m_mainText.gameObject.SetActive(true);
-        } 
         else
         {
             m_mainButton.gameObject.SetActive(true);

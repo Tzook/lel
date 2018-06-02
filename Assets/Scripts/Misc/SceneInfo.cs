@@ -45,6 +45,8 @@ public class SceneInfo : MonoBehaviour {
 
     public int Timer = 0;
 
+    public bool CanSetMainAbility = false;
+
     void Awake()
     {
         Instance = this;

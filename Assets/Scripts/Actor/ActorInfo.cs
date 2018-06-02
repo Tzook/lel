@@ -164,10 +164,6 @@ public class ActorInfo
         {
             SetMainAbilities(node["mainAbilities"]);
         }
-        else
-        {
-            AddMainAbility("melee");
-        }
 
         RefreshBonuses();
     }
@@ -193,6 +189,7 @@ public class ActorInfo
         }
 
         SortPrimaryAbilities();
+        AddMainAbility(key);
     }
 
     public void AddCharAbility(string key, JSONNode AbilityNode)
@@ -476,6 +473,10 @@ public class ActorInfo
 
     protected void SetMainAbilities(JSONNode mainAbilities)
     {
+        if (mainAbilities.Count == 0)
+        {
+            AddMainAbility("melee");
+        }
         for (int i = 0; i < mainAbilities.Count; i++)
         {
             AddMainAbility(mainAbilities[i]);

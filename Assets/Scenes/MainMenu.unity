@@ -47323,8 +47323,8 @@ MonoBehaviour:
       JumpBonus: 0
       SpeedBonus: 0
     Perks:
-    - Key: cooldownModifier
-      Value: -0.5
+    - Key: rageChance
+      Value: 0.2
     UseInfo:
       BonusHP: 0
       BonusMP: 0
@@ -52936,6 +52936,34 @@ MonoBehaviour:
       PartyBuff: 0
     IsClient: 1
     PerkType: 0
+  - Key: rageChance
+    Name: Rage Chance
+    Icon: {fileID: 21300000, guid: f8659334da4a1f943a71c5d7e68dad38, type: 3}
+    PrecentPerUpgrade: 0.02
+    UpgradeCap: 0.25
+    StartingValue: 0
+    Buff:
+      BonusPerks:
+      - Key: attackSpeedModifier
+        Value: 0.5
+      - Key: damageModifier
+        Value: 0.25
+      - Key: hpBonus
+        Value: 30
+      PartyBuff: 1
+    IsClient: 0
+    PerkType: 0
+  - Key: rageDuration
+    Name: Rage Duration
+    Icon: {fileID: 21300000, guid: f8659334da4a1f943a71c5d7e68dad38, type: 3}
+    PrecentPerUpgrade: 0.5
+    UpgradeCap: 8
+    StartingValue: 3
+    Buff:
+      BonusPerks: []
+      PartyBuff: 0
+    IsClient: 0
+    PerkType: 1
   Buffs:
   - Key: bleedChance
     Name: Bleed

@@ -959,22 +959,29 @@ public class ActorInstance : MonoBehaviour
             StopCoroutine(buff.RunningRoutine);
         }
 
-        buff.EffectPrefab.transform.SetParent(null);
-        buff.EffectPrefab.transform.gameObject.SetActive(false);
+        if (buff.EffectPrefab != null)
+        {
+            buff.EffectPrefab.transform.SetParent(null);
+            buff.EffectPrefab.transform.gameObject.SetActive(false);
+        }
 
         CurrentBuffs.Remove(buff);
 
         DevBuff buffReference = Content.Instance.GetBuff(buff.Key);
 
-        if (!string.IsNullOrEmpty(buffReference.DebuffSoundKey))
+        if (buffReference != null)
         {
-            AudioControl.Instance.Play(buffReference.DebuffSoundKey);
+            if (!string.IsNullOrEmpty(buffReference.DebuffSoundKey))
+            {
+                AudioControl.Instance.Play(buffReference.DebuffSoundKey);
+            }
+
+            if (!string.IsNullOrEmpty(buffReference.DebuffPrefabKey))
+            {
+                ResourcesLoader.Instance.GetRecycledObject(buffReference.DebuffPrefabKey).transform.position = transform.position;
+            }
         }
 
-        if (!string.IsNullOrEmpty(buffReference.DebuffPrefabKey))
-        {
-            ResourcesLoader.Instance.GetRecycledObject(buffReference.DebuffPrefabKey).transform.position = transform.position;
-        }
 
         if (Info.ID == LocalUserInfo.Me.ClientCharacter.ID)
         {
@@ -999,12 +1006,15 @@ public class ActorInstance : MonoBehaviour
     {
         DevBuff buffRef = Content.Instance.GetBuff(buff.Key);
 
-        buff.EffectPrefab = ResourcesLoader.Instance.GetRecycledObject(buffRef.EffectPrefab);
+        if (buffRef != null)
+        {
+            buff.EffectPrefab = ResourcesLoader.Instance.GetRecycledObject(buffRef.EffectPrefab);
 
-        buff.EffectPrefab.transform.SetParent(transform);
-        buff.EffectPrefab.transform.position = transform.position;
+            buff.EffectPrefab.transform.SetParent(transform);
+            buff.EffectPrefab.transform.position = transform.position;
 
-        AudioControl.Instance.Play(buffRef.AudioKey);
+            AudioControl.Instance.Play(buffRef.AudioKey);
+        }
 
         while (buff.Duration > 0)
         {

@@ -589,12 +589,12 @@ public class ActorController : MonoBehaviour
 
         Rigid.position += GetNextMovementPosition(Vector2.left);
 
-        Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
-
         Anim.SetBool("ReverseWalk", aimRight);
 
         if (!isAiming && AimTimeout <= 0)
         {
+            Anim.transform.localScale = new Vector3(-1 * initScale.x, initScale.y, initScale.z);
+
             Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 
@@ -608,12 +608,12 @@ public class ActorController : MonoBehaviour
 
         Rigid.position += GetNextMovementPosition(Vector2.right);
 
-        Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
-
         Anim.SetBool("ReverseWalk", !aimRight);
 
         if (!isAiming && AimTimeout <= 0)
         {
+            Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
+
             Instance.TorsoBone.transform.localScale = Vector3.one;
             Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
 
@@ -827,18 +827,6 @@ public class ActorController : MonoBehaviour
         isAiming = false;
 
         AimTimeout = 1f;
-        //if (aimRight)
-        //{
-        //    Instance.TorsoBone.transform.localScale = Vector3.one;
-        //    Instance.TorsoBone.transform.rotation = Quaternion.Euler(Vector3.zero);
-        //}
-        //else
-        //{
-        //    Instance.TorsoBone.transform.localScale = new Vector3(-1f, -1f, 1f);
-        //    Instance.TorsoBone.transform.rotation = Quaternion.Euler(0f,0f,180f);
-        //}
-
-        //rotDegrees = 0f;
     }
 
 

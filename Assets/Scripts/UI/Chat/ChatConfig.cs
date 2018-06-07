@@ -22,7 +22,7 @@ public class ChatConfig
     // Keep in this order! it's synced with the types
     public static string[] SHORTCUTS = {SHORTCUT_AREA, SHORTCUT_PARTY, SHORTCUT_WHISPER, /* Keep this one last! */ SHORTCUT_REPLY};
 
-    public const string PLACEHOLDER_WELCOME = "Welcome to lul!";
+    public const string PLACEHOLDER_WELCOME = "Welcome to XPlora!";
     public const string PLACEHOLDER_HOW_TO_SWITCH = "Switch chats with: " + SHORTCUT_AREA + " (area), " + SHORTCUT_PARTY + " (party), " + SHORTCUT_WHISPER + " (whisper) and " + SHORTCUT_REPLY + " (reply).";
     public const string PLACEHOLDER_AREA = "Talk to everyone...";
     public const string PLACEHOLDER_PARTY = "Party time!";

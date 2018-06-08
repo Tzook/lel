@@ -60,7 +60,7 @@ public class ResourcesLoader : MonoBehaviour {
             }
 		}
 
-		return new Sprite();
+		return null;
 	}
 
     public GameObject GetObject(string gKey)

@@ -767,6 +767,13 @@ public class DevContentEditor : Editor
                 }
             }
         }
+        else if (WordNumber(0) == "scenes")
+        {
+            if (WordNumber(1) == "save")
+            {
+                SceneSaver.Instance.resaveAllScenes();
+            }
+        }
     }
 
 

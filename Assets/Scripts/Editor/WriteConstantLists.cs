@@ -119,35 +119,65 @@ public class WriteConstantLists
 
     public void WriteScenesPopupList()
     {
-        List<string> scenes = new List<string>();
-        string path = FOLDER_NAME_SCENES;
-        DirectoryInfo dir = new DirectoryInfo(path);
-        foreach (var file in dir.GetFiles("*", SearchOption.AllDirectories))
-        {
-            if (file.Name.Contains(".unity.meta"))
-            {
-                scenes.Add(Path.GetFileName(file.Name).Split('.')[0]);
-            }
-        }
+        List<string> scenes = GetAllScenesNames();
 
         string text = File.ReadAllText(FILE_NAME_DUNGEON);
-        
+
         Regex rgx = new Regex("/\\* AUTO_GENERATED_SCENES_START \\*/ .* /\\* AUTO_GENERATED_SCENES_END \\*/");
         string listString = GetListString(scenes);
 
         string replacement = "/* AUTO_GENERATED_SCENES_START */ " + listString + " /* AUTO_GENERATED_SCENES_END */";
         string result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_DUNGEON, result);
-        
+
         text = File.ReadAllText(FILE_NAME_SCENE);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_SCENE, result);
-        
+
         text = File.ReadAllText(FILE_NAME_GATE_PORTAL);
         result = rgx.Replace(text, replacement);
         File.WriteAllText(FILE_NAME_GATE_PORTAL, result);
-        
+
         AssetDatabase.Refresh();
+    }
+
+    public List<string> GetAllScenesNames()
+    {
+        List<FileInfo> files = GetAllScenesFiles();
+        List<string> scenes = new List<string>();
+        foreach (var file in files)
+        {
+            scenes.Add(Path.GetFileName(file.Name).Split('.')[0]);
+        }
+
+        return scenes;
+    }
+
+    public List<string> GetAllScenesPaths()
+    {
+        List<FileInfo> files = GetAllScenesFiles();
+        List<string> paths = new List<string>();
+        foreach (var file in files)
+        {
+            paths.Add(file.FullName);
+        }
+
+        return paths;
+    }
+
+    public List<FileInfo> GetAllScenesFiles()
+    {
+        DirectoryInfo dir = new DirectoryInfo(FOLDER_NAME_SCENES);
+        List<FileInfo> paths = new List<FileInfo>();
+        foreach (var file in dir.GetFiles("*", SearchOption.AllDirectories))
+        {
+            if (file.Name.EndsWith(".unity"))
+            {
+                paths.Add(file);
+            }
+        }
+
+        return paths;
     }
 
     private string GetListString(List<string> items)

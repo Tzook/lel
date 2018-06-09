@@ -56,7 +56,7 @@ public class GameCamera : MonoBehaviour {
     {
         get
         {
-            return LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key == "range" && LocalUserInfo.Me.ClientCharacter.Instance.InputController.ActorAttack.InSecondaryMode;
+            return LocalUserInfo.Me.ClientCharacter.Instance != null && LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key == "range" && LocalUserInfo.Me.ClientCharacter.Instance.InputController.ActorAttack.InSecondaryMode;
         }
     }
 

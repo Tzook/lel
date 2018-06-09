@@ -267,9 +267,8 @@ public class ActorController : MonoBehaviour
 
     public void ToggleMainAbility()
     {
-        LocalUserInfo.Me.ClientCharacter.ToggleMainAbility();
         InturruptAttack();
-        EndAttack();
+        LocalUserInfo.Me.ClientCharacter.ToggleMainAbility();
     }
 
     public void SetMainAbility(string key)
@@ -476,7 +475,6 @@ public class ActorController : MonoBehaviour
 
     private void ClimbRope()
     {
-        EndAttack();
         InturruptAttack();
         OnRope = true;
         Anim.SetBool("OnRope", true);
@@ -485,7 +483,6 @@ public class ActorController : MonoBehaviour
         Instance.SortingGroup.enabled = false;
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         StopAim();
-        ActorAttack.StopSecondaryMode();
         EndAttack();
 
         Instance.TorsoBone.transform.localScale = Vector3.one;
@@ -929,6 +926,7 @@ public class ActorController : MonoBehaviour
 
     public void EndAttack()
     {
+        ActorAttack.StopSecondaryMode();
         Instance.StartCombatMode();
         Instance.BackwardLeftHand();
         CurrentSpellInCast = null;

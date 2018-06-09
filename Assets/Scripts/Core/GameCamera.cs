@@ -15,9 +15,6 @@ public class GameCamera : MonoBehaviour {
     [SerializeField]
     float MaxFarAim = 3f;
 
-    float farAimX;
-    float farAimY;
-
     [SerializeField]
     protected GameObject followingObject;
 
@@ -55,8 +52,13 @@ public class GameCamera : MonoBehaviour {
     public static GameCamera Instance;
     public static Vector3 MousePosition;
 
-    protected Coroutine FarAimModeInstance;
-    public bool FarAimMode = false;
+    public bool FarAimMode
+    {
+        get
+        {
+            return LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key == "range" && LocalUserInfo.Me.ClientCharacter.Instance.InputController.ActorAttack.InSecondaryMode;
+        }
+    }
 
     float InitCamSize;
 
@@ -151,34 +153,6 @@ public class GameCamera : MonoBehaviour {
         {
             DoubleClick();
         }
-
-        UpdateFarAimMode();
-    }
-
-    protected void UpdateFarAimMode()
-    {
-        if (FarAimModeInstance == null)
-        {
-            if (Input.GetMouseButton(1))
-            {
-                FarAimModeInstance = StartCoroutine(FarAimModeRoutine());
-            }
-        }
-        else
-        {
-            if (!Input.GetMouseButton(1))
-            {
-                StopCoroutine(FarAimModeInstance);
-                FarAimModeInstance = null;
-                FarAimMode = false;
-            }
-        }
-    }
-
-    private IEnumerator FarAimModeRoutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        FarAimMode = true;
     }
 
     private IEnumerator DoubleClickRoutine()
@@ -225,6 +199,8 @@ public class GameCamera : MonoBehaviour {
         {
             if (followingObject != null)
             {
+                float farAimX;
+                float farAimY;
 
                 if(FarAimMode)
                 {

@@ -9,6 +9,7 @@ public class ActorController : MonoBehaviour
     #region References
 
     public ActorInstance Instance;
+    public ActorAttack ActorAttack;
 
     Rigidbody2D Rigid;
     BoxCollider2D Collider;
@@ -99,6 +100,7 @@ public class ActorController : MonoBehaviour
     {
         Rigid = GetComponent<Rigidbody2D>();
         Instance  = GetComponent<ActorInstance>();
+        ActorAttack  = GetComponent<ActorAttack>();
 
         if(Rigid == null)
         {
@@ -124,9 +126,10 @@ public class ActorController : MonoBehaviour
         if (CanDoAction())
         {
 
-            if ((Input.GetMouseButton(0)) && !Game.Instance.isInteractingWithUI && !OnRope)
+            if (!Game.Instance.isInteractingWithUI && !OnRope)
             {
                 Aim();
+                ActorAttack.UpdateSecondaryMode();
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -482,6 +485,7 @@ public class ActorController : MonoBehaviour
         Instance.SortingGroup.enabled = false;
         Anim.transform.localScale = new Vector3(1 * initScale.x, initScale.y, initScale.z);
         StopAim();
+        ActorAttack.StopSecondaryMode();
         EndAttack();
 
         Instance.TorsoBone.transform.localScale = Vector3.one;
@@ -540,6 +544,7 @@ public class ActorController : MonoBehaviour
     {
         Aim();
         StopAim();
+        ActorAttack.StopSecondaryMode();
         DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
         
         if(spell == null)

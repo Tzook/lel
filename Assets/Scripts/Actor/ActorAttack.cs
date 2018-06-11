@@ -17,8 +17,10 @@ public class ActorAttack : MonoBehaviour
         }
         else
         {
+            LocalUserInfo.Me.ClientCharacter.Instance.InputController.Aim();
             if (!Input.GetMouseButton(1))
             {
+                LocalUserInfo.Me.ClientCharacter.Instance.InputController.StopAim();
                 StopSecondaryMode();
             }
         }

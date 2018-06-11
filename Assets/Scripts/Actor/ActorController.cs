@@ -128,9 +128,13 @@ public class ActorController : MonoBehaviour
 
             if (!Game.Instance.isInteractingWithUI && !OnRope)
             {
-                Aim();
+                if (Input.GetMouseButton(0)) 
+                {
+                    Aim();
+                }
                 ActorAttack.UpdateSecondaryMode();
             }
+
             if (Input.GetMouseButtonUp(0))
             {
                 StopAim();
@@ -592,6 +596,7 @@ public class ActorController : MonoBehaviour
         Rigid.position += GetNextMovementPosition(Vector2.left);
 
         Anim.SetBool("ReverseWalk", aimRight);
+        ActorAttack.StopSecondaryMode();
 
         if (!isAiming && AimTimeout <= 0)
         {
@@ -611,6 +616,7 @@ public class ActorController : MonoBehaviour
         Rigid.position += GetNextMovementPosition(Vector2.right);
 
         Anim.SetBool("ReverseWalk", !aimRight);
+        ActorAttack.StopSecondaryMode();
 
         if (!isAiming && AimTimeout <= 0)
         {
@@ -755,6 +761,7 @@ public class ActorController : MonoBehaviour
             }
             Rigid.AddForce((float)jumpPower * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
+            ActorAttack.StopSecondaryMode();
         }
 
         yield return new WaitForSeconds(JumpDelay);
@@ -762,7 +769,7 @@ public class ActorController : MonoBehaviour
         JumpRoutineInstance = null;
     }
 
-    private void Aim()
+    public void Aim()
     {
         tempRot = (GameCamera.MousePosition - Instance.TorsoBone.transform.position);
         tempRot.Normalize();
@@ -813,7 +820,7 @@ public class ActorController : MonoBehaviour
 
     }
 
-    private void StopAim()
+    public void StopAim()
     {
         if (aimRight)
         {

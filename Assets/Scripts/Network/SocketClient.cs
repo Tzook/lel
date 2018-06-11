@@ -1851,7 +1851,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
-        CurrentSocket.Emit("secondary_mode_start", node);
+        CurrentSocket.Emit("secondary_mode_started", node);
     }
 
     public void SendHitSecondaryMode(List<string> targetIDs)
@@ -1870,7 +1870,7 @@ public class SocketClient : MonoBehaviour
     {
         JSONNode node = new JSONClass();
 
-        CurrentSocket.Emit("secondary_mode_end", node);
+        CurrentSocket.Emit("secondary_mode_ended", node);
     }
 
     public void SendItemPositions(List<ItemInstance> ItemInstances)

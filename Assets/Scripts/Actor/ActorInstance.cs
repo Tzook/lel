@@ -685,7 +685,7 @@ public class ActorInstance : MonoBehaviour
   
     internal void Hurt()
     {
-        if (!Anim.GetBool("Charging") && !Anim.GetBool("Busy"))
+        if (!Anim.GetBool("Attacking") && !Anim.GetBool("Busy"))
         {
             Anim.SetInteger("HurtType", Random.Range(0, 3));
             Anim.SetTrigger("Hurt");
@@ -836,6 +836,7 @@ public class ActorInstance : MonoBehaviour
     {
         SetAttackAnimation();
 
+        Anim.SetBool("Attacking", true);
         Anim.SetBool("Charging", true);
     }
 
@@ -867,8 +868,19 @@ public class ActorInstance : MonoBehaviour
         }
     }
 
+    public void ToggleSecondaryAttackAnimation(bool on)
+    {
+        bool InSecondaryMode = on;
+        if (on)
+        {
+            StartCombatMode();
+        }
+        Anim.SetBool("SecondaryMode", on);
+    }
+
     public void PreformAttack(float chargeValue)
     {
+        Anim.SetBool("Attacking", false);
         Anim.SetBool("Charging", false);
 
         if (CurrentGrowEffect != null)

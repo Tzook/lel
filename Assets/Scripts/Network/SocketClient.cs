@@ -827,8 +827,7 @@ public class SocketClient : MonoBehaviour
 
         if (actorInfo != null && actorInfo.Instance != null)
         {
-            // TODO
-            // actorInfo.Instance.StartSecondaryMode();
+            actorInfo.Instance.ToggleSecondaryAttackAnimation(true);
         }
     }
 
@@ -842,8 +841,7 @@ public class SocketClient : MonoBehaviour
 
         if (actorInfo != null && actorInfo.Instance != null)
         {
-            // TODO
-            // actorInfo.Instance.StopSecondaryMode();
+            actorInfo.Instance.ToggleSecondaryAttackAnimation(false);
         }
     }
 

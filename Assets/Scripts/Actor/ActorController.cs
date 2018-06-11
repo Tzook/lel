@@ -126,16 +126,12 @@ public class ActorController : MonoBehaviour
         if (CanDoAction())
         {
 
-            if (!Game.Instance.isInteractingWithUI && !OnRope)
+            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !Game.Instance.isInteractingWithUI && !OnRope)
             {
-                if (Input.GetMouseButton(0)) 
-                {
-                    Aim();
-                }
-                ActorAttack.UpdateSecondaryMode();
+                Aim();
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) || Input.GetMouseButton(1))
             {
                 StopAim();
             }
@@ -228,7 +224,7 @@ public class ActorController : MonoBehaviour
 
         if (CanDoAction() && !OnRope)
         {
-            AttackCharge();
+            AttackAbility();
 
             if (Input.GetKeyDown(InputMap.Map["Primary Abilities Panel"]))
             {
@@ -259,14 +255,30 @@ public class ActorController : MonoBehaviour
         }
     }
 
-    private void AttackCharge()
+    private void AttackAbility()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Instance.SetAttackAnimation();
         }
+        
+        if (Input.GetMouseButton(1) && !IsManuallyMoving() && !Game.Instance.isInteractingWithUI)
+        {
+            ActorAttack.EnsureInSecondaryMode();
+        }
+        else
+        {
+            ActorAttack.EnsureStopSecondaryMode();
+        }
+ 
+        bool charging = Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA();
+        Anim.SetBool("Attacking", charging || Anim.GetBool("SecondaryMode"));
+        Anim.SetBool("Charging", charging);
+    }
 
-        Anim.SetBool("Charging", Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA());
+    protected bool IsManuallyMoving()
+    {
+        return Input.GetKey(InputMap.Map["Move Left"]) || Input.GetKey(InputMap.Map["Move Right"]) || Input.GetKey(InputMap.Map["Jump"]);
     }
 
     public void ToggleMainAbility()
@@ -545,7 +557,7 @@ public class ActorController : MonoBehaviour
     {
         Aim();
         StopAim();
-        ActorAttack.StopSecondaryMode();
+        ActorAttack.EnsureStopSecondaryMode();
         DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
         
         if(spell == null)
@@ -596,7 +608,6 @@ public class ActorController : MonoBehaviour
         Rigid.position += GetNextMovementPosition(Vector2.left);
 
         Anim.SetBool("ReverseWalk", aimRight);
-        ActorAttack.StopSecondaryMode();
 
         if (!isAiming && AimTimeout <= 0)
         {
@@ -616,7 +627,6 @@ public class ActorController : MonoBehaviour
         Rigid.position += GetNextMovementPosition(Vector2.right);
 
         Anim.SetBool("ReverseWalk", !aimRight);
-        ActorAttack.StopSecondaryMode();
 
         if (!isAiming && AimTimeout <= 0)
         {
@@ -692,7 +702,14 @@ public class ActorController : MonoBehaviour
         }
         else
         {
-            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
+            if (ActorAttack.InSecondaryMode)
+            {
+                SocketClient.Instance.SendHitSecondaryMode(targetIDs);
+            }
+            else
+            {
+                SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
+            }
 
             string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
             AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
@@ -738,7 +755,14 @@ public class ActorController : MonoBehaviour
         }
         else
         {
-            SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
+            if (ActorAttack.InSecondaryMode)
+            {
+                SocketClient.Instance.SendHitSecondaryMode(targetIDs);
+            }
+            else
+            {
+                SocketClient.Instance.SendUsedPrimaryAbility(targetIDs, attackIdCounter);
+            }
 
             string randomHitSound = tempAbility.HitSounds[Random.Range(0, tempAbility.HitSounds.Count)];
             AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
@@ -761,7 +785,6 @@ public class ActorController : MonoBehaviour
             }
             Rigid.AddForce((float)jumpPower * transform.up, ForceMode2D.Impulse);
             AudioControl.Instance.Play("sound_bloop");
-            ActorAttack.StopSecondaryMode();
         }
 
         yield return new WaitForSeconds(JumpDelay);
@@ -881,6 +904,13 @@ public class ActorController : MonoBehaviour
         LoadAttackValue = 0f;
     }
 
+    public void ReleaseSecondaryAttack()
+    {
+        Instance.StartCombatMode();
+
+        ActivatePrimaryAbility();
+    }
+
     public void ActivatePrimaryAbility()
     {
         DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
@@ -933,7 +963,7 @@ public class ActorController : MonoBehaviour
 
     public void EndAttack()
     {
-        ActorAttack.StopSecondaryMode();
+        ActorAttack.EnsureStopSecondaryMode();
         Instance.StartCombatMode();
         Instance.BackwardLeftHand();
         CurrentSpellInCast = null;
@@ -945,6 +975,7 @@ public class ActorController : MonoBehaviour
         }
         LoadAttackValue = 0f;
 
+        Anim.SetBool("Attacking", false);
         Anim.SetBool("Charging", false);
         InGameMainMenuUI.Instance.StopChargingAttack();
     }

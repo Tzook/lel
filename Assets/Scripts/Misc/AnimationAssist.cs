@@ -53,6 +53,14 @@ public class AnimationAssist : MonoBehaviour {
         }
     }
 
+    public void ReleaseSecondaryAttack()
+    {
+        if (Controller != null && Controller.enabled)
+        {
+            Controller.ReleaseSecondaryAttack();
+        }
+    }
+
     public void BeginChargeParticles()
     {
         m_Particles.Play();

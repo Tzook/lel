@@ -95,6 +95,8 @@ public class SocketClient : MonoBehaviour
         CurrentSocket.On("actor_load_attack", OnActorLoadAttack);
         CurrentSocket.On("actor_perform_attack", OnActorPreformAttack);
         CurrentSocket.On("actor_change_ability", OnActorChangeAbility);
+        CurrentSocket.On("actor_start_secondary_mode", OnActorStartSecondaryMode);
+        CurrentSocket.On("actor_end_secondary_mode", OnActorEndSecondaryMode);
 
         CurrentSocket.On("mob_spawn", OnMobSpawn);
         CurrentSocket.On("mob_die", OnMobDeath);
@@ -812,6 +814,36 @@ public class SocketClient : MonoBehaviour
         {
             BroadcastEvent(actorInfo.Name + " Changed ability Attack");
             actorInfo.SetPrimaryAbility(data["ability"].Value);
+        }
+    }
+
+    protected void OnActorStartSecondaryMode(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        if (actorInfo != null && actorInfo.Instance != null)
+        {
+            // TODO
+            // actorInfo.Instance.StartSecondaryMode();
+        }
+    }
+
+    protected void OnActorEndSecondaryMode(Socket socket, Packet packet, object[] args)
+    {
+        JSONNode data = (JSONNode)args[0];
+
+        BroadcastEvent(data.ToString());
+
+        ActorInfo actorInfo = Game.Instance.CurrentScene.GetActor(data["id"].Value);
+
+        if (actorInfo != null && actorInfo.Instance != null)
+        {
+            // TODO
+            // actorInfo.Instance.StopSecondaryMode();
         }
     }
 
@@ -1813,6 +1845,32 @@ public class SocketClient : MonoBehaviour
         node["attack_id"] = attackId.ToString();
 
         CurrentSocket.Emit("used_ability", node);
+    }
+
+    public void SendStartedSecondaryMode()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("secondary_mode_start", node);
+    }
+
+    public void SendHitSecondaryMode(List<string> targetIDs)
+    {
+        JSONNode node = new JSONClass();
+
+        for(int i = 0; i < targetIDs.Count; i++)
+        {
+            node["target_ids"][i] = targetIDs[i];
+        }
+
+        CurrentSocket.Emit("secondary_mode_hit", node);
+    }
+
+    public void SendEndedSecondaryMode()
+    {
+        JSONNode node = new JSONClass();
+
+        CurrentSocket.Emit("secondary_mode_end", node);
     }
 
     public void SendItemPositions(List<ItemInstance> ItemInstances)

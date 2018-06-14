@@ -159,6 +159,16 @@ public class AnimationAssist : MonoBehaviour {
         Controller.Instance.BackwardLeftHand();
     }
 
+    public void ForwardWeapon()
+    {
+        Controller.Instance.ForwardWeapon();
+    }
+
+    public void BackwarWeapon()
+    {
+        Controller.Instance.BackwardWeapon();
+    }
+
     public void ResetTriggers()
     {
         for (int i = 0; i < m_Anim.parameterCount; i++)

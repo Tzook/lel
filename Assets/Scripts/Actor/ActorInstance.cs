@@ -597,6 +597,16 @@ public class ActorInstance : MonoBehaviour
         m_LeftFist.sortingLayerName = "Sprites";
     }
 
+    public void ForwardWeapon()
+    {
+        Weapon.sortingLayerName = "Sprites";
+    }
+
+    public void BackwardWeapon()
+    {
+        Weapon.sortingLayerName = "Env00";
+    }
+
     public void SetRenderingLayer(int iLayer, Transform body = null)
     {
         if(body == null)

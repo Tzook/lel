@@ -16,7 +16,7 @@ public class Config
         public static string DOMAIN
         { get { return hostName = hostName == null ? GetHostName() : hostName; } }        
 #else
-    private static bool LOCAL = true; // Used for developing locally. This should always be falsy.
+    private static bool LOCAL = !true; // Used for developing locally. This should always be falsy.
     private const string DOMAIN_PROD = "lul.herokuapp.com";
     public static string DOMAIN = LOCAL ? DOMAIN_LOCAL : DOMAIN_PROD;
 #endif

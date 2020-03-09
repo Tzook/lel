@@ -54881,6 +54881,52 @@ MonoBehaviour:
         SpawnMobs: []
         Duration: 0
     aggroType: 0
+  - MonsterKey: BigTurtle
+    MonsterName: Ancient Turtle
+    MonsterHP: 2000
+    MonsterLevel: 1
+    DMG: 10
+    RewardEXP: 0
+    Type: 1
+    PossibleLoot:
+    - ItemKey: gold
+      MinStack: 8
+      MaxStack: 22
+    - ItemKey: oldTurtleShell
+      MinStack: 1
+      MaxStack: 1
+    isBoss: 1
+    Perks:
+    - Key: stunResistance
+      Value: 100
+    Spells:
+      SpellsList:
+      - Key: TurtleBossSmash
+        DisplayName: 
+        Description: 
+        ColliderPrefab: TurtleBossSmash
+        Perks:
+        - Key: damageModifier
+          Value: 0.1
+        - Key: stunChance
+          Value: 1
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Chance: 1
+      MinTime: 4
+      MaxTime: 10
+      DeathRattle:
+        Key: 
+        DisplayName: 
+        Description: 
+        ColliderPrefab: 
+        Perks: []
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Duration: 0
+    aggroType: 1
   - MonsterKey: Plant
     MonsterName: Moving Plant
     MonsterHP: 120

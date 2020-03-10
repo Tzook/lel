@@ -34,7 +34,7 @@ public class EnemyMoving : Enemy
         set
         {
             slowed = value;
-            if(value)
+            if (value)
             {
                 MovementSpeed = OriginalMovementSpeed * 0.5f; ;
             }
@@ -85,7 +85,7 @@ public class EnemyMoving : Enemy
     {
         base.SetTarget(target);
 
-        if(target == null)
+        if (target == null)
         {
             StopCurrentActionRoutine();
         }
@@ -114,7 +114,7 @@ public class EnemyMoving : Enemy
 
     void FixedUpdate()
     {
-        if(Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
+        if (Game.Instance.isBitch && !Dead && LastSentPosition != transform.position)
         {
             LastSentPosition = transform.position;
             LastGivenPosition = LastSentPosition;
@@ -133,9 +133,9 @@ public class EnemyMoving : Enemy
 
     void LateUpdate()
     {
-        if(m_HealthBar != null)
+        if (m_HealthBar != null)
         {
-            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x,m_HitBox.bounds.max.y) , Time.deltaTime * 3f);
+            m_HealthBar.transform.position = Vector2.Lerp(m_HealthBar.transform.position, new Vector2(transform.position.x, m_HitBox.bounds.max.y), Time.deltaTime * 3f);
         }
     }
 
@@ -183,7 +183,7 @@ public class EnemyMoving : Enemy
             }
 
             //ACT
-            switch(CurrentAction)
+            switch (CurrentAction)
             {
                 case AIAction.Thinking:
                     {
@@ -229,11 +229,11 @@ public class EnemyMoving : Enemy
         float t = Random.Range(0.5f, 5f);
 
         StandStill();
-        
-        while (t>0f)
+
+        while (t > 0f)
         {
             t -= 1f * Time.deltaTime;
-            
+
             yield return 0;
         }
 
@@ -242,7 +242,7 @@ public class EnemyMoving : Enemy
 
     protected virtual IEnumerator WanderLeftRotuine()
     {
-        float t = Random.Range(0.5f, 5f);
+        float t = Random.Range(0.5f, 3f);
 
         while (t > 0f)
         {
@@ -250,7 +250,7 @@ public class EnemyMoving : Enemy
 
             WalkLeft();
 
-            if (Stunned || isLeftBlocked())
+            if (Stunned || isLeftBlocked() || SpellInCast != null)
             {
                 break;
             }
@@ -263,7 +263,7 @@ public class EnemyMoving : Enemy
 
     protected virtual IEnumerator WanderRightRotuine()
     {
-        float t = Random.Range(0.5f, 5f);
+        float t = Random.Range(0.5f, 3f);
 
         while (t > 0f)
         {
@@ -271,7 +271,7 @@ public class EnemyMoving : Enemy
 
             WalkRight();
 
-            if (Stunned || isRightBlocked())
+            if (Stunned || isRightBlocked() || SpellInCast != null)
             {
                 break;
             }
@@ -286,40 +286,33 @@ public class EnemyMoving : Enemy
     {
         float currentDistance = Mathf.NegativeInfinity;
 
-        while(currentDistance < MaxChaseDistance)
+        while (currentDistance < MaxChaseDistance)
         {
 
             currentDistance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
 
-            if (Mathf.Abs(transform.position.x - CurrentTarget.transform.position.x) < 0.4f)
+            if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
             {
-                StandStill();
-            }
-            else
-            {
-                if (transform.position.x < CurrentTarget.transform.position.x) // Chase Right
+                if (Stunned || isRightBlocked() || SpellInCast != null)
                 {
-                    if (Stunned || isRightBlocked())
-                    {
-                        StandStill();
-                    }
-                    else
-                    {
-                        yield return StartCoroutine(WanderRightRotuine());
-                        CurrentAction = AIAction.Chasing;
-                    }
+                    StandStill();
                 }
-                else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
+                else
                 {
-                    if (Stunned || isLeftBlocked())
-                    {
-                        StandStill();
-                    }
-                    else
-                    {
-                        yield return StartCoroutine(WanderLeftRotuine());
-                        CurrentAction = AIAction.Chasing;
-                    }
+                    yield return StartCoroutine(WanderRightRotuine());
+                    CurrentAction = AIAction.Chasing;
+                }
+            }
+            else if (transform.position.x > CurrentTarget.transform.position.x) // Chase Left
+            {
+                if (Stunned || isLeftBlocked() || SpellInCast != null)
+                {
+                    StandStill();
+                }
+                else
+                {
+                    yield return StartCoroutine(WanderLeftRotuine());
+                    CurrentAction = AIAction.Chasing;
                 }
             }
 
@@ -335,21 +328,21 @@ public class EnemyMoving : Enemy
 
     public virtual void StandStill()
     {
-        Anim.SetBool("Walk", false);    
+        Anim.SetBool("Walk", false);
     }
 
     public virtual void WalkLeft()
     {
         Rigid.position += -(Vector2)Body.transform.right * MovementSpeed * Time.deltaTime;
-        Body.localScale = new Vector3( -initScale.x, initScale.y, initScale.z);
+        Body.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
     }
 
     public virtual void WalkRight()
     {
-        Rigid.position += (Vector2)Body.transform.right *  MovementSpeed * Time.deltaTime;
-        Body.localScale = new Vector3( initScale.x, initScale.y, initScale.z);
+        Rigid.position += (Vector2)Body.transform.right * MovementSpeed * Time.deltaTime;
+        Body.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
 
         Anim.SetBool("Walk", true);
     }
@@ -363,7 +356,7 @@ public class EnemyMoving : Enemy
 
             if (actor.transform.position.x < transform.position.x)
             {
-                Rigid.AddForce((damage/Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * transform.right, ForceMode2D.Impulse);
+                Rigid.AddForce((damage / Info.MaxHealth) * 3f * actor.Info.ClientPerks.KnockbackModifier * transform.right, ForceMode2D.Impulse);
             }
             else
             {
@@ -426,7 +419,7 @@ public class EnemyMoving : Enemy
     {
         LastGivenPosition = new Vector2(x, y);
 
-        if(Mathf.Abs(Rigid.position.x - x) > 0.05f)
+        if (Mathf.Abs(Rigid.position.x - x) > 0.05f)
         {
             Anim.SetBool("Walk", true);
 

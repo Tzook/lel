@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
     public EnemyInfo Info;
 
@@ -67,7 +68,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public virtual void Initialize(string instanceID ,DevMonsterInfo givenInfo ,int currentHP = 0)
+    public virtual void Initialize(string instanceID, DevMonsterInfo givenInfo, int currentHP = 0)
     {
         Info = new EnemyInfo(givenInfo, instanceID);
         Info.CurrentHealth = currentHP;
@@ -113,7 +114,7 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator RegisterRoutine()
     {
-        while(Game.Instance.CurrentScene == null)
+        while (Game.Instance.CurrentScene == null)
         {
             yield return 0;
         }
@@ -271,7 +272,7 @@ public class Enemy : MonoBehaviour {
     public virtual void Death()
     {
         if (!Dead)
-        {   
+        {
             Dead = true;
 
             m_HitBox.enabled = false;
@@ -300,14 +301,14 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator DeathRoutine()
     {
-        if (DeathTypes > 1) 
+        if (DeathTypes > 1)
         {
             Anim.SetInteger("DeathType", Random.Range(0, DeathTypes));
         }
         Anim.SetBool("Dead", true);
 
         yield return new WaitForSeconds(3f);
-        
+
         m_HitBox.enabled = true;
         Anim.SetBool("Dead", false);
         Dead = false;
@@ -325,7 +326,7 @@ public class Enemy : MonoBehaviour {
         for (int i = 0; i < SceneInfo.Instance.Spawners.Count; i++)
         {
             tempSpawner = SceneInfo.Instance.Spawners[i];
-             
+
             if (tempSpawner.MonsterKey == Info.Name)
             {
                 tempDistance = Vector2.Distance(transform.position, tempSpawner.transform.position);
@@ -342,12 +343,12 @@ public class Enemy : MonoBehaviour {
 
     public void TryIdleVarriation()
     {
-        if(IdleVarriations <= 0)
+        if (IdleVarriations <= 0)
         {
             return;
         }
 
-        if(Random.Range(0,VarriationChance) == 0)
+        if (Random.Range(0, VarriationChance) == 0)
         {
             Anim.SetInteger("IdleVarriationIndex", Random.Range(0, IdleVarriations));
             Anim.SetTrigger("IdleVarriation");
@@ -379,7 +380,7 @@ public class Enemy : MonoBehaviour {
 
         tempBuff.RunningRoutine = StartCoroutine(HandleBuff(tempBuff));
 
-        if(Game.Instance.isBitch)
+        if (Game.Instance.isBitch)
         {
             StartBuffEffect(buffKey);
         }
@@ -387,7 +388,7 @@ public class Enemy : MonoBehaviour {
 
     public void RemoveBuff(Buff buff)
     {
-        if(buff.RunningRoutine != null)
+        if (buff.RunningRoutine != null)
         {
             StopCoroutine(buff.RunningRoutine);
         }
@@ -417,9 +418,9 @@ public class Enemy : MonoBehaviour {
 
     public Buff GetBuff(string buffKey)
     {
-        for(int i=0;i<CurrentBuffs.Count;i++)
+        for (int i = 0; i < CurrentBuffs.Count; i++)
         {
-            if(CurrentBuffs[i].Key == buffKey)
+            if (CurrentBuffs[i].Key == buffKey)
             {
                 return CurrentBuffs[i];
             }
@@ -447,7 +448,7 @@ public class Enemy : MonoBehaviour {
 
         AudioControl.Instance.Play(buffRef.AudioKey);
 
-        while(buff.Duration > 0)
+        while (buff.Duration > 0)
         {
             yield return new WaitForSeconds(1f);
             buff.Duration--;
@@ -465,14 +466,15 @@ public class Enemy : MonoBehaviour {
 
     public void CastSpellComplete()
     {
-        if(SpellInCast == null || string.IsNullOrEmpty(SpellInCast.ColliderPrefab))
+        if (SpellInCast == null || string.IsNullOrEmpty(SpellInCast.ColliderPrefab))
         {
+            SpellInCast = null;
             return;
         }
 
         GameObject tempObj = ResourcesLoader.Instance.GetRecycledObject(SpellInCast.ColliderPrefab);
 
-        if(SpellSource != null)
+        if (SpellSource != null)
         {
             tempObj.transform.position = SpellSource.position;
         }
@@ -484,6 +486,7 @@ public class Enemy : MonoBehaviour {
         tempObj.GetComponent<EnemyDamageInstance>().SetInfo(this, SpellInCast.Key);
 
         Anim.SetBool("CastingSpell", false);
+        SpellInCast = null;
     }
 
 }

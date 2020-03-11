@@ -262,14 +262,15 @@ public class ActorController : MonoBehaviour
             Instance.SetAttackAnimation();
         }
 
-        if (Input.GetMouseButton(1) && !IsManuallyMoving() && !Game.Instance.isInteractingWithUI)
-        {
-            ActorAttack.EnsureInSecondaryMode();
-        }
-        else
-        {
-            ActorAttack.EnsureStopSecondaryMode();
-        }
+        // For now, disable secondary mode.
+        // if (Input.GetMouseButton(1) && !IsManuallyMoving() && !Game.Instance.isInteractingWithUI)
+        // {
+        //     ActorAttack.EnsureInSecondaryMode();
+        // }
+        // else
+        // {
+        //     ActorAttack.EnsureStopSecondaryMode();
+        // }
 
         bool charging = Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA();
         Anim.SetBool("Attacking", charging || Anim.GetBool("SecondaryMode"));
@@ -1240,7 +1241,7 @@ public class ActorController : MonoBehaviour
         DevMonsterInfo monsterInfo = Content.Instance.GetMonsterByName(enemy.Info.Name);
         if (!Invincible && monsterInfo.DMG != 0)
         {
-            //EndAttack();
+            // EndAttack();
 
             SocketClient.Instance.SendTookDMG(enemy.Info);
 

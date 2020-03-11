@@ -173,7 +173,7 @@ public class ActorInstance : MonoBehaviour
         UpdateHair();
         UpdateEquipment();
 
-        if(BlinkingInstance == null && this.gameObject.activeInHierarchy)
+        if (BlinkingInstance == null && this.gameObject.activeInHierarchy)
         {
             BlinkingInstance = StartCoroutine(BlinkingRoutine());
         }
@@ -384,7 +384,7 @@ public class ActorInstance : MonoBehaviour
         }
 
         string key;
-        for(int i=0;i<item.Sprites.Count;i++)
+        for (int i = 0; i < item.Sprites.Count; i++)
         {
             key = item.Sprites.Keys.ElementAt(i);
             SetSprites(key, item.Sprites[key]);
@@ -395,7 +395,7 @@ public class ActorInstance : MonoBehaviour
     {
         if (Info.Gender == Gender.Female)
         {
-            spriteKey = spriteKey.Replace("male","female");
+            spriteKey = spriteKey.Replace("male", "female");
         }
 
         switch (key)
@@ -543,7 +543,7 @@ public class ActorInstance : MonoBehaviour
         }
 
         projectile.transform.rotation = LastFireRot;
-        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer ,attackIdCounter ,ChargeValue, 15f, isPlayer);
+        projectile.GetComponent<ProjectileArrow>().SetInfo(this, Info.CurrentPrimaryAbility.Key, "", isPlayer, attackIdCounter, ChargeValue, 15f, isPlayer);
     }
 
     public void CastSpell(DevSpell spell)
@@ -609,7 +609,7 @@ public class ActorInstance : MonoBehaviour
 
     public void SetRenderingLayer(int iLayer, Transform body = null)
     {
-        if(body == null)
+        if (body == null)
         {
             body = this.transform;
         }
@@ -649,7 +649,7 @@ public class ActorInstance : MonoBehaviour
             if (Vector2.Distance(tempItem.transform.position, transform.position) < 0.5f)
             {
                 string errorMessage = Info.Inventory.canPickItem(item);
-                if (errorMessage != "") 
+                if (errorMessage != "")
                 {
                     InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage(errorMessage, Color.red, false);
                     continue;
@@ -687,12 +687,12 @@ public class ActorInstance : MonoBehaviour
         item.SawItem = false;
         int stackPicked = stack - item.Stack;
         InGameMainMenuUI.Instance.MinilogMessage((stackPicked > 0 ? "Picked up " : "Removed ") + Mathf.Abs(stackPicked).ToString("N0") + " " + item.Name + "s ");
-        
+
         Info.Inventory.ChangeItemStack(slot, stack);
 
         InGameMainMenuUI.Instance.RefreshInventory();
     }
-  
+
     internal void Hurt()
     {
         if (!Anim.GetBool("Attacking") && !Anim.GetBool("Busy"))
@@ -701,7 +701,7 @@ public class ActorInstance : MonoBehaviour
             Anim.SetTrigger("Hurt");
         }
 
-        if(LocalUserInfo.Me.ClientCharacter.ID == Info.ID)
+        if (LocalUserInfo.Me.ClientCharacter.ID == Info.ID)
         {
             InputController.StartInvincivility();
         }
@@ -738,7 +738,7 @@ public class ActorInstance : MonoBehaviour
 
         temObj.GetComponent<LevelUpEffect>().Play();
     }
-    
+
     public void MasteryUp()
     {
         GameObject temObj = ResourcesLoader.Instance.GetRecycledObject("MasteryUpEffect");
@@ -751,7 +751,7 @@ public class ActorInstance : MonoBehaviour
     public void PopHint(string text, Color clr, string icon = "hitIcon_dmg")
     {
         GameObject pop = ResourcesLoader.Instance.GetRecycledObject("PopHint");
-        pop.transform.position = transform.position + new Vector3(0f,1f,0f);
+        pop.transform.position = transform.position + new Vector3(0f, 1f, 0f);
         pop.GetComponent<PopText>().Pop(text, clr, new Color(), icon);
     }
 
@@ -767,17 +767,17 @@ public class ActorInstance : MonoBehaviour
         itemObject.GetComponent<ItemInstance>().Collect();
 
         float t = 0f;
-        while(t<1f)
+        while (t < 1f)
         {
             t += 2f * Time.deltaTime;
 
             itemObject.transform.position = Game.SplineLerp(itemInitPos, transform.position, rndHeight, t);
-            
+
 
             yield return 0;
         }
 
-        
+
     }
 
     public void PlayMouthEmote(string emoteKey)
@@ -880,9 +880,9 @@ public class ActorInstance : MonoBehaviour
 
     public void ToggleSecondaryAttackAnimation(bool on)
     {
-        bool InSecondaryMode = on;
         if (on)
         {
+            SetAttackAnimation();
             StartCombatMode();
         }
         Anim.SetBool("SecondaryMode", on);
@@ -901,12 +901,12 @@ public class ActorInstance : MonoBehaviour
 
         StartCombatMode();
 
-        
+
     }
 
     public void InturruptAttack()
     {
-        if(CurrentGrowEffect != null)
+        if (CurrentGrowEffect != null)
         {
             CurrentGrowEffect.SetActive(false);
             CurrentGrowEffect = null;
@@ -933,7 +933,7 @@ public class ActorInstance : MonoBehaviour
 
             yield return StartCoroutine(BlinkOnceRoutine());
 
-            if (Random.Range(0,3) == 0)
+            if (Random.Range(0, 3) == 0)
             {
                 yield return new WaitForSeconds(0.2f);
                 yield return StartCoroutine(BlinkOnceRoutine());

@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         Info = new EnemyInfo(givenInfo, instanceID);
         Info.CurrentHealth = currentHP;
+        SpellInCast = null;
 
         if (Body != null && initScale == Vector3.zero)
         {

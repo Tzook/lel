@@ -22,7 +22,7 @@ public class ActorController : MonoBehaviour
     Animator Anim;
 
     [SerializeField]
-    
+
     public GatePortal CurrentPortal;
     public BoxCollider2D CurrentRope;
 
@@ -99,10 +99,10 @@ public class ActorController : MonoBehaviour
     void Awake()
     {
         Rigid = GetComponent<Rigidbody2D>();
-        Instance  = GetComponent<ActorInstance>();
-        ActorAttack  = GetComponent<ActorAttack>();
+        Instance = GetComponent<ActorInstance>();
+        ActorAttack = GetComponent<ActorAttack>();
 
-        if(Rigid == null)
+        if (Rigid == null)
         {
             Rigid = this.gameObject.AddComponent<Rigidbody2D>();
             Rigid.freezeRotation = true;
@@ -207,7 +207,7 @@ public class ActorController : MonoBehaviour
             }
         }
 
-        if(!isAiming && AimTimeout > 0)
+        if (!isAiming && AimTimeout > 0)
         {
             AimTimeout -= 1f * Time.deltaTime;
         }
@@ -244,7 +244,7 @@ public class ActorController : MonoBehaviour
             }
         }
 
-        if(SpellCooldown > 0)
+        if (SpellCooldown > 0)
         {
             SpellCooldown -= 1f * Time.deltaTime;
         }
@@ -261,7 +261,7 @@ public class ActorController : MonoBehaviour
         {
             Instance.SetAttackAnimation();
         }
-        
+
         if (Input.GetMouseButton(1) && !IsManuallyMoving() && !Game.Instance.isInteractingWithUI)
         {
             ActorAttack.EnsureInSecondaryMode();
@@ -270,7 +270,7 @@ public class ActorController : MonoBehaviour
         {
             ActorAttack.EnsureStopSecondaryMode();
         }
- 
+
         bool charging = Input.GetMouseButton(0) && !Game.Instance.isInteractingWithUI && CanUsePA();
         Anim.SetBool("Attacking", charging || Anim.GetBool("SecondaryMode"));
         Anim.SetBool("Charging", charging);
@@ -473,9 +473,9 @@ public class ActorController : MonoBehaviour
             return;
         }
 
-        for(int i=0;i<CurrentPortal.RequiresItems.Count;i++)
+        for (int i = 0; i < CurrentPortal.RequiresItems.Count; i++)
         {
-            if(LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(CurrentPortal.RequiresItems[i]) == null)
+            if (LocalUserInfo.Me.ClientCharacter.Inventory.GetItem(CurrentPortal.RequiresItems[i]) == null)
             {
                 InGameMainMenuUI.Instance.ShockMessageCenter.CallMessage("Need the item: \"" + Content.Instance.GetItem(CurrentPortal.RequiresItems[i]).Name + "\" to enter.");
                 return;
@@ -486,7 +486,7 @@ public class ActorController : MonoBehaviour
         InturruptAttack();
         InGameMainMenuUI.Instance.CloseAllWindows();
         SocketClient.Instance.EmitEnteredPortal(CurrentPortal.Key);
-        
+
     }
 
     private void ClimbRope()
@@ -523,7 +523,7 @@ public class ActorController : MonoBehaviour
     {
         GameObject damageZone;
 
-        if(Instance.Info.Equipment.Weapon != null && Instance.Info.Equipment.Weapon.SubType == "twohanded")
+        if (Instance.Info.Equipment.Weapon != null && Instance.Info.Equipment.Weapon.SubType == "twohanded")
         {
             damageZone = ResourcesLoader.Instance.GetRecycledObject("DI_TwoHand");
         }
@@ -545,12 +545,12 @@ public class ActorController : MonoBehaviour
 
     public void ExecuteMovementSpell(DevSpell spell)
     {
-        if(MovementSpellRoutineInstance != null)
+        if (MovementSpellRoutineInstance != null)
         {
             StopCoroutine(MovementSpellRoutineInstance);
         }
 
-        MovementSpellRoutineInstance = StartCoroutine("MovementRoutine_"+spell.Key);
+        MovementSpellRoutineInstance = StartCoroutine("MovementRoutine_" + spell.Key);
     }
 
     private void CastSpell(int spellIndex)
@@ -559,8 +559,8 @@ public class ActorController : MonoBehaviour
         StopAim();
         ActorAttack.EnsureStopSecondaryMode();
         DevSpell spell = Content.Instance.GetSpellAtIndex(spellIndex);
-        
-        if(spell == null)
+
+        if (spell == null)
         {
             return;
         }
@@ -647,14 +647,15 @@ public class ActorController : MonoBehaviour
     private float GetMovementSpeed()
     {
         float speed;
-        if (TakingDamageInAir) 
+        if (TakingDamageInAir)
         {
             speed = 1f;
         }
-        else 
+        else
         {
             speed = InternalSpeed + Instance.Info.ClientPerks.SpeedBonus;
-            if (Slowed) {
+            if (Slowed)
+            {
                 speed /= 2f;
             }
         }
@@ -668,7 +669,7 @@ public class ActorController : MonoBehaviour
 
     public void Jump(float? jumpPower = null)
     {
-        if(JumpRoutineInstance==null)
+        if (JumpRoutineInstance == null)
         {
             JumpRoutineInstance = StartCoroutine(JumpRoutine(jumpPower));
         }
@@ -680,7 +681,7 @@ public class ActorController : MonoBehaviour
 
         DevAbility tempAbility = Content.Instance.GetAbility(LocalUserInfo.Me.ClientCharacter.CurrentPrimaryAbility.Key);
 
-        for (int i=0;i<sentTargets.Count;i++)
+        for (int i = 0; i < sentTargets.Count; i++)
         {
             targetIDs.Add(sentTargets[i].Info.ID);
         }
@@ -715,7 +716,7 @@ public class ActorController : MonoBehaviour
             AudioControl.Instance.PlayInPosition(randomHitSound, transform.position);
 
             GameObject tempHit;
-            
+
             tempHit = ResourcesLoader.Instance.GetRecycledObject(tempAbility.HitEffect);
             tempHit.transform.position = Instance.Weapon.transform.position;
             tempHit.GetComponent<HitEffect>().Play();
@@ -874,7 +875,7 @@ public class ActorController : MonoBehaviour
 
     private IEnumerator LoadAttackValueRoutine()
     {
-        while(LoadAttackValue < 1f)
+        while (LoadAttackValue < 1f)
         {
             LoadAttackValue += 1f * Time.deltaTime;
             InGameMainMenuUI.Instance.SetChargeAttackValue(LoadAttackValue);
@@ -889,10 +890,10 @@ public class ActorController : MonoBehaviour
     {
         Instance.StartCombatMode();
 
-        if(LoadAttackValueInstance!=null)
+        if (LoadAttackValueInstance != null)
         {
-             StopCoroutine(LoadAttackValueInstance);
-             LoadAttackValueInstance = null;
+            StopCoroutine(LoadAttackValueInstance);
+            LoadAttackValueInstance = null;
         }
 
         InGameMainMenuUI.Instance.StopChargingAttack();
@@ -914,7 +915,7 @@ public class ActorController : MonoBehaviour
     public void ActivatePrimaryAbility()
     {
         DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
-        if (devAbility.ManaCost > 0) 
+        if (devAbility.ManaCost > 0)
         {
             ManaUsage.Instance.UseMana(devAbility.ManaCost);
         }
@@ -939,7 +940,7 @@ public class ActorController : MonoBehaviour
     {
         DevAbility devAbility = Content.Instance.GetAbility(Instance.Info.CurrentPrimaryAbility.Key);
         bool canUse = true;
-        if (devAbility.ManaCost > 0) 
+        if (devAbility.ManaCost > 0)
         {
             if (!ManaUsage.Instance.CanUseMana(devAbility.ManaCost))
             {
@@ -1024,7 +1025,7 @@ public class ActorController : MonoBehaviour
                         damageZone.transform.rotation = Instance.LastFireRot;
 
 
-                        damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell" , CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId,1f,15f, isPlayer);
+                        damageZone.GetComponent<ProjectileArrow>().SetInfo(Instance, "spell", CurrentSpellInCast.Key, (LocalUserInfo.Me.ClientCharacter.ID == Instance.Info.ID), CurrentSpellAttackId, 1f, 15f, isPlayer);
                         break;
                     }
                 case SpellTypeEnumState.explosion:
@@ -1086,7 +1087,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
-    
+
     public void TookSpellDamage(EnemyDamageInstance instance)
     {
         SocketClient.Instance.SendTookSpellDamage(instance.ActionKey, instance.ParentEnemy.Info.ID);
@@ -1095,7 +1096,7 @@ public class ActorController : MonoBehaviour
 
     public void UseConsumable(int inventoryIndex, ItemInfo item = null)
     {
-        if(item == null)
+        if (item == null)
         {
             item = LocalUserInfo.Me.ClientCharacter.Inventory.ContentArray[inventoryIndex];
         }
@@ -1105,7 +1106,7 @@ public class ActorController : MonoBehaviour
 
     public void StartInvincivility()
     {
-        if(InvincibilityRoutineInstance == null)
+        if (InvincibilityRoutineInstance == null)
         {
             InvincibilityRoutineInstance = StartCoroutine(InvincibilityRoutine());
         }
@@ -1119,14 +1120,14 @@ public class ActorController : MonoBehaviour
         Vector2 initPos = Rigid.position;
         bool right = aimRight;
         Vector2 targetPoint = (right ? new Vector2(Rigid.position.x - 5f, Rigid.position.y) : new Vector2(Rigid.position.x + 5f, Rigid.position.y));
-        
+
 
         float t = 0f;
-        while(t<1f)
+        while (t < 1f)
         {
             if (!right && SideRayRight)
             {
-                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t-2f*Time.deltaTime);
+                Rigid.position = Game.SplineLerp(initPos, targetPoint, 1f, t - 2f * Time.deltaTime);
                 Rigid.velocity = Vector2.zero;
                 break;
             }
@@ -1192,7 +1193,7 @@ public class ActorController : MonoBehaviour
         {
             CurrentPortal = obj.GetComponent<GatePortal>();
         }
-        else if(obj.tag == "StrobeObject")
+        else if (obj.tag == "StrobeObject")
         {
             obj.GetComponent<PlayerStayStrobe>().Activate();
         }
@@ -1227,7 +1228,7 @@ public class ActorController : MonoBehaviour
         }
         else if (obj.tag == "Enemy")
         {
-            if(obj.GetComponent<HitBox>().EnemyReference == CollidingEnemy)
+            if (obj.GetComponent<HitBox>().EnemyReference == CollidingEnemy)
             {
                 CollidingEnemy = null;
             }
@@ -1283,7 +1284,7 @@ public class ActorController : MonoBehaviour
 
     private IEnumerator StrobeRoutine()
     {
-        while(true)
+        while (true)
         {
             Instance.SetOpacity(0.5f);
             yield return new WaitForSeconds(0.1f);
@@ -1314,9 +1315,9 @@ public class ActorController : MonoBehaviour
         AudioControl.Instance.Play("sound_item");
 
         float t = 0f;
-        while(t < 1f)
+        while (t < 1f)
         {
-            if(!Grounded || isMoving || OnRope || InGameMainMenuUI.Instance.isDraggingItem)
+            if (!Grounded || isMoving || OnRope || InGameMainMenuUI.Instance.isDraggingItem)
             {
                 InGameMainMenuUI.Instance.StopConsumingItem();
                 Anim.SetTrigger("StopUsingConsumable");
@@ -1341,6 +1342,6 @@ public class ActorController : MonoBehaviour
 
     public void SetAttackSpeed(float attackSpeed)
     {
-        Anim.SetFloat(AnimationAssist.PAREMETER_ATTACK_SPEED_MULTIPLIER, attackSpeed);        
+        Anim.SetFloat(AnimationAssist.PAREMETER_ATTACK_SPEED_MULTIPLIER, attackSpeed);
     }
 }

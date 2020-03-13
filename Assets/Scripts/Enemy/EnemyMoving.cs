@@ -49,6 +49,26 @@ public class EnemyMoving : Enemy
         }
     }
     protected bool slowed;
+    protected bool Hasted
+    {
+        set
+        {
+            hasted = value;
+            if (value)
+            {
+                MovementSpeed = OriginalMovementSpeed * 1.5f; ;
+            }
+            else
+            {
+                MovementSpeed = OriginalMovementSpeed;
+            }
+        }
+        get
+        {
+            return hasted;
+        }
+    }
+    protected bool hasted;
 
     void Awake()
     {
@@ -388,6 +408,11 @@ public class EnemyMoving : Enemy
                     this.Slowed = true;
                     break;
                 }
+            case "hasteChance":
+                {
+                    this.Hasted = true;
+                    break;
+                }
         }
     }
 
@@ -405,6 +430,11 @@ public class EnemyMoving : Enemy
                 case "crippleChance":
                     {
                         this.Slowed = false;
+                        break;
+                    }
+                case "hasteChance":
+                    {
+                        this.Hasted = false;
                         break;
                     }
             }

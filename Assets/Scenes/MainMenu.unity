@@ -45542,7 +45542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.054561224, y: 0.22141333}
   m_AnchorMax: {x: 0.97200006, y: 0.756449}
-  m_AnchoredPosition: {x: -0.3999939, y: -0.5}
+  m_AnchoredPosition: {x: -0.3999939, y: -0.4999981}
   m_SizeDelta: {x: -1, y: 0.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1733
@@ -48282,7 +48282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.26336417, y: 0.22440818}
   m_AnchorMax: {x: 0.74210036, y: 0.8007273}
-  m_AnchoredPosition: {x: -0.19999695, y: -3.7000008}
+  m_AnchoredPosition: {x: -0.19999695, y: -3.7000027}
   m_SizeDelta: {x: 7.9, y: 2.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1899
@@ -51000,7 +51000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.599609, y: 10.5}
+  m_AnchoredPosition: {x: 9.599609, y: 10.5000305}
   m_SizeDelta: {x: 49, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &2068
@@ -54913,7 +54913,20 @@ MonoBehaviour:
         HitIfTargetHasBuff: []
         ClearTargetBuffs: []
         SpawnMobs: []
-        Chance: 1
+        Chance: 0.5
+      - Key: LettuceFuel
+        DisplayName: 
+        Description: 
+        ColliderPrefab: 
+        Perks:
+        - Key: hasteChance
+          Value: 1
+        - Key: hasteDuration
+          Value: 6
+        HitIfTargetHasBuff: []
+        ClearTargetBuffs: []
+        SpawnMobs: []
+        Chance: 0.5
       MinTime: 4
       MaxTime: 10
       DeathRattle:
@@ -62436,6 +62449,30 @@ MonoBehaviour:
       PartyBuff: 0
     IsClient: 0
     PerkType: 1
+  - Key: hasteChance
+    Name: Haste Change
+    Icon: {fileID: 21300000, guid: f8659334da4a1f943a71c5d7e68dad38, type: 3}
+    PrecentPerUpgrade: 1
+    UpgradeCap: 1
+    StartingValue: 0
+    Buff:
+      BonusPerks:
+      - Key: mpBonus
+        Value: 1
+      PartyBuff: 0
+    IsClient: 0
+    PerkType: 0
+  - Key: hasteDuration
+    Name: Haste Duration
+    Icon: {fileID: 21300000, guid: f8659334da4a1f943a71c5d7e68dad38, type: 3}
+    PrecentPerUpgrade: 1
+    UpgradeCap: 1
+    StartingValue: 0
+    Buff:
+      BonusPerks: []
+      PartyBuff: 0
+    IsClient: 0
+    PerkType: 1
   Buffs:
   - Key: bleedChance
     Name: Bleed
@@ -62465,6 +62502,13 @@ MonoBehaviour:
     AudioKey: sound_freeze
     DebuffSoundKey: sound_shatter3
     DebuffPrefabKey: FreezeDebuff
+  - Key: hasteChance
+    Name: Haste
+    Icon: {fileID: 21300004, guid: 57927da7e17eba643b24036921e75d70, type: 3}
+    EffectPrefab: BuffEffect_Cripple
+    AudioKey: sound_swashaw
+    DebuffSoundKey: 
+    DebuffPrefabKey: 
   DefaultCursor: {fileID: 2800000, guid: 99dc0ecd9afda874d840d402608f3fa1, type: 3}
   ClickableCursor: {fileID: 2800000, guid: b1f5172ede3e12b42acdd990c597bd57, type: 3}
   CrosshairCursor: {fileID: 2800000, guid: 5a85afe90e73307479243df3e909b1a4, type: 3}
